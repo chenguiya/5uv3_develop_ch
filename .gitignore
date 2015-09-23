@@ -1,0 +1,36 @@
+/config
+#/config/config_global.php
+#/config/config_ucenter.php
+/data/cache/*.js
+/data/cache/*.css
+/data/template
+/data/log
+/data/diy/
+/data/install.lock
+/data/sendmail.lock
+/data/sysdata/
+/data/attachment
+/data/cache/mobile_siteqrcode.png
+/uc_client/data/cache/apps.php
+/uc_client/data/cache/settings.php
+/uc_server/data/config.inc.php
+/uc_server/data/install.lock
+/uc_server/data/upgrade.lock
+#zend项目文件
+.settings
+.buildpath
+.project
+#附件目录
+/data/attachment/image/
+/data/attachment/forum/
+
+config/config_global.php
+
+
+# IDE
+.idea/
+
+# OS System
+.DS_Store
+
+config/config_ucenter.php
