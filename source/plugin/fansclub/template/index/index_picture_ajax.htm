@@ -1,0 +1,21 @@
+这个页面应该没有用
+<!--{loop $arr $v}-->
+	<!--{eval $v['subject']=mb_substr($v['subject'],0,16,'utf-8');}-->
+	<div class="clubList">
+		<a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}" class="clubImg"> 
+			<!--{eval $att = DB::fetch_first("select aid from ".DB::table('forum_attachment')." where tid=".$v['tid']);}-->
+			<img src="<!--{eval echo getforumimg($att['aid'], 0, 235, 235);}-->" title="{$v['subject']}" alt="{$v['subject']}"   width="235px"/>
+		</a>
+		<a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}" class="clubDes">{$v['subject']}</a>
+
+		<div class="clubTxt"><span class="viewIco">{$v['views']}</span><span class="plIco">{$v['replies']}</span></div>
+		<div class="clubInfo">
+			<a href="home.php?mod=follow&uid={$v['authorid']}&do=view&from=space" target="_blank" title="" class="clubPhoto">
+			<!--{avatar($v['authorid'],small)}-->
+			</a>
+			<div class="clubName"><a href="home.php?mod=follow&uid={$v['authorid']}&do=view&from=space" target="_blank">{$v['author']}</a>
+
+				<p><!--{eval echo date('Y-m-d H:i:s',$v['dateline']);}--></p></div>
+		</div>
+	</div>
+ <!--{/loop}-->

@@ -1,0 +1,35 @@
+.mt10 { margin-top: 10px;}
+.mb10 { margin-bottom: 10px; }
+h1 { font-size: 20px; font-weight: normal; }
+.table-c { border: 1px solid #eee; width: 100%; margin-bottom: 20px; line-height: 24px; font-size: 12px;}
+.table-c td, .table-c th { padding: 10px; border:1px solid #eee;}
+.table-c th { background: #f1faff; font-size: 14px; }
+.table-c .txh { width: 30px; text-align: center; }
+.table-c .txt { width: 300px; }
+.table-c .tps { width: 80px; }
+.table-c .tcz { width: 170px; text-align: center; }
+.imagelist { margin: 0 0 0 45px;}
+.imagelist li {float: left; width: 150px; border: 1px solid #eee; margin-right: 10px; margin-top: 20px; padding: 5px; position: relative; list-style: none}
+.imagelist li .p_img { display: block; width: 150px;}
+.imagelist li .p_img img { width: 150px;}
+.imagelist li span.del a { position: absolute; right:-10px; top:-10px;}
+
+
+.poll_c { border:1px solid #eee; font-size: 14px; background: #fff; padding: 20px;}
+.poll_c_pop { border: none; }
+.poll_c li.poll_li, .poll_seoc li { margin-bottom: 15px; padding-bottom: 15px; margin-left: 15px; border-bottom: 1px dotted #EEE; line-height: 30px; vertical-align: top;}
+.poll_c li.poll_li .poll_title, .poll_seoc li .poll_title { line-height: 30px;}
+.poll_c li.poll_li .poll_radio input { margin-left: 10px;}
+.poll_c li.last { margin-bottom: 0; padding-bottom: 0; border-bottom: none;}
+.poll_c .px, .poll_seoc .px { width: 460px; height: 20px; line-height: 20px; padding: 5px; font-size: 14px;}
+.poll_c .px.mini, .poll_seoc .px.mini { width: 60px!important; }
+.poll_c .pxi { padding: 0; margin: 0; border: none; background: #EEE; width: 140px; padding: 5px; margin-top: 5px;}
+.poll_c .pt, .poll_seoc .pt { width: 460px; height: 140px; font-size: 14px; line-height: 22px;}
+.poll_c #ved p { margin-bottom: 10px;}
+.poll_c .topimg { max-width: 1070px; }
+
+.poll-btitle { margin-top: 80px; margin-bottom: 30px; padding: 5px 10px; color: #F26C4F; border-left: 5px solid #F26C4F; font-size: 16px; background: #fff3f0;}
+.poll-btitle .fs14 { font-size: 14px;}
+.cates { margin-left: 15px;}
+.poll-img-list { margin-top: 20px; text-align: center;}
+.poll-img-list img { max-height: 200px;}

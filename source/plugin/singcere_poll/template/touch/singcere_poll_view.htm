@@ -1,0 +1,268 @@
+<!--{template common/header}-->
+<style id="diy_style" type="text/css"></style>
+<link rel="stylesheet" href="source/plugin/singcere_poll/template/src/css/mobile.css">
+<link rel="stylesheet" href="source/plugin/singcere_poll/template/src/css/style{$theme[color]}.css">
+<link rel="stylesheet" href="source/plugin/singcere_poll/template/src/css/font-awesome.min.css">
+
+<script type="text/javascript" language="javascript">
+
+    function createtwo() {
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            width: 240,
+            height: 240,
+        });
+
+
+        var elText = document.URL;
+        qrcode.makeCode(elText);
+    }
+
+
+    function goto(id) {
+        $("#" + id).ScrollTo(800);
+    }
+
+
+    errorcode = new Array();
+
+    errorcode[-1] = "{lang singcere_poll:hefa}";
+    errorcode[-2] = "{lang singcere_poll:nozhuti}";
+    errorcode[-3] = "{lang singcere_poll:noitem}";
+    errorcode[-4] = "{lang singcere_poll:nobegin}";
+    errorcode[-5] = "{lang singcere_poll:gameover}";
+    errorcode[-6] = "{lang singcere_poll:nopeople}";
+    errorcode[-7] = "{lang singcere_poll:pover}";
+    errorcode[-8] = "{lang singcere_poll:hpolled}" + $theme[period] + "{lang singcere_poll:again}";
+    errorcode[-9] = "{lang singcere_poll:thpolled}" + $theme[period] + "{lang singcere_poll:again}";
+    errorcode[-10] = "{lang singcere_poll:login}";
+
+    function dopoll(pid, sid) {
+        $.get("{$_G[siteurl]}plugin.php?id=singcere_poll:singcere_poll&formhash={FORMHASH}&mod=poll&sid=" + sid + "&pid=" + pid, function(
+                data, status) {
+
+            rearray = data.split("#");
+            if (rearray[0] == 1) {
+                document.getElementById("peopel_" + sid).innerHTML = "{lang singcere_poll:zhichi} (" + rearray[1] + ")";
+            } else {
+
+                alert(errorcode[rearray[0]]);
+//            showDialog(errorcode[rearray[0]], "alert");
+                if (rearray[0] == -10) {
+                    showWindow('login', 'member.php?mod=logging&action=login');
+                }
+            }
+        });
+    }
+
+    function doSubmit(uid, can) {
+        if (uid == 0 && can == 0) {
+            showWindow('login', 'member.php?mod=logging&action=login');
+            return false;
+        }
+
+        return true;
+    }
+
+    function dodel(obj) {
+        if (confirm("{lang singcere_poll:suredel}")) {
+            showWindow(obj.id, obj.href);
+        }
+
+        return false;
+    }
+</script>
+
+
+<div class="poll-wp">
+
+    <div class="poll-banner">
+        <img src="data/attachment/singcere_file/singcere_poll/$pattach[head][attachment]" alt="$theme[subject]">
+    </div>
+
+    <div class="poll-header" id="poll-header">
+
+       
+        <!--{if $mnav[nav1]}--><a href="plugin.php?id=singcere_poll:singcere_poll&mod=index&pid=$theme[pid]&cur=nav1" {if $_GET[cur]=='nav1'||$_GET[cur]==''}class="cur"{/if} >$mnav[nav1]</a><!--{/if}-->
+        <!--{if $mnav[nav2]}--><a href="plugin.php?id=singcere_poll:singcere_poll&mod=index&pid=$theme[pid]&cur=nav2" {if $_GET[cur]=='nav2'}class="cur"{/if} >$mnav[nav2]</a><!--{/if}-->
+
+      
+        
+      <!--{if $mnav[p_nav]}--><a href="plugin.php?id=singcere_poll:singcere_poll&mod=index&pid=$theme[pid]&cur=p_nav" {if $_GET[cur]=='p_nav'}class="cur"{/if} >$mnav[p_nav]</a><!--{/if}-->
+      <!--{if $mnav[c_nav]}--><a href="plugin.php?id=singcere_poll:singcere_poll&mod=index&pid=$theme[pid]&cur=c_nav" {if $_GET[cur]=='c_nav'}class="cur"{/if} >$mnav[c_nav]</a><!--{/if}-->
+     
+    </div>
+
+    <div class="cat-body">
+        <div class="cat-body-c">
+            <!--{if $_GET[cur] == 'nav1' || empty($_GET[cur])}-->
+            <div class="cat01" id="c1">
+                <h2 class="spr tit01">
+                    <img src="data/attachment/singcere_file/singcere_poll/{$pattach[num0][attachment]}" alt="{lang singcere_poll:actroduce}">
+                </h2>
+                <div class="piece">
+                    <div class="bd cl">
+                        <div class="pnotice">
+                            <h3><i class="fa fa-bookmark pr5"></i>{lang singcere_poll:acyyan}</h3>
+                            <p><!--{eval echo nl2br($theme[troduce])}--></p>
+                        </div>
+                    </div>
+                    <div class="bd cl">
+                        <div class="pnotice">
+                            <h3><i class="fa fa-clock-o pr5"></i>{lang singcere_poll:actime}</h3>
+                            <p>$bdate[1] {lang singcere_poll:month} $bdate[2]{lang singcere_poll:day} - $endate[1] {lang singcere_poll:month} $bdate[2] {lang singcere_poll:day}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--{/if}-->
+
+            <!--{if $_GET[cur] == 'p_nav'}-->
+            <div class="cat03" id="ctp">
+                <h2 class="spr tit03">
+                    <img src="data/attachment/singcere_file/singcere_poll/{$pattach[num2][attachment]}" alt="{lang singcere_poll:acpoll}">
+                </h2>
+
+                <div class="poll-people cl" id="poll-people">
+                    <!--{loop $selitem $key $value}-->
+
+                    <h3 id="the_$key"><i class="fa fa-chevron-circle-right pr5"></i>$types[$key][name]</h3>
+                    <ul class="cl">
+                        <!--{eval $x = 1}-->
+                        <!--{loop $selitem[$key] $key1 $value1}-->
+                        <li class="poll-li {if $x % 2 == 0}last{/if}">
+                            <div class="pall">
+                                <a href="forum.php?mod=viewthread&tid=$value1[tid]">
+                                    <!--{loop $attach[$value1[sid]] $key2 $value2}-->
+                                    <img class="pimg" src="{PRE_PATH}$value2[attachment]" alt="$types[$key][name]">
+                                    <!--{/loop}-->
+                                </a>
+                                <div class="pbody">
+                                    <p class="ptitle">$value1[name]</p>
+                                    <p class="pmessage"><!--{eval echo nl2br($value1[troduce])}--></p>
+                                    <p class="pbtn cl">
+                                        <a href="javascript:void(0)"  onclick="dopoll($theme[pid], $value1[sid])" id="peopel_$value1[sid]"><i class="fa fa-thumbs-up pr5"></i>{lang singcere_poll:zhichi}($value1[pnum])</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <!--{eval $x ++}-->
+                        <!--{/loop}-->
+                    </ul>
+                    <!--{/loop}-->
+                </div>
+
+                <div class="view-btn pt10">
+                    <a class="share-weixin zg-btn-green"><i class="fa fa-share-square-o pr5"></i>{lang singcere_poll:share}</a>
+                    <div class="share-weixin-panel none"></div>
+                </div>
+
+            </div>
+            <!--{/if}-->
+
+            <!--{if $_GET[cur] == 'nav2'}-->
+            <div class="cat02" id="c2">
+                <h2 class="spr tit02">
+                    <img src="data/attachment/singcere_file/singcere_poll/{$pattach[num1][attachment]}" alt="{lang singcere_poll:gift}">
+                </h2>
+                <div class="poll-prize cl">
+                    <!--{loop $pattach[gift] $key $value}-->
+                    <div class="prize-li mli">
+                        <img src="{PRE_PATH}{$value[attachment]}" width="100%">
+                        <p><span><i class="fa fa-gift pr5">$value[troduce]</i></span></p>
+                    </div>
+                    <!--{/loop}-->
+                 
+                </div>
+            </div>
+            <!--{/if}-->
+
+            <div id="fastpostreturn" style="margin:-5px 0 5px"></div>
+
+            <!--{if $_GET[cur] == 'c_nav'}-->
+            <div class="cat04" id="cpl">
+                <h2 class="spr tit04">
+                    <img src="data/attachment/singcere_file/singcere_poll/{$pattach[num3][attachment]}" alt="{lang singcere_poll:pcomment}">
+                </h2>
+                <div class="piece">
+                    <div class="bd cl">
+
+                        <div class="pnotice pl">
+                            <h3><i class="fa fa-comments pr5"></i>{lang singcere_poll:gcomm}</h3>
+                            <div id="comment">
+                                <!--{loop $hot $key $value}-->                        
+                                <dl class="bbda cl">
+                                    <a href="home.php?mod=space&uid=$value[uid]" class="comment-avatar">
+                                        <!--{avatar($value[uid],small)}--> </a>
+                                    <dt class="mbm cl">
+
+                                    <a href="$_G[siteurl]home.php?mod=space&uid=$value[uid]" class="xi2" c="1" mid="card_8252">$value[username]</a>
+
+                                    <span class="xg1 xw0">
+                                        <!--{eval echo dgmdate($value[dateline])}--> </span>
+                                    <span class="y"></span>
+                                    </dt>
+                                    <dd>$value[message]</dd>
+                                </dl>
+                                <!--{/loop}-->
+                            </div>
+                        </div>
+
+                        <div class="pnotice pl">
+                            <h3><i class="fa fa-pencil pr5"></i>{lang singcere_poll:fabiao}</h3>
+                            <form id="cform" action="plugin.php?id=singcere_poll:singcere_poll&mod=remark"  method="post">
+                                <input type="hidden" name="formhash" value="{FORMHASH}" />
+                                <input type="hidden" name="remarksubmit"  value="yes" />
+                                <input type="hidden" name="mark"  value="$theme[mark]" />
+
+                                <input type="hidden" name="reffer"  value="$url" />
+                                <input type="hidden" name="pid"  value="$theme[pid]" />
+                                <div id="comment" class="p20">
+                                    <div class="tedt">
+                                        <div class="area">
+                                            <textarea name="message" class="pt" id="message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <p class="ptn mb20">
+                                        <button type="submit" onclick="doSubmit($uid, $theme[canmark]);" name="commentsubmit_btn" id="commentsubmit_btn" value="true" class="pn"> <strong>{lang singcere_poll:comment}</strong>
+                                        </button>
+                                    </p>
+                                    <div id="comment_ul">
+                                        <a name="comment_anchor_1"></a>
+
+                                        <!--{loop $marks $key $value}-->                        
+                                        <dl class="bbda cl">
+                                            <a href="home.php?mod=space&uid=$value[uid]" class="comment-avatar">
+                                                <!--{avatar($value[uid],small)}--> </a>
+                                            <dt class="mbm cl">
+
+                                            <a href="$_G[siteurl]home.php?mod=space&uid=$value[uid]" class="xi2" c="1" mid="card_8252">$value[username]</a>
+
+                                            <span class="xg1 xw0 y"><!--{eval echo dgmdate($value[dateline])}--> </span>
+                                            </dt>
+                                            <dd>$value[message]</dd>
+                                        </dl>
+                                        <!--{/loop}--> </div>
+                                </div>
+                             
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--{/if}-->
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    $(".poll-header a").click(function() {
+        $(this).siblings().removeClass("cur");
+        $(this).addClass("cur");
+        $(".cat-body-c").addClass("none");
+    });
+</script>
+<!--{template common/footer}-->

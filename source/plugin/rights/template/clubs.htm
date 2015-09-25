@@ -1,0 +1,52 @@
+<!--{template common/header}-->
+<!--{subtemplate home/spacecp_header}-->
+<p class="tbmu mbm">球迷会特权权益购买</p>
+	<form action="home.php?mod=spacecp&ac=plugin&id=rights:rights&rightsid={$rightsid}&do=buy" method="post" autocomplete="off">
+	<input type="hidden" value="{FORMHASH}" name="formhash" />
+	<table cellspacing="0" cellpadding="0" class="tfm">
+	<tr><td>选择你要购买特权的球迷会：</td></tr>
+	<tr>		
+		<td>
+			<select name="clubfid">
+			<!--{loop $clubinfo $club}-->
+			<option value="$club[fid]">$club[name]</option>
+			<!--{/loop}-->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<button type="submit" name="buysubmit" value="true" class="pn pnc" /><strong>权益购买</strong></button>
+		</td>
+	</tr>
+	</table>
+	</div></div>
+<div class="appl">
+	<div class="tbn">
+		<h2 class="mt bbda">{lang setup}</h2>
+		<ul>
+			<li$actives[avatar]><a href="home.php?mod=spacecp&ac=avatar">修改头像</a></li>			
+			<!--{hook/global_personal_pic}-->
+			<li$actives[profile]><a href="home.php?mod=spacecp&ac=profile">个人资料</a></li>
+			<!--{if $_G['setting']['verify']['enabled'] && allowverify() || $_G['setting']['my_app_status'] && $_G['setting']['videophoto']}-->
+			<li$actives[verify]><a href="{if $_G['setting']['verify']['enabled']}home.php?mod=spacecp&ac=profile&op=verify{else}home.php?mod=spacecp&ac=videophoto{/if}">{lang memcp_verify}</a></li>
+			<!--{/if}-->
+			<li$actives[credit]><a href="home.php?mod=spacecp&ac=credit">积分</a></li>
+			<li$actives[usergroup]><a href="home.php?mod=spacecp&ac=usergroup">用户组</a></li>
+			<li$actives[privacy]><a href="home.php?mod=spacecp&ac=privacy">隐私筛选</a></li>
+			
+			<!--{if $_G['setting']['sendmailday']}--><li$actives[sendmail]><a href="home.php?mod=spacecp&ac=sendmail">{lang memcp_sendmail}</a></li><!--{/if}-->
+			<li$actives[password]><a href="home.php?mod=spacecp&ac=profile&op=password">密码安全</a></li>
+	
+			<!--{if $_G['setting']['creditspolicy']['promotion_visit'] || $_G['setting']['creditspolicy']['promotion_register']}-->
+			<li$actives[promotion]><a href="home.php?mod=spacecp&ac=promotion">访问推广</a></li>
+			<!--{/if}-->
+			<!--{if !empty($_G['setting']['plugins']['spacecp'])}-->
+				<!--{loop $_G['setting']['plugins']['spacecp'] $id $module}-->
+					<!--{if !$module['adminid'] || ($module['adminid'] && $_G['adminid'] > 0 && $module['adminid'] >= $_G['adminid'])}--><li{if $_GET[id] == $id} class="a"{/if}><a href="home.php?mod=spacecp&ac=plugin&id=$id">$module[name]</a></li><!--{/if}-->
+				<!--{/loop}-->
+			<!--{/if}-->
+		</ul>
+	</div>
+</div>
+<!--{template common/footer}-->

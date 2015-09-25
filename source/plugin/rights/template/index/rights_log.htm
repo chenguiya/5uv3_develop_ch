@@ -1,0 +1,56 @@
+<!--{template common/header}-->
+<div class="ch_bm">
+	<div class="z"><a href="./" class="" title="{lang homepage}">5U体育</a><em>&raquo;</em><a href="plugin.php?id=rights">权益</a><em>&raquo;</em><a href="javascript:void(0);">购买记录</a></div>
+</div>
+<div class="rights_mian cl">
+     <!--{template rights:index/left}-->
+	 <div class="rights_right">
+	      <div class="rights_box">
+				<div class="cords_nav cl">
+					 <h2>钱包余额：</h2><em>$balance</em>&nbsp;元
+				</div>
+			   <div class="deta_bds cl">
+			   	<FORM id="searchform" name="searchform" method="get" action="plugin.php?id=rights:index&op=log" autocomplete="off">
+			   		<input type="hidden" name="id" value="rights:index">
+			   		<input type="hidden" name="op" value="log">			   		
+			        <select id="time" name="time" class="cord_select">
+			        		<option value="0" {if $_GET['time']==0}selected{/if}>全部</option>
+							<option value="1" {if $_GET['time']==1}selected{/if}>今日</option>
+							<option value="2" {if $_GET['time']==2}selected{/if}>昨日</option>
+							<option value="3" {if $_GET['time']==3}selected{/if}>前日</option>
+							<option value="4" {if $_GET['time']==4}selected{/if}>本周</option>
+							<option value="5" {if $_GET['time']==5}selected{/if}>上周</option>
+							<option value="6" {if $_GET['time']==6}selected{/if}>本月</option>
+					</select>
+					<input type="hidden" name="formhash" value="{FORMHASH}">
+			   		<input type="hidden" name="searchsubmit" value="true">					
+					<button type="submit" name="searchsubmit_btn" class="track" id="searchsubmit_btn" value="true"><em>查询</em></button>
+				</FORM>
+					<span class="cord_span">共 <b>{$count}</b> 条记录</span>
+					<div class="blank10"></div>
+					<!--{if $lists}-->
+					<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mine_table">
+					       <tr>
+						       <th width="100">交易时间</th>
+							   <th width="98">交易方式</th>
+							   <th width="95">收入/支出</th>
+							   <th width="auto">信息摘要</th>
+						   </tr>
+						   <!--{loop $lists $val}-->
+						   <tr>
+						       <td>{$val[dateline]}</td>
+							   <td>{$val[payment]}</td>
+							   <td>{$val[price]}</td>
+							   <td>{$val[subject]}</td>
+						   </tr>
+						   <!--{/loop}-->						   
+					</table>
+					$multipage
+					<!--{else}-->
+					无记录！
+					<!--{/if}-->
+			   </div>
+		  </div>
+	 </div>
+</div>
+<!--{template common/footer}-->

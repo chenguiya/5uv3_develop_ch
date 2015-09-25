@@ -1,0 +1,174 @@
+<!--{block league_club_star}-->
+<select style="width:100px;" id="league_id" name="league_id" onChange="chg1(this);">
+<option value="0">-联赛-</option></select>&nbsp;<select style="width:100px;display:none;" id="club_id" name="club_id" onChange="chg2(this);">
+<option value="0">-球会-</option></select>&nbsp;<select style="width:100px;display:none;" id="star_id" name="star_id">
+<option value="0">-球星-</option></select>
+<script language="javascript">
+
+var leagues = new Array();
+var clubs = new Array();
+var stars = new Array();
+<!--{loop $arr_forum_list $key1 $value1}-->
+leagues[$key1] = "$value1['name']";
+clubs[$key1] = new Array();
+stars[$key1] = new Array();
+<!--{loop $value1['list'] $key2 $value2}-->
+	clubs[$key1][$key2] = "$value2['name']";
+	stars[$key1][$key2] = new Array();
+<!--{loop $value2['list'] $key3 $value3}-->
+		stars[$key1][$key2][$key3] = "$value3['name']";
+<!--{/loop}-->
+<!--{/loop}-->
+<!--{/loop}-->
+
+var pIndex = 0;
+var leagueEle = document.getElementById("league_id");
+var clubEle = document.getElementById("club_id");
+var starEle = document.getElementById("star_id");
+
+for(var key in leagues) {
+	var op = new Option(leagues[key], key);
+	leagueEle.options.add(op);
+}
+
+function chg1(obj) {
+	if (obj.value == 0) {
+		clubEle.options.length = 0;
+		starEle.options.length = 0;
+		clubEle.style.display = 'none';
+		starEle.style.display = 'none';
+	}
+	else
+	{
+		clubEle.style.display = 'block';
+		clubEle.style.display = 'inline';		starEle.options.length = 0;		starEle.style.display = 'none';
+	}
+	
+	var val = obj.value;
+	pIndex = obj.value;
+	var cs = clubs[val];
+	clubEle.options.length = 0;
+	var op = new Option('-球会-', 0);
+	clubEle.options.add(op);
+		
+	var first = 0;
+	for(var key in cs) {
+		var op = new Option(cs[key], key);
+		clubEle.options.add(op);
+		if(first == 0)
+		{
+			first = key;
+		}
+	}
+	
+	if(first == 0)
+	{
+	}
+	else
+	{
+		var as = stars[val][first];
+		starEle.options.length = 0;
+		
+		var op = new Option('-球星-', 0);
+		starEle.options.add(op);
+		
+		for(var key in as) {
+			var op = new Option(as[key], key);
+			starEle.options.add(op);
+		}
+	}
+}
+
+function chg2(obj) {
+	var val = obj.value;
+	if(val == 0)
+	{
+		starEle.style.display = 'none';
+	}
+	else
+	{
+		starEle.style.display = 'block';
+		starEle.style.display = 'inline';
+		var as = stars[pIndex][val];
+		starEle.options.length = 0;
+		
+		var op = new Option('-球星-', 0);
+		starEle.options.add(op);
+		
+		for(var key in as) {
+			var op = new Option(as[key], key);
+			starEle.options.add(op);
+		}
+	}
+}
+
+jQuery(document).ready(function($) {
+	<!--{if $fansclub_info['league_id'] > 0}-->
+	$('#league_id').val({$fansclub_info['league_id']}).change();
+	<!--{/if}-->
+	<!--{if $fansclub_info['club_id'] > 0}-->
+	$('#club_id').val({$fansclub_info['club_id']}).change();
+	<!--{/if}-->
+	<!--{if $fansclub_info['star_id'] > 0}-->
+	$('#star_id').val({$fansclub_info['star_id']}).change();
+	<!--{/if}-->
+});
+</script>
+<!--{/block}-->
+
+<!--{block html}-->
+<span style="display:inline;" id="fansclubcitybox">$fansclubcityhtml</span>
+<input type="hidden" id="province_id" name="province_id" value="0">
+<input type="hidden" id="city_id" name="city_id" value="0">
+<input type="hidden" id="district_id" name="district_id" value="0">
+<input type="hidden" id="community_id" name="community_id" value="0">
+<script language="javascript">
+// 自动选择省市区
+jQuery(document).ready(function($) {
+<!--{if $fansclub_info['province_name']}-->
+	$('#fansclubprovince').val('{$fansclub_info['province_name']}').change();
+<!--{/if}-->
+
+<!--{if $fansclub_info['city_name']}-->
+	setTimeout(function(){
+		$('#fansclubcity').val('{$fansclub_info['city_name']}').change();
+	}, 1000);
+<!--{/if}-->
+
+<!--{if $fansclub_info['district_name']}-->	
+	setTimeout(function(){
+		$('#fansclubdistrict').val('{$fansclub_info['district_name']}').change();
+	}, 1500);
+<!--{/if}-->
+
+<!--{if $fansclub_info['community_name']}-->
+	setTimeout(function(){
+		$('#fansclubcommunity').val('{$fansclub_info['community_name']}').change();
+	}, 2000);
+<!--{/if}-->
+});
+
+// 地区联动
+function fansclub_showdistrict(container, elems, totallevel, changelevel, containertype) {
+	var getdid = function(elem) {
+		var op = elem.options[elem.selectedIndex];
+		return op['did'] || op.getAttribute('did') || '0';
+	};
+	var pid = changelevel >= 1 && elems[0] && $(elems[0]) ? getdid($(elems[0])) : 0;
+	var cid = changelevel >= 2 && elems[1] && $(elems[1]) ? getdid($(elems[1])) : 0;
+	var did = changelevel >= 3 && elems[2] && $(elems[2]) ? getdid($(elems[2])) : 0;
+	var coid = changelevel >= 4 && elems[3] && $(elems[3]) ? getdid($(elems[3])) : 0;
+	var url = "plugin.php?id=fansclub"+"&ac=ajax"+"&op=district"+"&container="+container+"&containertype="+containertype
+		+"&province="+elems[0]+"&city="+elems[1]+"&district="+elems[2]+"&community="+elems[3]
+		+"&pid="+pid + "&cid="+cid+"&did="+did+"&coid="+coid+'&level='+totallevel+'&handlekey='+container+'&inajax=1'+(!changelevel ? '&showdefault=1' : '');
+	
+	document.getElementById('province_id').value = pid;
+	document.getElementById('city_id').value = cid;
+	document.getElementById('district_id').value = did;
+	document.getElementById('community_id').value = coid;
+	
+	ajaxget(url, container, '');
+}
+
+</script>
+<!--{/block}-->

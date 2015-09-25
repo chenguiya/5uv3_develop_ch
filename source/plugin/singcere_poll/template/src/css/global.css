@@ -1,0 +1,123 @@
+.wp {margin: 0 auto;width: 1040px !important;}
+.pr5 { padding-right: 5px; }.pl5 { padding-left: 5px; }.pt5 { padding-top: 5px; }.pb5{ padding-bottom: 5px; }
+.pr10 { padding-right: 10px; }.pl10{ padding-left: 10px; }.pt10{ padding-top: 10px; }.pb10{ padding-bottom: 10px; }
+.pt150 { padding-top: 55px !important; }.pt100 { padding-top: 100px !important; }.pt120 { padding-top: 120px !important; }
+.ml20 { margin-left: 20px; }.mr20 { margin-right: 20px; }.mt20{ margin-top: 20px; }.mb20{ margin-bottom: 20px; }
+.ml30{ margin-left: 30px; }.mr30{ margin-right: 30px; }.mt30 { margin-top: 30px; }.mb30{ margin-bottom: 30px; }
+#header { position: inherit; }
+.poll-wp { width: 100%; overflow: hidden; background: #517b4b; padding-bottom: 20px; }
+.poll-header { width:1040px; height: 50px; z-index: 1; line-height: 50px; background: #0C3030; text-align: center; }
+.poll-header a { display: inline-block; height: 50px; line-height: 50px; margin-right: 10px; padding: 0 30px; color: #fff; font-size: 20px; text-decoration: none; border-radius: 3px; }
+.poll-header a:hover, .poll-header a.cur { background: #945254; height: 60px; line-height: 60px; margin-top: -5px; background-image: -moz-linear-gradient(top, #6C2F31, #3A0A0B); /* Firefox */
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #6C2F31), color-stop(1, #3A0A0B)); /* Saf4+, Chrome */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6C2F31', endColorstr='#3A0A0B', GradientType='0'); /* IE*/
+box-shadow:0 2px 2px rgba(0, 0, 0, 0.3); }
+.cat01, .cat02, .cat03, .cat04 { padding-top: 30px; min-height: 500px; margin:0 20px; } 
+.cat03 { min-height: 600px; }
+.tit01, .tit02, .tit03, .tit04 { width: 1040px; display: block;}
+.tit04 { margin-bottom: 100px;}
+
+/*button*/
+.poll-pn { height: 32px; line-height: 32px; padding: 0 10px; display: block; float: left; border-radius: 3px; background: #3EB1F0; color: #fff;}
+.poll-pn:hover { background: #1687CB; text-decoration: none; }
+
+
+/*Diy*/
+.frame, .frame-tab { border:none; margin: 0; background: none;}
+.block, .temp { margin: 0; }
+.xl1 li { margin: 10px 0; font-size: 14px;}
+
+
+/*列表页*/
+.poll-list { border:1px solid #eee; border-bottom: none; margin-bottom: 10px; }
+.poll-list .poll-listli { width: 50%; float: left;}
+.poll-list .poll-listli-c { display: block; border-right:1px solid #eee; border-bottom: 1px solid #eee; padding: 15px; min-height: 256px; }
+.poll-list .poll-listli-c:hover { background: #F6F6F6; text-decoration: none; }
+.poll-list .odd .poll-listli-c { border-right: none; }
+.poll-list .poll-listli-c img { width: 100%;}
+.poll-list .poll-listli-c .poll-listli-title { height: 20px; line-height: 20px; font-size: 16px; margin-bottom: 10px;}
+
+
+/*活动介绍*/
+.piece { margin-top: 20px; }
+.piece .bd { background-color: #FFF; padding: 20px; position: relative; opacity: .9; }
+.pnotice { margin-right: 240px; min-height: 260px; }
+.organizer { overflow: hidden; zoom: 1; position: absolute; right: 20px; top:-20px; border-radius: 5px 5px 0 0; background-color: #0a312c; min-height: 300px; padding: 20px 30px; }
+.organizer li { font-size: 16px; color: #F5F5F5; line-height: 24px; margin-bottom: 10px; }
+.organizer.pl { width: 300px; }
+.pnotice.pl { margin-right: 380px;  }
+.piece .tt h3 { color: #FFF; font-size: 18px; margin-bottom: 10px; }
+.piece .tt span { font-weight: normal; font-size: 18px; }
+.piece h3 { font: 24px/200% "\5fae\8f6f\96c5\9ed1", Geneva, sans-serif; color: #829e76; font-weight: 700; }
+.piece p { font-size: 14px; color: #333; line-height: 28px; margin-bottom: 20px; }
+.organizer.pl h3 { margin-bottom: 20px; }
+.piece .notice h3 { color: #0a312c; }
+.piece .pnotice h3 { color: #945254; }
+
+
+/*活动奖品*/
+.poll-prize { margin-top: 50px; margin-right: 10px; }
+.poll-prize .prize-li { display: block; float: left; border-radius: 100%; text-decoration: none; width: 35%; margin-right: -3%;}
+.poll-prize .prize-li img { border-radius: 100%; width: 100%; border:10px solid #DDD; margin-bottom: 10px; transition: background-color 0.3s linear;
+-moz-transition: background-color 0.3s linear;
+-webkit-transition: background-color 0.3s linear;
+-o-transition: background-color 0.3s linear; }
+.poll-prize .prize-li p { text-align: center; }
+.poll-prize .prize-li p span { display: inline-block; height: 40px; line-height: 40px; padding: 0 10px; font-size: 16px; color: #fff; border-radius: 5px;  }
+.poll-prize .prize-li:hover img { border-color:#945254;  }
+.poll-prize .prize-li:hover p span{ background: #945254; }
+
+
+/*活动投票*/
+.poll-people { margin-left: 90px; margin-top:40px; }
+.poll-people h3 { font-size: 24px; padding-top: 100px; margin-bottom: 30px; color: #EEE; height: 24px; line-height: 24px; font-weight: bold; }
+.poll-people li.poll-li { float: left; margin-right: 60px; margin-bottom: 30px; height:319px; overflow:hidden;}
+.poll-people li.last { margin-right: 0; }
+.poll-people li.poll-li .poll-div{ border:5px solid #DDD; width: 222px; margin-bottom: 10px; }
+.poll-people li.poll-li .poll-div a.poll-div-a { display: block; line-height: 0;}
+.poll-people li.poll-li .ppc { background: #FFF; opacity: .9; padding: 5px 0 10px 0;}
+.poll-people li.poll-li .pimg { width: 100%; }
+.poll-people li.poll-li .ptitle { font-size: 16px; padding: 0 10px; height: 34px; line-height: 34px; }
+.poll-people li.poll-li .pmessage { padding: 0 10px; line-height: 20px; margin-bottom: 15px; }
+.poll-people li.poll-li .pbtn { text-align: center; padding: 0 10px; }
+.poll-people li.poll-li .pbtn a{float:left; margin-right:10px; border-radius: 3px; background: #945254; background-image: -moz-linear-gradient(top, #6C2F31, #3A0A0B);
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #6C2F31), color-stop(1, #3A0A0B));
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6C2F31', endColorstr='#3A0A0B', GradientType='0'); height: 36px; line-height: 36px; padding: 0 10px; color: #fff; font-size: 12px; text-decoration: none;}
+.poll-people li.poll-li .pbtn a:hover { background: #3A0A0B; }
+.poll-people li.poll-li .pbtn a.btn_share { background: #666; }
+.poll-people li.poll-li .pbtn a.btn_share.a { background: #555;}
+.poll-people .pmore { font-size: 20px; color: #fff; margin-top: 30px;}
+.poll-people .pmore a.big-ptn { display: inline-block; border-radius: 3px; background: #945254; background-image: -moz-linear-gradient(top, #6C2F31, #3A0A0B);
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #6C2F31), color-stop(1, #3A0A0B));
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6C2F31', endColorstr='#3A0A0B', GradientType='0'); height: 46px; line-height: 46px; padding: 0 20px; color: #fff; font-size: 20px; text-decoration: none; }
+.poll-people .pmore a.big-ptn:hover { background: #3A0A0B; }
+.btn-share-body { background: #555; width: 70px; margin-top: -5px; padding: 10px; border-radius: 0 3px 3px 3px; }
+.btn-share-body li { height: 26px; line-height: 26px; }
+.btn-share-body li a { height: 26px; line-height: 26px; display: block; color: #fff; padding: 0 10px; border-radius: 3px; }
+.btn-share-body li a:hover { background: #333; text-decoration: none;}
+
+/*左侧栏目滑动*/
+.left-bar { position:absolute; left: 0px; top: 510px; z-index: 100; }
+.left-bar a { display: block; border-radius: 5px;  background: #0C3030; height: 40px; line-height: 40px; width: 120px; font-size: 14px; color: #EEE; text-align: center; margin-bottom: 10px; text-decoration: none; }
+.left-bar a:hover { background: #945254; }
+.left-bar.cur { position: fixed; left:50%; margin-left: -595px;}
+
+/*评论 */
+#commentWrap{ margin:0 20px; }
+#comment .comment_h3 { margin-bottom: 20px; font-size: 18px;}
+#comment dl{ position: relative; padding: 0 0 20px 65px; margin-bottom: 20px; }
+#comment dd{ font-size: 14px; }
+#comment .comment-avatar { position: absolute; width: 48px; height: 48px; display: block; left: 0; top: 0;}
+#comment .comment-avatar img { border-radius: 100%;}
+.tedt { width: 100%; }
+.tedt .pt { height: 100px;}
+.organizer #comment dd { color: #eee;}
+.organizer .bbda { border-color: #555;}
+.organizer #comment dl:last-child { border:none; padding-bottom: 0; margin-bottom: 0;}
+
+/*弹框*/
+.poll-fwinmask { background-color: #fff; border: 1px solid #ccc; box-shadow: 0 0 5px rgba(0,0,0,0.2); border-radius: 3px; }
+.poll-fwinmask .flb { line-height: 18px; padding: 9px 9px 8px 15px; border-top: 1px solid #fff; border-bottom: 1px solid #e7e7e7; background: #f6f6f6; }
+.poll-fwinmask .poll-fwinmask-c { padding: 10px; }
+
+#qrcode img { margin: 0 auto;}

@@ -1,0 +1,41 @@
+<table width="100%" border="1" bordercolor="#cccccc">
+	<tr>
+		<td width="100%" height="35" bgcolor="#F2F2F2" align="center">{$langvar['upload1']}</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div class="tedt" style="width:100%;margin:5px 5px;">
+			<div style="line-height:22px;font-size: 12px;">
+				{$langvar['upload2']}
+				<p></p>
+			</div>
+			</div>
+		</td>
+	</tr>
+</table>
+<br>
+<form method="post" action="{ADMINSCRIPT}?action=plugins&operation=config&do=$pluginid&identifier=nimba_regs&pmod=pregs" name="upload">
+<input type="hidden" name="formhash" value="{FORMHASH}">
+<table width="100%" border="1" bordercolor="#cccccc">
+	<tr>
+		<td width="100%" height="35" bgcolor="#F2F2F2" align="center">{$langvar['upload3']}</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div class="tedt" style="width:100%;margin:5px 5px;">
+			<div class="area">
+				<!--{if $uploadon==1}-->
+				<textarea rows="20"  name="uploaddata" class="pt" id="uploaddata" style="width:98%"></textarea>
+				<!--{else}-->
+				<textarea rows="20"  name="uploaddata" class="pt" id="uploaddata" disabled="disabled" style="width:98%">{$langvar['error3']}</textarea>
+				<!--{/if}-->
+			</div>
+			</div>
+		</td>
+	</tr>
+</table>
+<div style="text-align:center; margin-top:20px;">
+<input type="submit" class="btn" id="submit_submit" name="submit" value="{$langvar['upload4']}">
+</div>
+</form>
+

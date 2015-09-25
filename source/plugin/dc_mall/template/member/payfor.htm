@@ -1,0 +1,108 @@
+<!--{subtemplate common/header}-->
+
+<h3 class="flb" style="cursor: move;"><em id="return_c" fwin="select_pay_type">{lang dc_vip:payforwait}</em><span><a title="{lang close}" onclick="hideWindow('{$_GET['handlekey']}')" class="flbc" href="javascript:;">{lang close}</a></span></h3>
+<style>
+.chk_red_box_list{_padding-bottom:5px;padding-left:4px;margin-right:-7px;}
+.chk_red_box_list li{float:left;width:139px;height:42px;margin-left:-1px;position:relative;margin-bottom:-1px;  margin-top: 10px;}
+.now_chk,.cor_discount{display:none; top:20px;right:-2px;position:absolute;width: 20px;height:20px;background:url('source/plugin/dc_mall/image/tip.png') no-repeat;   }
+.chk_red_box_list .cor_discount{right:10px;top:-4px;width:24px;height:14px;line-height:14px;background-position: 0 -56px;display:block;font-style:normal;font-size:12px;color:#fff   }
+.chk_red_box_list .inner_wp{vertical-align:top;cursor:pointer;height:40px;border:1px solid #CCCCCC;background:#fcfcfc; }
+.chk_red_box_list .inner{cursor:pointer;position:relative; display:block;height:38px;border:1px solid #FCFCFC;text-align:center;font-size:14px;line-height: 38px    }
+.chk_red_box_list .cur{z-index:6;font-weight:bold;}
+.chk_red_box_list .cur .inner_wp{border-color:#FF381A;background:#FFF2EF;}
+.chk_red_box_list .cur .inner{}
+.chk_red_box_list .hv {z-index:6;}
+.chk_red_box_list .hv .inner_wp{border-color:#FF381A;}
+.chk_red_box_list .cur .now_chk{display:block; }
+
+.chk_red_box_list_2px li{margin-left:-2px;width: 140px}
+.chk_red_box_list_2px .inner_wp{border-width:1px;}
+.chk_red_box_list_2px .hv .inner_wp {background:#FFF2EF;}
+</style>
+<div style="width:600px;">
+	<div style="background: none repeat scroll 0% 0% #F80;padding: 4px;color:#FFF">{lang dc_mall:member_orders_info}</div>
+	<style>
+	.orderinfo th,.orderinfo td{border: 1px solid #E4E4E4;height:30px;}
+	</style>
+	<div style="width:550px;padding:20px;">
+		<table width="100%" cellpadding="0" cellspacing="0" class="orderinfo">
+			<tr>
+				<th style="width:80px;">{lang dc_mall:member_orders_orderid}</th>
+				<td>{$order['orderid']}</td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:member_orders_goodsname}</th>
+				<td><a href="plugin.php?id=dc_mall&action=goods&gid={$order['gid']}" target="_blank">{$order['gname']}</a></td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:member_orders_num}</th>
+				<td>{$order['count']}</td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:member_orders_credit}</th>
+				<td><font color="#FF0000">{$order['credit']}</font><!--{if $order['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$order['creditid']]['title']} <!--{/if}--></td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:member_orders_ctime}</th>
+				<td>{echo dgmdate($order['dateline'])}</td>
+			</tr>
+		</table>
+	</div>
+	<div id="payselect">
+		<form method="post" autocomplete="off" id="articleform" action="plugin.php?id=dc_mall:member&action=payfor" onsubmit="ajaxpost(this.id, 'floatlayout_{$_GET['handlekey']}','','onerror');return false;">
+			<div style="height:80px;">
+				<div style="background: none repeat scroll 0% 0% #F80;padding: 4px;color:#FFF">{lang dc_mall:paytype}</div>
+				<ul class="chk_red_box_list chk_red_box_list_2px">
+				<!--{if $_G[setting][ec_account]}--><li class="cur" onclick="paytype_set('alipay')" id="type_alipay"><div class="inner_wp"><span class="inner">{lang dc_mall:alipay}<i class="now_chk"></i></span></div></li><!--{/if}-->
+						<!--{if $_G[setting][ec_tenpay_bargainor] || $_G[setting][ec_tenpay_opentrans_chnid]}--><li <!--{if !$_G[setting][ec_account]}-->class="cur"<!--{/if}--> onclick="paytype_set('tenpay')"  id="type_tenpay"><div class="inner_wp"><span class="inner">{lang dc_mall:tenpay}<i class="now_chk"></i></span></div></li><!--{/if}-->
+				</ul>
+			</div>
+		<input id="paytype" type="hidden" name="paytype" value="<!--{if $_G[setting][ec_account]}-->alipay<!--{else}-->tenpay<!--{/if}-->" />
+		<input type="hidden" name="oid" value="{$oid}" />
+		<input type="hidden" name="handlekey" value="{$_GET['handlekey']}" />
+		<input type="hidden" name="submitchk" value="true" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<div style="margin-bottom:10px;padding-left:30px;">
+			<input class="pn pnc" name="submitbtn" value="{lang dc_mall:index_pay_gobuy}" type="submit">
+		</div>
+		</form>
+	</div>
+	<div id="payfor" style="display:none">
+	<div class="c altw">
+		<p><a href="#" id="payforurl" target="_blank" onclick="payclick()"><img src="source/plugin/dc_mall/image/paynow.gif" /></a></p>
+		<p id="ordercheck"></p>
+	</div>
+	<form method="post" autocomplete="off" id="paycheckform" name="paycheckform" action="plugin.php?id=dc_mall:member&action=payfor&op=check" onsubmit="ajaxpost(this.id, 'floatlayout_paycheck','','onerror');return false;">
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="oid" value="{$oid}" />
+	<input type="hidden" name="handlekey" value="paycheck" />
+	<input type="hidden" name="submitchk" value="true" />
+	<p class="o pns" id="payforcheck" style="display:none">
+		<button type="submit" class="pn pnc" name="ordersubmit" value="ordercheck"><strong>{lang dc_mall:payforcheck}</strong></button>
+	</p>
+	</form>
+	</div>
+</div>
+<div id="floatlayout_{$_GET['handlekey']}"></div>
+<div id="floatlayout_paycheck"></div>
+<script type="text/javascript">
+function paytype_set(tp) {
+		<!--{if $_G[setting][ec_account]}-->$('type_alipay').className="";<!--{/if}-->
+		<!--{if $_G[setting][ec_tenpay_bargainor] || $_G[setting][ec_tenpay_opentrans_chnid]}-->$('type_tenpay').className="";<!--{/if}-->
+		$('type_'+tp).className="cur";
+		$('paytype').value=tp;
+}
+function succeedhandle_{$_GET['handlekey']}(href, message, param){
+		$('payselect').style.display='none';
+		$('payfor').style.display='';
+		$('payforurl').href=href;
+	}
+	function payclick(){
+		$('payforcheck').style.display='';
+	}
+	function succeedhandle_paycheck(href, message, param){
+		hideWindow('{$_GET['handlekey']}');
+		showDialog(message, 'right', '', 'window.location.href=\''+href+'\'', '','','','','','',3);
+	}
+</script>
+<!--{subtemplate common/footer}-->

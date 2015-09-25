@@ -1,0 +1,10 @@
+<div class="chappl">
+<div class="ch_tbn">
+<h2 class="ch_bbda">{lang dc_mall:admin_sidebar_center}</h2>
+<ul>
+<!--{loop $dh $k $v}-->
+<li<!--{if $action==$k}--> class="a"<!--{/if}-->><em>.</em><a href="plugin.php?id=dc_mall:admin<!--{if $k!='index'}-->&action={$k}<!--{/if}-->">{$v}</a></li>
+<!--{/loop}-->
+</ul>
+</div>
+</div>

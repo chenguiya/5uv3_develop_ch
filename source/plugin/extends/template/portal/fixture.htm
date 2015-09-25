@@ -1,0 +1,43 @@
+<!--{block return}-->
+<!--{if $live_game}-->
+<div class="schedules" id="schedules">
+	<div class="sche_page">
+		<a href="javascript:void(0);" class="prev_ch"></a>
+		<a href="javascript:void(0);" class="next_ch"></a>
+	</div>
+	<div class="scheCon">
+		<ul class="stars_slide" style="width:2277px; left:0;">
+		<!--{loop $live_game $vo}-->
+			<!--{if $vo[game_state] == -1}-->
+			<li class="over_now">
+			<!--{elseif $vo[game_state] == 1}-->
+			<li class="live_in">
+			<!--{elseif $vo[game_state] == 0}-->
+			<li class="start_not">
+			<!--{/if}-->
+		     	<a href="live/" target="_blank">
+				<div class="match cl">
+					<span class="match_name">$vo[round]</span>
+					<span class="status_tit">$vo[game_desc]</span>
+				</div>
+				<div class="items cl">
+					<p class="item_logo">
+						<!--{if $vo[event_id]==1}-->
+						<img src="./template/usportstyle/common/images/football_case.png" alt="football">
+						<!--{else}-->
+						<img src="./template/usportstyle/common/images/basket_case.png" alt="basket">
+						<!--{/if}-->
+						<br>$vo[event_name]
+					</p>
+					<p class="item_time"><span>$vo[time]</span><span>$vo[date]</span></p>
+					<p class="item_time item_address"><span>$vo[team1_name]</span><span>$vo[team2_name]</span></p>
+					<p class="item_num"><span>$vo[team1_score]</span><span>$vo[team2_score]</span></p>
+				</div>
+				</a>
+			</li>
+		<!--{/loop}-->
+		</ul>
+	</div>
+</div>
+<!--{/if}-->
+<!--{/block}-->

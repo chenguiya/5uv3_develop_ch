@@ -1,0 +1,81 @@
+<!--{template common/header}-->
+<form action="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=select&op=$op" method="post" id="cform">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+
+    <!--{if $op=='create'}-->
+    <input type="hidden" name="pid"  value="$pid"/>
+    <input type="hidden" name="addselsubmit"  value="yes" />
+    <!--{else}-->
+    <input type="hidden" name="sid"  value="$sid"/>
+    <input type="hidden" name="editselsubmit"  value="yes" />
+    <!--{/if}-->
+
+    <h3 class="flb"> <em> {lang singcere_poll:pitem}</em>
+        <span>
+            <a href="javascript:void(0);" class="flbc" onclick="dohideMenu();"  title="{lang close}">{lang close}</a>
+        </span>
+    </h3>
+
+    <div class="m_c">
+        <div class="poll_c poll_c_pop">
+            <ul>
+                <li class="poll_li">
+                    <span class="poll_title">{lang singcere_poll:name}</span>
+                    <input type="text" name="name" value="$selitem[name]" class="px" />
+                </li>
+                <li class="poll_li">
+                    ΩÈ…‹£∫
+                    <textarea name="troduce" class="pt">$selitem[troduce] </textarea>
+                </li>
+                <li class="poll_li">
+                    <span class="poll_title">{lang singcere_poll:tid}</span>
+                    <input type="text" name="tid" value="$selitem[tid]" class="px" />
+                </li>
+                <!--{if !empty($types)}-->
+                <li class="poll_li">
+                    <span class="poll_title">{lang singcere_poll:cate} </span>
+                    <select name="stid">
+                        <!--{loop $types $key $value}-->
+                        <option value="$value[stid]" <!--{if $selitem[stid]==$value[stid]}-->
+                            selected
+                            <!--{/if}-->>$value[name]</option>
+                        <!--{/loop}--> </select>
+                </li>
+                <!--{/if}-->
+            </ul>
+
+
+            <div id="pollstr">
+               {lang singcere_poll:pic}
+                <span id="imgid"></span>
+            </div>
+            <script >getupload($sid);</script>
+            <div id="imagelist" class="imagelist cl">
+                <ul>
+                    <!--{loop $attach $key1 $value1}-->
+                    <li>
+                        <span aid="$value1[aid]"   onclick="doclick(this);"  class="del">
+                            <a href="javascript:;">
+                                <img src="{STATICURL}image/mobile/images/icon_del.png" />
+                            </a>
+                        </span>
+                        <span class="p_img">
+                            <a href="javascript:" class="a_img">
+                                <img src="{PRE_PATH}$value1[attachment]" style="height:94px;"></a>
+                        </span>
+                    </li>
+
+                    <!--{/loop}--> </ul>
+            </div>
+
+        </div>
+
+        <div class="o pns">
+            <button type="submit" id="commentsubmit_btn" class="pn pnc" onclick="return doSubmit();">
+                <span> {lang singcere_poll:submit}</span>
+            </button>
+        </div>
+    </div>
+</form>
+
+<!--{template common/footer}-->

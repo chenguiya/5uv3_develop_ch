@@ -1,0 +1,36 @@
+<form method="post" action="{ADMINSCRIPT}?action=plugins&operation=config&do={$pluginid}&identifier=nimba_regs&pmod=regs" name="regs">
+	<input type="hidden" name="formhash" value="{FORMHASH}">
+	<table width="60%" border="1" bordercolor="#cccccc">
+		<tr>
+			<td width="100" height="35" bgcolor="#F2F2F2" align="center">{$langvar['username']}</td>
+			<td colspan="2">&nbsp;&nbsp;&nbsp;
+				<select name="usertype" id="usertype" width="268" class="ps">
+					<option value="1">{$langvar['usertype1']}</option>
+					<option value="2">{$langvar['usertype2']}</option>
+					<option value="3">{$langvar['usertype3']}</option>
+					<option value="4">{$langvar['usertype4']}</option>
+					<option value="5">{$langvar['usertype5']}</option>
+				</select>						
+			</td>
+		</tr>
+		<tr>
+			<td height="35" bgcolor="#F2F2F2" align="center">{$langvar['pw1']}</td>
+			<td colspan="2">&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="pwtype" value="1" checked>{$langvar['pw2']}  
+				<input type="radio" name="pwtype" value="2">{$langvar['pw3']}<input type="text" class="px" size="10" value="" name="pw"/>
+			</td>
+		</tr>
+		<tr>
+			<td height="35" bgcolor="#F2F2F2" align="center"><span style="color:red;">*</span>{$langvar['regnum']}</td>
+			<td colspan="2">&nbsp;&nbsp;&nbsp;<input type="text" class="px" size="10" value="" name="regnum"/></td>
+		</tr>
+		
+		<tr>
+			<td colspan="2">
+				<div style="text-align:center; margin-top:20px;">
+					<button type="submit" name="submit" id="submit" value="true" class="btn" />{$langvar['submit']}</button>
+				</div>	
+			</td>	
+		</tr>
+	</table>
+</form>

@@ -1,0 +1,14 @@
+<!--{block html}-->
+	<div class="channelTitle">优秀会长</div>
+		<!--{loop $arr $v}-->
+        <div class="president">
+        	<div class="preList">
+            	<p class="preListName">
+					<a href="/home.php?mod=space&uid={$v['uid']}" target="_blank" title="{$v['username']}">{$v['username']}</a>
+					<span class="yo">优</span></p>
+                <p class="preListTeam">[<a href="fans/topic/{$v['fid']}/" target="_blank" title="">{$v['name']}</a>]</p>
+                <p>{$v['description']}...</p>
+            </div>    
+        </div>
+		<!--{/loop}-->   
+<!--{/block}-->

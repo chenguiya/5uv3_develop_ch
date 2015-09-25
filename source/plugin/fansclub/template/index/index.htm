@@ -1,0 +1,25 @@
+<!--{subtemplate common/header}-->
+<div>
+<br>
+【球迷会首页】
+<br>
+1、<a href="plugin.php?id=fansclub&ac=apply">球迷会申请</a>
+<br><br>
+2、附议记录
+<table border="1">
+<tr><td>申请ID</td><td>申请人</td><td>时间</td><td>名称</td><td>状态</td><td>需要附议人数</td><td>已经附议人数</td><td>操作</td></tr>
+<!--{loop $apply $key $value}-->
+<tr>
+<td>$value['apply_id']</td>
+<td>$value['username']</td>
+<td>$value['log_time']</td>
+<td>$value['fansclub_name']</td>
+<td>$value['status']</td>
+<td>$value['need_support']</td>
+<td>$value['have_support']</td>
+<td><a href="plugin.php?id=fansclub&ac=apply_support&apply_id=$value['apply_id']" target="_blank">我要附议</a></td></tr>
+<!--{/loop}-->
+</table>
+<br>
+</div>
+<!--{subtemplate common/footer}-->

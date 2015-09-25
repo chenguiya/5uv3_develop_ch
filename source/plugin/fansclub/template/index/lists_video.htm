@@ -1,0 +1,34 @@
+<!--{template group/group_header}-->
+
+<div class="boxMain" style="margin-top: -31px;">
+	<div class="clubMain index-picture">
+    		<!--{loop $arr_video_list $v}-->
+			<div class="clubList" style="background-color: #fff;gi">
+		    <!--{if $v['digest']}--><span class="tag"></span><!--{/if}-->
+            <a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}" class="clubImg">
+                {if $v['thumb'] != ''}
+				<img src="$v['thumb']" title="{$v['subject']}" alt="{$v['subject']}" width="235"/>
+				{elseif $v['video'] != ''}
+				{$v['video']}
+				{else}
+				<img src="$_G['style'][tpldir]/common/images/video_default.png" width="235">
+				{/if}
+            </a>
+            <a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}" class="clubDes">{$v['subject']}</a>
+            <div class="clubInfo">
+                <a href="home.php?mod=follow&uid={$v['authorid']}&do=view&from=space" target="_blank" title="" class="clubPhoto">
+				<img src="$v['avatar']" width="40" height="40"/>
+				</a>
+				<div class="clubName">
+				<a href="home.php?mod=follow&uid={$v['authorid']}&do=view&from=space" target="_blank">{$v['author']}</a>
+				<p>{$v['dateline']}</p></div>
+				<div class="clubTxt"><span class="viewIco">{$v['views']}</span><span class="plIco">{$v['replies']}</span></div>
+            </div>
+			</div>
+        <!--{/loop}-->
+		
+        <div class="clear"></div>
+    </div>
+    <div class="page">$multipage</div>
+</div>
+

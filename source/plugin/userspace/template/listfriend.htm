@@ -1,0 +1,23 @@
+<!--{block html}-->
+	<div class="panel friends">
+							<div class="panel-head">
+								<h2>好友</h2>
+								<a href="/home.php?mod=space&do=friend" class="y">更多</a>
+							</div>
+							<div class="panel-body">
+								<ul class="cl">
+									<!--{if $arr}-->
+									<!--{loop $arr $v}-->
+									<li>
+										<a href="home.php?mod=space&uid={$v['fuid']}">
+											{$v['avatar']}</a>
+											<div class="ct">{$v['fusername']}</div>
+									</li>
+									<!--{/loop}-->
+									<!--{else}-->
+										暂时没有好友
+									<!--{/if}-->
+								</ul>
+							</div>
+						</div>
+<!--{/block}-->

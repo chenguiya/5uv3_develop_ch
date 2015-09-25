@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[X2.5,X3]]></item>
+	<item id="Time"><![CDATA[2013-07-02 16:23]]></item>
+	<item id="From"><![CDATA[Discuz! Board (http://localhost/a/)]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[新浪微博綁定]]></item>
+			<item id="identifier"><![CDATA[mpage_weibo]]></item>
+			<item id="description"><![CDATA[新浪微博綁定和登錄]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[mpage_weibo/]]></item>
+			<item id="copyright"><![CDATA[www.mpage.cn]]></item>
+			<item id="version"><![CDATA[免費版1.2]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[weibo]]></item>
+					<item id="menu"><![CDATA[]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="1">
+					<item id="name"><![CDATA[bind]]></item>
+					<item id="menu"><![CDATA[新浪微博綁定]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[7]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="2">
+					<item id="name"><![CDATA[weibo]]></item>
+					<item id="menu"><![CDATA[綁定記錄]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[X2.5,X3]]></item>
+		<item id="var">
+			<item id="0">
+				<item id="displayorder"><![CDATA[1]]></item>
+				<item id="title"><![CDATA[App Key]]></item>
+				<item id="description"><![CDATA[申請地址 http://open.weibo.com/webmaster/add]]></item>
+				<item id="variable"><![CDATA[app_key]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[952457398]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="1">
+				<item id="displayorder"><![CDATA[2]]></item>
+				<item id="title"><![CDATA[App Secret]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[app_secret]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[8e8511ea7e7c06dc3e01efa1faf2709e]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="2">
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="title"><![CDATA[官方微博賬號]]></item>
+				<item id="description"><![CDATA[請填寫微博賬號uid]]></item>
+				<item id="variable"><![CDATA[weibo_uid]]></item>
+				<item id="type"><![CDATA[number]]></item>
+				<item id="value"><![CDATA[3372497180]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="3">
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="title"><![CDATA[官方微博顯示位置]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[weibo_position]]></item>
+				<item id="type"><![CDATA[select]]></item>
+				<item id="value"><![CDATA[1]]></item>
+				<item id="extra"><![CDATA[0=不顯示
+1=論壇首頁面包屑右側
+2=頂部導航左側
+3=頂部導航右側
+4=論壇首頁"我的帖子"左側
+5=主導航右側]]></item>
+			</item>
+		</item>
+		<item id="language">
+			<item id="scriptlang">
+				<item id="register_profile"><![CDATA[完善賬號信息]]></item>
+				<item id="sync_succeed"><![CDATA[同步設置更新成功\]]></item>
+				<item id="bind_succeed"><![CDATA[新浪微博綁定成功\]]></item>
+				<item id="unbind_succeed"><![CDATA[新浪微博解除成功\]]></item>
+				<item id="complete_or_bind"><![CDATA[登錄成功\，請完善賬號信息或綁定賬號]]></item>
+				<item id="reauth_fail"><![CDATA[授權失敗。]]></item>
+				<item id="weibo_sync"><![CDATA[同步到新浪微博]]></item>
+				<item id="weibo_sync_already"><![CDATA[已設置同步到新浪微博，<a href="home.php?mod=spacecp&ac=plugin&id=mpage_weibo:bind" class="xi2">更改設置</a>]]></item>
+				<item id="new_blog"><![CDATA[發表了一篇新日志︰]]></item>
+				<item id="new_article"><![CDATA[發表了一篇新文章︰]]></item>
+				<item id="unbind"><![CDATA[未綁定新浪微博]]></item>
+				<item id="sina_username"><![CDATA[新浪微博]]></item>
+				<item id="bind"><![CDATA[綁定時間]]></item>
+				<item id="expires"><![CDATA[過期時間]]></item>
+				<item id="update"><![CDATA[更新時間]]></item>
+				<item id="bind_update_succeed"><![CDATA[綁定記錄成功\更新]]></item>
+			</item>
+			<item id="templatelang">
+				<item id="config_bind"><![CDATA[點擊按鈕，立刻綁定新浪微博]]></item>
+				<item id="config_bindinfo"><![CDATA[您已將本站帳號 <strong>{$_G[username]}</strong> 與新浪微博綁定]]></item>
+				<item id="bind_weibo"><![CDATA[已綁定微博]]></item>
+				<item id="bind_dateline"><![CDATA[綁定時間]]></item>
+				<item id="sync_setting"><![CDATA[同步設置]]></item>
+				<item id="sync_thread"><![CDATA[主題]]></item>
+				<item id="sync_reply"><![CDATA[回復]]></item>
+				<item id="sync_follow"><![CDATA[廣播]]></item>
+				<item id="sync_blog"><![CDATA[日志]]></item>
+				<item id="sync_doing"><![CDATA[記錄]]></item>
+				<item id="sync_share"><![CDATA[分享]]></item>
+				<item id="sync_article"><![CDATA[文章]]></item>
+				<item id="config_save"><![CDATA[保存設置]]></item>
+				<item id="config_unbind"><![CDATA[解除已綁定帳號？]]></item>
+				<item id="config_unbind_desc"><![CDATA[您確認要解除與本站帳號的綁定關系？]]></item>
+				<item id="config_unbind_confirm"><![CDATA[確認解除]]></item>
+				<item id="config_title"><![CDATA[使用新浪微博賬號綁定本站，您可以...]]></item>
+				<item id="config_title1"><![CDATA[用新浪微博帳號輕松登錄]]></item>
+				<item id="config_desc_content1"><![CDATA[無需記住本站的帳號和密碼，隨時使用新浪微博帳號密碼輕松登錄]]></item>
+				<item id="config_title2"><![CDATA[發表主題同時推送到新浪微博]]></item>
+				<item id="config_desc_content2"><![CDATA[將您的論壇主題推送到新浪微博，讓粉絲全方面了解您]]></item>
+				<item id="config_title3"><![CDATA[把本站精彩內容分享到新浪微博]]></item>
+				<item id="config_desc_content3"><![CDATA[每一個精彩內容絕不放過，簡單快捷的將論壇主題分享給好友和粉絲]]></item>
+				<item id="header_login"><![CDATA[用新浪微博登錄]]></item>
+				<item id="header_login_tip"><![CDATA[只需一步，快速搞定]]></item>
+				<item id="weibo"><![CDATA[微博]]></item>
+				<item id="member_loginbind_tip"><![CDATA[綁定已有帳號可使用微博帳號快速登錄本站]]></item>
+				<item id="member_register_tip"><![CDATA[完善帳號信息可體驗本站更多功\能，<a href="member.php?mod=logging&action=login&referer=$referer" class="xi1">已經有帳號，綁定我的帳號</a>]]></item>
+			</item>
+		</item>
+		<item id="installfile"><![CDATA[install.php]]></item>
+		<item id="uninstallfile"><![CDATA[uninstall.php]]></item>
+	</item>
+</root>

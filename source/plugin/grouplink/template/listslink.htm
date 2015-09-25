@@ -1,0 +1,65 @@
+<!--{template common/header}-->
+<style>
+				 .gl td{
+					border:1px solid #cdcdcd
+				}
+			</style>
+			<!--{if $applink}-->
+			<div>
+					<p>申请管理</p>
+					<table width="100%" style="border:1px solid #cdcdcd" class="gl">
+						<thead>
+							<td align="center">球迷会名称</td>
+							<td align="center">操作</td>
+						</thead>
+						<tbody>
+							<tr>
+								<!--{loop $applink $v}-->
+									<td align="center">
+										<a href="$_G['siteurl']forum.php?mod=group&fid=$v['gid']" title="点击前往">
+											$v['name']</a>
+									</td>
+									<td align="center">
+									<a href="/plugin.php?id=grouplink:grouplink&fun=pass&fid=$_G['fid']&linkgid=$v['gid']">
+									<font color="blue">通过申请</font>
+									</a>
+									<a href="/plugin.php?id=grouplink:grouplink&fun=reject&fid=$_G['fid']&linkgid=$v['gid']">
+										<font color="blue">拒绝</font>
+									</a>
+									</td>
+								<!--{/loop}-->
+							</tr>
+						</tbody>
+					</table>
+			</div>
+			<!--{/if}-->
+			<!--{if $friendlink}-->
+			<div>
+					<p>友情球迷会管理</p>
+					<table width="100%"  style="border:1px solid #cdcdcd"  class="gl">
+						<thead>
+							<td align="center">球迷会名称</td>
+							<td align="center">操作</td>
+						</thead>
+						<tbody>
+							<tr>
+								<!--{loop $friendlink $v1}-->
+									<td align="center">
+										<a href="$_G['siteurl']forum.php?mod=group&fid=$v1['linkgid']" title="点击前往">
+											$v1['name']</a>
+										</td>
+									<td align="center">
+										<a href="/plugin.php?id=grouplink:grouplink&fun=del&fid=$_G['fid']&linkgid=$v1['linkgid']">
+											<font color="red">删除</font>
+										</a>
+									</td>
+								<!--{/loop}-->
+							</tr>
+						</tbody>
+					</table>
+			</div>
+			<!--{/if}-->
+			<!--{if empty($applink) && empty($friendlink) }-->
+				暂时无申请记录
+			<!--{/if}-->
+<!--{template common/footer}-->

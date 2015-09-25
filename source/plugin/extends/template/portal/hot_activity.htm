@@ -1,0 +1,18 @@
+<!--{block return}-->
+<div class="slide_wrap">
+<div class="slide_content">
+<div class="module cl slidebox" style="display: block;">
+<ul class="slideshow">
+<!--{loop $activitylists $key $val}-->
+<!--{if $key%3==0}--><li><!--{/if}-->
+<a href="{$val[url]}"><img src="data/attachment/{$val[pic]}" width="328" height="210"><span class="title">$val[title]</span></a>
+<!--{if $key%3==2}--></li><!--{/if}-->
+<!--{/loop}-->
+</ul>
+</div>
+<script type="text/javascript">
+runslideshow();
+</script>
+</div>
+</div>
+<!--{/block}-->

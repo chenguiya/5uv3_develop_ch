@@ -1,0 +1,20 @@
+<!--{block return}-->
+<!--{if $data['data']}-->
+<ul class="today_bd xin_ul cl">
+<!--{loop $data['data'] $val}-->
+<li>
+	<p class="tody_name"><a href="{$val['url']}" target="_blank">{$val['title']}</a></p>
+	<p class="tody_text">{$val['summary']}</p>
+	<div class="tody_areaB">
+		<span class="tody_time">{$val['dateline']}</span>
+		<span class="tody_from">来自：<em><a href="group/{$val['fields']['fid']}" target="_blank">{$val['fields']['forumname']}</a></em></span>
+		<span class="y">	
+			<i class="zan_A">{$val['recommend_add']}</i>
+			<i class="post_A">{$val['replies']}</i>
+		</span>
+	</div>
+</li>
+<!--{/loop}-->
+</ul>
+<!--{/if}-->
+<!--{/block}-->

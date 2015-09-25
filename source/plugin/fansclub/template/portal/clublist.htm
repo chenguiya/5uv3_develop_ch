@@ -1,0 +1,22 @@
+<!--{block clublists}-->
+<div class="layout_con">
+	<div class="layout_hd"><h3>球迷会分类</h3></div>
+	<div class="layout_bd">
+	     <div class="cate_lists">
+	     	<!--{loop $forumlists $forum}-->
+			<dl>
+				<dt><img src="./template/usportstyle/common/images/{$icon[$forum[name]]}.png" align="absmiddle" />$forum[name]</dt>
+				<dd class="cl">
+					<!--{eval $i=0;}-->
+					<!--{loop $forum[branch] $branch}-->					
+					<a target="_blank" href="group/{$branch[fid]}/">$branch[name] <!--{if $branch[hot]==1}--><em>热</em><!--{/if}--></a>
+					<!--{eval $i++;}-->				
+					<!--{/loop}-->	
+									
+				</dd>
+			</dl>
+	     	<!--{/loop}-->
+		 </div>
+	</div>
+ </div>
+ <!--{/block}-->

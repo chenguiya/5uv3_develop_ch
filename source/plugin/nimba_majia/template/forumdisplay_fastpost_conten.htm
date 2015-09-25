@@ -1,0 +1,20 @@
+<!--{block return}-->
+<div class="post_chbox cl">
+<dl class="profile">{lang nimba_majia:useid}
+	<select name="majiauid">
+		<option value=$_G[uid]>$_G[username]</option>
+	<!--{loop $repeatusers $majia}-->
+		<option value="$majia['useruid']">$majia['username']</option>
+	<!--{/loop}-->
+	</select>
+</dl>
+<dl class="profile">选择球迷会身份：
+	<select name="fansclubid">
+		<option value=''>选择球迷会</option>
+	<!--{loop $mygroups $fid $group}-->
+		<option value="$fid">$group</option>
+	<!--{/loop}-->
+	</select>
+</dl>
+</div>
+<!--{/block}-->

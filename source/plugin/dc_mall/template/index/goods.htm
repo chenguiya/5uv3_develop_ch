@@ -1,0 +1,100 @@
+<!--{template dc_mall:common/header}-->
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a>
+		<em>&raquo;</em>
+		<a href="jifen/">{$cvar['title']}</a>
+		<!--{if $mallnav[$sortid]}-->
+		<em>&raquo;</em>
+		<a href='jifen/id/desc/{if $sortid == ''}0{else}{$sortid}{/if}/'>{$mallnav[$sortid]['name']}</a>
+		<!--{/if}-->
+		<em>&raquo;</em>
+		<a href="goods-{$goods['id']}.html">{$goods['name']}</a>
+	</div>
+</div>
+<div id="frameGXoVbb">
+	<div id="frameGXoVbb_left" class="column frame-1-3-l framemallleft">
+		<div id="frameGXoVbb_left_temp" class="move-span temp"></div>
+		<!--{template dc_mall:index/leftinfo}-->
+	</div>
+	<div id="frameGXoVbb_center" class="column framemallright">
+		<div id="frameGXoVbb_center_temp" class="move-span temp"></div>
+		<div id="frameE3RKsJ" class="">
+			<div id="goodsinfo">
+				<div id="goodsinfo_middle">
+					<div id="goodsinfo_middle_pic"><img src="{$goods['pic']}" alt="{$goods['name']}" onerror="this.src='source/plugin/dc_mall/image/nopic.jpg'" /></div>
+					<div id="goodsinfo_middle_txt" class="z">
+						<div id="goodsinfo_title">{$goods['name']}</div>
+						<form method="post" action="plugin.php?id=dc_mall&action=pay" id="payfor" onsubmit="<!--{if $hookcheck===true}-->showWindow('payfor', 'payfor', 'post');<!--{/if}-->return false;">
+						<input type="hidden" name="formhash" value="{FORMHASH}" autocomplete="off"/>
+						<input type="hidden" name="gid" value="{$goods['id']}" />
+						<input type="hidden" name="handlekey" value="payfor" />
+						<input type="hidden" name="submitchk" value="true" />
+							<div id="price_box">
+								<div>{lang dc_mall:index_goods_price}<strong style="color:#FF6600; font-size:16px;"><!--{if $goods['credit']}--><!--{if $_G['dc_mall']['vip']['user']}--><del>{$goods['credit']}</del><!--{else}-->{$goods['credit']}<!--{/if}--></strong> <!--{if $goods['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$goods['creditid']]['title']} <!--{/if}--><!--{else}--><!--{if $_G['dc_mall']['vip']['user']}--><del>{lang dc_mall:free}</del><!--{else}-->{lang dc_mall:free}<!--{/if}--></strong><!--{/if}--></div>
+								<!--{if $_G['dc_mall']['vip']['open']}-->
+								<div>{lang dc_mall:index_goods_vipprice}<strong style="color:#FF0000; font-size:16px;"><!--{if $goods['vipcredit']}--><!--{if !$_G['dc_mall']['vip']['user']}--><del><!--{if $goods['vipcredit']!=null}-->{$goods['vipcredit']}<!--{else}-->{$goods['credit']}<!--{/if}--></del><!--{else}--><!--{if $goods['vipcredit']!=null}-->{$goods['vipcredit']}<!--{else}-->{$goods['credit']}<!--{/if}--><!--{/if}--></strong> <!--{if $goods['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$goods['creditid']]['title']} <!--{/if}--><!--{else}--><!--{if $_G['dc_mall']['vip']['user']}-->{lang dc_mall:free}<!--{else}--><del>{lang dc_mall:free}</del><!--{/if}--></strong><!--{/if}--></div><!--{/if}-->
+								 <div>{lang dc_mall:index_goods_cunkun}{$goods['count']} {lang dc_mall:jian}</div>
+								 <div>{lang dc_mall:index_goods_sales}{$goods['sales']} {lang dc_mall:jian}</div>
+								 <!-- <div>{lang dc_mall:index_goods_views}{$goods['views']} {lang dc_mall:ci}</div> -->
+								 {$hookstr}
+								 <!--{if $hookcheck===true&&$goods['maxbuy']>1}--><div>{lang dc_mall:index_goods_count}<input id="txt_count" type="number" name="txt_count" value="1" class="txt vm" style="width:35px;" maxlength="2" onkeyup="checkcount(this.value);" onchange="checkcount(this.value);"></div><!--{/if}-->
+							</div>
+							<div id="buy_btn"><button class="buy_btn <!--{if $hookcheck===true}-->ok_btn<!--{else}-->nook_btn<!--{/if}-->" type="submit" name="btn" value="true">立即兑换</button></div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div id="goodsdes">
+				<div class="hd"><h2>{lang dc_mall:index_goods_des}</h2></div>
+				<div class="bd">
+				{$goods['des']}
+				</div>
+			</div>
+			<div id="buylog">
+				<div class="hd"><h2>{lang dc_mall:index_goods_lastbuy}</h2></div>
+				<div class="bd">
+				<table border="0" cellpadding="2" cellspacing="0" align="center" width="100%">
+				<tbody><tr>
+				<td>{lang dc_mall:index_goods_user}</td>
+				<td>{lang dc_mall:index_goods_credit}</td>
+				<td>{lang dc_mall:index_goods_number}</td>
+				<td>{lang dc_mall:index_goods_cotime}</td>
+				</tr>
+				<!--{loop $orders $v}-->
+				<tr>
+				<td><a href="home.php?mod=space&uid={$v['uid']}" target="_blank">{$v['username']}</a></td>
+				<td><strong>{$v['credit']}</strong><!--{if $v['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$v['creditid']]['title']} <!--{/if}--></td>
+				<td>{$v['count']}</td>
+				<td><!--{echo dgmdate($v['dateline'])}--></td>
+				</tr>
+				<!--{/loop}-->
+
+				</tbody></table>
+				</div>
+				</div>
+		</div>
+	</div>
+</div>
+<script>
+function errorhandle_payfor(message, param){
+	hideWindow('payfor');
+	showDialog(message, 'alert');
+}
+function succeedhandle_payfor(locationhref, message, param){
+	hideWindow('payfor');
+	showWindow('payfor', locationhref);
+	//showDialog(message, 'right', '', 'window.location.href=\''+locationhref+'\'','','','','','','',3);
+}
+function checkcount(count){
+	kucount = {$goods['count']};
+	maxbuy = {$goods['maxbuy']};
+	$('txt_count').value = count.replace(/\D/gi,"1");
+	if(count>0&&count<kucount&&count<=maxbuy){
+		return;
+	}
+	$('txt_count').value=1;
+}
+</script>
+<div class="blank10"></div>
+<!--{template common/footer}-->

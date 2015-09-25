@@ -1,0 +1,11 @@
+.poll-wp { background: #C81C26;}
+.poll-header, .organizer, .left-bar a { background: #8B0007; }
+.poll-header a:hover, .poll-header a.cur, .poll-people li.poll-li .pbtn a, .poll-people .pmore a.big-ptn, .poll-prize .prize-li:hover p span {
+background: #4A660D;
+background-image: -moz-linear-gradient(top, #658916, #4A660D);
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #658916), color-stop(1, #4A660D));
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#658916', endColorstr='#4A660D', GradientType='0');
+}
+.poll-people li.poll-li .pbtn a:hover, .poll-people .pmore a.big-ptn:hover, .left-bar a:hover { background: #4A660D; }
+.poll-prize .prize-li:hover img { border-color:#658916; }
+.piece .pnotice h3, .piece h3 { color: #4A660D; }

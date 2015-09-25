@@ -1,0 +1,258 @@
+<!--{subtemplate common/header}-->
+<!--{template extend/desktop/channel_common_header}-->
+<div class="jianju15"></div>
+<div class="box">
+	<div class="dataMain">
+    	<div class="widget_con">
+        	<div class="widget_hd">
+            	<h3 class="fl">技术统计</h3>
+            </div>
+            <div class="dataCon">
+            	<div class="datatag">
+                    <a href="javascript:;" class="active" data-tab="tab1-1">常规数据</a>
+                    <a href="javascript:;" data-tab="tab1-2">进攻数据</a>
+                    <a href="javascript:;" data-tab="tab1-3">防守数据</a>
+                </div>
+                <div class="dataList">
+<!--常规数据 -->
+                	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="dataTable" data-tab-index="tab1-1" style="display:inline-table;" >
+                      <tr>
+                        <th scope="col">比赛类型</th>
+                        <th scope="col">胜/平/负</th>
+                        <th scope="col">进球</th>
+                        <th scope="col">失球</th>
+                        <th scope="col">传球</th>
+                        <th scope="col">红牌</th>
+                        <th scope="col">黄牌</th>
+                        <th scope="col">助攻</th>
+                        <th scope="col">抢断</th>
+                        <th scope="col">越位</th>
+                        <th scope="col">犯规</th>
+                      </tr>
+                     <!--{loop $eventroutine $v}-->
+                      <tr>
+                        <td>{$v->type}</td>
+                        <td>{$v->achievement}</td>
+                        <td>{$v->goals}</td>
+                        <td>{$v->fumble}</td>
+                        <td>{$v->passes}</td>
+                        <td>{$v->red_card}</td>
+                        <td>{$v->yellow_card}</td>
+                        <td>{$v->assists}</td>
+                        <td>{$v->steal}</td>
+                        <td>{$v->offsides}</td>
+                        <td>{$v->foul}</td>
+                      </tr>
+                      <!--{/loop}-->
+                    </table>
+                    
+<!--进攻数据-->
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" data-tab-index="tab1-2" class="dataTable" >
+                      <tr>
+                        <th scope="col">比赛类型</th>
+                        <th scope="col">头球进球</th>
+                        <th scope="col">直接任意球进球</th>
+                        <th scope="col">射正</th>
+                        <th scope="col">射门</th>
+                        <th scope="col">击中门框</th>
+                        <th scope="col">传中</th>
+                        <th scope="col">关键传球</th>
+                        <th scope="col">过人</th>
+                      </tr>
+                     <!--{loop $eventattack $v}-->
+                      <tr>
+                        <td>{$v->type}</td>
+                        <td>{$v->header}</td>
+                        <td>{$v->direct_free_kick}</td>
+                        <td>{$v->on_target}</td>
+                        <td>{$v->shoot}</td>
+                        <td>{$v->hit_the_woodwork}</td>
+                        <td>{$v->cross}</td>
+                        <td>{$v->key_pass}</td>
+                        <td>{$v->break_through}</td>
+                      </tr>
+                      <!--{/loop}-->
+                    </table>
+
+<!--防守数据-->                    
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" data-tab-index="tab1-3" class="dataTable" >
+                      <tr>
+                        <th scope="col">比赛类型</th>
+                        <th scope="col">拦截</th>
+                        <th scope="col">解围</th>
+                        <th scope="col">头球解围</th>
+                        <th scope="col">后场解围</th>
+                        <th scope="col">门线上解围</th>
+                        <th scope="col">头球争顶成功</th>
+                        <th scope="col">回抢</th>
+                        <th scope="col">乌龙球</th>
+                      </tr>
+                      <!--{loop $eventdefend $v}-->
+                      <tr>
+                        <td>{$v->type}</td>
+                        <td>{$v->tackle}</td>
+                        <td>{$v->clearance_kick}</td>
+                        <td>{$v->head_clearance}</td>
+                        <td>{$v->backcourt_clearance}</td>
+                        <td>{$v->line_clearance}</td>
+                        <td>{$v->heading_duel}</td>
+                        <td>{$v->get_back}</td>
+                        <td>{$v->own_goal}</td>
+                      </tr>
+                      <!--{/loop}-->
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="jianju10"></div>
+<!--{if ($_G['forum']['type'] == 'forum')}-->        
+        <div class="widget_con">
+        	<div class="widget_hd">
+            	<h3 class="fl">单场技术统计</h3>
+            </div>
+            <div class="dataCon">
+            	<div class="datatag">
+                    <a href="javascript:;" class="active" data-tab="tab2-1">常规数据</a>
+                    <a href="javascript:;" data-tab="tab2-2">进攻数据</a>
+                    <a href="javascript:;" data-tab="tab2-3">防守数据</a></div>
+                <div class="dataList">
+ <!--常规数据-->                 	
+                	<table width="100%" border="0" cellspacing="0" cellpadding="0" data-tab-index="tab2-1" class="dataTable dataTablea" style="display:inline-table;" >
+                      <tr>
+                        <th scope="col">比赛时间</th>
+                        <th scope="col">赛事</th>
+                        <th scope="col">比赛</th>
+                        <th scope="col">进球</th>
+                        <th scope="col">助攻</th>
+                        <th scope="col">角球</th>
+                        <th scope="col">任意球</th>
+                        <th scope="col">传球</th>
+                        <th scope="col">抢断</th>
+                        <th scope="col">越位</th>
+                        <th scope="col">犯规</th>
+                        <th scope="col">红牌</th>
+                        <th scope="col">黄牌</th>
+                      </tr>
+                       <!--{loop $matchroutine $v}-->
+                      <tr>
+                       	<td>{$v->match_date}</td>
+                        <td>{$v->type}</td>
+                        <td class="color6f">{$v->a_name} {$v->score} {$v->b_name}</td>
+                        <td>{$v->goal}</td>
+                        <td>{$v->assist}</td>
+                        <td>{$v->corner}</td>
+                        <td>{$v->free_kick}</td>
+                        <td>{$v->passes}</td>
+                        <td>{$v->steal}</td>
+                        <td>{$v->offside}</td>
+                        <td>{$v->foul}</td>
+                        <td>{$v->red_card}</td>
+                        <td>{$v->yellow_card}</td>
+                      </tr>
+					<!--{/loop}-->
+                    </table>
+                    
+<!--进攻数据-->                 	
+                	<table width="100%" border="0" cellspacing="0" cellpadding="0" data-tab-index="tab2-2" class="dataTable dataTablea">
+                      <tr>
+                        <th scope="col">比赛时间</th>
+                        <th scope="col">赛事</th>
+                        <th scope="col">比赛</th>
+                        <th scope="col">头球进球</th>
+                        <th scope="col">直接任意球进球</th>
+                        <th scope="col">射正</th>
+                        <th scope="col">射门</th>
+                        <th scope="col">击中门框</th>
+                        <th scope="col">传中</th>
+                        <th scope="col">关键传球</th>
+                        <th scope="col">过人</th>
+                      </tr>
+                       <!--{loop $matchattack $v}-->
+                      <tr>
+                       	<td>{$v->match_date}</td>
+                        <td>{$v->type}</td>
+                        <td class="color6f">{$v->a_name} {$v->score} {$v->b_name}</td>
+                        <td>{$v->header}</td>
+                        <td>{$v->direct_free_kick}</td>
+                        <td>{$v->on_target}</td>
+                        <td>{$v->shoot}</td>
+                        <td>{$v->hit_the_woodwork}</td>
+                        <td>{$v->cross}</td>
+                        <td>{$v->key_pass}</td>
+                        <td>{$v->break_through}</td>
+                      </tr>
+					<!--{/loop}-->
+                    </table> 
+                    
+<!--防守数据-->                 	
+                	<table width="100%" border="0" cellspacing="0" cellpadding="0" data-tab-index="tab2-3" class="dataTable dataTablea">
+                      <tr>
+                        <th scope="col">比赛时间</th>
+                        <th scope="col">赛事</th>
+                        <th scope="col">比赛</th>
+                        <th scope="col">拦截</th>
+                        <th scope="col">解围</th>
+                        <th scope="col">头球解围</th>
+                        <th scope="col">后场解围</th>
+                        <th scope="col">门线上解围</th>
+                        <th scope="col">头球争顶成功</th>
+                        <th scope="col">回抢</th>
+                        <th scope="col">乌龙球</th>
+                      </tr>
+                       <!--{loop $matchdefend $v}-->
+                      <tr>
+                       	<td>{$v->match_date}</td>
+                        <td>{$v->type}</td>
+                        <td class="color6f">{$v->a_name} {$v->score} {$v->b_name}</td>
+                        <td>{$v->tackle}</td>
+                        <td>{$v->clearance_kick}</td>
+                        <td>{$v->head_clearance}</td>
+                        <td>{$v->backcourt_clearance}</td>
+                        <td>{$v->line_clearance}</td>
+                        <td>{$v->heading_duel}</td>
+                        <td>{$v->get_back}</td>
+                        <td>{$v->own_goal}</td>
+                      </tr>
+					<!--{/loop}-->
+                    </table>                                        				
+                </div>
+            </div>
+        </div>
+ <!--{/if}--> 
+</div>    
+    <div class="dataSide">
+    	<div class="widget_con">
+        	<div class="widget_hd"><h3>球员</h3><a href="plugin.php?id=playerdata:playerdata&fid=$_G['fid']&ac=formation" class="title_more">&#187;</a></div>
+            <div class="playersList">
+            	<ul>
+            		<!--{loop $playerinfo $key $v}-->
+            		<!--{if ($v->player_name=='')}{eval break;}{/if}-->
+            		<!--{if ($key==18)}{eval break;}{/if}-->
+                	<li>
+                    	<a href="javascript:void(0);" class="playImg"><img onerror="this.src='./template/usportstyle/common/images/player_img.gif'" src="<!--{if ($v->head=='' || $v->head=='http://mat1.gtimg.com/sports/soccerdata/images//player/nophoto.jpg')}$_G['style'][tpldir]/common/images/player_img.gif{else}{$v->head}{/if}-->" width="70" height="97"/></a>
+                        <a href="javascript:void(0);">{$v->player_name}</a>
+                    </li>
+                    <!--{/loop}-->
+                </ul>
+                
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="jianju15"></div>
+        <div class="widget_con">
+        	<div class="widget_hd"><h3 class="fl">积分榜</h3></div>
+            <div class="columnSideT"><span class="hotline">排名</span><span class="teamline">球队</span><span class="winline">胜/平/负</span><span class="scoreline">积分</span></div>
+            <div class="daren">
+                <ul>
+                	<!--{loop $scoreboard $key $v}-->
+                    <li><em <!--{if ($key < 3)}class="fisrtc"{/if}-->>{$v->ranking}</em></span><span class="teamline">{$v->team_name}</span><span class="winline">{$v->win}/{$v->draw}/{$v->lost}</span><span class="scoreline">{$v->points}</span></li>
+                    <!--{/loop}-->
+                </ul>
+            </div>
+            <div class="jianju20"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<!--{subtemplate common/footer}-->

@@ -1,0 +1,151 @@
+<link href="template/usportstyle/common/main.css" rel="stylesheet" />
+
+<div class="ch_bm">
+		<div class="z">
+			<a href="./" class="" title="{lang home}">$_G[setting][bbname]</a><em>&rsaquo;</em><a href="group.php">$_G[setting][navs][3][navname]</a><!--{if $groupnav}-->$groupnav<!--{elseif $action == 'create'}--><em>&rsaquo;</em>{lang group_create}<!--{/if}-->
+		</div>
+	</div>
+
+	<!--{ad/text/wp a_t}-->
+
+	<style id="diy_style" type="text/css"></style>
+	<div class="wp">
+		<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
+	</div>
+	<div id="ct" class="group_main cl">
+	     <!--球迷公共头部 start-->
+	     <div class="group_hd">
+		      <div class="hd_top cl">
+			       <span class="sta_img"><a href=""><img src="$_G[forum][icon]" alt="$_G[forum][name]" width="38" height="38" align="top"/></a></span>
+				   <span class="ch_red">皇马官方球迷会</span>
+				   <span>球迷会：34</span>
+				   <span>球迷: 87569</span>
+				   <span>总帖数 : 9421</span>
+				   <p class="ch_back"><a href="">返回></a></p>
+			  </div>
+			  <div class="hd_con">
+			       <p class="sta_img"><img src="$_G['config'][static]/images/1000_banner.jpg" border="0"></p>
+				   <p class="sta_icon"><img src="$_G['config'][static]/images/180.jpg"></p>
+				   <div class="sta_list cl">
+				        <div class="sta_fanA cl">
+						   <h2 class="z"><a class="ch_red" href="">巴萨罗纳广州球迷会</a></h2>
+						   <span class="z ch_gold">&nbsp;</span>
+						   <!--join表加入，join_on表已加入，join_out表退出-->
+						   <span class="z ch_joins"><a class="join" href="forum.php?mod=group&action=join&fid=$_GET[fid]">&nbsp;</a></span>
+						</div>
+						<div class="sta_fanB cl">
+						     <span class="sta_route">广东&nbsp;&nbsp;&nbsp;广州</span>
+							 <span class="sta_num">87569</span>
+							 <span class="sta_post">9421</span>
+							 <span class="sta_rank"><em>贡献值：</em>87569</span>
+						</div>
+						<div class="sta_fanC">
+						     简介：等到风景都看透，我们一起看西水长流
+						</div>
+				   </div>
+				   <div class="sta_sign">
+				        <a class="ben_sign" href="">签到</a>
+						<div class="ben_time">
+						     <span>03月 02日<br />漏签<em>0</em>天</span>
+						</div>
+				   </div>
+			  </div>
+			  <!--{if $action != 'create'}-->
+			  <!--{if $status != 2 && $status != 3}-->
+				<div class="hd_navtb cl">
+				     <div class="navtb_R"> 
+					      <!--{if helper_access::check_module('group')}-->
+						  <span class="y nav_submit"><a href="javascript:;" id="newspecial" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" onclick="showWindow('newthread', 'forum.php?mod=post&action=newthread&fid=$_G[fid]')" title="{lang send_posts}">发帖</a></span>
+						  <!--{/if}-->
+						  <div class="nav_search">
+						       <form method="post" action="search.php?mod=group&srchfid=$_G[fid]&searchsubmit=1">
+							         <input type="text" name="srchtxt" id="groupsearch" class="srchtxt" size="15" value="输入要搜索的关键字" onclick="$('groupsearch').value=''" />&nbsp;
+									 <button type="submit" class="chsubmit"><span>&nbsp;</span></button>
+							   </form>
+						  </div>
+					 </div>
+					<ul id="groupnav">
+						<li {if $action == 'index'}class="a"{/if}><a href="forum.php?mod=group&fid=$_G[fid]#groupnav" title="" class="navA">首页</a></li>
+						<li {if $action == 'list'}class="a"{/if}><a href="forum.php?mod=forumdisplay&action=list&fid=$_G[fid]#groupnav" title="" class="navB">话题</a></li>
+						<!--{hook/thread_type_nav}-->
+						<li {if $_GET['type'] == 'pic'}class="a"{/if}><a href="plugin.php?id=fansclub:fansclub&ac=lists&fid=$_G['fid']&type=pic" title="" class="navC">图片</a></li>
+						<li {if $_GET['type'] == 'video'}class="a"{/if}><a href="plugin.php?id=fansclub:fansclub&ac=lists&fid=$_G['fid']&type=video" title="" class="navD">视频</a></li>
+						<li {if $action == 'memberlist' || $action == 'invite'}class="a"{/if}><a href="forum.php?mod=group&action=memberlist&fid=$_G[fid]#groupnav" title="" class="navE">成员</a></li>
+						<li {if $ac == ''}class="a"{/if}><a href="" title="" class="navF">大事记</a></li>
+						<li {if $ac == ''}class="a"{/if}><a href="" title="" class="navG">精华</a></li>
+					</ul>
+				</div>
+				<!--{/if}-->
+			  <!--{/if}-->
+			  <div class="nav_dynamic">
+			       <!--{if $action == 'index'}-->
+			       <span>今天有<font>354</font>条动态</span>
+				   <span>总共有<font>56845</font>条动态</span>
+				   <!--{/if}-->
+				   <!--{if $action == 'list'}-->
+				   <span>今日话题数：<font>2540</font></span>
+				   <span>总话题数：<font>254845</font></span>
+				   <!--{/if}-->
+			  </div>
+			  
+			  
+			<div class="flick_bd">	
+			<!--{if $feedlist}-->
+				<table cellpadding="0" cellspacing="0" border="0" width="100%" class="flick_list">
+					<tbody id="$thread[id]">
+					<!--{loop $feedlist $feed}-->			
+					<tr>
+				        <td class="avatar_c">
+						    <a href="" target="_blank"><img src="<!--{avatar($feed['uid'], 'middle', 1)}-->"></a>
+							<p><a href="" target="_blank">{$feed[username]}</a></p>
+						</td>
+						<td class="new_infor">
+						    <div class="new_name"><i class="{$feed[icon]}_icon">&nbsp;</i>{$feed[title_template]}</div>
+							<p class="new_title">
+								<!--{if $feed['message']}-->
+								{$feed[message]}
+								<!--{/if}-->
+								<!--{if $feed[attachment]}-->
+									<!--{loop $feed[attachment] $attachment}-->
+									<a href="forum.php?mod=viewthread&do=tradeinfo&tid={$feed[id]}" target="_blank"><img src="data/attachment/forum/{$attachment[attachment]}" width="auto" height="140" alt="" class="tn" /></a>
+									<!--{/loop}-->
+								<!--{/if}-->
+								<!--{if $feed[video]}-->
+								{$feed[video]}
+								<!--{/if}-->
+								<!--{if $feed[icon] == 'album'}-->
+									<!--{if $feed['image_1']}-->
+									<a href="$feed[image_1_link]"{$feed[target]}><img src="$feed[image_1]" alt="" class="tn" /></a>
+									<!--{/if}-->
+									<!--{if $feed['image_2']}-->
+									<a href="$feed[image_2_link]"{$feed[target]}><img src="$feed[image_2]" alt="" class="tn" /></a>
+									<!--{/if}-->
+									<!--{if $feed['image_3']}-->
+									<a href="$feed[image_3_link]"{$feed[target]}><img src="$feed[image_3]" alt="" class="tn" /></a>
+									<!--{/if}-->
+									<!--{if $feed['image_4']}-->
+									<a href="$feed[image_4_link]"{$feed[target]}><img src="$feed[image_4]" alt="" class="tn" /></a>
+									<!--{/if}-->
+								<!--{/if}-->
+							
+							</p>
+							<div class="new_meta">
+							     <span class="sta_time"><!--{date($feed[dateline], 'u')}--></span>
+								 <!--{if $feed[data][replies]}--><span class="y sta_post">$feed[data][replies]</span><!--{/if}-->
+								 <!--{if $feed[data][views]}--><span class="y sta_view">$feed[data][views]</span><!--{/if}-->
+								 
+							</div>
+						    <!--{if $feed[credits]}--><span class="experie" style="display: none;"><i>&nbsp;</i>+{$feed[credits]}经验值</span><!--{/if}-->
+						</td>
+					 </tr>
+					<!--{/loop}-->
+					</tbody>
+				</table>
+			<!--{/if}-->		 
+				 <div class="new_more"><a href="">》加载更多</a></div>
+			</div>
+			  
+			  
+			  
+			  
+		 </div>

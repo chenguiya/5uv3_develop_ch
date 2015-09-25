@@ -1,0 +1,46 @@
+<form method="post" autocomplete="off" action="home.php?mod=spacecp&ac=plugin&id=nimba_majia:admincp&pluginop=add">
+<input type="hidden" name="formhash" value="{FORMHASH}" />
+<p class="tbmu">{lang nimba_majia:adduser}</p>
+<table cellspacing="0" cellpadding="0" class="tfm" style="table-layout:fixed;margin-top:10px;">
+<tbody>
+	<tr><td class="mtm pns">
+		<p>
+		{lang nimba_majia:username} <input name="usernamenew" type="text" class="px" value="" style="width:100px" tabindex="1" />&nbsp;
+		{lang nimba_majia:password} <input name="passwordnew" type="password" class="px" style="width:100px" tabindex="2" />
+		<select name="questionidnew" tabindex="3" onchange="if(this.value > 0) {$('answernew').style.display='';} else {$('answernew').style.display='none';}">
+			<option value="0">{lang nimba_majia:security_question}</option>
+			<option value="1">{lang nimba_majia:security_question_1}</option>
+			<option value="2">{lang nimba_majia:security_question_2}</option>
+			<option value="3">{lang nimba_majia:security_question_3}</option>
+			<option value="4">{lang nimba_majia:security_question_4}</option>
+			<option value="5">{lang nimba_majia:security_question_5}</option>
+			<option value="6">{lang nimba_majia:security_question_6}</option>
+			<option value="7">{lang nimba_majia:security_question_7}</option>
+		</select>
+		<span id="answernew" style="display:none">{lang nimba_majia:security_answer} <input type="text" name="answernew" class="px" style="width:100px" class="txt" tabindex="4" /></span>
+		<br /><br />
+		<p>
+		<button type="submit" class="pn" name="adduser" value="yes" ><span>{lang nimba_majia:add}</span></button>
+		</p>
+	</td></tr>
+</tbody>
+</table>
+</form>
+<form method="post" autocomplete="off" action="home.php?mod=spacecp&ac=plugin&id=nimba_majia:admincp&pluginop=update">
+<input type="hidden" name="formhash" value="{FORMHASH}" />
+<table cellspacing="0" cellpadding="0" class="tfm" style="table-layout:fixed;margin-top:10px;">
+<thead class="colplural">
+	<tr><td width="40"></td><td>{lang nimba_majia:username}</td></tr>
+</thead>
+<!--{if $repeatusers}-->
+	<!--{loop $repeatusers $user}-->
+	<tr>
+		<td><input name="delete[]" type="checkbox" class="checkbox" value="$user[useruid]" /></td>
+		<td><b>{$user['username']}<!--{if $user[locked]}-->({lang nimba_majia:locked})<!--{/if}--></td>
+	</tr>
+	<!--{/loop}-->
+	<tr><td><input class="checkbox" type="checkbox" id="chkall" name="chkall" onclick="checkall(this.form);" /> <label for="chkall">{lang nimba_majia:delete_check}</label></td>
+	<td class="mtm pns"><button type="submit" class="pn" name="updateuser" value="yes" ><span>{lang submit}</span></button></td></tr>
+<!--{/if}-->
+</table>
+</form>

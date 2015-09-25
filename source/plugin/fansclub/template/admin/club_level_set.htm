@@ -1,0 +1,157 @@
+<!--设置普通等级-->
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform">
+<input type="hidden" name="formhash" value="$formhash">
+<table class="tb tb2 fixpadding" id="grouplevel">
+<tbody><tr><th colspan="15" class="partition">【球迷会等级设置 - 普通等级】&nbsp;&nbsp;<a href="admin.php?frames=yes&action=group&operation=level" target="_blank">积分范围设置</a></th></tr>
+<tr class="header"><th width="100">总积分计算公式：</th></tr>
+
+<script type="text/JavaScript">
+	function isUndefined(variable) {
+		return typeof variable == 'undefined' ? true : false;
+	}
+	function creditinsertunit(text, textend) {
+		insertunit($('creditsformula'), text, textend);
+		formulaexp();
+	}
+	var formulafind = new Array('digestposts', 'posts');
+	var formulareplace = new Array('<u>精华帖数</u>','<u>发帖数</u>');
+	function formulaexp() {
+		var result = $('creditsformula').value;
+		result = result.replace(/extcredits1/g, '<u>威望</u>');
+		result = result.replace(/extcredits2/g, '<u>金钱</u>');
+		result = result.replace(/extcredits3/g, '<u>贡献</u>');
+		result = result.replace(/extcredits4/g, '<u>自定义积分4</u>');
+		result = result.replace(/extcredits5/g, '<u>自定义积分5</u>');
+		result = result.replace(/extcredits6/g, '<u>自定义积分6</u>');
+		result = result.replace(/extcredits7/g, '<u>自定义积分7</u>');
+		result = result.replace(/extcredits8/g, '<u>自定义积分8</u>');
+		result = result.replace(/digestposts/g, '<u>精华帖数</u>');
+		result = result.replace(/posts/g, '<u>发帖数</u>');
+		result = result.replace(/contribution/g, '<u>贡献值</u>');
+		result = result.replace(/members/g, '<u>成员</u>');
+		result = result.replace(/threads/g, '<u>主题数</u>');
+		result = result.replace(/oltime/g, '<u>在线时间(小时)</u>');
+		result = result.replace(/friends/g, '<u>好友数</u>');
+		result = result.replace(/doings/g, '<u>记录数</u>');
+		result = result.replace(/blogs/g, '<u>日志数</u>');
+		result = result.replace(/albums/g, '<u>相册数</u>');
+		result = result.replace(/sharings/g, '<u>分享数</u>');
+		$('formulapermexp').innerHTML = result;
+	}
+
+</script>
+
+			<tr>
+				<td colspan="2">
+					<div class="extcredits">
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' contribution ')">贡献值</a> &nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' members ')">成员</a> &nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' posts ')">发帖数</a>&nbsp;
+						<!--<a href="javascript:return void(0);" onclick="creditinsertunit(' threads ')">主题数</a>&nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' digestposts ')">精华帖数</a>&nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' oltime ')">在线时间(小时)</a>&nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' friends ')">好友数</a>&nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' doings ')">记录数</a>&nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' blogs ')">日志数</a>&nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' albums ')">相册数</a>&nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' sharings ')">分享数</a>&nbsp;-->
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' + ')">&nbsp;+&nbsp;</a>&nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' - ')">&nbsp;-&nbsp;</a>&nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' * ')">&nbsp;*&nbsp;</a>&nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' / ')">&nbsp;/&nbsp;</a>&nbsp;
+						<a href="javascript:return void(0);" onclick="creditinsertunit(' (', ') ')">&nbsp;(&nbsp;)&nbsp;</a>&nbsp;
+					</div>
+					<div id="formulapermexp" class="margintop marginbot diffcolor2">
+					现在的公式是：<u>贡献值</u>*1+<u>成员</u>*5+<u>发帖数</u>*2
+					</div>
+					<textarea name="creditsformula" id="creditsformula" class="marginbot" style="width:80%" rows="3" onkeyup="formulaexp()" onkeydown="textareakey(this, event)">
+					$creditsformula</textarea>
+					<script type="text/JavaScript">formulaexp()</script>
+					<br><span class="smalltxt">总积分是衡量球迷会级别的唯一标准，您可以在此设定用户的总积分计算公式，
+					其中 contribution 表示贡献值；members posts 代表发帖数 (主题 + 回复数)。
+					<!--threads 代表用户发表的主题数；
+					digestposts 代表精华帖数；
+					oltime 代表用户总在线时间(小时)；
+					friends 代表好友数；
+					doings 代表发表的记录数；
+					blogs 代表发表的日志数；
+					albums 代表上传的相册数；
+					sharings 代表发表的分享数；
+					extcredits1～extcredits8 分别代表上述 8 个自定义积分。-->
+					公式中可使用包括 + - * / () 在内的运算符号</span>
+				</td>
+			</tr>
+			
+			
+
+
+<!--
+<tr class="header"><th width="100">等级ID</th><th width="100">等级名称</th><th>群组公共积分公式</th><th></th></tr>
+<!--{loop $arr_group $key $value}-->
+<tr class="hover">
+<td>{$value['levelid']}</td>
+<td><input type="text" class="txt" size="12" name="leveltitle_{$value['levelid']}" id="leveltitle_{$value['levelid']}" value="$value['leveltitle']"></td>
+<td class="td28">
+	贡献值：<input type="text" class="txt" size="6" name="contribution_{$value['levelid']}_min" value="{$value['contribution_min']}">~&nbsp;&nbsp;
+	<input type="text" class="txt" size="6" name="contribution_{$value['levelid']}_max" value="{$value['contribution_max']}">
+	成员：<input type="text" class="txt" size="6" name="members_{$value['levelid']}_min" value="{$value['members_min']}">~&nbsp;&nbsp;
+	<input type="text" class="txt" size="6" name="members_{$value['levelid']}_max" value="{$value['members_max']}">
+	帖子数：<input type="text" class="txt" size="6" name="threads_{$value['levelid']}_min" value="{$value['threads_min']}">~&nbsp;&nbsp;
+	<input type="text" class="txt" size="6" name="threads_{$value['levelid']}_max" value="{$value['threads_max']}">
+</td>
+<td class="td28">
+	<a href="admin.php?action=plugins&operation=config&do=14&identifier=fansclub&pmod=level&levelid=$value['levelid']" class="act">详情</a></td></tr>
+<!--{/loop}-->
+-->
+<tr>
+<td colspan="15">
+	<div class="fixsel"><input type="submit" class="btn" id="submit_grouplevelsubmit" name="grouplevelsubmit" title="按 Enter 键可随时提交您的修改" value="提交"></div></td></tr>
+</tbody></table>
+</form>
+<br>
+<!--设置特殊等级-->
+<form name="cpform_special" method="post" autocomplete="off" action="" id="cpform_special">
+<input type="hidden"  name="formhash" value="$formhash">
+<table class="tb tb2 fixpadding" id="grouplevel">
+<tbody><tr><th colspan="15" class="partition">【球迷会等级设置 - 特殊等级】</th></tr>
+<tr class="header"><th width="200">等级名称</th>
+<th width="100">话题数</th>
+<th width="100">成员数</th>
+<th width="100">活跃度</th>
+<th width="100">贡献值</th><th></th></tr>
+<!--{loop $arr_group_special $key $value}-->
+<tr class="hover">
+<td class="vtop">{$value['leveltitle']}<input type="hidden" name="leveltitle_{$value['levelid']}" id="leveltitle_{$value['levelid']}" value="$value['leveltitle']"></td>
+<!--<td class="vtop rowform"><input type="text" class="txt" name="specil_{$value['levelid']}_include" value="{$value['specil_include']}"></td>
+<td class="vtop tips2" s="1">填写要包含群组首页的群组 ID，以半角逗号 "," 隔开。例：“23,56,983”</td>-->
+<td class="vtop "><input type="text" class="txt" name="specil_{$value['levelid']}_posts" value="{$value['specil_posts']}"></td>
+<td class="vtop "><input type="text" class="txt" name="specil_{$value['levelid']}_members" value="{$value['specil_members']}"></td>
+<td class="vtop "><input type="text" class="txt" name="specil_{$value['levelid']}_activity" value="{$value['specil_activity']}"></td>
+<td class="vtop "><input type="text" class="txt" name="specil_{$value['levelid']}_contribution" value="{$value['specil_contribution']}"></td>
+</tr>
+<!--{/loop}-->
+<tr>
+<td colspan="15">
+	<div class="fixsel"><input type="submit" class="btn" id="submit_grouplevelsubmit_special" name="grouplevelsubmit_special" title="按 Enter 键可随时提交您的修改" value="提交"></div></td></tr>
+</tbody></table>
+</form>
+<br>
+<!--设置有效时间-->
+<form name="cpform_time" method="post" autocomplete="off" action="" id="cpform_time">
+<input type="hidden" name="formhash" value="$formhash">
+<table class="tb tb2 fixpadding" id="grouplevel">
+<tbody><tr><th colspan="15" class="partition">【球迷会等级设置 - 有效时间】</th></tr>
+<tr class="header"><th width="200">等级名称</th><th>有效时间</th><th></th></tr>
+<!--{loop $arr_group_time $key $value}-->
+<tr class="hover">
+<td class="vtop">{$value['leveltitle']}<input type="hidden" name="leveltitle_{$value['levelid']}" id="leveltitle_{$value['levelid']}" value="$value['leveltitle']"></td>
+<td class="vtop rowform"><input type="text" class="txt" name="specil_{$value['levelid']}_time" value="{$value['specil_time']}"></td>
+<td class="vtop tips2" s="1">填写有效时间(月份)。例：有效半年填“6”，有效3个月填“3”，0为不限制。</td>
+</tr>
+<!--{/loop}-->
+<tr>
+<td colspan="15">
+	<div class="fixsel"><input type="submit" class="btn" id="submit_grouplevelsubmit_time" name="grouplevelsubmit_time" title="按 Enter 键可随时提交您的修改" value="提交"></div></td></tr>
+</tbody></table>
+</form>
+<br>

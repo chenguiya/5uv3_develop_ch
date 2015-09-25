@@ -1,0 +1,73 @@
+<!--{subtemplate common/header}-->
+<center><br>【球迷会申请附议】</center>
+<iframe id="frame_fansclub" name="frame_fansclub" style="display: none"></iframe>
+<table cellpadding="0" cellspacing="0" class="tfm">
+<form id="form_fansclub" name="form_fansclub" action="plugin.php?id=fansclub&ac=apply_support&op=join" method="post" autocomplete="off" 
+	target="frame_fansclub">
+	<tr>
+		<th></th>
+		<td>
+		<input type="hidden" id="formhash" name="formhash" value="$formhash">
+		<input type="hidden" id="submitchk" name="submitchk" value="true">
+		<input type="hidden" id="apply_id" name="apply_id" value="{$apply_id}">
+		<input type="submit" id="apply_support_submit" name="apply_support_submit" value="立即加入"> 
+		</td>
+	</tr>
+	<tr>
+		<th>附议状态</th>
+		<td>$config['apply_status'][$apply['status']] - 已加入$apply['have_support'] - 还差$apply['differ'] </td>
+	</tr>
+	<tr>
+		<th>附议URL</th>
+		<td>$apply['url']</td>
+	</tr>
+	<tr>
+		<th>球迷会类别</th>
+		<td>$fansclub_relation</td>
+	</tr>
+	<tr>
+		<th>球迷会名称</th>
+		<td>$apply['fansclub_name']</td>
+	</tr>
+	<tr>
+		<th>球迷会范围</th>
+		<td>$fansclub_range</td>
+	</tr>
+	<tr>
+		<th>球迷会简介</th>
+		<td>$apply['fansclub_brief']</td>
+	</tr>
+	<tr>
+		<th>球迷会logo</th>
+		<td>$fansclub_logo</td>
+	</tr>
+	<tr>
+		<th>管理章程</th>
+		<td>$apply['fansclub_rules']</td>
+	</tr>
+	<tr>
+		<th>联系方式</th>
+		<td>手机：$apply['mobile']|QQ：$apply['qq']|Email：$apply['email']</td>
+	</tr>
+	<tr>
+		<th>已加入的会员</th>
+		<td>
+			<!--{loop $support $key $value}-->
+			<!--{if $key > 0}--><br><!--{/if}-->
+			$key $value['username'] $value['support_time']
+			<!--{/loop}-->
+		</td>
+	</tr>
+</form>
+</table>
+
+<script language="javascript">
+function show_success(message, jump_url, type) {
+	message = message == '' ? '更新成功' : message;
+	type = type == '' ? 'right' : type;
+	showDialog(message, type, '提示信息', function(){
+		top.window.location.href = (jump_url == '') ? top.window.location.href : jump_url;
+	}, 0, null, '', '', '', '', 3);
+}
+</script>
+<!--{subtemplate common/footer}-->

@@ -1,0 +1,224 @@
+
+<table cellpadding="0" cellspacing="0" class="tfm">
+<form method="post" id="ucharge_form">
+	<tr>
+		<th></th>
+		<td>【VIP充值】</td>
+	</tr>
+	<tr>
+		<th>请选择充值内容</th>
+		<td><select style="width:100px;" id="league" name="league" onChange="chg1(this);"><option value="0">请选择</option></select>&nbsp;
+			<select style="width:100px;visibility:hidden;" id="club" name="club" onChange="chg2(this);"><option value="0">请选择</option></select>&nbsp;
+			<select style="width:100px;visibility:hidden;" id="star" name="star"><option value="0">请选择</option></select>
+		</td>
+	</tr>
+	<tr>
+		<th>请选择充值金额</th>
+		<td><select id="charge_type" name="charge_type">
+			<option value="0">请选择</option>
+			<!--{loop $arr_type_list $key $value}-->
+			<option value="$key">$value['text']</option>
+			<!--{/loop}-->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th></th>
+		<td><input type="hidden" id="charge_submit" name="charge_submit" value="1">
+		<input type="button" id="charge_btn" name="charge_btn" value="去支付宝充值" onClick="form_submit();"></td>
+	</tr> 
+</form>
+</table>
+
+<script language="javascript">
+var leagues = new Array();
+var clubs = new Array();
+var stars = new Array();
+
+var leagues_show = new Array(); // 显示用
+var clubs_show = new Array();
+var stars_show = new Array();
+
+
+<!--{loop $arr_forum_list $key1 $value1}-->
+leagues[$key1] = "$value1['name']";
+leagues_show.push($key1 + '|' + leagues[$key1]);
+
+clubs[$key1] = new Array();
+clubs_show[$key1] = new Array();
+stars[$key1] = new Array();
+stars_show[$key1] = new Array();
+<!--{loop $value1['list'] $key2 $value2}-->
+	clubs[$key1][$key2] = "$value2['name']";
+	clubs_show[$key1].push($key2+'|'+clubs[$key1][$key2]);
+	stars[$key1][$key2] = new Array();
+	stars_show[$key1][$key2] = new Array();
+<!--{loop $value2['list'] $key3 $value3}-->
+		stars[$key1][$key2][$key3] = "$value3['name']";
+		stars_show[$key1][$key2].push($key3+'|'+stars[$key1][$key2][$key3]);
+<!--{/loop}-->
+<!--{/loop}-->
+<!--{/loop}-->
+
+
+var pIndex = 0;
+var leagueEle = document.getElementById("league");
+var clubEle = document.getElementById("club");
+var starEle = document.getElementById("star");
+var chargeTypeEle = document.getElementById("charge_type"); 
+
+//for(var i = leagues_show.length - 1; i >= 0; i--)
+for(var i = 0;i < leagues_show.length; i++)
+{
+	var temp = leagues_show[i].split('|');
+	var op = new Option(temp[1], temp[0]);
+	leagueEle.options.add(op);
+}
+
+/* 这个是原来的
+for(var key in leagues) {
+	var op = new Option(leagues[key], key);
+	leagueEle.options.add(op);
+}
+*/
+
+function chg1(obj) {
+	if (obj.value == 0) {
+		clubEle.options.length = 0;
+		starEle.options.length = 0;
+		clubEle.style.visibility = 'hidden';
+		starEle.style.visibility = 'hidden';
+	}
+	else
+	{
+		clubEle.style.visibility = 'visible';
+	}
+	
+	var val = obj.value;
+	pIndex = obj.value;
+	var cs = clubs[val];
+	clubEle.options.length = 0;
+	var op = new Option('请选择', 0);
+	clubEle.options.add(op);
+		
+	var first = 0;
+	
+	for(var i = 0;i < clubs_show[val].length; i++)
+	{
+		var temp = clubs_show[val][i].split('|');
+		var op = new Option(temp[1], temp[0]);
+		clubEle.options.add(op);
+		if(first == 0)
+		{
+			first = temp[0];
+		}
+	}
+	/* 这个是原来的
+	for(var key in cs) {
+		var op = new Option(cs[key], key);
+		clubEle.options.add(op);
+		if(first == 0)
+		{
+			first = key;
+		}
+	}
+	*/
+	
+	if(first == 0)
+	{
+	}
+	else
+	{
+		var as = stars[val][first];
+		starEle.options.length = 0;
+		
+		var op = new Option('请选择', 0);
+		starEle.options.add(op);
+		
+		for(var i = 0;i < stars_show[val][first].length; i++)
+		{
+			var temp = stars_show[val][first][i].split('|');
+			var op = new Option(temp[1], temp[0]);
+			starEle.options.add(op);
+		}
+		/*这个是原来的
+		for(var key in as) {
+			var op = new Option(as[key], key);
+			starEle.options.add(op);
+		}*/
+	}
+}
+
+function chg2(obj) {
+	var val = obj.value;
+	if(val == 0)
+	{
+		starEle.style.visibility = 'hidden';
+	}
+	else
+	{
+		starEle.style.visibility = 'visible';
+		var as = stars[pIndex][val];
+		starEle.options.length = 0;
+		
+		var op = new Option('请选择', 0);
+		starEle.options.add(op);
+		
+		for(var i = 0;i < stars_show[pIndex][val].length; i++)
+		{
+			var temp = stars_show[pIndex][val][i].split('|');
+			var op = new Option(temp[1], temp[0]);
+			starEle.options.add(op);
+		}
+		/*这个是原来的
+		for(var key in as) {
+			var op = new Option(as[key], key);
+			starEle.options.add(op);
+		}
+		*/
+	}
+}
+
+function form_submit()
+{
+	document.getElementById('ucharge_form').submit();
+}
+
+<!--{if $_GET['focus'] == 'league'}-->
+	leagueEle.focus();
+<!--{/if}-->
+
+<!--{if $_GET['focus'] == 'club'}-->
+	leagueEle.value = {$_GET['league']};
+	if (leagueEle.fireEvent) {
+		leagueEle.fireEvent('onchange');
+	} else {
+		leagueEle.onchange();
+	}
+	clubEle.style.visibility = 'visible';
+	clubEle.focus();
+<!--{/if}-->
+
+<!--{if $_GET['focus'] == 'charge_type'}-->
+	leagueEle.value = {$_GET['league']};
+	if (leagueEle.fireEvent) {
+		leagueEle.fireEvent('onchange');
+	} else {
+		leagueEle.onchange();
+	}
+	
+	clubEle.style.visibility = 'visible';
+	clubEle.value = {$_GET['club']};
+	if (clubEle.fireEvent) {
+		clubEle.fireEvent('onchange');
+	} else {
+		clubEle.onchange();
+	}
+<!--{if $_GET['star'] > 0}-->
+	starEle.value = {$_GET['star']};
+<!--{/if}-->
+
+	chargeTypeEle.focus();
+<!--{/if}-->
+</script>
+

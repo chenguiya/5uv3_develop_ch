@@ -1,0 +1,357 @@
+{subtemplate common/header}
+
+<!--{if !$_G['uid']}-->
+ 
+    <script type="text/javascript" language="javascript">
+ 
+        showDialog('亲，你还木有登录，请登录后再来签到吧。', 'info' , '温馨提示', '',1, '', '', '', '', 3, 0) 
+ 
+    </script>
+ 
+<!--{/if}-->
+<style>
+.mood-p-sign dl {
+	border: 3px solid rgb(145, 205, 81); width: 160px; margin-right: 70px;margin-top:10px;margin-botton:10px; float: left;
+}
+.mood-p-sign dl dt {
+	background: url("./source/plugin/k_misign/static/pic_gifts.png") no-repeat rgb(255, 255, 255); height: 136px; text-align: center; color: #646c78; line-height: 28px; position: relative;
+}
+.mood-p-sign dl dd {
+	height: 22px; text-align: center; color: rgb(255, 255, 255); line-height: 22px; background-color: rgb(145, 205, 81);
+}
+#gift1 dt {
+	
+}
+#gift2 dt {
+	background-position: -200px 0px;
+}
+#gift3 dt {
+	background-position: -600px 0px;
+}
+#gift4 dt {
+	background-position: -400px 0px;
+}
+#gift5 dt {
+	background-position: -800px 0px;
+}
+#gift6 dt {
+	background-position: -1000px 0px;
+}
+.mood-p-sign {
+	width: 960px; margin-left: 28px; float: left; overflow-x: hidden;
+}
+</style>
+
+<link rel="stylesheet" type="text/css" href="./source/plugin/k_misign/static/sign.css"  />
+<div class="wp cl">
+	<div class="lineA clearfix">
+		<div class="fleft"></div>
+		<div class="fright">
+			<span class="fir">{lang k_misign:todaystar}{$todaystar['username']}</span>
+			<span class="sec">{lang k_misign:height}<!--{if $stats[highestq] > $stats[todayq]}-->{$stats[highestq]}<!--{else}-->{$stats[todayq]}<!--{/if}-->{lang k_misign:people}</span>
+		</div>
+	</div>
+    <div class="lineB cl">
+        <div class="qdleft">
+        	<!--{if $qiandaodb['time'] >= $tdtime}-->
+            <span class="btn btnvisted"></span>
+            <!--{else}-->
+            	<!--{if !$_G['uid']}-->
+            <a id="JD_sign" href="member.php?mod=logging&action=login"  onclick="showWindow('login', this.href);return false;" class="btn J_chkitot"></a>
+                <!--{else}-->
+            <a id="JD_sign" href="#"  onclick="ajaxget('plugin.php?id=k_misign:sign&operation=qiandao&formhash={FORMHASH}&from=insign&token={$token}', this.id, '', '', '', 'window.location.reload();');return false;" class="btn J_chkitot"></a>
+            	<!--{/if}-->
+            <!--{/if}-->
+            <div class="paiming cl">
+                <input type="hidden" class="hidnum" id="qiandaobtnnum" value="{$qiandaodb['row']}">
+                <div class="font">
+                    <!--{if $qiandaodb['time'] >= $tdtime}-->{lang k_misign:yourrow}{$qiandaodb['row']}<!--{else}-->{lang k_misign:notqdyet}<!--{/if}-->
+                </div>
+                <div class="pics J_numpic cl J_animation" id="qdbn2"<!--{if $qiandaodb['time'] < $tdtime}--> style="display:none;"<!--{/if}-->>
+                <!--{eval $qdbn2 = str_split($qiandaodb['row']);}-->
+                	<!--{loop $qdbn2 $value}-->
+                    <span class="{$numtostr[$value]}"></span>
+                    <!--{/loop}-->
+                </div>
+            </div>
+        </div>
+        <div class="qdright">
+            <div class="content">
+                <h3 class="mainCon">
+                    <div class="user">
+                        <a href="home.php?mod=space&uid={$_G['uid']}" c="1"><!--{avatar($_G['uid'], small)}--></a>
+                        <a href="home.php?mod=space&uid={$_G['uid']}" c="1" class="author">{$_G['username']}</a>
+                    </div>
+                </h3>
+                <ul class="countqian cl">
+                    <li>
+                        <h4>{lang k_misign:row}{lang k_misign:sign}</h4>
+                        <p>
+                            <input type="hidden" class="hidnum" id="lxdays" value="{$qiandaodb['lasted']}">
+                            <b class="pics J_numpic J_animation" style="height:23px;">
+								<!--{eval $qdbn3 = str_split($qiandaodb['lasted']);}-->
+								<!--{loop $qdbn3 $value}-->
+									<span class="{$numtostr[$value]}"></span>
+								<!--{/loop}-->
+                            </b>
+                            <b class="qiandao">{lang k_misign:days}</b>
+                        </p>
+                    </li>
+                    <li>
+                        <h4>{lang k_misign:signlevel}</h4>
+                        <p class="lvgrade">
+                            <input type="hidden" class="hidnum" id="lxlevel" value="{$qiandaodb['level']}">
+                            <b class="pics J_numpic J_animation" style="height:26px;">
+								<!--{eval $qdbn4 = str_split($qiandaodb['level']);}-->
+								<!--{loop $qdbn4 $value}-->
+									<span class="{$numtostr[$value]}"></span>
+								<!--{/loop}-->
+                            </b>
+                        </p>
+                    </li>
+                    <li>
+                        <h4>{lang k_misign:signjl}</h4>
+                        <p>
+                            <input type="hidden" class="hidnum" id="lxreward" value="{$qiandaodb['lastreward']}">
+                            <b class="pics J_numpic J_animation" style="height:23px;">
+								<!--{eval $qdbn5 = str_split($qiandaodb['lastreward']);}-->
+								<!--{loop $qdbn5 $value}-->
+									<span class="{$numtostr[$value]}"></span>
+								<!--{/loop}-->
+                            </b>
+                            <b>{$_G[setting][extcredits][$setting[nrcredit]]['unit']}</b>
+                        </p>
+                    </li>
+                    <li>
+                        <h4>{lang k_misign:zong}</h4>
+                        <p>
+                            <input type="hidden" class="hidnum" id="lxtdays" value="{$qiandaodb['days']}">
+                            <b class="pics J_numpic J_animation" style="height:23px;">
+								<!--{eval $qdbn6 = str_split($qiandaodb['days']);}-->
+								<!--{loop $qdbn6 $value}-->
+									<span class="{$numtostr[$value]}"></span>
+								<!--{/loop}-->
+                            </b>
+                            <b>{lang k_misign:days}</b>
+                        </p>
+                    </li>
+                </ul>
+                <div class="weather_p">
+                    <div class="con">
+                        {$stats['todayq']}<span>{lang k_misign:people}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="lineC cl">
+		<div class="lineC_left" id="ranklist">
+		</div>
+        <script>ajaxget('plugin.php?id=k_misign:sign&operation=list','ranklist');</script>
+		<div class="lineC_right">
+			<h3 class="tit">{$setting['pushtitle']}</h3>
+            <!--{if $pushmemberlists}-->
+			<ul class="photos cl">
+            <!--{loop $pushmemberlists $value}-->
+				<li>
+                        <img src="{$value[pic]}" class="head_img" />
+                        <div class="info  J_info" id="J_info_1" style="bottom: -161px;">
+                            <h3>{$value['title']}</h3>
+                            <p class="con">{$value['message']}</p>
+                            <p class="link">{lang k_misign:visitmore}<img src="./source/plugin/k_misign/static/come_11.jpg"></p>
+                        </div>
+                        <a target="_blank" href="{$value['url']}" class="J_intro mask"></a>
+				</li>
+            <!--{/loop}-->
+			</ul>
+            <!--{else}-->
+            <center><span class="xi1">{lang k_misign:noinfo}</span></center>
+            <!--{/if}-->
+		</div>
+    	<div class="mood-p-sign">
+			<dl id="gift1">
+            <!--{if $mdays>6&&$libao1==0}-->
+				<dt onclick="ajaxget('plugin.php?id=k_misign:sign&operation=libao&libao=1&formhash={FORMHASH}', this.id, '', '', '', 'window.location.reload();');return false;">月签到累计7天</dt>
+            <!--{else}-->
+				<dt style="filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(100%);">月签到累计7天</dt>
+            <!--{/if}-->
+				<dd>5虾米</dd>
+			</dl>
+			<dl id="gift2">
+            <!--{if $mdays>14&&$libao2==0}-->
+				<dt onclick="ajaxget('plugin.php?id=k_misign:sign&operation=libao&libao=2&formhash={FORMHASH}', this.id, '', '', '', 'window.location.reload();');return false;">月签到累计15天</dt>
+            <!--{else}-->
+				<dt style="filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(100%);">月签到累计15天</dt>
+            <!--{/if}-->
+				<dd>10虾米</dd>
+			</dl>
+			<dl id="gift3">
+            <!--{if $mdays>26&&$libao3==0}-->
+				<dt onclick="ajaxget('plugin.php?id=k_misign:sign&operation=libao&libao=3&formhash={FORMHASH}', this.id, '', '', '', 'window.location.reload();');return false;">月签到累计27天</dt>
+            <!--{else}-->
+				<dt style="filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(100%);">月签到累计27天</dt>
+            <!--{/if}-->
+				<dd>20虾米</dd>
+			</dl>
+            <!--{if $lasted>2&&$lasted<7&&$libao4==0}-->
+			<dl id="gift4">
+				<dt onclick="ajaxget('plugin.php?id=k_misign:sign&operation=libao&libao=4&formhash={FORMHASH}', this.id, '', '', '', 'window.location.reload();');return false;">连续签到3天</dt>
+				<dd>荣誉签到勋章 1天</dd>
+            <!--{elseif $lasted>6&&$lasted<15&&$libao4==0}-->
+			<dl id="gift4">
+				<dt onclick="ajaxget('plugin.php?id=k_misign:sign&operation=libao&libao=4&formhash={FORMHASH}', this.id, '', '', '', 'window.location.reload();');return false;">连续签到7天</dt>
+				<dd>荣誉签到勋章 3天</dd>
+            <!--{elseif $lasted>14&&$lasted<30&&$libao4==0}-->
+			<dl id="gift4">
+				<dt onclick="ajaxget('plugin.php?id=k_misign:sign&operation=libao&libao=4&formhash={FORMHASH}', this.id, '', '', '', 'window.location.reload();');return false;">连续签到15天</dt>
+				<dd>荣誉签到勋章 10天</dd>
+            <!--{elseif $lasted>29&&$lasted<60&&$libao4==0}-->
+			<dl id="gift4">
+				<dt onclick="ajaxget('plugin.php?id=k_misign:sign&operation=libao&libao=4&formhash={FORMHASH}', this.id, '', '', '', 'window.location.reload();');return false;">连续签到30天</dt>
+				<dd>荣誉签到勋章 15天</dd>
+            <!--{elseif $lasted>59&&$lasted<91&&$libao4==0}-->
+			<dl id="gift4">
+				<dt onclick="ajaxget('plugin.php?id=k_misign:sign&operation=libao&libao=4&formhash={FORMHASH}', this.id, '', '', '', 'window.location.reload();');return false;">连续签到60天</dt>
+				<dd>荣誉签到勋章 30天</dd>
+            <!--{elseif $lasted>90&&$lasted<180&&$libao4==0}-->
+			<dl id="gift4">
+				<dt onclick="ajaxget('plugin.php?id=k_misign:sign&operation=libao&libao=4&formhash={FORMHASH}', this.id, '', '', '', 'window.location.reload();');return false;">连续签到91天</dt>
+				<dd>荣誉签到勋章 60天</dd>
+            <!--{elseif $lasted>179&&$lasted<360&&$libao4==0}-->
+			<dl id="gift4">
+				<dt onclick="ajaxget('plugin.php?id=k_misign:sign&operation=libao&libao=4&formhash={FORMHASH}', this.id, '', '', '', 'window.location.reload();');return false;">连续签到180天</dt>
+				<dd>荣誉签到勋章 90天</dd>
+            <!--{elseif $lasted>359&&$libao4==0}-->
+			<dl id="gift4">
+				<dt onclick="ajaxget('plugin.php?id=k_misign:sign&operation=libao&libao=4&formhash={FORMHASH}', this.id, '', '', '', 'window.location.reload();');return false;">连续签到360天</dt>
+				<dd>永久荣誉签到勋章</dd>
+            <!--{elseif $lasted<3}-->
+			<dl id="gift4">
+				<dt style="filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(100%);">连续签到3天</dt>
+				<dd>荣誉签到勋章 1天</dd>
+            <!--{elseif $lasted>2&&$lasted<=6}-->
+			<dl id="gift4">
+				<dt style="filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(100%);">连续签到7天</dt>
+				<dd>荣誉签到勋章 3天</dd>
+            <!--{elseif $lasted>6&&$lasted<=15}-->
+			<dl id="gift4">
+				<dt style="filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(100%);">连续签到15天</dt>
+				<dd>荣誉签到勋章 10天</dd>
+            <!--{elseif $lasted>14&&$lasted<=30}-->
+			<dl id="gift4">
+				<dt style="filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(100%);">连续签到30天</dt>
+				<dd>荣誉签到勋章 15天</dd>
+            <!--{elseif $lasted>29&&$lasted<60}-->
+			<dl id="gift4">
+				<dt style="filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(100%);">连续签到60天</dt>
+				<dd>荣誉签到勋章 30天</dd>
+            <!--{elseif $lasted>59&&$lasted<91}-->
+			<dl id="gift4">
+				<dt style="filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(100%);">连续签到91天</dt>
+				<dd>荣誉签到勋章 60天</dd>
+            <!--{elseif $lasted>90&&$lasted<180}-->
+			<dl id="gift4">
+				<dt style="filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(100%);">连续签到180天</dt>
+				<dd>荣誉签到勋章 90天</dd>
+            <!--{elseif $lasted>179&&$lasted<360}-->
+			<dl id="gift4">
+				<dt style="filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(100%);">连续签到360天</dt>
+				<dd>永久荣誉签到勋章</dd>
+            <!--{else}-->
+			<dl id="gift6">
+				<dt>达到指定条件</dt>
+				<dd>神秘大奖</dd>
+            <!--{/if}-->
+			</dl>
+                
+			<!--dl id="gift6">
+				<dt onclick="showDialog('亲，你已经领过礼包或还没有获得该礼包~', 'info' , '温馨提示', '',1, '', '', '', '', 3, 0)">连续签到360天</dt>
+				<dt onclick=''>月签到累计32天</dt>
+				<dd>神秘大奖</dd>
+			</dl-->
+		</div>
+
+	</div>
+	</div>
+    <!--{if $setting['prizestatus']}-->
+	<div class="lineD">
+		<h3 class="tit">{$setting['rewardtitle']}</h3>
+		<div class="content cl">
+			<ul class="leftcon cl J_mifens" id="J_mifens">
+            <!--{loop $prizememberlist $key $prizemember}-->
+            <!--{eval $prizemember['avatar'] = str_replace('\/' ,'/', $prizemember['avatar'])}-->
+               <li id="mifen{$key}">
+                    <a href="home.php?mod=space&uid={$prizemember[uid]}" c="1" class="headimg"><img src="{$prizemember['avatar']}"></a>
+                    <a href="home.php?mod=space&uid={$prizemember[uid]}" class="author">{$prizemember['username']}</a><br>
+                    <span class="thing">{lang k_misign:rewards}{$prizemember['prizename']}</span>
+                </li>
+            <!--{/loop}-->
+			</ul>
+            <div class="rewardlist" id="demo" style=" overflow:hidden; height:180px;">
+                <div id="demo1">
+                    <ul class="arts J_linescroll">
+                    <!--{loop $rewardmemberlists $key $rewardmember}-->
+                            <li><span class="user">{$rewardmember['username']}</span><span>{lang k_misign:todayrewards}&nbsp;{$rewardmember['lastreward']}{$_G['setting']['extcredits'][$setting[nrcredit]]['unit']}{$_G['setting']['extcredits'][$setting[nrcredit]]['title']}</span></li>
+                    <!--{/loop}-->
+                    </ul>
+                </div>
+                <div id="demo2"></div>
+            </div>
+        </div>
+	</div>
+<SCRIPT>
+var speed = 15;//滚动速度
+var rows = 28;//每行高度
+var stim = 80; //停留时间倍数 * speed
+var stop = 0; //初始化值，不管
+demo2.innerHTML = demo1.innerHTML
+function Marquee(){
+    if(demo.scrollTop%rows==0 && stop<=stim){
+      stop++;
+      return;
+    }
+    stop = 0;
+    if(demo2.offsetTop-demo.scrollTop<=0)
+      demo.scrollTop-=demo1.offsetHeight
+    else{
+      demo.scrollTop++
+    }
+}
+var MyMar    = setInterval(Marquee,speed)
+demo.onmouseover = function() {clearInterval(MyMar)}
+demo.onmouseout = function() {MyMar=setInterval(Marquee,speed)}
+</SCRIPT>
+    <!--{/if}-->
+<script src="./source/plugin/k_misign/static/jquery18.js"></script>
+<script type="text/javascript">
+var jq = jQuery.noConflict();
+</script>
+<script src="./source/plugin/k_misign/static/doT.js"></script>
+<script>
+var mifens = {"start":0,"end":9,"data":[
+<!--{loop $prizememberlist $key $prizemember}-->
+{"vip":1,"uid":"{$prizemember['uid']}","name":"{$prizemember['username']}","title":"{$prizemember['prizename']}","head":"{$prizemember['avatar']}","href":"home.php?mod=space&uid={$prizemember[uid]}"},
+<!--{/loop}-->
+]};
+</script>
+<script id="mifen-tmpl" type="text/template">
+{{ for (var i = it.start, l = it.end; i < l; i++) { }}
+   <li id="mifen{{=i}}">
+        <a href="{{=it.data[i].href}}" c="1" class="headimg"><img src="{{=it.data[i].head}}"></a>
+        <a href="{{=it.data[i].href}}" class="author">
+        {{=it.data[i].name}}</a><br>
+        <span class="thing">{lang k_misign:rewards}{{=it.data[i].title}}</span>
+    </li>
+{{ } }}
+</script>
+<script id="mifen2-tmpl" type="text/template">
+{{ for (var i = it.start, l = it.end; i < l; i++) { }}
+    <a href="{{=it.data[i].href}}" c="1" class="headimg"><img src="{{=it.data[i].head}}"></a>
+    <a href="{{=it.data[i].href}}" class="author">
+    {{=it.data[i].name}}</a><br>
+    <span class="thing">{lang k_misign:rewards}{{=it.data[i].title}}</span>
+{{ } }}
+</script>
+<script type="text/javascript" src="./source/plugin/k_misign/static/come.js" charset="utf-8"></script>
+</div>
+{subtemplate common/footer}

@@ -1,0 +1,42 @@
+<!--{block html}-->
+	<div class="teamFanMain">
+		<!--{if $first_arr}-->
+    	<div class="fanInfo">
+        	<div class="teamLogoa">
+				<a href="fans/topic/{$first_arr['fid']}/" target="_blank" title="{$first_arr['name']}">
+					<img src="{$first_arr['icon']}" alt="{$first_arr['name']}" title="{$first_arr['name']}" width="100" height="100" align="absmiddle"/></a><span class="fans_icon"></span></div>
+            <div class="fansName">
+            	<p><a href="fans/topic/{$first_arr['fid']}/" target="_blank" title="{$first_arr['name']}">{$first_arr['name']}</a>
+				<a href="plugin.php?id=fansclub&ac=verify&type=boots&fid={$first_arr['fid']}">{$first_arr['level_img']}</a></p>
+				<p class="fans_chbox">{$first_arr['joinin_button']}</p>
+                
+            </div>
+            <div class="jianju25"></div>
+            <div class="faninfoM">
+            	<span class="adico">{$first_arr['province_city']}</span>|<span class="numIco">{$first_arr['members']}</span><span class="plIco">{$first_arr['posts']}</span><span class="valueIco"><font>贡献值：</font>{$first_arr['contribution']}</span>
+            </div>
+            <div class="fansDes">{$first_arr['description']}..</div>
+        </div>
+        <!--{/if}-->
+        <div class="fansList channel-index">
+			<!--{loop $arr $v}-->
+				<div class="fansLista">
+					<div class="fansListImg">
+						<a href="fans/topic/{$v['fid']}/" target="_blank" title="{$v['name']}">
+							<img src="{$v['icon']}" width="60" height="60" alt="{$v['name']}" title="{$v['name']}" />
+							<em class="fans_icon"></em>
+						</a>
+						<span>{$v['province_city']}</span>
+					</div>
+					<div class="fansListR">
+						<div class="fansTitleS"><a href="fans/topic/{$v['fid']}/" target="_blank" title="{$v['name']}">{$v['name']}</a>
+						<a href="plugin.php?id=fansclub&ac=verify&type=boots&fid={$v['fid']}">{$v['level_img']}</a></div>
+						<div class="fansListInfo"><span class="numIco">{$v['members']}</span><span class="plIco">{$v['posts']}</span><span class="valueIco"><font>贡献值：</font>{$v['contribution']}</span></div>
+						<div><b>简介：</b>{$v['description']}..</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+            <!--{/loop}-->
+        </div>
+    </div>
+<!--{/block}-->

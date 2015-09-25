@@ -1,0 +1,45 @@
+<!--{template common/header}-->
+<div class="ch_bm">
+<div class="z">
+<a href="./" class="" title="{lang homepage}">5U体育</a><em>&raquo;</em><a href="plugin.php?id=rights">权益</a><em>&raquo;</em><a href="javascript:void(0);">我的权益</a></div>
+</div>
+<div class="rights_mian cl">
+	<!--{template rights:index/left}-->
+	 <div class="rights_right">
+	      <div class="rights_box">
+		       <p class="tbmu"><span class="deta_h3">您已开通以下服务</span></p>
+			   <div class="deta_bds cl">
+					<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mine_table">
+					       <tr>
+						       <th width="135">服务名称</th>
+							   <th width="auto">详情</th>
+							   <th width="158">有效期</th>
+							   <th width="120">状态</th>
+						   </tr>
+						   <!--{loop $myrights $val}-->
+						   <tr>
+						       <td class="oran_mine">{$val[name]}</td>
+							   <td class="mine_way">
+							       {$val[description]}<br>
+							       <span style="margin-left: 125px;"><a href="">更多特权》</a></span>
+							   </td>
+							   <td>{$val[regdate]} - {$val[canceldate]}</td>
+							   <td>
+							   <!--{if $val[status]==0}-->
+							   	<b style="color:green">服务中</b>
+							   <!--{elseif $val[status]==1}-->
+							   	<b style="color:gray">未生效</b>
+							   <!--{else}-->
+							   	<b style="color:red">已过期</b>
+							   <!--{/if}-->
+							   </td>
+						   </tr>
+						   <!--{/loop}-->
+					</table>
+					<div class="jianju20"></div>
+					{$nultipage}
+			   </div>
+		  </div>
+	 </div>
+</div>
+<!--{template common/footer}-->

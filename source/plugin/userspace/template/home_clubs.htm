@@ -1,0 +1,37 @@
+<!--{template common/header}-->
+<!--{template home/space_menu}-->
+<!--{if $arr}-->
+<div class="clubsBox">
+	<div class="clubsTitle">已加入<font>$num</font>个球迷会</div>
+    <div class="clubsList">
+		<!--{loop $arr $v}-->
+		<!--{eval $v['name']=strip_tags($v['name']);}-->
+    	<div class="clubsLista">
+        	<div class="clubsListImg"><a href="fans/{$v[fid]}/" target="_blank" title="{$v['name']}">
+			<img src="{$v['info'][icon]}" width="100" height="100" alt="{$v['name']}" title="{$v['name']}"/></a></div>
+            <div class="clubsTxt">
+            	<div><a href="fans/{$v[fid]}/" target="_blank" title="{$v['name']}" class="clubsName">{$v['name']}</a>
+					{$v['level_img']}</div>
+                <div class="faninfoM">
+            		<span class="adico">{$v['info']['province_name']}&nbsp;{$v['info']['city_name']}</span>|<span class="numIco">{$v['membernum']}</span>
+					<span class="plIco">{$v['posts']}</span><span class="valueIco"><font>贡献值：</font>{$v['info']['contribution']}</span>
+            	</div>
+                <p>简介：<!--{if $v['description']}-->{$v['description']}<!--{else}-->暂无简介<!--{/if}--></p>
+            </div>
+			 <div class="clubsListaR">
+			 {$v['joinin_button']}
+			 </div>
+            <div class="clear"></div>
+        </div>
+        <!--{/loop}-->
+    </div>
+</div>
+<!--{else}-->
+<div class="clubsBox clubsBoxN">
+	<div class="clubsTitle">没有加入任何球迷会</div>
+	<img src="$_G['config'][static]/images/hui.jpg"/>
+    <a href="group/" class="clubsBnt">到球迷会广场看看</a>
+</div>
+<!--{/if}-->
+<div class="blank20"></div>
+<!--{template common/footer}-->

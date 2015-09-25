@@ -1,0 +1,260 @@
+<!--{subtemplate common/header}-->
+<center><br>【球迷会申请】</center>
+{$msg_need_credit_user}{$msg_need_credit}
+<style>
+.input_gray {color:#ccc;}
+.input_white {color:#000;}
+</style>
+<iframe id="frame_fansclub" name="frame_fansclub" style="display:none"></iframe>
+
+<form id="form_fansclub" name="form_fansclub" action="plugin.php?id=fansclub&ac=apply&op=create" method="post" enctype="multipart/form-data" 
+autocomplete="off" target="frame_fansclub" onsubmit='clearErrorInfo();'>
+<table cellpadding="0" cellspacing="0" class="tfm" id="fansclub_list">
+	<tr id="tr_league_id">
+		<th id="th_league_id">球迷会类别</th>
+		<td id="td_league_id"><select style="width:100px;" id="league_id" name="league_id" onChange="chg1(this);"><option value="0">-联赛-</option></select>
+			<select style="width:100px;display:none;" id="club_id" name="club_id" onChange="chg2(this);"><option value="0">-球会-</option></select>
+			<select style="width:100px;display:none;" id="star_id" name="star_id"><option value="0">-球星-</option></select>
+			<div class="rq mtn" style="display:inline;" id="showerror_league_id"></div></td>
+	</tr>
+	<tr id="tr_fansclub_name">
+		<th id="th_fansclub_name">球迷会名称</th>
+		<td id="td_fansclub_name" ><input name="fansclub_name" id="fansclub_name" type="text" value="球迷会名称">
+		<div class="rq mtn" style="display:inline;" id="showerror_fansclub_name"></div></td>
+	</tr>
+	<tr id="tr_province_id">
+		<th id="th_province_id">球迷会范围</th>
+		<td id="td_province_id"><span style="display:inline;" id="fansclubcitybox">$fansclubcityhtml</span>
+		<div class="rq mtn" style="display:inline;" id="showerror_province_id"></div></td>
+	</tr>
+	<tr id="tr_fansclub_brief">
+		<th id="th_fansclub_brief">球迷会简介</th>
+		<td id="td_fansclub_brief"><textarea name="fansclub_brief" id="fansclub_brief" style="height:50px;width:300px;">球迷会简介</textarea>
+		<div class="rq mtn" style="display:inline;" id="showerror_fansclub_brief"></div></td>
+	</tr>
+	<tr>
+		<th>球迷会logo</th>
+		<td><input name="fansclub_logo" id="fansclub_logo" size="18" type="file"></td>
+	</tr>
+	<tr>
+		<th>管理章程</th>
+		<td><div class="tedt">
+			<div class="bar"><script src="static/js/seditor.js?QRC" type="text/javascript"></script>
+			<div class="fpd">
+			<a href="javascript:;" title="文字加粗" class="fbld" onclick="seditor_insertunit('send', '[b]', '[/b]');doane(event);">B</a>
+			<a href="javascript:;" title="设置文字颜色" class="fclr" id="sendforecolor" onclick="showColorBox(this.id, 2, 'send');doane(event);">Color</a>
+			<a id="sendimg" href="javascript:;" title="图片" class="fmg" onclick="seditor_menu('send', 'img');doane(event);">Image</a>
+			<a id="sendurl" href="javascript:;" title="添加链接" class="flnk" onclick="seditor_menu('send', 'url');doane(event);">Link</a>
+			<a id="sendquote" href="javascript:;" title="引用" class="fqt" onclick="seditor_menu('send', 'quote');doane(event);">Quote</a>
+			<a id="sendcode" href="javascript:;" title="代码" class="fcd" onclick="seditor_menu('send', 'code');doane(event);">Code</a>
+			<a href="javascript:;" class="fsml" id="sendsml" onclick="showMenu({'ctrlid':this.id,'evt':'click','layer':2});return false;">Smilies</a>
+			<script type="text/javascript" reload="1">smilies_show('sendsmiliesdiv', 8, 'send');</script>
+			</div></div>
+			<div class="area">
+			<textarea rows="8" cols="40" name="fansclub_rules" class="pt" id="sendmessage" onkeydown="ctrlEnter(event, 'pmsubmit_btn');">管理章程1、2、3、</textarea>
+			</div>
+			</div>
+		</td>
+	</tr>
+	<tr id="tr_mobile">
+		<th id="th_mobile">手机</th>
+		<td id="td_mobile">
+		<input name="mobile" id="mobile" size="18" type="text" value='请输入手机' class="input_gray"
+		onfocus='if(this.value=="请输入手机"){this.value=""; this.className="input_white";}' 
+		onblur='if(this.value==""){this.value="请输入手机";this.className="input_gray"};'>
+		<div class="rq mtn" style="display:inline;" id="showerror_mobile"></div>
+		</td>
+	</tr>
+	
+	<tr id="tr_qq">
+		<th id="th_qq">QQ</th>
+		<td id="td_qq">
+		<input name="qq" id="qq" size="18" type="text" value='请输入QQ' class="input_gray"
+		onfocus='if(this.value=="请输入QQ"){this.value=""; this.className="input_white";}' 
+		onblur='if(this.value==""){this.value="请输入QQ";this.className="input_gray"};'>
+		<div class="rq mtn" style="display:inline;" id="showerror_qq"></div>
+		</td>
+	</tr>
+	
+	<tr id="tr_email">
+		<th id="th_email">Email</th>
+		<td id="td_email">
+		<input name="email" id="email" size="18" type="text" value='请输入Email' class="input_gray"
+		onfocus='if(this.value=="请输入Email"){this.value=""; this.className="input_white";}' 
+		onblur='if(this.value==""){this.value="请输入Email";this.className="input_gray"};'>
+		<div class="rq mtn" style="display:inline;" id="showerror_email"></div>
+		</td>
+	</tr>
+		
+	<tr id="tr_submit">
+		<th id="th_submit"></th>
+		<td id="td_submit">
+		<input type="hidden" id="province_id" name="province_id" value="0">
+		<input type="hidden" id="city_id" name="city_id" value="0">
+		<input type="hidden" id="district_id" name="district_id" value="0">
+		<input type="hidden" id="community_id" name="community_id" value="0">
+		<input type="hidden" id="formhash" name="formhash" value="$formhash">
+		<input type="hidden" id="submitchk" name="submitchk" value="true" >
+		<input type="submit" id="apply_submit" name="apply_submit" value="提交申请">
+		<div class="rq mtn" style="display:inline;" id="showerror_submit"></div>
+		</td>
+	</tr>
+</table>
+</form>
+
+<script language="javascript">
+
+var leagues = new Array();
+var clubs = new Array();
+var stars = new Array();
+<!--{loop $arr_forum_list $key1 $value1}-->
+leagues[$key1] = "$value1['name']";
+clubs[$key1] = new Array();
+stars[$key1] = new Array();
+<!--{loop $value1['list'] $key2 $value2}-->
+	clubs[$key1][$key2] = "$value2['name']";
+	stars[$key1][$key2] = new Array();
+<!--{loop $value2['list'] $key3 $value3}-->
+		stars[$key1][$key2][$key3] = "$value3['name']";
+<!--{/loop}-->
+<!--{/loop}-->
+<!--{/loop}-->
+
+var pIndex = 0;
+var leagueEle = document.getElementById("league_id");
+var clubEle = document.getElementById("club_id");
+var starEle = document.getElementById("star_id");
+
+for(var key in leagues) {
+	var op = new Option(leagues[key], key);
+	leagueEle.options.add(op);
+}
+
+function chg1(obj) {
+	if (obj.value == 0) {
+		clubEle.options.length = 0;
+		starEle.options.length = 0;
+		clubEle.style.visibility = 'hidden';
+		starEle.style.visibility = 'hidden';
+	}
+	else
+	{
+		clubEle.style.display = 'block';
+		clubEle.style.display = 'inline';
+	}
+	
+	var val = obj.value;
+	pIndex = obj.value;
+	var cs = clubs[val];
+	clubEle.options.length = 0;
+	var op = new Option('-球会-', 0);
+	clubEle.options.add(op);
+		
+	var first = 0;
+	for(var key in cs) {
+		var op = new Option(cs[key], key);
+		clubEle.options.add(op);
+		if(first == 0)
+		{
+			first = key;
+		}
+	}
+	
+	if(first == 0)
+	{
+	}
+	else
+	{
+		var as = stars[val][first];
+		starEle.options.length = 0;
+		
+		var op = new Option('-球星-', 0);
+		starEle.options.add(op);
+		
+		for(var key in as) {
+			var op = new Option(as[key], key);
+			starEle.options.add(op);
+		}
+	}
+}
+
+function chg2(obj) {
+	var val = obj.value;
+	if(val == 0)
+	{
+		starEle.style.display = 'none';
+	}
+	else
+	{
+		starEle.style.display = 'block';
+		starEle.style.display = 'inline';
+		var as = stars[pIndex][val];
+		starEle.options.length = 0;
+		
+		var op = new Option('-球星-', 0);
+		starEle.options.add(op);
+		
+		for(var key in as) {
+			var op = new Option(as[key], key);
+			starEle.options.add(op);
+		}
+	}
+}
+
+// 地区联动
+function fansclub_showdistrict(container, elems, totallevel, changelevel, containertype) {
+	var getdid = function(elem) {
+		var op = elem.options[elem.selectedIndex];
+		return op['did'] || op.getAttribute('did') || '0';
+	};
+	var pid = changelevel >= 1 && elems[0] && $(elems[0]) ? getdid($(elems[0])) : 0;
+	var cid = changelevel >= 2 && elems[1] && $(elems[1]) ? getdid($(elems[1])) : 0;
+	var did = changelevel >= 3 && elems[2] && $(elems[2]) ? getdid($(elems[2])) : 0;
+	var coid = changelevel >= 4 && elems[3] && $(elems[3]) ? getdid($(elems[3])) : 0;
+	var url = "plugin.php?id=fansclub"+"&ac=ajax"+"&op=district"+"&container="+container+"&containertype="+containertype
+		+"&province="+elems[0]+"&city="+elems[1]+"&district="+elems[2]+"&community="+elems[3]
+		+"&pid="+pid + "&cid="+cid+"&did="+did+"&coid="+coid+'&level='+totallevel+'&handlekey='+container+'&inajax=1'+(!changelevel ? '&showdefault=1' : '');
+	
+	document.getElementById('province_id').value = pid;
+	document.getElementById('city_id').value = cid;
+	document.getElementById('district_id').value = did;
+	document.getElementById('community_id').value = coid;
+	
+	ajaxget(url, container, '');
+}
+
+// 显示提示信息用
+function show_error(fieldid, extrainfo) {
+	var elem = $('th_'+fieldid);
+	if(elem) {
+		elem.className = "rq";
+		fieldname = elem.innerHTML;
+		extrainfo = (typeof extrainfo == "string") ? extrainfo : "";
+		$('showerror_'+fieldid).innerHTML = "" + extrainfo;
+		$(fieldid).focus();
+	}
+}
+
+function show_success(message, jump_url, type) {
+	message = message == '' ? '更新成功' : message;
+	type = type == '' ? 'right' : type;
+	showDialog(message, type, '提示信息', function(){
+		top.window.location.href = (jump_url == '') ? top.window.location.href : jump_url;
+	}, 0, null, '', '', '', '', 3);
+}
+
+function clearErrorInfo() {
+	var spanObj = $('fansclub_list').getElementsByTagName("div");
+	for(var i in spanObj) {
+		if(!isNaN(i)) 
+		{
+			if(typeof (spanObj[i].id) != "undefined" && spanObj[i].id.length > 0 && spanObj[i].id.indexOf("_") > 0) {
+				var str_tail = spanObj[i].id.substr(spanObj[i].id.indexOf("_") + 1);
+				spanObj[i].innerHTML = '';
+				$('th_'+str_tail).className = '';
+			}
+		}
+	}
+}
+</script>
+<!--{subtemplate common/footer}-->

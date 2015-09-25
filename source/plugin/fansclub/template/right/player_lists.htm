@@ -1,0 +1,21 @@
+<!--{block html}-->
+<div class="players">
+	<div class="playersT">球员</div>
+    <a href="#" class="preIco"></a>
+    <div class="playersMain">
+    <ul>
+		<!--{loop $arr $v}-->
+    	<li>
+		{if $v['status'] == 0}
+			<a href="playerinfo/{$v['fid']}/" target="_blank" title="{$v['name']}">
+		{else}
+			<a href="group/{$v['fid']}/" target="_blank" title="{$v['name']}">
+		{/if}
+			<img src="{$v['icon']}" alt="{$v['name']}" title="{$v['name']}" width="78px" height="78px"/><div>{$v['name']}</div></a></li>
+		<!--{/loop}-->
+    </ul>
+    </div>
+    <a href="#" class="nextIco"></a>
+    <div class="clear"></div>
+</div>
+<!--{/block}-->

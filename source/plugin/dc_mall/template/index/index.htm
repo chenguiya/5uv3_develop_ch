@@ -1,0 +1,92 @@
+<!--{template dc_mall:common/header}-->
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em>&raquo;</em>
+		<a href="jifen/">{$cvar['title']}</a>
+		<!--{if $mallnav[$sortid]}-->
+		<em>&raquo;</em>
+		<a href='jifen/id/desc/{if $sortid == ''}0{else}{$sortid}{/if}/'>{$mallnav[$sortid]['name']}</a>
+		<!--{/if}-->
+	</div>
+</div>
+<div id="frameGXoVbb" class="cl_frame_bm frame move-span cl frame-1-3">
+	<div id="frameGXoVbb_left" class="column frame-1-3-l framemallleft">
+		<div id="frameGXoVbb_left_temp" class="move-span temp"></div>
+		<!--{template dc_mall:index/leftinfo}-->
+	</div>
+	<div id="frameGXoVbb_center" class="column framemallright">
+		<!--{ad/custom_1}-->
+		<div style="height:19px;"></div>
+		<div id="frameGXoVbb_center_temp" class="move-span temp"></div>
+		<div id="frameE3RKsJ" class="move-span cl frame-1">
+			<div id="mallfilter">
+				<div id="goodssort">
+					<span>{lang dc_mall:leibie}</span>
+					<a href="jifen/" {if !$sortid}class="hover" {/if}>{lang dc_mall:nolimit}</a>
+				<!--{loop $mallnav $nav}-->
+					<a href="jifen/{if $orderby ==''}id{else}{$orderby}{/if}/{if $_GET['da'] == ''}desc{else}$_GET['da']{/if}/{if $nav['id'] == ''}0{else}{$nav['id']}{/if}/" {if $sortid == $nav['id']}class="hover" {/if}>{$nav['name']}</a>
+				<!--{/loop}-->
+				</div>
+				<div id="orderby">
+					<span>{lang dc_mall:orderby}</span>
+					<a <!--{if $orderby=='id'}-->
+					href="jifen/id/{if $_GET['da'] == ''}desc{else}$_GET['da']{/if}/{if $_GET['sortid'] == ''}0{else}{$_GET['sortid']}{/if}/" class="selected"
+					<!--{else}-->
+					href="jifen/id/desc/{if $_GET['sortid'] == ''}0{else}{$_GET['sortid']}{/if}/"
+					<!--{/if}-->>{lang dc_mall:orderby_new}<i class="updown-icon down-icon"></i></a>
+					
+					<a <!--{if $orderby=='views'}-->
+					href="jifen/views/{if $_GET['da'] == ''}desc{else}$_GET['da']{/if}/{if $_GET['sortid'] == ''}0{else}{$_GET['sortid']}{/if}/" class="selected"
+					<!--{else}-->
+					href="jifen/views/desc/{if $_GET['sortid'] == ''}0{else}{$_GET['sortid']}{/if}/"
+					<!--{/if}-->>{lang dc_mall:orderby_view}<i class="updown-icon down-icon"></i></a>
+					
+					<a <!--{if $orderby=='sales'}-->
+					href="jifen/sales/{if $_GET['da'] == ''}desc{else}$_GET['da']{/if}/{if $_GET['sortid'] == ''}0{else}{$_GET['sortid']}{/if}/" class="selected"
+					<!--{else}-->
+					href="jifen/sales/desc/{if $_GET['sortid'] == ''}0{else}{$_GET['sortid']}{/if}/"
+					<!--{/if}-->>{lang dc_mall:orderby_sale}<i class="updown-icon down-icon"></i></a>
+					
+					<a <!--{if $orderby=='credit'}-->
+					href="jifen/credit/{if $_GET['da'] == ''}desc{else}$_GET['da']{/if}/{if $_GET['sortid'] == ''}0{else}{$_GET['sortid']}{/if}/" class="selected"
+					<!--{else}-->
+					href="jifen/credit/asc/{if $_GET['sortid'] == ''}0{else}{$_GET['sortid']}{/if}/"
+					<!--{/if}-->>{lang dc_mall:orderby_prince}<i class="updown-icon up-icon"></i></a>
+					
+				</div>
+			</div>
+			<div id="frameE3RKsJ_left" class="column frame-1-c">
+				<div id="frameE3RKsJ_left_temp" class="move-span temp"></div>
+				<div id="goodslist" >
+					<ul class="cl">					
+					<!--{loop $goodslist $v}-->
+						<li onmouseover="$('dcmall_list_goods_{$v['id']}').style.display='block';" onmouseout="$('dcmall_list_goods_{$v['id']}').style.display='none';">
+                        <div class="item_top">
+                            <div class="img">
+                                <a href="goods-{$v['id']}.html" title="{$v['name']}"><img src="{$v['pic']}" alt="{$v['name']}" onerror="this.src='source/plugin/dc_mall/image/nopic.jpg'"></a>
+                            </div>
+                            <div style="display: none;" id="dcmall_list_goods_{$v['id']}" class="list_goods_txt">
+                                <div>
+                                {lang dc_mall:now_views}<em>{$v['views']}</em> {lang dc_mall:ci}<br>
+                                {lang dc_mall:now_cunkun}<em>{$v['count']}</em> {lang dc_mall:jian}<br>
+								{lang dc_mall:now_sales}<em>{$v['sales']}</em> {lang dc_mall:jian}<br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_bottom">
+							<div class="item_title"><a href="goods-{$v['id']}.html" title="{$v['name']}">{$v['name']}</a></div>
+                            <div class="item_meta">{lang dc_mall:now_price}<span style="color:#ff8800"><!--{if $v['credit']}-->{$v['credit']}<!--{if $v['creditid']==99}--> {lang dc_mall:yuan}<!--{else}--> {$_G['setting']['extcredits'][$v['creditid']]['title']} <!--{/if}--><!--{else}-->{lang dc_mall:free}<!--{/if}--></span></div>
+							 <!--{if $_G['dc_mall']['vip']['open']}--><div>{lang dc_mall:now_vipprice}<!--{if $v['vipcredit']}--><span style="color:#FF0000;"><!--{if $v['vipcredit']!=null}-->{$v['vipcredit']}<!--{else}-->{$v['credit']}<!--{/if}--></span> <!--{if $v['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$v['creditid']]['title']} <!--{/if}--></div><!--{else}--><span style="color:#FF0000;">{lang dc_mall:free}</span><!--{/if}--><!--{/if}-->
+                        </div>
+                    </li>
+						<!--<li><a href="plugin.php?id=dc_mall&action=goods&gid={$v['id']}" title="{$v['name']}"><img src="{$v['pic']}" alt="{$v['name']}"></a></li>-->
+					<!--{/loop}-->
+					</ul>
+				</div>
+				{$multi}
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--{template common/footer}-->

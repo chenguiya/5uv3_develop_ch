@@ -1,0 +1,177 @@
+<!--{subtemplate common/header}-->
+<!--{template extend/desktop/channel_common_header}-->
+<!--资料-球员 start-->
+<div class="data_main">
+<div class="box playerinfo">
+	<div class="playerTitle">
+    	<h2 class="fl">{$player_info->player_name}<span>{$player_info->player_name_en}</span></h2>
+        <ul class="playerFrom">
+        	<li><span><img src="{$win_team->logo}" width="50" height="50" /></span>{$player_info->team_name}</li>
+            <li><span>{$player_info->number}</span>号码</li>
+        </ul>
+    </div>
+    
+    <div class="playersCon">
+    	<ul>
+        	<li><span>中文名</span>{$player_info->player_name}</li>
+            <li><span>号码</span>{$player_info->number}</li>
+            <li><span>外文名</span>{$player_info->player_name_en}</li>
+            <li><span>身高</span>{$player_info->height}</li>
+            <li><span>国籍</span>{$player_info->nationality}</li>
+            <li><span>出生日期</span>{$player_info->birthday}</li>
+            <li><span>体重</span>{$player_info->weight}</li>
+            <li><span>价值</span>{$player_info->value}</li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="box playHistory">
+	<div class="playHistoryT">球员履历</div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="playHTab">
+      <tr>
+        <th scope="col">赛季</th>
+        <th scope="col">俱乐部</th>
+        <th scope="col">号码</th>
+        <th scope="col">出场</th>
+        <th scope="col">进球</th>
+        <th scope="col">国家</th>
+        <th scope="col">联赛等级</th>
+        <th scope="col">排名</th>
+      </tr>
+<!--球员履历-->      
+<!--{loop $player_resume $v}-->
+	  <tr>
+        	<td>{$v->season}</td>
+	        <td>{$v->service_club}</td>
+	        <td>{$v->service_number}</td>
+	        <td>{$v->attend}</td>
+	        <td>{$v->goal}</td>
+	        <td>{$v->country}</td>
+	        <td>{$v->league_level}</td>
+	        <td>{$v->ranking}</td>
+      </tr>
+<!--{/loop}-->
+      
+   
+    </table>
+</div>
+<div class="box cl">
+	<div class="competition">
+    	<div class="playHistoryT">参加大赛</div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="playHTab">
+              <tr>
+                <th scope="col">赛事</th>
+                <th scope="col">年份</th>
+                <th scope="col">代表球队</th>
+                <th scope="col">号码</th>
+              </tr>
+<!--参加大赛-->              
+<!--{loop $player_event $v}-->
+			<tr>
+                <td>{$v->event}</td>
+                <td>{$v->event_time}</td>
+                <td>{$v->service_team}</td>
+                <td>{$v->number}</td>
+              </tr>
+<!--{/loop}-->
+              
+         
+           </table>
+    </div>
+ 
+<!-- 暂时注释    
+    <div class="competitionR">
+    	<div class="playHistoryT">获得荣誉</div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="playHTab">
+              <tr>
+                <th scope="col">荣誉</th>
+                <th scope="col">年份</th>
+                
+               
+              </tr>
+              <tr>
+                <td>2013/14</td>
+                <td>蚂蚁club</td>            
+              </tr>
+           </table>
+    </div>
+    <div class="clear"></div>
+
+-->
+</div>
+
+<div class="box playHistory">
+	<div class="playHistoryT">转会记录 (注：转会费单位为万欧元)</div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="playHTab">
+      <tr>
+        <th scope="col">开始日期</th>
+        <th scope="col">合同到期</th>
+        <th scope="col">转会性质</th>
+        <th scope="col">转会费</th>
+        <th scope="col">转出球队</th>
+        <th scope="col">转入球队</th>
+      </tr>
+<!--转会记录-->      
+<!--{loop $player_transfer $v}-->
+	      <tr>
+	        <td>{$v->contract_start}</td>
+	        <td>{$v->contract_end}</td>
+	        <td>{$v->transfer_type}</td>
+	        <td>{$v->transfer_fee}</td>
+	        <td>{$v->team_from}</td>
+	        <td>{$v->team_to}</td>
+	      </tr>
+<!--{/loop}-->     
+      
+    </table>
+</div>
+<div class="box playHistory">
+	<div class="playHistoryT">个人简介</div>
+    <p class="playersInfo">{$player_info->intro}</p>
+</div>
+</div>
+<!--资料-球员 end-->
+<!--资料-球队 start-->
+<div class="data_main" style="display:none;">
+     <div class="box playerinfo">
+			<div class="playerTitle">
+				<h2 class="fl">把赛罗那<span>Banceloan</span></h2>
+				<ul class="playerFrom">
+					<li><span><img src="{$win_team->logo}" width="50" height="50" /></span>{$player_info->team_name}</li>
+					<li><span>10</span>排名</li>
+				</ul>
+			</div>
+			<div class="playersCon">
+			     <ul>
+				     <li><span>城市</span>巴塞罗那</li>
+					 <li><span>现任主帅</span>路易斯·恩里克</li>
+					 <li><span>成立时间</span>1899年11月29日</li>
+					 <li><span>主场</span>诺坎普</li>
+				 </ul>
+			</div>
+			<div class="clear"></div>
+	 </div>
+	 <div class="box playHistory">
+	      <div class="playHistoryT">球队简介</div>
+		  <p class="playersInfo">巴萨毫无疑问是当今世界足坛最具技术性与观赏性的球队，整体传控打法能彻底主宰比赛，近6年两夺欧冠成为了全欧球队最忌惮的对手。巴萨之所以取得如此成功，得益于他们在过去23年坚持拉马西亚青训文化和所有梯队统一战术打法的方针。 </p>
+	 </div>
+	 <div class="box playHistory">
+	      <div class="playHistoryT">球队简介</div>
+		  <div class="playersInfo">
+		       欧洲冠军联赛冠军4次：1992年、2006年、2009年、2011年；<br />
+			   西甲联赛冠军21次：1929年、1945年、1948年、1949年、1952年、1953年、1959年、1960年、1974年、1985年、1991年、1992年、1993年、1994年、1998年、1999年、2005年、2006年、2009年、2010年、2011年；<br />
+			   西班牙国王杯冠军26次：1910年、1912年、1913年、1920年、1922年、1925年、1926年、1928年1942年、1951年、1952年、1953年、1957年、1959年、1963年、1968年、1971年、1978年、1981年、1983年、1988年、1990年、1997年、1998年、2009、2012年；<br />
+			   西班牙超级杯冠军10次：1983年、1991年、1992年、1994年、1996年、2005年、2006年、2009年、2010、2011年；<br />
+			   欧洲联盟杯赛冠军3次：1958年、1960年、1966年；<br />
+			   欧洲优胜者杯冠军4次：1979年、1982年、1989年、1997年；<br />
+			   欧洲超级杯冠军4次：1992年、1997年、2009、2011年；<br />
+			   国际城市工业博览会杯(联盟杯前身),冠军3次：1958年、1960年、1966年；<br />
+			   世界冠军俱乐部联赛冠军（前身为丰田杯）2次：2009、2011年；<br />
+			   历届金球奖球员9人次：苏亚雷斯、（西班牙 1960）、克鲁伊夫（荷兰 1973）、克鲁伊夫（荷兰 1974）、斯托伊奇科夫（保加利亚 1994）、里瓦尔多（巴西 1999）、罗纳尔迪尼奥（巴西 2005）、梅西（阿根廷 2009、2010、2011）；<br />
+			   历届世界足球先生8人次：罗马里奥（巴西 1994）、罗纳尔多（巴西 1996）、里瓦尔多（巴西 1999）、罗纳尔迪尼奥（巴西 2004）、罗纳尔迪尼奥（巴西 2005）、梅西（阿根廷 2009、2010、2011）；<br />
+			   FIFA金球奖1人次：（2010金球奖与世界足球先生合并）梅西（阿根廷 2010、2011）。
+		  </div>
+	 </div>
+</div>
+<!--资料-球队 end-->
+<!--{subtemplate common/footer}-->

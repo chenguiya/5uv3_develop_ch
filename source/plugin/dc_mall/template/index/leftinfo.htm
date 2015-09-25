@@ -1,0 +1,65 @@
+<div id="mallinfo">
+			<!-- <img src="source/plugin/dc_mall/image/i1.gif" class="vm"/> <span>礼品总数量：<em>{$_G['cache']['dcmallinfo']['goodstotal']}</em> {lang dc_mall:fen}</span><br /> -->
+			<!-- <img src="source/plugin/dc_mall/image/i2.gif" class="vm"/> <span>累计兑换量：<em>{$_G['cache']['dcmallinfo']['orderstotal']}</em> {lang dc_mall:ge}</span><br /> -->
+		<!--{if $_G['uid']}-->
+			<div style="text-align:center;">
+				<a href="plugin.php?id=dc_mall:member" class="mallbtn">{lang dc_mall:index_left_mycenter}</a><!--{if $_G['adminid'] == 1}--><a href="plugin.php?id=dc_mall:admin" class="mallbtn">{lang dc_mall:index_left_admincenter}</a><!--{/if}-->
+			</div>
+		<!--{else}-->
+			<div style="text-align:center;">
+				<a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)" class="mallbtn">{lang dc_mall:index_left_login}</a>
+			</div>
+		<!--{/if}-->			
+		</div>
+		<div id="framed7Zo5Z" class="mallbox">
+			<div class="mallboxtitle">
+				热门礼品
+			</div>
+			<div id="framed7Zo5Z_left" class="column frame-1-c">
+				<div id="framed7Zo5Z_left_temp" class="move-span temp"></div>
+				<div id="hotgoods">
+					<ul class="cl">
+					<!--{loop $goodshot $v}-->
+						<li><a href="goods-{$v['id']}.html" title="{$v['name']}"><img  src="{$v['pic']}" alt="{$v['name']}" onerror="this.src='source/plugin/dc_mall/image/nopic.jpg'"/></a><div class="goods-name"><a href="goods-{$v['id']}.html" title="{$v['name']}"><!--{eval echo cutstr($v['name'], 28, '')}--></a></div></li>
+					<!--{/loop}-->
+					</ul>
+						
+				</div>
+			</div>
+		</div>
+		<div id="frame7Ev7n3" class="mallbox">
+			<div class="mallboxtitle">{lang dc_mall:index_left_noworder}</div>
+			<div id="frame7Ev7n3_left" class="column frame-1-c">
+				<div id="frame7Ev7n3_left_temp" class="move-span temp"></div>
+				<div id="neworders">
+					<ul id="gundong1">
+					<!--{loop $ordersnew $v}-->
+						<li>
+							· <a class="a" href="home.php?mod=space&uid={$v['uid']}" target="_blank">{$v['username']}</a>
+							<a href="goods-{$v['gid']}.html" title="{$v['gname']}">{$v['gname']}</a>
+						</li>
+					<!--{/loop}-->
+					</ul>
+					<!--<ul id="gundong2"></ul>-->
+				</div>
+			</div>
+		</div>
+<!--{if count($ordersnew)>10}-->
+<script>
+var speed=40 
+var gundong=document.getElementById("neworders"); 
+var gundong2=document.getElementById("gundong2"); 
+var gundong1=document.getElementById("gundong1"); 
+gundong2.innerHTML=gundong1.innerHTML;
+function Marquee(){ 
+	if(gundong2.offsetHeight-gundong.scrollTop<=0) 
+	  gundong.scrollTop-=gundong1.offsetHeight 
+	else{ 
+	  gundong.scrollTop++ 
+	} 
+}
+var MyMar=setInterval(Marquee,speed) 
+gundong.onmouseover=function() {clearInterval(MyMar)} 
+gundong.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+</script>
+<!--{/if}-->

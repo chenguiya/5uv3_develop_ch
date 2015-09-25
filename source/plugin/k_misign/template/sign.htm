@@ -1,0 +1,159 @@
+{subtemplate common/header}
+<link rel="stylesheet" type="text/css" href="./source/plugin/k_misign/static/star.css"  />
+<link rel="stylesheet" type="text/css" href="./source/plugin/k_misign/static/sign.css"  />
+<div id="pt" class="bm cl">
+	<div class="z">
+		<!--<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em>&raquo;</em><a href="forum.php">{$_G[setting][navs][2][navname]}</a>$navigation-->
+		<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em>&raquo;</em>签到
+	</div>
+</div>
+<div class="wp cl">
+	<div class="lineA clearfix">
+		<div class="fleft"></div>
+		<div class="fright">
+			<span class="fir">{lang k_misign:todaystar}{$todaystar['username']}</span>
+			<span class="sec">{lang k_misign:height}<!--{if $stats[highestq] > $stats[todayq]}-->{$stats[highestq]}<!--{else}-->{$stats[todayq]}<!--{/if}-->{lang k_misign:people}</span>
+		</div>
+	</div>
+    <div class="lineB cl">
+        <div class="qdleft">
+			<!--{if $qiandaodb_list['time'] > $tdtime}-->
+            <span class="btn btnvisted"></span>
+            <!--{else}-->
+            <a id="JD_sign" href="plugin.php?id=k_misign:sign&operation=qiandao&formhash={FORMHASH}&from=insign" onclick="ajaxget(this.href, this.id, '', '', '', 'window.location.reload();');
+					return false;" class="btn J_chkitot"></a>
+            <!--{/if}-->
+            <div class="paiming cl">
+                <input type="hidden" class="hidnum" id="qiandaobtnnum" value="{$qiandaodb_list['row']}">
+                <div class="font">
+                    <!--{if $qiandaodb_list['time'] > $tdtime}-->{lang k_misign:yourrow}<!--{else}-->{lang k_misign:notqdyet}<!--{/if}--> 
+                </div>
+                <div class="pics J_numpic cl J_animation" id="qdbn2"<!--{if $qiandaodb_list['time'] < $tdtime}--> style="display:none;"<!--{/if}-->>
+					 <!--{eval $qdbn2 = str_split($qiandaodb_list['row']);}-->
+					 <!--{loop $qdbn2 $value}-->
+					 <span class="{$numtostr[$value]}"></span>
+                    <!--{/loop}-->
+                </div>
+            </div>
+        </div>
+        <div class="qdright">
+            <div class="content">
+                <h3 class="mainCon">
+                    <div class="user">
+                        <a href="home.php?mod=space&uid={$_G['uid']}" c="1"><!--{avatar($_G['uid'], small)}--></a>
+                        <a href="home.php?mod=space&uid={$_G['uid']}" c="1" class="author">{$_G['username']}</a>
+                    </div>
+                </h3>
+                <ul class="countqian cl">
+                    <li>
+                        <h4>{lang k_misign:row}{lang k_misign:sign}</h4>
+                        <p>
+                            <input type="hidden" class="hidnum" id="lxdays" value="{$qiandaodb_list['lasted']}">
+                            <b class="pics J_numpic J_animation" style="height:23px;">
+								<!--{eval $qdbn3 = str_split($qiandaodb_list['lasted']);}-->
+								<!--{loop $qdbn3 $value}-->
+								<span class="{$numtostr[$value]}"></span>
+								<!--{/loop}-->
+                            </b>
+                            <b class="qiandao">{lang k_misign:days}</b>
+                        </p>
+                    </li>
+
+                    <li>
+                        <h4>U币奖励</h4>
+                        <p>
+                            <input type="hidden" class="hidnum" id="lxreward" value="{$qiandaodb_list['lastreward']}">
+                            <b class="pics J_numpic J_animation" style="height:23px;">
+								<!--{eval $qdbn5 = str_split($qiandaodb_list['lastreward']);}-->
+								<!--{loop $qdbn5 $value}-->
+								<span class="{$numtostr[$value]}"></span>
+								<!--{/loop}-->
+                            </b>
+                            <b>{$_G[setting][extcredits][$setting[nrcredit]]['unit']}</b>
+                        </p>
+                    </li>
+                    <li>
+                        <h4>{lang k_misign:zong}</h4>
+                        <p>
+                            <input type="hidden" class="hidnum" id="lxtdays" value="{$qiandaodb_list['days']}">
+                            <b class="pics J_numpic J_animation" style="height:23px;">
+								<!--{eval $qdbn6 = str_split($qiandaodb_list['days']);}-->
+								<!--{loop $qdbn6 $value}-->
+								<span class="{$numtostr[$value]}"></span>
+								<!--{/loop}-->
+                            </b>
+                            <b>{lang k_misign:days}</b>
+                        </p>
+                    </li>
+                </ul>
+                <div class="weather_p">
+                    <div class="con">
+                        {$todayqd['todayqd']}<span>{lang k_misign:people}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="lineC cl">
+		<div class="lineC_left" id="ranklist">
+			<div class="left_tit">
+				<ul class="paihang J_phbtn cl">
+				<li class="active"><a onclick="ajaxget('plugin.php?id=k_misign:sign&amp;operation=list', 'ranklist')" href="javascript:;">今日排行</a></li>
+						<!-- <li><a onclick="ajaxget('plugin.php?id=k_misign:sign&amp;operation=list&amp;op=month', 'ranklist')" href="javascript:;">本月排行</a></li>
+						<li><a onclick="ajaxget('plugin.php?id=k_misign:sign&amp;operation=list&amp;op=zong', 'ranklist')" href="javascript:;">总排行</a></li>
+				<li><a onclick="ajaxget('plugin.php?id=k_misign:sign&amp;operation=list&amp;op=rewardlist', 'ranklist')" href="javascript:;">奖励排行</a></li> -->
+				</ul>
+				</div>
+				<div class="arr_detail">
+<table id="J_list_detail">
+	<tbody>
+	<tr>
+		<th style="width:160px;">昵称</th>
+		<th style="width:160px;">签到模块</th>
+		<th style="width:70px;">总天数</th>
+		<th style="width:70px;">月天数</th>
+		<th style="width:150px;">上次签到时间</th>
+		<th style="width:70px;">上次奖励</th>      	            
+	</tr>
+	<!--{loop $arr $v}-->
+	<tr>
+			<td style="width:160px;"><div style="width:160px;display: inline-block;"><a target="_blank" href="home.php?mod=space&amp;uid= $v['uid']">$v['username']</a></div></td>
+			<td>$v['forumname']</td>
+			<td>$v['days']</td>
+			<td>$v['mdays']</td>
+			<td>$v['time']</td>
+			<td>$v['lastreward'] U币</td>
+	</tr>
+	<!--{if !empty($multipage)}--><tr><td colspan="8"><div class="btns">$multipage</div></td></tr><!--{/if}-->
+	<!--{/loop}-->
+     </tbody>
+</table>
+</div>
+		</div>
+       <!--  <script>ajaxget('plugin.php?id=k_misign:sign&operation=list', 'ranklist');</script> -->
+		<div class="lineC_right">
+			<div class="ranktitle" style="align:center">
+				<span>粉丝积分排行</span>
+				<a href="plugin.php?id=fendou_ph:hy" target="_blank">更多&gt;</a>
+			</div>
+			<div class="rankstarc">
+				<!--{if $ranklist_fans}-->
+				<ul class="deanstarc cl">
+					<!--{loop $ranklist_fans $k=>$f}-->
+					<!--{eval $k=$k+1}-->
+					<li>
+						<a href="home.php?mod=space&uid={$f[uid]}" class="userImg"><img  src="{$f[avatar]}"></a>
+						<a href="home.php?mod=space&uid={$f[uid]}" class="userName">{$f[username]}</a>
+						<em class="points">{$f[credits]}积分</em>
+						<div class="clear"></div>
+					</li>
+					<!--{/loop}-->
+				</ul>
+				<!--{else}-->
+				<center><span class="xi1">暂无积分排行信息</span></center>
+				<!--{/if}-->
+			</div>
+		</div>
+	</div>
+</div>
+{subtemplate common/footer}

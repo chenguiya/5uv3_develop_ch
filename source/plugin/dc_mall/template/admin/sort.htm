@@ -1,0 +1,64 @@
+<!--{if $op=='delete'}-->
+	<!--{template common/header}-->
+	<h3 class="flb"><em>{lang dc_mall:admin_sort_del}</em><span><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET['handlekey']');" title="{lang close}">{lang close}</a></span></h3>
+	<form method="post" autocomplete="off" id="deletegoods" name="deletegoods" action="plugin.php?id=dc_mall:admin&action=sort&op=delete" onsubmit="ajaxpost(this.id, 'floatlayout_$_GET['handlekey']');return false;">
+	<div class="c altw">
+	<div class="alert_info">{lang dc_mall:admin_sort_delcheck} {$sort['name']}</div>
+	</div>
+	<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="sortid" value="{$sortid}" />
+	<input type="hidden" name="submitcheck" value="true" />
+	<p class="o pns">
+	<button type="submit" class="pn pnc" id="submitbtn" name="submitbtn" value="true"><strong>{lang confirms}</strong></button>
+	</p>
+	</form>
+	<script>
+	function succeedhandle_$_GET['handlekey'](locationhref, message, param) {
+		hideWindow('$_GET['handlekey']');
+		showDialog(message, 'right', '', 'window.location.href=\''+locationhref+'\'', '','','','','','',3);
+	}
+	</script>
+	<div id="floatlayout_$_GET['handlekey']"></div>
+	<!--{template common/footer}-->
+<!--{else}-->
+<div id="goodstop">
+	<h2 class="h2_titx">{lang dc_mall:admin_sort_goodssort}</h2>
+</div>
+<form method="post" autocomplete="off" id="sortform" action="plugin.php?id=dc_mall:admin&action=sort" class="ch_form">
+      <table class="dt_sort" cellpadding="0" cellspacing="0" id="admin_goods_list" width="100%">
+	         <tbody>
+			 <tr>
+			     <th width="20"></th>
+				 <th width="auto">{lang dc_mall:admin_sort_sortname}</th>
+				 <th width="150">{lang dc_mall:admin_sort_ordeby}</th>
+				 <th width="150" class="algin_c">{lang dc_mall:admin_sort_isnav}</th>
+				 <th width="110" class="algin_c">{lang dc_mall:admin_sort_caozuo}</th>
+			 </tr>
+			 <!--{loop $mallnav $v}-->
+			 <tr>
+			     <td><input type="hidden" value="{$v['id']}" name="sortid[]"/></td>
+				 <td><input type="text" value="{$v['name']}" name="name[{$v['id']}]" class="renew"/></td>
+				 <td><input type="text" value="{$v['order']}" name="order[{$v['id']}]" class="renew" style="width:80px;"/></td>
+				 <td class="algin_c"><input type="checkbox" name="isnav[{$v['id']}]" value="1" <!--{if $v['isnav']}-->checked<!--{/if}-->/></td>
+				 <td class="manage algin_c"><a href="javascript:;" onclick="showWindow('deletesort', 'plugin.php?id=dc_mall:admin&action=sort&op=delete&sortid={$v['id']}');">{lang dc_mall:del}</a></td>
+			 </tr>
+			 <!--{/loop}-->
+			 <tr>
+			    <td class="td_redds">{lang dc_mall:admin_sort_new}</td>
+				<td><input type="text" value="" name="newname" class="renew"/></td>
+				<td><input type="text" value="" name="neworder" class="renew" style="width:80px;"/></td>
+				<td class="algin_c"><input type="checkbox" value="1" name="newisnav" /></td>
+				<td></td>
+			 </tr>
+			 <tr>
+			     <td colspan="5" class="t_sor">
+				     <button type="submit" id="submitbtn" class="submi_btn" name="submitbtn"><strong>{lang dc_mall:admin_sort_tijiao}</strong></button>
+					 <input name="submitcheck" value="true" type="hidden">
+					 <input name="formhash" value="{FORMHASH}" type="hidden">
+				 </td>
+			 </tr>
+	  </tbody>
+	  </table>
+</form>
+<!--{/if}-->

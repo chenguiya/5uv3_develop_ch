@@ -1,0 +1,22 @@
+<!--{template common/header}-->
+<div style="height:500px;margin-top:20px">
+	<form action="/plugin.php?id=grouplink:grouplink&fun=add&fid=$fid" method="POST" id="addlink" >
+		<span>
+			<!--{loop $arr $k $v}-->
+			<input type="radio" name="mygid" id="mygid" <!--{if $k==0}-->checked="checked"<!--{/if}-->  value="$v['fid']"/>$v['name']
+			<!--{/loop}-->
+		</span>
+		<input type="hidden" name="formhash"  value="$formhash" />
+		<!--{if $flag}-->
+			<input type="hidden" name="autosub"  value="1" />
+		<!--{/if}-->
+		<span><input type="submit" name="subaddlink"  value="申请加入"  /></span>
+	</form>
+</div>
+
+<!--{template common/footer}-->
+<!--{if $flag}-->
+<script>
+		window.onload=function (){   jq("#addlink").submit();}
+</script>
+<!--{/if}-->

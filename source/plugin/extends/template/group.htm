@@ -1,0 +1,10 @@
+<!--{block return}-->
+<span class="">来自球迷会：
+	<select name="fansclubid">
+		<option value="0">选择我的球迷会</option>
+		<!--{loop $mygroups $groupid $groupname}-->
+		<option value="{$groupid}">{$groupname}</option>
+		<!--{/loop}-->
+	</select>
+</span>
+<!--{/block}-->

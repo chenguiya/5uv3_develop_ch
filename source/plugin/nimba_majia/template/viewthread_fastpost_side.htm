@@ -1,0 +1,10 @@
+<!--{block return}-->
+<dl class="profile">{lang nimba_majia:useid}
+	<select name="majiauid">
+		<option value=$_G[uid]>$_G[username]</option>
+	<!--{loop $repeatusers $majia}-->
+		<option value="$majia['useruid']">$majia['username']</option>
+	<!--{/loop}-->
+	</select>
+</dl>
+<!--{/block}-->

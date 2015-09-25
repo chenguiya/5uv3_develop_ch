@@ -1,0 +1,89 @@
+<!--{subtemplate common/header}-->
+<!--{template extend/desktop/channel_common_header}-->
+<link href="template/usportstyle/common/main.css" rel="stylesheet" />
+<div class="jianju20"></div>
+<div class="boxMain">
+	<div class="widget_con branch clusMain">
+        	<div class="widget_hd">
+				<h3 class="fl">球迷会</h3>
+				<a class="apply_hui" href="plugin.php?id=fansclub&ac=apply" target="_blank">申请加入球迷会</a>
+					<span class="fr sort">
+						<a href="plugin.php?id=fansclub:forumfansclub&fid={$_G['forum']['fid']}&ac=contribute"
+							<!--{if $_GET['ac']=='contribute' || empty($_GET['ac'])}-->class="active"<!--{/if}-->>按贡献值</a>
+						<a href="plugin.php?id=fansclub:forumfansclub&fid={$_G['forum']['fid']}&ac=membernum" 
+							<!--{if $_GET['ac']=='membernum'}-->class="active"<!--{/if}-->>按粉丝数</a>
+						<a href="plugin.php?id=fansclub:forumfansclub&fid={$_G['forum']['fid']}&ac=level"
+							<!--{if $_GET['ac']=='level'}-->class="active"<!--{/if}--> >按认证等级</a>
+						<a href="javascript:void(0);"  class="adressIco <!--{if $_GET['ac']=='address'}-->active<!--{/if}-->" id="adressflag">按地区</a>
+					</span>
+				</div>
+            
+            <div class="adressMain" id="adress" >
+            	<dl>
+                	<dt>地区/省：</dt>
+					<!--{loop $province $v}-->
+                    <dd><a href="javascript:void(0);" onclick="getcity({$v['id']});">{$v['name']}</a></dd>
+                    <!--{/loop}-->
+                </dl>
+                
+                <dl id="city" style="display:none">				
+                </dl>
+            </div>
+            
+            <div class="fanWillList column-3">
+				<!--{loop $arr $v}-->
+				<div class="fansListaWrap">
+					<div class="fansLista">
+						<div class="fansListImg">
+							<a href="fans/topic/{$v['fid']}/" target="_blank" title="{$v['name']}">
+							<img src="{$v['icon']}" width="60" height="60" alt="{$v['name']}" title="{$v['name']}">
+							<!--{if $v[specialclub]}--><img src="$_G['style'][tpldir]/common/images/icoa.png" class="icoA"/>
+							<!--{/if}--></a>
+							<span>{$v['province_city']}</span>
+						</div>
+						<div class="fansListR">
+							<div class="fansWillListT">
+							<a href="fans/topic/{$v['fid']}/" target="_blank" title="{$v['name']}"{if $v[specialclub]} class="colorRed"{/if}>{eval echo str_intercept($v['name'], 0, 8);}</a>
+							<a href="plugin.php?id=fansclub&ac=verify&type=boots&fid={$v['fid']}" class="badget">{$v['level_img']}</a></div>
+							<div class="fansListInfo"><span class="numIco">{$v['members']}</span><span class="plIco">{$v['posts']}</span><span class="valueIco"><font>贡献值：</font>{$v['contribution']}</span></div>
+							<div>简介：{eval echo str_intercept($v['description'], 0, 13);}</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<!--{/loop}-->
+                <div class="clear"></div>
+            </div>
+            <div class="page">{$str_page}</div>
+        </div>
+
+</div>
+<!--{subtemplate common/footer}-->
+<script>
+	jq(function() {	
+		jq("#adressflag").click(function(){
+			
+			jq("#adress").toggle('normal');
+		});
+		
+	});
+	
+	function getcity(id){
+		var id;
+		jq.ajax({
+			type:"GET",
+			url:"plugin.php",
+			dataType:'json',
+			data:'id=fansclub:forumfansclub&fid={$_G['fid']}&ac=ajax&proid='+id,
+			success:function(data){
+				var str='<dt>地区/市：</dt>';
+				jq.each(data,function(i,n){
+				 	str+=' <dd><a href="plugin.php?id=fansclub:forumfansclub&fid={$_G['fid']}&ac=address&cityid='+n.id+'");">'+n.name+'</a></dd>';
+				});
+				jq("#city").html(str);
+				jq("#city").show();
+			}
+		});
+	
+	}
+</script>

@@ -1,0 +1,21 @@
+<!--{block html}-->
+<div class="eventRank">
+        	<div class="channelTitle">赛程预告</div>
+            <div class="trailerCon">
+            <!--{loop $match_list $key $v}-->
+				<div class="trailer">
+	            	<div class="trailerL">
+	                	<b>{$v->league_name}</b>
+	                    <p>{$v->a_name}&nbsp;VS&nbsp;{$v->b_name}</p>
+	                </div>
+	                <div class="trailerR">
+	                	<p class="traTime"><!--{eval $m = date('m',$v->match_time); $d = date('d',$v->match_time); $h = date('H',$v->match_time);$i = date('i',$v->match_time);}-->{$m}月{$d}日  {$h}:{$i}</p>
+	                    <!--{if ($v->match_time > time())}--><a href="live/" target="_blank" class="remind">提醒</a><!--{/if}-->
+	                </div>
+	            </div>
+	            <!--{if ($key == 2)}-->{eval break;}<!--{/if}-->
+			<!--{/loop}-->
+            <div class="clear"></div>
+	  </div>
+ </div>
+<!--{/block}-->       

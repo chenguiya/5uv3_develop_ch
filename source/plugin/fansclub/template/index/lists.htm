@@ -1,0 +1,23 @@
+<!--{template group/group_header}-->
+<div class="wp mtn">
+	<!--[diy=diy3]--><div id="diy3" class="area"></div><!--[/diy]-->
+<div class="boxMain">
+<div class="clubMain">
+	<!--{loop $threadlist $value}-->
+	<div class="clubList">
+    	<!--{if $value[digest]}--><span class="tag"></span><!--{/if}-->
+    	<a href="forum.php?mod=viewthread&tid=$value[tid]" target="_blank" title="" class="clubImg"><img src="/data/attachment/forum/$value[cover][attachment]" title="" alt="" width="235px" /></a>
+        <a href="forum.php?mod=viewthread&tid=$value[tid]" target="_blank" title="" class="clubDes">$value[subject]</a>
+        <div class="clubTxt"><span class="viewIco">$value[views]</span><span class="plIco">$value[replies]</span></div>
+        <div class="clubInfo">
+        	<a href="#" target="_blank" title="" class="clubPhoto"><img src="$value[avatar]"  width="40" height="40"/></a>
+            <div class="clubName"><a href="#" target="_blank">$value[author]</a><p><!--{eval echo date('Y/m/d H:i:s', $value[dateline])}--></p></div>
+
+        </div>
+    </div>
+	<!--{/loop}-->    
+    <div class="clear"></div>
+</div>
+</div>
+<div class="jianju60"></div>
+</div>

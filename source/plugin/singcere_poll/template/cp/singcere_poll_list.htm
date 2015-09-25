@@ -1,0 +1,181 @@
+<!--{template common/header}-->
+<link rel="stylesheet" href="source/plugin/singcere_poll/template/src/css/global.css">
+<link rel="stylesheet" href="source/plugin/singcere_poll/template/src/css/cp.css">
+<script type="text/javascript" src="{STATICURL}js/mobile/jquery-1.8.3.min.js?{VERHASH}"></script>
+<script type="text/javascript" src="{$_G[setting][jspath]}swfupload.js?{VERHASH}"></script>
+<script type="text/javascript" src="{$_G[setting][jspath]}swfupload.queue.js?{VERHASH}"></script>
+<script type="text/javascript" src="{$_G[setting][jspath]}handlers.js?{VERHASH}"></script>
+<script type="text/javascript" src="{$_G[setting][jspath]}fileprogress.js?{VERHASH}"></script>
+
+
+
+<script>
+ jq = $.noConflict();
+    function ajax_uploadSuccess(file, data) {
+        flag = 0;
+        var dataarr = data.split('#');
+        if (dataarr[1] == "") {
+            alert("{lang singcere_poll:uperror}");
+            return;
+        }
+
+        jq('#imagelist').append('<li><span aid="' + dataarr[0] + '"   onclick="doclick(this);"  class="del"><a href="javascript:;"><img src="{STATICURL}image/mobile/images/icon_del.png" /></a></span><span class="p_img"><a href="' + dataarr[1] + '" class="a_img">\n\<img id=" aimg_' + dataarr[0] + '" title="' + 1 + '" src="' + dataarr[1] + '"  style="height:94px;" /></a></span></li>');
+        jq('#imagelist').append('<input type="hidden" name="aids[]" value="' + dataarr[0] + '" />');
+        var progress = new FileProgress(file, this.customSettings.progressTarget);
+        progress.setComplete();
+        progress.setStatus("{lang singcere_poll:finsh}");
+        $(file.id).style.display = 'none';
+    }
+
+
+    function doclick(objs) {
+        var obj = jq(objs);
+     
+        jq.ajax({
+            type: 'GET',
+            url: "{$_G[siteurl]}plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=select&op=upload&type=delete&aid=" + obj.attr('aid'),
+        }).success(function(s) {
+            obj.parent().remove();
+        }).error(function() {
+            popup.open('{lang networkerror}', 'alert');
+        });
+        return false;
+    }
+
+    function  doSubmit() {
+        ajaxpost('cform', 'fastpostreturn', 'fastpostreturn', 'onerror', $('commentsubmit_btn'));
+    }
+    
+    function getupload(sid) {
+        upload = new SWFUpload({
+            upload_url: "{$_G[siteurl]}plugin.php?id=singcere_poll:singcere_poll&uid=$_G[uid]&mod=cp&ac=select&op=upload&sid=" + sid,
+            file_size_limit: "2048",
+            file_types: "*.jpg;*.jpeg;*.gif;*.png;*.bmp;*.flv;*.rmvb;*.avi",
+            file_types_description: "{lang pictypefile}",
+            file_upload_limit: 0,
+            file_queue_limit: 15,
+            swfupload_preload_handler: preLoad,
+            swfupload_load_failed_handler: loadFailed,
+            file_dialog_start_handler: fileDialogStart,
+            file_queued_handler: fileQueued,
+            file_queue_error_handler: fileQueueError,
+            file_dialog_complete_handler: fileDialogComplete,
+            upload_start_handler: uploadStart,
+            upload_progress_handler: uploadProgress,
+            upload_error_handler: uploadError,
+            upload_success_handler: ajax_uploadSuccess,
+            upload_complete_handler: uploadComplete,
+            auto_upload: false,
+            button_image_url: "{IMGDIR}/common/uploadbutton.png",
+            button_placeholder_id: "imgid",
+            button_width: 100,
+            button_height: 25,
+            button_cursor: SWFUpload.CURSOR.HAND,
+            button_window_mode: "transparent",
+            custom_settings: {
+                progressTarget: "pollstr"
+            },
+            debug: false
+        });
+        return upload;
+    }
+
+    function dodel(obj) {
+        if (confirm("{lang singcere_poll:suredel}")) {
+            showWindow(obj.id, obj.href);
+        }
+        return false;
+    }
+
+    function doloaditem(obj,pid,sid,op) {
+        href = "plugin.php?id=singcere_poll:singcere_poll" + "&mod=cp&ac=select&op=" + op+"&pid="+pid+"&sid="+sid;
+     
+        ajaxget(href, "show_menu");
+        showMenu({'ctrlid': 'show',
+		'pos': '00', 
+		'ctrlclass': 'lll',
+		'maxh':500,
+		'mtype':'win',
+		'duration': 3});
+    }
+	function dohideMenu(){
+	hideMenu();
+	window.location.reload();
+	
+	}
+</script>
+
+<div id="fastpostreturn"></div>
+<!--{if $ac=='poll'}-->
+<div id="pt" class="bm cl">
+    <div class="z">
+        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em>&raquo;</em>
+        <a href="plugin.php?id=singcere_poll:singcere_poll&mod=list">{lang singcere_poll:poll}</a> <em>&raquo;</em>
+   {lang singcere_poll:pmanage}
+    </div>
+</div>
+<table class="table-c">
+    <tr>
+        <th class="txh">{lang singcere_poll:order}</th>
+        <th class="txt">{lang singcere_poll:theme}</th>
+        <th class="tps">{lang singcere_poll:ptotal}</th>
+        <th class="tsj">{lang singcere_poll:betime}</th>
+        <th class="tcz">{lang singcere_poll:opr}</th>
+    </tr>
+    <!--{loop $themes $key $value}-->
+    <tr>
+        <td class="txh"><!--{eval echo $key+1}--></td>
+        <td><a href="plugin.php?id=singcere_poll:singcere_poll&mod=view&pid=$value[pid]" target="_blank">$value[subject]</a></td>
+        <td><!--{if isset($count[$value[pid]][total])}-->$count[$value[pid]][total]<!--{else}-->0<!--{/if}--></td>
+        <td><!--{eval echo dgmdate($value[begin]);}--> ~  <!--{eval echo dgmdate($value[end]);}--></td> 
+        <td class="tcz"> 
+            <a href="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=select&op=list&pid=$value[pid]" class="xi2">{lang singcere_poll:pitemmang}</a>
+            <span class="pipe">|</span>
+            <a href="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=poll&op=edit&pid=$value[pid]">{lang singcere_poll:edit}</a>
+            <span class="pipe">|</span>
+            <a href="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=poll&formhash={FORMHASH}&op=delete&pid=$value[pid]" id="del$value[iid]"  onclick="return dodel(this);">{lang singcere_poll:delete}</a>
+        </td>
+    </tr>
+    <!--{/loop}-->
+    $muti
+</table>
+<p class="mb10 cl"><a href="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=poll&op=create" class="poll-pn"><span>{lang singcere_poll:adsubject}</span></a></p>
+<!--{/if}-->
+
+<!--{if $ac=='select'}-->
+<div id="pt" class="bm cl">
+    <div class="z">
+        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em>&raquo;</em>
+        <a href="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=poll&op=list">{lang singcere_poll:poll}</a> <em>&raquo;</em>
+        <a href="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=poll&op=list">{lang singcere_poll:pmanage}</a><em>&raquo;</em>
+        {lang singcere_poll:pitemmang}
+    </div>
+</div>
+<table class="table-c">
+    <tr>
+        <th class="txh">{lang singcere_poll:order}</th>
+        <th class="txt">{lang singcere_poll:itemname}</th>
+        <th class="tps">{lang singcere_poll:pnum}</th>
+        <th class="tcz">{lang singcere_poll:opr}</th>
+    </tr>
+    <!--{loop $selitem  $key $value}-->
+    <tr>
+        <td class="txh"><!--{eval echo $key+1}--></td>
+        <td>$value[name]</td>
+        <td>$value[pnum]</td>        
+        <td class="tcz"> 
+            <a href="javascript:void(0);"  onclick="doloaditem(this,$pid,$value[sid], 'edit');" class="show xi2">{lang singcere_poll:edit}</a>
+            <span class="pipe">|</span>
+            <a href="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=select&formhash={FORMHASH}&op=delete&sid=$value[sid]" id="del$value[iid]"  onclick="return dodel(this);">{lang singcere_poll:delete}</a>
+        </td>
+    </tr>
+    <!--{/loop}-->
+   
+</table>
+$muti
+<p class="mb10 cl"><a href="javascript:void(0);"  onclick="doloaditem(this, $pid,0,'create');"  class="show poll-pn"><span>{lang singcere_poll:additem}</span></a></p>
+<!--{/if}-->
+<div id="show_menu" class="poll-fwinmask" style="width: 560px; min-height:600px; display: none;">
+
+</div>
+<!--{template common/footer}-->

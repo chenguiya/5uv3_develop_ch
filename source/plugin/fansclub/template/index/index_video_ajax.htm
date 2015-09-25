@@ -1,0 +1,24 @@
+这个页面应该没有用
+<!--{loop $arr $v}-->
+	<div class="clubList">
+	<a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}" class="clubImg"> 
+	{if $v['thumb'] != ''}
+	<img src="$v['thumb']" title="{$v['subject']}" alt="{$v['subject']}" width="235px"/>
+	{elseif $v['video'] != ''}
+	{$v['video']}
+	{else}
+	&nbsp;<暂时没有预览>
+	{/if}
+	</a>
+	<a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}" class="clubDes">{$v['subject']}</a>
+	<div class="clubTxt"><span class="viewIco">{$v['views']}</span><span class="plIco">{$v['replies']}</span></div>
+	<div class="clubInfo">
+	<a href="home.php?mod=follow&uid={$v['authorid']}&do=view&from=space" target="_blank" title="" class="clubPhoto">
+	<img src="$v['avatar']" width="40" height="40"/>
+	</a>
+	<div class="clubName">
+	<a href="home.php?mod=follow&uid={$v['authorid']}&do=view&from=space" target="_blank">{$v['author']}</a>
+	<p>{$v['dateline']}</p></div>
+	</div>
+	</div>
+<!--{/loop}-->

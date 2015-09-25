@@ -1,0 +1,12 @@
+<!--{block html}-->
+	<div class="channelTitle">贡献达人</div>
+        <div class="daren">
+        	<ul>
+				<!--{loop $arr $k $v}-->
+				<!--{eval $num=$k+1;}-->
+            	<li><em <!--{if $num<=3}-->class="fisrtc"<!--{/if}-->>{$num}</em>
+					<a href="/home.php?mod=space&uid={$v['uid']}" target="_blank">{$v['username']}</a><span>贡献：{$v['credits']}</span></li>
+				<!--{/loop}-->
+            </ul>
+        </div>
+<!--{/block}-->

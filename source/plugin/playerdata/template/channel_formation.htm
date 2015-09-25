@@ -1,0 +1,157 @@
+<!--{subtemplate common/header}-->
+<!--{template extend/desktop/channel_common_header}-->
+<div class="jianju15"></div>
+<div class="box formationMain">
+    <div class="widget_con widget_conL">
+        <div class="widget_hd"><h3>最近一场首发阵容</h3></div>
+        <div class="widget_format">
+			   <div class="for_left">
+			        <span class="zhenxing">阵型：{eval echo ($last_formation['a_team'][0]->formation);}</span>
+					<!--{loop $last_formation['a_team'] $v}-->
+				   		 <span style="{$v->point_x}{$v->point_y}"><em><img onerror="this.src='./template/usportstyle/common/images/player_img.gif'" src="<!--{if ($v->head=='' || $v->head=='http://mat1.gtimg.com/sports/soccerdata/images//player/nophoto.jpg' || $v->head=='http://mat1.gtimg.com/sports/soccerdata/images//player/154041.jpg')}$_G['style'][tpldir]/common/images/player_img.gif{else}{$v->head}{/if}-->"></em><h5>{$v->player_name}</h5></span>
+					<!--{/loop}-->
+			   </div>
+			   <div class="for_right">
+			        <span class="zhenxing">阵型：{eval echo ($last_formation['b_team'][0]->formation);}</span>
+					<!--{loop $last_formation['b_team'] $v}-->
+				   		 <span style="{$v->point_x}{$v->point_y}"><em><img onerror="this.src='./template/usportstyle/common/images/player_img.gif'" src="<!--{if ($v->head=='' || $v->head=='http://mat1.gtimg.com/sports/soccerdata/images//player/nophoto.jpg' || $v->head=='http://mat1.gtimg.com/sports/soccerdata/images//player/154041.jpg')}$_G['style'][tpldir]/common/images/player_img.gif{else}{$v->head}{/if}-->"></em><h5>{$v->player_name}</h5></span>
+					<!--{/loop}-->
+			   </div>
+        </div>
+    </div>
+	
+    <div class="widget_con widget_conR">
+        <div class="widget_hd"><h3>主教练</h3></div>
+        <div class="widget_Coach">
+        	<div class="coachImg">
+        		<img onerror="this.src='./template/usportstyle/common/images/player_img.gif'" src="{if ($coach->head != '')}./data/photo_play/pic/{$coach->head}{else}$_G['style'][tpldir]/common/images/player_img.gif{/if}" width="70" height="100"/>
+            	<p>{$coach->name}</p>
+            </div>
+            <ul class="coachInfo" style="overflow: hidden;">
+            	<li class="fl">生日：{$coach->birthday}</li>
+                <li>身高：{$coach->height}</li>
+                <li class="fl">国籍：{$coach->nationality}</li>
+                <li>体重：{$coach->weight}</li>
+            </ul>
+            <b class="coachingT">执教纪录</b>
+            <ul class="coaching">
+            	<!--{loop $coachinfo $key $v}-->
+            	<li>{$v->club}   {$v->start}到{$v->end}</li>
+            	<!--{if ($key==5) }--><!--{eval break;}--><!--{/if}-->
+            	<!--{/loop}-->                
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+  <!--'前锋','中场','后卫'-->  
+<div class="jianju15"></div>
+<div class="box">
+	 <div class="widget_con">
+     	<div class="widget_hd"><h3>球员技术统计</h3></div>
+        <div class="techT">
+        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <th scope="col" width="42">号码</th>
+                <th scope="col" width="180">球员</th>
+                <th scope="col" width="50">位置</th>
+                <th scope="col" width="120">出场/首发</th>
+                <th scope="col" width="65">进球</th>
+                <th scope="col" width="65">助攻</th>
+                <th scope="col" width="95">传球</th>
+                <th scope="col" width="80">抢断</th>
+                <th scope="col" width="85">越位</th>
+                <th scope="col" width="70">犯规</th>
+                <th scope="col">红/黄牌</th>
+              </tr>
+            </table>
+
+        </div>
+     
+        <!--{loop $playerlist $name $item}-->
+        <div class="techCon">
+        	<div class="techT{$positionArr[$positionName[$name]][1]}"><span>{$positionName[$name]}</span></div>
+            <div class="techMain">
+            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<!--{loop $item $v}-->
+                  <tr>
+                    <td width="42">{$v->number}</td>
+                    <td width="180" class="playUser"><a href="javascript:void(0);" target="_blank" title=""><img onerror="this.src='./template/usportstyle/common/images/player_img.gif'" src="<!--{if ($v->head=='' || $v->head=='http://mat1.gtimg.com/sports/soccerdata/images//player/nophoto.jpg' || $v->head=='http://mat1.gtimg.com/sports/soccerdata/images//player/154041.jpg')}$_G['style'][tpldir]/common/images/player_img.gif{else}{$v->head}{/if}-->" width="34" height="34" /></a><a href="javascript:void(0);" target="_blank" title="{$v->player_name}">{$v->player_name}</a></td>
+                    <td width="50">{$v->position}</td>
+                    <td width="120">{$v->appearances}</td>
+                    <td width="65">{$v->goal}</td>
+                    <td width="65">{$v->assists}</td>
+                    <td width="95">{$v->passes}</td>
+                    <td width="80">{$v->steal}</td>
+                    <td width="85">{$v->offsides}</td>
+                    <td width="70">{$v->foul}</td>
+                    <td>{$v->cards}</td>
+                  </tr>
+				 <!--{/loop}-->
+                </table>
+
+            </div>
+            
+            <div class="clear"></div>
+        </div>
+         <!--{/loop}-->
+         <div class="jianju20"></div>
+ 
+  <!--守门员-->       
+        <div class="techT">
+        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <th scope="col" width="42">号码</th>
+                <th scope="col" width="180">球员</th>
+                <th scope="col" width="50">位置</th>
+                <th scope="col" width="90">出场/首发</th>
+                <th scope="col" width="55">失球</th>
+                <th scope="col" width="55">触球</th>
+                <th scope="col" width="60">出击</th>
+                <th scope="col" width="60">补救</th>
+                <th scope="col" width="60">扑点球</th>
+                <th scope="col" width="80">扑必进球</th>
+                <th scope="col" width="100">赢得一对一</th>
+                <th scope="col">犯规</th>
+                <th scope="col" width="80">红/黄牌</th>
+              </tr>
+           </table>
+        </div>
+        <div class="techCon">
+        	<div class="techTd"><span>守门员</span></div>
+            <div class="techMain">
+            	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+            		<tbody>
+                    <!--{loop $goalkeeper $v}-->
+	                  <tr>
+	                    <td width="42">{$v->number}</td>
+	                    <td width="180" class="playUser"><a href="javascript:void(0);" target="_blank" title="{$v->player_name}"><img onerror="this.src='./template/usportstyle/common/images/player_img.gif'" src="<!--{if ($v->head=='' || $v->head=='http://mat1.gtimg.com/sports/soccerdata/images//player/nophoto.jpg' || $v->head=='http://mat1.gtimg.com/sports/soccerdata/images//player/154041.jpg')}$_G['style'][tpldir]/common/images/player_img.gif{else}{$v->head}{/if}-->" width="34" height="34" /></a><a href="javascript:void(0);" target="_blank" title="{$v->player_name}">{$v->player_name}</a></td>
+	                    <td width="50">{$v->position}</td>
+	                    <td width="90">{$v->appearances}</td>
+	                    <td width="55">{$v->fumble}</td>
+	                    <td width="55">{$v->hand_ball}</td>
+	                    <td width="60">{$v->attack}</td>
+	                    <td width="60">{$v->save}</td>
+	                    <td width="60">{$v->clear_penalty}</td>
+	                    <td width="80">{$v->clear_goal}</td>
+	                    <td width="100">{$v->one_on_one}</td>
+	                    <td>{$v->foul}</td>
+	                    <td width="80">{$v->cards}</td>
+	                  </tr>
+				<!--{/loop}-->
+                  </tbody>
+                  </table>
+            </div>
+            
+            <div class="clear"></div>
+        </div>
+
+            <div class="clear"></div>
+        </div>
+        <div class="jianju"></div>
+     </div>
+     
+</div>
+<!--{subtemplate common/footer}-->

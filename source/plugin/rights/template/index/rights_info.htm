@@ -1,0 +1,71 @@
+<!--{template common/header}-->
+<div class="ch_bm">
+	<div class="z"><a href="./" class="" title="{lang homepage}">5U体育</a><em>&raquo;</em><a href="plugin.php?id=rights">权益</a><em>&raquo;</em><a href="javasript:void(0);">{$info[name]}</a></div>
+</div>
+<div class="rights_mian cl">
+	<!--{template rights:index/left}-->
+	<div class="rights_right">
+		<div class="rights_box">
+			<p class="tbmu"><span class="deta_h3">{$info[name]}</span></p>
+			<form id="rightsinfoform" name="rightsinfoform" method="post" action="plugin.php?id=rights:index&op=info" autocomplete="off">
+				<input type="hidden" name="formhash" value="{FORMHASH}">
+				<input type="hidden" name="buysubmit" value="true">
+				<input type="hidden" name="rightsid" value="{$info[rightsid]}">
+				<input type="hidden" name="name" value="{$info[name]}">
+				<input type="hidden" name="price" value="{eval echo $info[price]*$info[discount]}">	
+			   		<div class="deta_bds cl">			   	
+			        	<div class="deta_l"><img src="data/attachment/forum/{$info[icon]}"><em>{$info[name]}</em></div>					
+						<div class="deta_r">						
+						     <table border="0" cellpadding="0" cellspacing="0" class="table_one" width="100%">
+							        <colgroup>
+							             <col width="200">
+										 <col width="auto">
+							        </colgroup>
+							        <tr>
+									    <td>折扣：<!--{if $info[discount] == 1}-->暂无折扣<!--{else}-->{eval echo $info[discount]*10;}折<!--{/if}--></td>
+										<td>存货量：{$info[num]}</td>
+									</tr>
+									<tr>
+									    <td>使用周期：{$useperoid[$info[useperoid]]}</td>
+										<td>使用本权益球迷会：梅西</td>
+									</tr>
+							 </table>
+							 <table border="0" cellpadding="0" cellspacing="0" class="table_two" width="100%">
+							       <tr><td>{$info[description]}</td></tr>
+							 </table>
+							 
+						</div>
+				   </div>
+				   <div class="pay_detaM">
+				   		<!--{if $info[typeid] == 2 && !empty($clublists)}-->
+				   		<h2>选择你要为以下哪个球迷会购买此权益：</h2>
+				   		<select id="clubid" name="clubid">
+				   			<!--{loop $clublists $key $club}-->
+				   			<option value="{$key}">{$club}</option>
+				   			<!--{/loop}-->
+				   		</select>
+				   		<!--{else}-->
+				   		你加入的球迷会都经拥有了此权益。
+				   		<!--{/if}-->
+						<!--<h2>支付方式：</h2>
+						<ul class="tb_payselect cl">
+						    <li><a href=""><span>钱包</span></a></li>
+							<li><a href=""><span>支付宝</span></a></li>
+							<li><a href=""><span>微信支付</span></a></li>
+							<li class="select_hover"><a href=""><span>银行卡</span></a><i>已选中</i></li>
+						</ul>-->
+						<div class="pay_5upay">
+							<!--{if $info[discount] < 1}-->
+							<h2>原价：<font>{$info[price]}</font>元</h2>				 
+							<h2>折后价：<font>{eval echo $info[price]*$info[discount]}</font>元</h2>
+							<!--{else}-->
+							<h2>应付金额：<font>{eval echo $info[price]*$info[discount]}</font>元</h2>
+							<!--{/if}-->
+						</div>
+				   </div>
+				   <div class="pay_submits"><button type="submit" class="track" id="submit_order" name="submit_order" value="ture">立即开通</div>
+			   </form>
+		  </div>
+	 </div>
+</div>
+<!--{template common/footer}-->

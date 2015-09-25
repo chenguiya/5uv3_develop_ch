@@ -1,0 +1,29 @@
+<link rel="stylesheet" type="text/css" href="{$_G['config'][static]}/css_minjian.css">
+
+<div class="ch_bm">
+<div class="z">
+<a href="./" class="" title="">5U体育</a><em>&gt;</em>
+<a href="/match/shanghai">{$local_name}球迷会联赛</a>
+{if $ac == 'match'}
+<em>&gt;</em><a href="/match/shanghai/schedule">赛程</a>
+{/if}
+{if $ac == 'inegral'}
+<em>&gt;</em><a href="/match/shanghai/soccer">积分榜</a>
+{/if}
+{if $ac == 'shooter'}
+<em>&gt;</em><a href="/match/shanghai/goal">射手榜</a>
+{/if}
+</div>
+</div>
+
+<div class="club_banner">
+    <div class="ch_main"><img src="{$_G['config'][static]}/images/minjian/banner_1.jpg"></div>
+</div>
+<div class="ch_main">
+    <ul class="ch_navul cl">
+        <li><a href="/match/shanghai" target="_self"{if $ac == 'index'} class="active"{/if}>首页</a></li>
+        <li><a href="/match/shanghai/schedule" target="_self"{if $ac == 'match'} class="active"{/if}>赛程</a></li>
+        <li><a href="/match/shanghai/soccer" target="_self"{if $ac == 'inegral'} class="active"{/if}>积分榜</a></li>
+        <li><a href="/match/shanghai/goal" target="_self"{if $ac == 'shooter'} class="active"{/if}>射手榜</a></li>
+    </ul>
+</div>

@@ -1,0 +1,195 @@
+<!--{if $op=='view'}-->
+	<!--{template common/header}-->
+	<div class="f_c">
+		<h3 class="flb">
+			<em >
+				{lang dc_mall:admin_orders_info}
+			</em>
+			<span><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET[handlekey]')" title="{lang close}">{lang close}</a></span>
+		</h3>
+	</div>
+	<style>
+	.orderinfo th,.orderinfo td{border: 1px solid #E4E4E4;height:30px;}
+	</style>
+	<div style="width:550px;padding:20px;">
+		<table width="100%" cellpadding="0" cellspacing="0" class="orderinfo">
+			<tr>
+				<th style="width:80px;">{lang dc_mall:admin_orders_orderid}</th>
+				<td>{$order['orderid']}</td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:admin_orders_goodsname}</th>
+				<td><a href="plugin.php?id=dc_mall&action=goods&gid={$order['gid']}" target="_blank">{$order['gname']}</a></td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:admin_orders_goodsext}</th>
+				<td>{$extend['title']}</td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:admin_orders_num}</th>
+				<td>{$order['count']}</td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:admin_orders_credit}</th>
+				<td>{$order['credit']}<!--{if $order['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$order['creditid']]['title']} <!--{/if}--></td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:admin_orders_buyname}</th>
+				<td><a href="home.php?mod=space&uid={$order['uid']}" target="_blank">{$order['username']}</a></td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:admin_orders_ctime}</th>
+				<td>{echo dgmdate($order['dateline'])}</td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:admin_orders_status}</th>
+				<td><!--{if $order['status']==1}--><b style="color:#008000">{lang dc_mall:admin_orders_chengjiao}</b><!--{elseif $order['status']==2}--><b style="color:#FF0000">{lang dc_mall:admin_orders_nopay}</b><!--{elseif $order['status']==3}--><b style="color:#333333">{lang dc_mall:admin_orders_cancel}</b><!--{else}--><b style="color:#FF9E00">{lang dc_mall:admin_orders_ispay}</b><!--{/if}--></td>
+			</tr>
+			<!--{if $order['status']==1}-->
+			<tr>
+				<th>{lang dc_mall:admin_orders_ftime}</th>
+				<td>{echo dgmdate($order['finishtime'])}</td>
+			</tr>
+			<!--{elseif $order['status']==3}-->
+			<tr>
+				<th>{lang dc_mall:member_orders_canceltime}</th>
+				<td>{echo dgmdate($order['finishtime'])}</td>
+			</tr>
+			<!--{/if}-->
+		</table>
+		<form id="fm_search" name="fm_search" action="plugin.php?id=dc_mall:admin&action=orders&op=view" method="post" onsubmit="ajaxpost(this.id, 'floatlayout_{$_GET['handlekey']}','','onerror');return false;">
+		{$hookstr}
+		<input type="hidden" id="oid" name="oid" value="{$order['id']}" />
+		<input type="hidden" name="handlekey" value="{$_GET['handlekey']}" />
+		<input type="hidden" name="submitchk" value="true" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		</form>
+	</div>
+	<div id="floatlayout_{$_GET['handlekey']}"></div>
+	<script>
+	function succeedhandle_{$_GET['handlekey']}(href, message, param){
+		hideWindow('{$_GET['handlekey']}');
+		showDialog(message, 'right', '', 'window.location.href=\''+href+'\'', '','','','','','',3);
+	}
+</script>
+	<!--{template common/footer}-->
+<!--{elseif $op=='delete'}-->
+	<!--{template common/header}-->
+	<h3 class="flb"><em>{lang dc_mall:admin_orders_delorder}</em><span><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET['handlekey']');" title="{lang close}">{lang close}</a></span></h3>
+	<form method="post" autocomplete="off" id="deletegoods" name="deleteorder" action="plugin.php?id=dc_mall:admin&action=orders&op=delete" onsubmit="ajaxpost(this.id, 'floatlayout_$_GET['handlekey']','','onerror');return false;">
+	<div class="c altw">
+	<div class="alert_info">{lang dc_mall:admin_orders_delorderchk} {$order['orderid']}</div>
+	</div>
+	<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="oid" value="{$order['id']}" />
+	<input type="hidden" name="submitchk" value="true" />
+	<p class="o pns">
+	<button type="submit" class="pn pnc" id="submitbtn" name="submitbtn" value="true"><strong>{lang confirms}</strong></button>
+	</p>
+	</form>
+	<script>
+	function succeedhandle_$_GET['handlekey'](locationhref, message, param) {
+		hideWindow('$_GET['handlekey']');
+		showDialog(message, 'right', '', 'window.location.href=\''+locationhref+'\'', '','','','','','',3);
+	}
+	</script>
+	<div id="floatlayout_$_GET['handlekey']"></div>
+	<!--{template common/footer}-->
+<!--{else}-->
+<div id="goodstop">
+     <h2 class="h2_titx">{lang dc_mall:admin_orders_orderlist}</h2>
+	 <div class="ch_mtm">
+	 <form id="fm_search" name="fm_search" action="plugin.php?id=dc_mall:admin&action=orders" method="post">
+		   <select id="searchtype" name="searchtype" class="cp_fre">
+				<option value="1">{lang dc_mall:admin_orders_orderid}</option>
+				<option value="2">{lang dc_mall:admin_orders_userid}</option>
+				<option value="3">{lang dc_mall:admin_orders_uname}</option>
+				<option value="4">{lang dc_mall:admin_orders_goodsname}</option>
+		   </select>&nbsp;
+	       <input id="searchkeyword" name="searchkeyword" value="{$searchkeyword}" class="input_o" type="text">&nbsp;&nbsp;
+	       <button type="submit" id="searchbutton" name="searchbutton" class="pn_bt"><em>{lang dc_mall:admin_orders_search}</em></button>&nbsp;&nbsp;
+		   <select id="sortid" name="sortid" class="p_fre" onchange="submit();">
+		          <option value="">--{lang dc_mall:admin_orders_allleibie}--</option>
+				  <!--{loop $mallnav $sort}-->
+				  <option value="{$sort['id']}" <!--{if $sort['id']==$sid}-->selected<!--{/if}-->>{$sort['name']}</option>
+				  <!--{/loop}-->
+		   </select>&nbsp;
+		   <select id="extid" name="extid" class="p_fre" onchange="submit();">
+		          <option value="">--{lang dc_mall:admin_orders_allext}--</option>
+				  <!--{loop $extends $ext}-->
+				  <option value="{$ext['id']}" <!--{if $ext['id']==$extid}-->selected<!--{/if}-->>{$ext['title']}</option>
+				  <!--{/loop}-->
+		  </select>&nbsp;
+		  <select id="status" name="status" class="p_fre" onchange="submit();">
+		          <option value="">--{lang dc_mall:admin_orders_allstatus}--</option>
+				  <option value="1" <!--{if $status==1}-->selected<!--{/if}-->>{lang dc_mall:admin_orders_chengjiao}</option>
+				  <option value="2" <!--{if $status==2}-->selected<!--{/if}-->>{lang dc_mall:admin_orders_nopay}</option>
+				  <option value="3" <!--{if $status==3}-->selected<!--{/if}-->>{lang dc_mall:admin_orders_cancel}</option>
+				  <option value="9" <!--{if $status==9}-->selected<!--{/if}-->>{lang dc_mall:admin_orders_ispay}</option>
+		  </select>
+		  <input name="searchsubmit" value="true" type="hidden">
+		  <input name="formhash" value="{FORMHASH}" type="hidden">
+	</form>
+	</div>
+</div>
+<form method="post" autocomplete="off" id="sortform" action="plugin.php?id=dc_mall:admin&action=orders&op=delete" class="form_table">
+      <table class="dt_table" cellpadding="0" cellspacing="0" id="admin_goods_list">
+	      <tbody>
+		        <tr>
+				   <th width="15"></th>
+				   <th width="auto">{lang dc_mall:admin_orders_orderid}</th>
+				   <th width="113">{lang dc_mall:admin_orders_u}</th>
+				   <th width="113">{lang dc_mall:admin_orders_goodsname}</th>
+				   <th width="113">{lang dc_mall:admin_orders_ext}</th>
+				   <th width="113">{lang dc_mall:admin_orders_num}</th>
+				   <th width="113" id="admin_caozuo">{lang dc_mall:admin_orders_caozuo}</th>
+				</tr>
+				<!--{loop $orders $v}-->
+				<tr>
+				   <td><input type="checkbox" value="{$v['id']}" name="oid[]"/></td>
+				   <td>{$v['orderid']}</td>
+				   <td><a href="home.php?mod=space&uid={$v['uid']}" target="_blank">{$v['username']}</a></td>
+				   <td><a href="plugin.php?id=dc_mall&action=goods&gid={$v['gid']}" target="_blank">{$v['gname']}</a></td>
+				   <td>{$extends[$v['extid']]['title']}</td>
+				   <td>{$v['count']} </td>
+				   <td class="manage">
+				   <!--{if $v['status']==1}--><b style="color:#eb6000">{lang dc_mall:admin_orders_chengjiao}</b><!--{elseif $v['status']==2}--><b style="color:#FF0000">{lang dc_mall:admin_orders_nopay}</b><!--{elseif $v['status']==3}--><b style="color:#333333">{lang dc_mall:admin_orders_cancel}</b><!--{else}--><b style="color:#FF9E00">{lang dc_mall:admin_orders_ispay}</b><!--{/if}--><br />
+				   <a href="javascript:;" onclick="showWindow('orderview', 'plugin.php?id=dc_mall:admin&action=orders&op=view&oid={$v['id']}');">{lang dc_mall:admin_orders_view}</a><span class="pipe">|</span><a href="javascript:;" onclick="showWindow('deleteorders', 'plugin.php?id=dc_mall:admin&action=orders&op=delete&oid={$v['id']}');">{lang dc_mall:del}</a><br /></td>
+				</tr>
+				<!--{/loop}-->
+				<tr>
+				    <td colspan="7" class="submit_t"><input type="checkbox" name="chkall" id="chkall" class="checkbox" onclick="checkAll('prefix', this.form, 'oid')" style="vertical-align:middle" />&nbsp;<label for="chkall">{lang dc_mall:admin_orders_del}</label>&nbsp;&nbsp;<button type="submit" id="submitbtn" class="pn pnc" name="submitbtn" ><strong>{lang dc_mall:admin_orders_tijiao}</strong></button>{$multi}
+					<input name="submitchk" value="true" type="hidden">
+					<input name="formhash" value="{FORMHASH}" type="hidden"></td>
+				</tr>
+	     </tbody>
+	  </table>
+</form>
+<script>
+	function checkAll(type, form, value, checkall, changestyle) {
+	var checkall = checkall ? checkall : 'chkall';
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(type == 'option' && e.type == 'radio' && e.value == value && e.disabled != true) {
+			e.checked = true;
+		} else if(type == 'value' && e.type == 'checkbox' && e.getAttribute('chkvalue') == value) {
+			e.checked = form.elements[checkall].checked;
+			if(changestyle) {
+				multiupdate(e);
+			}
+		} else if(type == 'prefix' && e.name && e.name != checkall && (!value || (value && e.name.match(value)))) {
+			e.checked = form.elements[checkall].checked;
+			if(changestyle) {
+				if(e.parentNode && e.parentNode.tagName.toLowerCase() == 'li') {
+					e.parentNode.className = e.checked ? 'checked' : '';
+				}
+				if(e.parentNode.parentNode && e.parentNode.parentNode.tagName.toLowerCase() == 'div') {
+					e.parentNode.parentNode.className = e.checked ? 'item checked' : 'item';
+				}
+			}
+		}
+	}
+}
+</script>
+<!--{/if}-->

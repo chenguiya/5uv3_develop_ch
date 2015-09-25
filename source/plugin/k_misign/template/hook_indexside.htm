@@ -1,0 +1,14 @@
+<!--{block return}-->
+<script type="text/javascript">
+function cjdsign(){
+	//document.getElementById("JD_sign").className = 'midaben_signpanel JD_sign visted';	
+	document.getElementById("JD_sign").href = 'javascript:void(0);';
+	document.getElementById("JD_sign").class = 'btn-sign-over';
+	document.getElementById("JD_sign").html = '已签到';
+	document.getElementById("JD_sign").onclick = '';
+	location.reload();
+} 
+</script>
+<a class="<!--{if $qiandaodb['time'] >= $tdtime}-->btn-sign-over<!--{else}-->btn-sign<!--{/if}-->"  id="JD_sign"  <!--{if empty($_G['uid'])}--> onclick="showWindow('login', this.href);return false;" href="member.php?mod=logging&action=login"<!--{elseif  $qiandaodb['time'] >= $tdtime}-->  href="javascript:void(0);" <!--{else}--> href="plugin.php?id=k_misign:sign&operation=qiandao&formhash={FORMHASH}&fid=$_G['fid']" onclick="ajaxget(this.href, this.id, '', '', '', 'cjdsign();');return false;"<!--{/if}-->><!--{if $qiandaodb['time'] >= $tdtime}-->已签到<!--{else}-->签到<!--{/if}--></a>
+<!--{/block}-->
+<!--{eval return $return;}-->

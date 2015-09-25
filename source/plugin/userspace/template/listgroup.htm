@@ -1,0 +1,32 @@
+<!--{block html}-->
+	<div class="panel clubs">
+							<div class="panel-head">
+								<h2>球迷会</h2>
+								<a href="plugin.php?id=userspace:mygroup&uid={$uid}&do=club&from=space" class="y">更多</a>
+							</div>
+							<div class="panel-body">
+								<ul>
+									<!--{if $arr}-->
+									<!--{loop $arr $v}-->
+									<li>
+										<a href="forum.php?mod=group&fid={$v[fid]}" class="icon">
+											<img src="{$v[icon]}"></a>
+										<div class="extra">
+											<!--<span class="badget" ></span>-->
+											{$v['level_img']}
+											{$v['joinin_button']}
+										</div>
+										<div class="info">
+											<h3>{$v[name]}</h3>
+											<p>球迷：{$v[membernum]}</p>
+											<p>总帖数：{$v[posts]}</p>
+										</div>
+									</li>
+									<!--{/loop}-->
+									<!--{else}-->
+										暂时没有加入任何球迷会
+									<!--{/if}-->
+								</ul>
+							</div>
+						</div>
+<!--{/block}-->

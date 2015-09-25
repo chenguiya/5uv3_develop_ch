@@ -1,0 +1,77 @@
+<!--{subtemplate common/header}-->
+	 <div class="ch_bm">
+		<div class="z">
+			<a href="./" class="" title="{lang home}">$_G[setting][bbname]</a><em>&gt;</em>
+			<em><a href="{$_SERVER['REQUEST_URI']}" target="_self">视频</a></em>
+		</div>
+	</div>
+<div class="container">
+    <div class="squareMain" style="float: left;width: 224px;">
+       <div class="squareSide">
+        <div class="nav">
+            <div class="hotTitle">全部</div>
+        <!--{loop $arr_forum_list $key1 $value1}-->
+            <div class="navTitle">
+            <p><img src="$value1['icon']" />$value1['name']</p>
+            <ul class="navMain">
+                <!--{loop $value1['list'] $key2 $value2}-->
+                <li class="navCon">
+                    <a class="navTitlea" href="group/{$key2}/" target="_blank">$value2['name']</a>
+					<a class="titleOperate" href="javascript:;"></a>
+                    <ul style="display:block;">
+                        <!--{loop $value2['list'] $key3 $value3}-->
+                        <a href="group/{$key3}/" target="_blank"><li {if $fid == $key3} class="active"{/if}>$value3['name']</li></a>
+                        <!--{/loop}-->
+                    </ul>
+                </li>
+                <!--{/loop}-->
+                </ul>
+            </div>
+        <!--{/loop}-->
+        </div>
+
+    </div>
+    </div>
+    <div class="main" style="float: left;padding-left: 15px;">
+        <div class="index-tags">
+            <h3>视频</h3>
+            <dl>
+                <dt>排序：</dt>
+                <dd <!--{if $_GET['sort']=='new' || empty($_GET['sort'])}--> class="active"<!--{/if}-->><a href="plugin.php?id=fansclub:index&ac=video&sort=new"  >最新帖</a></dd>
+                <dd <!--{if $_GET['sort']=='hot'}--> class="active"<!--{/if}-->> <a href="plugin.php?id=fansclub:index&ac=video&sort=hot" >最热帖</a></dd>
+                <dd <!--{if $_GET['sort']=='stick'}--> class="active"<!--{/if}-->> <a href="plugin.php?id=fansclub:index&ac=video&sort=stick" >精华帖</a></dd>
+            </dl>
+        </div>
+        <div class="boxMain index-picture video" style="width: 746px; padding-left: 2px;">
+			<div class="clubMain" data-url="plugin.php?id=fansclub:index&ac=video&sort={$_GET['sort']}&return=ajax" style="width: 761px;">
+			<!-- 精 -->
+			<!--{loop $arr $v}-->
+				<div class="clubList">
+				<a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}" class="clubImg"> 
+				{if $v['thumb'] != ''}
+				<img src="$v['thumb']" title="{$v['subject']}" alt="{$v['subject']}" width="235px"/>
+				{elseif $v['video'] != ''}
+				{$v['video']}
+				{else}
+				<img src="$_G['style'][tpldir]/common/images/video_default.png" width="235">
+				{/if}
+				</a>
+				<a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}" class="clubDes">{$v['subject']}</a>
+				<div class="clubInfo">
+				<a href="home.php?mod=follow&uid={$v['authorid']}&do=view&from=space" target="_blank" title="" class="clubPhoto">
+				<img src="$v['avatar']" width="40" height="40"/>
+				</a>
+				<div class="clubName">
+				<a href="home.php?mod=follow&uid={$v['authorid']}&do=view&from=space" target="_blank">{$v['author']}</a>
+				<p>{$v['dateline']}</p>
+                </div>
+                    <div class="clubTxt"><span class="viewIco">{$v['views']}</span><span class="plIco">{$v['replies']}</span></div>
+                </div>
+                </div>
+			<!--{/loop}-->
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<!--{subtemplate common/footer}-->

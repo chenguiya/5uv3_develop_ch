@@ -1,0 +1,107 @@
+<!--{template common/header}-->
+<div class="f_c">
+	<h3 class="flb">
+		<em >
+			{lang dc_mall:index_pay_creatorder}
+		</em>
+		<span><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET[handlekey]')" title="{lang close}">{lang close}</a></span>
+	</h3>
+</div>
+<style>
+#creatorder th{background: none repeat scroll 0% 0% #FFF7D7;}
+#creatorder th, #creatorder td {text-align: center;border: 1px solid #E4E4E4; padding: 0 5px; }
+#creatorder .left{text-align:left;}
+#vipinfo td{background-color: #FFEBEB;}
+#newaddress td {border: 1px solid #E4E4E4;}
+</style>
+<form method="post" autocomplete="off" id="articleform" action="plugin.php?id=dc_mall&action=pay&op=save" onsubmit="ajaxpost(this.id, 'floatlayout_createorder','','onerror');return false;">
+<div style="width:550px;padding:20px;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" id="creatorder">
+		<tr>
+			<th style="width:230px;height:40px">{lang dc_mall:index_pay_goodstitle}</th>
+			<th>{lang dc_mall:index_pay_goodsnum}</th>
+			<th width="40px">&nbsp;</th>
+			<th>{lang dc_mall:index_pay_goodsprice}(<!--{if $goods['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$goods['creditid']]['title']} <!--{/if}-->)</th>
+			<th width="40px">&nbsp;</th>
+			<th>{lang dc_mall:index_pay_goodstotal}</th>
+		</tr>
+		<tr>
+			<td height="40" class="left">$goods['name']</td>
+			<td>
+				<input id="txt_count" name="txt_count" style="width:60px;" value="{$count}" type="number" autocomplete='off' maxlength="2" onkeyup="checkcount(this.value);tongji();" onchange="checkcount(this.value);tongji();" /></td>
+			<td>X</td>
+			<td>{$goods['credit']} </td>
+			<td>=</td>
+			<td>
+				<span id="totalcredit">{echo $goods['credit']*$count}</span> <!--{if $goods['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$goods['creditid']]['title']} <!--{/if}-->
+			</td>
+		</tr>
+		<!--{if $_G['dc_mall']['vip']['open']}-->
+		<tr id="vipinfo">
+			<td height="40" class="left">{lang dc_mall:index_pay_goodsvipprice}</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>{$goods['vipcredit']}</td>
+			<td>=</td>
+			<td>
+				<span id="totalvipcredit">{echo $goods['vipcredit']*$count}</span> <!--{if $goods['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$goods['creditid']]['title']} <!--{/if}-->
+			</td>
+		</tr>
+		<!--{/if}-->
+		<tr>
+			<td height="40" class="left">{lang dc_mall:index_pay_yingfu}</td>
+			<td>&nbsp;</td>
+			<td >&nbsp;</td>
+			<td colspan="3">
+				<strong style="color:#FF0000; font-size:16px;"><span id="all_total">{echo $_G['dc_mall']['vip']['user']?$goods['vipcredit']*$count:$goods['credit']*$count}</span></strong> <!--{if $goods['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$goods['creditid']]['title']} <!--{/if}-->
+			</td>
+		</tr>
+	</table>
+	{$hookstr}
+</div>
+<input type="hidden" id="gid" name="gid" value="{$gid}" />
+<input type="hidden" name="handlekey" value="createorder" />
+<input type="hidden" name="submitchk" value="true" />
+<input type="hidden" name="formhash" value="{FORMHASH}" />
+<div style="margin-bottom:10px;">
+&nbsp;&nbsp;&nbsp;
+<input class="pn pnc" name="submitbtn" value="{lang dc_mall:index_pay_gobuy}" type="submit">
+<strong style="font-size:16px; color:#FF0000"><!--{if $goods['creditid']!=99}-->{lang dc_mall:index_pay_nowhave} {echo getuserprofile('extcredits'.$goods['creditid'])} {$_G['setting']['extcredits'][$goods['creditid']]['title']} <!--{/if}--></strong>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="plugin.php?id=dc_mall:member&mod=orders" target="_blank"><strong style="color:#006699; font-size:16px;">{lang dc_mall:myorder}</strong></a>
+</div>
+</div>
+</form>
+<div id="floatlayout_createorder"></div>
+<script type="text/javascript">
+function checkcount(count){
+	kucount = {$goods['count']};
+	maxbuy = {$goods['maxbuy']};
+	$('txt_count').value = count.replace(/\D/gi,"1");
+	if(count>0&&count<kucount&&count<=maxbuy){
+		return;
+	}
+	$('txt_count').value=1;
+}
+function tongji(){
+	credit = {$goods['credit']};
+	$('totalcredit').innerHTML = credit * $('txt_count').value;
+	<!--{if $_G['dc_mall']['vip']['open']}-->
+	vipcredit ={$goods['vipcredit']};
+	$('totalvipcredit').innerHTML = vipcredit * $('txt_count').value;
+	<!--{/if}-->
+	<!--{if $_G['dc_mall']['vip']['user']}-->
+	$('all_total').innerHTML =$('totalvipcredit').innerHTML;
+	<!--{else}-->
+	$('all_total').innerHTML =$('totalcredit').innerHTML;
+	<!--{/if}-->
+}
+function succeedhandle_createorder(href, message, param){
+		hideWindow('createorder');
+		if(param['waiting']=='yes'){
+			showWindow('payfor', href);
+		}else{
+			showDialog(message, 'right', '', 'window.location.href=\''+href+'\'', '','','','','','',3);
+		}
+}
+</script>
+<!--{template common/footer}-->

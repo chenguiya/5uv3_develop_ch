@@ -1,0 +1,42 @@
+<!--{template common/header}-->
+<div class="ch_bm">
+	<div class="z"><a href="./" class="" title="{lang homepage}">5U体育</a><em>&raquo;</em><a href="plugin.php?id=rights">权益</a><em>&raquo;</em><a href="javascript:void(0);">钱包充值</a></div>
+</div>
+<div class="rights_mian cl">
+     <!--{template rights:index/left}-->
+	 <div class="rights_right">
+	      <div class="rights_box">
+	      	<form id="addfundsform" name="addfundsform" method="post" autocomplete="off" action="plugin.php?id=rights:index&op=buy">
+	      		<input type="hidden" name="formhash" value="{FORMHASH}">
+				<input type="hidden" name="addfundssubmit" value="true">
+				<input type="hidden" name="handlekey" value="buycredit">
+		       	<p class="tbmu"><span class="deta_h3">钱包充值</span></p>
+			   	<div class="deta_bds cl">
+					<ul class="wallet_con">
+					    <li class="wallt_one">
+						    充值金额：<input type="text" class="wallet_input" name="paysum" iscod="0" value="" size="20"> <span>元</span>
+						</li>
+						<li class="wallet_two">
+						    <p>账户余额</p>
+							<div class="wallet_num">{$balance}<em>&nbsp;元</em></div>
+						</li>
+					</ul>
+			   	</div>
+			   <div class="pay_detaM">
+					<h2>支付方式：</h2>
+					<ul class="tb_payselect cl">
+					    <!--<li><a href="javascript:void(0);" onclick=""><span>充值卡充值</span></a></li>-->
+						<li><a href="javascript:void(0);" onclick=""><span>支付宝</span></a></li>
+						<!--<li><a href=""><span>微信支付</span></a></li>
+						<li class="select_hover"><a href=""><span>银行卡</span></a><i>已选中</i></li>-->
+					</ul>
+					<div class="pay_bank"></div>					
+			   </div>
+			   <div class="pay_submits">			   
+			   	<button type="submit" name="addfundssubmit_btn" class="track" id="addfundssubmit_btn" value="true"><em>立即充值</em></button>
+			   </div>
+			</form>
+		  </div>
+	 </div>
+</div>
+<!--{template common/footer}-->

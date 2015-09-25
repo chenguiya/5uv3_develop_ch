@@ -1,0 +1,98 @@
+<!--{block return}-->
+<!--{if $_G['forum']['ismoderator']}-->
+	<script type="text/javascript" src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
+<!--{/if}-->
+<div class="flick_bd">	
+<!--{if $feedlist}-->
+	<table cellpadding="0" cellspacing="0" border="0" width="100%" class="flick_list">
+		<tbody id="$thread[id]">
+		<!--{loop $feedlist $feed}-->			
+		<tr>
+	        <td class="avatar_c">
+			    <a href="home.php?mod=space&uid={$feed[uid]}" target="_blank" c="1"><img src="{$feed[avatar]}" width="80" height="80"></a>
+				<p><a href="home.php?mod=space&uid={$feed[uid]}" target="_blank">{$feed[username]}</a> <img src="$_G['style'][tpldir]/common/images/vip_1.png" style="display: none;" width="27" height="13" align="absmiddle"></p>
+				<!--<span class="ident_icon"></span>-->
+			</td>
+			<td class="new_infor">
+			    <div class="new_name">
+			    	<i class="{$feed[icon]}_icon">&nbsp;</i>
+			    	{$feed[title_template]}
+				</div>
+				<div class="new_title">
+					<!--{if $feed['message']}-->
+					{$feed[message]}<br>
+					<!--{/if}-->
+					<!--{if $feed[attachment]}-->
+					  <p class="feed_imags">
+						<!--{loop $feed[attachment] $attachment}-->
+						<a href="forum.php?mod=viewthread&do=tradeinfo&tid={$feed[id]}" target="_blank"><img src="data/attachment/forum/{$attachment[attachment]}" width="auto" height="140" alt="" class="tn" /></a>
+						<!--{/loop}-->
+						</p>
+					<!--{/if}-->
+					<!--{if $feed[video]}-->
+					{$feed[video]}
+					<!--{/if}-->
+					<!--{if $feed[icon] == 'album'}-->
+						<!--{if $feed['image_1']}-->
+						<a href="$feed[image_1_link]"{$feed[target]}><img src="$feed[image_1]" alt="" class="tn" /></a>
+						<!--{/if}-->
+						<!--{if $feed['image_2']}-->
+						<a href="$feed[image_2_link]"{$feed[target]}><img src="$feed[image_2]" alt="" class="tn" /></a>
+						<!--{/if}-->
+						<!--{if $feed['image_3']}-->
+						<a href="$feed[image_3_link]"{$feed[target]}><img src="$feed[image_3]" alt="" class="tn" /></a>
+						<!--{/if}-->
+						<!--{if $feed['image_4']}-->
+						<a href="$feed[image_4_link]"{$feed[target]}><img src="$feed[image_4]" alt="" class="tn" /></a>
+						<!--{/if}-->
+					<!--{/if}-->
+				
+				</div>
+				<div class="new_meta">
+				     <span class="sta_time">{$feed[dateline]}</span>
+					 <!--{if $feed[data][fid] != $_G[fid]}-->
+				    	<!--{if $feed[data][status] == 3}-->			    	
+				    	<span class="sta_xg"> 来自: <a href="forum.php?mod=group&fid={$feed[data][fid]}" target="_blank" class="xgs">{$feed[data][forum_name]}</a></span>
+				    	<!--{else}-->
+				    	<span class="sta_xg"> 来自: <a href="forum.php?mod=forumdisplay&fid={$feed[data][fid]}" target="_blank" class="xgs">{$feed[data][forum_name]}</a></span>
+				    	<!--{/if}-->
+			    	<!--{/if}-->
+					 <span class="y sta_post"><!--{if $feed[data][replies]}-->$feed[data][replies]<!--{else}-->0<!--{/if}--></span>
+					 <span class="y sta_view"><!--{if $feed[data][views]}-->$feed[data][views]<!--{else}-->0<!--{/if}--></span>
+				</div>
+			    <!--{if $feed[credits]}--><span class="experie" style="display: none;"><i>&nbsp;</i>+{$feed[credits]}贡献值</span><!--{/if}-->
+			</td>
+		 </tr>
+		<!--{/loop}-->
+		</tbody>
+	</table>
+<!--{/if}-->		 
+<!--{if $maxpage > 1}-->
+	<div style="text-align: center;">
+		<a class="bm_h" href="javascript:;" rel="$multipage_more" curpage="$page" id="autopbn" totalpage="$maxpage"
+				style="border: 1px solid #e9e9e9;font: normal 14px/28px 'Microsoft Yahei', sans-serif;width: 500px;height: 40px;line-height: 40px;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;display: inline-block;background: -webkit-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);">加载更多</a>
+	</div>
+	<script>
+		var button = jq("#autopbn");
+		button.click(function () {
+			var url = button.attr("rel"),
+					currentPage = parseInt(button.attr("curpage")),
+					totalPage = parseInt(button.attr("totalpage"));
+			if (currentPage + 1 < totalPage) {
+				jq.get(url, function (result) {
+					currentPage++;
+					if (currentPage + 1 == totalPage) {
+						button.hide();
+					}
+					button.attr("curpage", currentPage);
+					url = url.replace(/&page=\d+/, "&page=" + (currentPage + 1));
+					button.attr("rel", url);
+
+					jq(".flick_list tbody").append(jq(".flick_list tbody tr", jq(result)));
+				});
+			}
+		});
+	</script>
+	<!--{/if}-->
+</div>
+<!--{/block}-->

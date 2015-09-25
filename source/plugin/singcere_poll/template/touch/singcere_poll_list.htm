@@ -1,0 +1,18 @@
+<!--{template common/header}-->
+<link rel="stylesheet" href="source/plugin/singcere_poll/template/src/css/mobile.css">
+
+<div class="poll-list cl">
+	<!--{loop $t_list $key $value}-->
+	<div class="poll-listli">
+		<a href="plugin.php?id=singcere_poll:singcere_poll&mod=view&pid=$value[pid]" class="poll-listli-c">
+			<p class="poll-listli-title">$value[subject]</p>
+			<img src="{PRE_PATH}{$value[attachment]}" />
+		</a>
+	</div>
+	<!--{/loop}-->
+</div>
+<div class="cl mb20">$muti</div>
+
+
+
+<!--{template common/footer}-->

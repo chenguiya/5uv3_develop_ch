@@ -1,0 +1,46 @@
+<!--{block html}-->
+		<div class="widget_con">
+    	<div class="widget_hd"><h3>管理小组</h3></div>
+        <div class="widget_bd">
+        	<div class="widgetTitle">会长</div>
+            <ul class="presidentMain">
+				<!--{loop $userinfoarr[3] $v}-->
+            	<li>
+					<a href="home.php?mod=space&uid=$v[uid]" target="_blank" class="avt" c="1">
+						{$v['avatar']}
+						</a>
+					<a href="home.php?mod=space&uid=$v[uid]" target="_blank" title="{$v['username']}">{$v['username']}</a>
+				</li>
+				<!--{/loop}-->
+            </ul>
+            
+            <div class="widgetTitle">副会长</div>
+            <ul class="presidentMain">
+            	<!--{loop $userinfoarr[16] $v}-->
+            	<li>
+					<a href="home.php?mod=space&uid=$v[uid]" target="_blank" class="avt" c="1">
+						{$v['avatar']}
+						</a>
+					<a href="home.php?mod=space&uid=$v[uid]" target="_blank" title="{$v['username']}">{$v['username']}</a>
+				</li>
+				<!--{/loop}-->
+            </ul>
+            
+            <div class="widgetTitle">理事</div>
+            <ul class="presidentMain presidentMaina">
+            	<!--{loop $userinfoarr[19] $v}-->
+            	<li>
+					<a href="home.php?mod=space&uid=$v[uid]" target="_blank" class="avt" c="1">
+						{$v['avatar']}
+						</a>
+					<a href="home.php?mod=space&uid=$v[uid]" target="_blank" title="{$v['username']}">{$v['username']}</a>
+				</li>
+				<!--{/loop}-->
+            </ul>
+            
+            <div class="jianju25"></div>
+            <!--{if $_G['forum']['status']!=3}--> <div class="joinMana"><a href="/forum.php?mod=viewthread&tid=45359&extra=" target="_blank">申请加入管理团队</a></div> <!--{/if}-->
+        </div>
+        <div class="clear"></div>
+    </div>
+<!--{/block}-->

@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[X3.2]]></item>
+	<item id="Time"><![CDATA[2014-09-18 13:09]]></item>
+	<item id="From"><![CDATA[Discuz!À©Õ¹ÖÐÐÄ (http://www.kuozhan.net/)]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[Ð¡Ã×Ã¿ÈÕÇ©µ½]]></item>
+			<item id="identifier"><![CDATA[k_misign]]></item>
+			<item id="description"><![CDATA[]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[k_misign/]]></item>
+			<item id="copyright"><![CDATA[Discuz!À©Õ¹ÖÐÐÄ]]></item>
+			<item id="version"><![CDATA[1.0.0]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[sign]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="1">
+					<item id="name"><![CDATA[pluginextendcp]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[²å¼þ»¥Áª]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[6]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="2">
+					<item id="name"><![CDATA[buttoncp]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[°´Å¥ÉèÖÃ]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[7]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="3">
+					<item id="name"><![CDATA[addon]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[Ó¦ÓÃÍÆ¼ö]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[99]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[X2.5,X3,X3.1,X3.2]]></item>
+		<item id="var">
+			<item id="0">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[²å¼þÃû³Æ]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[title]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[Ð¡Ã×Ç©µ½]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="1">
+				<item id="displayorder"><![CDATA[1]]></item>
+				<item id="title"><![CDATA[°´Å¥¹¦ÄÜÇøÅäÖÃ]]></item>
+				<item id="description"><![CDATA[ÇëÎðËæÒâÉèÖÃ£¬´ËÇøÎªDiscuz!ÄÚÖÃ¹¦ÄÜÇø°´Å¥ÉèÖÃ£¬Çëµ½°´Å¥ÉèÖÃÑ¡ÏîÖÐÉèÖÃ¡£]]></item>
+				<item id="variable"><![CDATA[modstatus]]></item>
+				<item id="type"><![CDATA[textarea]]></item>
+				<item id="extra"><![CDATA[]]></item>
+				<item id="__value">
+					<item id="portal_index">
+						<item id="status"><![CDATA[1]]></item>
+						<item id="width"><![CDATA[0]]></item>
+					</item>
+					<item id="portal_list">
+						<item id="status"><![CDATA[1]]></item>
+						<item id="width"><![CDATA[0]]></item>
+					</item>
+					<item id="portal_view">
+						<item id="status"><![CDATA[1]]></item>
+						<item id="width"><![CDATA[0]]></item>
+					</item>
+					<item id="forum_index">
+						<item id="status"><![CDATA[1]]></item>
+						<item id="width"><![CDATA[0]]></item>
+					</item>
+					<item id="forum_forumdisplay">
+						<item id="status"><![CDATA[1]]></item>
+						<item id="width"><![CDATA[0]]></item>
+					</item>
+					<item id="forum_viewthread">
+						<item id="status"><![CDATA[1]]></item>
+						<item id="width"><![CDATA[0]]></item>
+					</item>
+					<item id="group_default">
+						<item id="status"><![CDATA[1]]></item>
+						<item id="width"><![CDATA[0]]></item>
+					</item>
+					<item id="group_index">
+						<item id="status"><![CDATA[1]]></item>
+						<item id="width"><![CDATA[0]]></item>
+					</item>
+					<item id="group_forumdisplay">
+						<item id="status"><![CDATA[1]]></item>
+						<item id="width"><![CDATA[0]]></item>
+					</item>
+					<item id="group_viewthread">
+						<item id="status"><![CDATA[1]]></item>
+						<item id="width"><![CDATA[0]]></item>
+					</item>
+					<item id="group_other">
+						<item id="status"><![CDATA[1]]></item>
+						<item id="width"><![CDATA[0]]></item>
+					</item>
+					<item id="home_index">
+						<item id="status"><![CDATA[1]]></item>
+						<item id="width"><![CDATA[218]]></item>
+					</item>
+				</item>
+			</item>
+			<item id="2">
+				<item id="displayorder"><![CDATA[2]]></item>
+				<item id="title"><![CDATA[Ç©µ½°´Å¥Ä¬ÈÏ¿í¶È]]></item>
+				<item id="description"><![CDATA[µ¥Î»£ºpx
+µ±°´Å¥¹¦ÄÜÇø»ò²å¼þ»¥Áª°´Å¥ÍÆËÍÎ´ÉèÖÃ¿í¶ÈÊ±£¬ÒÔ´ËÎª×¼¡£]]></item>
+				<item id="variable"><![CDATA[width]]></item>
+				<item id="type"><![CDATA[number]]></item>
+				<item id="value"><![CDATA[220]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="3">
+				<item id="displayorder"><![CDATA[6]]></item>
+				<item id="title"><![CDATA[Ç©µ½Ê±²î]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[tos]]></item>
+				<item id="type"><![CDATA[number]]></item>
+				<item id="value"><![CDATA[8]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="4">
+				<item id="displayorder"><![CDATA[7]]></item>
+				<item id="title"><![CDATA[¿ÉÊ¹ÓÃµÄÓÃ»§×é]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[groups]]></item>
+				<item id="type"><![CDATA[groups]]></item>
+				<item id="extra"><![CDATA[]]></item>
+				<item id="__value">
+					<item id="0"><![CDATA[10]]></item>
+					<item id="1"><![CDATA[11]]></item>
+					<item id="2"><![CDATA[12]]></item>
+					<item id="3"><![CDATA[13]]></item>
+					<item id="4"><![CDATA[14]]></item>
+					<item id="5"><![CDATA[15]]></item>
+					<item id="6"><![CDATA[20]]></item>
+					<item id="7"><![CDATA[16]]></item>
+					<item id="8"><![CDATA[17]]></item>
+					<item id="9"><![CDATA[18]]></item>
+					<item id="10"><![CDATA[19]]></item>
+					<item id="11"><![CDATA[1]]></item>
+					<item id="12"><![CDATA[2]]></item>
+					<item id="13"><![CDATA[3]]></item>
+					<item id="14"><![CDATA[7]]></item>
+				</item>
+			</item>
+			<item id="5">
+				<item id="displayorder"><![CDATA[8]]></item>
+				<item id="title"><![CDATA[½ûÖ¹Ç©µ½µÄÓÃ»§]]></item>
+				<item id="description"><![CDATA[ÇëÊäÈëÆäuid£¬¶à¸ö»áÔ±ÇëÒÔ°ë½Ç¶ººÅ","¼ä¸ô]]></item>
+				<item id="variable"><![CDATA[ban]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="6">
+				<item id="displayorder"><![CDATA[9]]></item>
+				<item id="title"><![CDATA[Ç©µ½µÈ¼¶Ãû³Æ]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[lvtext]]></item>
+				<item id="type"><![CDATA[textarea]]></item>
+				<item id="value"><![CDATA[³õÀ´Ã×·Û
+Ã×Ì³ÐÂÈË
+Ã×Ì³ÊìÈË
+Ã×Ì³ÐÂÐÇ
+ÆÕÍ¨Ã×·Û
+³¬¼¶Ã×·Û
+¿ñÈÈÃ×·Û
+Ìú¸ËÃ×·Û
+»Æ½ðÃ×·Û
+ÖÁ×ðÃ×·Û
+Ã×ÀÏÍ·]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="7">
+				<item id="displayorder"><![CDATA[10]]></item>
+				<item id="title"><![CDATA[Ç°N¶îÍâ½±ÀøÏî×Ô¶¨Òå]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[jlmain]]></item>
+				<item id="type"><![CDATA[textarea]]></item>
+				<item id="value"><![CDATA[2|10
+2|9
+2|8
+2|7
+2|6
+2|5
+2|4
+2|3
+2|2
+2|1]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="8">
+				<item id="displayorder"><![CDATA[11]]></item>
+				<item id="title"><![CDATA[×îÉÙ½±Àø»ý·ÖÖµ]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[mincredit]]></item>
+				<item id="type"><![CDATA[number]]></item>
+				<item id="value"><![CDATA[2]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="9">
+				<item id="displayorder"><![CDATA[12]]></item>
+				<item id="title"><![CDATA[×î¶à½±Àø»ý·ÖÖµ]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[maxcredit]]></item>
+				<item id="type"><![CDATA[number]]></item>
+				<item id="value"><![CDATA[3]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="10">
+				<item id="displayorder"><![CDATA[13]]></item>
+				<item id="title"><![CDATA[Ç©µ½½±Àø»ý·ÖÏî]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[nrcredit]]></item>
+				<item id="type"><![CDATA[extcredit]]></item>
+				<item id="value"><![CDATA[2]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="11">
+				<item id="displayorder"><![CDATA[99]]></item>
+				<item id="title"><![CDATA[²å¼þÀ©Õ¹ÅäÖÃÇø]]></item>
+				<item id="description"><![CDATA[ÇëÎðËæÒâÐÞ¸Ä£¬ÐèÒªÅäÖÃ²ÎÊýÇëµã»÷²å¼þ»¥ÁªÑ¡ÏîºóÉèÖÃ]]></item>
+				<item id="variable"><![CDATA[pextend]]></item>
+				<item id="type"><![CDATA[textarea]]></item>
+				<item id="extra"><![CDATA[]]></item>
+				<item id="value"><![CDATA[]]></item>
+			</item>
+		</item>
+		<item id="language">
+			<item id="scriptlang">
+				<item id="navpage1"><![CDATA[µÚ]]></item>
+				<item id="navpage2"><![CDATA[Ò³]]></item>
+				<item id="sign"><![CDATA[Ç©µ½]]></item>
+				<item id="signed"><![CDATA[ÒÑÇ©µ½]]></item>
+				<item id="djqd"><![CDATA[µã»÷Ç©µ½]]></item>
+				<item id="row"><![CDATA[Á¬Ðø]]></item>
+				<item id="days"><![CDATA[Ìì]]></item>
+				<item id="people"><![CDATA[ÈË]]></item>
+				<item id="signsuccess"><![CDATA[Ç©µ½³É¹¦]]></item>
+				<item id="yourrow"><![CDATA[ÄúµÄÇ©µ½ÅÅÃû£º]]></item>
+				<item id="signlevel"><![CDATA[Ç©µ½µÈ¼¶]]></item>
+				<item id="success"><![CDATA[²Ù×÷³É¹¦]]></item>
+				<item id="signtoranklist"><![CDATA[Ç©µ½¿´ÅÅÃû]]></item>
+				<item id="groupontallow"><![CDATA[ÄúËùÔÚÓÃ»§×é²»ÔÊÐíÊ¹ÓÃ]]></item>
+				<item id="uidinblack"><![CDATA[ÄúÒÑ¾­±»ÁÐÈëºÚÃûµ¥]]></item>
+				<item id="tdyq"><![CDATA[½ñÈÕÒÑÇ©]]></item>
+				<item id="button_status"><![CDATA[¿ªÆô°´Å¥ÍÆËÍ]]></item>
+				<item id="button_width"><![CDATA[°´Å¥¿í¶È]]></item>
+				<item id="portal_index"><![CDATA[ÃÅ»§Ê×Ò³£¨ÐèÒªÄ£°åÖ§³Ö£©]]></item>
+				<item id="portal_list"><![CDATA[ÃÅ»§ÁÐ±íÒ³£¨ÐèÒªÄ£°åÖ§³Ö£©]]></item>
+				<item id="portal_view"><![CDATA[ÃÅ»§ÎÄÕÂÄÚÈÝÒ³]]></item>
+				<item id="forum_index"><![CDATA[ÂÛÌ³Ê×Ò³]]></item>
+				<item id="forum_forumdisplay"><![CDATA[ÂÛÌ³ÁÐ±íÒ³]]></item>
+				<item id="forum_viewthread"><![CDATA[ÂÛÌ³Ìû×ÓÄÚÈÝÄÚ£¨ÐèÒªÄ£°åÖ§³Ö£©]]></item>
+				<item id="group_default"><![CDATA[Èº×é¾ÛºÏÒ³]]></item>
+				<item id="group_index"><![CDATA[Èº×éÊ×Ò³]]></item>
+				<item id="group_forumdisplay"><![CDATA[Èº×éÌÖÂÛÇø]]></item>
+				<item id="group_viewthread"><![CDATA[Èº×éÌû×ÓÄÚÈÝÒ³£¨ÐèÒªÄ£°åÖ§³Ö£©]]></item>
+				<item id="group_other"><![CDATA[Èº×éÆäËûÒ³]]></item>
+				<item id="home_index"><![CDATA[¼ÒÔ°SNS·ç¸ñ±ßÀ¸]]></item>
+				<item id="buttoncp_tip"><![CDATA[Î´ÌîÐ´»ò0ÔòÒÔÈ«¾ÖÄ¬ÈÏ¿í¶ÈÎª×¼]]></item>
+			</item>
+			<item id="templatelang">
+				<item id="index"><![CDATA[Ê×Ò³]]></item>
+				<item id="sign"><![CDATA[Ç©µ½]]></item>
+				<item id="signed"><![CDATA[ÒÑÇ©µ½]]></item>
+				<item id="row"><![CDATA[Á¬Ðø]]></item>
+				<item id="days"><![CDATA[Ìì]]></item>
+				<item id="people"><![CDATA[ÈË]]></item>
+				<item id="signtoranklist"><![CDATA[Ç©µ½¿´ÅÅÃû]]></item>
+				<item id="signsuccess"><![CDATA[Ç©µ½³É¹¦]]></item>
+				<item id="yourrow"><![CDATA[ÄúµÄÇ©µ½ÅÅÃû£º]]></item>
+				<item id="signlevel"><![CDATA[Ç©µ½µÈ¼¶]]></item>
+				<item id="signjl"><![CDATA[»ý·Ö½±Àø]]></item>
+				<item id="zong"><![CDATA[×ÜÌìÊý]]></item>
+				<item id="todaystar"><![CDATA[½ñÈÕÇ©µ½Ö®ÐÇ£º]]></item>
+				<item id="height"><![CDATA[ÀúÊ·×î¸ßÈËÊý£º]]></item>
+				<item id="notqdyet"><![CDATA[Äú½ñÌì»¹Ã»ÓÐÇ©µ½]]></item>
+				<item id="ranklist_today"><![CDATA[½ñÈÕÅÅÐÐ]]></item>
+				<item id="ranklist_month"><![CDATA[±¾ÔÂÅÅÐÐ]]></item>
+				<item id="ranklist_zong"><![CDATA[×ÜÅÅÐÐ]]></item>
+				<item id="ranklist_reward"><![CDATA[½±ÀøÅÅÐÐ]]></item>
+				<item id="ranklist_nickname"><![CDATA[êÇ³Æ]]></item>
+				<item id="ranklist_days"><![CDATA[×ÜÌìÊý]]></item>
+				<item id="ranklist_monthdays"><![CDATA[ÔÂÌìÊý]]></item>
+				<item id="ranklist_lasttime"><![CDATA[ÉÏ´ÎÇ©µ½Ê±¼ä]]></item>
+				<item id="ranklist_nowlevel"><![CDATA[Ä¿Ç°µÈ¼¶]]></item>
+				<item id="ranklist_lastreward"><![CDATA[ÉÏ´Î½±Àø]]></item>
+				<item id="ranklist_rewards"><![CDATA[×Ü½±Àø]]></item>
+				<item id="todayrewards"><![CDATA[½ñÈÕ»ñµÃÁË]]></item>
+				<item id="rewards"><![CDATA[»ñµÃÁË]]></item>
+				<item id="rewardusers"><![CDATA[ÖÐ½±ÓÃ»§]]></item>
+				<item id="visitmore"><![CDATA[·ÃÎÊÏêÇé]]></item>
+				<item id="noinfo"><![CDATA[ÔÝÎÞÄÚÈÝ]]></item>
+			</item>
+		</item>
+		<item id="installfile"><![CDATA[install.php]]></item>
+		<item id="uninstallfile"><![CDATA[uninstall.php]]></item>
+	</item>
+</root>

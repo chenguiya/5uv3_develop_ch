@@ -1,0 +1,11 @@
+<!--{block return}-->
+<!--{if $joinclub}-->
+<dl class="profile" style="margin-top:10px;">选择球迷会：
+	<select name="fansclubid">
+		<!--{loop $joinclub $club}-->
+		<option value="{$club[clubid]}">{$club[clubname]}</option>
+		<!--{/loop}-->
+	</select>
+</dl>
+<!--{/if}-->
+<!--{/block}-->

@@ -1,0 +1,122 @@
+<!--{if $op=='view'}-->
+	<!--{template common/header}-->
+	<div class="f_c">
+		<h3 class="flb">
+			<em >
+				{lang dc_mall:member_orders_info}
+			</em>
+			<span><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET[handlekey]')" title="{lang close}">{lang close}</a></span>
+		</h3>
+	</div>
+	<style>
+	.orderinfo th,.orderinfo td{border: 1px solid #E4E4E4;height:30px;padding: 2px 5px; }
+	</style>
+	<div style="width:550px;padding:20px;">
+		<table width="100%" cellpadding="0" cellspacing="0" class="orderinfo">
+			<tr>
+				<th style="width:80px;">{lang dc_mall:member_orders_orderid}</th>
+				<td>{$order['orderid']}</td>
+			</tr>
+			<tr>
+				<th>礼品名称</th>
+				<td><a href="plugin.php?id=dc_mall&action=goods&gid={$order['gid']}" target="_blank">{$order['gname']}</a></td>
+			</tr>
+			<tr>
+				<th>礼品类型</th>
+				<td>{$extend['title']}</td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:member_orders_num}</th>
+				<td>{$order['count']}</td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:member_orders_credit}</th>
+				<td>{$order['credit']}<!--{if $order['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$order['creditid']]['title']} <!--{/if}--></td>
+			</tr>
+			<tr>
+				<th>{lang dc_mall:member_orders_ctime}</th>
+				<td>{echo dgmdate($order['dateline'])}</td>
+			</tr>
+			<!--{if $order['status']==1}-->
+			<tr>
+				<th>{lang dc_mall:member_orders_ftime}</th>
+				<td>{echo dgmdate($order['finishtime'])}</td>
+			</tr>
+			<!--{elseif $order['status']==3}-->
+			<tr>
+				<th>{lang dc_mall:member_orders_canceltime}</th>
+				<td>{echo dgmdate($order['finishtime'])}</td>
+			</tr>
+			<!--{/if}-->
+			<tr>
+				<th>{lang dc_mall:member_orders_status}</th>
+				<td><!--{if $order['status']==1}--><b style="color:#008000">{lang dc_mall:member_orders_chengjiao}</b><!--{elseif $order['status']==2}--><b style="color:#FF0000">{lang dc_mall:member_orders_nopay}</b>(<a href="javacript:;" onclick="hideWindow('$_GET[handlekey]');showWindow('payfor', 'plugin.php?id=dc_mall:member&action=payfor&oid={$order['id']}');" style="color:#2873C2">{lang dc_mall:member_orders_gopay}</a>)<!--{elseif $order['status']==3}--><b style="color:#333333">{lang dc_mall:member_orders_cancel}</b><!--{else}--><b style="color:#FF9E00">{lang dc_mall:member_orders_ispay}</b><!--{/if}--></td>
+			</tr>
+		</table>
+		{$hookstr}
+	</div>
+	<!--{template common/footer}-->
+<!--{else}-->
+	<div id="goodstop">
+	<h2 class="mbm xs2">
+	{lang dc_mall:member_orders_list}
+	</h2>
+	<div class="mtm">
+	<form id="fm_search" name="fm_search" action="plugin.php?id=dc_mall:member&action=orders" method="post">
+	<select id="searchtype" name="searchtype" class="p_fre">
+		<option value="1">{lang dc_mall:member_orders_orderid}</option>
+		<option value="2">礼品名称</option>
+	</select>
+	<input id="searchkeyword" name="searchkeyword" value="{$searchkeyword}" class="p_fre" type="text">&nbsp;&nbsp;
+	<button type="submit" id="searchbutton" name="searchbutton" class="pn">{lang dc_mall:member_orders_search}</button>&nbsp;&nbsp;
+	<select id="sortid" name="sortid" class="p_fre" onchange="submit();">
+	<option value="">--{lang dc_mall:member_orders_allleibie}--</option>
+	<!--{loop $mallnav $sort}-->
+	<option value="{$sort['id']}" <!--{if $sort['id']==$sid}-->selected<!--{/if}-->>{$sort['name']}</option>
+	<!--{/loop}-->
+	</select>
+	<select id="extid" name="extid" class="p_fre" onchange="submit();">
+	<option value="">--{lang dc_mall:member_orders_allext}--</option>
+	<!--{loop $extends $ext}-->
+	<option value="{$ext['id']}" <!--{if $ext['id']==$extid}-->selected<!--{/if}-->>{$ext['title']}</option>
+	<!--{/loop}-->
+	</select>
+	<select id="status" name="status" class="p_fre" onchange="submit();">
+	<option value="">--{lang dc_mall:member_orders_allstatus}--</option>
+	<option value="1" <!--{if $status==1}-->selected<!--{/if}-->>{lang dc_mall:member_orders_chengjiao}</option>
+	<option value="2" <!--{if $status==2}-->selected<!--{/if}-->>{lang dc_mall:member_orders_nopay}</option>
+	<option value="3" <!--{if $status==3}-->selected<!--{/if}-->>{lang dc_mall:member_orders_cancel}</option>
+	<option value="9" <!--{if $status==9}-->selected<!--{/if}-->>{lang dc_mall:member_orders_ispay}</option>
+	</select>
+	<input name="searchsubmit" value="true" type="hidden">
+	<input name="formhash" value="{FORMHASH}" type="hidden">
+	</form>
+	</div>
+	</div>
+	<table class="dt mtm" cellpadding="0" cellspacing="0" id="goods_list">
+	<tbody><tr>
+	<th width="160">{lang dc_mall:member_orders_orderid}</th>
+	<th>礼品名称</th>
+	<th width="100">{lang dc_mall:member_orders_num}</th>
+	<th width="120">礼品类型</th>
+	<th width="140">{lang dc_mall:member_orders_cftime}</th>
+	<th width="100" id="admin_caozuo">{lang dc_mall:member_orders_caozuo}</th>
+	</tr>
+	<!--{loop $orders $v}-->
+	<tr>
+	<td>{$v['orderid']}</td>
+	<td><a href="plugin.php?id=dc_mall&action=goods&gid={$v['gid']}" target="_blank">{$v['gname']}</a></td>
+	<td>{$v['count']} </td>
+	<td>{$extends[$v['extid']]['title']}</td>
+	<td>{echo dgmdate($v['dateline'])}<br /><font color="#eb6000">{echo $v['finishtime']?dgmdate($v['finishtime']):'--'}</font></td>
+	<td class="manage">
+		<!--{if $v['status']==1}--><b style="color:#eb6000">{lang dc_mall:member_orders_chengjiao}</b><!--{elseif $v['status']==2}--><a href="javascript:;" onclick="showWindow('payfor', 'plugin.php?id=dc_mall:member&action=payfor&oid={$v['id']}');"><b style="color:#FF0000">{lang dc_mall:member_orders_gopay}</b></a><!--{elseif $v['status']==3}--><b style="color:#333333">{lang dc_mall:member_orders_cancel}</b><!--{else}--><b style="color:#FF9700">{lang dc_mall:member_orders_wait}</b><!--{/if}--><br />
+		<a href="javascript:;" onclick="showWindow('orderview', 'plugin.php?id=dc_mall:member&action=orders&op=view&oid={$v['id']}');" class="orBnt">{lang dc_mall:member_orders_view}</a>
+	</td>
+	</tr>
+	<!--{/loop}-->
+	<tr><td colspan="7">
+	{$multi}</td></tr>
+	</tbody></table>
+
+<!--{/if}-->

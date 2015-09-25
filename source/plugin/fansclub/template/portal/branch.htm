@@ -1,0 +1,15 @@
+<!--{block return}-->
+<ul class="rank_bd cl">
+<!--{loop $result $val}-->
+ <li class="rank_B">
+	 <a class="rank_img" href="fans/topic/{$val[id]}/"><img src="{if $val[info][icon]}{$val[info][icon]}{else}{$_G['style'][tpldir]}/common/images/default_icon.jpg{/if}"></a>
+	 <div class="rank_areaB">
+		  <h3><a href="fans/topic/{$val[id]}/" target="_blank">$val[title]</a></h3>
+		  <p class="rank_address">{$val[province]}&nbsp;&nbsp;{$val[city]}</p>
+		  <p>球迷: {$val[info][membernum]}</p>
+		  <p>总帖数: {$val[info][threads]}</p>
+	 </div>
+ </li>
+<!--{/loop}-->
+</ul>
+<!--{/block}-->

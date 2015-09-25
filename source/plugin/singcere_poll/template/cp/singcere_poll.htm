@@ -1,0 +1,360 @@
+<!--{template common/header}-->
+<link rel="stylesheet" href="source/plugin/singcere_poll/template/src/css/global.css">
+<link rel="stylesheet" href="source/plugin/singcere_poll/template/src/css/cp.css">
+<script type="text/javascript" src="static/js/calendar.js"></script>
+<script type="text/javascript" src="{STATICURL}js/mobile/jquery-1.8.3.min.js?{VERHASH}"></script>
+<script type="text/javascript" src="{STATICURL}js/mobile/ajaxfileupload.js?{VERHASH}"></script>
+<script type="text/javascript" src="{STATICURL}js/mobile/buildfileupload.js?{VERHASH}"></script>
+
+<script>
+
+var type = "";
+var imgid = "";
+jq = $.noConflict();
+jq(document).ready(function () {
+    jq(document).on('change', '#filedata', function () {
+        uploadsuccess = function (data) {
+            var dataarr = data.split('#');
+            if (dataarr[0] == "" || dataarr[1] == "") {
+                alert("{lang singcere_poll:uperror}");
+                return;
+            }
+ 
+            jq('#image' + imgid).html("<input type='hidden' name='aid" + imgid + "' value='" + dataarr[1] +
+                "'/>" + " <img src='" + dataarr[0] + "'" + " />");
+            hideMenu();
+        };
+        jq.ajaxfileupload({
+            url: "{$_G[siteurl]}plugin.php?id=singcere_poll:singcere_poll&formhash={FORMHASH}&mod=cp&ac=poll&op=upload&type=" + type + "&pid=" + $pid,
+            data: {
+                uid: "$_G[uid]",
+                hash: "<!--{eval echo md5(substr(md5($_G[config][security][authkey]), 8).$_G[uid])}-->"
+            },
+            dataType: 'text',
+            fileElementId: 'filedata',
+            success: uploadsuccess,
+            error: function () {
+                popup.open('{lang uploadpicfailed}', 'alert');
+            }
+        });
+    });
+});
+ 
+function validate() {
+ 
+    sub = document.getElementById("subject").value;
+    tim = document.getElementById("times").value;
+    beg = document.getElementById("begin").value;
+    en = document.getElementById("end").value;
+	
+    if (sub == "" || !isDigit(tim) || beg == "" || en == "") {
+        showDialog("{lang singcere_poll:illedge}", "alert");
+        return false;
+    } else {
+        return true;
+    }
+}
+ 
+ 
+function isDigit(s) {
+    var patrn = /^[0-9]{1,2}$/;
+    if (!patrn.exec(s))
+        return false;
+    return true;
+}
+ 
+ 
+function doadd() {
+ 
+    jq('#cates').append(
+        '<span>'+"{lang singcere_poll:newcate}"+'<input type="text" name="types[]"/><a href="javascript:" onclick="dodelete(this);">'+"{lang singcere_poll:delete}"+'</a><br></span>');
+ 
+}
+ 
+function dodelete(obj, stid) {
+ 
+    if (stid != 0) {
+ 
+        href = "plugin.php?id=singcere_poll:singcere_poll" +
+            "&mod=cp&ac=poll&formhash={FORMHASH}&op=edit&type=deltype&stid=" + stid;
+        ajaxget(href, "subject");
+ 
+    }
+    obj.parentNode.parentNode.removeChild(obj.parentNode);
+ 
+}
+ 
+function douoload(ctype, cimgid) {
+    imgid = cimgid;
+    type = ctype;
+    showMenu({
+        'ctrlid': 'show',
+        'pos': '00',
+        'ctrlclass': 'a',
+	'drag':'1',
+        'duration': 3
+    });
+ 
+}
+function dochgdiy(obj){
+
+shownav(obj.value);
+
+}
+function shownav(id){
+document.getElementById("nav").innerHTML=document.getElementById("nav"+id).innerHTML;
+
+}
+</script>
+
+<div id="nav2" style="display:none">
+    <span class="poll_title">{lang singcere_poll:nav1}</span><input type="text" name="nav1" value="$snav[nav1]" class="px mini"/>
+	<span class="poll_title">{lang singcere_poll:nav2}</span><input type="text" name="nav2" value="$snav[nav2]" class="px mini"/>
+    <span class="poll_title">{lang singcere_poll:nacpoll}</span><input type="text" name="p_nav" value="$snav[p_nav]" class="px mini"/>
+ 	<span class="poll_title">{lang singcere_poll:accomment}</span><input type="text" name="c_nav" value="$snav[c_nav]" class="px mini"/>
+	<input type="hidden" name="nvtype" value="2"/>
+</div>
+
+<div id="nav1" style="display:none">
+    <span class="poll_title">{lang singcere_poll:nav1}</span><input type="text" name="nav1" value="$fnav[nav1]" class="px mini"/>
+	<span class="poll_title">{lang singcere_poll:nav2}</span><input type="text" name="nav2" value="$fnav[nav2]" class="px mini"/>
+    <span class="poll_title">{lang singcere_poll:nav3}</span><input type="text" name="nav3" value="$fnav[nav3]" class="px mini"/>
+ 	<span class="poll_title">{lang singcere_poll:nav4}</span><input type="text" name="nav4" value="$fnav[nav4]" class="px mini"/>
+	<span class="poll_title">{lang singcere_poll:nacpoll}</span><input type="text" name="p_nav" value="$fnav[p_nav]" class="px mini"/>
+	<span class="poll_title">{lang singcere_poll:accomment}</span><input type="text" name="c_nav" value="$fnav[c_nav]" class="px mini"/>
+	<input  type="hidden" name="nvtype" value="1"/>
+</div>
+
+
+<div id="pt" class="bm cl">
+    <div class="z">
+        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&raquo;</em>
+        <a href="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=poll&op=list">{lang singcere_poll:poll}</a> <em>&raquo;</em>
+        <a href="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=poll&op=list">{lang singcere_poll:pmanage}</a> <em>&raquo;</em>
+        {lang singcere_poll:edit}
+    </div>
+</div>
+
+<form action="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=poll&op=$op" method="post"  onsubmit="return validate();">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <!--{if $op=='edit' }-->
+    <input type="hidden" name="pid"  value="$poll[pid]"/>
+    <input type="hidden" name="editpollsubmit"  value="yes" />
+    <input type="hidden" name="oaid0" value="$pattach[head][aid]"/>
+    <input type="hidden" name="oaid1" value="$pattach[num0][aid]"/>
+    <input type="hidden" name="oaid2" value="$pattach[num1][aid]"/>
+    <input type="hidden" name="oaid3" value="$pattach[num2][aid]"/>
+    <input type="hidden" name="oaid4" value="$pattach[num3][aid]"/>
+	 <input type="hidden" name="oaid5" value="$pattach[gift1][aid]"/>
+    <input type="hidden" name="oaid6" value="$pattach[gift2][aid]"/>
+    <input type="hidden" name="oaid7" value="$pattach[gift3][aid]"/>
+    <!--{else}-->
+ <input type="hidden" name="addpollsubmit"  value="yes" />
+        <!--{/if}-->
+
+    <div class="poll_c">
+        <ul>
+            <div class="poll-btitle" style="margin-top:0">{lang singcere_poll:commconf}</div>
+            <li class="poll_li"><span class="poll_title">{lang singcere_poll:psubject}</span><input type="text" name="subject" id="subject" value="$poll[subject]" class="px" /></li>
+            <li class="poll_li"><span class="poll_title">{lang singcere_poll:begin}</span><input type="text" name="begin" id="begin" size="35" value="$poll[begin]" onclick="showcalendar(event, this,1)" class="px" /></li>
+            <li class="poll_li "><span class="poll_title">{lang singcere_poll:end}</span><input type="text" name="end" id="end" size="35" value="$poll[end]" onclick="showcalendar(event, this,1)" class="px" /></li>
+            <li class="poll_li last">{lang singcere_poll:tempcolor}
+            <select name="color">
+                <option value="1"  <!--{if $poll[color]==1}-->
+                    selected
+                    <!--{/if}-->>{lang singcere_poll:green}</option>
+                <option value="2"  <!--{if $poll[color]==2}-->
+                    selected
+                    <!--{/if}-->>{lang singcere_poll:red}</option>
+                <option value="3"  <!--{if $poll[color]==3}-->
+                    selected
+                    <!--{/if}-->>{lang singcere_poll:blue}</option>
+                    <option value="4"  <!--{if $poll[color]==4}-->
+                    selected
+                    <!--{/if}-->> {lang singcere_poll:white}</option>
+                    <option value="5"  <!--{if $poll[color]==5}-->
+                    selected
+                    <!--{/if}-->>{lang singcere_poll:purple}</option>
+                
+            </select>
+            </li>
+
+            <div class="poll-btitle">{lang singcere_poll:supconf}</div>
+			 <li class="poll_li">
+               {lang singcere_poll:blank}
+                <input type="radio" name="blank" value="1" onclick="dochgdiy(this)" {if $poll[blank]==1} checked {/if}/>{lang singcere_poll:yes}
+                <input type="radio" name="blank" value="2"  onclick="dochgdiy(this)"  {if $poll[blank]==2} checked {/if}/>{lang singcere_poll:no}
+                <span class="xi2">{lang singcere_poll:explain1}</span>
+            </li>
+    		<li class="poll_li" id="nav">
+    		<!--{if $op=='create'}-->
+    		  <script>shownav(2);</script>
+    		  <!--{else}-->
+    		   <script>shownav($poll[nvtype]);</script>
+    		  <!--{/if}-->
+    		</li>
+            <li class="poll_li last"><span class="poll_title">{lang singcere_poll:topy}</span><input type="text" name="juli" id="juli" value="$poll[juli]" class="px" /><span class="xi2">{lang singcere_poll:tdefault}</span></li>
+
+
+            <div class="poll-btitle">{lang singcere_poll:seoconf}</div>
+            <li class="poll_li"><span class="poll_title">Title：</span><input type="text" name="title" value="$poll[title]" class="px"/></li>
+            <li class="poll_li"><span class="poll_title">Keywords：</span><input type="text" name="keywords" value="$poll[keywords]" class="px"/></li>
+            <li class="poll_li last"><span class="poll_title">Description：</span><input type="text" name="descript" value="$poll[descript]" class="px"/></li>
+
+
+
+            <div class="poll-btitle">{lang singcere_poll:pcconf}</div>
+            <div class="cates">
+                <div id="cates">
+                <!--{loop $types $key $value}-->
+                <input type="hidden" name="ostids[]" value="$value[stid]"/>
+                <span>
+        {lang singcere_poll:hcate}
+                <input type="text" name="otypes[]"  value="$value[name]"/>
+                <a href="javascript:" onclick="dodelete(this, $value[stid]);">{lang singcere_poll:delete}</a>
+                <br></span>
+                <!--{/loop}-->
+                <span>
+                {lang singcere_poll:ncate}
+                <input type="text" name="types[]"/>
+                <a href="javascript:" onclick="dodelete(this, 0);">{lang singcere_poll:delete}</a>
+                <br></span>
+                </div>
+                <a href="javascript:void(0);" onclick="doadd()" class="pn"><span>{lang singcere_poll:nadcate}</span></a>
+            </div>
+
+            <div class="poll-btitle">{lang singcere_poll:pucontrol}</div>
+            <li class="poll_li"><span class="poll_title">{lang singcere_poll:pmax}</span><input type="text" name="times" id="times"  value="$poll[times]" class="px"/></li>
+            <li class="poll_li"><span class="poll_title">{lang singcere_poll:pperiod}</span><input type="text" name="period" id="period" value="$poll[period]" class="px"/> <span class="xi2">{lang singcere_poll:clain}</span></li>
+            <li class="poll_li">{lang singcere_poll:pmuti}
+                <input type="radio" name="muti" value="1" {if $poll[muti]==1} checked {/if}/>{lang singcere_poll:can}
+                <input type="radio" name="muti" value="0" {if $poll[muti]==0} checked {/if}/>{lang singcere_poll:nocan}
+            </li>
+			 <li class="poll_li">{lang singcere_poll:canaomm}
+                <input type="radio" name="mark" value="1" {if $poll[mark]==1} checked {/if}/>{lang singcere_poll:can}
+                <input type="radio" name="mark" value="0" {if $poll[mark]==0} checked {/if}/>{lang singcere_poll:nocan}
+            </li>
+            <li class="poll_li last">
+       {lang singcere_poll:youkpol}
+                <input type="radio" name="nologin" value="1" {if $poll[nologin]==1} checked {/if}/>{lang singcere_poll:can}
+                <input type="radio" name="nologin" value="0" {if $poll[nologin]==0} checked {/if}/>{lang singcere_poll:nocan}
+            </li>    
+
+
+
+            <div class="poll-btitle">
+                <p>{lang singcere_poll:mconf}</p>
+                <p class="fs14">{lang singcere_poll:mexplain1}</p>
+                <p class="fs14">{lang singcere_poll:mexplain2}</p>
+            </div>
+            <li class="poll_li">{lang singcere_poll:mtroduce}<textarea name="troduce" class="pt"> $poll[troduce]</textarea></li>
+
+            <li class="poll_li">
+        {lang singcere_poll:mhead}
+                <a href="javascript:void(0);"  onclick="douoload('head',0);"  id="show" class="xi2">{lang singcere_poll:upload}</a> <span class="pipe">{lang singcere_poll:mexplain3}</span>
+                <br>
+
+                <div id="image0" class="poll-img-list">
+                    <!--{if !empty($pattach[head][attachment])}-->
+                    <img src="{PRE_PATH}$pattach[head][attachment]"></img>
+                    <!--{/if}-->
+                </div>
+            </li>
+            <li class="poll_li">
+                {lang singcere_poll:mexplain4}
+                <a href="javascript:void(0);"  onclick="douoload('num0',1);"  id="show" class="xi2">{lang singcere_poll:upload}</a> <span class="pipe">{lang singcere_poll:mexplain5}</span>
+                <br>
+                <div id="image1" class="poll-img-list">
+                    <!--{if !empty($pattach[num0][attachment])}-->
+                    <img src="{PRE_PATH}$pattach[num0][attachment]"></img>
+                    <!--{/if}-->
+                </div>
+            </li>
+            <li class="poll_li">
+             {lang singcere_poll:picgift}
+                <a href="javascript:void(0);"  onclick="douoload('num1',2);"  id="show" class="xi2">{lang singcere_poll:upload}</a> <span class="pipe">{lang singcere_poll:mexplain5}</span>
+                <br>
+                <div id="image2" class="poll-img-list">
+                    <!--{if !empty($pattach[num1][attachment])}-->
+                    <img src="{PRE_PATH}$pattach[num1][attachment]"></img>
+                    <!--{/if}-->
+                </div>
+            </li>
+            <li class="poll_li">
+          {lang singcere_poll:picpoll}
+                <a href="javascript:void(0);"  onclick="douoload('num2',3);"  id="show" class="xi2">{lang singcere_poll:upload}</a> <span class="pipe">{lang singcere_poll:mexplain5}</span>
+                <br>
+                <div id="image3" class="poll-img-list">
+                <!--{if !empty($pattach[num2][attachment])}-->
+                <img src="{PRE_PATH}$pattach[num2][attachment]"></img>
+                <!--{/if}-->
+                </div>
+            </li>
+            <li class="poll_li">
+   {lang singcere_poll:piccomment}
+                <a href="javascript:void(0);"  onclick="douoload('num3',4);"  id="show" class="xi2">{lang singcere_poll:upload}</a> <span class="pipe">{lang singcere_poll:mexplain5}</span>
+                <br>
+                <div id="image4" class="poll-img-list">
+                <!--{if !empty($pattach[num3][attachment])}-->
+                <img src="{PRE_PATH}$pattach[num3][attachment]"></img>
+                <!--{/if}-->
+                </div>
+            </li>
+
+
+            <li class="poll_li">
+               {lang singcere_poll:picm1}
+                <a href="javascript:void(0);"  onclick="douoload('gift1',5);"  id="show" class="xi2">{lang singcere_poll:upload}</a>
+                <div id="image5" class="poll-img-list">
+                    <!--{if !empty($pattach[gift1][attachment])}-->     
+                    <img src="{PRE_PATH}$pattach[gift1][attachment]"></img>
+                    <!--{/if}-->
+                </div>
+           {lang singcere_poll:pivtro1}
+                <input type="text" name="troduce1" value="$pattach[gift1][troduce]"/>       
+            </li>
+            <li class="poll_li">     
+             {lang singcere_poll:picm2}
+                <a href="javascript:void(0);"  onclick="douoload('gift2',6);"  id="show" class="xi2">{lang singcere_poll:upload}</a>
+                <div id="image6" class="poll-img-list">
+                <!--{if !empty($pattach[gift1][attachment])}-->     
+                <img src="{PRE_PATH}$pattach[gift2][attachment]"></img>
+                <!--{/if}-->
+                </div>
+               {lang singcere_poll:pivtro2}
+                <input type="text" name="troduce2" value="$pattach[gift2][troduce]"/>       
+            </li>
+            <li class="poll_li">     
+                {lang singcere_poll:picm3}
+                <a href="javascript:void(0);"  onclick="douoload('gift3',7);"  id="show" class="xi2">{lang singcere_poll:upload}</a>
+                <div id="image7" class="poll-img-list">
+                <!--{if !empty($pattach[gift3][attachment])}-->     
+                <img src="{PRE_PATH}$pattach[gift3][attachment]"></img>
+                <!--{/if}--> </div>
+               {lang singcere_poll:pivtro3}
+                <input type="text" name="troduce3" value="$pattach[gift3][troduce]"/>       
+                </div>
+            </li>
+        </ul>
+    <button class="pn"><span>{lang singcere_poll:submit}</span></button>
+    </div>
+</form>
+
+
+
+
+
+
+<div id="show_menu" class="poll-fwinmask" width="100px" height="200px"  style="display:none"  >
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <input type="hidden" name="ptitlesubmit" value="yes" />
+    <h3 class="flb"> <em>{lang singcere_poll:uppic}</em>
+        <span>
+            <a href="javascript:void(0);" class="flbc" onclick="hideMenu();"  title="{lang close}">{lang close}</a>
+        </span>
+    </h3>
+    <div class="poll-fwinmask-c">
+        <input type="file" name="Filedata" id="filedata" />
+    </div>
+</div>
+<!--{template common/footer}-->

@@ -1,0 +1,21 @@
+<!--{block html}-->
+<div class="widget_con">
+        	<div class="widget_hd"><h3>视频/图片</h3></div>
+            <div class="widget_bd videoList">
+            	<ul>
+					<!--{loop $arr $v}-->
+                	<li>
+                    	<span class="<!--{if $v['vflag']}-->icoV<!--{else}-->icoI<!--{/if}-->"></span>
+                    	<a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}">
+						<!--{eval $att = DB::fetch_first("select aid from ".DB::table('forum_attachment')." where tid=".$v['tid']);}-->
+						<!--{eval $icon = getforumimg($att['aid']); }-->
+							<img src="{$icon}" width="190" height="106" alt="{$v['subject']}" title="{$v['subject']}" >
+								<!--{if $v['vflag']}--><span class="videoIco"></span><!--{/if}-->
+						</a>
+                        <a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}" class="videoTxta">{$v['subject']}</a>
+                    </li>
+                    <!--{/loop}-->
+                </ul>
+            </div>
+        </div>
+	<!--{/block}-->

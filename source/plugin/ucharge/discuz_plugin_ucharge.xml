@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[X3.2]]></item>
+	<item id="Time"><![CDATA[2015-04-02 21:10]]></item>
+	<item id="From"><![CDATA[Discuz! Board (http://192.168.2.169/discuz/)]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[U充值]]></item>
+			<item id="identifier"><![CDATA[ucharge]]></item>
+			<item id="description"><![CDATA[]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[ucharge/]]></item>
+			<item id="copyright"><![CDATA[5usport]]></item>
+			<item id="version"><![CDATA[1.0]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[admin]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[充值记录]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[1]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="1">
+					<item id="name"><![CDATA[ucharge_vip]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[VIP充值]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[19]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[2]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[X3.2]]></item>
+		<item id="var">
+			<item id="0">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[是否开放]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[charge_enable]]></item>
+				<item id="type"><![CDATA[radio]]></item>
+				<item id="value"><![CDATA[1]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="1">
+				<item id="displayorder"><![CDATA[1]]></item>
+				<item id="title"><![CDATA[可充值板块]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[charge_forums]]></item>
+				<item id="type"><![CDATA[forums]]></item>
+				<item id="extra"><![CDATA[]]></item>
+				<item id="__value">
+					<item id="0"><![CDATA[39]]></item>
+					<item id="1"><![CDATA[40]]></item>
+					<item id="2"><![CDATA[41]]></item>
+					<item id="3"><![CDATA[42]]></item>
+				</item>
+			</item>
+			<item id="2">
+				<item id="displayorder"><![CDATA[2]]></item>
+				<item id="title"><![CDATA[可充值类型]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[charge_types]]></item>
+				<item id="type"><![CDATA[selects]]></item>
+				<item id="extra"><![CDATA[1=VIP1
+2=VIP2
+3=VIP3]]></item>
+				<item id="__value">
+					<item id="0"><![CDATA[1]]></item>
+					<item id="1"><![CDATA[2]]></item>
+					<item id="2"><![CDATA[3]]></item>
+				</item>
+			</item>
+			<item id="3">
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="title"><![CDATA[VIP1金额]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[charge_vip1]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[0.01|0.01元充【VIP1】]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="4">
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="title"><![CDATA[VIP2金额]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[charge_vip2]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[0.02|0.02元充【VIP2】]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="5">
+				<item id="displayorder"><![CDATA[5]]></item>
+				<item id="title"><![CDATA[VIP3金额]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[charge_vip3]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[0.03|0.03元充【VIP3】]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+		</item>
+		<item id="installfile"><![CDATA[install.php]]></item>
+		<item id="uninstallfile"><![CDATA[uninstall.php]]></item>
+	</item>
+</root>

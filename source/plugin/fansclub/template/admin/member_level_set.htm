@@ -1,0 +1,27 @@
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform">
+<input type="hidden" name="formhash" value="$formhash">
+<table class="tb tb2 fixpadding" id="grouplevel">
+<tbody><tr><th colspan="15" class="partition">【会员等级设置】</th></tr>
+<tr class="header"><th width="100">等级ID</th><th width="100">等级名称</th><th width="100">是否管理组</th><th>管理权限</th></tr>
+<!--{loop $arr_group_user_level $key $value}-->
+<tr class="hover">
+<td>{$value['id']}</td>
+<td><input type="text" class="txt" size="12" name="title_{$value['id']}" id="title_{$value['id']}" value="$value['title']"></td>
+<td>{if $value['moderator'] == 1}<font color="#0D0">是</font>{else}否{/if}
+<input type="hidden" name="moderator_{$value['id']}" value="$value['moderator']"></td>
+<td>
+<ul onmouseover="altStyle(this);" class="ckbox" style="CURSOR: pointer;">
+<!--{loop $arr_group_user_right $key2 $value2}-->
+<li style=""{if $value[$key2] == 1} class="checked"{/if} ><input type="checkbox"{if $value[$key2] == 1} checked{/if} name="{$key2}_{$value['id']}" value="1">&nbsp;{$value2}</li>
+<!--{/loop}-->
+</ul>
+</td>
+</td>
+</tr>
+<!--{/loop}-->
+<tr>
+<td colspan="15">
+<div class="fixsel"><input type="submit" class="btn" id="submit_grouplevelsubmit" name="grouplevelsubmit" title="按 Enter 键可随时提交您的修改" value="提交"></div></td></tr>
+</tbody></table>
+</form>
+<br>

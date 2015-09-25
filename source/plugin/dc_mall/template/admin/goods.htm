@@ -1,0 +1,272 @@
+<!--{if $op == 'add' || $op == 'update'}-->
+<script src="static/js/calendar.js" type="text/javascript"></script>
+<div id="goodstop">
+     <h2 class="h2_titx">
+		 <a href="plugin.php?id=dc_mall:admin&action=goods" class="ch_xw0 y"><i></i>礼品列表</a><!--{if $op == 'add'}-->添加礼品<!--{else}-->编辑礼品<!--{/if}-->
+	</h2>
+</div>
+<div class="ch_mtm">
+     <form method="post" autocomplete="off" id="articleform" action="plugin.php?id=dc_mall:admin&action=goods&op={$op}" enctype="multipart/form-data">
+	 <table border="0" align="left" width="100%" class="mt_table" cellpadding="0" cellspacing="0">
+	        <tbody>
+			      <tr>
+				      <th><font color="#eb6000">*</font>&nbsp;礼品名称：</th>
+					  <td colspan="2"><input class="chp_fre" id="txt_name" name="txt_name" value="{$goods['name']}" size="80" type="text"></td>
+				  </tr>
+				  <tr>
+				      <th><font color="#eb6000">*</font>&nbsp;礼品分类：</th>
+					  <td colspan="2">
+					      <select id="txt_sortid" name="txt_sortid" class="p_selc" >
+						          <option value="">--{lang dc_mall:admin_goods_sctleibie}--</option>
+								  <!--{loop $mallnav $sort}-->
+								  <option value="{$sort['id']}" <!--{if $goods['sortid']==$sort['id']}-->selected<!--{/if}-->>{$sort['name']}</option>
+								  <!--{/loop}-->
+						  </select>
+					  </td>
+				  </tr>
+				  <tr>
+				      <th><font color="#eb6000">*</font>&nbsp;礼品类型：</th>
+					  <td colspan="2">
+					      <select id="txt_extid" name="txt_extid" class="p_selc" <!--{if $op == 'update'}-->disabled<!--{/if}--> onchange="ajaxget('plugin.php?id=dc_mall:admin&action=goods&op=selectext&extid='+this.value, 'extinfo');">
+					              <option value="">--{lang dc_mall:admin_goods_sctext}--</option>
+								  <!--{loop $extends $ext}-->
+								  <option value="{$ext['id']}" <!--{if $goods['extid']==$ext['id']}-->selected<!--{/if}-->>{$ext['title']}</option>
+								  <!--{/loop}-->
+						  </select>&nbsp;<em>{lang dc_mall:admin_goods_extmsg}</em></td>
+				  </tr>
+				  <tr>
+				      <th><font color="#eb6000">*</font>&nbsp;礼品图片：</th>
+					  <td colspan="2"><input class="psf" name="txt_pic" id="txt_pic" size="18" type="file"><!--{if $op == 'update'}--><img src="{$goods['pic']}" width="50"  height="50" align="absmiddle" onerror="this.src='source/plugin/dc_mall/image/nopic.jpg'"/><!--{/if}--></td>
+				  </tr>
+			</tbody>
+			<tbody id="extinfo">{$hookstr}</tbody>
+			<tbody>
+			      
+				  <tr>
+				      <th><font color="#eb6000">*</font>&nbsp;{lang dc_mall:admin_goods_credittype}</th>
+					  <td colspan="2">
+					      <select id="txt_creditid" name="txt_creditid" class="p_selc">
+						          <option value="99" <!--{if $goods['creditid']==99}-->selected<!--{/if}-->>{lang dc_mall:rmb}</option>
+								  <!--{loop $_G['setting']['extcredits'] $k $ext}-->
+								  <option value="{$k}" <!--{if $goods['creditid']==$k}-->selected<!--{/if}-->>{$ext['title']}</option>
+								  <!--{/loop}-->
+						  </select>
+					  </td>
+				  </tr>
+				  <tr>
+				      <th><font color="#eb6000">*</font>&nbsp;{lang dc_mall:admin_goods_creditd}</th>
+					  <td colspan="2"><input name="txt_credit" id="txt_credit" value="{$goods['credit']}" class="chp_fre" type="text"></td>
+				  </tr>
+				  <!--{if $_G['dc_mall']['vip']['open']}-->
+				  <tr>
+				     <th><font color="#eb6000">*</font>&nbsp;{lang dc_mall:admin_goods_vippriced}</th>
+					 <td colspan="2"><input name="txt_vipcredit" id="txt_vipcredit" value="{echo $goods['vipcredit']==null?$goods['credit']:$goods['vipcredit']}" class="chp_fre" type="text"></td>
+				  </tr>
+				  <!--{/if}-->
+				  <tr>
+				      <th class="th_tops"><font color="#eb6000">*</font>&nbsp;{lang dc_mall:allowpaygroup}</th>
+					  <td class="td_selt">{$allowgroupstr}<em>{lang dc_mall:allowpaygroup_msg}</em></td>
+				  </tr>
+				  <tr>
+				      <th>&nbsp;&nbsp;&nbsp;{lang dc_mall:admin_goods_orderbyd}</th>
+					  <td><input name="txt_hot" id="txt_hot" value="{$goods['hot']}" class="chp_fre" type="text"></td>
+				  </tr>
+				  <tr>
+				      <th>&nbsp;&nbsp;&nbsp;{lang dc_mall:admin_goods_endtimed}</th>
+					  <td <!--{if $_G['dc_mall']['vip']['open']}--> colspan="2"<!--{/if}-->><input name="txt_enddateline" id="txt_enddateline" value="{echo $goods['enddateline']?dgmdate($goods['enddateline']):''}" class="chp_fre" type="text" onclick="showcalendar(event, this);"></td>
+				  </tr>
+				  <tr>
+				     <td colspan="3">
+					 <p class="h3_p">礼品详情<p>
+					 <div class="pbw">
+					 <script src="static/image/editor/editor_function.js?H53" type="text/javascript"></script>
+					 <textarea class="userData" name="txt_des" id="uchome-ttHtmlEditor" style="height: 100%; width: 100%; display: none; border: 0px">{$goods['des']}</textarea>
+					 <iframe src="home.php?mod=editor&charset={CHARSET}&allowhtml=1&isportal=0" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" style="width:99%;border: 1px solid #C5C5C5;" frameborder="0" height="300"></iframe>
+					 </div>
+					 </td>
+				 </tr>
+				 <tr>
+				     <td colspan="3" class="td_ts" align="center">
+					     <button type="submit" id="articlebutton" class="submi_btn" name="articlebutton" onclick="edit_save();"><strong>{lang dc_mall:admin_goods_tijiao}</strong></button>
+						 <!--{if $op == 'update'}-->
+						 <input id="txt_id" name="gid" value="{$gid}" type="hidden">
+						 <!--{/if}-->
+						 <input name="submitchk" value="true" type="hidden">
+						 <input name="formhash" value="{FORMHASH}" type="hidden">
+				     </td>
+				 </tr>
+	 </tbody></table>
+     </form>
+</div>
+<div id="icoImg_image_menu" style="display: none" unselectable="on">
+	<table width="100%" cellpadding="0" cellspacing="0" class="fwin">
+	      <tr>
+		     <td class="t_l"></td>
+			 <td class="t_c"></td>
+			 <td class="t_r"></td>
+		 </tr>
+		 <tr>
+		     <td class="m_l">&nbsp;&nbsp;</td>
+			 <td class="m_c"><div class="mtm mbm">
+	<ul class="tb tb_s cl" id="icoImg_image_ctrl" style="margin-top:0;margin-bottom:0;">
+		<li class="y"><span class="flbc" onclick="hideAttachMenu('icoImg_image_menu')">{lang close}</span></li>
+		<li id="icoImg_btn_www" class="current"><a href="javascript:;" hidefocus="true" onclick="switchImagebutton('www');" style="background:none">{lang e_img_www}</a></li>
+	</ul>
+	<div class="p_opt popupfix" unselectable="on" id="icoImg_www" >
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr class="xg1">
+				<th>{lang e_img_inserturl}</th>
+				<th>{lang e_img_width}</th>
+				<th>{lang e_img_height}</th>
+			</tr>
+			<tr>
+				<td width="74%"><input type="text" id="icoImg_image_param_1" onchange="loadimgsize(this.value)" style="width: 95%;" value="" class="px" autocomplete="off" /></td>
+				<td width="13%"><input id="icoImg_image_param_2" size="3" value="" class="px p_fre" autocomplete="off" /></td>
+				<td width="13%"><input id="icoImg_image_param_3" size="3" value="" class="px p_fre" autocomplete="off" /></td>
+			</tr>
+			<tr>
+				<td colspan="3" class="pns ptn">
+					<button type="button" class="pn pnc" onclick="insertWWWImg();"><strong>{lang submit}</strong></button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</div></td>
+	         <td class="m_r">&nbsp;&nbsp;</td>
+		 </tr>
+		 <tr>
+		     <td class="b_l"></td>
+			 <td class="b_c"></td>
+			 <td class="b_r"></td>
+		 </tr>
+	</table>
+</div>
+<script type="text/javascript">
+	function switchImagebutton(btn) {
+		switchButton(btn, 'image');
+		$('icoImg_image_menu').style.height = '';
+		doane();
+	}
+	function hideAttachMenu(id) {
+		if($(id)) {
+			$(id).style.visibility = 'hidden';
+		}
+	}
+
+	function insertWWWImg() {
+		var urlObj = $('icoImg_image_param_1');
+		if(urlObj.value != '') {
+			var widthObj = $('icoImg_image_param_2');
+			var heightObj = $('icoImg_image_param_3');
+			insertImage(urlObj.value, null, widthObj.value, heightObj.value);
+			urlObj.value = widthObj.value = heightObj.value = '';
+		}
+	}
+</script>
+<!--{elseif $op=='delete'}-->
+	<!--{template common/header}-->
+	<h3 class="flb"><em>{lang dc_mall:admin_goods_del}</em><span><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET['handlekey']');" title="{lang close}">{lang close}</a></span></h3>
+	<form method="post" autocomplete="off" id="deletegoods" name="deletegoods" action="plugin.php?id=dc_mall:admin&action=goods&op=delete" onsubmit="ajaxpost(this.id, 'floatlayout_$_GET['handlekey']');return false;">
+	<div class="c altw">
+	<div class="alert_info">{lang dc_mall:admin_goods_delchk} {$goods['name']}</div>
+	</div>
+	<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="gid" value="{$gid}" />
+	<input type="hidden" name="submitcheck" value="true" />
+	<p class="o pns">
+	<button type="submit" class="pn pnc" id="submitbtn" name="submitbtn" value="true"><strong>{lang confirms}</strong></button>
+	</p>
+	</form>
+	<script>
+	function succeedhandle_$_GET['handlekey'](locationhref, message, param) {
+		hideWindow('$_GET['handlekey']');
+		showDialog(message, 'right', '', 'window.location.href=\''+locationhref+'\'', '','','','','','',3);
+	}
+	</script>
+	<div id="floatlayout_$_GET['handlekey']"></div>
+	<!--{template common/footer}-->
+<!--{elseif $op=='changestate'}-->
+	<!--{template common/header}-->
+	<h3 class="flb"><em>{lang dc_mall:goods}<!--{if $goods['status']}-->{lang dc_mall:admin_goods_xiajia}<!--{else}-->{lang dc_mall:admin_goods_shangjia}<!--{/if}--></em><span><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET['handlekey']');" title="{lang close}">{lang close}</a></span></h3>
+	<form method="post" autocomplete="off" id="deletegoods" name="deletegoods" action="plugin.php?id=dc_mall:admin&action=goods&op=changestate" onsubmit="ajaxpost(this.id, 'floatlayout_$_GET['handlekey']');return false;">
+	<div class="c altw">
+	<div class="alert_info">{lang dc_mall:yesno}<!--{if $goods['status']}-->{lang dc_mall:admin_goods_xiajia}<!--{else}-->{lang dc_mall:admin_goods_shangjia}<!--{/if}-->{lang dc_mall:goods} {$goods['name']}</div>
+	</div>
+	<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="gid" value="{$gid}" />
+	<input type="hidden" name="submitcheck" value="true" />
+	<p class="o pns">
+	<button type="submit" class="pn pnc" id="submitbtn" name="submitbtn" value="true"><strong>{lang confirms}</strong></button>
+	</p>
+	</form>
+	<script>
+	function succeedhandle_$_GET['handlekey'](locationhref, message, param) {
+		hideWindow('$_GET['handlekey']');
+		showDialog(message, 'right', '', 'window.location.href=\''+locationhref+'\'', '','','','','','',3);
+	}
+	</script>
+	<div id="floatlayout_$_GET['handlekey']"></div>
+	<!--{template common/footer}-->
+<!--{else}-->
+<div id="goodstop">
+     <h2 class="h2_titx">
+	     <a href="plugin.php?id=dc_mall:admin&action=goods&op=add" class="ch_xw0 y"><i></i>添加礼品</a>礼品列表
+	 </h2>
+	 <div class="ch_mtm">
+	      <form id="fm_search" name="fm_search" action="plugin.php?id=dc_mall:admin&action=goods" method="post">
+		  礼品名称：<input id="searchkeyword" name="searchkeyword" value="{$searchkeyword}" class="input_o" type="text">&nbsp;&nbsp;
+		  <button type="submit" id="searchbutton" name="searchbutton" class="pn_bt"><em>{lang dc_mall:admin_goods_search}</em></button>&nbsp;&nbsp;
+		  <select id="sortid" name="sortid" class="p_fre" onchange="submit();">
+		          <option value="">--{lang dc_mall:admin_goods_allleibie}--</option>
+				  <!--{loop $mallnav $sort}-->
+				  <option value="{$sort['id']}" <!--{if $sort['id']==$sid}-->selected<!--{/if}-->>{$sort['name']}</option>
+				  <!--{/loop}-->
+		  </select>
+		  <select id="extid" name="extid" class="p_fre" onchange="submit();">
+		         <option value="">--{lang dc_mall:admin_goods_allext}--</option>
+				 <!--{loop $extends $ext}-->
+				 <option value="{$ext['id']}" <!--{if $ext['id']==$extid}-->selected<!--{/if}-->>{$ext['title']}</option>
+				 <!--{/loop}-->
+		  </select>
+		  <input name="searchsubmit" value="true" type="hidden">
+		  <input name="formhash" value="{FORMHASH}" type="hidden">
+	      </form>
+	 </div>
+</div>
+<div class="form_table">
+	<table class="dt_table dt_good" cellpadding="0" cellspacing="0" id="admin_goods_list">
+	       <tbody>
+		         <tr>
+				     <th width="95">礼品截图</th>
+					 <th style="text-align:left; padding-left:10px;">礼品名称</th>
+					 <th width="80">{lang dc_mall:admin_goods_ext}</th>
+					 <th width="80"><!--{if $orderby=='credit'}--><a href="{$commonurl}&orderby=credit&da=<!--{echo $da=='asc'?'desc':'asc'}-->" class="selected">{lang dc_mall:admin_goods_price}<i class="updown_icon <!--{echo $da=='asc'?'up-icon':'down-icon'}-->"></i></a><!--{else}--><a href="{$commonurl}&orderby=credit&da=desc">{lang dc_mall:admin_goods_price}<i class="updown_icon down-icon"></i></a><!--{/if}--></th>
+					 <th width="80"><!--{if $orderby=='sales'}--><a href="{$commonurl}&orderby=sales&da=<!--{echo $da=='asc'?'desc':'asc'}-->" class="selected">{lang dc_mall:admin_goods_sales}<i class="updown_icon <!--{echo $da=='asc'?'up-icon':'down-icon'}-->"></i></a><!--{else}--><a href="{$commonurl}&orderby=sales&da=desc">{lang dc_mall:admin_goods_sales}<i class="updown_icon down-icon"></i></a><!--{/if}--></th>
+					 <th width="80"><!--{if $orderby=='count'}--><a href="{$commonurl}&orderby=count&da=<!--{echo $da=='asc'?'desc':'asc'}-->" class="selected">{lang dc_mall:admin_goods_cunku}<i class="updown_icon <!--{echo $da=='asc'?'up-icon':'down-icon'}-->"></i></a><!--{else}--><a href="{$commonurl}&orderby=count&da=desc">{lang dc_mall:admin_goods_cunku}<i class="updown_icon down-icon"></i></a><!--{/if}--></th>
+					 <th width="120" id="admin_caozuo">{lang dc_mall:admin_goods_caozuo}</th>
+				 </tr>
+				 <!--{loop $goodslist $v}-->
+				 <tr>
+				     <td class="thumb_b"><a href="plugin.php?id=dc_mall&action=goods&gid={$v['id']}" target="_blank"><img src="{$v['pic']}" alt="" height="60" width="80" onerror="this.src='source/plugin/dc_mall/image/nopic.jpg'"></a></td>
+					 <td class="td_s"><h3>{$v['name']}</h3><span style="color:#999999">{lang dc_mall:admin_goods_leibied}{$mallnav[$v['sortid']]['name']}{lang dc_mall:admin_goods_views}{$v['views']} {lang dc_mall:ci}</span></td>
+					 <td>{$extends[$v['extid']]['title']}</td>
+					 <td>{$v['credit']}<!--{if $v['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$v['creditid']]['title']} <!--{/if}--></td>
+					 <td><strong style="font-size:16px; color:#eb6000">{$v['sales']}</strong></td>
+					 <td><strong style="font-size:16px; color:#eb6000">{$v['count']}</strong></td>
+					 <td class="mans_s">
+					 <!--{if $v['status']}--><b style="color:#eb6000">{lang dc_mall:admin_goods_isuse}</b><!--{else}--><b style="color:#F00">{lang dc_mall:admin_goods_notuse}</b><!--{/if}--><br />
+					 <a href="javascript:;" onclick="showWindow('changestategoods', '{$commonurl}&op=changestate&gid={$v['id']}');"><!--{if $v['status']}-->{lang dc_mall:admin_goods_xiajia}<!--{else}-->{lang dc_mall:admin_goods_shangjia}<!--{/if}--></a><span class="pipe">|</span>
+					 <a href="{$commonurl}&op=update&gid={$v['id']}">{lang dc_mall:admin_goods_edit}</a><span class="pipe">|</span>
+					 <a href="javascript:;" onclick="showWindow('deletegoods', '{$commonurl}&op=delete&gid={$v['id']}');">{lang dc_mall:del}</a><br />
+					 {echo $extends[$v['extid']]['data']['admin']['goods']?str_replace('[gid]',$v['id'],$extends[$v['extid']]['data']['admin']['goods']):''}
+					 </td>
+				</tr>
+				<!--{/loop}-->
+		   </tbody>
+	 </table>
+</div>
+{$multi}
+<div class="blank10"></div>
+<!--{/if}-->

@@ -1,0 +1,47 @@
+<!--{template common/header}-->
+<div class="ch_bm">
+	<div class="z"><a href="./" class="" title="{lang homepage}">5U体育</a><em>&raquo;</em><a href="plugin.php?id=rights">权益</a><em>&raquo;</em><a href="javasript:void(0)">权益商店</a></div>
+</div>
+<div class="rights_mian cl">
+     <!--{template rights:index/left}-->
+	 <div class="rights_right">
+	      <div class="rights_box">
+		       <div class="tbmu cl">
+		       <!--{loop $rtypes $key $name}-->
+				  <a href="plugin.php?id=rights:index&op=mall&typeid={$key}" {if $key == $typeid}class="a"{/if}>{$name}</a>
+		       <!--{/loop}-->
+			   </div>
+			   <!--{if $_G[uid]}-->
+			   	<div class="rights_packt">
+			        <span>账户余额：{$balance} {$credits[$creditstrans][title]}</span>&nbsp;&nbsp;
+					<span><a href="plugin.php?id=rights:index&op=buy" class="charge_on">充值</a></span>
+			   	</div>
+			   <!--{/if}-->
+			   <div style="clear:both;"></div>
+			   <ul class="rights_vip cl">
+			   		<!--{loop $rlists $val}-->
+					<li>
+						<a href="plugin.php?id=rights:index&op=info&rightsid=$val[rightsid]" target="_blank">
+							<span class="vip_img"><img src="$_G['style'][tpldir]/common/images/logo_5u.png"></span>
+							<div class="vip_box">
+								<h3>{$val[name]}</h3>
+								<span>{$val[description]}</span>
+							</div>
+							<div class="vip_show">
+								<div class="vip_dbox cl">
+									<span><img src="$_G['style'][tpldir]/common/images/logo_5u.png"></span>
+									<span class="vip_t">{$val[name]}</span>
+									<span class="vip_pice y">{$val[price]}{$credits[$creditstrans][title]}</span>
+								</div>
+								<p class="vip_title">{$val[descrittion]}</p>
+								<p class="vip_submit"><span>购买</span></p>
+							</div>
+						</a>
+					</li>
+			   		<!--{/loop}-->
+			   </ul>
+		  </div>
+		  {$multipage}
+	 </div>
+</div>
+<!--{template common/footer}-->

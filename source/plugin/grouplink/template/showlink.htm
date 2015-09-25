@@ -1,0 +1,26 @@
+<!--{block html}-->
+<div class="widget_hd">
+     <h3>友情球迷会</h3>
+</div>
+<div class="widget_bd">
+     <!--{if  $list}-->
+	 <ul class="ship_Mul cl">
+		<!--{loop $lists $v}-->
+		 <li>
+		     <a class="avt_img" title="$v['name']" href="forum.php?mod=group&fid=$v['fid']"><img src="$v['icon']" alt="$v['name']" width="44" height="44" /></a>
+			 <div class="ship_bd">
+			      <p class="name">$v['name']</p>
+				  <div class="ship_U cl">
+				     <span class="sta_num">$v['usernum']</span>
+					 <span class="sta_post">$v['posts']</span>
+				  </div>
+			 </div>
+		</li>
+		<!--{/loop}-->
+	</ul>
+	<!--{/if}-->
+	<!--{if empty($arr)}-->
+	<p class="widget_apply"><a href="/plugin.php?id=grouplink:grouplink&fun=add&fid=$_GET['fid'] " >申请成为友情球迷会</a></p>
+	<!--{/if}-->
+</div>
+<!--{/block}-->

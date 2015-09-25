@@ -1,0 +1,10 @@
+<!--{block html}-->
+	<div class="channeNews">
+        	<!--{loop $arr $v}-->
+            <dl>
+            	<dt><a href="{$v['url']}" target="_blank" title="{$v['title']}">{$v['title']}</a></dt>
+                <dd>{$v['intro']}</dd>
+            </dl>
+            <!--{/loop}-->
+        </div> 
+<!--{/block}-->

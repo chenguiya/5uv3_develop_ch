@@ -1,0 +1,124 @@
+<!--{if $op=='setdefault'}-->
+<!--{template common/header}-->
+<div class="f_c">
+	<h3 class="flb"><em>{lang dc_mall:member_address_setdefaultaddr}</em><span><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET['handlekey']');" title="{lang close}">{lang close}</a></span></h3></div>
+	<div>
+	<form method="post" autocomplete="off" id="deletegoods" name="deleteorder" action="plugin.php?id=dc_mall:member&action=address&op=setdefault" onsubmit="ajaxpost(this.id, 'floatlayout_$_GET['handlekey']','','onerror');return false;">
+	<div class="c altw">
+	<div class="alert_info">{lang dc_mall:member_address_setdefaultchk} {$addr['realname']} {$addr['address']} {$addr['tel']} {lang dc_mall:member_address_setdefaultchk1}</div>
+	</div>
+	<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="addrid" value="{$addr['id']}" />
+	<input type="hidden" name="submitchk" value="true" />
+	<p class="o pns">
+	<button type="submit" class="pn pnc" id="submitbtn" name="submitbtn" value="true"><strong>{lang confirms}</strong></button>
+	</p>
+	</form>
+	</div>
+	<script>
+	function succeedhandle_$_GET['handlekey'](locationhref, message, param) {
+		hideWindow('$_GET['handlekey']');
+		showDialog(message, 'right', '', 'window.location.href=\''+locationhref+'\'', '','','','','','',3);
+	}
+	</script>
+	<div id="floatlayout_$_GET['handlekey']"></div>
+	<!--{template common/footer}-->
+<!--{elseif $op=='delete'}-->
+<!--{template common/header}-->
+	<div class="f_c">
+	<h3 class="flb"><em>{lang dc_mall:member_address_deladdr}</em><span><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET['handlekey']');" title="{lang close}">{lang close}</a></span></h3></div>
+	<div>
+	<form method="post" autocomplete="off" id="deletegoods" name="deleteorder" action="plugin.php?id=dc_mall:member&action=address&op=delete" onsubmit="ajaxpost(this.id, 'floatlayout_$_GET['handlekey']','','onerror');return false;">
+	<div class="c altw">
+	<div class="alert_info">{lang dc_mall:member_address_deladdrchk} {$addr['realname']} {$addr['address']} {$addr['tel']}{lang dc_mall:member_address_deladdrchk1}</div>
+	</div>
+	<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="addrid" value="{$addr['id']}" />
+	<input type="hidden" name="submitchk" value="true" />
+	<p class="o pns">
+	<button type="submit" class="pn pnc" id="submitbtn" name="submitbtn" value="true"><strong>{lang confirms}</strong></button>
+	</p>
+	</form>
+	</div>
+	<script>
+	function succeedhandle_$_GET['handlekey'](locationhref, message, param) {
+		hideWindow('$_GET['handlekey']');
+		showDialog(message, 'right', '', 'window.location.href=\''+locationhref+'\'', '','','','','','',3);
+	}
+	</script>
+	<div id="floatlayout_$_GET['handlekey']"></div>
+	<!--{template common/footer}-->
+<!--{elseif $op=='add'}-->
+<!--{template common/header}-->
+<div class="f_c">
+		<h3 class="flb">
+			<em >
+				{lang dc_mall:member_address_addrmsg}
+			</em>
+			<span><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET[handlekey]')" title="{lang close}">{lang close}</a></span>
+		</h3>
+	</div>
+	<style>
+	#newaddress td{border: 1px solid #E4E4E4;height:30px;padding: 5px;}
+	</style>
+<div style="width:550px;padding:20px;">
+<form id="fm_search" name="fm_search" action="plugin.php?id=dc_mall:member&action=address&op=add" method="post" onsubmit="ajaxpost(this.id, 'floatlayout_{$_GET['handlekey']}','','onerror');return false;">
+<table width="100%" cellpadding="0" id="newaddress" cellspacing="0" style="border:1px solid #E4E4E4;">
+<tr>
+<td align="right">{lang dc_mall:member_address_named}</td>
+<td><input type="text" name="txt_realname" id="txt_realname" value=""/></td>
+</tr>
+<tr>
+<td align="right">{lang dc_mall:member_address_teld}</td>
+<td><input type="text" name="txt_tel" id="txt_tel" value=""/></td>
+</tr>
+<tr>
+<td align="right">{lang dc_mall:member_address_addrd}</td>
+<td>{$reside}<input type="text" name="txt_address" id="txt_address"  size="50" value=""/></td>
+</tr>
+<tr>
+<td align="right"></td>
+<td><input class="pn pnc" name="submitbtn" value="{lang dc_mall:member_address_add}" type="submit"></td>
+</tr>
+</table>
+<input type="hidden" name="handlekey" value="{$_GET['handlekey']}" />
+<input type="hidden" name="submitchk" value="true" />
+<input type="hidden" name="formhash" value="{FORMHASH}" />
+</form>
+</div>
+<div id="floatlayout_{$_GET['handlekey']}"></div>
+<script>
+	function succeedhandle_{$_GET['handlekey']}(href, message, param){
+		hideWindow('{$_GET['handlekey']}');
+		showDialog(message, 'right', '', 'window.location.href=\''+href+'\'', '','','','','','',3);
+	}
+</script>
+<!--{template common/footer}-->
+<!--{else}-->
+	<div id="goodstop">
+	<h2 class="mbm xs2">
+		<a href="javascript:;" onclick="showWindow('address', 'plugin.php?id=dc_mall:member&action=address&op=add');" class="xi2 xs1 xw0 y">{lang dc_mall:member_address_addrmsg}</a>{lang dc_mall:member_address_useraddr}
+	</h2>
+	</div>
+	<table class="dt mtm" cellpadding="0" cellspacing="0" id="admin_goods_list">
+	<tbody><tr>
+	<th width="50"></th>
+	<th width="120">{lang dc_mall:member_address_name}</th>
+	<th width="120" >{lang dc_mall:member_address_tel}</th>
+	<th>{lang dc_mall:member_address_addr}</th>
+	<th width="120">{lang dc_mall:member_address_caozuo}</th>
+	</tr>
+	<!--{loop $address $v}-->
+	<tr<!--{if $v['default']}--> style="background-color:#FFB640"<!--{/if}-->>
+	<td></td>
+	<td>{$v['realname']}</td>
+	<td>{$v['tel']}</td>
+	<td>{$v['address']}</td>
+	<td><!--{if !$v['default']}--><a href="javascript:;" onclick="showWindow('address', 'plugin.php?id=dc_mall:member&action=address&op=setdefault&addrid={$v['id']}');">{lang dc_mall:member_address_setdefault}</a><!--{/if}--> <a href="javascript:;" onclick="showWindow('address', 'plugin.php?id=dc_mall:member&action=address&op=delete&addrid={$v['id']}');">{lang dc_mall:member_address_del}</a></td>
+	</tr>
+	<!--{/loop}-->
+	</tbody>
+	</table>
+<!--{/if}-->

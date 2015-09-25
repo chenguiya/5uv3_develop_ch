@@ -1,0 +1,11 @@
+<div class="appl">
+<div class="tbn">
+<h2 class="mt bbda">{lang dc_mall:member_sidebar_center}</h2>
+<ul>
+<!--{loop $dh $k $v}-->
+<li<!--{if $action==$k}--> class="a"<!--{/if}-->><a href="plugin.php?id=dc_mall:member<!--{if $k!='index'}-->&action={$k}<!--{/if}-->">{$v}</a></li>
+<!--{/loop}-->
+</ul>
+</div>
+</div>
+</div>

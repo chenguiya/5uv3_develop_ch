@@ -1,0 +1,20 @@
+<!--{block html}-->
+<div class="eventRank">
+        	<div class="channelTitle">联赛排名</div>
+            <div class="eventRankL">
+            	<div><span>场次</span>{$scoreboard->complete}</div>
+                <div><span>胜</span>{$scoreboard->win}</div>
+                <div><span>平</span>{$scoreboard->draw}</div>
+                <div><span>负</span>{$scoreboard->lost}</div>
+            </div>
+            <div class="eventRankM">{$scoreboard->ranking}</div>
+            
+            <div class="eventRankL">
+            	<div><span>进球</span>{$scoreboard->goal}</div>
+                <div><span>失球</span>{$scoreboard->lost_goal}</div>
+                <div><span>净胜球</span>{$scoreboard->diff_goal}</div>
+                <div><span>积分</span>{$scoreboard->points}</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+<!--{/block}-->       

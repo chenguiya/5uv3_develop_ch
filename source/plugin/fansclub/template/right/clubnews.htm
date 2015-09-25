@@ -1,0 +1,42 @@
+<!--{block html}-->
+<div class="columnMain">
+    	<div class="channelTitle">{$_G['forum']['name']}新闻</div>
+        <div class="columnCon">
+		<!--{loop $arr $v}-->
+        <div class="teamNewList <!--{if $v['attachnum']>=3}--> teamNewListA<!--{/if}-->">
+        	<div class="newTitle"><a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank">{$v['subject']}</a></div>
+			<!--{if $v['attachnum']>=1 && $v['attachnum']<3}-->
+            <div class="teamNewListImg">
+				<a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}">
+					<img src="{$v['icon']}"  width="138" height="83" alt="{$v['subject']}" title="{$v['subject']}" /></a>
+				</div>
+			<!--{/if}-->
+            <div class="teamNewListInfo">
+			<!--{if $v['attachnum']>=3}-->
+            	<div class="teamNewListImg">	
+				<!--{loop $v['img'] $key $img}-->
+				<!--{if $key>=3}-->
+					<!--{eval break;}-->
+				<!--{/if}-->
+            	<a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}">
+					<img src="{$img}" width="195" height="188" alt="{$v['subject']}" title="{$v['subject']}" />
+				</a>
+				<!--{/loop}-->
+				</div>
+			<!--{else}-->
+				<p>{$v['intro']}</p>
+			<!--{/if}-->
+                <div class="newElse">
+                	<span class="newTime">{$v['dateline']}</span>
+                    <span class="replyIco">{$v['replies']}</span>
+                    <span class="zanIco">{$v['recommend_add']}</span>
+                    <span class="shareIco">{$v['sharetimes']}</span>
+                </div>
+               
+            </div>
+            <div class="clear"></div>
+        </div>
+		<!--{/loop}-->
+        </div>
+    </div>
+	<!--{/block}-->

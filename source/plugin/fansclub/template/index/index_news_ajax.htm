@@ -1,0 +1,50 @@
+这个页面应该没有用
+				<!--{loop $arr $k $v}-->
+                <li>
+                    <h3 class="subject"><a href="forum.php?mod=viewthread&amp;tid={$v['tid']}">{$v['subject']}</a></h3>
+					<!--{eval $sql='select * from '.DB::table('forum_post').' where tid='.$v['tid'];}-->
+					<!--{eval $tinfo=DB::fetch_first($sql);}-->
+					<!--{eval $intro =  preg_replace('/\[img(.*?)\](.*?)\[\/img\]/i','',$tinfo['message']); }-->
+					<!--{eval $intro =  preg_replace('/\[media(.*?)\](.*?)\[\/media\]/i','',$intro); }-->
+					<!--{eval $intro =  preg_replace('/\[flash(.*?)\](.*?)\[\/flash\]/i','',$intro); }-->
+					<!--{eval $intro =  preg_replace('/\[(.*?)\]/i','',$intro); }-->	
+					<!--{eval $intro = mb_substr($intro,0,80,'utf-8');}-->
+					<!--{eval preg_match_all("/\[attach\](\d+)\[\/attach\]/i", $tinfo['message'], $matchaids);}-->	
+					<!--{if count($matchaids[1])>=3}-->
+					<div class="thumbs">
+							<!--{loop $matchaids[1] $key $aid}-->	
+										<!--{if $key>=3}-->
+											<!--{eval break;}-->
+										<!--{/if}-->
+										<a href="forum.php?mod=viewthread&tid={$v['tid']}">
+											<img src="<!--{eval echo getforumimg($aid, 0, 235, 235);}-->">
+										</a>
+								<!--{/loop}-->
+						</div>
+						<!--{elseif  count($matchaids[1])>=1 && count($matchaids[1])<3}-->
+						<div class="thumb">
+								<img src="<!--{eval echo getforumimg($matchaids[1][0], 0, 235, 235);}-->">
+						</div>
+						<!--{/if}-->
+						<!--{if count($matchaids[1])<3}-->
+						<div class="intro">$intro</div>
+						<!--{/if}-->
+                    <div class="meta">
+							<!--{eval $datetime = date('Y-m-d',$v['dateline']);}-->
+                        <span class="date">{$datetime}</span>
+                         <span class="date">{$datetime}</span>
+						<!--{eval $fromforum=DB::fetch_first('select * from '.DB::table('forum_forum').' where fid='.$v['fid']);}-->
+                        <span class="source">来自：
+						<!--{if $fromforum['status']==3}--><a href="forum.php?mod=group&fid={$v['fid']}">{$fromforum['name']}</a>
+						<!--{else}-->
+							<a href="forum.php?mod=forumdisplay&fid={$v['fid']}&tpl=channel_index">{$fromforum['name']}</a>
+						<!--{/if}-->
+						</span>
+                        <div class="active y">
+							<span class="rt">{$v['sharetimes']}</span>
+							<span class="up">{$v['recommend_add']}</span>
+							<span class="comment">{$v['replies']}</span></div>
+                    </div>
+                </li>
+				<!--{/loop}-->
+            

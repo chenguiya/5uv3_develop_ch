@@ -1,0 +1,25 @@
+<!--{block html}-->
+		<div class="panel clubranking">
+			<div class="panel-head">
+				<h2>球迷会排行</h2>
+			</div>
+			<div class="panel-body">
+				<ol>
+					<!--{loop $arr $k $v}-->
+					<!--{eval $n=$k+1;}-->
+					<li class="cl">
+						<i class='no no-{$n}'>{$n}</i>
+						<a href="fans/topic/{$v['fid']}/" class="clublogo" target="_blank"><img src="data/attachment/group/{$v['icon']}"><span class="fans_icon"></span></a>
+						<h3><a href="fans/topic/{$v['fid']}/" target="_blank">{$v['name']}</a>
+						<a href="plugin.php?id=fansclub&ac=verify&type=boots&fid={$v['fid']}" class="badget" target="_blank">
+						{$v['level_img']}
+						</a></h3>
+						<!--{eval $info = get_fansclub_info($v['fid']);}-->
+						<div>{$info['province_city']}</div>
+						<div>球迷：{$v['membernum']}&nbsp;&nbsp;&nbsp;&nbsp;总帖数：{$v['posts']}</div>
+					</li>
+					<!--{/loop}-->
+				</ol>
+			</div>
+		</div>
+<!--{/block}-->

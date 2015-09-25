@@ -1,0 +1,52 @@
+<form method="get" autocomplete="off" action="home.php" style="border-bottom: 1px dashed #CDCDCD;">
+	<input type="hidden" name="mod" value="spacecp">
+	<input type="hidden" name="ac" value="plugin">
+	<input type="hidden" name="id" value="benefits:benefits">
+	<input type="hidden" name="formhash" value="{FORMHASH}">
+	<table style="margin-bottom:10px">
+		<tr>
+			<td width="150">权益作用版块/球迷会：</td>
+			<td width="100"><select name="benefits_typeid">$forum_option</select></td>
+			<td width="40"><input type="submit" name="srchbtn" class="btn" value="搜索"></td>
+		</tr>
+	</table>	
+</form>
+<!--{if $rightslists}-->
+<table cellspacing="0" cellpadding="0" class="dt mtm">
+	<caption><h2 class="mbm xs2">权益列表</h2>
+	</caption>
+	<thead class="alt"><tr><td width="140">权益名称</td><td>分类</td><td width="120">价格</td><td>时效</td><td></td></tr></thead>
+	<!--{loop $rightslists $item}-->
+	<!--{if $item['buystatus']}-->
+	<tr style="background:green; color:#000000">
+		<td>{$item[name]}</td>		
+		<td>{$rights_type[$item[typeid]]}</td>
+		<td>{$item[price]}</td>
+		<td>{date('Y-m-d', $item[regdate])} - {date('Y-m-d', $item[canceldate])}</td>
+		<input type="hidden" name="typeid[]" value="{$item[typeid]}">
+		<td><b>已购买</b><!--{if $item[typeid]==1}-->&nbsp;&nbsp;<a href="">展开</a><!--{/if}--></td>
+	</tr>
+	<!--{else}-->
+	<tr>
+		<td>{$item[name]}</td>
+		<input type="hidden" name="typeid[]" value="{$item[typeid]}">
+		<td>{$rights_type[$item[typeid]]}</td>
+		<td>{$item[price]}</td>
+		<td>{$item[regdate]} - {$item[canceldate]}</td>
+		<td><a href="home.php?mod=spacecp&ac=plugin&id=rights:rights&rightsid={$item[rightsid]}&do=buy"><b>购买</b></a><!--{if $item[typeid]==1}-->&nbsp;&nbsp;<a href="javascript:unfold('info_$item[rightsid]', '{$item[packtdstr]}');">展开</a><!--{/if}--></td>		
+	</tr>	
+	<!--{/if}-->
+	<!--{if $item[typeid]==1}-->
+	<tr id="info_{$item[rightsid]}"></tr>
+	<!--{/if}-->
+	<!--{/loop}-->		
+</table>
+<script type="text/javascript">
+function unfold(id, str) {
+	//var trid = 'info_'+30;
+	document.getElementById(id).innerHTML = str;
+}
+</script>
+<div style="clear:both; height:10px;"></div>
+$multipage
+<!--{/if}-->

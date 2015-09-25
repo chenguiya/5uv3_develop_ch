@@ -1,0 +1,32 @@
+<!--{block return}-->
+<!--VIP服务 start-->
+<div class="widget_con">
+	 <div class="widget_hd">
+		   <h3>VIP服务</h3>
+		   <a class="more_s" href="plugin.php?id=rights:index">更多></a>
+	 </div>
+	 <div class="widget_bd">
+		  <dl>
+		  <!--{if $packs}-->
+			  <dd>
+				  <ul class="vip_Mul">
+				  <!--{loop $packs $pack}-->
+					  <li><i><img src="{if !empty($pack[icon])}data/attachment/forum/{$pack[icon]}{else}source/plugin/rights/static/image/default.png{/if}" width="28" height="28"/></i>{$pack[name]}<br><font>{$pack[price]}元</font><a href="plugin.php?id=rights:index&op=info&rightsid={$pack[rightsid]}" target="_blank" class="vip_add">购买</a></li>
+				  <!--{/loop}-->
+				  </ul>
+			  </dd>
+		<!--{/if}-->
+		<!--{if $rights}-->
+			  <dt>会员权益</dt>
+			  <dd>
+				  <ul class="vip_Mul vip_cl">
+				  <!--{loop $rights $right}-->
+					  <li><i><img src="{if !empty($right[icon])}data/attachment/forum/{$right[icon]}{else}source/plugin/rights/static/image/default.png{/if}" height="28" width="28"/></i>{$right[name]}<br><font>{$right[price]}元</font><a href="plugin.php?id=rights:index&op=info&rightsid={$right[rightsid]}" target="_blank" class="vip_add">购买</a></li>
+				  <!--{/loop}-->
+				  </ul>
+			  </dd>
+		<!--{/if}-->
+		  </dl>
+	 </div>
+</div>
+<!--{/block}-->

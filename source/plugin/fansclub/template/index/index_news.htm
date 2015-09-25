@@ -1,0 +1,132 @@
+<!--{subtemplate common/header}-->
+	 <div class="ch_bm">
+		<div class="z">
+			<a href="./" class="" title="{lang home}">$_G[setting][bbname]</a><em>&gt;</em>
+			<em><a href="{$_SERVER['REQUEST_URI']}" target="_self">新闻</a></em>
+		</div>
+	</div>
+<div class="channel-news" style="margin:0;">
+    <div class="squareSide">
+        <div class="nav">
+            <div class="hotTitle">全部</div>
+        <!--{loop $arr_forum_list $key1 $value1}-->
+            <div class="navTitle">
+            <p><img src="$value1['icon']" />$value1['name']</p>
+            <ul class="navMain">
+                <!--{loop $value1['list'] $key2 $value2}-->
+                <li class="navCon">
+                    <a class="navTitlea" href="group/{$key2}/" target="_blank">$value2['name']</a>
+					<a class="titleOperate" href="javascript:;"></a>
+                    <ul style="display:block;">
+                        <!--{loop $value2['list'] $key3 $value3}-->
+                        <a href="group/{$key3}/" target="_blank"><li {if $fid ==$key3} class="active"{/if}>$value3['name']</li></a>
+                        <!--{/loop}-->
+                    </ul>
+                </li>
+                <!--{/loop}-->
+                </ul>
+            </div>
+        <!--{/loop}-->
+        </div>
+
+    </div>
+    <div class="col-left newsR">
+    	<div class="newsTab">
+        	<h2 class="newsTlle">新闻</h2>
+           <div class="newsClsaa">排序：
+		   <a href="plugin.php?id=fansclub:index&ac=news&sort=new"  <!--{if $_GET['sort']=='new' || empty($_GET['sort'])}--> class="active"<!--{/if}-->>最新帖</a>
+		   <a href="plugin.php?id=fansclub:index&ac=news&sort=hot" <!--{if $_GET['sort']=='hot'}--> class="active"<!--{/if}-->>最热帖</a>
+		   <a href="plugin.php?id=fansclub:index&ac=news&sort=stick" <!--{if $_GET['sort']=='stick'}--> class="active"<!--{/if}-->>精华帖</a>
+		 </div> 
+        </div>
+        <div class="jianju15"></div>
+        <div class="newslist">
+            <ul id="newslistflag">
+				<!--{loop $arr $k $v}-->
+                <li>
+					<!--{eval $sql='select * from '.DB::table('forum_post').' where tid='.$v['tid'];}-->
+					<!--{eval $tinfo=DB::fetch_first($sql);}-->		
+					<!--{eval $intro =  preg_replace('/\[img(.*?)\](.*?)\[\/img\]/i','',$tinfo['message']); }-->
+					<!--{eval $intro =  preg_replace('/\[media(.*?)\](.*?)\[\/media\]/i','',$intro); }-->
+					<!--{eval $intro =  preg_replace('/\[flash(.*?)\](.*?)\[\/flash\]/i','',$intro); }-->
+					<!--{eval $intro =  preg_replace('/\[(.*?)\]/i','',$intro); }-->
+					<!--{eval $intro = mb_substr($intro,0,80,'utf-8');}-->
+					<!--{eval preg_match_all("/\[attach\](\d+)\[\/attach\]/i", $tinfo['message'], $matchaids);}-->
+					<!--{if count($matchaids[1])<1 || count($matchaids[1])>=4}-->
+					<h3 class="subject"><a href="forum.php?mod=viewthread&amp;tid={$v['tid']}" target="_blank">{$v['subject']}</a></h3>
+					<!--{/if}-->
+
+			        <table style="width: 100%">
+                        <tr>
+                            <td>
+                        <!--{if count($matchaids[1])>=4}-->
+                                <div class="thumbs">
+                                    <!--{loop $matchaids[1] $key $aid}-->
+                                    <!--{if $key>=4}-->
+                                    <!--{eval break;}-->
+                                    <!--{/if}-->
+                                    <a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank">
+                                        <img src="<!--{eval echo getforumimg($aid);}-->">
+                                    </a>
+                                    <!--{/loop}-->
+                                </div>
+                        <!--{/if}-->
+                            </td>
+                        </tr>
+                        <tr>
+							<!--{if  count($matchaids[1])>=1 && count($matchaids[1])<4}-->
+							<td style="width: 160px;">
+								<div class="thumb">
+										<img src="<!--{eval echo getforumimg($matchaids[1][0]);}-->">
+								</div>
+							</td>
+							<!--{/if}-->
+							<td style="position: relative;vertical-align: top;padding-bottom: 30px;">
+								<!--{if  count($matchaids[1])>=1 && count($matchaids[1])<4}-->
+								<h3 class="subject"><a href="forum.php?mod=viewthread&amp;tid={$v['tid']}" target="_blank">{$v['subject']}</a></h3>
+								<!--{/if}-->
+								<!--{if count($matchaids[1])<4}-->
+									<div class="intro">{$intro}</div>
+								<!--{/if}-->
+								<div class="meta">
+									<!--{eval $datetime = date('Y-m-d',$v['dateline']);}-->
+									<span class="date">{$datetime}</span>
+									<!--{eval $fromforum=DB::fetch_first('select * from '.DB::table('forum_forum').' where fid='.$v['fid']);}-->
+									<span class="source">来自：<!--{if $fromforum['status']==3}--><a href="forum.php?mod=group&fid={$v['fid']}" target="_blank">{$fromforum['name']}</a>
+									<!--{else}-->
+										<a href="forum.php?mod=forumdisplay&fid={$v['fid']}&tpl=channel_index" target="_blank">{$fromforum['name']}</a>
+									<!--{/if}--></span>
+									<div class="active y">
+										<span class="rt">{$v['sharetimes']}</span>
+										<span class="up">{$v['recommend_add']}</span>
+										<span class="comment">{$v['replies']}</span></div>
+								</div>
+							</td>
+						</tr>
+					</table>
+                </li>
+				<!--{/loop}-->
+            </ul>
+            <div class="loadmore">
+                <a onclick="getmoreload('plugin.php?id=fansclub:index&ac=news&sort={$_GET['sort']}', '#newslistflag', '#newslistflag');"  page="2" class="btn-default" href="javascript:void(0);">&lt;&lt;加载更多</a>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="jianju25"></div>
+<!--{subtemplate common/footer}-->
+<script>
+	function getmoreload(url,sourceSelector,targetSelector){
+		var url,sourceSelector,targetSelector,num;
+		var page=parseInt(jq('.btn-default').attr('page'));
+		url=url+'&page='+page;
+		jq.get(url, function (html) {
+			jq(targetSelector).append(jq(html).find(targetSelector));
+			num=page+1;
+			jq('.btn-default').attr('page',num);
+		});
+	
+	}
+	
+</script>
