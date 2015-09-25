@@ -1,0 +1,27 @@
+@charset "utf-8";
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td{margin: 0;padding: 0;}table{border-collapse: collapse;border-spacing: 0;}fieldset, img{border: 0;}address, caption, cite, code, dfn, em, th, var{font-style: normal;font-weight: normal;}li{list-style: none;}caption, th{text-align: left;}h1, h2, h3, h4, h5, h6{font-size: 100%;}
+body { padding: 0; margin: 0; background-color: #fff; font-family: sans-serif; }
+h3 { font: normal 37.5px/1.6em "Microsoft Yahei",sans-serif; color: #000; }h3 span { font-size: 43.5px; color: #75bfe7;  }
+p{ line-height: 2em; margin: 0; }.cl{zoom:1;}.cl:after{ content:''; display:block; clear:both; height:0;}
+.zone1 { background: url(zone_bg1.jpg) no-repeat center top; width: 100%; height: 700px; margin:0 auto;}
+.wrap_zone_box{ width: 1000px; margin: 0 auto; background: url(zone_mianbg.jpg) no-repeat center top; height: 700px;}
+.zone1_right{ float: right; width: 295px; padding-top: 82px;}
+.col-leftd{ width: 705px; float:left;}
+.logo {padding-top: 67px;padding-bottom: 80px;}
+.zone1_dl{ margin-left: 37px;}
+.btn-dl { margin-right: 12px;}
+.zone2 { background: #fff; padding-top: 90px; padding-bottom: 196px;}
+.zone2_wrap{ width: 710px; margin: 0 auto;}
+.zone3{ background: #f7f7f7; }
+.zone3_left{ float: left; padding-top: 42px; padding-bottom: 50px; width: 460px;}
+.zone3_right{ float: right; padding-top: 113px; width: 378px;}
+.wrap_box{ width:1000px; position:relative; margin:0 auto;}
+.zone4 { background: #fff;}
+.zone4_left{ float: left; width: 455px; padding-top: 140px;}
+.zone4_right{ float:right; width: 385px; padding-top: 66px;}
+.zone5 { background: #f7f7f7;}
+.zone5_left{ float:left; width: 428px; padding-top: 86px; padding-bottom: 108px;}
+.zone5_right{ float: right; width: 420px; padding-top: 125px;}
+.zone6{ background: #c4c4c4;}
+.zone6_cont{ width:560px; margin: 0 auto; padding-bottom: 20px;}
+.zone6_cont h3{ font-size: 24px; color: #595757; display: block; padding: 20px 0;}
