@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[nimba_majia.plugin]]></item>
+	<item id="RevisionID"><![CDATA[16619]]></item>
+	<item id="SN"><![CDATA[2014111214FoZu8zkEHO]]></item>
+	<item id="RevisionDateline"><![CDATA[1404100801]]></item>
+	<item id="Data">
+		<item id="/tongji.inc.php"><![CDATA[d4d7cdeabfd81f43b05ca15f68ce94b7]]></item>
+		<item id="/majia.class.php"><![CDATA[0f3d45159da9459e3a34a0e4bccbfed4]]></item>
+		<item id="/data.inc.php"><![CDATA[92187a31740ecc3b78aaf35db3cbf38e]]></item>
+		<item id="/discuz_plugin_nimba_majia_SC_UTF8.xml"><![CDATA[15f3a16fad349c9e233ba9b8f7283ecc]]></item>
+		<item id="/install.php"><![CDATA[3b36deacaf43fa5e0ed6e084cc166dde]]></item>
+		<item id="/upgrade.php"><![CDATA[7aa7e9542ff130d17061b36f6023d051]]></item>
+		<item id="/add.inc.php"><![CDATA[d05291130a1fcb76e0d2f5cd381568d7]]></item>
+		<item id="/uninstall.php"><![CDATA[4a677d6134f36febfd3a9a8bca4ba499]]></item>
+		<item id="/discuz_plugin_nimba_majia_TC_UTF8.xml"><![CDATA[63ffd4e670bcb76a1b305102a7e899af]]></item>
+		<item id="/discuz_plugin_nimba_majia_TC_BIG5.xml"><![CDATA[ed66cdc47470707b73473f1469b30be0]]></item>
+		<item id="/posts.inc.php"><![CDATA[a88992968a6f7fb3271fe94b849983ad]]></item>
+		<item id="/template/post_infloat_top.htm"><![CDATA[5d76434bc6ea694599f5a118ca0a6e50]]></item>
+		<item id="/template/viewthread_fastpost_side.htm"><![CDATA[8db9933f74755ae3792b6cd35095834a]]></item>
+		<item id="/template/post_middle.htm"><![CDATA[5d76434bc6ea694599f5a118ca0a6e50]]></item>
+		<item id="/template/index.htm"><![CDATA[7215ee9c7d9dc229d2921a40e899ec5f]]></item>
+		<item id="/template/forumdisplay_fastpost_conten.htm"><![CDATA[5d76434bc6ea694599f5a118ca0a6e50]]></item>
+		<item id="/template/post_side_bottom.htm"><![CDATA[8db9933f74755ae3792b6cd35095834a]]></item>
+		<item id="/template/admincp.htm"><![CDATA[5507ee86bcce4c04fcac364568a0354a]]></item>
+		<item id="/addon.inc.php"><![CDATA[327e81bde5c9b2f805bb24e08874e492]]></item>
+		<item id="/admincp.inc.php"><![CDATA[6aa845cb7fc46372bf5e08ae48958ed5]]></item>
+		<item id="/discuz_plugin_nimba_majia_SC_GBK.xml"><![CDATA[7096dd9184c83034789f14d47743ad45]]></item>
+	</item>
+</root>

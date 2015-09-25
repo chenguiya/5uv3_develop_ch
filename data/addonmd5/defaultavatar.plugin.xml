@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[defaultavatar.plugin]]></item>
+	<item id="RevisionID"><![CDATA[37183]]></item>
+	<item id="SN"><![CDATA[2014111215lnUuqDvq6d]]></item>
+	<item id="RevisionDateline"><![CDATA[1404979202]]></item>
+	<item id="Data">
+		<item id="/discuz_plugin_defaultavatar_SC_UTF8.xml"><![CDATA[75116af67ed9a5ea63f02ac0c8f5c7ad]]></item>
+		<item id="/upload.inc.php"><![CDATA[1d75e60652295c3041db10306d1c38bd]]></item>
+		<item id="/libs/index.htm"><![CDATA[d41d8cd98f00b204e9800998ecf8427e]]></item>
+		<item id="/libs/upload.lib.php"><![CDATA[ec04d1e4442bf4f4e02c0877ff8f11e5]]></item>
+		<item id="/hook.class.php"><![CDATA[ce26202b452f497c7504bf716410913f]]></item>
+		<item id="/install.php"><![CDATA[48573727e592d953acfa0419e0a03acb]]></item>
+		<item id="/upgrade.php"><![CDATA[676ccf531ea09574e41a59e99bc857e8]]></item>
+		<item id="/uninstall.php"><![CDATA[8caab3abc7546b96398a8be23097b81c]]></item>
+		<item id="/discuz_plugin_defaultavatar_TC_BIG5.xml"><![CDATA[ed58fbd3ae7cd66aba6ff3a02e55fb0c]]></item>
+		<item id="/template/ajax.htm"><![CDATA[3a0e6a1e8793a8e518c2c2dc870aa7e6]]></item>
+		<item id="/template/defaultavatar.htm"><![CDATA[d5bbd0d9dd6778c2a5064cc20f4404f3]]></item>
+		<item id="/ajax.inc.php"><![CDATA[685d52c2e1be8411f74c308e767c00a4]]></item>
+		<item id="/addon.inc.php"><![CDATA[463e830b742cd0d4536ce8878c612041]]></item>
+		<item id="/avatar/default/avatar_1403071844.jpg"><![CDATA[81d5d74d974b923c997d6a5a36e5d8ef]]></item>
+		<item id="/avatar/default/avatar_1403071735.jpg"><![CDATA[70cd22ef68ab6132171d8fb068c67a14]]></item>
+		<item id="/avatar/default/avatar_1403071832.jpg"><![CDATA[35bf317af17870e2a71a94d0a4b4fb7f]]></item>
+		<item id="/avatar/default/avatar_1403071383.jpg"><![CDATA[1e5877fea555d92009aca11f89a37935]]></item>
+		<item id="/avatar/default/avatar_1403071814.jpg"><![CDATA[7d599d14dd7f83d58e981d13121fd236]]></item>
+		<item id="/avatar/default/avatar_1403071764.jpg"><![CDATA[fbdc80add3aac58a9628455b984cad06]]></item>
+		<item id="/avatar/default/avatar_1403071798.jpg"><![CDATA[71be6dda6c0557157a39eac2ee8c9b4d]]></item>
+		<item id="/avatar/default/avatar_1403071782.jpg"><![CDATA[4081d2d4218ca88b833329bec0ef5079]]></item>
+		<item id="/avatar/default/avatar_1403071725.jpg"><![CDATA[d0f4979fb9e3a71d5343b6a325e147bc]]></item>
+		<item id="/avatar/default/avatar_1403071746.jpg"><![CDATA[a1ad8bbc6d026b5abd2599a1106491b5]]></item>
+		<item id="/discuz_plugin_defaultavatar_SC_GBK.xml"><![CDATA[55f466df90ab174beb35915502e51b6a]]></item>
+		<item id="/discuz_plugin_defaultavatar_TC_UTF8.xml"><![CDATA[96a6cc7ea11e54a0efaa049cd22b2782]]></item>
+	</item>
+</root>

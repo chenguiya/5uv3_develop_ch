@@ -1,0 +1,36 @@
+<?php
+$scriptlang['fansclub'] = array(
+	'pluginname' => '球迷会插件',
+	'fansclub_level' => '球迷会等级',
+	'fansclub_level_tips' => '<ul id="tipslis"><li>球迷会等级不宜设置过多。</li><li>当允许球迷会内发帖等操作影响用户积分时应谨慎，用户有可能通过球迷会刷积分。</li><li>默认等级图标大小是25 X 25像素。</li></ul>',
+	'club_level_noexist' => '球迷会等级不存在',
+	//积分策略
+	'handle' => '操作',
+	'cycle' => '周期',
+	'rewardnum' => '奖励次数',
+	'credits' => '贡献',
+	'time' => '间隔时间',
+	'fansclub_credits_rule' => '积分规则',
+	'fansclub_credits_rule_tips' => '<ul id="tipslis"><li>选中的操作生效。</li><li>后面文本框录入操作增加/扣除的积分数值。</li><li>当允许球迷会内发帖等操作影响用户积分时应谨慎，用户有可能通过球迷会刷积分。</li></ul>',
+	'club_level_credits_post' => '发帖加积分',
+	'club_level_credits_reply' => '回复加积分',
+	'club_level_credits_digest' => '加精华增加积分',
+	'club_level_credits_postattach' => '上传附件加积分',
+	'club_level_credits_getattach' => '下载附件扣积分',
+	'club_level_credits_tradefinished' => '成功交易积分',
+	'club_level_credits_joinpoll' => '参与投票加积分',
+	//前端
+	'official_club' => '官方球迷会',
+	'fansclub' => '球迷会',
+	'fans' => '球迷',
+	'thread_num' => '帖子数',
+	'contribution' => '贡献值',
+	'hot' => '热点',
+	'latest' => '最新',
+	'dynamic' => '动态',
+	'chairman' => '会长',
+	'vice-chairman' => '副会长',
+	'director' => '理事',
+	'home' => '首页',
+		
+);

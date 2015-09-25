@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[fendou_ph.plugin]]></item>
+	<item id="RevisionID"><![CDATA[21567]]></item>
+	<item id="SN"><![CDATA[201409251009944KN034]]></item>
+	<item id="RevisionDateline"><![CDATA[1375840801]]></item>
+	<item id="Data">
+		<item id="/discuz_plugin_fendou_ph_TC_BIG5.xml"><![CDATA[687ad66b355a6e644e3b79de81ef3b94]]></item>
+		<item id="/discuz_plugin_fendou_ph_TC_UTF8.xml"><![CDATA[672eebba646b6589a2738c84f685a732]]></item>
+		<item id="/discuz_plugin_fendou_ph_SC_GBK.xml"><![CDATA[eda4cec68a084e9d9e8f351243399ded]]></item>
+		<item id="/template/jfbz.htm"><![CDATA[978f309831a8d51f65bba1e6e4508485]]></item>
+		<item id="/template/fbztz.htm"><![CDATA[e799002919a99c852b36a53831906a47]]></item>
+		<item id="/template/hy.htm"><![CDATA[6d18ad98e8ec4eec287c5dc2698a9683]]></item>
+		<item id="/template/jhbz.htm"><![CDATA[9772ea7044092618ece646b47282d27e]]></item>
+		<item id="/template/zcbz.htm"><![CDATA[a1051c024e3b9a5e92b1cba181dfa23c]]></item>
+		<item id="/template/fz.htm"><![CDATA[4540fb59e065b8f8df0e65a038e5df62]]></item>
+		<item id="/template/fbhfz.htm"><![CDATA[1d5914b98c25854815e36ee3238d53d6]]></item>
+		<item id="/template/zxsjz.htm"><![CDATA[1f3a9984b941687e233af6858983c552]]></item>
+		<item id="/ph.class.php"><![CDATA[d3a7dc2dd5738a38507a7ec054efaeea]]></item>
+		<item id="/discuz_plugin_fendou_ph_SC_UTF8.xml"><![CDATA[2e81ff07252f5cac320fb35d9f574623]]></item>
+		<item id="/hy.inc.php"><![CDATA[44d52afb5b4d939e91f50f504da9fe0d]]></item>
+	</item>
+</root>

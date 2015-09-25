@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[geetest.plugin]]></item>
+	<item id="RevisionID"><![CDATA[25572]]></item>
+	<item id="SN"><![CDATA[2015071714p3FHnChPPp]]></item>
+	<item id="RevisionDateline"><![CDATA[1436252401]]></item>
+	<item id="Data">
+		<item id="/about.inc.php"><![CDATA[9148b5d390bbc848fe064217bab3f44e]]></item>
+		<item id="/advance.inc.php"><![CDATA[483440373c2d9d99518cd3bbb408a862]]></item>
+		<item id="/discuz_plugin_geetest_SC_GBK.xml"><![CDATA[a1f17092a75685b9837b8c96c9ca7061]]></item>
+		<item id="/discuz_plugin_geetest_SC_UTF8.xml"><![CDATA[8341206bb15fbf9155ac8ecd499d6f72]]></item>
+		<item id="/discuz_plugin_geetest_TC_BIG5.xml"><![CDATA[3596be6b941d15878437a445fa175ad8]]></item>
+		<item id="/discuz_plugin_geetest_TC_UTF8.xml"><![CDATA[21b8b4a3ff50903f9ccfe11388f9f879]]></item>
+		<item id="/feedback.inc.php"><![CDATA[2bdc09ecccbc216a2eb2712540a18028]]></item>
+		<item id="/geetest.class.php"><![CDATA[1fc4468c73fb70128a5073a1e9eef2ad]]></item>
+		<item id="/geetestcloud.inc.php"><![CDATA[575a8516ec955e1097acf611ca0ae847]]></item>
+		<item id="/geetest_mobile.class.php"><![CDATA[13dbcfb6b49406082a6bc89bdd91b453]]></item>
+		<item id="/install.php"><![CDATA[4713c310810b36e1edd67ca234ca7aca]]></item>
+		<item id="/lib/config.php"><![CDATA[764c67e983f8fad138f5f80f59785104]]></item>
+		<item id="/lib/geetestlib.php"><![CDATA[d343f17e7f7ccd5c4ea044a3bcec962c]]></item>
+		<item id="/plugin_class/plugin_geetest_forum.class.php"><![CDATA[54289e99a5e0dce7e2767155c1b1ff89]]></item>
+		<item id="/plugin_class/plugin_geetest_home.class.php"><![CDATA[cd0938ecd5ae7f06231259ba254f559b]]></item>
+		<item id="/plugin_class/plugin_geetest_member.class.php"><![CDATA[574c444e3eb64ec84ccdb7319a323411]]></item>
+		<item id="/template/geetest_mobile/discuz_style_geetest_mobile.xml"><![CDATA[ec54ebe0945fbbb342fd02ce48320c7a]]></item>
+		<item id="/template/geetest_mobile/index.htm"><![CDATA[7215ee9c7d9dc229d2921a40e899ec5f]]></item>
+		<item id="/template/geetest_mobile/mobile/forum/forumdisplay_fastpost.htm"><![CDATA[35b9e61b874d99247bcdd45060e99a73]]></item>
+		<item id="/template/geetest_mobile/mobile/forum/post.htm"><![CDATA[1c0c540b282a749f55c9913444dbf7f6]]></item>
+		<item id="/template/geetest_mobile/mobile/member/login.htm"><![CDATA[73adbb426e767c4ca35953646ff23c4a]]></item>
+		<item id="/template/geetest_mobile/mobile/member/register.htm"><![CDATA[3f552108aef7f7d554823102b53e747d]]></item>
+		<item id="/template/geetest_mobile/touch/forum/forumdisplay_fastpost.htm"><![CDATA[783cab7f1be290d8e2ac90a001422d4a]]></item>
+		<item id="/template/geetest_mobile/touch/forum/post.htm"><![CDATA[1c76d5ba303b23810ccb220f34235eeb]]></item>
+		<item id="/template/geetest_mobile/touch/member/login.htm"><![CDATA[911d979a5477eea82ff0b7017c830d69]]></item>
+		<item id="/template/geetest_mobile/touch/member/register.htm"><![CDATA[c9499dcd465993e6e8334ce169213cfb]]></item>
+		<item id="/template/readme.xml"><![CDATA[324a26654ff541d0d64abdef5aaa93e7]]></item>
+		<item id="/upgrade.php"><![CDATA[c275e3e196f9c156b5ae9f53b02b1299]]></item>
+		<item id="/js/mobile_keyset.js"><![CDATA[d372d8dc8c41bf6b0b9df1e9c71454de]]></item>
+		<item id="/js/web_keyset.js"><![CDATA[de13f0ee527f037b9d42de976e59b1cb]]></item>
+		<item id="/js/geetest_mobile.js"><![CDATA[2d2b0e8b8486fcc1730f47e8cb02bcbd]]></item>
+		<item id="/plugin_class/plugin_geetest_group.class.php"><![CDATA[842f356bda9a26be9c29e4e49fd253d1]]></item>
+	</item>
+</root>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[of_forum_nav.plugin]]></item>
+	<item id="RevisionID"><![CDATA[34457]]></item>
+	<item id="SN"><![CDATA[2014122912Du00U22Zfm]]></item>
+	<item id="RevisionDateline"><![CDATA[1398736801]]></item>
+	<item id="Data">
+		<item id="/about.inc.php"><![CDATA[ec25f4a50819165a80f7534d3f54885f]]></item>
+		<item id="/discuz_plugin_of_forum_nav_SC_GBK.xml"><![CDATA[48f57780ec3fc55377167a6667b19fbf]]></item>
+		<item id="/discuz_plugin_of_forum_nav_SC_UTF8.xml"><![CDATA[2b5c687da9513461890be3e779e2a545]]></item>
+		<item id="/discuz_plugin_of_forum_nav_TC_BIG5.xml"><![CDATA[8c906a0027265756e10cf235fcc828fe]]></item>
+		<item id="/discuz_plugin_of_forum_nav_TC_UTF8.xml"><![CDATA[c8ba2d60ebcc1cb37438de46429efa40]]></item>
+		<item id="/images/icon.gif"><![CDATA[4f0b13667717aa4daab93aa88229c72f]]></item>
+		<item id="/images/left/1.gif"><![CDATA[5583d00866d33bce6cce718c2f5fccee]]></item>
+		<item id="/images/left/10.gif"><![CDATA[7cc76da1127f0c12e7c191d4653cc713]]></item>
+		<item id="/images/left/2.gif"><![CDATA[4ae6061cdccb46f3a43cc597c68e2e83]]></item>
+		<item id="/images/left/3.gif"><![CDATA[067562ea3df8099d4d24234fb1493403]]></item>
+		<item id="/images/left/4.gif"><![CDATA[f90637d1d318136cd134a6a83d50afdd]]></item>
+		<item id="/images/left/5.gif"><![CDATA[f60f90207a629a5d696e65a10d228b5b]]></item>
+		<item id="/images/left/6.gif"><![CDATA[91fbe9203b153bd7f8f391eb6e22ce34]]></item>
+		<item id="/images/left/7.gif"><![CDATA[43f0e3d881e15d94185c7f60ffa1778e]]></item>
+		<item id="/images/left/8.gif"><![CDATA[6b0c09e9a7de7242834a380bd170e939]]></item>
+		<item id="/images/left/9.gif"><![CDATA[c536b5724492d224c55a08b8ed392d42]]></item>
+		<item id="/images/right/1.gif"><![CDATA[99ff9742f8f5ccef094ffd3e8c41131e]]></item>
+		<item id="/images/right/10.gif"><![CDATA[0de348816308c20ef57fcef5bd62f5c7]]></item>
+		<item id="/images/right/2.gif"><![CDATA[97d1966a50ca8d3eb589436e1baa8acb]]></item>
+		<item id="/images/right/3.gif"><![CDATA[ca7e0ee2561b301ab7736669b0786414]]></item>
+		<item id="/images/right/4.gif"><![CDATA[b36f6a88d50bab14b21ffd96c5eee6f0]]></item>
+		<item id="/images/right/5.gif"><![CDATA[8f00aa7441b157f4d77d7fc27f00d16c]]></item>
+		<item id="/images/right/6.gif"><![CDATA[d9e2e381067e09018998fb890a28491c]]></item>
+		<item id="/images/right/7.gif"><![CDATA[e4d1ece386ca9a02b24822f5f8e4c576]]></item>
+		<item id="/images/right/8.gif"><![CDATA[175046d9fe94949faf6cf0b4649b9c9b]]></item>
+		<item id="/images/right/9.gif"><![CDATA[58b05fc5727c02438913c19015686d36]]></item>
+		<item id="/images/scroll-bg.gif"><![CDATA[de2cd9c2bcdd013553cc1b200bd1d2bc]]></item>
+		<item id="/images/tile-bg.png"><![CDATA[13f88d4cd5ebac9b79ec4b3f5b024847]]></item>
+		<item id="/lang.php"><![CDATA[00ae8a2a605fa8e39d744f95571d1875]]></item>
+		<item id="/scripts/jquery_1.7.js"><![CDATA[a0ac638f2180b5b44321143541501d63]]></item>
+		<item id="/scripts/of_side_scroll.js"><![CDATA[da209c15892f500515e07db7a0484185]]></item>
+		<item id="/sidenavbar.class.php"><![CDATA[37883ccc9c2f7cb1087301e624b04326]]></item>
+		<item id="/styles/s1.css"><![CDATA[832351667846c7a8f011fb770d51c191]]></item>
+		<item id="/styles/s10.css"><![CDATA[65e5e05f93c6f24c64df5d21d3b16608]]></item>
+		<item id="/styles/s2.css"><![CDATA[f3a05db8834d391055bdc6cf56d1aea3]]></item>
+		<item id="/styles/s3.css"><![CDATA[ea47989ad1fba05c879dd0f6086cb2d2]]></item>
+		<item id="/styles/s4.css"><![CDATA[2100aa585a3a1334e4a480ddc79bf998]]></item>
+		<item id="/styles/s5.css"><![CDATA[de37f8b3ac84cd8c01845019356916a0]]></item>
+		<item id="/styles/s6.css"><![CDATA[797e5970ab0442974aaf08ec4a80612b]]></item>
+		<item id="/styles/s7.css"><![CDATA[28952851023fe7ba4973026e1b78a69d]]></item>
+		<item id="/styles/s8.css"><![CDATA[b2432f3439bcb7e56944bb549018a383]]></item>
+		<item id="/styles/s9.css"><![CDATA[8280405ea0169b7db75898720e6e2602]]></item>
+		<item id="/styles/style-left.css"><![CDATA[3d7dbc7a5fd4c2b7f015b28302b2c572]]></item>
+		<item id="/styles/style-right.css"><![CDATA[94d0659a3d425df1417da73485821ff0]]></item>
+		<item id="/styles/style.css"><![CDATA[a04c5f9d059cd0364efd32299a0aac42]]></item>
+	</item>
+</root>

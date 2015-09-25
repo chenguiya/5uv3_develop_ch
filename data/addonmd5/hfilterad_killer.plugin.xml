@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[hfilterad_killer.plugin]]></item>
+	<item id="RevisionID"><![CDATA[17844]]></item>
+	<item id="SN"><![CDATA[2014120418vFrdgppppf]]></item>
+	<item id="RevisionDateline"><![CDATA[1412150402]]></item>
+	<item id="Data">
+		<item id="/discuz_plugin_hfilterad_killer_SC_GBK.xml"><![CDATA[a270c6d58a180645df6513610cf6d5f0]]></item>
+		<item id="/discuz_plugin_hfilterad_killer_SC_UTF8.xml"><![CDATA[244062af229c56fe8573f62a877b673f]]></item>
+		<item id="/discuz_plugin_hfilterad_killer_TC_BIG5.xml"><![CDATA[30d7b6133ea53e68ebd45ded7a617f0e]]></item>
+		<item id="/discuz_plugin_hfilterad_killer_TC_UTF8.xml"><![CDATA[e3e86ee4cedc4334cf2f398746a8059e]]></item>
+		<item id="/install.php"><![CDATA[86f176db06049b13d675fb17c9e002b8]]></item>
+		<item id="/killer.class.php"><![CDATA[cf9336b08b289b31412a66017b8be8c7]]></item>
+		<item id="/mobile.class.php"><![CDATA[5ebbe2da9f485709cf02bfd0984dc695]]></item>
+		<item id="/uninstall.php"><![CDATA[cdd6b0507be85fd1316c0b0e25d9cb31]]></item>
+	</item>
+</root>

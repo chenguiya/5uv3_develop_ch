@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[jz52_jump.plugin]]></item>
+	<item id="RevisionID"><![CDATA[35098]]></item>
+	<item id="SN"><![CDATA[2014122911475j3N9EEj]]></item>
+	<item id="RevisionDateline"><![CDATA[1399384801]]></item>
+	<item id="Data">
+		<item id="/discuz_plugin_jz52_jump_SC_GBK.xml"><![CDATA[748af827c3ac45518c61747d4ba7960b]]></item>
+		<item id="/discuz_plugin_jz52_jump_SC_UTF8.xml"><![CDATA[8a386e8a5ffbac3983c45d017e7208c6]]></item>
+		<item id="/discuz_plugin_jz52_jump_TC_BIG5.xml"><![CDATA[fcb4d5b51f88695a9dc87d43df18e728]]></item>
+		<item id="/discuz_plugin_jz52_jump_TC_UTF8.xml"><![CDATA[2187eb48c1a3bbb31ecfff1c5455be82]]></item>
+		<item id="/index.html"><![CDATA[d41d8cd98f00b204e9800998ecf8427e]]></item>
+		<item id="/jump.class.php"><![CDATA[c31478c7852a4409f449ca404d306515]]></item>
+	</item>
+</root>

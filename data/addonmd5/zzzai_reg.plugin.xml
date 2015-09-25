@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[zzzai_reg.plugin]]></item>
+	<item id="RevisionID"><![CDATA[13037]]></item>
+	<item id="SN"><![CDATA[2014120418l9b2j1qBPq]]></item>
+	<item id="RevisionDateline"><![CDATA[1389146401]]></item>
+	<item id="Data">
+		<item id="/discuz_plugin_zzzai_reg_SC_GBK.xml"><![CDATA[9f4c724e86dc152ca2ebd3b351119863]]></item>
+		<item id="/discuz_plugin_zzzai_reg_SC_UTF8.xml"><![CDATA[6c949062c563ca6bb59c2a1e0cdd2ce8]]></item>
+		<item id="/discuz_plugin_zzzai_reg_TC_BIG5.xml"><![CDATA[5961e7a0da27042e141b8ec3256c3d32]]></item>
+		<item id="/discuz_plugin_zzzai_reg_TC_UTF8.xml"><![CDATA[123ca1e611a6998cac9dc77c0cd2057c]]></item>
+		<item id="/index.htm"><![CDATA[d41d8cd98f00b204e9800998ecf8427e]]></item>
+		<item id="/uninstall.php"><![CDATA[e225ce901f79e664367fed64ebfbc87d]]></item>
+		<item id="/zzzai_ban.inc.php"><![CDATA[385155c7bea9a02404e065b5c5f86e71]]></item>
+		<item id="/zzzai_down.inc.php"><![CDATA[347d77525d4ba1616e1633bf3dc6522f]]></item>
+		<item id="/zzzai_log.inc.php"><![CDATA[b877894c846716dce7fd6a57b0c8002d]]></item>
+		<item id="/zzzai_reg.class.php"><![CDATA[3a53767e90316c66534a96ab358a273e]]></item>
+	</item>
+</root>

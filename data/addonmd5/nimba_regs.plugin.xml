@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[nimba_regs.plugin]]></item>
+	<item id="RevisionID"><![CDATA[16068,39765]]></item>
+	<item id="SN"><![CDATA[2014111215Hf87i96L7I,20141112153S3FZgf3Fe]]></item>
+	<item id="RevisionDateline"><![CDATA[1412992801,1407571202]]></item>
+	<item id="Data">
+		<item id="/table/table_nimba_member.php"><![CDATA[32fb5fdac443abd67475ebdc038c089d]]></item>
+		<item id="/discuz_plugin_nimba_regs_SC_GBK.xml"><![CDATA[4e4ced87b9bb8c3620be020a46f15933]]></item>
+		<item id="/libs/avatar.lib.php"><![CDATA[bcc593f8f85567b19dcfc988a3a2a3db]]></item>
+		<item id="/libs/upload.lib.php"><![CDATA[09fdb55fa3a458cc7c2593a01ea91e66]]></item>
+		<item id="/data.inc.php"><![CDATA[986697a49cc4456866236a9bce8d0dc9]]></item>
+		<item id="/status.inc.php"><![CDATA[09d86377ec4381539d69b7a13d913f3a]]></item>
+		<item id="/install.php"><![CDATA[2e123dfe08e88b59ddaf60cf77b9ef63]]></item>
+		<item id="/upgrade.php"><![CDATA[def02c655a1f4c651bac969abe68925f]]></item>
+		<item id="/discuz_plugin_nimba_regs_SC_UTF8.xml"><![CDATA[56916f56fb882e73ddfeb13b486d933f]]></item>
+		<item id="/uninstall.php"><![CDATA[39da57a1ffe077d4d1c78e2004cf8c59]]></item>
+		<item id="/output.inc.php"><![CDATA[636d8368d9eda68b5c0d4f3b6e3464c8]]></item>
+		<item id="/template/regs.htm"><![CDATA[886d63e9fd4c9c8eb8b80d13e25079f1]]></item>
+		<item id="/template/upload.htm"><![CDATA[1741299b7e7352b87e7c70b9a996e247]]></item>
+		<item id="/addon.inc.php"><![CDATA[b32dada88105e31926433655b1098a2c]]></item>
+		<item id="/pregs.inc.php"><![CDATA[fd8c97bd7002f27a341ce21d825c7944]]></item>
+		<item id="/function/regs.fun.php"><![CDATA[8dc084c9b1245eaf248616fb9adf6878]]></item>
+		<item id="/avatar.inc.php"><![CDATA[52f3f2bf20b2722be370573c34ba1e54]]></item>
+		<item id="/regs.inc.php"><![CDATA[6fcea9a513ff4b3a7b109f778f704fd7]]></item>
+		<item id="/regs.class.php"><![CDATA[de25a6d9e379bf7bc39a541fc16756d9]]></item>
+		<item id="/libs/output.lib.php"><![CDATA[b054de25857cc5dbebfc59379eb0caab]]></item>
+	</item>
+</root>

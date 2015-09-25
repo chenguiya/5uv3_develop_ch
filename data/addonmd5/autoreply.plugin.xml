@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[autoreply.plugin]]></item>
+	<item id="RevisionID"><![CDATA[11186,23401,31631,35769]]></item>
+	<item id="SN"><![CDATA[201411111641rj7R5A43,20141111162zWLI2SIpj,2014111215rlPYUYLPzN,2014111215WtBiKKVFWr]]></item>
+	<item id="RevisionDateline"><![CDATA[1409626801,1387519202,1392984001,1400234401]]></item>
+	<item id="Data">
+		<item id="/autoreply.class.php"><![CDATA[d719c2ade6357b261444d94ce72dcfbf]]></item>
+		<item id="/member.inc.php"><![CDATA[935e042a461ee9c4e8f3ad721deff343]]></item>
+		<item id="/index.html"><![CDATA[d41d8cd98f00b204e9800998ecf8427e]]></item>
+		<item id="/table/index.html"><![CDATA[d41d8cd98f00b204e9800998ecf8427e]]></item>
+		<item id="/table/table_plugin_autoreply_kv.php"><![CDATA[c8b3a9b26e4342ef030e106cea671994]]></item>
+		<item id="/table/table_forum_thread_plugin.php"><![CDATA[69c5c6bed2be0789939d75fbedff6363]]></item>
+		<item id="/table/table_plugin_autoreply_ref.php"><![CDATA[132b1837d800ed252ef46b4f825f39b5]]></item>
+		<item id="/table/table_plugin_autoreply_thread.php"><![CDATA[ba978454eb02fdd0670c8bf30bfbe269]]></item>
+		<item id="/table/table_plugin_autoreply_member.php"><![CDATA[43a10e765cfe48b37aa39b7987ed9d13]]></item>
+		<item id="/discuz_plugin_autoreply_SC_UTF8.xml"><![CDATA[37f03dc18efb0b4a7b422194d799cf39]]></item>
+		<item id="/RTCreative.php"><![CDATA[4e80d774a1efddfe11faf4e32ea10cf7]]></item>
+		<item id="/extend.inc.php"><![CDATA[6deccbce8f51f16d0c24031f4bcdf076]]></item>
+		<item id="/install.php"><![CDATA[6a89566201b2d15d87678f5e17fc8282]]></item>
+		<item id="/discuz_plugin_autoreply_TC_BIG5.xml"><![CDATA[010278a6d9a94bc2bde13dc4104d1647]]></item>
+		<item id="/aboutme.inc.php"><![CDATA[70d3455bc66bd94ba55528bdd7cfdc23]]></item>
+		<item id="/uninstall.php"><![CDATA[f55af34e28d11bef58b60ec3362228ba]]></item>
+		<item id="/reply.inc.php"><![CDATA[31b0db2e5f469cbc427abd241c2e8884]]></item>
+		<item id="/template/index.html"><![CDATA[d41d8cd98f00b204e9800998ecf8427e]]></item>
+		<item id="/template/aboutme.htm"><![CDATA[c0157a59fb9e1d79c6c28257df078a34]]></item>
+		<item id="/template/bussiness.htm"><![CDATA[1f0c45141c3c442af53ec3b3ba29a920]]></item>
+		<item id="/recommend.inc.php"><![CDATA[601239ad328605e2ed3c113dea9bec67]]></item>
+		<item id="/include/index.html"><![CDATA[d41d8cd98f00b204e9800998ecf8427e]]></item>
+		<item id="/include/function.inc.php"><![CDATA[21b146e5cef525dffd37e4c87f59f851]]></item>
+		<item id="/trend.inc.php"><![CDATA[7571ffb6937c7fd435a8224ef82e1109]]></item>
+		<item id="/discuz_plugin_autoreply_SC_GBK.xml"><![CDATA[d4b9913c519b41c4af4e2be414accf0b]]></item>
+		<item id="/discuz_plugin_autoreply_TC_UTF8.xml"><![CDATA[797469087932347407c913a5ba4bd4d8]]></item>
+		<item id="/include/functions.inc.php"><![CDATA[674faf83a06a608556cb3be5d083bf56]]></item>
+		<item id="/include/super_var.inc.php"><![CDATA[f7f31455ad9ce19c1d23f176ff4e01cc]]></item>
+		<item id="/include/multi_reply.inc.php"><![CDATA[8f2f981153704c193a4007f003d53608]]></item>
+	</item>
+</root>

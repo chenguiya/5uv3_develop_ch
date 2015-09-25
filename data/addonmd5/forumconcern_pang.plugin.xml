@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[forumconcern_pang.plugin]]></item>
+	<item id="RevisionID"><![CDATA[38404]]></item>
+	<item id="SN"><![CDATA[2014092910B70acn79bn]]></item>
+	<item id="RevisionDateline"><![CDATA[1405303202]]></item>
+	<item id="Data">
+		<item id="/ajax.inc.php"><![CDATA[e61c304fbdc992f588ea2919938a872c]]></item>
+		<item id="/discuz_plugin_forumconcern_pang_SC_GBK.xml"><![CDATA[3aed80dd8d9935472b811f4531da5f2c]]></item>
+		<item id="/discuz_plugin_forumconcern_pang_SC_UTF8.xml"><![CDATA[bfb8dba4d240c487af75ee48e5c08f48]]></item>
+		<item id="/discuz_plugin_forumconcern_pang_TC_BIG5.xml"><![CDATA[9007f4172c1224bc4fe45c8f2da09276]]></item>
+		<item id="/discuz_plugin_forumconcern_pang_TC_UTF8.xml"><![CDATA[4fd11edeb409d3e3ae8fb8077f9804a6]]></item>
+		<item id="/forum_concern.inc.php"><![CDATA[c2754d88ee3b6d4e36f7b8907c896b7f]]></item>
+		<item id="/hook.class.php"><![CDATA[5c508fd14b33ffdf25657911f34cdc65]]></item>
+		<item id="/install.php"><![CDATA[d3d18df74595181205b5deb105836004]]></item>
+		<item id="/template/forum_concern.htm"><![CDATA[b5e0739462872121d9c3a4a508b246c9]]></item>
+		<item id="/template/forum_concern_ajax.htm"><![CDATA[b6368c944d1c618b885eca74219a5d75]]></item>
+		<item id="/uninstall.php"><![CDATA[081b93384102da58cb1668cd002911ac]]></item>
+	</item>
+</root>

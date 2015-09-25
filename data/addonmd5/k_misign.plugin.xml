@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[k_misign.plugin]]></item>
+	<item id="RevisionID"><![CDATA[41405]]></item>
+	<item id="SN"><![CDATA[2015041517YKinEFPBRJ]]></item>
+	<item id="RevisionDateline"><![CDATA[1411048801]]></item>
+	<item id="Data">
+		<item id="/addon.inc.php"><![CDATA[3c3973a73f51bdd97309899878abd630]]></item>
+		<item id="/buttoncp.inc.php"><![CDATA[f896e1e5f6d127b343e13f2fb46df9d7]]></item>
+		<item id="/discuz_plugin_k_misign_SC_GBK.xml"><![CDATA[e2e760116c5243705d200f6c5806e6d3]]></item>
+		<item id="/discuz_plugin_k_misign_SC_UTF8.xml"><![CDATA[6bfd7f1bee5e52d73e66349139db3f41]]></item>
+		<item id="/discuz_plugin_k_misign_TC_BIG5.xml"><![CDATA[7cc80835f11ec8df6833395d7091b4bf]]></item>
+		<item id="/discuz_plugin_k_misign_TC_UTF8.xml"><![CDATA[2baa9405d288c74a493cdf44193c195c]]></item>
+		<item id="/install.php"><![CDATA[5097b5eeaa89981a43ee45935483dfac]]></item>
+		<item id="/pluginextendcp.inc.php"><![CDATA[bce13af51c368788e0fbb571e33f2994]]></item>
+		<item id="/sign.class.php"><![CDATA[27273fc6f2567cdbc08dbb79a103f8ac]]></item>
+		<item id="/sign.inc.php"><![CDATA[4b6cb0761c60894310c09ef8b57b2e7a]]></item>
+		<item id="/static/come.js"><![CDATA[10550822d53e6ac1779acabdc65d3fb6]]></item>
+		<item id="/static/come_10.jpg"><![CDATA[f39b6bf59d1337992d185a8c4fd0a5c5]]></item>
+		<item id="/static/come_11.jpg"><![CDATA[aacc0b44b300fda5a26f027872961aa6]]></item>
+		<item id="/static/come_12.jpg"><![CDATA[71551639c0672ddf6ceb415c48991830]]></item>
+		<item id="/static/come_16.png"><![CDATA[29969d6575abec1e23c304e6d739a704]]></item>
+		<item id="/static/come_24.jpg"><![CDATA[490258ea3c5c034986c590ba1d8775d3]]></item>
+		<item id="/static/come_25.jpg"><![CDATA[e4050a4853eacf3b07bd73d1007a9681]]></item>
+		<item id="/static/come_26.jpg"><![CDATA[16cdd3adb84fd36e499b3bd9a35bd8b2]]></item>
+		<item id="/static/come_27.jpg"><![CDATA[a0792d130be43af30d336383403cf918]]></item>
+		<item id="/static/come_2_left.jpg"><![CDATA[af89157ab5b47f6978b00094fdd0a484]]></item>
+		<item id="/static/come_2_right.jpg"><![CDATA[cd089f3d344f49a315e1f85b5bb8d7d8]]></item>
+		<item id="/static/come_30.jpg"><![CDATA[22f02436cf7ab8beac84e3bc7b2c12c6]]></item>
+		<item id="/static/come_7.jpg"><![CDATA[3f899df8b81bd8c52c3a3afcaa4a6c2d]]></item>
+		<item id="/static/come_8.jpg"><![CDATA[811689a8b4fa9615114e520ea73c1494]]></item>
+		<item id="/static/come_9.jpg"><![CDATA[effc64cedfdbec6674ed760da87f15db]]></item>
+		<item id="/static/doT.js"><![CDATA[d22d6f76b03fbcbbd6c932098b943d69]]></item>
+		<item id="/static/heart5.png"><![CDATA[5439a93e91c531f1b5518ceb7640ed1e]]></item>
+		<item id="/static/jquery18.js"><![CDATA[5021d2fbfd0043a1937579dcf59e5df9]]></item>
+		<item id="/static/kfgm_2.png"><![CDATA[c4c3554e0a282a577a2fec9f742810c9]]></item>
+		<item id="/static/sign.css"><![CDATA[ce1f3ad5d5e74ba90c0772acac387b6e]]></item>
+		<item id="/static/sprBg.png"><![CDATA[3a941379b327c6c7b693150c002c1064]]></item>
+		<item id="/static/tou.png"><![CDATA[ae0e25b7d9e9a27f3a2a223d3a45d752]]></item>
+		<item id="/static/tou2.jpg"><![CDATA[6dcbc14a86997d688f281d9275c96ddd]]></item>
+		<item id="/table/table_plugin_k_misign.php"><![CDATA[2e99b89ef902746a252c3ea22a2d5cbb]]></item>
+		<item id="/table/table_plugin_k_misign_prize.php"><![CDATA[feca7b4f5b539fb5e839a767e13399dd]]></item>
+		<item id="/table/table_plugin_k_misign_prize_kami.php"><![CDATA[17747e9838e525dbbb8f5ef5e51a8871]]></item>
+		<item id="/table/table_plugin_k_misign_prize_log.php"><![CDATA[6f2307c4a0bd76fb7da5e57dfa84e0c0]]></item>
+		<item id="/table/table_plugin_k_misign_push.php"><![CDATA[5f70fbe09588c5704f08044e1863852e]]></item>
+		<item id="/template/float.htm"><![CDATA[ba57796c3a373845c6897e8081d7c3ad]]></item>
+		<item id="/template/hook_indexside.htm"><![CDATA[a6829955b9306ba7dcb1004ff8111e9d]]></item>
+		<item id="/template/sign2.htm"><![CDATA[9736f983e9e4685e96942ea5c2a704d4]]></item>
+		<item id="/uninstall.php"><![CDATA[596842ea56fd22cc4e87827fde975b0d]]></item>
+	</item>
+</root>
