@@ -1,0 +1,101 @@
+<div id="elecnation_group_title_line" style="margin-top:18px;"></div>
+<div id="elecnation_group_title" style="width:60px;">{lang group_discuss_area}</div>
+
+<!--{if helper_access::check_module('group')}-->
+<div class="threadlist">
+			<div>
+			<!--{if $_G['forum_threadcount']}-->
+				<!--{loop $_G['forum_threadlist'] $key $thread}-->
+					<!--{if !$_G['setting']['mobile']['mobiledisplayorder3'] && $thread['displayorder'] > 0}-->
+						{eval continue;}
+					<!--{/if}-->
+                	<!--{if $thread['displayorder'] > 0 && !$displayorder_thread}-->
+                		{eval $displayorder_thread = 1;}
+                    <!--{/if}-->
+					<!--{if $thread['moved']}-->
+						<!--{eval $thread[tid]=$thread[closed];}-->
+					<!--{/if}-->
+					
+					<!--{hook/forumdisplay_thread_mobile $key}-->
+                    <a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra" $thread[highlight] >
+					<div id="threadlist_li">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td width="18" valign="top">
+                        <!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+                        	<span><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_top.gif" width="13" height="12"></span>
+                        <!--{elseif $thread['attachment'] == 2 && $_G['setting']['mobile']['mobilesimpletype'] == 0}-->
+                            <span><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_img.gif" width="13" height="12"></span>
+                        <!--{elseif $thread['digest'] > 0}-->
+                        	<span><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_dig.gif" width="13" height="12"></span>
+                        <!--{else}-->
+							<span><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_tid.gif" width="13" height="12"></span>
+                        <!--{/if}-->
+                      </td>
+                        <td valign="top">{$thread[subject]}</td>
+                      </tr>
+                    </table>
+                    
+                    <div style="margin-left:18px; font-size:11px; color:#AAAAAA; line-height:16px;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <!--{if $thread['replies'] > 0}-->
+                      <tr>
+                        <td width="80%">
+                        	{lang author} : 
+							<!--{if $thread['author'] && !$thread['anonymous']}-->
+                            $thread[author]
+                            <!--{else}-->
+                            {lang anonymous}
+                            <!--{/if}-->
+                        	 @ $thread[dateline]
+                            <br />
+                            {lang join_thread} : 
+                            <!--{if $thread['lastposter'] && !$thread['anonymous']}-->
+                            $thread[lastposter] @ $thread[lastpost]
+                            <!--{else}-->
+                            	{lang anonymous} @ $thread[lastpost]
+                          	<!--{/if}-->
+                            
+                        </td>
+                        <td align="right">
+                        	$thread[allreplies] {lang join_thread}<br />
+							$thread[views] {lang focus_show}
+                        </td>
+                      </tr>
+					  <!--{else}-->
+                      <tr>
+                        <td width="80%">
+                        	{lang author} :
+                            <!--{if $thread['author'] && !$thread['anonymous']}-->
+                            $thread[author]
+                            <!--{else}-->
+                            {lang anonymous}
+                            <!--{/if}-->
+                        	 @ $thread[dateline]
+                        </td>
+                        <td align="right">
+                        	$thread[allreplies] {lang join_thread}<br />
+							$thread[views] {lang focus_show}
+                        </td>
+                      </tr>
+                        <!--{/if}-->
+                    </table>
+                    </div>
+                    </div>
+					</a>
+					
+                <!--{/loop}-->
+            <!--{else}-->
+			<div id="elecnation_noinfo">{lang forum_nothreads}</div>
+			<!--{/if}-->
+		</div>
+
+$multipage
+<div id="elecnation_multi_footer"></div>
+
+</div>
+<!--{/if}-->
+
+
+<!--{hook/forumdisplay_bottom_mobile}-->
+<div class="pullrefresh" style="display:none;"></div>

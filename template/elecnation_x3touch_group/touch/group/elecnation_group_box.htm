@@ -1,0 +1,145 @@
+<div id="box1" style="display:none;">
+	<div class="elecnation_group_box_hide" style="padding-left:37px;">
+		<img src="{$_G['style']['styleimgdir']}/touch/common/images/group_arrow.png" width="11" height="5" />
+	</div>
+	<div class="elecnation_group_box_div">
+	<!--{loop dunserialize($_G['setting']['group_recommend']) $val}-->
+	<a href="forum.php?mod=group&fid=$val[fid]">
+	<div class="elecnation_group_box_div_box">
+    	<div class="elecnation_group_box_div_img_bg">
+		<div class="elecnation_group_img24">
+        	<img src="$val[icon]" width="24" height="24" />
+		</div>
+        </div>
+		<div class="elecnation_group_name">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="26" align="center" valign="middle">$val[name]</td>
+          </tr>
+        </table>        
+        </div>
+	</div>
+	</a>
+	<!--{/loop}-->
+	<div id="elecnation_clear"></div>  
+	</div>
+</div>
+
+
+<div id="box2" style="display:none;">
+	<div class="elecnation_group_box_hide" style="padding-left:116px;">
+		<img src="{$_G['style']['styleimgdir']}/touch/common/images/group_arrow.png" width="11" height="5" />
+	</div>
+	<div class="elecnation_group_box_div">
+
+	<a href="group.php?mod=my&view=join">
+	<div class="elecnation_group_box_div_box">
+		<div class="elecnation_group_box_div_img_bg">
+        <div class="elecnation_group_img24">
+        	<img src="uc_server/avatar.php?uid=$_G[uid]&size=small" width="24" height="24" />
+		</div>
+        </div>
+        <div class="elecnation_group_name">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="26" align="center" valign="middle">{lang my_join}{lang group}</td>
+          </tr>
+        </table>        
+        </div>
+	</div>
+	</a>
+    
+    <a href="group.php?mod=my&view=manager">
+	<div class="elecnation_group_box_div_box">
+		<div class="elecnation_group_box_div_img_bg">
+        <div class="elecnation_group_img24">
+        	<img src="{$_G['style']['styleimgdir']}/touch/common/images/group_group.png" width="24" height="24" />
+		</div>
+        </div>
+        <div class="elecnation_group_name">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="26" align="center" valign="middle">{lang my_manage}{lang group}</td>
+          </tr>
+        </table>    
+        </div>
+	</div>
+	</a>
+
+	<div id="elecnation_clear"></div>  
+	</div>
+</div>
+
+
+<div id="box3" style="display:none;">
+	<div class="elecnation_group_box_hide" style="padding-left:193px;">
+		<img src="{$_G['style']['styleimgdir']}/touch/common/images/group_arrow.png" width="11" height="5" />
+	</div>
+	<div class="elecnation_group_box_div">
+	<!--{loop $topgrouplist $fid $group}-->
+	<a href="forum.php?mod=group&fid=$group[fid]">
+	<div class="elecnation_group_box_div_box">
+		<div class="elecnation_group_box_div_img_bg">
+        <div class="elecnation_group_img24">
+        	<img src="$group[icon]" width="24" height="24" />
+		</div>
+        </div>
+        <div class="elecnation_group_name">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="26" align="center" valign="middle">$group[name]</td>
+          </tr>
+        </table>    
+        </div>
+	</div>
+	</a>
+	<!--{/loop}-->
+	<div id="elecnation_clear"></div>  
+	</div>
+</div>
+
+<script type="text/javascript">
+function openShutManager(oSourceObj,oTargetObj,shutAble,oOpenTip,oShutTip){
+var sourceObj = typeof oSourceObj == "string" ? document.getElementById(oSourceObj) : oSourceObj;
+var targetObj = typeof oTargetObj == "string" ? document.getElementById(oTargetObj) : oTargetObj;
+var openTip = oOpenTip || "";
+var shutTip = oShutTip || "";
+	if(targetObj.id == "box1" ){
+		document.getElementById("group_box1").style.border = "1px solid #73AA66";
+		document.getElementById("group_box2").style.border = "1px solid #CCCCCC";
+		document.getElementById("group_box3").style.border = "1px solid #CCCCCC";
+		document.getElementById("box2").style.display = "none";
+		document.getElementById("box3").style.display = "none";
+	}
+	if(targetObj.id == "box2" ){
+		document.getElementById("group_box1").style.border = "1px solid #CCCCCC";
+		document.getElementById("group_box2").style.border = "1px solid #73AA66";
+		document.getElementById("group_box3").style.border = "1px solid #CCCCCC";
+		document.getElementById("box1").style.display = "none";
+		document.getElementById("box3").style.display = "none";
+	}
+	if(targetObj.id == "box3" ){
+		document.getElementById("group_box1").style.border = "1px solid #CCCCCC";
+		document.getElementById("group_box2").style.border = "1px solid #CCCCCC";
+		document.getElementById("group_box3").style.border = "1px solid #73AA66";
+		document.getElementById("box1").style.display = "none";
+		document.getElementById("box2").style.display = "none";
+	}
+if(targetObj.style.display!="none"){
+	if(shutAble) return;
+	targetObj.style.display = "none";
+	document.getElementById("group_box1").style.border = "1px solid #CCCCCC";
+	document.getElementById("group_box2").style.border = "1px solid #CCCCCC";
+	document.getElementById("group_box3").style.border = "1px solid #CCCCCC";
+	if(openTip  &&  shutTip){
+		sourceObj.innerHTML = shutTip;
+	}
+} 
+else {
+	targetObj.style.display="block";
+	if(openTip  &&  shutTip){
+	sourceObj.innerHTML = openTip;
+	}
+}
+}
+</script>

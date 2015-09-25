@@ -1,0 +1,35 @@
+<!--{template common/header}-->
+
+<!-- header start -->
+<header class="header">
+    <div class="nav">
+        <div class="category">
+        	加入的球迷会
+        	<div id="elecnation_nav_left">
+                <a href="javascript:;" onclick="history.go(-1)" class="head_back"></a>
+        	</div>
+        </div>
+	</div>
+</header>
+<!-- header end -->
+<!--{if $grouplist}-->
+	<div class="hsub_content">
+        <ul>
+        	<!--{loop $grouplist $group}-->
+            <li>
+                <a href="forum.php?mod=group&fid=$group[fid]&mobile=2">
+                    <div class="hsc_head"><img src="$group[icon]" alt=""></div>
+                    <div class="hsc_mes">
+                        <div class="hsm_t">$group[name]<!--{if $group[verify_org] == 3}-->&nbsp;<span class="certif">官</span><!--{elseif $group[verify_5u] == 3}-->&nbsp;<span>5U认证</span><!--{/if}--></div>
+                        <div class="hsm_b">
+                            <span>人数：$group[membernum]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>地区：$group[province_name]&nbsp;&nbsp;$group[city_name]</span>
+                        </div>
+                    </div>
+                    <div class="hsc_right"></div>
+                </a>
+            </li>
+            <!--{/loop}-->            
+        </ul>
+    </div>
+<!--{/if}-->
+</div>

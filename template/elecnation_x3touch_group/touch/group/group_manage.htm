@@ -1,0 +1,460 @@
+<div id="elecnation_group_title_line" style="padding-top:18px;"></div>
+<div id="elecnation_group_title" style="width:88px;">
+    {lang group_admin}
+</div>
+
+<div style="position:relative; padding:8px 0;">
+<div style="background:#EEEEEE; ">
+
+<div style=" position:absolute; top:-8px; left:0; width:68px; ">
+	
+    <a href="forum.php?mod=group&action=manage&op=group&fid=$_G[fid]"{if $_GET['op'] == 'group'} class="blue"{/if}>
+    <div style="width:68px; height:48px; line-height:48px; display:block; text-align:center; background:<!--{if $_GET['op'] == 'group'}-->#FFFFFF<!--{else}-->#EEEEEE<!--{/if}-->; border-bottom:1px #FFFFFF solid;">
+    	{lang group_setup}
+    </div>
+    </a>
+    
+    
+    
+<!--{if !empty($groupmanagers[$_G[uid]]) || $_G['adminid'] == 1}-->
+	<a href="forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]"{if $_GET['op'] == 'checkuser'} class="blue"{/if}>
+    <div style="width:68px; height:48px; line-height:48px; display:block; text-align:center; background:<!--{if $_GET['op'] == 'checkuser'}-->#FFFFFF<!--{else}-->#EEEEEE<!--{/if}-->; border-bottom:1px #FFFFFF solid;">{lang group_member_moderate}
+    </div>
+    </a>
+    
+	<a href="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]"{if $_GET['op'] == 'manageuser'} class="blue"{/if}>
+    <div style="width:68px; height:48px; line-height:48px; display:block; text-align:center; background:<!--{if $_GET['op'] == 'manageuser'}-->#FFFFFF<!--{else}-->#EEEEEE<!--{/if}-->; border-bottom:1px #FFFFFF solid;">{lang group_member_management}</div>
+    </a>
+<!--{/if}-->
+
+<!--{if $_G['forum']['founderuid'] == $_G['uid'] || $_G['adminid'] == 1}-->
+	<a href="forum.php?mod=group&action=manage&op=threadtype&fid=$_G[fid]"{if $_GET['op'] == 'threadtype'} class="blue"{/if}>
+    <div style="width:68px; height:48px; line-height:48px; display:block; text-align:center; background:<!--{if $_GET['op'] == 'threadtype'}-->#FFFFFF<!--{else}-->#EEEEEE<!--{/if}-->; border-bottom:1px #FFFFFF solid;">{lang group_threadtype}</div></a>
+    
+	<a href="forum.php?mod=group&action=manage&op=demise&fid=$_G[fid]"{if $_GET['op'] == 'demise'} class="blue"{/if}>
+    <div style="width:68px; height:48px; line-height:48px; display:block; text-align:center; background:<!--{if $_GET['op'] == 'demise'}-->#FFFFFF<!--{else}-->#EEEEEE<!--{/if}-->; border-bottom:1px #FFFFFF solid;">{lang group_demise}</div>
+    </a>
+<!--{/if}-->
+</div>
+
+
+<div style="width:100%; overflow:hidden; ">
+<!--{if $_GET['op'] == 'group'}-->
+	<div style=" margin-left:68px; background:#FFFFFF; min-height:280px; padding-left:18px;">
+		<form enctype="multipart/form-data" action="forum.php?mod=group&action=manage&op=group&fid=$_G[fid]" name="manage" method="post" autocomplete="off">
+			<input type="hidden" value="{FORMHASH}" name="formhash" />
+			<table cellspacing="0" cellpadding="0" summary="{lang group_admin_panel}">
+				<tbody>
+					<tr>
+						<th><em id="returnmessage4"></em></th>
+					</tr>
+                    
+                    <!--{if !empty($specialswitch['allowchangename']) && ($_G['uid'] == $_G['forum']['founderuid'] || $_G['adminid'] == 1)}-->
+					<tr>
+					  <th>
+                      <div style="border-bottom:1px #CCCCCC dotted; padding-bottom:18px; margin-bottom:6px; ">
+                      <input type="text" id="name" name="name" tabindex="1" value="$_G[forum][name]" autocomplete="off" style="padding-right:8px;" />
+                      </div>        
+                      </th>
+				  </tr>
+                  <!--{/if}-->
+                  
+                  <!--{if !empty($specialswitch['allowchangetype']) && ($_G['uid'] == $_G['forum']['founderuid'] || $_G['adminid'] == 1)}-->
+					<tr>
+					  <th>
+                      <div style="border-bottom:1px #CCCCCC dotted; padding:8px 0 16px 0; margin-bottom:6px;">
+                      <select name="parentid" tabindex="2" onchange="ajaxget('forum.php?mod=ajax&action=secondgroup&fupid='+ this.value, 'secondgroup');">
+                      $groupselect[first]
+                      </select>
+                      <em id="secondgroup"><!--{if $groupselect['second']}--><select id="fup" name="fup" >$groupselect[second]</select><!--{/if}-->
+                      </em>
+                      </div>
+                      </th>
+				  </tr>
+                  <!--{/if}-->
+                  
+					<tr>
+					  <th>
+                      <div style="border-bottom:1px #CCCCCC dashed; padding:8px 0 16px 0; margin-bottom:6px;">
+                      <textarea id="descriptionmessage" name="descriptionnew" rows="8">$_G[forum][descriptionnew]</textarea>
+                      </div>
+                      </th>
+				  </tr>
+					<tr>
+					  <th>
+                      <div style="border-bottom:1px #CCCCCC dashed; padding:8px 0 16px 0; margin-bottom:6px; line-height:24px;">
+                      {lang group_perm_visit} : <br />
+
+                      <label><input type="radio" name="gviewpermnew" value="1" $gviewpermselect[1] /> {lang group_perm_all_user}</label><br />
+
+                      <label><input type="radio" name="gviewpermnew" value="0" $gviewpermselect[0] /> {lang group_perm_member_only}</label>
+                      </div>
+                      </th>
+				  </tr>
+				  <tr>
+					  <th>
+                      <div style="border-bottom:1px #CCCCCC dashed; padding:8px 0 16px 0; margin-bottom:6px; line-height:24px;">
+                      {lang group_join_type} : <br />
+                       	<label class="lb"><input type="radio" name="jointypenew" value="0" $jointypeselect[0] /> {lang group_join_type_free}</label><br />
+
+						<label class="lb"><input type="radio" name="jointypenew" value="2" $jointypeselect[2] /> {lang group_join_type_moderate}</label><br />
+
+						<label class="lb"><input type="radio" name="jointypenew" value="1" $jointypeselect[1] /> {lang group_join_type_invite}</label><br />
+
+						<!--{if !empty($specialswitch['allowclosegroup'])}-->
+						<label class="lb"><input type="radio" name="jointypenew" value="-1" $jointypeselect[-1] /> {lang close}</label>
+						<p>{lang group_close_notice}</p>
+						<!--{/if}-->
+                        </div>
+                     </th>
+				  </tr>
+                  
+                  <!--{if $_G['setting']['allowgroupdomain'] && !empty($_G['setting']['domain']['root']['group']) && $domainlength}-->
+				  <tr>
+					  <th>
+                      <div style="border-bottom:1px #CCCCCC dashed; padding:8px 0 16px 0; margin-bottom:6px; line-height:24px;">
+                      {lang subdomain} : <br />
+                      http://<input type="text" name="domain" value="$_G[forum][domain]" style="width: 100px;" />
+                      .{$_G['setting']['domain']['root']['group']}
+                      <p>{lang group_domain_message}<br/>
+                      <!--{if $_G[forum][domain] && $consume}-->{lang group_edit_domain_message}<!--{/if}-->
+                      </p>
+                      </div>
+                      </th>
+				  </tr>
+                  <!--{/if}-->
+                  
+					<tr>
+					  <th>
+                      <div style="border-bottom:1px #CCCCCC dashed; padding:8px 0 16px 0; margin-bottom:6px; line-height:24px;">
+                      {lang group_icon} :                   
+                      <input type="file" id="iconnew" size="25" name="iconnew" />
+							<p>
+								{lang group_icon_resize}<br />
+								<!--{if $_G[setting][group_imgsizelimit]}-->
+									{lang group_image_filesize_limit}
+								<!--{/if}--></p>
+							<!--{if $_G['forum']['icon']}-->
+								<img width="48" height="48" style="margin-right: 1em;" src="$_G[forum][icon]?{TIMESTAMP}" />
+							<!--{/if}-->
+                      </div>
+                      </th>
+					<tr>
+					  <th><button type="submit" name="groupmanage" value="1"><strong>{lang submit}</strong></button></th>
+				  </tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+<!--{elseif $_GET['op'] == 'checkuser'}-->
+<div style=" margin-left:68px; background:#FFFFFF; min-height:280px; padding:0 8px 0 16px;">
+	<!--{if $checkusers}-->
+		<div>
+		<!--{loop $checkusers $uid $user}-->
+			<div style=" border-bottom:1px #CCCCCC dotted; ">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td width="38%" height="46">
+                        <a href="home.php?mod=space&uid=$user[uid]">
+                          <div style="width:32px; height:32px; padding:1px; border:1px solid #DDDDDD; -moz-border-radius: 19px; -webkit-border-radius: 19px; border-radius: 19px; display:block;">
+                              <div style="width:32px; height:32px; margin:0 auto; -moz-border-radius: 16px; -webkit-border-radius: 16px; border-radius: 16px; overflow:hidden;">
+                                <img src="<!--{avatar($user[uid], small, true)}-->" width="32" height="32" style="border:none;" />
+                              </div>
+                          </div>
+                        </a>
+                        </td>
+                        <td align="right">
+                        <button type="submit" name="checkuserfalse" class="pn" value="true" onclick="location.href='forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]&uid=$user[uid]&checktype=2'"><em>{lang ignore}</em></button> &nbsp; <button type="submit" name="checkusertrue" class="pn pnc" value="true" onclick="location.href='forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]&uid=$user[uid]&checktype=1'"><em>{lang pass}</em></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">$user[username] {lang group_wait_mod} $user['joindateline']</td>
+                      </tr>
+                    </table>
+			</div>
+		<!--{/loop}-->
+		</div>
+        
+		<!--{if $multipage}-->$multipage<!--{/if}-->
+	<!--{else}-->
+		<div id="elecnation_noinfo">{lang group_no_member_moderated}</div>
+	<!--{/if}-->
+</div>
+<!--{elseif $_GET['op'] == 'manageuser'}-->
+<div style=" margin-left:68px; background:#FFFFFF; min-height:280px; padding:0 8px 0 16px;">
+	<script type="text/javascript">
+		function groupManageUser(targetlevel_val) {
+			$('targetlevel').value = targetlevel_val;
+			$('manageuser').submit();
+		}
+	</script>
+	<!--{if $_G['forum']['membernum'] > 50}-->
+	<div>
+		<form action="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]" method="post">
+		<input type="text" {if empty($_GET['srchuser'])}onclick="$('groupsearch').value=''"{/if} value="{if $_GET['srchuser']}$_GET[srchuser]{else}{lang enter_member_user}{/if}" size="15" id="groupsearch" name="srchuser">&nbsp;
+		<button type="submit"><span>{lang search}</span></button>
+		</form>
+	</div>
+	<!--{/if}-->
+	<form action="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]&manageuser=true" name="manageuser" id="manageuser" method="post" autocomplete="off" >
+		<input type="hidden" value="{FORMHASH}" name="formhash" />
+        <input type="hidden" value="0" name="targetlevel" id="targetlevel" />
+		<!--{if $adminuserlist}-->
+			<div style="border-bottom:1px #CCCCCC dotted; padding-bottom:8px; margin-bottom:8px;">
+				<div>
+					<h2>{lang group_admin_member}</h2>
+				</div>
+				
+                <div>
+                	<!--{loop $adminuserlist $user}-->
+						<div style="width:88px; float:left; border:1px #73AA66 solid;  -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; box-shadow:2px 2px 2px rgba(0, 0, 0, 0.2); margin:6px; padding:6px 3px; text-align:center; position:relative; white-space:nowrap;  overflow:hidden; ">
+							
+                            <div class="elecnation_group_img32_box">
+                              <div class="elecnation_group_img32">
+                                <a href="home.php?mod=space&uid=$user[uid]"><img src="<!--{avatar($user[uid], small, true)}-->" width="32" height="32" style="border:none;" /></a>
+                              </div>
+                          	</div>
+							
+							<div><a href="home.php?mod=space&uid=$user[uid]">$user[username]</a></div>
+							<div style="position:absolute; top:1px; right:1px; text-align:right;"><!--{if $_G['adminid'] == 1 || ($_G['uid'] != $user['uid'] && ($_G['uid'] == $_G['forum']['founderuid'] || $user['level'] > $groupuser['level']))}--><input type="checkbox" name="muid[{$user[uid]}]" value="$user[level]" /><!--{/if}--></div>
+						</div>
+					<!--{/loop}-->
+                    <div id="elecnation_clear"></div>
+				</div>
+                
+			</div>
+		<!--{/if}-->
+		<!--{if $staruserlist || $userlist}-->
+			<div>
+				<!--{if $staruserlist}-->
+					<div style="border-bottom:1px #CCCCCC dotted; padding-bottom:8px; margin-bottom:8px;">
+                    	<div><h2>{lang group_star_member_title}</h2></div>
+						<!--{loop $staruserlist $user}-->
+						<div style="width:88px; float:left; border:1px #FFD24D solid;  -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; box-shadow:2px 2px 2px rgba(0, 0, 0, 0.2); margin:6px; padding:6px 3px; text-align:center; position:relative; white-space:nowrap; overflow:hidden;">
+							
+							<div class="elecnation_group_img32_box">
+                              <div class="elecnation_group_img32">
+                                <a href="home.php?mod=space&uid=$user[uid]"><img src="<!--{avatar($user[uid], small, true)}-->" width="32" height="32" style="border:none;" /></a>
+                              </div>
+                         	</div>
+							
+							<div><a href="home.php?mod=space&uid=$user[uid]">$user[username]</a></div>
+							<div style="position:absolute; top:1px; right:1px; text-align:right;"><!--{if $_G['adminid'] == 1 || $user['level'] > $groupuser['level']}--><input type="checkbox" name="muid[{$user[uid]}]" value="$user[level]" /><!--{/if}--></div>
+						</div>
+						<!--{/loop}-->
+                        <div id="elecnation_clear"></div>
+					</div>
+				<!--{/if}-->
+				
+				<!--{if $userlist}-->
+					<div style="border-bottom:1px #CCCCCC dotted; padding-bottom:8px; margin-bottom:8px;">
+                    	<div><h2>{lang member}</h2></div>
+						<!--{loop $userlist $user}-->
+						<div style="width:88px; float:left; border:1px #666666 solid;  -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; box-shadow:2px 2px 2px rgba(0, 0, 0, 0.2); margin:6px; padding:6px 3px; text-align:center; position:relative; white-space:nowrap; overflow:hidden;">
+							
+                            <div class="elecnation_group_img32_box">
+                              <div class="elecnation_group_img32">
+                                <a href="home.php?mod=space&uid=$user[uid]"><img src="<!--{avatar($user[uid], small, true)}-->" width="32" height="32" style="border:none;" /></a>
+                              </div>
+                         	</div>
+                          	
+							<div><a href="home.php?mod=space&uid=$user[uid]">$user[username]</a></div>
+							<div style="position:absolute; top:1px; right:1px; text-align:right;"><!--{if $_G['adminid'] == 1 || $user['level'] > $groupuser['level']}--><input type="checkbox" name="muid[{$user[uid]}]" value="$user[level]" /><!--{/if}--></div>
+						</div>
+						<!--{/loop}-->
+                        <div id="elecnation_clear"></div>
+					</div>
+				<!--{/if}-->
+			</div>
+		<!--{/if}-->
+        
+		<!--{if $multipage}-->$multipage<!--{/if}-->
+        
+		<div style="line-height:38px; padding:6px;">
+			<!--{loop $mtype $key $name}-->
+            	<!--{if $_G['forum']['founderuid'] == $_G['uid'] || $key > $groupuser['level'] || $_G['adminid'] == 1}-->
+                <button type="button" name="manageuser" value="true" onclick="groupManageUser('{$key}')"><span>$name</span></button>
+                <!--{/if}-->
+            <!--{/loop}-->
+		</div>
+	</form>
+</div>
+
+<!--{elseif $_GET['op'] == 'threadtype'}-->
+<div style=" margin-left:68px; background:#FFFFFF; min-height:280px; padding:0 8px 0 16px;">
+		<!--{if empty($specialswitch['allowthreadtype'])}-->
+			<div id="elecnation_noinfo">{lang group_level_cannot_do}</div>
+		<!--{else}-->
+		
+		<div id="threadtypes">
+			<form id="threadtypeform" action="forum.php?mod=group&action=manage&op=threadtype&fid=$_G[fid]" autocomplete="off" method="post" name="threadtypeform">
+				<input type="hidden" value="{FORMHASH}" name="formhash" />
+				<table cellspacing="0" cellpadding="0" >
+					<tr>
+						<th>
+                        <div style="border-bottom:1px #CCCCCC dotted; padding-bottom:8px; margin-bottom:8px;">
+                        {lang threadtype_turn_on}:<br />
+                        <div style="line-height:36px;">
+							<label><input type="radio" name="threadtypesnew[status]" value="1" onclick="$('threadtypes_config').style.display = '';$('threadtypes_manage').style.display = '';" $checkeds[status][1] /> {lang yes} </label> &nbsp; &nbsp; 
+                            <label><input type="radio" name="threadtypesnew[status]" value="0" onclick="$('threadtypes_config').style.display = 'none';$('threadtypes_manage').style.display = 'none';"  $checkeds[status][0] /> {lang no} </label>
+                        </div>
+						<div>{lang threadtype_turn_on_comment}</div>
+                        </div>
+                        </th>
+					</tr>
+					<tbody id="threadtypes_config" style="display: $display">
+						<tr>
+							<th>
+                             <div style="border-bottom:1px #CCCCCC dotted; padding-bottom:8px; margin-bottom:8px;">
+                            {lang threadtype_required}:<br />
+							<div style="line-height:36px;">
+                            <label><input type="radio" name="threadtypesnew[required]" value="1" $checkeds[required][1] /> {lang yes} </label> &nbsp; &nbsp; 
+                            <label><input type="radio" name="threadtypesnew[required]" value="0" $checkeds[required][0] /> {lang no} </label>
+                            </div>
+							<div>{lang threadtype_required_force}</div>
+                            </div>
+                            </th>
+						</tr>
+						<tr>
+							<th>
+                            <div style="border-bottom:1px #CCCCCC dotted; padding-bottom:8px; margin-bottom:8px;">
+                            {lang threadtype_prefix}:<br />
+							<div style="line-height:36px;">
+                            <label><input type="radio" name="threadtypesnew[prefix]" value="1" $checkeds[prefix][1] /> {lang threadtype_prefix_on} </label> &nbsp; &nbsp; 
+                            <label><input type="radio" name="threadtypesnew[prefix]" value="0" $checkeds[prefix][0] /> {lang threadtype_prefix_off} </label>
+                            </div>
+							<div>{lang threadtype_prefix_comment}</div>		
+                            </div>
+                            </th>
+						</tr>
+					</tbody>
+				</table>
+				<script type="text/JavaScript">
+                    var rowtypedata = [
+                        [
+                            [1,'<input type="checkbox" disabled="disabled" />', ''],
+                            [1,'<input type="checkbox" name="newenable[]" checked="checked" value="1" />', ''],
+                            [1,'<input type="text" size="2" name="newdisplayorder[]" value="0" />'],
+                            [1,'<input type="text" name="newname[]" />']
+                        ],
+                    ];
+                    var addrowdirect = 0;
+                    var typenumlimit = $typenumlimit;
+                    function addrow(obj, type) {
+                        var table = obj.parentNode.parentNode.parentNode.parentNode;
+                        if(typenumlimit <= obj.parentNode.parentNode.parentNode.rowIndex - 1) {
+                            alert('{lang group_threadtype_limit_1}'+typenumlimit+'{lang group_threadtype_limit_2}');
+                            return false;
+                        }
+                        if(!addrowdirect) {
+                            var row = table.insertRow(obj.parentNode.parentNode.parentNode.rowIndex);
+                        } else {
+                            var row = table.insertRow(obj.parentNode.parentNode.parentNode.rowIndex + 1);
+                        }
+        
+                        var typedata = rowtypedata[type];
+                        for(var i = 0; i <= typedata.length - 1; i++) {
+                            var cell = row.insertCell(i);
+                            cell.colSpan = typedata[i][0];
+                            var tmp = typedata[i][1];
+                            if(typedata[i][2]) {
+                                cell.className = typedata[i][2];
+                            }
+                            tmp = tmp.replace(/\{(\d+)\}/g, function($1, $2) {return addrow.arguments[parseInt($2) + 1];});
+                            cell.innerHTML = tmp;
+                        }
+                        addrowdirect = 0;
+                    }
+                </script>
+				<div id="threadtypes_manage" style="border-bottom:1px #CCCCCC dotted; padding-bottom:8px; margin-bottom:8px; display: $display">
+					{lang threadtype}: <br />
+					<table cellspacing="0" cellpadding="0">
+						<thead>
+							<tr style="line-height:14px;">
+								<th height="38">{lang delete}</th>
+								<th>{lang enable}</th>
+								<th>{lang displayorder}</th>
+								<th>{lang threadtype_name}</th>
+							</tr>
+						</thead>
+						<!--{if $threadtypes}-->
+							<!--{loop $threadtypes $val}-->
+							<tbody>
+								<tr>
+									<td height="38"><input type="checkbox" name="threadtypesnew[options][delete][]" value="{$val[typeid]}" /></td>
+									<td><input type="checkbox" name="threadtypesnew[options][enable][{$val[typeid]}]" value="1" $val[enablechecked] /></td>
+									<td><input type="text" name="threadtypesnew[options][displayorder][{$val[typeid]}]" size="2" value="$val[displayorder]" /></td>
+									<td><input type="text" name="threadtypesnew[options][name][{$val[typeid]}]" value="$val[name]" /></td>
+								</tr>
+							</tbody>
+							<!--{/loop}-->
+						<!--{/if}-->
+						<tr>
+							<td height="36" colspan="4"><img class="vm" src="{IMGDIR}/addicn.gif" /> <a href="javascript:;" onclick="addrow(this, 0)">{lang threadtype_add}</a></td>
+						</tr>
+					</table>
+				</div>
+				<div style="line-height:36px;">
+                <button type="submit" name="groupthreadtype" value="1"><strong>{lang submit}</strong></button>
+                </div>
+			</form>
+		</div>
+		<!--{/if}-->
+	</div>
+<!--{elseif $_GET['op'] == 'demise'}-->
+<div style=" margin-left:68px; background:#FFFFFF; min-height:280px; padding:0 8px 0 16px;">
+		<!--{if $groupmanagers}-->
+			<div style="border-bottom:1px #CCCCCC dotted; padding-bottom:8px; margin-bottom:8px;">
+				{lang group_demise_comment}
+				<div>{lang group_demise_notice}</div>
+			</div>
+			<form action="forum.php?mod=group&action=manage&op=demise&fid=$_G[fid]" name="groupdemise" method="post" >
+				<input type="hidden" value="{FORMHASH}" name="formhash" />
+				<table cellspacing="0" cellpadding="0" >
+					<tr>
+						<th>
+                        	<div style="line-height:36px;">{lang transfer_group_to}:</div>
+							<div>
+								<!--{loop $groupmanagers $user}-->
+                                <div style="width:88px; float:left; border:1px #666666 solid;  -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; box-shadow:2px 2px 2px rgba(0, 0, 0, 0.2); margin:6px; padding:6px 3px; text-align:center; position:relative; white-space:nowrap; overflow:hidden;">
+                                    
+                                    <div class="elecnation_group_img32_box">
+                              		  <div class="elecnation_group_img32">
+                                        <a href="home.php?mod=space&uid=$user[uid]"><img src="<!--{avatar($user[uid], small, true)}-->" width="32" height="32" style="border:none;" /></a>
+                                      </div>
+                                    </div>
+                                    
+                                    <div><a href="home.php?mod=space&uid=$user[uid]">$user[username]</a></div>
+                                    <div style="position:absolute; top:1px; right:1px; text-align:right;"><!--{if $user['uid'] != $_G['uid']}--><input type="radio" name="suid" value="$user[uid]" /><!--{/if}--></div>
+                                </div>
+                                <!--{/loop}-->
+                                <div id="elecnation_clear"></div>
+							</div>						</th>
+					</tr>
+					<tr>
+						<th>
+                        <div style="padding-left:6px; border-top:1px #CCCCCC dotted; padding-top:8px; margin-top:8px;">
+                        {lang group_input_password} : <br />
+					    <div style="line-height:36px;"><input type="password" name="grouppwd" />
+                        </div>
+                        </div>
+                        </th>
+					</tr>
+					<tr>
+						<th>
+                        <div style="line-height:36px; padding-left:6px; border-top:1px #CCCCCC dotted; padding-top:8px; margin-top:8px;">
+						  <button type="submit" name="groupdemise" value="1"><strong>{lang submit}</strong></button>
+                        </div>
+                        </th>
+					</tr>
+				</table>
+			</form>
+		<!--{else}-->
+			<div id="elecnation_noinfo">{lang group_no_admin_member}</div>
+		<!--{/if}-->
+	</div>
+<!--{/if}-->
+</div>
+</div>
+</div>
+<script type="text/javascript" src="{$_G[setting][jspath]}common.js?{VERHASH}"></script>

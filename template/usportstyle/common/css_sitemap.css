@@ -1,0 +1,194 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "microsoft yahei", "΢���ź�", 'Microsoft Sans Serif', Tahoma, Arial, Verdana, Sans-Serif;
+    color: #515151;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #515151;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.nav .container {
+    overflow: hidden;
+    font-size: 16px;
+    color: #515151;
+    padding: 25px 0 20px;
+}
+.nav a{
+    color: #515151;
+}
+
+.nav .container .logo {
+    float: left;
+}
+.nav .container .menu{
+    padding: 20px 5px 0 0;
+    float: right;
+    color: #515151;
+}
+.nav .container .menu li a {
+    padding-left: 27px;
+}
+.nav .container .menu li.active a {
+    color: #eb6100;
+}
+.nav .container .menu li {
+    float: left;
+}
+
+.main h2 {
+    font-size: 20px;
+    font-weight: normal;
+    margin-bottom: 10px;
+    padding-left: 25px;
+}
+.main h3 ,.main h3 a{
+    font-size: 20px;
+    font-weight: normal;
+    color: #eb6100;
+    padding-left: 2px;
+    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 4px;
+}
+
+#sitemap {
+    margin-top: 25px;
+    margin-bottom: 70px;
+}
+#sitemap .content {
+    padding: 30px 23px;
+    border: 1px solid #ccc;
+}
+#sitemap .content dl {
+    overflow: hidden;
+    padding: 23px 0;
+}
+#sitemap .content dt {
+    width: 75px;
+    font-size: 20px;
+    float: left;
+}
+#sitemap .content dd {
+    float: left;
+    width: 885px;
+    font-size: 0;
+    margin-top: -8px;
+    margin-left: -8px;
+}
+#sitemap .content dd a{
+    margin: 8px;
+    font-size: 14px;
+    display: inline-block;
+    width: 140px;
+    height: 28px;
+    line-height: 28px;
+    background-color: #fff;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid #e3e3e3;
+    text-align: center;
+}
+#sitemap .content a.active {
+    background-color: #eb6100;
+    border-color: #eb6100;
+    color: #fff;
+}
+
+.footer {
+    font-size: 12px;
+    color: #919191;
+    border-top: 6px solid #eb6100;
+    background-color: #595656;
+}
+.foooter a {
+    color: #919191;
+}
+.footer .container {
+    padding: 10px 0 40px;
+}
+.footer .logo {
+    float: right;
+}
+.footer .logo .shejiao {
+    text-align: right;
+    display: block;
+    margin-top: 10px;
+    position: relative;
+}
+.footer .logo .shejiao .sinaIco, .footer .logo .shejiao .weixinIco, .footer .logo .shejiao .iphoneIco {
+    padding: 0 10px;
+}
+.footer .logo .shejiao .openBox {
+    display: none;
+    position: absolute;
+    left: 0;
+    background-color: #fff;
+}
+.footer .logo .shejiao .ch_weixin-box p, .footer .logo .shejiao .ch_weixin-box p {
+    margin-bottom: 3px;
+}
+.footer .logo .shejiao .ch_weixin-box{
+    left: 64px;
+    bottom: 46px;
+    background: #7e7e7e;
+    width: 104px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #fff;
+    padding-top: 4px;
+    height: 119px;
+    font-family: Microsoft YaHei;
+    text-align: center;
+}
+.footer .logo .shejiao .ch_ipad-box{
+    left: 128px;
+    bottom: 46px;
+    background: #7e7e7e;
+    width: 104px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #fff;
+    padding-top: 4px;
+    height: 119px;
+    font-family: Microsoft YaHei;
+    text-align: center;
+}
+.footer .logo .shejiao .sinaBox {
+    left: -46px;
+    bottom: 49px;
+    background-color: #fff;
+}
+.footer .logo .logoFooter {
+    display: block;
+    margin-top: 20px;
+}
+.footer .copyright {
+
+}
+.footer .copyright .friendly-link {
+    padding: 10px 0 15px;
+}
+.footer .copyright .friendly-link a {
+    color: #d2d2d2;
+    padding: 0px 2px;
+}
+.footer .copyright p {
+    line-height: 2;
+}

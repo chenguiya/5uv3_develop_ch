@@ -1,0 +1,106 @@
+
+<link rel="stylesheet" href="template/usportstyle/touch/common/mobtime.css" type="text/css" media="all">
+<li class="exfm">
+	<div class="sinf sppoll">
+		<dl>
+			<dt>{lang post_event_time}:</dt>
+			<dd>
+			    <input type="text" name="starttimefrom[1]" id="starttimefrom_1" class="demo_datetime pxch" onclick="showcalendar(event, this, true)" autocomplete="off" value="$activity[starttimefrom]" tabindex="1" /> <span class="rq">*</span>
+				
+			</dd>
+		 </dl>
+		 <dl>
+		      <dt>活动截止:</dt>
+		     <dd>
+		       <input type="text" autocomplete="off" id="starttimeto" name="starttimeto" class="demo_datetime pxch" value="{if $activity['starttimeto']}$activity[starttimeto]{/if}" tabindex="1" /> <span class="rq">*</span>
+		     </dd>
+		 </dl>
+		 <input type="hidden" id="activitytime" name="activitytime" value="1">
+		 <dl>
+			<dt><label for="activityplace">{lang activity_space}:</label></dt>
+			<dd>
+				<input type="text" name="activityplace" id="activityplace" class="pxch" value="$activity[place]" tabindex="1" /> <span class="rq">*</span>
+			</dd>
+			
+	     </dl>
+		 <dl>
+		     <dt><label for="activityexpiration">{lang post_closing}:</label></dt>
+			<dd class="hasd cl">
+				<span>
+					<input type="text" class="demo_datetime pxch" name="activityexpiration" id="activityexpiration" onclick="showcalendar(event, this, true)" autocomplete="off" value="$activity[expiration]" tabindex="1" />
+				</span>
+				<a href="javascript:;" class="dpbtn" onclick="showselect(this, 'activityexpiration')"></a>
+			</dd>
+		 </dl>
+		 <dl>
+		 <input type="hidden" id="activityclass" name="activityclass" value="默认分类">
+			<!--{if $_G['setting']['activityfield']}-->
+			<dt>必填选项:</dt>
+			<dd>
+				<ul class="xl2 cl">
+				<!--{loop $_G['setting']['activityfield'] $key $val}-->
+				<li><label for="userfield_$key"><input type="checkbox" name="userfield[]" id="userfield_$key" class="pc" value="$key"{if $activity['ufield']['userfield'] && in_array($key, $activity['ufield']['userfield'])} checked="checked"{/if} />$val</label></li>
+				<!--{/loop}-->
+				</ul>
+			</dd>
+			<!--{/if}-->
+			<!--{if $_G['setting']['activityextnum']}-->
+			<dt><label for="extfield">{lang other_data}:</label></dt>
+			<dd>
+				<textarea name="extfield" id="extfield" class="pt" cols="50" style="width: 270px;"><!--{if $activity['ufield']['extfield']}-->$activity[ufield][extfield]<!--{/if}--></textarea><br />{lang post_activity_message} $_G['setting']['activityextnum'] {lang post_option}
+			</dd>
+			<!--{/if}-->
+		</dl>
+		<!--{if $allowpostimg}-->
+		<dl>
+		<dt>{lang post_topic_image}:</dt>
+		<dd><a href="javascript:;" class=" acit_photo">
+					<input type="file" name="Activityimg" id="activityimg" style="opacity:0;"/>
+				</a>
+		</dd>
+		</dl>
+		<dl>
+		   <dt></dt>
+		  <dd><ul id="activityimglist" class="post_imglist cl"></ul></dd>		
+		</dl>	
+		<!--{/if}-->
+	</div>
+</li>
+
+<script type="text/javascript" reload="1">
+simulateSelect('gender');
+function checkvalue(value, message){
+	if(!value.search(/^\d+$/)) {
+		$(message).innerHTML = '';
+	} else {
+		$(message).innerHTML = '<b>{lang input_invalid}</b>';
+	}
+}
+
+EXTRAFUNC['validator']['special'] = 'validateextra';
+function validateextra() {
+	if($('postform').starttimefrom_0.value == '' && $('postform').starttimefrom_1.value == '') {
+		showDialog('{lang post_error_message_1}', 'alert', '', function () { if($('activitytime').checked) {$('postform').starttimefrom_1.focus();} else {$('postform').starttimefrom_0.focus();} });
+		return false;
+	}
+	if($('postform').activityplace.value == '') {
+		showDialog('{lang post_error_message_2}', 'alert', '', function () { $('postform').activityplace.focus() });
+		return false;
+	}
+	if($('postform').activityclass.value == '') {
+		showDialog('{lang post_error_message_3}', 'alert', '', function () { $('postform').activityclass.focus() });
+		return false;
+	}
+	return true;
+}
+function activityaid_upload(aid, url) {
+	$('activityaid_url').value = url;
+	updateactivityattach(aid, url, '{$_G['setting']['attachurl']}forum');
+}
+</script>
+<script src="{STATICURL}js/mobile/mobtime.js?{VERHASH}" type="text/javascript"></script>
+<script>
+        $(function () {
+                $('.demo_datetime').mobiscroll().datetime({theme: "mobiscroll", mode: "scroller",display: "modal", lang: "zh",minDate: new Date(2014,3,10,9,22),maxDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),stepMinute: 5 });
+        })
+    </script>

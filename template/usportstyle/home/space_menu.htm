@@ -1,0 +1,47 @@
+<!--{if $space[uid] || $_GET['id']=='userspace:mygroup'}-->
+<div class="personal-center">
+	<div class="avater-img">
+		<a href="home.php?mod=space&uid=$space[uid]"><!--{avatar($space[uid],big)}--></a>
+		<span class="badge"></span>
+		<!--{if is_verify($space[uid], 1)}--><span class="icon_big"></span><!--{/if}-->
+	</div>
+	<div class="personal-info">	
+		<div class="name">{$space[username]}</div>
+		<span class="w100">等级：$_G[cache][usergroups][$space[groupid]][grouptitle]</span>		
+		<span class="w100">积分：<!--{if $space[credits]}-->$space[credits]<!--{else}-->0<!--{/if}--></span>		
+		<!--{loop $_G[setting][extcredits] $key $value}-->
+		<!--{if $value[title]}-->
+		<span class="w100">$value[title]：<!--{if $space["extcredits$key"]}-->{$space["extcredits$key"]}<!--{else}-->0<!--{/if}--></span>
+		<!--{/if}-->
+		<!--{/loop}-->
+		<br/>
+		<span class="w100">地区：<!--{if $user_profiles[$space[uid]][resideprovince] && $user_profiles[$space[uid]][residecity]}-->$user_profiles[$space[uid]][resideprovince]&nbsp;$user_profiles[$space[uid]][residecity]<!--{else}-->未填写<!--{/if}--></span>
+		<span class="w100">生日：{$user_profiles[$space[uid]][birthyear]}/{$user_profiles[$space[uid]][birthmonth]}/{$user_profiles[$space[uid]][birthday]}</span>
+		<!--{if $_G['setting']['verify']['enabled']}-->
+			<!--{eval $showverify = true;}-->
+			<!--{loop $_G['setting']['verify'] $vid $verify}-->
+				<!--{if $verify['available']}-->
+					<!--{if is_verify($space[uid], 1)}-->
+					<span class="block">$verify[title]：<!--{if $user_profiles[$space[uid]][company]}-->$user_profiles[$space[uid]][company]<!--{/if}--><!--{if $user_profiles[$space[uid]][position]}-->$user_profiles[$space[uid]][position]<!--{/if}--></span>
+					<!--{/if}-->
+				<!--{/if}-->
+			<!--{/loop}-->
+		<!--{/if}-->
+		<span class="block">简介：<!--{if $space[spacedescription]}-->简介： $space[spacedescription]<!--{else}-->这家伙很懒，什么都没有留下。<!--{/if}--></span>
+	</div>
+	<div class="buttons">
+		<!--{if $_G['uid']==$space['uid']}--><a href="home.php?mod=spacecp" class="btn modify-info">修改资料</a><!--{/if}-->
+		<a href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid={$space[uid]}&from=head" class="btn attention">关注</a>
+		<a href="home.php?mod=spacecp&ac=pm&op=showmsg&handlekey=showmsg_$space[uid]&touid={$space[uid]}&pmid=0&daterange=2" class="btn private-letter" id="a_sendpm_$space[uid]" onclick="showWindow('showMsgBox', this.href, 'get', 0)">私信</a>
+	</div>
+</div>
+<ul class="personal-care">
+    <li class="item<!--{if $do=='thread'} active{/if}-->"><a href="home.php?mod=space&uid=$space[uid]&do=thread&view=me&from=space">{lang topic}</a></li>
+    <!--{if helper_access::check_module('album')}-->
+	<li class="item<!--{if $do=='album'} active{/if}-->"><a href="home.php?mod=space&uid=$space[uid]&do=album&view=me&from=space">{lang album}</a></li>
+	<!--{/if}-->
+    <li class="item<!--{if $do=='club'} active{/if}-->"><a href="plugin.php?id=userspace:mygroup&uid=$space[uid]&do=club&from=space">球迷会</a></li>
+    <li class="item<!--{if $do=='following'} active{/if}-->"><a href="home.php?mod=follow&do=following&uid={$space[uid]}">关注（{$space['following']}）</a></li>
+    <li class="item<!--{if $do=='follower'} active{/if}-->"><a href="home.php?mod=follow&do=follower&uid={$space[uid]}">粉丝（{$space['follower']}）</a></li>
+</ul>
+<!--{/if}-->

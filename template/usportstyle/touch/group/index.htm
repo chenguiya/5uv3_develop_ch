@@ -1,0 +1,62 @@
+<!--{template common/header}-->
+<!--{template common/topnav}-->
+    <ul class="hsub_team">
+    	<!--{loop $showleagues $league}-->
+    	<li id="league_$league[fid]"><a href="javascript:;">$league[name]</a></li>
+    	<!-- <li class="cur"><a href="javascript:;">$vo[name]</a></li> -->
+    	<!--{/loop}-->        
+    </ul>
+    <!--{loop $showleagues $league}-->
+    <div id="club_$league[fid]" class="hst_club swiper-container" style="{if $league[fid] != 1}display:none;{/if}height: 60px;overflow: hidden;">    	
+        <div class="hclub_ul swiper-wrapper">
+        	<!--{loop $league['clubs'] $club}-->
+            <!-- <li class="active"><a href=""><img src="template/usportstyle/touch/common/images/team_pic1.png" alt="" width="35" height="35"></a></li> -->
+            <div id="club_$club[fid]" class="hclub_li swiper-slide">
+                <a href="javascript:;" data-href="forum.php?mod=fansclub&fid=$club[fid]"><img src="data/attachment/common/$club[icon]" alt="" width="35" height="35"></a>
+            </div>
+            <!--{/loop}-->
+        </div>
+    </div>
+    <!--{/loop}-->
+    <div class="hsub_content">
+        <ul>
+        	<!--{loop $fansclub $vo}-->
+            <li>
+                <a href="forum.php?mod=group&fid=$vo[fid]&mobile=2">
+                    <div class="hsc_head"><img src="$vo[icon]" alt="$vo[name]"></div>
+                    <div class="hsc_mes">
+                        <div class="hsm_t">$vo[name]<!--{if $vo[verify_org] == 3}-->&nbsp;<span class="certif">官</span><!--{elseif $vo[verify_5u] == 3}-->&nbsp;<span>5U认证</span><!--{/if}--></div>
+                        <div class="hsm_b">
+                            <span>人数：</span><span>$vo[members]</span><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><span><span>地区：</span><span>$vo[province_name] </span>$vo[city_name]</span>
+                        </div>
+                    </div>
+                    <div class="hsc_right"></div>
+                </a>
+            </li>
+            <!--{/loop}-->            
+        </ul>
+    </div>
+</div>
+<script id="group-index-templ" type="text/x-dot-template">
+    {{ for (var key in it) { }}
+    <li>
+        <a href="forum.php?mod=group&fid={{=it[key].fid}}&mobile=2">
+            <div class="hsc_head"><img src="{{=it[key].icon}}" alt=""></div>
+            <div class="hsc_mes">
+                <div class="hsm_t">{{=it[key].name}}</div>
+                <div class="hsm_b">
+                    <span>人数：</span><span>{{=it[key].members}}</span><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><span><span>地区：</span><span>{{=it[key].province_name}}</span>{{=it[key].city_name}}</span>
+                </div>
+            </div>
+            <div class="hsc_right"></div>
+        </a>
+    </li>
+    {{ } }}
+</script>
+<script type="text/javascript">
+    new Swiper('.swiper-container', {
+        freenMode: true,
+        slideActiveClass: 'slideActive',
+        width: '50'
+    })
+</script>

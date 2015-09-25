@@ -1,0 +1,288 @@
+<!--{template common/sub_common_header}-->
+<!--{template extend/desktop/channel_common_header}-->
+<style id="diy_style" type="text/css"></style>
+<link href="template/usportstyle/common/main.css" rel="stylesheet" />
+    <div class="wp ball_main" id="wp">
+        <div class="ball_left fl clearfix">
+        <!--精选帖子-->
+        <!--[diy=diyselectpost]--><div id="diyselectpost" class="area"></div><!--[/diy]-->
+        <!--精选帖子end-->
+            <!--<div class="ball_official">
+                <div class="channel_header">
+                    <h1 class="ball_title bt">精选帖子</h1>
+                </div>
+                <div class="ball_pb fl clearfix">
+                    <img src="images/ball_pb.jpg" width="280" height="126">
+                    <p>C罗跟梅西谁更牛B，我说的是梅西沙丁鱼跟梅西沙丁鱼跟梅西沙丁鱼.</p>
+                </div>
+                <div class="ball_pb fl clearfix">
+                    <img src="images/ball_pb.jpg" width="280" height="126">
+                    <p>C罗跟梅西谁更牛B，我说的是梅西沙丁鱼跟梅西沙丁鱼跟梅西沙丁鱼.</p>
+                </div>
+            </div>-->
+            <div class="ball_left mt20">
+                
+                <div class="th">
+					<table cellspacing="0" cellpadding="0">
+						<tr>
+							<th colspan="{if !$_GET['archiveid'] && $_G['forum']['ismoderator']}3{else}2{/if}">
+							<!--{if CURMODULE != 'guide'}-->
+								<div class="tf">
+									
+									<!--{if $_GET['specialtype'] == 'reward'}-->
+			                        
+										<a id="filter_reward" href="javascript:;" class="showmenu xi2{if $_GET['rewardtype']} xw1{/if}" onclick="showMenu(this.id)"><!--{if $_GET['rewardtype'] == ''}-->{lang all_reward}<!--{elseif $_GET['rewardtype'] == '1'}-->{lang rewarding}<!--{elseif $_GET['rewardtype'] == '2'}-->{lang reward_solved}<!--{/if}--></a>
+			                        
+									<!--{/if}-->
+			                        <div class="fl all">
+			                        	<span>筛选：<a id="filter_special" href="javascript:;" class="showmenu xi2{if $_GET['specialtype']} xw1{/if}" onclick="showMenu(this.id)">
+										<!--{if $_GET['specialtype'] == 'poll'}-->{lang thread_poll}<!--{elseif $_GET['specialtype'] == 'trade'}-->{lang thread_trade}<!--{elseif $_GET['specialtype'] == 'reward'}-->{lang thread_reward}<!--{elseif $_GET['specialtype'] == 'activity'}-->{lang thread_activity}<!--{elseif $_GET['specialtype'] == 'debate'}-->{lang thread_debate}<!--{else}-->{lang threads_all}<!--{/if}--></a>
+										</span>
+										排序：<a id="filter_dateline" href="javascript:;" class="showmenu xi2{if $_GET['dateline']} xw1{/if}" onclick="showMenu(this.id)">							
+										<!--{if $_GET['orderby'] == 'dateline'}-->{lang list_post_time}
+										<!--{elseif $_GET['orderby'] == 'replies'}-->{lang replies}
+										<!--{elseif $_GET['orderby'] == 'views'}-->{lang views}
+										<!--{/if}-->
+										
+										<!--{if $_GET['dateline'] == '86400'}-->{lang last_1_days}
+										<!--{elseif $_GET['dateline'] == '172800'}-->{lang last_2_days}
+										<!--{elseif $_GET['dateline'] == '604800'}-->{lang list_one_week}
+										<!--{elseif $_GET['dateline'] == '2592000'}-->{lang list_one_month}
+										<!--{elseif $_GET['dateline'] == '7948800'}-->{lang list_three_month}
+										<!--{else}-->
+										<!--{/if}-->
+										<!--{if $_GET['dateline'] == '' && ($_GET['orderby'] == 'lastpost' || $_GET['orderby'] == 'heats')}-->
+										{lang more}
+										<!--{/if}-->
+										</a>&nbsp;	
+			                        </div>
+			                        <div class="fr">
+													
+									<a href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=lastpost&orderby=lastpost$forumdisplayadd[lastpost]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" class="xi2{if $_GET['filter'] == 'lastpost'} xw1{/if}">{lang latest}</a>&nbsp;
+									<a href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=heat&orderby=heats$forumdisplayadd[heat]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" class="xi2{if $_GET['filter'] == 'heat'} xw1{/if}">{lang order_heats}</a>&nbsp;
+									<a href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=hot" class="xi2{if $_GET['filter'] == 'hot'} xw1{/if}">{lang hot_thread}</a>&nbsp;
+									<a href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=digest&digest=1$forumdisplayadd[digest]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" class="xi2{if $_GET['filter'] == 'digest'} xw1{/if}">{lang digest_posts}</a>
+									<!-- <a id="filter_dateline" href="javascript:;" class="showmenu xi2{if $_GET['dateline']} xw1{/if}" onclick="showMenu(this.id)">{lang more}</a>&nbsp; -->
+									<!--{if empty($_G['forum']['picstyle']) && $_GET['orderby'] == 'lastpost' && (!$_G['setting']['forumseparator'] || !$separatepos) && !$_GET['filter']}-->
+										
+									<!--{/if}-->
+									<!--{if $_GET['filter'] == 'hot'}-->
+										<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+										<span>$ctime</span>
+										<img src="{IMGDIR}/date_magnify.png" class="cur1" alt="" id="hottime" value="$ctime" fid="$_G[fid]" onclick="showcalendar(event, this, false, false, false, false, function(){viewhot(this);});" align="absmiddle" />
+									<!--{/if}-->
+									
+			                        </div>
+									<!--{hook/forumdisplay_filter_extra}-->
+								</div>
+							<!--{else}-->
+								{lang title}
+							<!--{/if}-->
+							</th>
+							
+						</tr>
+					</table>
+				</div>
+                
+                <div class="indexThread">
+                    <ul>
+                        <li class="cl">
+                        <div class="avatar">
+                            <a href="" target="_blank"><img src="$_G['config'][static]/images/avatar_middle.jpg"></a>
+                        </div>
+                        <div class="inde_info">
+                            <p class="in_name"><a href="" target="_blank">厄齐尔:誓帮阿森纳超巴萨夺欧冠 最想抽皇马碰C罗</a></p>
+                            <p class="in_title">
+                            在自由市场优秀球员纷纷落户的情况下，加上之前又被小乔丹给“忽悠了”，这时候的达拉斯小牛终于“梦醒”，没有了小乔丹，又放走了泰森-钱德勒。
+                            </p>
+                            <p class="in_img">
+                            <a href="" target="_blank"><img src="$_G['config'][static]/images/img.jpg" width="auto" height="140"></a>
+                            <a href="" target="_blank"><img src="$_G['config'][static]/images/img.jpg" width="auto" height="140"></a>
+                            <a href="" target="_blank"><img src="$_G['config'][static]/images/img.jpg" width="auto" height="140"></a>
+                            </p>
+                            <div class="in_meta">
+                                <span><a href="" target="_blank">小珊子</a>&nbsp;&nbsp;7月21日09:00 &nbsp;&nbsp;&nbsp;来自<a href="" target="_blank">曼联频道</a></span>
+                                <span class="y sta_lun">55</span>
+                                <span class="y sta_zan">0</span>
+                            </div>
+                        </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="ball_right fr clearfix">
+            <div class="bg_publish"><div class="ball_publish"><a href="javascript:"><i></i>发表帖子</a></div></div>
+            <div class="chComd bgnone chMatch clearfix">
+                <ul>
+                    <li><a href="javascript:" class="mPrev">上一场</a></li>
+                    <li><a href="javascript:" class="active">本场</a></li>
+                    <li><a href="javascript:" class="mNext">下一场</a></li>
+                </ul>
+                <div class="matchCont">
+                    <div class="match_l fl clearfix">
+                        <img src="images/chcomd_hm.png" width="65" height="65">
+                        <h4>皇马</h4>
+                    </div>
+                    <div class="match_m fl clearfix">
+                        <h4>英超</h4>
+                        <h1>2</h1><h1>-</h1><h1>6</h1>
+                        <div>直播中</div>
+                    </div>
+                    <div class="match_r fl clearfix">
+                        <img src="images/chcomd_qex.png" width="65" height="65">
+                        <h4>曼联</h4>
+                    </div>
+                </div>
+            </div>
+			<!--{if $moderator_info}-->
+            <div class="chComd clearfix">
+                <div class="chHeader">
+                    <h1 class="fl bt chComd_title">版主</h1>
+                </div>
+                <div class="chBlock fl clearfix">
+                	<!--{loop $moderator_info $val}-->
+                    <div class="chBoard">
+                        <div class="board_c">
+                            <div class="board_l fl clearfix"><img src="{$val[avatar]}" width="" height="" alt="{$val[username]}"></div>
+                            <div class="board_r fl clearfix">
+                                <div class="r_up"><span>{$val[username]}</span></div>
+                                <div class="r_down"><span>简介：<!--{if $val[bio]}-->{$val[bio]}<!--{else}-->这家伙很懒，什么都没有留下！<!--{/if}--></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--{/loop}-->                    
+                </div>
+            </div>
+            <!--{/if}-->
+            <div class="chComd clearfix">
+                <div class="chHeader">
+                    <h1 class="fl bt chComd_title">球员</h1>
+                </div>
+                <div class="chBlock fl clearfix">
+                    <div class="chPlayer">
+                        <div class="player_c">
+                            <div class="player_m fl clearfix">
+                                <div class="m_up"></div>
+                                <div class="m_down">约翰特里球约翰特里球</div>
+                            </div>
+                            <div class="player_m fl clearfix">
+                                <div class="m_up"></div>
+                                <div class="m_down">约翰特里球约翰特里球</div>
+                            </div>
+                            <div class="player_m fl clearfix">
+                                <div class="m_up"></div>
+                                <div class="m_down">约翰特里球约翰特里球</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chComd clearfix">
+                <div class="chHeader">
+                    <h1 class="fl bt chComd_title">推荐球迷会</h1>
+                    <a href="javascript:" class="fr chComd_more clearfix">更多</a>
+                </div>
+                <div class="chBlock fl">
+                    <div class="chBlockfl chH200 fl">
+                        <a href="javascript:"><img src="images/fanscomd_hm.png"></a>
+                        <p>广州切尔西球迷会</p>
+                        <p><h4>人数：200</h4></p>
+                    </div>
+                    <div class="chBlockfl chH200 fl">
+                        <a href="javascript:"><img src="images/fanscomd_qex.png"></a>
+                        <p>黑龙江切尔西球迷会</p>
+                        <p><h4>人数：200</h4></p>
+                    </div>
+                    <div class="chBlockfl chH200 fl">
+                        <a href="javascript:"><img src="images/fanscomd_hm.png"></a>
+                        <p>广州切尔西球迷会</p>
+                        <p><h4>人数：200</h4></p>
+                    </div>
+                    <div class="chBlockfl chH200 fl">
+                        <a href="javascript:"><img src="images/fanscomd_qex.png"></a>
+                        <p>黑龙江切尔西球迷会</p>
+                        <p><h4>人数：200</h4></p>
+                    </div>
+                    <div class="chBlockfl chH200 fl">
+                        <a href="javascript:"><img src="images/fanscomd_hm.png"></a>
+                        <p>广州切尔西球迷会</p>
+                        <p><h4>人数：200</h4></p>
+                    </div>
+                    <div class="chBlockfl chH200 fl">
+                        <a href="javascript:"><img src="images/fanscomd_qex.png"></a>
+                        <p>黑龙江切尔西球迷会</p>
+                        <p><h4>人数：200</h4></p>
+                    </div>
+                </div>
+            </div>
+            <!--{template extend/desktop/sub_activity}-->
+
+            <div class="chComd clearfix">
+                <div class="chHeader">
+                    <h1 class="fl bt chComd_title">积分榜</h1>
+                    <a href="javascript:" class="fr chComd_more clearfix">更多</a>
+                </div>
+                <div class="chBlock chScore fl clearfix">
+                    
+                        <ul class="s_ulHeader">
+                            <li>排名</li>
+                            <li>球队</li>
+                            <li>胜平负</li>
+                            <li>积分</li>
+                        </ul>
+                        <ul class="s_ulBody">
+                            <li><img src="images/ch_no1.png" alt=""></li>
+                            <li>切尔西</li>
+                            <li>25/9/3</li>
+                            <li>84</li>
+                        </ul>
+                        <ul class="s_ulBody">
+                            <li><img src="images/ch_no2.png" alt=""></li>
+                            <li>切尔西</li>
+                            <li>25/9/3</li>
+                            <li>84</li>
+                        </ul>
+                        <ul class="s_ulBody">
+                            <li><img src="images/ch_no3.png" alt=""></li>
+                            <li>切尔西</li>
+                            <li>25/9/3</li>
+                            <li>84</li>
+                        </ul>
+                        <ul class="s_ulBody">
+                            <li><img src="images/ch_no4.png" alt=""></li>
+                            <li>切尔西</li>
+                            <li>25/9/3</li>
+                            <li>84</li>
+                        </ul>
+                        <ul class="s_ulBody">
+                            <li><img src="images/ch_no5.png" alt=""></li>
+                            <li>切尔西</li>
+                            <li>25/9/3</li>
+                            <li>84</li>
+                        </ul>
+                        <ul class="s_ulBody">
+                            <li><img src="images/ch_no6.png" alt=""></li>
+                            <li>切尔西</li>
+                            <li>25/9/3</li>
+                            <li>84</li>
+                        </ul>
+                        <ul class="s_ulBody">
+                            <li><img src="images/ch_no7.png" alt=""></li>
+                            <li>切尔西</li>
+                            <li>25/9/3</li>
+                            <li>84</li>
+                        </ul>
+                        <ul class="s_ulBody">
+                            <li><img src="images/ch_no8.png" alt=""></li>
+                            <li>切尔西</li>
+                            <li>25/9/3</li>
+                            <li>84</li>
+                        </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="jianju40"></div>
+<!--{template common/footer}-->

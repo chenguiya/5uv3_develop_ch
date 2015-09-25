@@ -1,0 +1,26 @@
+<!--{template group/group_header}-->
+<div class="boxMain boxMemo">
+	<div class="memoTitle">{$fansclub_name}</div>
+	<div class="memoListMain">
+<!--{loop $arr_big_event $key $value}-->
+    	<div class="memoList">
+    	<div class="perioda"><span>{$value['time']}</span></div>
+        <div class="memoLista">
+            <div class="memoListT">{$value['title']}</div>
+			<div class="memoListTa">
+			<p>{$value['content']}</p>
+			</div>
+			 <ul class="property">
+				<li>总会员：<font>$value['add_info']['members']</font></li>
+				<li>图片数：<font>$value['add_info']['pictures']</font></li>
+				<li>总话题：<font>$value['add_info']['posts']</font></li>
+				<li>视频数：<font>$value['add_info']['vedios']</font></li>
+			</ul>
+        </div>
+        <div class="clear"></div>
+		</div>
+<!--{/loop}-->
+		<div class="clear"></div>
+    </div> 
+</div>
+<div class="jianju60"></div>

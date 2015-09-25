@@ -1,0 +1,48 @@
+<div class="ch_bm">
+	<div class="z">
+		<a href="./" class="" title="{lang home}">$_G[setting][bbname]</a><em>&gt;</em>
+		<em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{if $_GET['ac'] == 'live'}直播{/if}{if $_GET['ac'] == 'standings'}积分榜{/if}{if $_GET['ac'] == 'scorer'}射手榜{/if}</a></em>
+	</div>
+</div>
+<!--公共banner start-->
+
+<div class="title-block">
+        <ul class="list">
+            <li><a class="{if $_GET['ac'] == 'live'}active{/if}" href="live">直播</a></li>
+            <li><a class="{if $_GET['ac'] == 'standings'}active{/if}" href="standings">积分榜</a></li>
+            <li><a class="{if $_GET['ac'] == 'scorer'}active{/if}" href="scorer">射手榜</a></li>
+            <!--<li><a href="zg">助攻榜</a></li>-->
+        </ul>
+</div>
+
+<!--公共banner end-->
+<div class="live clearfix" style="margin:0;">
+	<div class="col-left">
+		<div class="types_ch">
+                    
+                    <ul>
+                            <!--{if $_GET['ac']== 'live'}--><li class="type {if $_G['gp_league_id'] == ''}hot{/if}"><a href="$_GET['ac']/" class="ico ico-hot">热门</a></li><!--{/if}-->
+                            <li class="type {if $_G['gp_league_id'] == '1'||$_G['gp_league_id'] == ''&& $_GET['ac'] != 'live'}hot{/if}"><a href="$_GET['ac']/pl" class="ico ico-yc">英超</a></li>
+                            <li class="type {if $_G['gp_league_id'] == '15'}hot{/if}"><a href="$_GET['ac']/laliga" class="ico ico-xj">西甲</a></li>
+                            <li class="type {if $_G['gp_league_id'] == '13'}hot{/if}"><a href="$_GET['ac']/csl" class="ico ico-zc">中超</a></li>
+                            <li class="type {if $_G['gp_league_id'] == '41'}hot{/if}"><a href="$_GET['ac']/afccl" class="ico ico-yg">亚冠</a></li>
+                            <li class="type {if $_G['gp_league_id'] == '21'}hot{/if}"><a href="$_GET['ac']/seriea" class="ico ico-yj">意甲</a></li>
+                            <li class="type {if $_G['gp_league_id'] == '2'}hot{/if}"><a href="$_GET['ac']/bundesliga" class="ico ico-dj">德甲</a></li>
+                            <li class="type {if $_G['gp_league_id'] == '3'}hot{/if}"><a href="$_GET['ac']/ligue" class="ico ico-fj">法甲</a></li>
+                            <li class="type {if $_G['gp_league_id'] == '7'}hot{/if}"><a href="$_GET['ac']/nba" class="ico ico-nba">NBA</a></li>
+                            <li class="type {if $_G['gp_league_id'] == '8'}hot{/if}"><a href="$_GET['ac']/cba" class="ico ico-cba">CBA</a></li>
+                            <li class="type {if $_G['gp_league_id'] == '100'}hot{/if}"><a href="$_GET['ac']/others" class="ico ico-misc">其它</a></li>
+                    </ul>
+
+		</div>
+	</div>
+	<div class="col-right">
+            <!--{if $_GET['ac']== 'live'}-->
+		 <!--{template live/live_index}-->
+            <!--{elseif $_GET['ac']== 'scorer'}-->
+                 <!--{template live/live_shooter}-->
+            <!--{elseif $_GET['ac']== 'standings'}-->
+                 <!--{template live/live_jifen}-->
+            <!--{/if}-->
+	</div>
+</div>

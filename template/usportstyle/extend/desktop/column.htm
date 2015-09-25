@@ -1,0 +1,56 @@
+<!--{template common/header}-->
+<div class="blank15"></div>
+<div class="ad_banner">
+<!-- 108811：首页-频道-列表-内容-顶部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+</div>
+<div class="container">
+    <div class="title-block" style="margin-top: 20px;">
+        <ul class="list">
+		<!--{eval $zhengzhifu = strpos($_SERVER['HTTP_HOST'], '5usport.com') !== FALSE ? TRUE : FALSE; }-->
+		{if $zhengzhifu}
+			<li><a{if $_GET['name'] == '体育趣图'} class="active"{/if} href="tag/18803/">趣图</a></li>
+            <li><a{if $_GET['name'] == '体育花边'} class="active"{/if} href="tag/19031/">花花视界</a></li>
+            <li><a{if $_GET['name'] == '5U原创'} class="active"{/if} href="tag/18804/">精品文章</a></li>
+            <li><a{if $_GET['name'] == '足球视频'} class="active"{/if} href="tag/11202/">足球集锦</a></li>
+            <li><a{if $_GET['name'] == '篮球视频'} class="active"{/if} href="tag/19214/">篮球集锦</a></li>
+            <li><a{if $_GET['name'] == '聊球主播'} class="active"{/if} href="tag/20110/">聊球主播</a></li>
+		{else}
+			<li><a{if $_GET['name'] == '体育趣图'} class="active"{/if} href="misc.php?mod=tag&name=体育趣图&type=thread&op=waterwall">趣图</a></li>
+            <li><a{if $_GET['name'] == '体育花边'} class="active"{/if} href="misc.php?mod=tag&name=体育花边&type=thread&op=waterwall">花花视界</a></li>
+            <li><a{if $_GET['name'] == '5U原创'} class="active"{/if} href="misc.php?mod=tag&name=5U原创&type=thread&op=waterwall">精品文章</a></li>
+            <li><a{if $_GET['name'] == '足球视频'} class="active"{/if} href="misc.php?mod=tag&name=足球视频&type=thread&op=waterwall">足球集锦</a></li>
+            <li><a{if $_GET['name'] == '篮球视频'} class="active"{/if} href="misc.php?mod=tag&name=篮球视频&type=thread&op=waterwall">篮球集锦</a></li>
+            <li><a{if $_GET['name'] == '聊球主播'} class="active"{/if} href="misc.php?mod=tag&name=聊球主播&type=thread&op=waterwall">聊球主播</a></li>
+		{/if}
+        </ul>
+    </div>
+    <!--{if $threadlist}-->
+    <div class="waterfall">
+    	<!--{loop $threadlist $thread}-->
+        <div class="item" style="margin-bottom: 15px;">
+        	<!--{if $thread['type'] == 2}-->
+            <a href="{$thread[url]}" target="_blank"><img class="img" src="{$thread[imgUrl]}" alt="{$thread[title]}"></a>
+            <!--{elseif $thread['type'] == 3}-->
+            <embed width="320" height="231" allownetworking="internal" allowscriptaccess="never" src="{$thread[videoUrl]}" quality="high" bgcolor="#ffffff" wmode="transparent" allowfullscreen="true" autostart="false" type="application/x-shockwave-flash"></embed>
+            <!--{/if}-->
+            <div class="desc">
+                <a href="{$thread[url]}" target="_blank" class="brief">{$thread[title]}</a>
+                <div class="author">
+                	<a href="home.php?mod=space&uid=$thread[authorId]" target="_blank"><img class="thumb" src="{$thread[authorThumbUrl]}" alt="{$thread[authorName]}"/></a>
+                    <div class="wrap">
+                        <a href="home.php?mod=space&uid=$thread[authorId]" class="name femen" target="_blank">{$thread[authorName]}</a>
+                        <div class="time">{$thread[time]}</div>
+                    </div>                   
+                    <a href="{$thread[url]}" class="replay" target="_blank">{$thread[replay]}</a>
+                </div>
+            </div>
+        </div>
+        <!--{/loop}-->
+    </div>
+    <!--{/if}-->
+</div>
+
+<!--{template common/footer}-->

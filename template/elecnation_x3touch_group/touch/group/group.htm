@@ -1,0 +1,101 @@
+<!--{template common/header}-->
+<!-- header start -->
+<header class="header">
+{eval $nav = 'http://'.$_G['setting']['domain']['app']['mobile'];}
+    
+    <div class="nav">
+    	<div class="category" style="width:100%; text-align:center; ">
+        	<div class="name"><!--{if $action != 'create'}-->$_G[forum][name]{lang group}<!--{else}-->{lang group_create}<!--{/if}--></div>
+
+            <div class="z" style="position:absolute; left:8px; top:0;">
+            <a href="group.php">
+                <div style="width:24px; height:24px; margin:0 auto; display:block; padding:1px; border:1px #CCCCCC solid; -moz-border-radius: 14px; -webkit-border-radius: 14px; border-radius: 14px;">
+                    <div class="elecnation_group_img24">
+                        <img src="{$_G['style']['styleimgdir']}/touch/common/images/group_group.png" width="24" height="24" />
+                    </div>
+                </div>
+            </a>
+            </div>
+
+            <div class="icon_edit y" style="width:36px; position:absolute; right:0; top:0;">
+                <a href="forum.php?mod=post&action=newthread&fid=$_G[fid]"><span class="none">{lang send_threads}</span></a>
+            </div>
+        </div>    
+    </div>
+    
+</header>
+<!-- header end -->
+
+<!--group start-->
+<div class="wp">
+
+    <!--{if $action != 'create'}-->
+    <div id="elecnation_group_index_top">
+
+        <a href="forum.php?mod=group&fid=$_G[fid]">
+        <div id="elecnation_group_index_float_<!--{if $action == 'index' && $status != 2 && $status != 3}-->1<!--{else}-->3<!--{/if}-->">{lang group}{lang home}</div></a>
+        
+		<a href="forum.php?mod=forumdisplay&action=list&fid=$_G[fid]#groupnav">
+        <div id="elecnation_group_index_float_<!--{if $action == 'list'}-->1<!--{else}-->3<!--{/if}-->">{lang group_discuss_area}</div></a>
+        
+		<a href="forum.php?mod=group&action=memberlist&fid=$_G[fid]#groupnav">
+        <div id="elecnation_group_index_float_<!--{if $action == 'memberlist'}-->1<!--{else}-->3<!--{/if}-->">{lang group_member_list}</div></a>
+		        
+		<!--{if $_G['forum']['ismoderator']}-->
+		<a href="forum.php?mod=group&action=manage&fid=$_G[fid]#groupnav">
+        <div id="elecnation_group_index_float_<!--{if $action == 'manage'}-->1<!--{else}-->3<!--{/if}-->">{lang group_admin}</div></a>
+		<!--{else}-->
+			<!--{if helper_access::check_module('group') && $status != 'isgroupuser'}-->
+                <a href="forum.php?mod=group&action=join&fid=$_G[fid]"><div id="elecnation_group_index_float_3">{lang group_join_group}</div></a>
+			<!--{else}-->
+                <a href="forum.php?mod=group&action=out&fid=$_G[fid]"><div id="elecnation_group_index_float_3">{lang group_exit}</div></a>
+			<!--{/if}-->
+		<!--{/if}-->
+    </div>
+    <!--{/if}-->
+
+	<div>
+	<!--{if $action != 'create'}-->
+    	<div id="elecnation_group_index_header">
+        <div id="elecnation_group_index_name">$_G[forum][name]</div>
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td width="15%" align="center" valign="bottom">$_G[forum][membernum]<br />{lang member}</td>
+				<td width="30%" align="center" valign="bottom">$_G[forum][posts]<br />{lang posts}</td>
+				<td width="10%" align="center" valign="bottom">
+                <div class="elecnation_group_img32_box" style="margin-bottom:8px;">
+                <div class="elecnation_group_img32">
+                	<img width="32" height="32" src="$_G[forum][icon]" />
+                </div>
+                </div>
+                {lang group_moderator_title}
+                </td>
+				<td width="30%" align="center" valign="bottom">$_G[forum][commoncredits]<br />
+			    {lang credits}</td>
+				<td width="15%" align="center" valign="bottom">$groupcache[ranking][data][today]<br />
+				  {lang group_member_rank}
+                  </td>
+			</tr>
+		</table>
+        <!--{loop $groupmanagers $manage}--><a href="home.php?mod=space&uid=$manage[uid]" target="_blank" class="elecnation_wy">$manage[username]</a><!--{/loop}-->
+        </div>
+	<!--{/if}-->
+	</div>
+
+    <div>
+    	<!--{if $action == 'index' && $status != 2 && $status != 3}-->
+			<!--{subtemplate group/group_index}-->
+		<!--{elseif $action == 'list'}-->
+			<!--{subtemplate group/group_list}-->
+		<!--{elseif $action == 'memberlist'}-->
+			<!--{subtemplate group/group_memberlist}-->
+        <!--{elseif $action == 'create'}-->
+				<!--{subtemplate group/group_create}-->
+		<!--{elseif $action == 'manage'}-->
+			<!--{subtemplate group/group_manage}-->
+		<!--{/if}-->
+	</div>
+
+</div>
+
+<!--{template common/footer}-->

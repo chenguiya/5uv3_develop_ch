@@ -1,0 +1,9 @@
+<!--{template common/sub_common_header}-->
+
+<!--{if (isset($_GET['tpl']))}-->
+	<!--{eval include template('extend/desktop/'.$_GET['tpl']);}-->
+<!--{else}-->
+	没指定模板
+<!--{/if}-->
+
+<!--{template common/footer}-->

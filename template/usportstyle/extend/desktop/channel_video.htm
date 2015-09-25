@@ -1,0 +1,19 @@
+<link href="../../common/main.css" rel="stylesheet" />
+<div class="boxMain">
+	<div class="titleColumns">$_G['cache']['forums'][$_G['fid']]['name']视频</div>
+    <div class="listVideo">
+    	<ul>
+			<!--{loop $_G['forum_threadlist'] $key $thread}-->
+        	<li>
+            	<a href="/forum.php?mod=viewthread&tid={$thread['tid']}" target="_blank" title="{$thread['subject']}" class="videoImg">
+					<img src="{$thread['coverpath']}" width="235" height="176" align="" title="{$thread['subject']}"/>
+					<span class="videoIco"></span></a>
+                <a href="/forum.php?mod=viewthread&tid={$thread['tid']}" target="_blank" title="{$thread['subject']}" class="videoTxt">{$thread['subject']}</a>
+            </li>
+            <!--{/loop}-->
+        </ul>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="page">$multipage</div>
+</div>

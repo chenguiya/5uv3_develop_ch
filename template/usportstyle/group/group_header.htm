@@ -1,0 +1,106 @@
+<div class="ch_bm">
+		<div class="z">
+			<a href="./" class="" title="{lang home}">$_G[setting][bbname]</a><em>&gt;</em>
+			<!--{eval $fupinfo=DB::fetch_first('select * from '.DB::table('plugin_fansclub_info').' where fid='.$_G['forum']['fid']);}-->
+			<a href="group/{$fupinfo['relation_fid']}/" class="">{$fupinfo['relation_name']}频道</a><em>&gt;</em>
+			 <!--{if $action == 'index' && $ac == ''}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}</a></em><!--{/if}-->
+			 <!--{if $action == 'list'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}话题</a></em><!--{/if}-->
+			  <!--{if $_GET['type'] == 'pic'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}图片</a></em><!--{/if}-->
+			  <!--{if $_GET['type'] == 'video'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}视频</a></em><!--{/if}-->
+			  <!--{if $action == 'memberlist' || $action == 'invite'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}成员</a></em><!--{/if}-->
+			  <!--{if $ac == 'event'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}大事记</a></em><!--{/if}-->
+			  <!--{if $action == 'manage'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}管理</a></em><!--{/if}-->
+		</div>
+	</div>
+
+	<!--{ad/text/wp a_t}-->
+
+	<style id="diy_style" type="text/css"></style>
+	<div class="wp">
+		<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
+	</div>
+	<div class="ad_banner">
+	<!-- 108811：首页-频道-列表-内容-顶部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+	</div>
+	<div class="blank15"></div>
+	<div id="ct" class="group_main cl">
+
+	     <!--球迷公共头部 start-->
+		 <div class="group-header">
+			 <div class="img">
+				 <img src="$_G[forum][banner]" alt="{$_G[forum][name]}"/>
+			 </div>
+			 <div class="center">
+				 <div class="logo"><img src="$_G[forum][icon]" alt="{$_G[forum][name]}"/></div>
+                 <div class="name">
+                     <h3>{$_G[forum][name]}</h3>
+                     <!--{if check_joined_fansclub($_GET['fid'])}-->
+                     <p class="fans_btn"><a class="attes_on" href="javascript:;" onclick="showDialog('确定退出球迷会吗？','confirm','',function(){location.href='forum.php?mod=group&action=out&fid=$_GET[fid]'});" title="退出"></a></p>
+                     <!--{else}-->
+                     <p class="fans_btn"><a class="attes" href="forum.php?mod=group&action=join&fid={$_GET[fid]}&forward=current" title="加入"></a></p>
+                     <!--{/if}-->
+                 </div>
+                 <span>地区：{$_G[forum][province_name]}&nbsp;|&nbsp;{$_G[forum][city_name]}</span><span>人数：{$_G[forum][members]}</span><span>话题数：{$_G[forum][posts]}</span>
+                 <p class="brief">简介：<!--{if $_G['forum']['description']}-->{$_G['forum']['description']}<!--{else}-->暂无简介<!--{/if}--></p>
+                 <!--{if CURMODULE == 'group'}--> <!--{hook/group_qiandao}--><!--{elseif CURMODULE == 'fansclub'}--> <!--{hook/global_qiandao}--><!--{else}--><!--{hook/forumdisplay_qiandao}--><!--{/if}-->
+			 </div>
+			 
+			 <!--{if $action != 'create'}-->
+			 <!--{if $status != 2 && $status != 3}-->			 
+             <ul class="cate">
+                 <li class="item{if ($_GET['type']=='topic'|| $_GET['mod'] == 'forumdisplay')} active{/if}"><a href="fans/topic/$_GET[fid]/" title="topic">话题</a></li>
+                 <li class="item{if $_GET['type']=='pic'} active{/if}"><a href="fans/pic/$_GET[fid]/" title="pic">图片</a></li>
+                 <li class="item{if $_GET['type']=='video'} active{/if}"><a href="fans/video/$_GET[fid]/" title="video">视频</a></li>
+				 <!--<li class="item"><a href="javascript:;">活动</a></li>-->
+				 <li class="item{if $action == 'memberlist' || $action == 'invite'} active{/if}"><a href="fans/member/$_GET[fid]/" title="member">成员</a></li>
+				 <!--<li class="item"><a href="javascript:;">球队</a></li>-->
+                 <li class="item{if $ac == 'event'} active{/if}"><a href="fans/event/$_GET[fid]/" title="event">大事记</a></li>
+                 <li class="item{if $action == 'manage'} active{/if}"><a href="forum.php?mod=group&action=manage&fid=$_GET[fid]#groupnav">管理</a></li>
+             </ul>
+             <!--{/if}-->
+             <!--{/if}-->
+		 </div>
+		 <!--球迷公共头部 end-->
+		{if $ac == ''}
+			<div class="group_bd {if $action == 'manage'}group_manage{/if}">
+			 
+				<!--{if $action == 'manage'}-->
+				<!--{subtemplate group/group_manage}-->
+				<!--{/if}-->
+
+				<div class="index_l">
+				<!--[diy=diycontenttop]--><div id="diycontenttop" class="area"></div><!--[/diy]-->
+				
+				<!--{if $action == 'index' && $status != 2 && $status != 3}-->
+					<!--{hook/group_feed_list}-->
+				<!--{elseif $action == 'list'}-->
+					<!--{subtemplate group/group_list}-->
+				<!--{elseif $action == 'memberlist'}-->
+					<!--{subtemplate group/group_memberlist}-->
+				<!--{elseif $action == 'create'}-->
+					<!--{subtemplate group/group_create}-->
+				<!--{elseif $action == 'invite'}-->
+					<!--{subtemplate group/group_invite}-->
+				<!--{/if}-->
+				<!--{if CURMODULE == 'group'}--><!--{hook/group_bottom}--><!--{else}--><!--{hook/forumdisplay_bottom}--><!--{/if}-->
+				<!--[diy=diycontentbottom]--><div id="diycontentbottom" class="area"></div><!--[/diy]-->
+				</div>
+				
+				<!--{subtemplate group/group_right}-->
+		 
+		
+		 </div>
+		  {/if}
+		
+	</div>
+
+	<div class="ad_banner">
+		<!-- 108817：首页-频道-列表-内容-底部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108817,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+	</div>
+	<div class="blank15"></div>

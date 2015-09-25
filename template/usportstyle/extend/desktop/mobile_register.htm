@@ -1,0 +1,409 @@
+<script type="text/javascript">
+	var strongpw = new Array();
+	<!--{if $_G['setting']['strongpw']}-->
+		<!--{loop $_G['setting']['strongpw'] $key $val}-->
+		strongpw[$key] = $val;
+		<!--{/loop}-->
+	<!--{/if}-->
+	var pwlength = <!--{if $_G['setting']['pwlength']}-->$_G['setting']['pwlength']<!--{else}-->0<!--{/if}-->;
+</script>
+
+<div id="ct" class="ptm wp cl">
+	<div class="nfl" id="main_succeed" style="display: none">
+		<div class="f_c altw">
+			<div class="alert_right">
+				<p id="succeedmessage"></p>
+				<p id="succeedlocation" class="alert_btnleft"></p>
+				<p class="alert_btnleft"><a id="succeedmessage_href">{lang message_forward}</a></p>
+			</div>
+		</div>
+	</div>
+	<div class="mn">
+
+<div class="bm" id="main_message">
+
+	<div class="ch_regscon" id="main_hnav">
+		<span class="y">
+		      
+		</span>
+		<h3 id="layer_reginfo_t" class="xs2">
+			手机注册&nbsp;&nbsp;|&nbsp;&nbsp;<a href="member.php?mod=register" target="_self">邮箱注册</a>
+		</h3>
+	</div>
+
+	<p id="returnmessage4"></p>
+
+	<form method="post" autocomplete="off" name="register" id="registerform" onsubmit="if(checksubmit_this()){ checksubmit();return false; } else { return false; }" action="plugin.php?id=fansclub&ac=mobile_register">
+		<div id="layer_reg" class="bm_c">
+			<input type="hidden" name="regsubmit" value="yes" />
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<input type="hidden" name="referer" value="$dreferer" />
+			<input type="hidden" name="activationauth" value="{if $_GET[action] == 'activation'}$activationauth{/if}" />
+			<div class="mtw chreg_form">
+				<div id="reginfo_a">
+					<div class="rfm">
+						<table>
+							<tr>
+								<th><span class="rq">*</span><label for="">用户名:</label></th>
+								<td><input type="text" id="username" name="username" class="px" tabindex="1" value="" autocomplete="off" size="25" maxlength="11" required /></td>
+								<td class="tipcol"></td>
+							</tr>
+						</table>
+					</div>
+					<div class="rfm">
+						<table>
+							<tr>
+								<th><span class="rq">*</span><label for="">手机:</label></th>
+								<td><input type="text" id="mobile" name="mobile" class="px" tabindex="2" value="" autocomplete="off" size="25" maxlength="11" required />
+								<input type="hidden" id="mobile_real" name="mobile_real" value="" /></td>
+								<td class="tipcol"></td>
+							</tr>
+						</table>
+					</div>
+					<div class="rfm">
+						<table>
+							<tr>
+								<th><span class="rq">*</span><label for="">验证码</label></th>
+								<td><script async type="text/javascript" src="http://api.geetest.com/get.php?gt=d37f7f8be6b3a2dcb7b12d212f5b6138"></script></td>
+								<td class="tipcol"></td>
+							</tr>
+						</table>
+					</div>
+					<div class="rfm">
+						<table>
+							<tr>
+								<th><span class="rq">*</span><label for="">短信验证码:</label></th>
+								<td><input type="text" id="sms_verify" name="sms_verify" class="px code_cm" tabindex="4" value="" autocomplete="off" size="10" maxlength="6" required />
+								<input type="button" style="cursor:pointer" id="btn_sms" name="btn_sms" class="btn_codns" value="免费获取验证码" tabindex="3" >
+								<a href="javascript:void(0);" id="re_send_sms" class='link'><font class="msg">没收到？点击重发</font></a></td>
+								<td class="tipcol"></td>
+							</tr>
+						</table>
+					</div>
+					<div class="rfm">
+						<table>
+							<tr>
+								<th><span class="rq">*</span><label for="">密码:</label></th>
+								<td><input type="password" id="password" name="password" size="25" maxlength='16' tabindex="5" class="px" required /></td>
+								<td class="tipcol"></td>
+							</tr>
+						</table>
+					</div>
+					<div class="rfm">
+						<table>
+							<tr>
+								<th><span class="rq">*</span><label for="">确认密码:</label></th>
+								<td><input type="password" id="passwordconfirm" name="passwordconfirm" size="25" maxlength='16' tabindex="6" class="px" required /></td>
+								<td class="tipcol"></td>
+							</tr>
+						</table>
+					</div>
+					<div class="rfm">
+						<table>
+							<tr>
+								<th></th>
+								<td class="ch_policy"><input type="checkbox" id="protocol" name="protocol" checked="checked">&nbsp;&nbsp;同意并愿意遵守5U体育用户协议和隐私政策</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="layer_reginfo_b">
+			<div class="rfm mbw bw0">
+			<table width="100%">
+			<tbody><tr>
+			<th>&nbsp;</th>
+			<td>
+			<span id="reginfo_a_btn">
+			<em>&nbsp;</em><button name="regsubmit" tabindex="7" class="reg_buts" id="registerformsubmit" type="submit" value="true"><strong>提交</strong></button>
+			</span>
+			</td>
+			<td></td>
+			</tr>
+			</tbody></table>
+			</div>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+var mobile_next_1 = 0;
+var mobile_next_2 = 0;
+var mobile_next_3 = 0;
+var mobile_next_4 = 0;
+var mobile_next_5 = 0;
+var mobile_next_6 = 1;
+
+jQuery(document).ready(function($){
+
+	
+	// 等待60秒才发送
+	var wait=60;
+	var t;
+	function time(o) {
+		if (wait == 0) {
+			o.removeAttribute("disabled");
+			o.setAttribute("style", 'background-color: #eb6100;color:#FFFFFF');
+			o.value="免费获取验证码";
+			wait = 2;
+		} else {
+			o.setAttribute("disabled", true);
+			o.value="重新发送(" + wait + ")";
+			wait--;
+			t = setTimeout(function() {
+				time(o)
+			},
+			1000);
+		}
+	}
+	
+	function time_stop(o) {
+		o.removeAttribute("disabled");
+		o.setAttribute("style", 'background-color: #eb6100;color:#FFFFFF');
+		o.value="免费获取验证码";
+		wait = 60;
+		clearTimeout(t);
+	}
+	
+	function fucCheckLength(strTemp) 
+	{ 
+		var i,sum; 
+		sum=0; 
+		for(i=0;i<strTemp.length;i++) 
+		{ 
+			if ((strTemp.charCodeAt(i)>=0) && (strTemp.charCodeAt(i)<=255)) 
+				sum=sum+1; 
+			else 
+				sum=sum+2; 
+		} 
+		return sum; 
+	}
+
+	
+	$("#username").blur(function(){
+		var username = $(this).val();
+		var obj = $(this);
+		var str_length = fucCheckLength(username);
+		if(str_length < 3 || str_length > 15 || username == '') { 
+			obj.parent().next().html('<font color="red">用户名不得小于 3 个字符</font>');
+			obj.addClass("er");
+			$(this).parent().next().removeClass('p_right');
+			mobile_next_1 = 0;
+			return false;
+		}
+		else
+		{
+			mobile_next_1 = 1;
+			obj.removeClass("er");
+			$(this).parent().next().addClass('p_right');
+			$(this).parent().next().html('');
+		}
+		
+		var url = "plugin.php?id=fansclub"+"&ac=mobile_register"+"&step=check_username&inajax=1";
+		$.post(url, {'username': username},
+		function(result){
+			if(result['success'] == true)
+			{
+				mobile_next_1 = 1;
+				obj.removeClass("er");
+				obj.parent().next().addClass('p_right');
+				obj.parent().next().html('');
+			}
+			else
+			{
+				mobile_next_1 = 0;
+				obj.addClass("er");
+				obj.parent().next().removeClass('p_right');
+				obj.parent().next().html('<font color="red">'+result['message']+'</font>');
+			}
+		},'json');
+	}).focus(function(){
+		$(this).parent().next().removeClass('p_right');
+		$(this).parent().next().html('用户名由 3 到 15 个字符组成');
+	});
+	
+	$("#mobile").blur(function(){
+		var mobile = $(this).val();
+		var obj = $(this);
+		if ( !/^1\d{10}$/.test(mobile) || mobile == '') { 
+			obj.parent().next().html('<font color="red">手机号码不正确</font>');
+			mobile_next_2 = 0;
+			obj.addClass("er");
+			$(this).parent().next().removeClass('p_right');
+			$("#btn_sms").attr('disabled', "true");
+			$("#btn_sms").attr('style','background-color: #cccccc;');
+			return false;
+		}
+		else
+		{
+			mobile_next_2 = 1;
+			obj.removeClass("er");
+			obj.parent().next().addClass('p_right');
+			obj.parent().next().html('');
+		}
+		
+		var url = "plugin.php?id=fansclub"+"&ac=mobile_register"+"&step=check_mobile&inajax=1";
+		$.post(url, {'mobile': mobile},
+		function(result){
+			if(result['success'] == true)
+			{
+				mobile_next_2 = 1;
+				obj.removeClass("er");
+				obj.parent().next().addClass('p_right');
+				obj.parent().next().html('');
+				$("#btn_sms").removeAttr("disabled");
+				$("#btn_sms").attr('style','background-color: #eb6100;color:#FFFFFF');
+			}
+			else
+			{
+				mobile_next_2 = 0;
+				obj.addClass("er");
+				obj.parent().next().removeClass('p_right');
+				obj.parent().next().html('<font color="red">'+result['message']+'</font>');
+				$("#btn_sms").attr('disabled', "true");
+				$("#btn_sms").attr('style','background-color: #cccccc;');
+			}
+		},'json');
+	}).focus(function(){
+		$(this).parent().next().removeClass('p_right');
+		$(this).parent().next().html('请输入手机号码');
+		$("#btn_sms").parent().next().html('');
+	});
+	
+	$("#btn_sms").click(function(){
+		var obj = this;
+		var obj2 = $(this);
+		$("#btn_sms").val("正在发送...");
+		$("#btn_sms").attr('disabled', "true");
+		$("#mobile").attr('disabled', "true");
+		$("#btn_sms").attr('style','background-color: #cccccc;');
+		time(obj);
+
+		
+				  
+		var url = "plugin.php?id=fansclub"+"&ac=mobile_register"+"&step=send_sms&inajax=1";
+		url += "&geetest_challenge="+$("input[name='geetest_challenge']").val()+
+                "&geetest_validate="+$("input[name='geetest_validate']").val()+
+                "&geetest_seccode="+$("input[name='geetest_seccode']").val();
+		$.post(url, {'mobile': $("#mobile").val()},
+		function(result){
+			if(result['success'] == true)
+			{
+				time_stop(obj);
+				$("#btn_sms").attr('disabled', "true");
+				mobile_next_3 = 1;
+				$("#btn_sms").val("发送成功");
+				$("#mobile_real").val($("#mobile").val());
+			}
+			else
+			{
+				mobile_next_3 = 0;
+				obj2.parent().next().html('<font color="red">'+result['message']+'</font>');
+				$("#mobile").removeAttr('disabled');
+				$("#mobile_real").val('');
+				time_stop(obj);
+			}
+		},'json');
+	});
+	
+	$("#sms_verify").blur(function(){
+		var sms_verify = $(this).val();
+		var obj = $(this);
+		if ( !/^\d{6}$/.test(sms_verify) || sms_verify == '') { 
+			obj.parent().next().html('<font color="red">短信验证码不正确</font>');
+			mobile_next_4 = 0;
+			obj.addClass("er");
+			obj.parent().next().removeClass('p_right');
+			return false;
+		}
+		else
+		{
+			mobile_next_4 = 1;
+			obj.removeClass("er");
+			obj.parent().next().addClass('p_right');
+			$(this).parent().next().html('');
+		}
+		
+		var url = "plugin.php?id=fansclub"+"&ac=mobile_register"+"&step=check_sms&inajax=1";
+		$.post(url, {'sms_verify': sms_verify},
+		function(result){
+			if(result['success'] == true)
+			{
+				mobile_next_4 = 1;
+				obj.removeClass("er");
+				obj.parent().next().addClass('p_right');
+				obj.parent().next().html('');
+			}
+			else
+			{
+				mobile_next_4 = 0;
+				obj.addClass("er");
+				obj.parent().next().removeClass('p_right');
+				obj.parent().next().html('<font color="red">'+result['message']+'</font>');
+			}
+		},'json');
+	}).focus(function(){
+		$(this).parent().next().removeClass('p_right');
+		$(this).parent().next().html('请输入手机收到的验证码');
+	});
+	
+	$("#password").blur(function(){
+		var password = $(this).val();
+		var obj = $(this);
+		if (password.length < 6 || password == '') { 
+			obj.parent().next().html('<font color="red">密码太短，不得少于 6 个字符</font>');
+			mobile_next_5 = 0;
+			obj.addClass("er");
+			return false;
+		}
+		else
+		{
+			mobile_next_5 = 1;
+			obj.removeClass("er");
+			$(this).parent().next().html('');
+		}
+	}).focus(function(){
+		$(this).parent().next().html('请填写密码, 最小长度为 6 个字符');
+	});
+	
+	$("#passwordconfirm").blur(function(){
+		var password = $("#password").val();
+		var passwordconfirm = $(this).val();
+		var obj = $(this);
+		if (passwordconfirm == '' || password != passwordconfirm) { 
+			obj.parent().next().html('<font color="red">确认密码不正确</font>');
+			mobile_next_6 = 0;
+			obj.addClass("er");
+			return false;
+		}
+		else
+		{
+			mobile_next_6 = 1;
+			obj.removeClass("er");
+			$(this).parent().next().html('');
+		}
+	}).focus(function(){
+		$(this).parent().next().html('请再次输入密码');
+	});
+	
+
+});
+
+function checksubmit_this()
+{
+	if(mobile_next_1 + mobile_next_2 + mobile_next_3 + mobile_next_4 + mobile_next_5 + mobile_next_6 != 6)
+	{
+		alert('请检查并修正错误');
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+</script>
+
+	</div>
+</div>

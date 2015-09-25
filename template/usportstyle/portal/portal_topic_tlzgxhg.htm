@@ -1,0 +1,93 @@
+<!--{template common/header_special}-->
+
+<link type="text/css" href="$_G['config'][static]/topic/css_tlzgxhg.css" rel="stylesheet" />
+<div class="top_box">
+     <div class="ban_content">
+	      <p><img src="$_G['config'][static]/topic/2015tlzgxhg/top_01.jpg" width="1000" height="239" border="0"></p>
+		  <p><img src="$_G['config'][static]/topic/2015tlzgxhg/top_02.jpg" width="1000" height="238" border="0"></p>
+	 </div>
+</div>
+<div class="adver_box">
+     <div class="adver_mian cl">
+		  <div class="adver_l">
+		  <!--[diy=diyfocus]--><div id="diyfocus" class="area"></div><!--[/diy]-->
+		  </div>
+		  <div class="adver_r">
+		  <!--[diy=diynews]--><div id="diynews" class="area"></div><!--[/diy]-->
+		  </div>
+	 </div>
+</div>
+<div class="tent_body">
+     <!--足球梦 start-->
+	 <div class="basket_box">
+	      <div><img src="$_G['config'][static]/topic/2015tlzgxhg/bask_one1.png" width="290" height="57"></div>
+		  <div class="basket_main">
+		       <div class="bask_common cl">
+				
+				<div class="left_w one_w">
+					     <h3><span>图集</span></h3>
+						 <!--[diy=diypic1]--><div id="diypic1" class="area"></div><!--[/diy]-->
+					</div>
+				
+				<div class="left_w one_z">
+					     <h3><span>视频</span></h3>
+						 <!--[diy=diyvideo1]--><div id="diyvideo1" class="area"></div><!--[/diy]-->
+					</div>
+			   </div>
+		       <span class="backet_icon"><img src="$_G['config'][static]/topic/2015tlzgxhg/bask_icon.png"></span>
+		  </div>
+	 </div>
+	 <!--足球梦 end-->
+	 <!--5u梦 start-->
+	 <div class="basket_box">
+	      <div><img src="$_G['config'][static]/topic/2015tlzgxhg/5u_one1.png" width="350" height="57"></div>
+		  <div class="basket_main two_main">
+		       <div class="bask_common cl">
+			   <div class="left_w two_w">
+					     <h3><span>图集</span></h3>
+						  <!--[diy=diypic2]--><div id="diypic2" class="area"></div><!--[/diy]-->
+					</div>
+					<div class="left_w two_z">
+					     <h3><span>视频</span></h3>
+						 <!--[diy=diyvideo2]--><div id="diyvideo2" class="area"></div><!--[/diy]-->
+					</div>
+			   </div>
+		       <span class="backet_icon"><img src="$_G['config'][static]/topic/2015tlzgxhg/5u_icon.png"></span>
+		  </div>
+	 </div>
+	 <!--5u梦 end-->
+	 <!--聊球-特里最爱的APP start-->
+	 <div class="basket_box">
+	      <div><img src="$_G['config'][static]/topic/2015tlzgxhg/app_one1.png" width="455" height="57"></div>
+		  <div class="basket_main three_main">
+		       <div class="bask_common cl">
+					
+			        <div class="left_w three_w">
+					     <h3><span>图集</span></h3>
+						 <!--[diy=diypic3]--><div id="diypic3" class="area"></div><!--[/diy]-->
+					</div>
+					<div class="left_w three_z">
+					     <h3><span>视频</span></h3>
+						 <!--[diy=diyvideo3]--><div id="diyvideo3" class="area"></div><!--[/diy]-->
+					</div>
+			   </div>
+		       <span class="backet_icon"><img src="$_G['config'][static]/topic/2015tlzgxhg/app_icon.png"></span>
+		  </div>
+	 </div>
+	 <!--聊球-特里最爱的APP end-->
+</div>
+<!--评论区 start-->
+<div class="blank15"></div>
+<div class="ban_content">
+<!--{if $topic['allowcomment']==1}-->
+	{eval
+		$data = &$topic;
+		$common_url = "portal.php?mod=comment&id=$topicid&idtype=topicid";
+		$form_url = "portal.php?mod=portalcp&ac=comment";
+		$commentlist = portaltopicgetcomment($topicid);	}
+	<!--{template portal/portal_comment}-->
+<!--{/if}-->
+</div>
+<!--评论区 end-->
+<script src="misc.php?mod=diyhelp&action=get&type=topic&diy=yes&topicid=$topicid&r={echo random(4)}" type="text/javascript"></script>
+<!--{template common/footer}-->

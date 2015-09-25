@@ -1,0 +1,65 @@
+<!--{template common/sub_common_header}-->
+<!--{template extend/desktop/channel_common_header}-->
+<div class="titleColumns"><span class="fl"><font>4565</font>条新闻</span><div class="fr"><a href="#" class="showmenu">全部主题</a><a href="#">最新</a><a href="#">热门</a><a href="#">热帖</a><a href="#">精华</a><a href="#" class="showmenu">更多</a></div></div>
+<div class="channel-news cl">
+	<div class="col-left">
+		<div class="newslist">
+			<ul>
+				<!--{loop $_G['forum_threadlist'] $v}-->
+					<li>
+						<h3 class="subject"><a href="forum.php?mod=viewthread&tid={$v['tid']}">{$v['subject']}</a></h3>
+						<!--{eval $sql='select * from '.DB::table('forum_post').' where tid='.$v['tid'];}-->
+						<!--{eval $tinfo=DB::fetch_first($sql);}-->
+						<!--{eval $intro =  preg_replace("/\[attach\](\d+)\[\/attach\]/i",'',$tinfo['message']); }-->
+						<!--{eval $intro = mb_substr($intro,0,80,'utf-8');}-->
+						<!--{eval preg_match_all("/\[attach\](\d+)\[\/attach\]/i", $tinfo['message'], $matchaids);}-->	
+						<!--{if count($matchaids[1])>=3}-->
+						<div class="thumbs">
+							<!--{loop $matchaids[1] $key $aid}-->	
+										<!--{if $key>=3}-->
+											<!--{eval break;}-->
+										<!--{/if}-->
+										<a href="forum.php?mod=viewthread&tid={$v['tid']}">
+											<img src="<!--{eval echo getforumimg($aid);}-->">
+										</a>
+								<!--{/loop}-->
+						</div>
+						<!--{elseif  count($matchaids[1])>=1 && count($matchaids[1])<3}-->
+						<div class="thumb">
+								<img src="<!--{eval echo getforumimg($matchaids[1][0]);}-->">
+						</div>
+						<!--{/if}-->
+						<!--{if count($matchaids[1])<3}-->
+						<div class="intro">$intro</div>
+						<!--{/if}-->
+						<div class="meta">
+							<span class='date'>{$v['dateline']}</span>
+							<span class='source'>来自：<a href="#">休斯敦火箭队</a></span>
+							<div class="active y"><span class='rt'>{$v['sharetimes']}</span> <span class='up'>{$v['recommend_add']}</span> <span class='comment'>{$v['replies']}</span></div>
+						</div>
+					</li>
+				<!--{/loop}-->
+			</ul>
+			<div class="loadmore">
+				<a href="{$multipage_more}" class="btn-default"><<加载更多</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-right">
+		
+		<!--{hook/forumdisplay_sort_fansclub}-->
+
+		<!--公共模块：会务管理-->
+		<!--{template extend/desktop/sidebar_rule}-->
+		
+		<!--公共模块：VIP-->
+		<!--{hook/forumdisplay_server_vip}-->
+		
+		<!--公共模块：产品推荐位-->
+		<!--{template extend/desktop/sidebar_promo}-->
+
+		<!--公共模块：视频图片-->
+		<!--{hook/forumdisplay_sort_media}-->
+	</div>
+</div> 
+<!--{template common/footer}-->

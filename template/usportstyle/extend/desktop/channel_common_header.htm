@@ -1,0 +1,116 @@
+<div class="bread">
+	<a href="/" target="_blank">5U体育</a>&nbsp;&gt;&nbsp;
+	<!--{if $_GET['tpl']=='channel_index'}--><a href="group/" target="_blank">球迷会广场</a>&nbsp;&gt;&nbsp;<!--{/if}-->
+	<!--{if $_GET['tpl']!='channel_index'}--><a href="group/{$_G['fid']}/" target="_blank">{$_G['forum']['name']}频道</a>
+	<!--{else}--><a href="group/{$_G['fid']}/" target="_self">{$_G['forum']['name']}频道</a><!--{/if}-->
+	<!--{if $_GET['tpl']=='channel_video'}--><a href="{$_SERVER['REQUEST_URI']}" target="_self">&nbsp;&gt;&nbsp;{$_G['forum']['name']}视频</a><!--{/if}-->
+	<!--{if $_GET['tpl']=='channel_picture'}--><a href="{$_SERVER['REQUEST_URI']}" target="_self">&nbsp;&gt;&nbsp;{$_G['forum']['name']}图片</a><!--{/if}-->
+	<!--{if $_GET['tpl']=='channel_news'}--><a href="{$_SERVER['REQUEST_URI']}" target="_self">&nbsp;&gt;&nbsp;{$_G['forum']['name']}新闻</a><!--{/if}-->
+	<!--{if $_GET['id']=='fansclub:forumfansclub'}--><a href="{$_SERVER['REQUEST_URI']}" target="_self">&nbsp;&gt;&nbsp;{$_G['forum']['name']}球迷会分会</a><!--{/if}-->
+	<!--{if $_GET['id']=='playerdata:playerdata' && $_GET['ac']=="data"}--><a href="{$_SERVER['REQUEST_URI']}" target="_self">&nbsp;&gt;&nbsp;{$_G['forum']['name']}数据</a><!--{/if}-->
+	<!--{if $_GET['id']=='playerdata:playerdata' && $_GET['ac']=="formation"}--><a href="{$_SERVER['REQUEST_URI']}" target="_self">&nbsp;&gt;&nbsp;{$_G['forum']['name']}阵容</a><!--{/if}-->
+</div>
+<!--共用头部-->
+<div class="teamHead">
+     <div class="teamImg"><!--{if $_G[forum][banner]}--><img src="{$_G[forum][banner]}" width="1000" height="200"><!--{else}--><img src="$_G['config'][static]/images/teambg.jpg" width="1000" height="200"><!--{/if}--></div>
+	
+	 <div class="teamLogo"><img src="{$_G['setting']['attachurl']}common/{$_G[forum][icon]}" width="110" height="110" alt="" title="" /></div>
+     <div class="teamInfo">
+    	<p class="teamName">{$_G[forum][name]}频道</p>
+    	<!--{if $_G[forum][type] == 'forum'}-->
+    	<div class="teamul">
+             <!--{if $team_scoreboard->league_name && $team_scoreboard->ranking && $team_scoreboard->ranking}--><p><span>联赛：{$team_scoreboard->league_name}</span><span>排名：{$team_scoreboard->ranking}</span><span>主教练：{$coach->name}</span></p><!--{/if}-->
+             <p><span>总帖：{$_G[forum][threads]}</span><span>今日：$_G[forum][todayposts]</span><span>球迷会：{eval echo intval($branchnum);}</span></p>
+         </div>
+         <!--{elseif $_G[forum][type] == 'sub'}-->
+         <div class="teamul">
+             <p><span>联赛：{$_G[forum][league_name]}</span><span>所属俱乐部：{$_G[forum][fup_name]}</span></p>
+             <p><span>生日：{$player[birthday]}</span><span>身高：{$player[height]}</span></p>
+         </div>
+         <!--{/if}-->
+    </div>
+</div>
+<!--足球圈或篮球圈的高亮-->
+<script language="javascript">
+jQuery(document).ready(function($) {
+<!--{if in_array($_G['forum']['fup'], array(1,54,64,81,82,185))}-->
+$(".chnav.cl").find("li").removeClass("a");
+$(".chnav.cl").find("li:eq(1)").addClass("a");
+<!--{elseif in_array($_G['forum']['fup'], array(129,194))}-->
+$(".chnav.cl").find("li").removeClass("a");
+$(".chnav.cl").find("li:eq(2)").addClass("a");
+<!--{/if}-->
+});
+</script>
+
+<!--光用头部end-->
+<div class="teamMenu">
+	<ul>		
+		<li {if empty($_GET['typeid']) && $_SERVER['PHP_SELF'] != '/plugin.php' }class="active"{/if}>
+			{if $forum_is_open}<a href="group/{$_G[fid]}/" title="论坛">首页</a>
+			{else}<span>首页</span>
+			{/if}</li>	
+		<!--{if $_G['forum']['threadtypes']}-->
+			<!--{loop $_G['forum']['threadtypes']['types'] $id $name}-->
+                
+                <!--
+                <!--{if $_GET['typeid'] == $id}-->
+                <li class="active"><a href="forum.php?mod=forumdisplay&fid=$_G[fid]{if $_GET['sortid']}&filter=sortid&sortid=$_GET['sortid']{/if}{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}"><!--{if $_G[forum][threadtypes][icons][$id] && $_G['forum']['threadtypes']['prefix'] == 2}--><img class="vm" src="$_G[forum][threadtypes][icons][$id]" alt="" /> <!--{/if}-->$name<!--{if $showthreadclasscount[typeid][$id]}--><span class="xg1 num">$showthreadclasscount[typeid][$id]</span><!--{/if}--></a></li>
+                <!--{else}-->
+                <li><a href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=typeid&typeid=$id$forumdisplayadd[typeid]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}"><!--{if $_G[forum][threadtypes][icons][$id] && $_G['forum']['threadtypes']['prefix'] == 2}--><img class="vm" src="$_G[forum][threadtypes][icons][$id]" alt="" /> <!--{/if}-->$name<!--{if $showthreadclasscount[typeid][$id]}--><span class="xg1 num">$showthreadclasscount[typeid][$id]</span><!--{/if}--></a></li>
+                <!--{/if}-->
+                -->
+                
+                <!--{if $name=='视频'}-->
+                <li <!--{if $_GET['typeid'] == $id}-->class="active"<!--{/if}-->>
+                    {if $forum_is_open}<a href="video/{$_G[fid]}/{$id}/" title="视频">视频</a>
+                    {else}<span>视频</span>
+                    {/if}</li>
+                <!--{/if}-->
+                <!--{if $name=='图片'}-->
+                <li <!--{if $_GET['typeid'] == $id}-->class="active"<!--{/if}-->>
+                    {if $forum_is_open}<a href="pic/{$_G[fid]}/{$id}/" title="图片">图片</a>
+                    {else}<span>图片</span>
+                    {/if}</li>
+                <!--{/if}-->
+                <!--{if $name=='新闻'}-->
+                <li <!--{if $_GET['typeid'] == $id}-->class="active"<!--{/if}-->>
+                    {if $forum_is_open}<a href="news/{$_G[fid]}/{$id}/" title="新闻">新闻</a>
+                    {else}<span>新闻</span>
+                    {/if}</li>
+                <!--{/if}-->
+        
+            <!--{/loop}-->
+		<!--{/if}-->
+
+        <li <!--{if $_GET['id']=='fansclub:forumfansclub'}-->class="active"<!--{/if}-->>
+			{if $forum_is_open}<a href="fansclub/{$_G['fid']}/" title="球迷会">球迷会</a>
+			{else}<span>球迷会</span>
+			{/if}</li>
+		<!--{if $_G['forum']['type'] == 'forum'}-->
+        <!-- <li><a href="#" target="_blank" title="球员">球员</a></li> -->
+		<!--{/if}-->
+        <!-- <li><a href="#" target="_blank" title="赛程">赛程</a></li> -->
+		
+        <li <!--{if $_GET['id']=='playerdata:playerdata' && $_GET['ac']=="data"}--> class="active"<!--{/if}--> >
+		<!--{if $groupid !="129"}--><a href="data/{$_G['fid']}/" title="数据">数据</a>
+		<!--{else}--><span>数据</span>
+		<!--{/if}--> </li>
+        {if $_G['forum']['type'] == 'forum'}
+			<li <!--{if $_GET['id']=='playerdata:playerdata' && $_GET['ac']=="formation"}-->class="active"<!--{/if}--> >
+			<!--{if $groupid !="129"}-->
+			<a  href="formation/{$_G['fid']}/" title="阵容" >阵容</a>
+			<!--{else}--><span>阵容</span>
+			<!--{/if}--></li>
+		{/if}
+		{if $_G['forum']['type'] == 'sub'}
+		<li <!--{if $_GET['id']=='playerdata:playerdata' && $_GET['ac']=="playerinfo"}-->class="active"<!--{/if}--> >
+		<!--{if $groupid !="129"}--><a href="playerinfo/{$_G['fid']}/" title="资料">资料</a>
+		<!--{else}--><span>资料</span>
+		<!--{/if}--></li>
+		{/if}
+    </ul>
+</div>
+<div class="jianju20"></div>
+
+

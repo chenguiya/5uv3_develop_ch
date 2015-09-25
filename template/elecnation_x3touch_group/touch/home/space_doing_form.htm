@@ -1,0 +1,73 @@
+<div id="elecnation_doing_moodfm">
+    <div id="home_doing_face" onclick="openShutManager(this,'doing_box',false)">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="36"><img src="{$_G['style']['styleimgdir']}/touch/common/images/facelist.gif" /></td>
+        <td>$defaultstr</td>
+      </tr>
+    </table>
+    </div>
+	<form name="inputform" method="post" autocomplete="off" id="mood_addform" action="home.php?mod=spacecp&ac=doing&view=$_GET[view]" onsubmit="if($('message').value == msgstr){return false;}">
+	  <table width="100%" cellpadding="0" cellspacing="0">
+			<tr>
+			  <td colspan="2" class="moodfm_input" id="mood_statusinput">
+              	<textarea name="message" rows="3" class="pt xg1" id="message" onfocus="handlePrompt(1);" onblur="handlePrompt(0);" onkeydown="ctrlEnter(event, 'add');" onkeyup="strLenCalc(this, 'maxlimit')" style="width:100%;"></textarea>
+                
+                <div id="doing_box" style="display:none; margin-bottom:8px; padding:0 0 6px 8px; border-bottom:1px #DDDDDD dotted;">
+                	<div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/1.gif" width="20" height="20" onClick="addface('message', '[em:1:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/2.gif" width="20" height="20" onClick="addface('message', '[em:2:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/3.gif" width="20" height="20" onClick="addface('message', '[em:3:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/4.gif" width="20" height="20" onClick="addface('message', '[em:4:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/5.gif" width="20" height="20" onClick="addface('message', '[em:5:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/6.gif" width="20" height="20" onClick="addface('message', '[em:6:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/7.gif" width="20" height="20" onClick="addface('message', '[em:7:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/8.gif" width="20" height="20" onClick="addface('message', '[em:8:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/9.gif" width="20" height="20" onClick="addface('message', '[em:9:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/10.gif" width="20" height="20" onClick="addface('message', '[em:10:]')" /></div>
+                    
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/11.gif" width="20" height="20" onClick="addface('message', '[em:11:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/12.gif" width="20" height="20" onClick="addface('message', '[em:12:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/13.gif" width="20" height="20" onClick="addface('message', '[em:13:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/14.gif" width="20" height="20" onClick="addface('message', '[em:14:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/15.gif" width="20" height="20" onClick="addface('message', '[em:15:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/16.gif" width="20" height="20" onClick="addface('message', '[em:16:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/17.gif" width="20" height="20" onClick="addface('message', '[em:17:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/18.gif" width="20" height="20" onClick="addface('message', '[em:18:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/19.gif" width="20" height="20" onClick="addface('message', '[em:19:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/20.gif" width="20" height="20" onClick="addface('message', '[em:20:]')" /></div>
+                    
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/21.gif" width="20" height="20" onClick="addface('message', '[em:21:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/22.gif" width="20" height="20" onClick="addface('message', '[em:22:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/23.gif" width="20" height="20" onClick="addface('message', '[em:23:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/24.gif" width="20" height="20" onClick="addface('message', '[em:24:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/25.gif" width="20" height="20" onClick="addface('message', '[em:25:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/26.gif" width="20" height="20" onClick="addface('message', '[em:26:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/27.gif" width="20" height="20" onClick="addface('message', '[em:27:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/28.gif" width="20" height="20" onClick="addface('message', '[em:28:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/29.gif" width="20" height="20" onClick="addface('message', '[em:29:]')" /></div>
+                    <div class="home_face"><img src="{$_G['style']['styleimgdir']}/touch/common/images/face/30.gif" width="20" height="20" onClick="addface('message', '[em:30:]')" /></div>
+                    <div id="elecnation_clear"></div>
+                </div>
+              </td>
+	    	</tr>
+            
+			<tr>
+				<td valign="bottom" class="moodfm_f">
+					<div id="return_doing" class="xi1 xw1"></div>
+					<!--{if $_G['group']['maxsigsize']}-->
+					<label for="to_sign"><input type="checkbox" name="to_signhtml" id="to_sign" class="pc" value="1" />{lang doing_update_personal_signature}</label>
+					<!--{/if}-->
+				</td>
+
+				<td width="33%" height="30" align="center" valign="bottom">
+                <button type="submit" name="add" id="add">{lang publish}</button>
+                </td>
+			</tr>
+	  </table>
+		<input type="hidden" name="addsubmit" value="true" />
+		<input type="hidden" name="refer" value="$theurl" />
+		<input type="hidden" name="topicid" value="$topicid" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+  </form>
+</div>
+<script src="{$_G['style']['styleimgdir']}/touch/common/images/get_face.js"></script>

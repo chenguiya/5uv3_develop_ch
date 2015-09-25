@@ -1,0 +1,111 @@
+<!--{template common/header}-->
+
+	<!--{if $validate}-->
+		<p class="tbmu mbm">{lang validator_comment}</p>
+		<form action="member.php?mod=regverify" method="post" autocomplete="off">
+		<input type="hidden" value="{FORMHASH}" name="formhash" />
+		<table summary="{lang memcp_profile}" cellspacing="0" cellpadding="0" class="tfm">
+		<tr>
+			<th>{lang validator_remark}</th>
+			<td>$validate[remark]</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<th>{lang validator_message}</th>
+			<td><input type="text" class="px" name="regmessagenew" value="" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td colspan="2">
+				<button type="submit" name="verifysubmit" value="true" class="pn pnc" /><strong>{lang validator_submit}</strong></button>
+			</td>
+		</tr>
+		</table>
+		</div></div>
+		<div class="appl">
+		<!--{subtemplate home/spacecp_footer}-->
+	</div>
+	<!--{else}-->
+		<!--{if $operation == 'password'}-->
+		<!--{subtemplate touch/home/spacecp_password}-->			
+		<!--{else}-->
+			<!--{hook/spacecp_profile_top}-->
+			    <!--{if $vid}-->
+				<p class="tbms mtm {if !$showbtn}tbms_r{/if}"><!--{if $showbtn}-->{lang spacecp_profile_message1}<!--{else}-->{lang spacecp_profile_message2}<!--{/if}--></p>
+				<!--{/if}-->
+			<iframe id="frame_profile" name="frame_profile" style="display: none"></iframe>
+			<header class="header">
+			    <div class="nav">
+			        <div class="category">
+			        	修改资料
+			        	<div id="elecnation_nav_left">
+			                <a href="javascript:;" onclick="history.go(-1)" class="head_back"></a>
+			        	</div>
+			        </div>
+				</div>
+			</header>
+            <div class="modefBox">
+            <form action="home.php?mod=spacecp&ac=profile&mobile=2" method="post" autocomplete="off">
+				<input type="hidden" value="{FORMHASH}" name="formhash" />
+			
+                    <div class="boxCont">
+						<div class="boxC_l">{lang username}:</div>
+						<div class="boxC_r">$_G[member][username]</div>
+					</div>
+                    <!--{loop $settings $key $value}-->
+                    <!--{if $value[available]}-->
+                    <div class="boxCont">
+						<div class="boxC_l"><!--{if $value[required]}--><span class="rq" title="{lang required}">*</span><!--{/if}-->$value[title]:</div>
+						<div class="boxC_r">$htmls[$key]</div>
+                    </div>
+                    <!--{/if}-->
+                    <!--{/loop}-->
+                    <div class="boxCont">
+						<div class="boxC_l">E-mail:</div>
+						<div class="boxC_r">$space[email]&nbsp;(<a href="home.php?mod=spacecp&ac=profile&op=password&from=contact&mobile=2#contact">{lang modify}</a>)</div>
+					</div>
+					<div class="btn_saved">
+	                    <input type="hidden" name="profilesubmit" value="true" />
+	                    <button tabindex="4" value="true" name="profilesubmitbtn" value="profilesubmitbtn" type="submit" class="pn1"><span>保&nbsp;&nbsp;存</span></button>
+                    </div>
+            </form>
+			</div>
+			<script type="text/javascript">
+				/*function show_error(fieldid, extrainfo) {
+					var elem = $('th_'+fieldid);
+					if(elem) {
+						elem.className = "rq";
+						fieldname = elem.innerHTML;
+						extrainfo = (typeof extrainfo == "string") ? extrainfo : "";
+						$('showerror_'+fieldid).innerHTML = "{lang check_date_item} " + extrainfo;
+						$(fieldid).focus();
+					}
+				}
+				function show_success(message) {
+					message = message == '' ? '{lang update_date_success}' : message;
+					showDialog(message, 'right', '{lang reminder}', function(){
+						top.window.location.href = top.window.location.href;
+					}, 0, null, '', '', '', '', 3);
+				}
+				function clearErrorInfo() {
+					var spanObj = $('profilelist').getElementsByTagName("div");
+					for(var i in spanObj) {
+						if(typeof spanObj[i].id != "undefined" && spanObj[i].id.indexOf("_")) {
+							var ids = explode('_', spanObj[i].id);
+							if(ids[0] == "showerror") {
+								spanObj[i].innerHTML = '';
+								$('th_'+ids[1]).className = '';
+							}
+						}
+					}
+				}*/
+			</script>
+		<!--{/if}-->
+		</div>
+	</div>
+	
+	<!--{/if}-->
+</div>
+
+

@@ -1,0 +1,22 @@
+<!--{if $status != 2}-->
+<div id="elecnation_group_title_line" style="margin-top:18px;"></div>
+<div id="elecnation_group_title" style="width:68px;">{lang group_member_status}</div>
+                
+	<div style="margin-top:1px;">
+
+		<div class="bm_c">
+			<!--{if $groupfeedlist}-->
+				<ul class="el">
+					<!--{loop $groupfeedlist $feed}-->
+						<li style="border-bottom:1px #CCCCCC dashed; padding:8px 0;">
+							<img src="$feed[icon_image]" width="8" height="8" />
+							<!--{if !empty($feed[title_template])}-->$feed[title_template]<!--{/if}--> <!--{if !empty($feed[body_data][subject])}-->$feed[body_data][subject]<!--{/if}-->
+						</li>
+					<!--{/loop}-->
+				</ul>
+			<!--{else}-->
+				<div id="elecnation_noinfo">{lang group_no_latest_feeds}</div>
+			<!--{/if}-->
+		</div>
+	</div>
+<!--{/if}-->

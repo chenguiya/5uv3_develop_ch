@@ -1,0 +1,39 @@
+<!--{block return}-->
+<!--{if $data[data]}-->
+<div class="chComd clearfix">
+    <div class="chHeader">
+        <h1 class="fl bt chComd_title">推荐球迷会</h1>
+        <a href="fansclub/{$_G[forum][fid]}" class="fr chComd_more clearfix">更多</a>
+    </div>
+    <div class="chBlock fl">
+
+	{if count($data[data]) == 1}
+	<!--{loop $data[data] $val}-->
+		<div class="chBlockfl chH200 fl" style="width:320px;">
+			<div style="margin-left:auto; margin-right:auto; width:160px;">
+            <a target="_blank" href="fans/topic/{$val[fid]}"><img src="data/attachment/group/{$val[logo]}"></a>
+            <p><a href="fans/topic/{$val[fid]}">{$val[name]}</a></p>
+            <p><h4>人数：{$val[members]}</h4></p>
+			</div>
+		</div>
+	<!--{/loop}-->
+	{else}
+    	<!--{loop $data[data] $key $val}-->
+		<div class="chBlockfl chH200 fl">
+            <a target="_blank" href="fans/topic/{$val[fid]}"><img src="data/attachment/group/{$val[logo]}"></a>
+            <p><a href="fans/topic/{$val[fid]}">{$val[name]}</a></p>
+            <p><h4>人数：{$val[members]}</h4></p>
+        </div>
+		{if $key % 2 == 0 && $key == count($data[data]) - 1}
+		<div class="chBlockfl chH200 fl">
+            <img src="" style="visibility:hidden;">
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+        </div>
+		{/if}
+		<!--{/loop}-->
+	{/if}
+    </div>
+</div>
+<!--{/if}-->
+<!--{/block}-->

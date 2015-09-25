@@ -1,0 +1,131 @@
+<div class="ch_bm">
+	<div class="z">
+		<a href="./" class="" title="{lang home}">$_G[setting][bbname]</a><em>&gt;</em>
+		<em><a href="{$_SERVER['REQUEST_URI']}" target="_self">直播</a></em>
+	</div>
+</div>
+<!--公共banner start-->
+<div class="title-block">
+        <ul class="list">
+            <li><a class="active" href="">直播</a></li>
+            <li><a href="">积分榜</a></li>
+            <li><a href="">射手榜</a></li>
+            <li><a href="">助攻榜</a></li>
+        </ul>
+</div>
+<!--公共banner end-->
+<div class="live clearfix" style="margin:0;">
+	<div class="col-left">
+		<div class="types_ch">
+			<ul>
+				<li class="type {if $_G['gp_league_id'] == ''}hot{/if}"><a href="live" class="ico ico-hot">热门</a></li>
+				<li class="type {if $_G['gp_league_id'] == '1'}hot{/if}"><a href="live/1" class="ico ico-yc">英超</a></li>
+				<li class="type {if $_G['gp_league_id'] == '15'}hot{/if}"><a href="live/15" class="ico ico-xj">西甲</a></li>
+				<li class="type {if $_G['gp_league_id'] == '13'}hot{/if}"><a href="live/13" class="ico ico-zc">中超</a></li>
+				<li class="type {if $_G['gp_league_id'] == '41'}hot{/if}"><a href="live/41" class="ico ico-yg">亚冠</a></li>
+				<li class="type {if $_G['gp_league_id'] == '21'}hot{/if}"><a href="live/21" class="ico ico-yj">意甲</a></li>
+				<li class="type {if $_G['gp_league_id'] == '2'}hot{/if}"><a href="live/2" class="ico ico-dj">德甲</a></li>
+				<li class="type {if $_G['gp_league_id'] == '3'}hot{/if}"><a href="live/3" class="ico ico-fj">法甲</a></li>
+				<li class="type {if $_G['gp_league_id'] == '7'}hot{/if}"><a href="live/7" class="ico ico-nba">NBA</a></li>
+				<li class="type {if $_G['gp_league_id'] == '8'}hot{/if}"><a href="live/8" class="ico ico-cba">CBA</a></li>
+				<li class="type {if $_G['gp_league_id'] == '100'}hot{/if}"><a href="live/100" class="ico ico-misc">其它</a></li>
+			</ul>
+
+		</div>
+	</div>
+	<div class="col-right">
+		 <div class="match_ch">
+		      <div class="mconthd">
+                   <span id="leagrank_lb_1" class="tab_hd_item current" onclick="cg('leagrank',1)">未开始</span>
+                   <span id="leagrank_lb_2" class="tab_hd_item" onclick="cg('leagrank',2)">已结束</span>
+              </div>
+              <div class="mcontTab">
+               <ul id="leagrank_div_1">
+                   <li class="item clearfix">
+                       <div class="state">
+                            <div class="cl">
+                                 <span class="type">中协杯-半准决赛</span>
+                                 <i class="onliv on-live">直播中</i>
+                            </div>                      
+                            <div class="time">周三：<em>2015-08-08  19:45</em></div>
+                       </div>
+                       <div class="link">
+                            <ul>
+                               <li><a href="http://v.gdtv.cn/option/com_content/ItemId/96/" target="_blank">广东体育</a></li>
+                               <li><a href="http://sports.cntv.cn/live/cctv5/index.shtml" target="_blank">CCTV5官网</a></li>
+                               <li><a href="http://pub.pptv.com/player/iframe/index.html#w=800&amp;h=600&amp;id=301813" target="_blank">PPTV</a></li>
+                            </ul>
+                        </div>
+                        <div class="versus">
+                             <div class="team">
+                                  <a href="#" onclick="return false;" class="logo"><img src="http://img.usportnews.com/uploadfile/2014/0731/20140731040154805.png"></a>
+                                  <div>上海绿地申花</div>
+                             </div>
+                             <div class="score">0 - 1</div>
+                             <div class="team">
+                                  <a href="#" onclick="return false;" class="logo"><img src="http://img.usportnews.com/uploadfile/2014/0328/20140328060857300.png"></a>
+                                  <div>上海上港</div>
+                             </div>
+                        </div>
+                    </li>
+                    <li class="item clearfix">
+                       <div class="state">
+                            <div class="cl">
+                                 <span class="type">中协杯-半准决赛</span>
+                                 <i class="onliv notstart">未开始</i>
+                            </div>                      
+                            <div class="time">周四：<em>2015-08-08  19:45</em></div>
+                       </div>
+                       <div class="link">
+                            <ul>
+                               <li><a href="http://v.gdtv.cn/option/com_content/ItemId/96/" target="_blank">广东体育</a></li>
+                               <li><a href="http://sports.cntv.cn/live/cctv5/index.shtml" target="_blank">CCTV5官网</a></li>
+                               <li><a href="http://pub.pptv.com/player/iframe/index.html#w=800&amp;h=600&amp;id=301813" target="_blank">PPTV</a></li>
+                            </ul>
+                        </div>
+                        <div class="versus">
+                             <div class="team">
+                                  <a href="#" onclick="return false;" class="logo"><img src="http://img.usportnews.com/uploadfile/2014/0731/20140731040154805.png"></a>
+                                  <div>上海绿地申花</div>
+                             </div>
+                             <div class="score">VS</div>
+                             <div class="team">
+                                  <a href="#" onclick="return false;" class="logo"><img src="http://img.usportnews.com/uploadfile/2014/0328/20140328060857300.png"></a>
+                                  <div>上海上港</div>
+                             </div>
+                        </div>
+                    </li>
+               </ul>
+               <ul id="leagrank_div_2" style="display:none">
+                   <li class="item clearfix">
+                       <div class="state">
+                            <div class="cl">
+                                 <span class="type">中协杯-半准决赛</span>
+                                 <i class="onliv on-over">未开始</i>
+                            </div>                      
+                            <div class="time">周四：<em>2015-08-08  19:45</em></div>
+                       </div>
+                       <div class="link">
+                            <ul>
+                               <li><a href="http://v.gdtv.cn/option/com_content/ItemId/96/" target="_blank">广东体育</a></li>
+                               <li><a href="http://sports.cntv.cn/live/cctv5/index.shtml" target="_blank">CCTV5官网</a></li>
+                               <li><a href="http://pub.pptv.com/player/iframe/index.html#w=800&amp;h=600&amp;id=301813" target="_blank">PPTV</a></li>
+                            </ul>
+                        </div>
+                        <div class="versus">
+                             <div class="team">
+                                  <a href="#" onclick="return false;" class="logo"><img src="http://img.usportnews.com/uploadfile/2014/0731/20140731040154805.png"></a>
+                                  <div>上海绿地申花</div>
+                             </div>
+                             <div class="score score_over">0 - 1</div>
+                             <div class="team">
+                                  <a href="#" onclick="return false;" class="logo"><img src="http://img.usportnews.com/uploadfile/2014/0328/20140328060857300.png"></a>
+                                  <div>上海上港</div>
+                             </div>
+                        </div>
+                    </li>
+                 </ul>
+            </div>
+		 </div>
+	</div>
+</div>

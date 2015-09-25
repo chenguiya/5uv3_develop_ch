@@ -1,0 +1,53 @@
+<!--{if $_GET['op'] == 'manageuser'}-->
+<div class="tab-body">
+	<!--{if $userlist}-->
+	<ul class="author-thumbs clearfix">					
+		<!--{loop $userlist $user}-->
+		<li>
+			<a href="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]&muid=$user[uid]">
+				<div class="author-thumb">
+					<img src="<!--{avatar($user[uid], middle, true)}-->" />
+					<!--{if $user[level] != 1}-->
+					<a href="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]&muid=$user[uid]&mobile=2" class="iconfont icon-del active dialog"></a>
+					<!--{/if}-->
+				</div>
+				<div class="name">$user[username]</div>
+			</a>
+		</li>
+		<!--{/loop}-->
+	</ul>
+	<!--{/if}-->	
+</div>
+<!--{if $nextpage > 1}-->
+<div style="padding: 0 8px;">
+	<a id="load-more-group-manage" href="$multipage_more" class="ybtn loadmore">加载更多</a>
+</div>
+<!--{/if}-->
+<!--{elseif $_GET['op'] == 'checkuser'}-->
+<div class="user_check">
+	<ul>
+	<!--{loop $checkusers $user}-->
+		<li class="ucheck_list">
+			<div class="ucl_img"><a href=""><img src="<!--{avatar($user[uid], middle, true)}-->" alt=""></a></div>
+			<div class="ucl_user"><a href="">$user[username]</a></div>
+			<div class="ucl_apply"><span>$user[joindateline]</span></div>
+			<a href="forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]&uid=$user[uid]&checktype=1" class="ucl_btn uclb_y dialog">通过</a>
+			<a href="forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]&uid=$user[uid]&checktype=2" class="ucl_btn uclb_n dialog">忽略</a>
+		</li>
+	<!--{/loop}-->		
+	</ul>
+</div>
+<!--{/if}-->
+<script id="load-more-group-manage-templ" type="text/x-dot-template">
+	{{ for (var key in it) { }}
+	<li>
+		<a href="forum.php?mod=group&action=manage&op=manageuser&fid={{=it[key].fid}}&muid={{=it[key].uid}}">
+			<div class="author-thumb">
+				<img src="{{=it[key].avatar}}" />
+				<a href="forum.php?mod=group&action=manage&op=manageuser&fid={{=it[key].fid}}&muid={{=it[key].uid}}&mobile=2" class="iconfont icon-del active dialog"></a>
+			</div>
+			<div class="name">{{=it[key].username}}</div>
+		</a>
+	</li>
+	{{ } }}
+</script>

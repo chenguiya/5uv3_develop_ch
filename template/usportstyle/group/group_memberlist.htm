@@ -1,0 +1,99 @@
+<!--{if $op == 'alluser'}-->
+<div class="member_main">
+     <div class="flick_hd">
+	      <div class="memb_search">
+		       <form method="post" action="home.php?mod=spacecp&ac=search&searchsubmit=yes">
+			         <input type="text" name="username" id="username" class="srchtxt" size="15" placeholder="输入昵称或备注">&nbsp;
+					 <button type="submit" class="chsubmit"><span>&nbsp;</span></button>
+			   </form>
+		  </div>
+	 </div>
+	 <div class="member_con">
+	<!--{if $adminuserlist}-->
+		<div class="mem_admin">
+			<!--<div class="bm_ch cl">
+				<h2>{lang group_admin_member}</h2>
+			</div>-->
+			
+			<!--{hook/group_member_list}--><!-- 生成 $_G['cache']['fansclub_group_user_level'] -->
+			
+			<!--{loop $_G['cache']['fansclub_group_user_moderator'] $key $value}-->
+			<!--{eval $count1 = 0;}-->
+			<!--{loop $adminuserlist $user_test}-->
+			{if ($user_test['level'] == $key && $count1 == 0)}
+			<div class="bm_ch cl">
+				<h2>{$value['title']}</h2>
+			</div>
+			<div class="bm_c">
+				<ul class="ml mls cl">
+					<!--{loop $adminuserlist $user}-->
+					{if $user['level'] == $key}
+					<li>
+						<a href="home.php?mod=space&uid=$user[uid]" title="{if $user['level'] == 1}{lang group_moderator_title}{elseif $user['level'] == 2}{lang group_moderator_vice_title}{/if}{if $user['online']} {lang login_normal_mode}{/if}" class="avt" c="1">
+						<!--{if $user['level'] == 1}-->
+							<em class="gm"></em>
+						<!--{elseif $user['level'] == 2}-->
+							<em class="gm" style="filter:alpha(opacity=50); opacity: 0.5"></em>
+						<!--{/if}-->
+						<!--{if $user['online']}-->
+							<em class="gol" style="margin-top: 15px;"></em>
+						<!--{/if}-->
+							<!--{echo avatar($user[uid], 'middle')}-->
+							<em class="ident_icon"></em>
+						</a>
+						<p><a href="home.php?mod=space&uid=$user[uid]">$user[username]</a></p>
+					</li>
+					{else}
+					{/if}
+					<!--{/loop}-->
+				</ul>
+			</div>
+			<!--{eval $count1++;}--> 
+			{/if}
+			
+			<!--{/loop}-->
+			
+			<!--{/loop}-->
+		</div>
+	<!--{/if}-->
+	<!--{if $staruserlist || $alluserlist}-->
+		<div class="mem_other">
+			<div class="bm_ch cl">
+				<h2>{lang member}</h2>
+			</div>
+			<div class="bm_c">
+				<!--{if $staruserlist}-->
+					<ul class="ml mls cl">
+						<!--{loop $staruserlist $user}-->
+						<li>
+							<a href="home.php?mod=space&uid=$user[uid]" title="{lang group_star_member_title}{if $user['online']} {lang login_normal_mode}{/if}" class="avt" c="1">
+							<em class="gs"></em>
+							<!--{if $user['online']}-->
+								<em class="gol"{if $user['level'] <= 3} style="margin-top: 15px;"{/if} title="{lang login_normal_mode}"></em>
+							<!--{/if}-->
+							<!--{echo avatar($user[uid], 'middle')}-->
+							
+							</a>
+							<p><a href="home.php?mod=space&uid=$user[uid]">$user[username]</a></p>
+						</li>
+						<!--{/loop}-->
+					</ul>
+				<!--{/if}-->
+				<!--{if $alluserlist}-->
+					<ul class="ml mls cl">
+						<!--{loop $alluserlist $user}-->
+						<li>
+							<a href="home.php?mod=space&uid=$user[uid]" class="avt" c="1"><!--{echo avatar($user[uid], 'middle')}-->
+							<em class="ident_icon"></em></a>
+							<p><a href="home.php?mod=space&uid=$user[uid]">$user[username]</a></p>
+						</li>
+						<!--{/loop}-->
+					</ul>
+				<!--{/if}-->
+			</div>
+		</div>
+	<!--{/if}-->
+	<!--{if $multipage}--><div class="pgs cl">$multipage</div><!--{/if}-->
+	</div>
+</div>
+<!--{/if}-->

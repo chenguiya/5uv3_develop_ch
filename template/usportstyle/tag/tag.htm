@@ -1,0 +1,26 @@
+﻿<!--{template common/header}-->
+<!--{if $type != 'countitem'}-->
+<div id="ct" class="wp cl">
+	<div class="bread"><a href="./">首页</a>&nbsp;&gt;&nbsp;<a href="tag/">标签</a></div>
+	<div class="bm">
+		<div class="bm_c">
+			<form method="POST" action="tag/" class="pns tag_forms">
+				<input type="text" name="name" class="px vm" size="30" /><button type="submit" class="pn vm">{lang search}</button>
+			</form>
+			<div class="taglist mtm mbm">
+				<!--{if $tagarray}-->
+					<!--{loop $tagarray $tag}-->
+						<a href="tag/$tag[tagid]/" title="$tag[tagname]" target="_blank">$tag[tagname]</a>
+					<!--{/loop}-->
+				<!--{else}-->
+					<p class="emp">{lang no_tag}</p>
+				<!--{/if}-->
+
+			</div>
+		</div>
+	</div>
+</div>
+<!--{else}-->
+$num
+<!--{/if}-->
+<!--{template common/footer}-->

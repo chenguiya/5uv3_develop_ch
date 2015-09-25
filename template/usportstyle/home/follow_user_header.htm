@@ -1,0 +1,39 @@
+<div class="relation">
+	<!--{if helper_access::check_module('follow')}-->
+	<div class="tns">
+		<table cellspacing="0" cellpadding="0">
+			<tr>
+				<th>
+					<!--{eval $usercount=DB::fetch_first("select *  from ".DB::table('common_member_count')." where uid=".$uid);}-->
+					<p><a href="javascript:void(0);" class="xi2 xw1">{$usercount['threads']}</a></p>
+					<span><a href="javascript:void(0);" class="xi2">帖子</a></span>
+				</th>
+				<th>
+					<p><a href="javascript:void(0);" class="xi2 xw1">{$usercount['friends']}</a></p>
+					<span><a href="javascript:void(0);" class="xi2">好友</a></span>
+				</th>
+				<td>
+					<!--{eval $groups=DB::fetch_first("select count(*) as groups from ".DB::table('forum_groupuser')." where uid=".$uid); }-->
+					<p><a href="plugin.php?id=userspace:mygroup&uid={$uid}&do=club&from=space" id="followernum_$uid" class="xi2 xw1">{$groups['groups']}</a></p>
+					<span><a href="plugin.php?id=userspace:mygroup&uid={$uid}&do=club&from=space" id="followernum_$uid" class="xi2">球迷会</a></span>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!--{/if}-->
+<!--{if !$viewself}-->
+	<div class="mtm o cl">
+		<div id="followflag" {if !isset($flag[$_G['uid']])}style="display: none"{/if}>
+			<!--{if helper_access::check_module('follow')}-->
+			<a href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special={if $flag[$_G['uid']]['status'] == 1}2{else}1{/if}&fuid=$uid&from=head" class="{if $flag[$_G['uid']]['status'] == 1}flw_specialunfo{else}flw_specialfo{/if}" id="specialflag_$uid" onclick="ajaxget(this.href);doane(event);" title="{if $flag[$_G['uid']]['status'] == 1}{lang follow_del_special_following}{else}{lang follow_add_special_following}{/if}"><!--{if $flag[$_G['uid']]['status'] == 1}-->{langfollow_del_special_following}<!--{else}-->{lang follow_add_special_following}<!--{/if}--></a>
+			<!--{/if}-->
+			<!--{if $flag[$_G['uid']]['mutual']}-->
+			<span class="z flw_status_2">{lang follow_follower_mutual}</span>
+			<!--{else}-->
+			<span class="z flw_status_1">{lang follow_followed},</span>
+			<!--{/if}-->
+			<a id="a_followmod_{$uid}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$uid&from=head" onclick="ajaxget(this.href);doane(event);" class="xi2">{lang follow_del}</a>
+		</div>
+	</div>
+<!--{/if}-->
+</div>

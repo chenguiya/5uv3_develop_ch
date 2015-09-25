@@ -1,0 +1,53 @@
+<!--{template common/header}-->
+<!--别人 start-->
+{if $member['self'] == 0}
+<header class="cenhead">
+        <a href="javascript:;" onclick="history.go(-1)" class="head_back"></a>
+        <div class="cen_img">
+             <p><img src="<!--{avatar($space[uid], big, true)}-->" alt="{$discuz_userss}" />{if $space[gender]==1}<i class="fontweb_icon ic_nan"></i>{elseif $space[gender]==2}<i class="fontweb_icon ic_nv"></i>{elseif $space[gender]==0}<i class="fontweb_icon ic_secret"></i>{/if}</p>   
+        </div>
+        <div class="cen_names">$space[username]</div>
+        <div class="cen_introd"><!--{if $space['bio']}-->简介：{$space['bio']}<!--{else}-->简介：这家伙很懒，什么都没有留下。<!--{/if}--></div>
+</header> 
+{/if}
+<!--别人 end-->
+
+{if $member['self'] == 1}
+<nav class="navbar">
+	<div class="inner">
+		<div class="left"><a href="javascript:;" onclick="history.go(-1)"><i class="iconfont icon-angle-left"></i></a></div>
+		<div class="center">我的帖子</div>
+	</div>
+</nav>
+{/if}
+
+<div class="ymain ymain-padding" <!--{if $member['self'] == 0}-->style="padding-top:0.5rem;" <!--{/if}-->>
+	<ul id="mypost" class="ylist">
+
+	<!--{if $subjectarrlen == 1}-->
+		<!--{loop $subjectarr $key=>$value}-->		
+		<li class="row" href="forum.php?mod=viewthread&tid=$key">
+			<div class="author-thumb">
+				<a href="home.php?mod=space&uid=$space[uid]&do=thread&from=thread&mobile=2"><img src="{avatar($space[uid], big, true)}" alt=""/></a>
+			</div>
+
+			<div class="row-item">
+				<div class="title"><a href="forum.php?mod=viewthread&tid=$key" target="_self" >$value['subject']</a></div>
+				<span class="<!--{if $value['dateline'] < 60}--> s accent <!--{else}--> s <!--{/if}-->">$value['dateline']</span>
+			</div>
+			<div class="row-badge-wrap">
+				<a class="social" href="forum.php?mod=viewthread&tid=$key"><i class="fa fa-commenting-o"></i>$value['replies']</a>
+			</div>
+		</li>
+		<!--{/loop}-->
+	<!--{else}-->
+		<div style="text-align:center;width:100%;margin:2rem;"><img src="template/usportstyle/touch/common/images/nonemes_pic.png" alt="" style="width:60%;"></div>
+	<!--{/if}-->
+	</ul>
+</div>
+<script>
+	$("#mypost li").click(function () {
+		window.location.href = $(this).attr("href");
+	});
+</script>
+<!--{template common/footer}-->

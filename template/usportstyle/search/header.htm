@@ -1,0 +1,44 @@
+<!--{subtemplate common/header_common}-->
+<link rel="stylesheet" type="text/css" href="$_G['config'][static]/stsearch.css">
+</head>
+<body id="nv_search" onkeydown="if(event.keyCode==27) return false;">
+	<div id="append_parent"></div><div id="ajaxwaitid"></div>
+	<!--{if $_G['adminid']}-->
+	<div id="toptb" class="cl search-toolbar-top">
+		<div class="z">
+			<a href="./" id="navs" class="showmenu xi2" onMouseOver="showMenu(this.id)">{lang return_homepage}<i></i></a>
+		</div>
+		<!--{if $_G['setting']['navs']}-->
+		<ul class="p_pop h_pop p_sera" id="navs_menu" style="display: none;">
+		<!--{loop $_G['setting']['navs'] $nav}-->
+			<!--{eval $nav_showmenu = strpos($nav['nav'], 'onmouseover="showMenu(');}-->
+		    <!--{eval $nav_navshow = strpos($nav['nav'], 'onmouseover="navShow(')}-->
+		    <!--{if $nav_hidden !== false || $nav_navshow !== false}-->
+			<!--{eval $nav['nav'] = preg_replace("/onmouseover\=\"(.*?)\"/i", '',$nav['nav'])}-->
+		    <!--{/if}-->
+			<!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}--><li $nav[nav]></li><!--{/if}-->
+		<!--{/loop}-->
+		    <i></i>
+		</ul>
+	<!--{/if}-->     
+	</div>
+	<!--{/if}-->
+	
+	<!--{if !empty($_G['setting']['plugins']['jsmenu'])}-->
+		<ul class="p_pop h_pop" id="plugin_menu" style="display: none">
+		<!--{loop $_G['setting']['plugins']['jsmenu'] $module}-->
+		     <!--{if !$module['adminid'] || ($module['adminid'] && $_G['adminid'] > 0 && $module['adminid'] >= $_G['adminid'])}-->
+		     <li>$module[url]</li>
+		     <!--{/if}-->
+		<!--{/loop}-->   
+		</ul>
+	<!--{/if}-->
+	$_G[setting][menunavs]
+
+	<ul id="myspace_menu" class="p_pop" style="display:none;">
+		<!--{loop $_G['setting']['mynavs'] $nav}-->
+			<!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}-->
+				<li>$nav[code]</li>
+			<!--{/if}-->
+		<!--{/loop}-->
+	</ul>

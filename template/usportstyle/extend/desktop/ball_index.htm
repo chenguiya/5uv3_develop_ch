@@ -1,0 +1,153 @@
+<!--{template common/header}-->
+<div class="ch_bm">
+		<div class="z">
+			<a href="./" class="" title="{lang home}">$_G[setting][bbname]</a><em>&gt;</em>
+			<!--{if ($type == 'football' && $op == 'index')}--><a href="{$_SERVER['REQUEST_URI']}">足球圈</a><!--{/if}-->
+			<!--{if ($type == 'basket' && $op == 'index')}--><a href="{$_SERVER['REQUEST_URI']}">篮球圈</a><!--{/if}-->
+		</div>
+	</div>
+	<div class="ad_banner">
+	     <!-- 108811：首页-频道-列表-内容-顶部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+	</div>
+	<div class="blank15"></div>
+	<div class="wp ball_index">
+		<a href="{$type}" class="{if $op=='index'}active{/if}" target="_blank">首页</a><a href="{$type}/allcategory" class="{if $op=='allcategory'}active{/if}" target="_blank">所有频道</a>
+	</div>
+	<div class="ball_main cl">
+		<div class="ball_left fl">
+			<!--{if $official['data']}-->
+			<div class="ball_official">
+				<div class="channel_header">
+					<h1 class="ball_title bt">官方发布</h1>
+				</div>
+				<!--{loop $official['data'] $val}-->
+				<div class="ball_pb fl clearfix">
+					<a href="{$val[url]}" target="_blank"><img src="data/attachment/{$val[thumbpath]}" width="280" height="126"></a>
+					<p><a class="ball_officical_hover" href="{$val[url]}" target="_blank">{$val[title]}</a></p>
+				</div>
+				<!--{/loop}-->
+			</div>
+			<!--{/if}-->
+			<div class="ball_left mt20">
+				<div class="indexThread" style="background: #fff;">
+					<div class="ball_official" style="height: 45px;">
+						<div class="channel_header">
+							<h1 class="ball_title bt">精选帖子</h1>
+						</div>
+					</div>
+					<ul>
+						<!--{loop $threadlist $val}-->
+						<li class="cl">
+						<div class="avatar">
+							<a href="home.php?mod=space&uid={$val[authorid]}" target="_blank"><img src="{$val[author_avatar]}"></a>
+						</div>
+						<div class="inde_info">
+							<p class="in_name"><a href="forum.php?mod=viewthread&tid={$val[tid]}" target="_blank">{$val[subject]}</a></p>
+							<p class="in_title">{$val[message][message]}</p>							
+							<!--{if $val[message][img]}-->
+							<p class="in_img">
+							<!--{loop $val[message][img] $img}-->
+							<a href="forum.php?mod=viewthread&tid={$val[tid]}" target="_blank"><img src="{$img}" width="auto" height="140"></a>
+							<!--{/loop}-->
+							</p>
+							<!--{/if}-->
+							<!--{if $val[message][media]}-->
+							<p class="in_img">
+							<embed width="230" height="140" allownetworking="internal" allowscriptaccess="never" src="{$val['message']['media']}" quality="high" bgcolor="#ffffff" wmode="transparent" allowfullscreen="true" type="application/x-shockwave-flash"></embed>
+							</p>
+							<!--{/if}-->							
+							<div class="in_meta">
+								<span><a href="home.php?mod=space&uid={$val[authorid]}" target="_blank">{$val[author]}</a>&nbsp;&nbsp;{$val[dateline]} &nbsp;&nbsp;&nbsp;来自<a href="group/{$val[fid]}" target="_blank">{$_G[cache][forums][$val[fid]][name]}频道</a></span>
+								<span class="y sta_lun">{$val[replies]}</span>
+								<span class="y sta_zan">{$val[recommend_add]}</span>
+							</div>
+						</div>
+						</li>
+						<!--{/loop}-->
+					</ul>
+				</div>
+			</div>
+			<!--{if $maxpage > 1}-->$multipage<!--{/if}-->
+		</div>
+		<div class="ball_right fr">
+			<div class="bg_publish"><div class="ball_publish"><a onclick="showWindow('nav', this.href, 'get', 0)" href="forum.php?mod=misc&action=nav"><i></i>发表帖子</a></div></div>
+			<div class="chComd clearfix">
+				<div class="chHeader">
+					<h1 class="fl bt chComd_title">推荐频道</h1>
+					<a href="{$type}/allcategory" class="fr chComd_more clearfix" target="_blank">更多</a>
+				</div>
+				<div class="chBlock fl clearfix">
+					<!--{loop $recommond_forum['data'] $val}-->
+					<div class="chBlockfl fl">
+						<a href="group/$val[id]" target="_blank"><img src="{$val[fields][icon]}"></a>
+						<p><a href="group/$val[id]" target="_blank">{$val[title]}</a></p>
+					</div>
+					<!--{/loop}-->
+				</div>
+			</div>
+			<div class="blank15"></div>
+			<div class="ad_boxs">
+			     <!-- 108813：首页-频道-列表-内容-右侧button1 类型：固定广告位 尺寸：300x0-->
+<script type="text/javascript">
+_acK({aid:108813,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+			</div>
+			<div class="chComd clearfix">
+				<div class="chHeader">
+					<h1 class="fl bt chComd_title">推荐球迷会</h1>
+					<!--<a href="plugin.php?id=fansclub:fansclub" class="fr chComd_more">更多</a>-->
+				</div>
+				<div class="chBlock fl">
+					
+					{if count($recommond_fansclub['data']) == 1}
+					<!--{loop $recommond_fansclub['data'] $val}-->
+						<div class="chBlockfl chH200 fl" style="width:320px;">
+							<div style="margin-left:auto; margin-right:auto; width:160px;">
+							<a href="fans/topic/$val[id]" target="_blank"><img src="{$val[fields][icon]}"></a>
+							<p><a href="fans/topic/$val[id]" target="_blank">{$val[title]}</a></p>
+							<p><h4>人数：{$val[fields][membernum]}</h4></p>
+						</div>
+					<!--{/loop}-->
+					{else}
+						<!--{eval $i = 0;}-->
+						<!--{loop $recommond_fansclub['data'] $val}-->
+						<div class="chBlockfl chH200 fl">
+						<a href="fans/topic/$val[id]" target="_blank"><img src="{$val[fields][icon]}"></a>
+						<p><a href="fans/topic/$val[id]" target="_blank">{$val[title]}</a></p>
+						<p><h4>人数：{$val[fields][membernum]}</h4></p>
+						</div>
+						{if ( $i % 2 == 0) &&  $i == (count($recommond_fansclub['data']) - 1)}
+						<div class="chBlockfl chH200 fl">
+							<img src="" style="visibility:hidden;">
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+						</div>
+						{/if}
+						{eval $i++;}
+						<!--{/loop}-->
+					{/if}
+	
+				</div>
+			</div>
+			<!--{template extend/desktop/sub_activity}-->
+			<div class="blank15"></div>
+			<div class="ad_boxs">
+			     <!-- 108815：首页-频道-列表-内容-右侧button2 类型：固定广告位 尺寸：300x0-->
+<script type="text/javascript">
+_acK({aid:108815,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+			</div>
+		</div>
+	</div>
+	<div class="blank15"></div>
+	<div class="ad_banner">
+	     <!-- 108817：首页-频道-列表-内容-底部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108817,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+	</div>
+	<div class="blank15"></div>
+<!--{template common/footer}-->

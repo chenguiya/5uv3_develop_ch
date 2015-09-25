@@ -1,0 +1,91 @@
+<div class="ch_bm">
+	<div class="z">
+		<a href="./" class="" title="{lang home}">$_G[setting][bbname]</a><em>&gt;</em>
+		<em><a href="{$_SERVER['REQUEST_URI']}" target="_self">直播</a></em>
+	</div>
+</div>
+<div class="ad_banner">
+<!-- 108811：首页-频道-列表-内容-顶部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+</div>
+<div class="blank15"></div>
+<div class="live clearfix" style="margin:0;">
+	<div class="col-left">
+		<div class="types_ch">
+			<ul>
+				<li class="type {if $_G['gp_league_id'] == ''}hot{/if}"><a href="live" class="ico ico-hot">热门</a></li>
+				<li class="type {if $_G['gp_league_id'] == '1'}hot{/if}"><a href="live/1" class="ico ico-yc">英超</a></li>
+				<li class="type {if $_G['gp_league_id'] == '15'}hot{/if}"><a href="live/15" class="ico ico-xj">西甲</a></li>
+				<li class="type {if $_G['gp_league_id'] == '13'}hot{/if}"><a href="live/13" class="ico ico-zc">中超</a></li>
+				<li class="type {if $_G['gp_league_id'] == '41'}hot{/if}"><a href="live/41" class="ico ico-yg">亚冠</a></li>
+				<li class="type {if $_G['gp_league_id'] == '21'}hot{/if}"><a href="live/21" class="ico ico-yj">意甲</a></li>
+				<li class="type {if $_G['gp_league_id'] == '2'}hot{/if}"><a href="live/2" class="ico ico-dj">德甲</a></li>
+				<li class="type {if $_G['gp_league_id'] == '3'}hot{/if}"><a href="live/3" class="ico ico-fj">法甲</a></li>
+				<li class="type {if $_G['gp_league_id'] == '7'}hot{/if}"><a href="live/7" class="ico ico-nba">NBA</a></li>
+				<li class="type {if $_G['gp_league_id'] == '8'}hot{/if}"><a href="live/8" class="ico ico-cba">CBA</a></li>
+				<li class="type {if $_G['gp_league_id'] == '100'}hot{/if}"><a href="live/100" class="ico ico-misc">其它</a></li>
+			</ul>
+
+		</div>
+	</div>
+
+	<div class="col-right">
+	     
+	<!--{loop $arr_game $key $value}-->
+		<div class="match clearfix">
+			<div class="head"><i class='ico'></i>{$value['date_tips']} {$value['week']}  {$value['date']}</div>
+			<ul>
+			<!--{loop $value['games'] $key1 $value1}-->
+				<li class="item clearfix">
+					<div class="state">
+					<i class="ico {if $value1['game_state'] == '0'}ico-notstart{/if}{if $value1['game_state'] == '1'}ico-live{/if}{if $value1['game_state'] == '-1'}ico-over{/if}">{$value1['game_desc']}</i> 
+					<span class='type'>{$value1['round']}</span>
+						<div class="time">开赛时间：{$value1['game_time']}</div>
+					</div>
+					<div class="link">
+						<ul>
+						{if $value1['game_state'] == '-1'}
+						    <!--<li><a{if $value1['promotion_list']['url0'] != ''} href="$value1['promotion_list']['url0']" target="blank" {else}href="#"{/if}>$value1['promotion_list']['title0']</a></li>-->
+							<li><a{if $value1['promotion_list']['url1'] != ''} href="$value1['promotion_list']['url1']" target="blank" {else}href="#"{/if}>$value1['promotion_list']['title1']</a></li>
+							<li><a{if $value1['promotion_list']['url2'] != ''} href="$value1['promotion_list']['url2']" target="blank" {else}href="#"{/if}>$value1['promotion_list']['title2']</a></li>
+							<li><a{if $value1['promotion_list']['url3'] != ''} href="$value1['promotion_list']['url3']" target="blank" {else}href="#"{/if}>$value1['promotion_list']['title3']</a></li>
+							
+						{else}
+						{if $value1['promotion_list']['url0'] != ''}
+						<li><a{if $value1['promotion_list']['url0'] != ''} href="$value1['promotion_list']['url0']" target="blank" {else}href="#"{/if}>$value1['promotion_list']['title0']</a></li>
+						{/if}
+						<!--{loop $value1['live_list'] $key2 $value2}-->
+							<li><a href="{$value2['url']}" target="_blank">{$value2['name']}</a></li>
+						<!--{/loop}-->
+						{/if}
+						</ul>
+					</div>
+					<div class="versus">
+						<div class="team">
+							<a href="#" onClick="return false;" class="logo"><img src="{$value1['image1_url']}"></a>
+							<div>{$value1['team1_name']}</div>
+						</div>
+						<div class="score">{if $value1['game_state'] == '0'}--{else}{$value1['team1_score']} - {$value1['team2_score']}{/if}</div>
+						<div class="team">
+							<a href="#" onClick="return false;" class="logo"><img src="{$value1['image2_url']}"></a>
+							<div>{$value1['team2_name']}</div>
+						</div>
+					</div>
+				</li>
+			<!--{/loop}-->
+			</ul>
+		</div>
+		<!--{/loop}-->
+	</div>
+
+</div> 
+<div class="blank15"></div>
+<div class="ad_banner">
+<!-- 108817：首页-频道-列表-内容-底部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108817,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+</div>
+<div class="blank15"></div>

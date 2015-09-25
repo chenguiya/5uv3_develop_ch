@@ -1,0 +1,61 @@
+<!--{template common/header}-->
+<link type="text/css" rel="stylesheet" href="../../common/jquery.selectBox.css"/>
+<script type="text/javascript" src="../../common/jquery.selectBox.js"></script>
+<div class="ch_bm">
+        <div class="z">
+            <a href="./" class="" title="{lang home}">$_G[setting][bbname]</a><em>&gt;</em>
+            <a href="{$_SERVER['REQUEST_URI']}">活动</a>
+        </div>
+    </div>
+    <div class="ad_banner">
+    <!-- 108811：首页-频道-列表-内容-顶部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+    </div>
+    <div class="blank15"></div>
+<div class="container">
+
+    <div class="title-block">
+        <h3 class="title">热门活动</h3>
+        <!--<select id="standard-dropdown" name="standard-dropdown" class="select">
+            <option value="all">全部</option>
+            <option value="1">皇马</option>
+            <option value="2">曼联</option>
+            <option value="3">利物浦</option>
+            <option value="4">切尔西</option>
+        </select>-->
+    </div>
+    <div class="cell-wrap">
+    	<!--{if $activitylists}-->
+    	<!--{loop $activitylists $val}-->
+        <div class="cell">
+            <a href="forum.php?mod=viewthread&tid={$val[tid]}" target="_blank"><img class="img" src="{$val[thumb]}" alt=""></a>
+            <div class="desc">
+                <p class="brief">
+                    <a href="forum.php?mod=viewthread&tid={$val[tid]}">{$val['title']}</a>
+                </p>
+                <span class="time">{$val['starttimefrom']}<!--{if $val['starttimeto']}-->&nbsp;至<br>&nbsp;{$val['starttimeto']}<!--{/if}--></span>
+                <a href="forum.php?mod=viewthread&tid={$val[tid]}" class="{if $val[status]}btn-join{else}btn-over{/if}">{if $val[status]}立即参加{else}已结束{/if}</a>
+            </div>
+        </div>
+        <!--{/loop}-->
+        <!--{else}-->
+       	 暂无活动
+        <!--{/if}-->
+    </div>
+</div>
+<!--{if $maxpage > 1}-->
+{$multipage}
+<!--{/if}-->
+<script>
+    $('select').selectBox();
+</script>
+<div class="ad_banner">
+<!-- 108817：首页-频道-列表-内容-底部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108817,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+</div>
+<div class="blank15"></div>
+<!--{template common/footer}-->

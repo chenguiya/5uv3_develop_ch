@@ -1,0 +1,25 @@
+<nav class="navbar">
+    <div class="inner">
+        <div class="left">
+            <!--{if $_GET['op'] == 'checkuser'}-->
+            <a href="javascript: history.go(-1);"><i class="iconfont icon-angle-left"></i></a>
+            <!--{else}-->
+            <a class="logo" href="$_G[siteurl]"><img
+                    src="template/usportstyle/touch/common/images/logo-03.png" alt="5u体育"></a>
+            <!--{/if}-->
+        </div>
+        
+        <div class="right">
+        	<a href="home.php?mod=space&do=group&mycenter=1&mobile=2"><i class="iconfont icon-qmh"></i></a>            
+            <a href="home.php?mod=space&do=profile&mycenter=1&mobile=2"><i class="iconfont icon-me"></i></a>    
+        </div>
+    </div>
+</nav>
+
+<div class="ymain">
+<ul class="ysub-navbar">
+    <li{if APPTYPEID == 2 && $mod == 'index'} class="active"{/if}><a href="{if APPTYPEID == 2 && $mod == 'index'}javascript:;{else}forum.php?mobile=yes{/if}">广场</a></li>
+    <li{if APPTYPEID == 2 && $mod == 'activity'} class="active"{/if}><a href="{if APPTYPEID == 2 && $mod == 'activity'}javascript:;{else}forum.php?mod=activity{/if}">活动</a></li>
+    <li{if APPTYPEID == 3} class="active"{/if}><a href="{if APPTYPEID == 3}javascript:;{else}group.php{/if}">球迷会</a></li>
+    <!-- <li><a href="#">球迷联赛</a></li> -->
+</ul>

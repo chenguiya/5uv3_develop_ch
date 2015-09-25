@@ -1,0 +1,16 @@
+<!--{block return}-->
+<!--{if $data['data']}-->
+<div class="viewon_con">
+    <div class="ch_avatar_bd">
+         <p class="off_imgs"><a href="{if $_G[forum][type] == 'forum'}group/{$_G[forum][fid]}{elseif $_G[forum][type] == 'sub'}group/{$_G[forum][fup]}{/if}" target="_blank"><img src="data/attachment/common/{$data[data][icon]}"></a></p>
+         <p class="p_name"><a href="{if $_G[forum][type] == 'forum'}group/{$_G[forum][fid]}{elseif $_G[forum][type] == 'sub'}group/{$_G[forum][fup]}{/if}" title="bruseli">{$_G[forum][name]}</a></p>
+         <ul class="view_table cl">
+             <li>联   赛：{$data[data][league_name]}</li>
+             <li class="odd">排   名：{$data[data][ranking]}</li>
+             <li>主教练：{$data[data][coach]}</li>
+             <li class="odd">球迷会：{$data[data][branchnum]}</li>
+         </ul>
+    </div>
+</div>
+<!--{/if}-->
+<!--{/block}-->

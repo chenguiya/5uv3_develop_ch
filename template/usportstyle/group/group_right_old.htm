@@ -1,0 +1,48 @@
+<!--{if $action == 'index' || $action == 'list' || $action == 'memberlist'}-->
+<div class="index_r">
+    <!--{hook/group_info_manage}-->
+	<!--{hook/forumdisplay_info_manage}-->
+	
+	<!--{template extend/desktop/sidebar_rule}-->
+	<!--{hook/group_viewthread_credits_ban}-->
+	<!--精选图集 start-->
+	<!--div class="widget_con">
+	     <div class="widget_hd">
+		       <h3>精选图集</h3>
+		 </div>
+		 <div class="widget_bd">
+		      <div class="wid_alta">
+			       <a href="" target="_blank"><img src="http://img2.cache.netease.com/sports/2015/4/19/20150419200248a9d41.jpg" width="235" height="150"></a>
+				   <a href="" target="_blank" class="wid_txt">388张</a>
+			  </div>
+		 </div>
+	</div-->
+	<!--友情球迷会 start-->
+	<div class="widget_con">
+	     <div class="drag">
+		      <!--[diy=diysidetop]--><div id="diysidetop" class="area"></div><!--[/diy]-->
+		 </div>
+		 <!--{if CURMODULE == 'group'}--><!--{hook/group_side_bottom}--><!--{else}--><!--{hook/forumdisplay_side_bottom}--><!--{/if}-->
+		 <div class="drag">
+		      <!--[diy=diy2]--><div id="diy2" class="area"></div><!--[/diy]-->
+		 </div>
+	</div>
+	<!--你问我答 start-->
+	<div class="widget_con">
+	     <div class="widget_hd">
+		       <h3>你问我答</h3>
+		 </div>
+		 <div class="widget_bd">
+		      <ul class="question_Mul">
+			      <li><a href="forum.php?mod=viewthread&tid=33146&extra=page%3D1" target="_blank"><em>.</em>如何创建球迷会？</a></li>
+				  <li><a href="forum.php?mod=viewthread&tid=33142&extra=page%3D1" target="_blank"><em>.</em>如何加入球迷会？</a></li>
+				  <li><a href="forum.php?mod=viewthread&tid=33158&extra=page%3D1" target="_blank"><em>.</em>如何申请为球迷会总会会长？</a></li>
+				  <li><a href="forum.php?mod=viewthread&tid=33151&extra=page%3D1" target="_blank"><em>.</em>如何进行球迷会管理？</a></li>
+				  <li><a href="forum.php?mod=viewthread&tid=33152&extra=page%3D1" target="_blank"><em>.</em>球迷会等级说明以及认证流程？</a></li>
+			  </ul>
+			  <div class="ch_create"><a href="plugin.php?id=fansclub&ac=apply" target="_blank"><img src="$_G['style'][tpldir]/common/images/ch_create_icon.png"></a></div>
+		 </div>
+	</div>
+</div>
+<!--{/if}-->
+<!--{if CURMODULE == 'group'}--><!--{hook/group_side_top}--><!--{else}--><!--{hook/forumdisplay_side_top}--><!--{/if}-->

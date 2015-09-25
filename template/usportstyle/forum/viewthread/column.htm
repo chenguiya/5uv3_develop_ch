@@ -1,0 +1,18 @@
+<!--{block return}-->
+<!--{if $data[data]}-->
+<div class="viewr_hd">
+     <span>$data[name]</span>
+     <a href="tag/{$data[tagid]}/" target="_blank" class="moresd">更多</a>
+</div>
+<div class="viewr_bd">
+     <ul class="col_ul cl">
+     	<!--{loop $data[data] $vo}-->
+		<li>
+			<a href="{$vo[url]}" class="col_img" target="_blank"><img src="{$vo[imgUrl]}"></a>
+			<a href="{$vo[url]}" class="col_title" target="_blank">{$vo[title]}</a>
+		</li>
+        <!--{/loop}-->
+     </ul>
+</div>
+<!--{/if}-->
+<!--{/block}-->

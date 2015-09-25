@@ -1,0 +1,14 @@
+<!--{block return}-->
+<!--{if $data['data']}-->
+<div class="slide_content">
+	<div class="module cl slidebox">
+		<ul class="slideshow">
+			<!--{loop $data['data'] $val}-->
+			<li><a href="{$val[url]}" target="_blank"><img src="data/attachment/{$val[pic]}" width="660" height="350"><span class="title">{$val[title]}</span></a></li>
+			<!--{/loop}-->			
+		</ul>
+	</div>
+	<script type="text/javascript">runslideshow();</script>
+</div>
+<!--{/if}-->
+<!--{/block}-->

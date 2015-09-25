@@ -1,0 +1,35 @@
+<!--{template group/elecnation_group_header}-->
+<div class="wp">
+
+    <div id="elecnation_group_title_line" style="padding-top:18px;"></div>
+    <div id="elecnation_group_title" style="width:88px;">
+    <!--{if $view == 'join'}-->{lang my_join_group}<!--{elseif $view == 'manager'}-->{lang my_manage_group}<!--{/if}-->
+    </div>
+
+    <div style="padding:8px;">
+        <!--{if $view == 'manager' || $view == 'join'}-->
+            <!--{if $grouplist}-->
+                <div>
+                <!--{loop $grouplist $groupid $group}-->
+                <a href="forum.php?mod=group&fid=$groupid" title="$group[name]">
+                    <div id="elecnation_group_my_float">
+                    <div class="elecnation_group_img32_box">
+                    <div class="elecnation_group_img32">
+                        <img src="$group[icon]" width="32" height="32" style="border:none;" />
+                    </div>
+                    </div>
+                    <div id="elecnation_group_my_name"><!--{if $group['flevel'] == '-1'}-->({lang group_wait_mod})<!--{/if}-->$group[name]</div>
+                    </div>
+                </a>
+                <!--{/loop}-->
+                <div id="elecnation_clear"></div>
+                </div>
+                $multipage
+            <!--{else}-->
+                <div id="elecnation_noinfo"><!--{if $view == 'manager'}-->{lang no_group_create_now} <!--{elseif $view == 'join'}-->{lang no_group_join} <!--{/if}--></div>
+            <!--{/if}-->
+        <!--{/if}-->  
+    </div>
+
+</div>
+<!--{template common/footer}-->

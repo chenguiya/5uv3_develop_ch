@@ -1,0 +1,81 @@
+<!--{template group/elecnation_group_header}-->
+<!--group start-->
+
+<div id="elecnation_group_main">
+
+    <div id="elecnation_group_type">$curtype[name]{lang group} ($curtype[groupnum])
+    <span class="y">
+        <select title="{lang orderby}" onchange="location.href=this.value" >
+        <option value="$url" $selectorder[default]>{lang orderby_default}</option>
+        <option value="$url&orderby=thread" $selectorder[thread]>{lang stats_main_threads_count}</option>
+        <option value="$url&orderby=membernum" $selectorder[membernum]>{lang group_member_count}</option>
+        <option value="$url&orderby=dateline" $selectorder[dateline]>{lang group_create_time}</option>
+        <option value="$url&orderby=activity" $selectorder[activity]>{lang group_activities}</option>
+        </select>
+    </span>
+    </div>
+
+	<div>
+    		<!--{if $list}-->
+				<!--{if $curtype['forumcolumns'] > 1}-->
+					<div>
+						<table cellspacing="0" cellpadding="0">
+							<tr>
+								<!--{loop $list $fid $val}-->
+								<!--{if $val['orderid'] && ($val['orderid'] % 2 == 0)}-->
+							</tr>
+							<tr>
+								<!--{/if}-->
+								<td align="center" style="padding:8px 0; border-right:1px dashed #CCCCCC; border-bottom:1px dashed #CCCCCC; width:50%;">
+									<a href="forum.php?mod=group&fid=$fid">
+                                    <div style="display:block;">
+                                    <div class="elecnation_group_img24_box">
+                                    	<div class="elecnation_group_img24">
+                                            <img width="24" height="24" src="$val[icon]" />
+                                        </div>
+                                        </div>
+                                        <div>$val[name]</div>
+                                        <div>{lang group_total_members_threads}</div>
+                                        <div class="elecnation_dy">{lang group_founded_in} $val[dateline]</div>
+                                    </div>
+									</a>
+								</td>
+								<!--{/loop}-->
+								$endrows
+							</tr>
+						</table>
+					</div>
+				<!--{else}-->
+
+						<!--{loop $list $fid $val}-->
+                        <a href="forum.php?mod=group&fid=$fid">
+                        <div id="elecnation_group_type_list">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td width="38" valign="top">
+                            <div class="elecnation_group_img24_box">
+                            <div class="elecnation_group_img24">
+                            	<img width="24" height="24" src="$val[icon]" />
+                            </div>
+                            </div>
+                            </td>
+                            <td>
+                            <span style="font-size:14px; font-weight:bold;">$val[name]</span>
+                             <span style=" margin-left:6px; color:#666666; ">{lang group_total_members_threads}</span>
+							<p>$val[description]</p>
+                            </td>
+                          </tr>
+                        </table>
+						</div>
+                        </a>
+                        <!--{/loop}-->
+
+				<!--{/if}-->
+
+			<!--{else}-->
+				<div id="elecnation_noinfo">{lang group_category_no_groups}</div>
+			<!--{/if}-->
+	</div>
+</div>
+
+<!--{template common/footer}-->

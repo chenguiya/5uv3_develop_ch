@@ -1,0 +1,67 @@
+<!--{if $op == 'alluser'}-->
+	<!--{if $adminuserlist}-->
+    <div id="elecnation_group_title_line" style="margin-top:18px;"></div>
+	<div id="elecnation_group_title" style="width:68px;">{lang group_admin_member}</div>
+			
+            <div style="padding:8px;">
+					<!--{loop $adminuserlist $user}-->
+                    <a href="home.php?mod=space&uid=$user[uid]">
+                    <div id="elecnation_group_mem_card" style="border:1px #73AA66 solid;">
+                    <div class="elecnation_group_img32_box">
+					<div class="elecnation_group_img32">
+						<img src="<!--{avatar($user[uid], small, true)}-->" width="32" height="32" style="border:none;" />
+					</div>
+                    </div>
+                    <div id="elecnation_group_my_name">$user[username]</div>
+                    </div>
+                    </a>
+					<!--{/loop}-->
+                    <div id="elecnation_clear"></div>
+			</div>
+	<!--{/if}-->
+	<!--{if $staruserlist || $alluserlist}-->
+        <!--{if $staruserlist}-->
+            <div id="elecnation_group_title_line" style="margin-top:18px;"></div>
+			<div id="elecnation_group_title" style="width:68px;">{lang group_star_member_title}</div>
+    
+                <div style="padding:8px;">
+						<!--{loop $staruserlist $user}-->
+                        <a href="home.php?mod=space&uid=$user[uid]">
+						<div id="elecnation_group_mem_card" style="border:1px #FFD24D solid;">
+                    	<div class="elecnation_group_img32_box">
+						<div class="elecnation_group_img32">
+							<img src="<!--{avatar($user[uid], small, true)}-->" width="32" height="32" style="border:none;" />
+						</div>
+                    	</div>
+                    	<div id="elecnation_group_my_name">$user[username]</div>
+                    	</div>
+                        </a>
+						<!--{/loop}-->
+                        <div id="elecnation_clear"></div>
+				</div>
+		<!--{/if}-->
+		<!--{if $alluserlist}-->
+            <div id="elecnation_group_title_line" style="margin-top:18px;"></div>
+			<div id="elecnation_group_title" style="width:38px;">{lang member}</div>
+                
+					<div style="padding:8px;">
+						<!--{loop $alluserlist $user}-->
+                        <a href="home.php?mod=space&uid=$user[uid]">
+						<div id="elecnation_group_mem_card" style="border:1px #888888 solid;">
+                    	<div class="elecnation_group_img32_box">
+						<div class="elecnation_group_img32">
+                            <img src="<!--{avatar($user[uid], small, true)}-->" width="32" height="32" style="border:none;" />
+						</div>
+                    	</div>
+                    	<div id="elecnation_group_my_name">$user[username]</div>
+                    	</div>
+                        </a>
+						<!--{/loop}-->
+                        <div id="elecnation_clear"></div>
+					</div>
+				<!--{/if}-->
+
+	<!--{/if}-->
+
+$multipage
+<!--{/if}-->

@@ -1,0 +1,88 @@
+<div class="match_ch">
+              <div class="mconthd">
+                   <span id="leagrank_lb_1" class="tab_hd_item current" onclick="cg('leagrank',1)">未结束</span>
+                   <span id="leagrank_lb_2" class="tab_hd_item" onclick="cg('leagrank',2)">已结束</span>
+              </div>
+
+              <div class="mcontTab">
+              
+                 <ul id="leagrank_div_1">
+                    <!--{loop $arr_game['have_not_'] $key $value}-->  
+                    <li class="item clearfix">
+                           <div class="state">
+                                <div class="cl">
+                                     <span class="type">{$value['round']}</span>
+                                     <i class="onliv {if $value['game_state'] == '-1'}on-over{/if}{if $value['game_state'] == '1'}on-live{/if}{if $value['game_state'] == '0'}notstart{/if}">{$value['game_desc']}</i>
+                                </div>                      
+                                <div class="time">$value['week']&nbsp;&nbsp;<em>{$value['game_time']}</em></div>
+                           </div>
+                           <div class="link">
+                                <ul>
+                                <!--{loop $value['live_list'] $key1 $value1}-->
+                                  <li><a href="{$value1['url']}" target="_blank">{$value1['name']}</a></li>                      
+                                <!--{/loop}--> 
+                                </ul>
+                            </div>
+                            <div class="versus">
+                                 <div class="team">
+                                      <a href="#" onclick="return false;" class="logo"><img src="{$value['image1_url']}"></a>
+                                      <div>{$value['team1_name']}</div>
+                                 </div>
+                                 <div class="score score_over">{if $value['game_state'] == '0'}VS{else}{$value['team1_score']} - {$value['team2_score']}{/if}</div>
+                                 <div class="team">
+                                      <a href="#" onclick="return false;" class="logo"><img src="{$value['image2_url']}"></a>
+                                      <div>{$value['team2_name']}</div>
+                                 </div>
+                            </div>
+                    </li>
+                    <!--{/loop}--> 
+                 </ul>         
+                
+                <ul id="leagrank_div_2" style="display:none">
+                    <!--{loop $arr_game['have_end_'] $key $value}-->  
+                    <li class="item clearfix">
+                           <div class="state">
+                                <div class="cl">
+                                     <span class="type">{$value['round']}</span>
+                                     <i class="onliv {if $value['game_state'] == '-1'}on-over{/if}{if $value['game_state'] == '1'}on-live{/if}{if $value['game_state'] == '0'}notstart{/if}">{$value['game_desc']}</i>
+                                </div>                      
+                                <div class="time">$value['week']&nbsp;&nbsp;<em>{$value['game_time']}</em></div>
+                           </div>
+                           <div class="link">
+                                <ul>
+                                    {if $value['promotion_list']['url1'] == '' && $value['promotion_list']['url2'] == ''&& $value['promotion_list']['url3'] == ''}<li><a href="http://www.5usport.com/live" target="blank">等待更新</a></li>{/if}
+                                      {if $value['promotion_list']['url1'] != ''}<li><a href="$value['promotion_list']['url1']" target="blank">$value['promotion_list']['title1']</a></li>{/if}
+                                      {if $value['promotion_list']['url2'] != ''}<li><a href="$value['promotion_list']['url2']" target="blank">$value['promotion_list']['title2']</a></li>{/if}
+                                      {if $value['promotion_list']['url3'] != ''}<li><a href="$value['promotion_list']['url3']" target="blank">$value['promotion_list']['title3']</a></li>{/if}
+                                </ul>
+                            </div>
+                            <div class="versus">
+                                 <div class="team">
+                                      <a href="#" onclick="return false;" class="logo"><img src="{$value['image1_url']}"></a>
+                                      <div>{$value['team1_name']}</div>
+                                 </div>
+                                 <div class="score score_over">{$value['team1_score']} - {$value['team2_score']}</div>
+                                 <div class="team">
+                                      <a href="#" onclick="return false;" class="logo"><img src="{$value['image2_url']}"></a>
+                                      <div>{$value['team2_name']}</div>
+                                 </div>
+                            </div>
+                    </li>
+                    <!--{/loop}--> 
+                </ul>
+
+              </div>
+</div>
+<script>
+    function cg(id,m){
+       var n=3;
+       for(var i=1;i<=3;i++){
+       jq("#"+id+"_lb_"+i).removeClass(" current");
+       jq("#"+id+"_div_"+i).css("display","none");
+       if(m==i){
+       jq("#"+id+"_lb_"+i).addClass(" current");
+       jq("#"+id+"_div_"+i).css("display","");      
+     }
+   }
+ }
+</script>

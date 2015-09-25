@@ -1,0 +1,26 @@
+<!--{template common/header}-->
+<!--{template common/topnav}-->
+<!--{if $activitylists}-->
+<section class="ch_activity">
+	<ul id="ch_actbox">
+		<!--{loop $activitylists $activity}-->
+		<li>
+		    <a href="forum.php?mod=viewthread&tid=$activity[tid]" class="m_actbox">
+		       <span class="act_imgshow"><img src="$activity[thumb]"></span>
+		       <div class="act_info">
+		            <h3>$activity[title]</h3>
+		            <p class="act_time">$activity[starttimefrom]<!--{if $activity[starttimeto]}-->&nbsp;至&nbsp;$activity[starttimeto]<!--{/if}--></p>
+		            <p class="act_btn"><!--{if $activity[status]}-->立即参加<!--{else}-->已结束<!--{/if}--></p>
+		       </div>
+		    </a>
+		</li>
+		<!--{/loop}-->		
+	</ul>
+</section>
+
+<!--{if $maxpage > 1}-->
+<div class="act_page"><a href="javascript:void(0);" page="2" totalpage="$maxpage" class="act_more" id="actbox_More">加载更多</a></div>
+<!--{/if}-->
+<!--{/if}-->
+</div>
+<!--{template common/footer}-->

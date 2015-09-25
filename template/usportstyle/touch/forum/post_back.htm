@@ -1,0 +1,95 @@
+<!--{template common/header}-->
+<!--{eval $adveditor = $isfirstpost && $special && ($_GET['action'] == 'newthread' || $_GET['action'] == 'reply' && !empty($_GET['addtrade']) || $_GET['action'] == 'edit' );}-->
+<nav class="navbar">
+    <div class="inner">
+        <div class="left"><i class="fa fa-user"></i></div>
+        <div class="center">帖子</div>
+        <div class="right"><a href="3" class="ybtn ybtn-small">发表</a></div>
+    </div>
+</nav>
+<div class="ymain ymain-padding">
+    <div class="ybtn-group">
+        <a class="ybtn active" href="forum.php?mod=post&action=newthread&fid=$_G[fid]&cedit=yes">普通贴</a>
+        <a class="ybtn" href="forum.php?mod=post&action=newthread&special=4&fid=$_G[fid]&cedit=yes">活动贴</a>
+    </div>
+    <div class="myform">
+        <input type="text" class="yinput" placeholder="标题"/>
+
+        <div class="yinput-group">
+            <input class="yinput" type="text" placeholder="选择分类主题"/>
+            <i class="icon fa fa-chevron-down"></i>
+        </div>
+        <!--{if $adveditor}-->	
+			<!--{if $special == 4}--><!--{template forum/post_activity}--><!--{/if}-->
+		<!--{/if}-->
+        <textarea cols="30" rows="10" placeholder="内容"></textarea>
+
+        <div id="uploadCamera">
+            <div class="selectImages" style="display: none;">
+                <div class="image">
+                    <img src="/template/usportstyle/touch/common/images/demo/8.png" alt=""/>
+                    <i class="fa fa-minus-circle icon"></i>
+                </div>
+                <div class="image">
+                    <img src="/template/usportstyle/touch/common/images/demo/8.png" alt=""/>
+                    <i class="fa fa-minus-circle icon"></i>
+                </div>
+                <div class="image">
+                    <img src="/template/usportstyle/touch/common/images/demo/8.png" alt=""/>
+                    <i class="fa fa-minus-circle icon"></i>
+                </div>
+                <div class="image">
+                    <img src="/template/usportstyle/touch/common/images/demo/8.png" alt=""/>
+                    <i class="fa fa-minus-circle icon"></i>
+                </div>
+                <div class="image">
+                    <img src="/template/usportstyle/touch/common/images/demo/8.png" alt=""/>
+                    <i class="fa fa-minus-circle icon"></i>
+                </div>
+            </div>
+            <div>
+                <i id="post-camera" class="fa fa-camera"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="model">
+    <div class="panel">
+        <div class="panel-body">
+            <ul class="ylist" style="text-align: center;">
+                <li class="row"><a class="l accent" href="#">拍照或录像</a></li>
+                <li class="row"><a class="l accent" href="#">照片图库</a></li>
+                <li class="row"><a class="l" href="#">取消</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="mark-bg"></div>
+</div>
+<div class="model">
+    <div class="panel">
+        <div class="panel-body">
+            <div style="padding: 1.6rem 0; text-align: center;">
+                <label class="yradio yradio-ib">
+                    <input type="radio" name="type-1"  checked/>
+                    新闻
+                    <i class="fa icon"></i>
+                </label>
+                <label class="yradio yradio-ib">
+                    <input type="radio" name="type-1" />
+                    视频
+                    <i class="fa icon"></i>
+                </label>
+                <label class="yradio yradio-ib">
+                    <input type="radio" name="type-1" />
+                    视频
+                    <i class="fa icon"></i>
+                </label>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <a href="#" class="ybtn ybtn-primary ybtn-ib" style="margin-right: 20px;">确定</a>
+            <a href="#" class="ybtn ybtn-default ybtn-ib">取消</a>
+        </div>
+    </div>
+    <div class="mark-bg"></div>
+</div>

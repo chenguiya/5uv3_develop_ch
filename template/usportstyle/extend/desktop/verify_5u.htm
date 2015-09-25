@@ -1,0 +1,121 @@
+﻿<div class="bread"><a href="{$_G['setting']['discuzurl']}" target="_blank">5U体育</a>&nbsp;&gt;&nbsp; {$_G['forum']['name']} </div>
+<div class="box">
+<div class="navSide">
+	<div class="navSideT">球迷会认证</div>
+    <div class="navSideC">
+    	<ul>
+        	<li><a href="{$arr_left_url['boots']}" class="navSidea">金银铜靴认证</a></li>
+            <li class="active"><a href="{$arr_left_url['5u']}" class="navSideb">5U认证</a></li>
+            <li><a href="{$arr_left_url['org']}" class="navSidec">机构认证</a></li>
+            <li><a href="{$arr_left_url['faq']}" target="_blank" class="navSided">常见问题</a></li>
+        </ul>
+    </div>
+</div>
+<div class="mainR">
+	<h3 class="titleU">5U认证</h3>
+    <span class="conditionT">认证条件</span>
+	<iframe id="frame_fansclub" name="frame_fansclub" style="display: none"></iframe>
+	<form id="form_fansclub" name="form_fansclub" action="plugin.php?id=fansclub&ac=verify&fid={$fid}&op=apply" method="post" autocomplete="off" target="frame_fansclub">
+	{if $arr_verify_5u['apply_status'] == '-1' && $can_apply}
+	<input type="hidden" id="formhash" name="formhash" value="$formhash">
+	<input type="hidden" id="submitchk" name="submitchk" value="true">
+	<input type="hidden" id="level_type" name="level_type" value="1">
+	<input type="submit" style="cursor:pointer;" class="apply" value="立刻申请" id="apply_level_submit" class="btn-join" name="apply_level_submit">
+	{elseif $arr_verify_5u['apply_status'] == '0'}
+	<a href="javascript:void(0);" class="applyed">申请审核中</a>
+	{elseif $arr_verify_5u['apply_status'] == '3'}
+	<a href="javascript:void(0);" class="applyed">已申请成功</a>
+	{elseif $arr_verify_5u['apply_status'] == '4'}
+	<a href="javascript:void(0);" class="applyed">申请失败</a>
+	{else}
+	<a href="javascript:void(0);" class="applyed">已被申请</a>
+	{/if}
+	</form>
+    <div class="jianju25"></div>
+    <div class="condition">
+    	<table width="100%" border="1" bordercolor="#dedede" cellspacing="0" cellpadding="0" class="conditionTab">
+          <tr>
+            <th scope="col">资料完善</th>
+            <th scope="col">组织结构完善</th>
+            <th scope="col">话题数</th>
+            <th scope="col">成员数</th>
+            <th scope="col">贡献值</th>
+			 <th scope="col">活跃度</th>
+          </tr>
+          <tr>
+            <td><img src="{$_G['style'][tpldir]}/common/images/dui.jpg" /></td>
+            <td><img src="{$_G['style'][tpldir]}/common/images/dui.jpg" /></td>
+            <td>{$arr_verify_5u['specil_posts']}</td>
+            <td>{$arr_verify_5u['specil_members']}</td>
+            <td>{$arr_verify_5u['specil_contribution']}</td>
+			<td>{$arr_verify_5u['specil_activity']}</td>
+          </tr>
+        </table>
+        <div class="conditionList">
+        	<dl>
+            	<dt>认证说明:</dt>
+                <dd>1、官方认证是指由5U体育官方联合球队和球星共同授予的认证，是5U体育最高认证等级</dd>
+                <dd>2、球迷会分会资料完整。</dd>
+                <dd>3、球迷会分会组织结构完善。</dd>
+                <dd>4、积分=话题数*N%+话题数*N%+话题数*N%+话题数*N%+话题数*N%</dd>
+                <dd>5、认证周期：半年</dd>
+                <dd>6、单个球星同一时间只有1个官方认证球迷会，到期后重新申请。</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="jianju25"></div>
+    <div class="columnBox">
+    	<b class="columnT">享受的权益</b>
+        <div class="interests">
+        	<table width="100%" border="1" bordercolor="#e7e7e7" cellspacing="0" cellpadding="0" class="interestsTab">
+              <tr>
+                <td>
+                    <img src="{$_G['style'][tpldir]}/common/images/in01.jpg" width="134" height="120"/>
+                    <div class="interestsTxt"><span class="inColora">认证标识</span><p>易于标识，更加权威</p></div>
+                </td>
+               <td>
+                    <img src="{$_G['style'][tpldir]}/common/images/in02.jpg" width="120" height="120"/>
+                    <div class="interestsTxt"><span class="inColorb">球星互动优先权</span><p>代表球迷与球星互动的优先权</p></div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <img src="{$_G['style'][tpldir]}/common/images/in03.jpg" width="120" height="120"/>
+                    <div class="interestsTxt"><span class="inColorc">物料分配</span><p>获得5U体育官方物料分配</p></div>
+                </td>
+                <td>
+                    <img src="{$_G['style'][tpldir]}/common/images/in04.jpg" width="120" height="119"/>
+                    <div class="interestsTxt"><span class="inColord">业务分成</span><p>获得5U体育官方业务分成</p></div>
+                </td>
+              </tr>
+            </table>
+
+        </div>
+        
+        <div class="jianju25"></div>
+        <div class="conditionList">
+        	<dl>
+            	<dt>权益说明:</dt>
+                <dd>1、可享受团购商品球迷会专属优惠，即团购商品面向普通用户是一种价格，面向球迷会用户是另一种价格。</dd>
+                <dd>2、可享受限量商品购买配额，不同等级球迷会可享受不同数量的配额。</dd>
+                <dd>3、可用球迷会积分兑换特属礼品。</dd>
+                <dd>4、可优先参加5U官方活动，获取额外奖励</dd>
+                <dd>5、可优先申请线下自办活动经费</dd>
+                <dd>6、可优先申请5U体育线下活动承办资格。</dd>
+                <dd>7、可参与5U体育业务分成</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+</div>
+<script language="javascript">
+function show_success(message, jump_url, type) {
+	message = message == '' ? '更新成功' : message;
+	type = type == '' ? 'right' : type;
+	showDialog(message, type, '提示信息', function(){
+		top.window.location.href = (jump_url == '') ? top.window.location.href : jump_url;
+	}, 0, null, '', '', '', '', 3);
+}
+</script>
+<div class="jianju40"></div>

@@ -1,0 +1,35 @@
+<!--{block return}-->
+<!--{if $data[data]}-->
+<div class="modul_con">
+	<div class="in_hdbox">
+	     <span class="hdspan">认证用户</span>
+	     <a href="home.php?mod=spacecp&ac=profile&op=verify" class="aplicat" target="_blank">申请认证</a>
+	</div>
+	<div class="aplicat_Con">
+		<ul class="cl">
+			<!--{loop $data['data'] $val}-->
+			<li class="cl">
+			    <a href="home.php?mod=space&uid={$val[id]}" class="apl_img" target="_blank"><img src="{$val[fields][avatar_middle]}"><!--{if is_verify($val[id])}--><span class="icon_middle"><!--{/if}--></span></a>
+			    <div class="apl_box">
+			         <div class="apl_hd">
+			              <p class="apl_name"><a href="home.php?mod=space&uid={$val[id]}" target="_blank">{$val[title]}</a></p>
+			              <p class="apl_tit">[{$val[fields][position]}]</p>			              
+			              <!--{if follow_check({$val[id]})}-->
+					      <a href="javascript:;" onclick="showDialog('确定取消关注吗？','confirm','',function(){location.href='home.php?mod=spacecp&ac=follow&op=del&fuid={$val[id]}'});" class="atten atten_over"></a>
+					      <!--{else}-->
+					      <a  id="a_followmod_{$val[id]}" href="home.php?mod=spacecp&ac=follow&op=add&fuid={$val[id]}" class="atten atten_on"></a>
+					      <!--{/if}-->		              
+			         </div>
+			         <div class="apl_bds">
+			         	<!--{loop $val['lastthread'] $v}-->
+						<span><i>--</i> <a href="forum.php?mod=viewthread&tid={$v[tid]}" target="_blank">{$v[subject]}</a></span>
+			            <!--{/loop}-->
+			         </div>
+			    </div>
+			</li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+</div>
+<!--{/if}-->
+<!--{/block}-->

@@ -1,0 +1,22 @@
+<div class="threadlist">
+	<h2 class="thread_tit"><!--{if $keyword}-->{lang search_result_keyword} <!--{if $modfid}--><a href="forum.php?mod=modcp&action=thread&fid=$modfid&keywords=$modkeyword&submit=true&do=search&page=$page" target="_blank">{lang goto_memcp}</a><!--{/if}--><!--{else}-->{lang search_result}<!--{/if}--></h2>
+	<!--{if empty($threadlist)}-->
+	<ul><div id="elecnation_noinfo"><a href="javascript:;">{lang search_nomatch}</a></div></ul>
+	<!--{else}-->
+			<ul>
+				<!--{loop $threadlist $thread}-->
+                
+                <div id="threadlist_li">
+					<a href="forum.php?mod=viewthread&tid=$thread[realtid]&highlight=$index[keywords]" target="_blank" $thread[highlight]>
+                    $thread[subject]
+					<span class="by">$thread[author] 
+                    <span class="elecnation_time"><!--{if $thread['isgroup'] != 1}-->$thread[replies]<!--{else}-->{$groupnames[$thread[tid]][replies]}<!--{/if}--> / <!--{if $thread['isgroup'] != 1}-->$thread[views]<!--{else}-->{$groupnames[$thread[tid]][views]}<!--{/if}--></span>
+                    <span class="elecnation_time">$thread[dateline]</span>
+					</a>
+				</div>
+				<!--{/loop}-->
+			</ul>
+	<!--{/if}-->
+	$multipage
+    <div id="elecnation_multi_footer"></div>
+</div>

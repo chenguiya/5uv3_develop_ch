@@ -1,0 +1,276 @@
+<div class="create-club">
+	<div class="header">
+		<h1>创建球迷会</h1>
+		<div class="condition"><a>$msg_need_credit_user</a>$msg_need_credit<a>积分不够？</a></div>
+	</div>
+	<div class="main">
+		<div class="col-left">
+			<iframe id="frame_fansclub" name="frame_fansclub" style="display:none"></iframe>
+			<form id="form_fansclub" name="form_fansclub" action="plugin.php?id=fansclub&ac=apply&op=create" method="post" enctype="multipart/form-data" autocomplete="off" target="frame_fansclub" onsubmit='clearErrorInfo();'>
+				<dl id='fansclub_list'>
+					<dt id="th_league_id"><label>球迷会类别：</label></dt>
+					<dd><select class="club_type" id="league_id" name="league_id" onChange="chg1(this);">
+							<option value="0">-联赛-</option></select>
+						<select class="club_type" style="display:none;" id="club_id" name="club_id" onChange="chg2(this);">
+							<option value="0">-球会-</option></select>
+						<select class="club_type" style="display:none;" id="star_id" name="star_id">
+							<option value="0">-球星-</option></select>
+					<div class="rq mtn" style="display:inline;" id="showerror_league_id"></div>
+					</dd>
+					
+					<dt id="th_fansclub_name"><label>球迷会名称：</label></dt>
+					<dd><input name="fansclub_name" id="fansclub_name" type="text" value="" maxlength="20" placeholder="请输入球迷会名称">
+					<div class="rq mtn" style="display:inline;" id="showerror_fansclub_name">
+					</dd>
+					
+					<dt id="th_province_id"><label>球迷会范围：</label></dt>
+					<dd><span style="display:inline;" id="fansclubcitybox">$fansclubcityhtml</span>
+					<div class="rq mtn" style="display:inline;" id="showerror_province_id"></div>
+					</dd>
+					
+					<dt id="th_fansclub_brief"><label>球迷会简介：</label></dt>
+					<dd><textarea rows="6" class="club_intro" name="fansclub_brief" id="fansclub_brief" placeholder="请输入球迷会简介"></textarea>
+					<div class="rq mtn" style="display:inline;" id="showerror_fansclub_brief"></div>
+					</dd>
+					
+					<dt><label>球迷会LOGO：</label></dt>
+					<dd><input class="" name="fansclub_logo" id="fansclub_logo" size="18" type="file">
+					<span class="tips">图片尺寸为 300x300</span>
+					</dd>
+					
+					<dt id="th_sendmessage"><label>管理章程：</label></dt>
+					<dd><table><tr><td>
+						<div class="tedt" >
+						<div class="bar"><script src="static/js/seditor.js?QRC" type="text/javascript"></script>
+						<div class="fpd" >
+						<a href="javascript:;" title="文字加粗" class="fbld" onclick="seditor_insertunit('send', '[b]', '[/b]');doane(event);">B</a>
+						<a href="javascript:;" title="设置文字颜色" class="fclr" id="sendforecolor" onclick="showColorBox(this.id, 2, 'send');doane(event);">Color</a>
+						<a id="sendimg" href="javascript:;" title="图片" class="fmg" onclick="seditor_menu('send', 'img');doane(event);">Image</a>
+						<a id="sendurl" href="javascript:;" title="添加链接" class="flnk" onclick="seditor_menu('send', 'url');doane(event);">Link</a>
+						<a id="sendquote" href="javascript:;" title="引用" class="fqt" onclick="seditor_menu('send', 'quote');doane(event);">Quote</a>
+						<a id="sendcode" href="javascript:;" title="代码" class="fcd" onclick="seditor_menu('send', 'code');doane(event);">Code</a>
+						<a href="javascript:;" class="fsml" id="sendsml" onclick="showMenu({'ctrlid':this.id,'evt':'click','layer':2});return false;">Smilies</a>
+						<script type="text/javascript" reload="1">smilies_show('sendsmiliesdiv', 8, 'send');</script>
+						</div></div>
+						<div class="area">
+						<textarea rows="8" cols="40" name="fansclub_rules" id="sendmessage" onkeydown="ctrlEnter(event, 'pmsubmit_btn');" placeholder="请输入管理章程"></textarea>
+						<div class="rq mtn" style="display:inline;" id="showerror_sendmessage"></div>
+						</div>
+						</div></td></tr>
+						</table>
+					</dd>
+					
+					<dt class='contact'><label>联系方式：</label></dt>
+					<dd>
+						<p style="display:inline;" ><span id='th_mobile'></span><input type="text" name="mobile" id="mobile" maxlength="11" placeholder="请输入手机">
+							<div class="rq mtn" style="display:inline;" id="showerror_mobile"></div>
+						</p>
+						<p style="display:inline;"><span id='th_qq'></span><input type="text" name="qq" id="qq" placeholder="请输入QQ" >
+							<div class="rq mtn" style="display:inline;" id="showerror_qq"></div>
+						</p>
+						<p style="display:inline;"><span id='th_email'></span><input type="text" name="email" placeholder="请输入Email" >
+							<div class="rq mtn" style="display:inline;" id="showerror_email"></div>
+						</p>
+						<p><input type="hidden" id="province_id" name="province_id" value="0">
+							<input type="hidden" id="city_id" name="city_id" value="0">
+							<input type="hidden" id="district_id" name="district_id" value="0">
+							<input type="hidden" id="community_id" name="community_id" value="0">
+							<input type="hidden" id="formhash" name="formhash" value="$formhash">
+							<input type="hidden" id="submitchk" name="submitchk" value="true" >
+							<input type="submit" id="apply_submit" name="apply_submit" class="btn-submit" value="提交申请">
+							<span id='th_submit'></span><span class="rq mtn" style="display:inline;" id="showerror_submit"></span>
+							<span class="tips">申请成功后，我们将私信通知您，请注意查收。</span>
+						</p>
+					</dd>
+				</dl>
+			</form>
+		</div>
+		<div class="col-right sidebar">
+			<div class="panel">
+				<div class="panel-head">
+					<h2>注册须知</h2>
+				</div>
+				<div class="panel-body">
+					<p>基于球星球会主题社区，面向球迷用户开放球迷会（类群组）申请创建通道，凡是在5U体育正式注册的会员用户，达到一定条件资格后即可申请创建自己的球迷会，具体细节如下：</p>
+					<p>1、创建球迷会需消耗一定的积分，因此创建者须先获得足够的5U体育积分。</p>
+					<p>2、创建球迷会除创建者本人申请之外，还需有至少100名5U体育正式注册用户附议（这100人在球会迷成功创建后自动成为首批球迷会成员），因此创建者须拉来至少100名网友到5U体育进行注册。</p>
+					<p>3、申请创建球迷会时先选择球迷会层级（球会&球员）、省份、城市，然后填写球迷会基本资料，上传球迷会LOGO，球迷会管理章程等。</p>
+					<p>4、球迷会创建者在球迷会成功创建之后自动成为第一任会长，其下可设多名副会长、理事、副理事等管理角色，除第一任会长之外其他角色可以在创建成功后的任何时间内设置，会长身份可转移给其他成员。</p>
+				</div>
+			</div>
+
+			<div class="panel">
+				<div class="panel-head">
+					<h2>会务管理</h2>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li><a href="forum.php?mod=viewthread&tid=33146&extra=page%3D1">如何创建球迷会？</a></li>
+						<li><a href="forum.php?mod=viewthread&tid=33142&extra=page%3D1">如何加入球迷会？</a></li>
+						<li><a href="forum.php?mod=viewthread&tid=33158&extra=page%3D1">如何申请为球迷会总会会长？</a></li>
+						<li><a href="forum.php?mod=viewthread&tid=33151&extra=page%3D1">如何进行球迷会管理？</a></li>
+						<li><a href="forum.php?mod=viewthread&tid=33152&extra=page%3D1">球迷会等级说明以及认证流程？</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script language="javascript">
+
+var leagues = new Array();
+var clubs = new Array();
+var stars = new Array();
+<!--{loop $arr_forum_list $key1 $value1}-->
+{if $key1 != ''}
+leagues[$key1] = "$value1['name']";
+clubs[$key1] = new Array();
+stars[$key1] = new Array();
+<!--{loop $value1['list'] $key2 $value2}-->
+	clubs[$key1][$key2] = "$value2['name']";
+	stars[$key1][$key2] = new Array();
+<!--{loop $value2['list'] $key3 $value3}-->
+		stars[$key1][$key2][$key3] = "$value3['name']";
+<!--{/loop}-->
+<!--{/loop}-->
+{/if}
+<!--{/loop}-->
+
+var pIndex = 0;
+var leagueEle = document.getElementById("league_id");
+var clubEle = document.getElementById("club_id");
+var starEle = document.getElementById("star_id");
+
+for(var key in leagues) {
+	var op = new Option(leagues[key], key);
+	leagueEle.options.add(op);
+}
+
+function chg1(obj) {
+	if (obj.value == 0) {
+		clubEle.options.length = 0;
+		starEle.options.length = 0;
+		clubEle.style.visibility = 'hidden';
+		starEle.style.visibility = 'hidden';
+	}
+	else
+	{
+		clubEle.style.display = 'block';
+		clubEle.style.display = 'inline';
+	}
+	
+	var val = obj.value;
+	pIndex = obj.value;
+	var cs = clubs[val];
+	clubEle.options.length = 0;
+	var op = new Option('-球会-', 0);
+	clubEle.options.add(op);
+		
+	var first = 0;
+	for(var key in cs) {
+		var op = new Option(cs[key], key);
+		clubEle.options.add(op);
+		if(first == 0)
+		{
+			first = key;
+		}
+	}
+	
+	if(first == 0)
+	{
+	}
+	else
+	{
+		var as = stars[val][first];
+		starEle.options.length = 0;
+		
+		var op = new Option('-球星-', 0);
+		starEle.options.add(op);
+		
+		for(var key in as) {
+			var op = new Option(as[key], key);
+			starEle.options.add(op);
+		}
+	}
+}
+
+function chg2(obj) {
+	var val = obj.value;
+	if(val == 0)
+	{
+		starEle.style.display = 'none';
+	}
+	else
+	{
+		starEle.style.display = 'block';
+		starEle.style.display = 'inline';
+		var as = stars[pIndex][val];
+		starEle.options.length = 0;
+		
+		var op = new Option('-球星-', 0);
+		starEle.options.add(op);
+		
+		for(var key in as) {
+			var op = new Option(as[key], key);
+			starEle.options.add(op);
+		}
+	}
+}
+
+// 地区联动
+function fansclub_showdistrict(container, elems, totallevel, changelevel, containertype) {
+	var getdid = function(elem) {
+		var op = elem.options[elem.selectedIndex];
+		return op['did'] || op.getAttribute('did') || '0';
+	};
+	var pid = changelevel >= 1 && elems[0] && $(elems[0]) ? getdid($(elems[0])) : 0;
+	var cid = changelevel >= 2 && elems[1] && $(elems[1]) ? getdid($(elems[1])) : 0;
+	var did = changelevel >= 3 && elems[2] && $(elems[2]) ? getdid($(elems[2])) : 0;
+	var coid = changelevel >= 4 && elems[3] && $(elems[3]) ? getdid($(elems[3])) : 0;
+	var url = "plugin.php?id=fansclub"+"&ac=ajax"+"&op=district"+"&container="+container+"&containertype="+containertype
+		+"&province="+elems[0]+"&city="+elems[1]+"&district="+elems[2]+"&community="+elems[3]
+		+"&pid="+pid + "&cid="+cid+"&did="+did+"&coid="+coid+'&level='+totallevel+'&handlekey='+container+'&inajax=1'+(!changelevel ? '&showdefault=1' : '');
+	
+	document.getElementById('province_id').value = pid;
+	document.getElementById('city_id').value = cid;
+	document.getElementById('district_id').value = did;
+	document.getElementById('community_id').value = coid;
+	
+	ajaxget(url, container, '');
+}
+
+// 显示提示信息用
+function show_error(fieldid, extrainfo) {
+	var elem = $('th_'+fieldid);
+	if(elem) {
+		elem.className = "rq";
+		fieldname = elem.innerHTML;
+		extrainfo = (typeof extrainfo == "string") ? extrainfo : "";
+		$('showerror_'+fieldid).innerHTML = "" + extrainfo;
+		$(fieldid).focus();
+	}
+}
+
+function show_success(message, jump_url, type) {
+	message = message == '' ? '更新成功' : message;
+	type = type == '' ? 'right' : type;
+	showDialog(message, type, '提示信息', function(){
+		top.window.location.href = (jump_url == '') ? top.window.location.href : jump_url;
+	}, 0, null, '', '', '', '', 3);
+}
+
+function clearErrorInfo() {
+	var spanObj = $('fansclub_list').getElementsByTagName("div");
+	for(var i in spanObj) {
+		if(!isNaN(i)) 
+		{
+			if(typeof(spanObj[i].id) != "undefined" && spanObj[i].id.length > 0 && spanObj[i].id.indexOf("_") > 0) {
+				var str_tail = spanObj[i].id.substr(spanObj[i].id.indexOf("_") + 1);
+				spanObj[i].innerHTML = '';
+				$('th_'+str_tail).className = '';
+			}
+			
+		}
+	}
+}
+</script>
+</div>

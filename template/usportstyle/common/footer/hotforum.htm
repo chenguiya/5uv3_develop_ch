@@ -1,0 +1,10 @@
+<!--{block return}-->
+<!--{if $data[data]}-->
+<div class="scroll_code" id="leftSideScrollCode">
+    <!--{loop $data[data] $val}-->
+    <a href="group/{$val[id]}" name="{$val[name]}"><img src="{$val[fields][icon]}"></a>
+    <!--{/loop}-->
+    <a href="football" class="hotcode">热门频道<i class="icon"></i></a>
+</div>
+<!--{/if}-->
+<!--{/block}-->

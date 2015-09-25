@@ -1,0 +1,8 @@
+<!--{block sectpl}--><sec> <span id="sec<hash>" onclick="showMenu({if !empty($_G[gp_infloat])}{'ctrlid':this.id,'win':'{$_GET[handlekey]}'}{else}this.id{/if})"><sec></span><div id="sec<hash>_menu" class="p_pop p_opt" style="display:none"><sec></div><!--{/block}-->
+<div class="mtm cl" style="height:30px;">
+	<!--{if $_GET[mod]=='viewthread'}-->
+    <!--{hook/viewthread_fastpost_group}-->
+    <!--{elseif $_GET[mod]=='forumdisplay'}-->
+    <!--{hook/forumdisplay_fastpost_group}-->
+    <!--{/if}-->	 
+<!--{subtemplate common/seccheck}--></div>

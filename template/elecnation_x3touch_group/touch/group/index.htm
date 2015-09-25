@@ -1,0 +1,65 @@
+<!--{template group/elecnation_group_header}-->
+<!--group start-->
+<div class="wp">
+			<div id="elecnation_group">
+            
+                    <div id="group_box1" class="elecnation_group_box" style="margin-left:8px;" onclick="openShutManager(this,'box1',false)">
+                        <div class="elecnation_group_box_img"><img src="{$_G['style']['styleimgdir']}/touch/common/images/group_star.png" alt="{lang my_group}" width="24" height="24" />
+                        </div>
+                        <div class="elecnation_center">{lang recommend_group}</div>
+                    </div>
+                
+                    <div id="group_box2" class="elecnation_group_box" onclick="openShutManager(this,'box2',false)">
+						<div class="elecnation_group_box_img"><img src="uc_server/avatar.php?uid=$_G[uid]&size=small" alt="{lang my_group}" width="24" height="24" />
+                    	</div>
+						<div class="elecnation_center">{lang my_group}</div>
+                    </div>
+
+                    <div id="group_box3" class="elecnation_group_box" onclick="openShutManager(this,'box3',false)">
+						<div class="elecnation_group_box_img"><img src="{$_G['style']['styleimgdir']}/touch/common/images/group_medal.png" width="24" height="24" />
+                    	</div>
+						<div class="elecnation_center">{lang credit_ranking}</div>
+                    </div>
+                
+                    <a href="forum.php?mod=group&action=create&mobile=2">
+                    <div class="elecnation_group_box" style="border:1px solid #CCCCCC;">
+						<div class="elecnation_group_box_img"><img src="{$_G['style']['styleimgdir']}/touch/common/images/group_group.png" width="24" height="24" />
+                    	</div>
+						<div class="elecnation_center">{lang group_create}</div>
+                    </div>
+                    </a>
+                    
+            	<div id="elecnation_clear"></div>
+                
+            <!--{template group/elecnation_group_box}-->
+            
+		</div>
+
+
+			<div id="elecnation_group_index_list">
+            	<div id="elecnation_group_title_line"></div>
+            	<div id="elecnation_group_title" style="width:68px;">{lang group_categories}</div>
+					
+                    <!--{loop $first $groupid $group}-->
+                    <div id="elecnation_group_index_list_cat">
+                        <div id="elecnation_group_index_list_cat_bar">
+                            <div id="elecnation_group_index_list_cat_name">$group[name]</div>
+                            <div id="elecnation_group_index_list_cat_num"><!--{if $group[groupnum]}--><span>$group[groupnum]</span><!--{else}--><span>0</span><!--{/if}--></div>
+                            <div id="elecnation_clear"></div>
+                        </div>
+                        <div id="elecnation_clear"></div>
+                    
+                    	<div>
+						<!--{loop $group['secondlist'] $fid}-->
+                            <div id="elecnation_group_index_list_fid">
+                            	<a href="group.php?sgid=$fid"><div id="elecnation_group_index_list_fid_name">$second[$fid][name]</div></a>
+                            </div>
+						<!--{/loop}-->
+                    	<div id="elecnation_clear"></div>
+                    	</div>
+					</div>
+                    <!--{/loop}-->
+			</div>
+
+</div>
+<!--{template common/footer}-->

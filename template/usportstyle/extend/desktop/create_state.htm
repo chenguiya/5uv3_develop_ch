@@ -1,0 +1,106 @@
+<div class="tpl-create-state">
+	<div class="header">
+		<h1>$apply['fansclub_name']</h1>
+	</div>
+	<div class="main">
+		<div class="col-left">
+			<div class="state">
+				<div class="inner">
+				<iframe id="frame_fansclub" name="frame_fansclub" style="display: none"></iframe>
+				<form id="form_fansclub" name="form_fansclub" action="plugin.php?id=fansclub&ac=apply_support&op=join" method="post" autocomplete="off" target="frame_fansclub">
+					<div class="join">
+					<input type="hidden" id="formhash" name="formhash" value="$formhash">
+					<input type="hidden" id="submitchk" name="submitchk" value="true">
+					<input type="hidden" id="apply_id" name="apply_id" value="{$apply_id}">
+					<div><input type="submit" id="apply_support_submit" class="btn-join" name="apply_support_submit" value="立即加入"></div>
+						<div class="state-text">$apply['have_support']人已加入，还差<span class="high">$apply['differ']人</span>即可开通</div>
+					</div>
+					<div class="invite">
+						<div class="subhead">专属球迷邀请链接</div>
+						<div><a title="$apply['url']" href="$apply['url']" target="_blank" class="high"><span id="url_short">$apply['url_short']</span></a>
+						<a href="javascript:return void(0);" onClick="copycode($('url_short'));" class="btn-copy">复制链接</a></div>
+					</div>
+				</form>
+				</div>
+			</div>
+
+			<div class="profile">
+				<h2 class="subhead">基本资料</h2>
+				<div>
+					<dl>
+						<dt>球迷会类别：</dt>
+						<dd>$fansclub_relation</dd>
+						<dt>球迷会名称：</dt>
+						<dd>$apply['fansclub_name']</dd>
+						<dt>球迷会范围：</dt>
+						<dd>$fansclub_range</dd>
+						<dt>球迷会简介：</dt>
+						<dd class='d_area'>$apply['fansclub_brief']</dd>
+						<dt>球迷会LOGO：</dt>
+						<dd class='d_area'>$fansclub_logo</dd>
+						<dt>管理章程：</dt>
+						<dd class='d_area'><a href="javascript:return void(0);" onClick="$('span_rules').style.display = 'block'; this.style.display='none';" class="btn-default">查看章程</a>
+						<span id="span_rules" style="display:none;">{$apply['fansclub_rules']}</dd>
+						<dt>联系方式：</dt>
+						<dd class='d_area'>
+						<p>$apply['mobile']</p><p>$apply['qq']</p><p>$apply['email']</p>
+						</dd>
+					</dl>
+				</div>
+			</div>
+
+			<div class="joined">
+				<h2 class="subhead">已加入会员</h2>
+				<div>
+					<ul>
+						<!--{loop $support $key $value}-->
+						<li>
+							<div><img class="avatar" src="$value['avatar_url']"></div>
+							<div>$value['username']</div>
+							<div><a href="home.php?mod=spacecp&ac=friend&op=add&uid={$value['uid']}&handlekey=addfriendhk_{$value['uid']}" id="a_friend_li_{$value['uid']}" onClick="showWindow(this.id, this.href, 'get', 0);" class="btn-follow">加好友</a></div>
+						</li>
+						<!--{/loop}-->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-right sidebar">
+			<div class="panel">
+				<div class="panel-head">
+					<h2>注册须知</h2>
+				</div>
+				<div class="panel-body">
+					<p>基于球星球会主题社区，面向球迷用户开放球迷会（类群组）申请创建通道，凡是在5U体育正式注册的会员用户，达到一定条件资格后即可申请创建自己的球迷会，具体细节如下：</p>
+					<p>1、创建球迷会需消耗一定的积分，因此创建者须先获得足够的5U体育积分。</p>
+					<p>2、创建球迷会除创建者本人申请之外，还需有至少100名5U体育正式注册用户附议（这100人在球会迷成功创建后自动成为首批球迷会成员），因此创建者须拉来至少100名网友到5U体育进行注册。</p>
+					<p>3、申请创建球迷会时先选择球迷会层级（球会&球员）、省份、城市，然后填写球迷会基本资料，上传球迷会LOGO，球迷会管理章程等。</p>
+					<p>4、球迷会创建者在球迷会成功创建之后自动成为第一任会长，其下可设多名副会长、理事、副理事等管理角色，除第一任会长之外其他角色可以在创建成功后的任何时间内设置，会长身份可转移给其他成员。</p>
+				</div>
+			</div>
+
+			<div class="panel">
+				<div class="panel-head">
+					<h2>会务管理</h2>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li><a href="forum.php?mod=viewthread&tid=33146&extra=page%3D1">如何创建球迷会？</a></li>
+						<li><a href="forum.php?mod=viewthread&tid=33142&extra=page%3D1">如何加入球迷会？</a></li>
+						<li><a href="forum.php?mod=viewthread&tid=33158&extra=page%3D1">如何申请为球迷会总会会长？</a></li>
+						<li><a href="forum.php?mod=viewthread&tid=33151&extra=page%3D1">如何进行球迷会管理？</a></li>
+						<li><a href="forum.php?mod=viewthread&tid=33152&extra=page%3D1">球迷会等级说明以及认证流程？</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script language="javascript">
+function show_success(message, jump_url, type) {
+	message = message == '' ? '更新成功' : message;
+	type = type == '' ? 'right' : type;
+	showDialog(message, type, '提示信息', function(){
+		top.window.location.href = (jump_url == '') ? top.window.location.href : jump_url;
+	}, 0, null, '', '', '', '', 3);
+}
+</script>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+<!--{block return}-->
+<div class="modul_con">
+     <div class="in_hdbox">
+          <span class="hdspan">活跃粉丝</span>
+          <!--<a href="plugin.php?id=extends&action=userchange&hash={FORMHASH}" onclick="changeBody(this);" class="mores">换一换</a>-->
+     </div>
+     <div class="active_Con">
+		<ul class="cl" id="avtiveFans">
+			<!--{loop $data['data'] $val}-->
+			<li class="cl">
+				<span class="actico act{$val[displayorder]}"></span>
+				<a href="{$val[url]}" class="act_img" target="_blank"><img src="{$val[fields][avatar_middle]}"><!--{if is_verify($val[id])}--><span class="icon_small"></span><!--{/if}--></a>
+				<div class="act_middle">
+					<p class="actname"><a href="{$val[url]}" target="_blank">{$val[title]}</a>&nbsp;&nbsp;&nbsp;<em>积分：</em>{$val[fields][credits]}</p>
+					<p class="acttit">{$val[fields][bio]}</p>
+				</div>				
+				<span class="y">
+				      <!--{if follow_check({$val[id]})}-->
+				      <a href="javascript:;" onclick="showDialog('确定取消关注吗？','confirm','',function(){location.href='home.php?mod=spacecp&ac=follow&op=del&fuid={$val[id]}'});" class="atten atten_over"></a>
+				      <!--{else}-->
+				      <a  id="a_followmod_{$val[id]}" href="home.php?mod=spacecp&ac=follow&op=add&fuid={$val[id]}" class="atten atten_on"></a>
+				      <!--{/if}-->
+				</span>
+			</li>
+			<!--{/loop}-->            
+		</ul>
+     </div>
+</div>
+
+<!--{/block}-->

@@ -1,0 +1,42 @@
+<!--{template common/sub_common_header}-->
+<!--{template extend/desktop/channel_common_header}-->
+<div class="boxMain" style="margin-top: -20px;">
+    <!--<div class="channel-picture-top-header">
+        <div class="totals"><span class="number">{$_G['forum_threadnum']}</span>视频</div>
+        <ul>
+
+            <li><a href="forum.php?mod=forumdisplay&fid={$_G['forum']['fid']}&tpl=channel_video&filter=typeid&typeid={$_GET['typeid']}&orderby=lastpost">最新</a></li>
+            <li><a href="forum.php?mod=forumdisplay&fid={$_G['forum']['fid']}&tpl=channel_video&filter=typeid&typeid={$_GET['typeid']}&orderby=heats">热门</a></li>
+            <li><a href="forum.php?mod=forumdisplay&fid={$_G['forum']['fid']}&tpl=channel_video&filter=typeid&typeid={$_GET['typeid']}&digest=1">精华</a></li>
+        </ul>
+    </div>-->
+    <div class="clubMain index-picture">
+    <!--{loop $arr_video_list $v}-->
+        <div class="clubList" style="background-color: #fff;gi">
+            <!--{if $v['digest']}--><span class="tag"></span><!--{/if}-->
+            <a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}" class="clubImg">
+                {if $v['thumb'] != ''}
+				<img src="$v['thumb']" title="{$v['subject']}" alt="{$v['subject']}" width="235"/>
+				{elseif $v['video'] != ''}
+				{$v['video']}
+				{else}
+				<img src="$_G['style'][tpldir]/common/images/video_default.png" width="235">
+				{/if}
+            </a>
+            <a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank" title="{$v['subject']}" class="clubDes">{$v['subject']}</a>
+            
+            <div class="clubInfo">
+                <a href="home.php?mod=follow&uid={$v['authorid']}&do=view&from=space" target="_blank" title="" class="clubPhoto">
+				<img src="$v['avatar']" width="40" height="40"/>
+				</a>
+				<div class="clubName">
+				<a href="home.php?mod=follow&uid={$v['authorid']}&do=view&from=space" target="_blank">{$v['author']}</a>
+				<p>{$v['dateline']}</p></div>
+				<div class="clubTxt"><span class="viewIco">{$v['views']}</span><span class="plIco">{$v['replies']}</span></div>
+            </div>
+        </div>
+        <!--{/loop}-->
+    </div>
+    <div class="page">$multipage</div>
+</div>
+<!--{template common/footer}-->

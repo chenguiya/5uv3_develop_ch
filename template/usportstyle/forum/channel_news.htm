@@ -1,0 +1,112 @@
+<!--{template common/sub_common_header}-->
+<!--{template extend/desktop/channel_common_header}-->
+<div class="channel-news cl">
+	<div class="col-left">
+		<div class="newslist">
+			<ul id="newslistflag">
+				<!--{if $_G['forum_threadlist']}-->
+				<!--{loop $_G['forum_threadlist'] $v}-->
+					<li>
+						<!--{eval $sql='select * from '.DB::table('forum_post').' where tid='.$v['tid'];}-->
+						<!--{eval $tinfo=DB::fetch_first($sql);}-->
+						<!--{eval $intro =  preg_replace('/\[img(.*?)\](.*?)\[\/img\]/i','',$tinfo['message']); }-->
+					<!--{eval $intro =  preg_replace('/\[media(.*?)\](.*?)\[\/media\]/i','',$intro); }-->
+					<!--{eval $intro =  preg_replace('/\[flash(.*?)\](.*?)\[\/flash\]/i','',$intro); }-->
+					<!--{eval $intro =  preg_replace('/\[(.*?)\]/i','',$intro); }-->
+					<!--{eval $intro = mb_substr($intro,0,80,'utf-8');}-->
+						<!--{eval preg_match_all("/\[attach\](\d+)\[\/attach\]/i", $tinfo['message'], $matchaids);}-->
+						<!--{if count($matchaids[1])<1 || count($matchaids[1])>=4}-->
+						<h3 class="subject"><a href="forum.php?mod=viewthread&tid={$v['tid']}">{$v['subject']}</a></h3>
+						<!--{/if}-->
+						<table width="100%">
+							<tr>
+								<td>
+									<!--{if count($matchaids[1])>=3}-->
+									<div class="thumbs">
+										<!--{loop $matchaids[1] $key $aid}-->
+										<!--{if $key>=3}-->
+										<!--{eval break;}-->
+										<!--{/if}-->
+										<a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank">
+											<img src="<!--{eval echo getforumimg($aid);}-->">
+										</a>
+										<!--{/loop}-->
+									</div>
+									<!--{/if}-->
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<!--{if  count($matchaids[1])>=1 && count($matchaids[1])<3}-->
+									<div class="thumb">
+										<img src="<!--{eval echo getforumimg($matchaids[1][0]);}-->">
+									</div>
+									<!--{/if}-->
+								</td>
+								<td>
+									<!--{if  count($matchaids[1])>=1 && count($matchaids[1])<3}-->
+									<h3 class="subject"><a href="forum.php?mod=viewthread&tid={$v['tid']}" target="_blank">{$v['subject']}</a></h3>
+									<!--{/if}-->
+									<!--{if count($matchaids[1])<3}-->
+									<div class="intro">$intro</div>
+									<!--{/if}-->
+									<div class="meta">
+										<span class='date'><!--{eval echo date('Y-m-d H:i:s',$v['dbdateline']);}--></span>
+										<!--{if $groupnames[$v[tid]]}-->
+										<span class='source'>来自：<a href="group/{$groupnames[$v[tid]][fid]}/" target="_blank" >{$groupnames[$v[tid]][name]}</a></span>
+										<!--{/if}-->
+										<div class="active y"><span class='rt'>{$v['sharetimes']}</span> <span class='up'>{$v['recommend_add']}</span> <span class='comment'>{$v['replies']}</span></div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</li>
+				<!--{/loop}-->
+				<!--{else}-->
+					暂无帖子
+				<!--{/if}-->
+			</ul>
+			
+			<!--{if $_G['forum_threadlist']}-->
+			<div class="loadmore">
+			{if $maxpage >= $page}
+			<a onclick="getmoreload('{$multipage_more}', '#newslistflag', '#newslistflag');" page="2" class="btn-default" href="javascript:void(0);"><<加载更多</a>
+			{else}
+			{/if}
+			</div>
+			<!--{/if}-->
+		</div>
+	</div>
+	<div class="col-right">
+		
+		<!--{hook/forumdisplay_sort_fansclub}-->
+
+		<!--公共模块：会务管理-->
+		<!--{template extend/desktop/sidebar_rule}-->
+		
+
+		<!--公共模块：视频图片-->
+		<!--{hook/forumdisplay_sort_media}-->
+	</div>
+</div> 
+<script>
+function getmoreload(url,sourceSelector,targetSelector){
+	var url,sourceSelector,targetSelector,num;
+	var page=parseInt(jq('.btn-default').attr('page'));
+	url=url+'&page='+page;
+	jq.get(url, function (html) {
+	jq(targetSelector).append(jq(html).find(targetSelector));
+	num = page + 1;
+	if(num > {$maxpage})
+	{
+		jq('.loadmore').hide();
+	}
+	else
+	{
+		jq('.btn-default').attr('page',num);
+	}
+	});
+
+}
+</script>
+<!--{template common/footer}-->

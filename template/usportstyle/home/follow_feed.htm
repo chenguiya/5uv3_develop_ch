@@ -1,0 +1,224 @@
+<!--{if $do == 'feed'}-->
+	<!--{template common/header}-->
+	<div id="pt" class="bm cl">
+		<div class="z">
+			<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
+			<a href="home.php?mod=follow">{lang follow}</a>
+		</div>
+	</div>
+	<style id="diy_style" type="text/css"></style>
+	<div class="wp">
+		<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
+	</div>
+	<div id="ct" class="ct2_a wp cl">
+		<!--{if $_G[setting][homestyle]}-->
+			<div class="appl">
+				<!--{subtemplate common/userabout}-->
+			</div>
+		<!--{else}-->
+		<div class="appl">
+			<div class="tbn">
+				<h2 class="mt bbda">{lang follow}</h2>
+				<ul>
+					<li$actives[follow]><a href="home.php?mod=follow&view=follow">{lang follow_following}</a></li>
+					<li$actives[special]><a href="home.php?mod=follow&view=special">{lang follow_special_following}</a></li>
+					<li$actives[other]><a href="home.php?mod=follow&view=other">{lang follow_hall}</a></li>
+					<!--{hook/follow_nav_extra}-->
+				</ul>
+			</div>
+		</div>
+		<!--{/if}-->
+		<div class="mn">
+		<!--[diy=diycontenttop]--><div id="diycontenttop" class="area"></div><!--[/diy]-->
+<!--{else}-->
+	<!--{if $_G[setting][homepagestyle]}-->
+		<!--{subtemplate home/space_header}-->
+		<div id="ct" class="ct2 wp cl">
+			<div class="mn">
+				<div class="bm">
+					<div class="bm_h">
+						<h1 class="mt">{lang follow}</h1>
+					</div>
+				<div class="bm_c">
+	<!--{else}-->
+		<!--{template common/header}-->
+		<div id="pt" class="bm cl">
+			<div class="z">
+				<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
+				<a href="home.php?mod=space&uid=$space[uid]">{$space[username]}</a> <em>&rsaquo;</em>
+				<a href="home.php?mod=follow&uid=$space[uid]&do=view&from=space">{lang follow}</a>
+			</div>
+		</div>
+		<style id="diy_style" type="text/css"></style>
+		<!--{template home/space_menu}-->				
+	<!--{/if}-->
+<!--{/if}-->
+<!--{if in_array($do, array('following', 'follower'))}-->
+	<!--{if $list}-->
+		<!--{if $do=='following'}-->
+		<div class="container-fans cl">
+			<!--{loop $list $fuid $fuser}-->
+			<div class="fanscard im">
+		        <div class="left"><a href="home.php?mod=space&uid=$fuser['followuid']" shref="home.php?mod=space&uid=$fuser['followuid']" title="alt="$fuser['fusername']"">{avatar($fuser[followuid],small)}</a></div>
+		        <div class="right">
+		            <p class="name">{$fuser['fusername']}
+		            <!--{if $viewself}-->
+						<a id="a_followmod_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);" class="attention">{lang follow_del}</a>
+					<!--{elseif $fuser[followuid] != $_G[uid]}-->
+						<!--{if $fuser['mutual']}-->
+							<!--{if $fuser['mutual'] > 0}--><span class="z flw_status_2">{lang follow_follower_mutual}</span><!--{else}--><span class="z flw_status_1">{lang did_not_follow_to_me}</span><!--{/if}--><a id="a_followmod_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['followuid']"  onclick="ajaxget(this.href);doane(event);" class="attention">{lang follow_del}</a>
+						<!--{elseif helper_access::check_module('follow')}-->
+							<a id="a_followmod_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);" class="attention add">{lang follow_add}</a>
+						<!--{/if}-->
+					<!--{/if}-->
+					</p>
+		            <span>关注：{$memberinfo[$fuid]['follower']}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span> 粉丝：{$memberinfo[$fuid]['following']}</span>
+		            <p class="info">简介：<!--{if $memberprofile[$fuid]['bio']}-->{$memberprofile[$fuid]['bio']}<!--{else}-->这家伙很懒，什么都没留下！<!--{/if}--></p>		            
+		        </div>
+		    </div>	
+			<!--{/loop}-->
+		</div>
+		<!--{elseif $do=='follower'}-->
+			<div class="container-fans cl">
+				<!--{loop $list $fuid $fuser}-->
+				<div class="fanscard im">
+			        <div class="left"><a href="home.php?mod=space&uid=$fuser['uid']" shref="home.php?mod=space&uid=$fuser['uid']"><img src='<!--{avatar($fuser[uid],small)}-->' alt="$fuser[username]"/></a></div>
+			        <div class="right">
+			            <p class="name">{$fuser[username]}
+			            <!--{if $viewself}-->
+							<a id="a_followmod_{$fuser[uid]}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser[uid]" onclick="ajaxget(this.href);doane(event);" class="attention">{lang follow_del}</a>
+						<!--{elseif $fuser[followuid] != $_G[uid]}-->
+							<!--{if $fuser['mutual']}-->
+								<!--{if $fuser['mutual'] > 0}--><span class="z flw_status_2">{lang follow_follower_mutual}</span><!--{else}--><span class="z flw_status_1">{lang did_not_follow_to_me}</span><!--{/if}--><a id="a_followmod_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['uid']"  onclick="ajaxget(this.href);doane(event);" class="attention">{lang follow_del}</a>
+							<!--{elseif helper_access::check_module('follow')}-->
+								<a id="a_followmod_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$fuser['uid']" onclick="ajaxget(this.href);doane(event);" class="attention add">{lang follow_add}</a>
+							<!--{/if}-->
+						<!--{/if}-->
+						</p>
+			            
+			            <span>关注：{$memberinfo[$fuid][following]}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span> 粉丝：{$memberinfo[$fuid][follower]}</span>
+			            <p class="info">简介：<!--{if $memberprofile[$fuid]['bio']}-->{$memberprofile[$fuid]['bio']}<!--{else}-->这家伙很懒，什么都没留下！<!--{/if}--></p>
+			            
+			        </div>
+			    </div>	
+				<!--{/loop}-->
+			</div>
+		<!--{/if}-->
+		<!--{if !empty($multi)}--><div>$multi</div><!--{/if}-->
+		<br/>
+	<!--{else}-->
+		<div id="nofollowmsg">
+			<div class="flw_thread">
+				<ul>
+					<li class="flw_article">
+						<div class="emp">
+							<h2 class="xg1 xs2 hm">
+								<!--{if $viewself}-->
+									<!--{if $do=='following'}-->
+										{lang follow_you_following_none}<a href="home.php?mod=follow&view=other" class="xi2">{lang follow_hall}</a>{lang follow_fetch_interested_user}
+									<!--{else}-->
+										{lang follow_you_follower_none1}<a href="home.php?mod=follow" class="xi2">{lang follow_add_feed}</a>{lang follow_you_follower_none2}
+									<!--{/if}-->
+								<!--{else}-->
+									<!--{if $do=='following'}-->
+										{lang follow_user_following_none}
+									<!--{else}-->
+										{lang follow_user_follower_none}
+									<!--{/if}-->
+
+								<!--{/if}-->
+							</h2>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	<!--{/if}-->
+<!--{/if}-->
+
+<script type="text/javascript" reload="1">
+	function succeedhandle_followmod(url, msg, values) {
+		var numObj = $('followernum_'+values['fuid']);
+		if(numObj) {followernum = parseInt(numObj.innerHTML);}
+		if(values['type'] == 'add') {
+			if(values['from'] == 'head') {
+				if($('followflag')) $('followflag').style.display = '';
+				if($('unfollowflag')) $('unfollowflag').style.display = 'none';
+				if($('fbkname_'+values['fuid'])) $('fbkname_'+values['fuid']).style.display = '';
+			} else if($('a_followmod_'+values['fuid'])) {
+
+				$('a_followmod_'+values['fuid']).innerHTML = '{lang follow_del}';
+				if(values['from'] != 'block') {
+					$('a_followmod_'+values['fuid']).className = 'attention';
+				}
+				$('a_followmod_'+values['fuid']).href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid']+(values['from'] == 'block' ? '&from=block' : '');
+
+			}
+			if(numObj) {
+				numObj.innerHTML = followernum + 1;
+			}
+
+		} else if(values['type'] == 'del') {
+			if(values['from'] == 'head') {
+				if($('followflag')) $('followflag').style.display = 'none';
+				if($('unfollowflag')) $('unfollowflag').style.display = '';
+				if($('followbkame_'+values['fuid'])) $('followbkame_'+values['fuid']).innerHTML = '';
+				if($('fbkname_'+values['fuid'])) {
+					$('fbkname_'+values['fuid']).innerHTML = '[{lang follow_add_bkname}]';
+					$('fbkname_'+values['fuid']).style.display = 'none';
+				}
+			} else if($('a_followmod_'+values['fuid']))  {
+				$('a_followmod_'+values['fuid']).innerHTML = '{lang follow_add}';
+				if(values['from'] != 'block') {
+					$('a_followmod_'+values['fuid']).className = 'attention add';
+				}
+				$('a_followmod_'+values['fuid']).href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid='+values['fuid']+(values['from'] == 'block' ? '&from=block' : '');
+			}
+			if(numObj) {
+				numObj.innerHTML = followernum - 1;
+			}
+		} else if(values['type'] == 'special') {
+			if(values['from'] == 'head') {
+				var specialObj = $('specialflag_'+values['fuid']);
+				if(values['special'] == 1) {
+					specialObj.className = 'flw_specialfo';
+					specialObj.innerHTML = '{lang follow_add_special_following}';
+				} else {
+					specialObj.className = 'flw_specialunfo';
+					specialObj.innerHTML = '{lang follow_del_special_following}';
+				}
+				specialObj.title = specialObj.innerHTML;
+				specialObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid']+'&from=head';
+			} else {
+				$('a_specialfollow_'+values['fuid']).innerHTML = values['special'] == 1 ? '{lang follow_add_special_following}' : '{lang follow_del_special_following}';
+				$('a_specialfollow_'+values['fuid']).href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid'];
+			}
+		}
+	}
+	function changefeed(tid, pid, flag, obj) {
+		var x = new Ajax();
+		var o = obj.parentNode;
+		for(var i = 0; i < 4; i++) {
+			if(o.id.indexOf('original_content_') == -1) {
+				o = o.parentNode;
+			} else {
+				break;
+			}
+		}
+		x.get('forum.php?mod=ajax&action=getpostfeed&inajax=1&tid='+tid+'&pid='+pid+'&type=changefeed&flag='+flag, function(s){
+			o.innerHTML = s;
+		});
+	}
+	function vieworiginal(clickobj, id) {
+		var obj = $(id);
+		if(obj.style.display == 'none') {
+			obj.style.display =  '';
+			clickobj.innerHTML = '- {lang pack_up}';
+		} else {
+			obj.style.display =  'none';
+			clickobj.innerHTML = '+ {lang follow_open_feed}';
+		}
+	}
+</script>
+
+<!--{template common/footer}-->

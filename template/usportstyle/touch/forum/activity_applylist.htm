@@ -1,0 +1,95 @@
+<!--{template common/header}-->
+<header class="chheader">
+        <a href="javascript:history.back();" class="head_back">&nbsp;</a>
+        <span id="return_$_GET['handlekey']"><!--{if $isactivitymaster}-->{lang activity_applylist_manage}<!--{else}-->{lang activity_applylist}<!--{/if}--></span>
+</header>
+<section class="ch_mians">
+<form id="applylistform" method="post" autocomplete="off" action="forum.php?mod=misc&action=activityapplylist&tid=$_G[tid]&applylistsubmit=yes&infloat=yes{if !empty($_GET['from'])}&from=$_GET['from']{/if}"{if !empty($_GET['infloat']) && empty($_GET['from'])} onsubmit="ajaxpost('applylistform', 'return_$_GET['handlekey']', 'return_$_GET['handlekey']', 'onerror');return false;"{/if}>
+	<div class="ch_manabox">
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="operation" id="operation" value="" />
+		<!--{if !empty($_GET['infloat'])}--><input type="hidden" name="handlekey" value="$_GET['handlekey']" /><!--{/if}-->
+		<div class="c floatwrap">
+
+			<table class="float_table folat_label" cellspacing="0" cellpadding="0" width="100%">
+				<thead>
+					<tr>
+						<!--{if $isactivitymaster}--><th width="9%">&nbsp;</th><!--{/if}-->
+						<th class="labe_one">{lang activity_join_members}</th>
+						<th class="labe_two">真实姓名</th>
+						<th class="labe_three">手机号码</th>
+					</tr>
+				</thead>
+			</table>
+			<div class="folat_label" id="folat_labelModel">
+				<!--{loop $applylist $apply}-->
+					<label>
+						<!--{if $isactivitymaster}-->
+
+							<!--{if $apply[uid] != $_G[uid]}-->
+								<input type="checkbox" name="applyidarray[]" class="pc pcyver" value="$apply[applyid]" />
+							<!--{else}-->
+								<input type="checkbox" class="pc" disabled="disabled" />
+							<!--{/if}-->
+							
+						<!--{/if}-->
+						<span class="labe_one">$apply[username]</span>
+						<span class="labe_two">
+							<!--{if $apply['ufielddatanew']['userfield']['realname']}--> 
+						    $apply['ufielddatanew']['userfield']['realname'] 
+						    <!--{else}-->
+						    --
+						    <!--{/if}-->
+						    </span>
+						    <span class="labe_three">
+						    <!--{if $apply['ufielddatanew']['userfield']['mobile']}--> 
+						    $apply['ufielddatanew']['userfield']['mobile'] 
+						    <!--{else}-->
+						    --
+						    <!--{/if}-->
+						</span>
+					</label>
+				<!--{/loop}-->
+			</div>
+			<div class="folat_more"><a href="javascript:void(0);" class="act_more" id="{if $_GET[pid]}applylist_manage{else}applylist_more{/if}" data-pid="$_GET[pid]" data-id="$_G[tid]" page="2" totalpage="$maxpage">加载更多</a></div>
+		</div>
+
+	</div>
+
+	<!--{if $isactivitymaster}-->
+		<div class="ch_pnscom">
+			<label{if !empty($_GET['infloat'])} class="z"{/if}><input class="pc" type="checkbox" name="chkall" onclick="checkall(this.form, 'applyid')" />{lang checkall} </label>
+			<div class="ch_input">
+			     <button class="formdialog pnsc pn_btns" type="submit" value="true" id='applylistsubmit' name="applylistsubmit"><span>{lang confirm}</span></button>
+			     <button class="formdialog pnsc" type="submit" value="true" id='applylistsubmit_delete' name="applylistsubmit"><span>{lang activity_refuse}</span></button>
+			</div>
+		</div>
+	<!--{/if}-->
+</form>
+</section>
+
+<!--{if !empty($_GET['infloat'])}-->
+<script type="text/javascript" reload="1">
+function succeedhandle_$_GET['handlekey'](locationhref) {
+	ajaxget('forum.php?mod=viewthread&tid=$_G[tid]&viewpid=$_GET[pid]', 'post_$_GET[pid]');
+	hideWindow('$_GET['handlekey']');
+}
+</script>
+<!--{/if}-->
+<script>
+function checkall(form, prefix, checkall) {
+	var checkall = checkall ? checkall : 'chkall';
+	count = 0;
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.name && e.name != checkall && !e.disabled && (!prefix || (prefix && e.name.match(prefix)))) {
+			e.checked = form.elements[checkall].checked;
+			if(e.checked) {
+				count++;
+			}
+		}
+	}
+	return count;
+}
+</script>
+<!--{template common/footer}-->

@@ -1,0 +1,37 @@
+<div class="tab-body">
+	<!--{if $alluserlist}-->
+	<ul class="author-thumbs clearfix">
+		<!--{loop $alluserlist $user}-->
+		<li>
+			<div class="author-thumb">
+				<a class="author-thumb-img" href="home.php?mod=space&uid=$user[uid]&do=thread&from=space"
+				   data-url="home.php?mod=space&uid=$user[uid]&do=thread&from=space">
+					<img src="$user[avatar]" alt="$user[username]"/>
+				</a>
+				<a href="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]&muid=$user[uid]&mobile=2" class="iconfont icon-del dialog"></a>
+			</div>
+			<div class="name"><a href="home.php?mod=space&uid=$user[uid]&do=thread&from=space">$user[username]</a></div>
+		</li>
+		<!--{/loop}-->
+	</ul>
+	<!--{/if}-->	
+</div>
+<!--{if $nextpage > 1}-->
+<div style="padding: 0 8px">
+	<a id="load-more-group-memberlist" href="$multipage_more" class="ybtn loadmore">加载更多</a>
+</div>
+<!--{/if}-->
+<script id="load-more-group-memberlist-templ" type="text/x-dot-template">
+	{{ for (var key in it) { }}
+	<li>
+		<div class="author-thumb">
+			<a class="author-thumb-img" href="home.php?mod=space&uid=$user[uid]&do=thread&from=space"
+			   data-url="home.php?mod=space&uid=$user[uid]&do=thread&from=space">
+				<img src="{{=it[key].avatar}}" alt="{{=it[key].username}}"/>
+			</a>
+			<a href="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]&muid=$user[uid]&mobile=2" class="iconfont icon-del dialog"></a>
+		</div>
+		<div class="name">{{=it[key].username}}</div>
+	</li>
+	{{ } }}
+</script>

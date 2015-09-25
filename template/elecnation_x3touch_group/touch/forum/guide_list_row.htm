@@ -1,0 +1,81 @@
+				<!--{if $list['threadcount']}-->
+					<div class="threadlist">
+						<!--{loop $list['threadlist'] $key $thread}-->
+                                <a href="forum.php?mod=viewthread&tid=$thread[tid]&fromguid=hot&{if $_GET['archiveid']}archiveid={$_GET['archiveid']}&{/if}extra=$extra">
+                                <div id="threadlist_li">
+										<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
+												<!--{eval $thread[tid]=$thread[closed];}-->
+										<!--{/if}-->
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                          <tr>
+                                            <td width="18" valign="top">
+                                            <!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+                                                <span><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_top.gif" width="13" height="12"></span>
+                                            <!--{elseif $thread['attachment'] == 2 && $_G['setting']['mobile']['mobilesimpletype'] == 0}-->
+                                                <span><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_img.gif" width="13" height="12"></span>
+                                            <!--{elseif $thread['digest'] > 0}-->
+                                                <span><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_dig.gif" width="13" height="12"></span>
+                                            <!--{else}-->
+                                                <span><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_tid.gif" width="13" height="12"></span>
+                                            <!--{/if}-->
+                                          </td>
+                                            <td valign="top">$thread[typehtml] $thread[sorthtml] $thread[subject]</td>
+                                          </tr>
+                                        </table>
+										
+                                        <div style="margin-left:18px; font-size:11px; color:#AAAAAA; line-height:16px;">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                          <!--{if $thread['replies'] > 0}-->
+                                          <tr>
+                                            <td width="80%">
+                                                {lang author} : 
+                                                <!--{if $thread['author'] && !$thread['anonymous']}-->
+                                                $thread[author]
+                                                <!--{else}-->
+                                                {lang anonymous}
+                                                <!--{/if}-->
+                                                 @ $thread[dateline]
+                                                <br />
+                                                {lang join_thread} : 
+                                                <!--{if $thread['lastposter'] && !$thread['anonymous']}-->
+                                                $thread[lastposter] @ $thread[lastpost]
+                                                <!--{else}-->
+                                                    {lang anonymous} @ $thread[lastpost]
+                                                <!--{/if}-->
+                                                
+                                            </td>
+                                            <td align="right">
+                                                <!--{if $thread['isgroup'] != 1}-->$thread[replies]<!--{else}-->{$groupnames[$thread[tid]][replies]}<!--{/if}-->
+                                                {lang join_thread}<br />
+                                                <!--{if $thread['isgroup'] != 1}-->$thread[views]<!--{else}-->{$groupnames[$thread[tid]][views]}<!--{/if}-->
+                                                {lang focus_show}
+                                            </td>
+                                          </tr>
+                                          <!--{else}-->
+                                          <tr>
+                                            <td width="80%">
+                                                {lang author} :
+                                                <!--{if $thread['author'] && !$thread['anonymous']}-->
+                                                $thread[author]
+                                                <!--{else}-->
+                                                {lang anonymous}
+                                                <!--{/if}-->
+                                                 @ $thread[dateline]
+                                            </td>
+                                            <td align="right">
+                                                <!--{if $thread['isgroup'] != 1}-->$thread[replies]<!--{else}-->{$groupnames[$thread[tid]][replies]}<!--{/if}-->
+                                                {lang join_thread}<br />
+                                                <!--{if $thread['isgroup'] != 1}-->$thread[views]<!--{else}-->{$groupnames[$thread[tid]][views]}<!--{/if}-->
+                                                {lang focus_show}
+                                            </td>
+                                          </tr>
+                                            <!--{/if}-->
+                                        </table>
+                                        </div>
+                                </div>
+								</a>
+						<!--{/loop}-->
+					</div>
+				<!--{else}-->
+					<div id="elecnation_noinfo">{lang guide_nothreads}</div>
+				<!--{/if}-->

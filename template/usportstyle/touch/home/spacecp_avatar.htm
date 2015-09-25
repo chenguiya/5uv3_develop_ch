@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-control"
+          content="{if $_G['setting']['mobile'][mobilecachetime] > 0}{$_G['setting']['mobile'][mobilecachetime]}{else}no-cache{/if}"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="keywords" content="{if !empty($metakeywords)}{echo dhtmlspecialchars($metakeywords)}{/if}"/>
+    <meta name="description"
+          content="{if !empty($metadescription)}{echo dhtmlspecialchars($metadescription)} {/if},$_G['setting']['bbname']"/>
+    <title><!--{if !empty($navtitle)}-->$navtitle - <!--{/if}--><!--{if empty($nobbname)}--> $_G['setting']['bbname'] -
+        <!--{/if}--> {lang waptitle} - Powered by Discuz!</title>
+    <link href="http://www.5usport.com/favicon.ico" rel="shortcut icon"/>
+    <link rel="apple-touch-icon-precomposed" href="http://www.5usport.com/mbbicon.png"/>
+    <link rel="stylesheet" href="template/usportstyle/touch/common/touch_style.css" type="text/css" media="all">
+    <script src="{STATICURL}js/mobile/jquery-1.8.3.min.js?{VERHASH}"></script>    
+</head>
+<body>
+<header class="chphoto">
+        <a href="javascript:history.back();" class="head_back">&nbsp;</a>
+        <span>上传头像</span>
+</header>
+<div class="resource_lazy hide"></div>
+<div class="pic_edit">
+    <div id="clipArea" style="display:none;">
+        <div class="photo-clip-view">
+             <div class="photo-clip-moveLayer">
+                  <div class="photo-clip-rotateLayer"></div>
+             </div>
+        </div>
+        <div class="photo-clip-mask"></div>
+        <div class="photo-clip-mask-right"></div>
+        <div class="photo-clip-mask-top"></div>
+        <div class="photo-clip-mask-bottom"></div>
+        <div class="photo-clip-area"></div>
+    </div>
+    
+    <div id="plan1"><center><img src="{avatar($_G[uid], big, true)}"></center></div>
+    
+    <center><button id="upload2">选择图片</button>
+    <button id="clipBtn" style="display:none;">上传图片</button></center>
+    <input type="file" id="file" style="opacity: 0;position: fixed;bottom: -100px" accept="image/*">
+
+</div>
+<img src="" filename="" id="hit" style="display: none; z-index: 9; background-color: rgb(102, 102, 102); background-size: contain; background-position: 50% 50%; background-repeat: no-repeat;">
+
+<div id="cover"></div>
+<script src="{STATICURL}js/mobile/hammer.js?{VERHASH}"></script>
+<script>
+var hammer = '';
+var currentIndex = 0;
+var body_width = $('body').width();
+var body_height = $('body').height();
+
+$("#clipArea").photoClip({
+    width: body_width * 0.8125,
+    height: body_width * 0.8125,
+    file: "#file",
+    view: "#hit",
+    ok: "#clipBtn",
+    clipFinish: function (dataURL){
+        $('#hit').attr('src', dataURL);
+        saveImageInfo();
+    }
+});
+
+//图片上传
+function saveImageInfo() {
+    var filename = $('#hit').attr('fileName');
+    var img_data = $('#hit').attr('src');
+    if(img_data==""){alert('null');}
+    render(img_data); 
+    
+    $.post('plugin.php?id=fansclub:api&ac=upload_avatar&uid={$_G["uid"]}', {image: img_data}, function (data) {
+        if (data != '') {
+        // console.info(data);
+        // alert(data);
+        location.href= 'home.php?mod=space&uid={$_G["uid"]}&do=profile&mycenter=1&mobile=2';
+        }
+    });
+}
+
+/*获取文件拓展名*/
+function getFileExt(str) {
+    var d = /\.[^\.]+$/.exec(str);
+    return d;
+}
+
+//图片上传结束
+$(function () {
+    $('#upload2').on('touchstart', function () {
+        //图片上传按钮
+        $('#plan1').hide();
+        $("#clipArea").show();
+        $("#clipBtn").show();
+        
+        $('#file').click();
+    });
+})
+
+
+function Close(){
+// $('#plan').hide();
+}
+
+// 渲染 Image 缩放尺寸  
+function render(src){  
+     var MAX_HEIGHT = 256;  //Image 缩放尺寸 
+    // 创建一个 Image 对象  
+    var image = new Image();  
+    
+    // 绑定 load 事件处理器，加载完成后执行  
+    image.onload = function(){  
+        // 获取 canvas DOM 对象  
+        var canvas = document.getElementById("myCanvas"); 
+        // 如果高度超标  
+        if(image.height > MAX_HEIGHT) {  
+            // 宽度等比例缩放 *=  
+            image.width *= MAX_HEIGHT / image.height;  
+            image.height = MAX_HEIGHT;  
+        }  
+        // 获取 canvas的 2d 环境对象,  
+        // 可以理解Context是管理员，canvas是房子  
+        var ctx = canvas.getContext("2d");  
+        // canvas清屏  
+        ctx.clearRect(0, 0, canvas.width, canvas.height); 
+        canvas.width = image.width;        // 重置canvas宽高  
+        canvas.height = image.height;  
+        // 将图像绘制到canvas上  
+        ctx.drawImage(image, 0, 0, image.width, image.height);  
+        // !!! 注意，image 没有加入到 dom之中  
+        
+     var dataurl = canvas.toDataURL("image/jpeg");  
+     var imagedata =  encodeURIComponent(dataurl); 
+        // $('#plan').attr('data-src',dataurl); 
+        // $('#plan').show();
+    };  
+    // 设置src属性，浏览器会自动加载。  
+    // 记住必须先绑定render()事件，才能设置src属性，否则会出同步问题。  
+    image.src = src;    
+};  
+</script>
+</body>
+</html>

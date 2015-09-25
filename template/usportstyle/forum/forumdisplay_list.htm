@@ -1,0 +1,68 @@
+<div id="threadlist" class="tl bm bmw"{if $_G['uid']} style="position: relative;"{/if}>
+<!--{if empty($_GET['typeid'])}-->
+	<!--{if $quicksearchlist && !$_GET['archiveid']}-->
+		<!--{subtemplate forum/search_sortoption}-->
+	<!--{/if}-->	
+	<div class="ball_official h50">
+        <div class="channel_header">
+            <h1 class="ball_title bt">精选帖子</h1>
+        </div>
+    </div>
+	<div class="ball_list">
+		<div class="gList">
+			<ul class="gList_l">
+				<li><a href="group/$_G[fid]/" class="{if (($_GET['filter'] == 'lastpost' || $_GET['filter'] == '') && $_GET['specialtype'] == '')} active{/if}">最新</a></li>
+				<li><a href="group/$_G[fid]/digest/" class="{if $_GET['filter'] == 'digest'} active{/if}">精品</a></li>
+				<li><a href="group/$_G[fid]/reply/" class="{if $_GET['filter'] == 'reply'} active{/if}">回复</a></li>
+			</ul>
+			<ul class="gList_r">
+				<li class="{if $_GET['specialtype'] == 'all'}active{/if}"><a href="group/$_G[fid]/all/">全部</a></li>
+				<li class="{if $_GET['specialtype'] == 'poll'}active{/if}"><a href="group/$_G[fid]/poll/">投票</a></li>
+				<li class="{if $_GET['specialtype'] == 'activity'}active{/if}"><a href="group/$_G[fid]/activity/">活动</a></li>
+			</ul>
+		</div>
+	</div>
+<!--{/if}-->
+	
+	<div class="indexThread indexPost">
+	    <ul>
+	    	<!--{if $_G['forum_threadlist']}-->
+	    	<!--{loop $_G['forum_threadlist'] $thread}-->
+	        <li class="cl">
+		        <div class="avatar">
+		            <a href="home.php?mod=space&uid={$thread[authorid]}" target="_blank"><img src="<!--{avatar($thread[authorid],small,1)}-->"></a>
+		        </div>
+		        <div class="inde_info">
+		            <p class="in_name">
+		            	<a href="forum.php?mod=viewthread&tid=$thread[tid]" target="_blank">$thread[subject]</a>
+		            	<!--{if $thread['digest'] > 0 && $filter != 'digest'}--><span class="in_post">精</span><!--{/if}-->
+		            	<!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}--><span class="in_post in_post_zd">置顶</span><!--{/if}-->
+		            </p>
+		            <!--{if !in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+		            <!--{eval $message = get_message('', $thread['tid'])}-->
+					<p class="in_title">{$message[message]}</p>
+					<!--{if $message['img']}-->
+					<p class="in_img">
+						<!--{loop $message['img'] $v}-->
+						<a href="forum.php?mod=viewthread&tid=$thread[tid]" target="_blank"><img src="{$v}" width="auto" height="140"></a>
+						<!--{/loop}-->
+					</p>
+					<!--{elseif $message['media']}-->
+					<p class="in_img"><embed width="230" height="140" allownetworking="internal" allowscriptaccess="never" src="{$message['media']}" quality="high" bgcolor="#ffffff" wmode="transparent" allowfullscreen="true" type="application/x-shockwave-flash"></embed></p>
+					<!--{/if}-->
+					<!--{/if}-->
+		            <div class="in_meta">   
+		                <span><a href="home.php?mod=space&uid=$thread[authorid]" target="_blank">$thread[author]</a>&nbsp;&nbsp;{eval echo(date('m月d日 H:i',$thread[dbdateline]))} &nbsp;&nbsp;&nbsp;来自<a href="group/$a[$thread[fid]][fid]/" target="_blank">$a[$thread[fid]][forumname]</a></span>
+		                <span class="y sta_lun">$thread[replies]</span>
+		                <span class="y sta_zan">$thread[recommend_add]</span>
+		            </div>
+		        </div>
+	        </li>
+	        <!--{/loop}-->
+	        <!--{/if}-->
+	    </ul>
+	</div>
+	
+	</div>
+<!--{if $_G['setting']['threadmaxpages'] > 0}-->$multipage<!--{/if}-->
+

@@ -1,0 +1,18 @@
+<link href="../../common/main.css" rel="stylesheet" />
+<div class="boxMain">
+	<div class="titleColumns"><span class="fl"><font>4565</font>张图片</span><div class="fr"><a href="#" class="showmenu">全部主题</a><a href="#">最新</a><a href="#">热门</a><a href="#">热帖</a><a href="#">精华</a><a href="#" class="showmenu">更多</a></div></div>
+    <div class="listVideo">
+    	<ul>
+			<!--{loop $_G['forum_threadlist'] $key $thread}-->
+        	<li>
+            	<a href="/forum.php?mod=viewthread&tid={$thread['tid']}" target="_blank" title="{$thread['subject']}" class="videoImg">
+					<img src="{$thread['coverpath']}" width="235" height="176" align="" title="{$thread['subject']}"/></a>
+                <a href="/forum.php?mod=viewthread&tid={$thread['tid']}" target="_blank" title="{$thread['subject']}" class="videoTxt">{$thread['subject']}</a>
+            </li>
+            <!--{/loop}-->
+        </ul>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="page">$multipage</div>
+</div>

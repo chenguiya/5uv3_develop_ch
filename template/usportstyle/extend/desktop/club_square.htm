@@ -1,0 +1,225 @@
+<div class="boxMain">
+	 <div class="ch_bm">
+		<div class="z">
+			<a href="./" class="" title="{lang home}">$_G[setting][bbname]</a><em>&gt;</em>
+			<em><a href="{$_SERVER['REQUEST_URI']}" target="_self">球迷会广场</a></em>
+		</div>
+	</div>
+	 <div class="ad_banner">
+	      <!-- 107239：球迷会广场 - 顶部通栏 类型：固定广告位 尺寸：1000x0-->
+<!--<script type="text/javascript">
+_acK({aid:107239,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>-->
+	 </div>
+	 <div class="blank10"></div>
+	<div class="squareTop">
+    	<span class="squareTtitle">球迷会广场</span>
+        <div class="searchS"><input type="text" class="searchIn" id="search_club"`/><input id="btn_search_club" type="button" value="找球迷会" class="searchBnt"/></div>
+    </div>
+    
+    <div class="jianju"></div>
+    <div class="squareMain">
+    	<div class="squareSide">
+		     <div class="ad_banner">
+			<!-- 107253：球迷会广场 - 左侧banner3 类型：固定广告位 尺寸：200x0-->
+<!--<script type="text/javascript">
+_acK({aid:107253,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>--></div>
+        	<div class="createSide">
+            	<p>5467个球迷会<br/>你找到他们了吗？</p>
+                <a id="btn_create_club_square" href="plugin.php?id=fansclub&ac=apply" target="_blank" class="createa">创建球迷会</a>
+            </div>
+			<div class="blank10"></div>
+           <!--{template extend/desktop/sidebar_rule}-->
+            
+			<div class="nav">
+			<!--{loop $arr_forum_list $key1 $value1}-->
+				<div class="navTitle">
+				<p><img src="$value1['icon']" />$value1['name']</p>
+				<ul class="navMain">
+				<!--{loop $value1['list'] $key2 $value2}-->
+					<li class="navCon">
+						<a class="navTitlea" href="group/search-{eval echo urlencode($value2['name']);}" target="_self">$value2['name']</a>
+						<a class="titleOperate" href="javascript:;"></a>
+						<ul>
+						<!--{loop $value2['list'] $key3 $value3}-->
+							<a href="group/search-{eval echo urlencode($value3['name']);}"><li{if $search == $value3['name']} class="active"{/if}>$value3['name']</li></a>
+						<!--{/loop}-->
+						</ul>
+					</li>
+				<!--{/loop}-->
+
+				</ul>
+				</div>
+			<!--{/loop}-->
+			</div>
+			
+			<div class="ad_banner"><!-- 107251：球迷会广场 - 左侧banner2 类型：固定广告位 尺寸：200x0-->
+<!--<script type="text/javascript">
+_acK({aid:107251,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>--></div>
+			 
+
+        </div>
+    </div>
+    
+    <div class="squareCon{if $search} squareSearch{/if}">
+    	<div class="widget_con">
+        	<div class="widget_hd"><h3>球迷会总会</h3></div>
+            <div class="line"></div>
+            <div class="fansWill">
+			{if $search}
+				{loop $arr_forum_show $key $value}
+				<div class="fansWillList">
+                	<!--<a href="forum.php?mod=forumdisplay&fid={$value['fid']}&tpl=channel_index" target="_blank" title="" class="fansImg">-->
+					<a href="group/{$value['fid']}/" target="_blank" title="" class="fansImg">
+					<img src="$value['icon']" width="90" height="90"/></a>
+                    <div class="fansInfo">
+                    	<p class="fansWillListT"><a href="group/{$value['fid']}/" target="_blank" title="">$value['name']</a><img src="$_G['config'][static]/images/jiang.png" align="middle"/></p>
+                        <p class="fansTeam"><span>联赛：$value['league_name']</span><span>排名：{$value['rank']}</span></p>
+                        <p class="fansEles"><span class="numIco">$value['members']</span><span class="plIco">$value['posts']</span><span class="valueIco"><font>贡献值：</font>$value['contribution']</span></p>
+                    </div>
+                    <p class="teamInfoa">{$value['description']}</p>
+                </div>
+            	<div class="essence">
+                	<p>精华帖</p>
+                    <ul>
+					{loop $value['digest'] $key2 $value2}
+						<li><a href="forum.php?mod=viewthread&tid=$value2['tid']" target="_blank">$value2['subject']</a></li>
+					{/loop}
+                    </ul>
+                </div>
+				{/loop}
+			{else}
+				{loop $arr_forum_show $key $value}
+					<div class="fansWillList">
+						<a href="group/{$value['fid']}/" target="_blank" title="" class="fansImg"><img src="$value['icon']" width="90" height="90"/></a>
+						<div class="fansInfo">
+							<p class="fansWillListT"><a href="group/{$value['fid']}/" target="_blank" title="">$value['name']</a></p>
+							<p class="fansTeam"><span>联赛：$value['league_name']</span><span>排名：{$value['rank']}</span></p>
+							<p class="fansEles"><span class="numIco">$value['members']</span><span class="plIco" style="color: #eb6100">$value['posts']</span><span class="valueIco"><font>贡献值：</font>$value['contribution']</span></p>
+						</div>
+					</div>
+				{/loop}
+			{/if}
+                <div class="clear"></div>
+            </div>
+            
+        </div>
+        <div class="ad_banner">
+		<!-- 107243：球迷会广场表 - 中部通栏 类型：固定广告位 尺寸：760x0-->
+<!--<script type="text/javascript">
+_acK({aid:107243,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>--></div>
+		<div class="blank10"></div>
+        <div class="widget_con branch">
+        	<div class="widget_hd"><h3 class="fl">球迷会分会</h3>
+			<span class="fr sort">
+			<a href="plugin.php?id=fansclub:fansclub&orderby=contribution"{if $orderby == 'contribution'} class="active"{/if}>按贡献值</a>
+			<a href="plugin.php?id=fansclub:fansclub&orderby=fansnum"{if $orderby == 'fansnum'} class="active"{/if}>按粉丝数</a>
+			<a href="plugin.php?id=fansclub:fansclub&orderby=level"{if $orderby == 'level'} class="active"{/if}>按认证等级</a>
+			<a style="text-decoration:none;" onClick="return false;" id="adressflag" class="adressIco">按地区</a></span></div>
+             
+			
+			<div class="adressMain" id="adress">
+            	<dl>
+                	<dt>地区/省：</dt>
+					<!--{loop $arr_province_city $value}-->
+                    <dd><a href="javascript:void(0);" onclick="getcity({$value['id']});">{$value['name']}</a></dd>
+                    <!--{/loop}-->
+                </dl>
+                
+                <dl id="city" style="display:none">				
+                </dl>
+            </div>
+
+			
+            <div class="fanWillList">
+			
+		<!--{loop $arr_group_show $key $value}-->
+			<div class="fansListaWrap">
+				<div class="fansLista">
+					<div class="fansListImg">
+						<a href="fans/topic/{$value['fid']}/" target="_blank" title=""><img src="$value['icon']" width="60" height="60" alt="" title=""></a>
+						<span>$value['province_city']</span>
+					</div>
+					<div class="fansListR">
+						<div class="fansWillListT"><a href="fans/topic/{$value['fid']}/" target="_blank" title="$value['name']" {if $value[specialclub]} class="colorRed"{/if}>$value['name']</a>
+						<a href="plugin.php?id=fansclub&ac=verify&type=boots&fid={$value['fid']}" class="badget">{$value['level_img']}</a></div>
+						<div class="fansListInfo"><span class="numIco">$value['members']</span><span class="plIco">$value['posts']</span><span class="valueIco"><font>贡献值：</font>$value['contribution']</span></div>
+						<div title="$value['description']">简介：$value['description_short']</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		<!--{/loop}-->
+			
+                <div class="clear"></div>
+            </div>
+            
+            <div class="page"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+	<div class="ad_banner">
+	     <!-- 107247：球迷会广场- 底部通栏 类型：固定广告位 尺寸：1000x0-->
+<!--<script type="text/javascript">
+_acK({aid:107247,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>-->
+	 </div>
+	 <div class="blank15"></div>
+</div>
+<script language="javascript">
+jQuery(document).ready(function($) {
+    // 使用 jQuery $ 的代码
+	$('#tab_range, #area_address').mouseover(function(){
+		$('#area_address').show();
+	});
+	
+	$('#tab_range, #area_address').mouseout(function(){
+		$('#area_address').hide();
+	});
+	
+	$('#btn_search_club').click(function(){
+		window.location.href='plugin.php?id=fansclub:fansclub&search='+$('#search_club').val();
+	});
+	
+	$("#adressflag").click(function(){
+		$(this).toggleClass("activeAdress");
+		$("#adress").toggle('normal');
+	});
+});
+/*
+			<!--
+            <div id="area_address" class="adressMain">
+			<!--{loop $arr_province_city $key $value}-->
+			<dl>
+                	<dt>$value['name']：</dt>
+					<!--{loop $value['list'] $key2 $value2}-->
+                    <dd><a href="plugin.php?id=fansclub:fansclub&orderby={$orderby}&cityid={$value2['id']}">$value2['name']</a></dd>
+					<!--{/loop}-->
+            </dl>
+			<!--{/loop}-->
+            </div>
+			-->
+*/
+	function getcity(id){
+		var id;
+		jq.ajax({
+			type:"GET",
+			url:"plugin.php",
+			dataType:'json',
+			data:'id=fansclub:forumfansclub&ac=ajax&proid='+id,
+			success:function(data){
+				var str='<dt>地区/市：</dt>';
+				jq.each(data,function(i,n){
+				 	str+=' <dd><a href="plugin.php?id=fansclub:fansclub&orderby={$orderby}&cityid='+n.id+'");">'+n.name+'</a></dd>';
+				});
+				jq("#city").html(str);
+				jq("#city").show();
+			}
+		});
+	}
+	
+
+</script>

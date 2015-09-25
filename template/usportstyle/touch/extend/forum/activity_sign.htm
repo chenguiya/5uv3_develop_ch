@@ -1,0 +1,34 @@
+<!--{template common/header}-->
+<nav class="navbar">
+    <div class="inner">
+        <div class="left">
+            <a href="javascript: history.go(-1);"><i class="iconfont icon-angle-left"></i></a>
+        </div>
+        <div class="center">活动签到</div>
+    </div>
+</nav>
+<div class="ymain ymain-padding">
+    <div style="margin-top: 15px;font-size: 16px;line-height: 24px;color: #666666;">
+        <div class="row">
+            <div style="white-space: nowrap;">活动：</div>
+            <div>$activity[subject]</div>
+        </div>
+        <div class="row">
+            <div style="white-space: nowrap;">时间：</div>
+            <div>{eval echo(date('Y-m-d H:i', $activity[starttimefrom]))}<!--{if $activity[starttimeto]}-->&nbsp;至&nbsp;{eval echo(date('Y-m-d H:i', $activity[starttimeto]))}<!--{/if}--></div>
+        </div>
+        <div class="row">
+            <div style="white-space: nowrap;">地点：</div>
+            <div>$activity[place]</div>
+        </div>
+        <!--{if $issigned}-->
+        <div class="ybtn ybtn-primary">已签到</div>
+        <!--{else}-->
+        <form name="activity" id="activity" method="post" autocomplete="off" action="forum.php?mod=misc&action=signin&tid=$_GET[tid]">
+            <input type="hidden" name="formhash" value="{FORMHASH}" />
+            <input type="hidden" name="handlekey" value="activitysignin" />
+            <button class="ybtn ybtn-primary" value="true" name="submitsign"><span>立即签到</span></button>
+        </form>
+        <!--{/if}-->
+    </div>
+</div>

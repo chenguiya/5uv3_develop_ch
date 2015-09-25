@@ -1,0 +1,140 @@
+<div class="bread"><a href="{$_G['setting']['discuzurl']}" target="_blank">5U体育</a>&nbsp;&gt;&nbsp; {$_G['forum']['name']} </div>
+<div class="box">
+<div class="navSide">
+	<div class="navSideT">球迷会认证</div>
+    <div class="navSideC">
+    	<ul>
+        	<li class="active"><a href="{$arr_left_url['boots']}" class="navSidea">金银铜靴认证</a></li>
+            <li><a href="{$arr_left_url['5u']}" class="navSideb">5U认证</a></li>
+            <li><a href="{$arr_left_url['org']}" class="navSidec">机构认证</a></li>
+            <li><a href="{$arr_left_url['faq']}" target="_blank" class="navSided">常见问题</a></li>
+        </ul>
+    </div>
+</div>
+<div class="mainR">
+	<h3 class="titleU">金银铜靴认证</h3>
+    <span class="conditionT">认证条件</span>
+    <div class="jianju25"></div>
+    <div class="condition">
+    	<table width="100%" border="1" bordercolor="#dedede" cellspacing="0" cellpadding="0" class="conditionTab">
+          <tr>
+            <th scope="col">等级</th>
+            <th scope="col">资料完整</th>
+            <th scope="col">组织结构完善</th>
+            <th scope="col">积分</th>
+          </tr>
+		  <!--{loop $show_level $key $value}-->
+          <tr>
+          	<td class="xueC"><img src="{$_G['style'][tpldir]}/common/images/xue_0{$value['id']}.jpg" />&nbsp;&nbsp;&nbsp;{$value['leveltitle']}</td>
+            <td><img src="{$_G['style'][tpldir]}/common/images/dui.jpg" /></td>
+            <td><img src="{$_G['style'][tpldir]}/common/images/dui.jpg" /></td>
+            <td>{$value['creditshigher']}</td>
+          </tr>
+		  <!--{/loop}-->
+        </table>
+		<div class="jianju25"></div>
+        <div class="conditionList">
+        	<dl>
+            	<dt>认证说明:</dt>
+                <dd>1、球迷会资料完整。</dd>
+                <dd>2、球迷会分会组织结构完善。</dd>
+                <dd><div  style="" id="formulapermexp"></div></dd>
+                <dd>4、只要达到条件，系统将自动升级。</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="jianju25"></div>
+    <div class="columnBox">
+    	<b class="columnT">享受的权益</b>
+        <div class="interests">
+        	<table width="100%" border="1" bordercolor="#e7e7e7" cellspacing="0" cellpadding="0" class="interestsTab">
+              <tr>
+                <td>
+                    <img src="{$_G['style'][tpldir]}/common/images/in06.jpg" width="134" height="120"/>
+                    <div class="interestsTxt"><span class="inColora">认证标识</span><p>易于标识，更加权威</p></div>
+                </td>
+               <td>
+                    <img src="{$_G['style'][tpldir]}/common/images/in07.jpg" width="120" height="120"/>
+                    <div class="interestsTxt"><span class="inColore">商品折扣</span><p>专属优惠，普通会员没哦</p></div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <img src="{$_G['style'][tpldir]}/common/images/in08.jpg" width="120" height="120"/>
+                    <div class="interestsTxt"><span class="inColord">商品配额</span><p>贵重物品，只有你能买</p></div>
+                </td>
+                <td>
+                    <img src="{$_G['style'][tpldir]}/common/images/in09.jpg" width="120" height="119"/>
+                    <div class="interestsTxt"><span class="inColorf">特属商品</span><p>积分兑换特殊商品</p></div>
+                </td>
+              </tr>
+            </table>
+
+        </div>
+        
+        <div class="conditionList">
+        	<dl>
+            	<dt>铜靴权益:</dt>
+                <dd>1、可享受团购商品球迷会专属优惠，即团购商品面向普通用户是一种价格，面向球迷会用户是另一种价格。</dd>
+                <dd>2、可享受限量商品购买配额，不同等级球迷会可享受不同数量的配额。</dd>
+                <dd>3、可用球迷会积分兑换特属礼品。</dd>
+                <dd>4、可优先参加5U官方活动，获取额外奖励</dd>
+                <dd>5、可优先申请线下自办活动经费</dd>
+                <dd>6、可优先申请5U体育线下活动承办资格。</dd>
+                <dd>7、可参与5U体育业务分成</dd>
+            </dl>
+            
+            <dl>
+            	<dt>银靴权益:</dt>
+                <dd>1、可享受团购商品球迷会专属优惠，即团购商品面向普通用户是一种价格，面向球迷会用户是另一种价格。</dd>
+                <dd>2、可享受限量商品购买配额，不同等级球迷会可享受不同数量的配额。</dd>
+                <dd>3、可用球迷会积分兑换特属礼品。</dd>
+                <dd>4、可优先参加5U官方活动，获取额外奖励</dd>
+                <dd>5、可优先申请线下自办活动经费</dd>
+                <dd>6、可优先申请5U体育线下活动承办资格。</dd>
+                <dd>7、可参与5U体育业务分成</dd>
+            </dl>
+            
+            <dl>
+            	<dt>金靴权益:</dt>
+                <dd>1、可享受团购商品球迷会专属优惠，即团购商品面向普通用户是一种价格，面向球迷会用户是另一种价格。</dd>
+                <dd>2、可享受限量商品购买配额，不同等级球迷会可享受不同数量的配额。</dd>
+                <dd>3、可用球迷会积分兑换特属礼品。</dd>
+                <dd>4、可优先参加5U官方活动，获取额外奖励</dd>
+                <dd>5、可优先申请线下自办活动经费</dd>
+                <dd>6、可优先申请5U体育线下活动承办资格。</dd>
+                <dd>7、可参与5U体育业务分成</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+</div>
+
+<script language="javascript">
+function formulaexp() {
+		var result = '{$creditsformula}';
+		result = result.replace(/extcredits1/g, '<u>威望</u>');
+		result = result.replace(/extcredits2/g, '<u>金钱</u>');
+		result = result.replace(/extcredits3/g, '<u>贡献</u>');
+		result = result.replace(/extcredits4/g, '<u>自定义积分4</u>');
+		result = result.replace(/extcredits5/g, '<u>自定义积分5</u>');
+		result = result.replace(/extcredits6/g, '<u>自定义积分6</u>');
+		result = result.replace(/extcredits7/g, '<u>自定义积分7</u>');
+		result = result.replace(/extcredits8/g, '<u>自定义积分8</u>');
+		result = result.replace(/digestposts/g, '<u>精华帖数</u>');
+		result = result.replace(/posts/g, '<u>发帖数</u>');
+		result = result.replace(/contribution/g, '<u>贡献值</u>');
+		result = result.replace(/members/g, '<u>成员</u>');
+		result = result.replace(/threads/g, '<u>主题数</u>');
+		result = result.replace(/oltime/g, '<u>在线时间(小时)</u>');
+		result = result.replace(/friends/g, '<u>好友数</u>');
+		result = result.replace(/doings/g, '<u>记录数</u>');
+		result = result.replace(/blogs/g, '<u>日志数</u>');
+		result = result.replace(/albums/g, '<u>相册数</u>');
+		result = result.replace(/sharings/g, '<u>分享数</u>');
+		$('formulapermexp').innerHTML = '3、积分 ='+result;
+	}
+</script>
+<script type="text/JavaScript">formulaexp()</script>
+<div class="jianju40"></div>

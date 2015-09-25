@@ -1,0 +1,46 @@
+<!--{template common/header}-->
+<div class="ch_bm">
+		<div class="z">
+			<a href="./" class="" title="{lang home}">$_G[setting][bbname]</a><em>&gt;</em>
+			<!--{if ($type == 'football' && $op == 'allcategory')}--><a href="football/">足球圈</a><em>&gt;</em><a href="{$_SERVER['REQUEST_URI']}">所有频道</a><!--{/if}-->
+			<!--{if ($type == 'basket' && $op == 'allcategory')}--><a href="basket/">篮球圈</a><em>&gt;</em><a href="{$_SERVER['REQUEST_URI']}">所有频道</a><!--{/if}-->
+			
+		</div>
+</div>
+<div class="ad_banner">
+<!-- 108811：首页-频道-列表-内容-顶部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+</div>
+<div class="blank15"></div>
+<div class="wp ball_index">
+	<a href="{$type}">首页</a><a href="{$type}/allcategory" class="active">所有频道</a>
+</div>
+<div class="wp ball_channel" style="margin-bottom: 20px;">
+	<!--{loop $all_forums $val}-->
+		<div class="channel_wrap clearfix">
+			<div class="channel_header">
+				<div class="channel_title bt fl clearfix">{$val[fields][name]}</div>
+				<i class="channel_icons fr clearfix"></i>
+			</div>
+			<div class="channel_cont clearfix">
+				<!--{loop $val['sub'] $_val}-->
+				<div class="chUnits fl clearfix">
+					<a href="group/{$_val['fid']}" target="_blank"><img src="{$_G['siteurl']}data/attachment/common/{$_val[icon]}" width="80" height="80"></a>
+					<p><a href="group/{$_val['fid']}" target="_blank">{$_val[name]}</a></p>
+					<span>总贴:{$_val[threads]}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>新贴:{$_val[todayposts]}</span>
+				</div>
+				<!--{/loop}-->
+			</div>
+		</div>
+	<!--{/loop}-->
+</div>
+<div class="ad_banner">
+<!-- 108817：首页-频道-列表-内容-底部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108817,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+</div>
+<div class="blank20"></div>
+<!--{template common/footer}-->

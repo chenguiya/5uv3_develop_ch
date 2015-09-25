@@ -1,0 +1,201 @@
+﻿<link type="text/css" rel="stylesheet" href="http://www.usportnews.com/statics/css/header.css" />
+<link type="text/css" rel="stylesheet" href="http://www.usportnews.com/statics/css/usport/about/about.css" />
+<link rel="stylesheet" type="text/css" href="$_G['config'][static]/css_common.css">
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script> 
+	<div class="menu menuMain">
+	<div class="box">
+    	<div class="fl logo"><a href="$_G['siteurl']" title="5U体育"><img src="$_G['config'][static]/images/header/logo.png"/></a></div>
+        <div class="fr menuC">
+            <ul>
+				<li><a href="about/aboutus/"  title="关于我们">关于我们</a></li>
+				<li><a href="about/advert/" title="广告服务">广告服务</a></li>
+				<li><a href="about/hr/" title="招聘信息">招聘信息</a></li>
+				<li><a href="about/copyright/" title="法律声明">法律声明</a></li>
+				<li><a href="about/contactus/" title="联系方式">联系方式</a></li>
+				<li><a href="about/sitemap/" title="网站地图">网站地图</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+
+<div class="main mainC">
+<div class="main_l">
+<div class="title titled">联系<span>方式</span></div>
+<div class="content contentC">
+<div class="conTitle">广州市晌网文化传播有限公司</div>
+<div class="adress">地 址：广州市越秀区沿江中路298号江湾商业中心43楼(全层)<br />
+邮 编：510110</div>
+<div class="contact">总 机：86 - 020 - 83284903<br />
+传 真：86 - 020 - 83284903<br />
+用户服务：service@5usport.com<br />
+投稿信箱：tougao@5usport.com<br />
+广告合作：18102253122<br />
+市场、商务合作QQ:595813375<br />
+市场、商务合作邮箱:cwj@5usport</span>.com<br />
+5U体育交流QQ群：310990219</div>
+</div>
+<br />
+<div class="title titlee">如何<span>来访</span></div>
+<div class="content">
+<p class="bus"><span>公交：</span>东堤站、文德南路站、越秀南路站、江湾桥脚站、白云路站、大沙头码头站</p>
+<br />
+<p class="ditie"><span>地铁：</span>地铁2号线&ldquo;海珠广场&rdquo;站A出口，往左手边沿着江边步行15分钟到公司<br />
+地铁6号线&ldquo;团一大广场&rdquo; 站A出口，往江边步行5分钟到公司</p>
+</div>
+<div class="clear">&nbsp;</div>
+</div>
+<div class="main_r">
+<div><img alt="广州市晌网文化传播有限公司" src="$_G['config'][static]/images/header/ditu.jpg" title="广州市晌网文化传播有限公司" /></div>
+<div>&nbsp;</div>
+<div id="dituContent" style="width:402px; height:302px; margin-top:35px;">&nbsp;</div>
+</div>
+<div class="clear">&nbsp;</div>
+</div>
+<div class="jianju50">&nbsp;</div>
+<!--版权!-->
+<!--BAIDU_YUNTU_START-->
+<script>
+// 隐藏两个层
+(function($) {
+$("#toptb").css('display','none');
+$(".chheader").css('display','none');
+})(jQuery);
+document.title='联系方式 - 5U体育_承载自由体育文化 传递不一样的体育声音';
+
+(function(d, t) {
+    var r = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    r.async = 1;
+    r.src = '//rp.baidu.com/rp3w/3w.js?sid=8774583147889157546&t=' + Math.ceil(new Date/3600000);
+    s.parentNode.insertBefore(r, s);
+})(document, 'script');
+</script>
+<!--BAIDU_YUNTU_END-->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F08e23d5339d9237a04872314bc969c39' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script>
+	(function($) {
+		$(function(){
+			if ($('div.footerLink').length) {
+				var footerlinkTime = '';
+				$('div.footerLink').delegate('a','mouseover', function() {
+					var $box = $('div.' + $(this).attr('class') + '-box');
+					if (!$box.length || $box.is('visible'))
+						return false;
+					if (footerlinkTime) clearTimeout(footerlinkTime);
+					$box.stop().fadeIn('fast').siblings('div.openBox').stop().fadeOut('fast');
+				}).delegate('a', 'mouseout', function(){
+					var $box = $('div.' + $(this).attr('class') + '-box');
+					if (!$box.length || $box.is('hidden'))
+						return false;
+					footerlinkTime = setTimeout(function(){$box.stop().fadeOut('fast');},500);
+				}).delegate('div.openBox','mouseout', function(){
+					var $box =  $(this);
+					footerlinkTime = setTimeout(function(){$box.stop().fadeOut('fast');},500);
+				}).delegate('div.openBox', 'mouseover', function(){
+					if (footerlinkTime) clearTimeout(footerlinkTime);
+				});
+			}
+		});
+	})(jQuery);
+</script>
+ <script type="text/javascript">
+    //创建和初始化地图函数：
+    function initMap(){
+        createMap();//创建地图
+        setMapEvent();//设置地图事件
+        addMapControl();//向地图添加控件
+        addMarker();//向地图中添加marker
+    }
+    
+    //创建地图函数：
+    function createMap(){
+        var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
+        var point = new BMap.Point(113.288382,23.1194);//定义一个中心点坐标
+        map.centerAndZoom(point,15);//设定地图的中心点和坐标并将地图显示在地图容器中
+        window.map = map;//将map变量存储在全局
+    }
+    
+    //地图事件设置函数：
+    function setMapEvent(){
+        map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+        map.enableScrollWheelZoom();//启用地图滚轮放大缩小
+        map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+        map.enableKeyboard();//启用键盘上下左右键移动地图
+    }
+    
+    //地图控件添加函数：
+    function addMapControl(){
+        //向地图中添加缩放控件
+	var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+	map.addControl(ctrl_nav);
+        //向地图中添加缩略图控件
+	var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
+	map.addControl(ctrl_ove);
+        //向地图中添加比例尺控件
+	var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+	map.addControl(ctrl_sca);
+    }
+    
+    //标注点数组
+    var markerArr = [{title:"广州市晌网文化传播有限公司",content:"U体育——24小时全球体坛情报中心<br/>网址：www.usportnews.com<br/>地址：广州市越秀区沿江中路298号江湾商业中心34楼01-03",point:"113.283648|23.121527",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+		 ];
+    //创建marker
+    function addMarker(){
+        for(var i=0;i<markerArr.length;i++){
+            var json = markerArr[i];
+            var p0 = json.point.split("|")[0];
+            var p1 = json.point.split("|")[1];
+            var point = new BMap.Point(p0,p1);
+			var iconImg = createIcon(json.icon);
+            var marker = new BMap.Marker(point,{icon:iconImg});
+			var iw = createInfoWindow(i);
+			var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
+			marker.setLabel(label);
+            map.addOverlay(marker);
+            label.setStyle({
+                        borderColor:"#808080",
+                        color:"#333",
+                        cursor:"pointer"
+            });
+			
+			(function(){
+				var index = i;
+				var _iw = createInfoWindow(i);
+				var _marker = marker;
+				_marker.addEventListener("click",function(){
+				    this.openInfoWindow(_iw);
+			    });
+			    _iw.addEventListener("open",function(){
+				    _marker.getLabel().hide();
+			    })
+			    _iw.addEventListener("close",function(){
+				    _marker.getLabel().show();
+			    })
+				label.addEventListener("click",function(){
+				    _marker.openInfoWindow(_iw);
+			    })
+				if(!!json.isOpen){
+					label.hide();
+					_marker.openInfoWindow(_iw);
+				}
+			})()
+        }
+    }
+    //创建InfoWindow
+    function createInfoWindow(i){
+        var json = markerArr[i];
+        var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
+        return iw;
+    }
+    //创建一个Icon
+    function createIcon(json){
+        var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+        return icon;
+    }
+    
+    initMap();//创建和初始化地图
+</script>

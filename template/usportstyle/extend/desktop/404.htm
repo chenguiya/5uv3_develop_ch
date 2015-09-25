@@ -1,0 +1,40 @@
+<div class="container homepage-404">
+    <div class="left"><img src="template/usportstyle/common/images/404.png" alt="#"/></div>
+    <div class="right">
+        <div class="content">
+            <h2>您访问的页面找不回来了！</h2>
+            <a id="directToHome" href="javascript:void(0);">&lt;&lt;<span>10</span>秒后</a>
+            <a href="/">返回首页</a>
+            <a href="javascript:void(0);" onClick="history.go(-1);">返回上一级</a>
+        </div>
+        <div class="recommend">
+            <h4>推荐球迷会：</h4>
+            <ul>
+            <!--{eval $i = 0;}-->
+			<!--{loop $arr_group_show $v}-->
+            <!--{eval if($i > 3) break; $i++;}-->
+                <li>
+                    <a href="fans/topic/{$v['fid']}/" target="_blank"><img src="{$v['icon']}" alt="{$v['name']}" /></a>
+                    <div class="desc">
+                        <p><a href="fans/topic/{$v['fid']}/" target="_blank">{$v['name']}</a></p>
+                        <span class="matches">{$v['province_city']}</span>
+                        <span class="ranking">{$v['members']}人</span>
+                    </div>
+                    <!--<img class="reward" src="template/usportstyle/common/images/jiang.png" alt=""/>-->
+                </li>
+				<!--{/loop}-->
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    <!-- 10秒后自己跳回首页 -->
+    var directToHome = document.getElementById("directToHome"), time = 10;
+    var intID = setInterval(function () {
+        directToHome.children[0].innerText = time;
+        time--;
+        if (time == 0) {
+            location.href = "/";
+        }
+    }, 1000);
+</script>

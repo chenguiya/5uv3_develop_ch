@@ -1,0 +1,104 @@
+<div style="padding:18px; line-height:22px;" id="main_messaqge">
+		<form method="post" autocomplete="off" name="groupform" id="groupform" onsubmit="checkCategory();ajaxpost('groupform', 'returnmessage4', 'returnmessage4', 'onerror');return false;" action="forum.php?mod=group&action=create">
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<input type="hidden" name="referer" value="{echo dreferer()}" />
+			<input type="hidden" name="handlekey" value="creategroup" />
+			<table cellspacing="0" cellpadding="0" summary="{lang group_create}">
+				<tbody>
+					<tr>
+						<th colspan="3">
+						  <style type="text/css">
+								#returnmessage4 { display: none; color: {NOTICETEXT}; font-weight: bold; }
+								#returnmessage4.onerror { display: block; }
+							</style>
+						  <p id="returnmessage4"></p>					    </th>
+					</tr>
+					<tr>
+					  <th colspan="3">{lang group_name}:</th>
+				  </tr>
+					<tr>
+					  <th colspan="3">
+                      <input type="text" name="name" id="name" size="36" tabindex="1" value="" autocomplete="off" onBlur="checkgroupname()" tabindex="1" />
+                      </th>
+				  </tr>
+					<tr>
+					  <th colspan="3">{lang group_category}:</th>
+				  </tr>
+					<tr>
+					  <th colspan="3">
+                      <select name="parentid" tabindex="2" onchange="ajaxget('forum.php?mod=ajax&action=secondgroup&fupid='+ this.value, 'secondgroup');">
+                      <option value="0">{lang choose_please}</option>
+                      $groupselect[first]
+                      </select>
+                      <em id="secondgroup"></em>
+                      <span id="groupcategorycheck"></span>
+                      </th>
+				  </tr>
+					<tr>
+					  <th colspan="3">{lang group_description}:</th>
+				  </tr>
+					<tr>
+					  <th colspan="3">
+                      <script type="text/javascript">
+								var allowbbcode = allowimgcode = parsetype = 1;
+								var allowhtml = forumallowhtml = allowsmilies = 0;
+							</script>
+							<script type="text/javascript" src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
+							<div>
+								
+								<div>
+									<textarea id="descriptionmessage" name="descriptionnew" tabindex="3" rows="8"></textarea>
+								</div>
+							</div>
+                      </th>
+				  </tr>
+					<tr>
+					  <th colspan="3">{lang group_perm_visit}:</th>
+				  </tr>
+					<tr>
+					  <th><label><input type="radio" name="gviewperm" tabindex="4" value="1" checked="checked" />{lang group_perm_all_user}</label></th>
+					  <th><label style="width:33%"><input type="radio" name="gviewperm" value="0" />{lang group_perm_member_only}</label></th>
+					  <th>&nbsp;</th>
+			      </tr>
+					<tr>
+					  <th colspan="3">{lang group_join_type}:</th>
+				  </tr>
+					<tr>
+					  <th><label><input type="radio" name="jointype" tabindex="5" value="0" checked="checked" />{lang group_join_type_free}</label></th>
+					  <th><label><input type="radio" name="jointype" value="2" />{lang group_join_type_moderate}</label></th>
+					  <th><label><input type="radio" name="jointype" value="1" />{lang group_join_type_invite}</label></th>
+			      </tr>
+					<tr>
+					  <th colspan="3">
+                      <div>
+                      <input type="hidden" name="createsubmit" value="true"><button type="submit" tabindex="6"><strong>{lang create}</strong></button>
+							<!--{if $_G['group']['buildgroupcredits']}-->&nbsp;&nbsp;&nbsp;(<strong>{lang group_create_buildcredits} $_G['group']['buildgroupcredits'] $_G['setting']['extcredits'][$creditstransextra]['unit']{$_G['setting']['extcredits'][$creditstransextra]['title']}</strong>)<!--{/if}-->
+                      </div>
+                      </th>
+				  </tr>
+				</tbody>
+			</table>
+		</form>
+</div>
+<script type="text/javascript" src="{$_G[setting][jspath]}common.js?{VERHASH}"></script>
+<script type="text/javascript">
+	function checkgroupname() {
+		var groupname = trim($('name').value);
+		ajaxget('forum.php?mod=ajax&forumcheck=1&infloat=creategroup&handlekey=creategroup&action=checkgroupname&groupname=' + (BROWSER.ie && document.charset == 'utf-8' ? encodeURIComponent(groupname) : groupname), 'groupnamecheck');
+	}
+	function checkCategory(){
+		var groupcategory = trim($('fup').value);
+		if(groupcategory == ''){
+			$('groupcategorycheck').innerHTML = '{lang group_create_selete_categroy}';
+			return false;
+		} else {
+			$('groupcategorycheck').innerHTML = '';
+		}
+	}
+	<!--{if $_GET['fupid']}-->
+			ajaxget('forum.php?mod=ajax&action=secondgroup&fupid=$_GET[fupid]<!--{if $_GET[groupid]}-->&groupid=$_GET[groupid]<!--{/if}-->', 'secondgroup');
+	<!--{/if}-->
+	if($('name')) {
+		$('name').focus();
+	}
+</script>

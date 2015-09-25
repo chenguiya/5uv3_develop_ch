@@ -1,0 +1,72 @@
+{eval 
+	$space['isfriend'] = $space['self'];
+	if(in_array($_G['uid'], (array)$space['friends'])) $space['isfriend'] = 1;
+	space_merge($space, 'count');
+}
+<!--{if $param['login']}-->
+	<!--{if $_G['inajax']}-->
+	<!--{eval dheader('Location:member.php?mod=logging&action=login&inajax=1&infloat=1');exit;}-->
+	<!--{else}-->
+	<!--{eval dheader('Location:member.php?mod=logging&action=login');exit;}-->
+	<!--{/if}-->
+<!--{/if}-->
+<!--{template common/header}-->
+<!--{if $_G['inajax']}-->
+<div class="tip">
+	<dt id="messagetext">
+		<p>$show_message</p>
+        <!--{if $_G['forcemobilemessage']}-->
+        	<p>
+            	<a href="{$_G['setting']['mobile']['pageurl']}" class="mtn">{lang continue}</a><br />
+                <a href="javascript:history.back();">{lang goback}</a>
+            </p>
+        <!--{/if}-->
+		<!--{if $url_forward && !$_GET['loc']}-->
+			<!--<p><a class="grey" href="$url_forward">{lang message_forward_mobile}</a></p>-->
+			<script type="text/javascript">
+				setTimeout(function() {
+					window.location.href = '$url_forward';
+				}, '3000');
+			</script>
+		<!--{elseif $allowreturn}-->
+			<p><input type="button" class="button" onclick="popup.close();" value="{lang close}"></p>
+		<!--{/if}-->
+	</dt>
+</div>
+<!--{else}-->
+
+<!-- header start -->
+<nav class="navbar">
+    <div class="inner">
+        <div class="left"><a class="logo" href="forum.php?mod=group&fid=1367&mobile=2">
+            <img src="template/usportstyle/touch/common/images/logo-03.png" alt="#"></a>
+        </div>
+        <div class="right">
+            <a href="home.php?mod=space&uid=$_G[uid]&do=profile&mycenter=1"><i class="iconfont icon-me"></i></a>
+        </div>
+    </div>
+</nav>
+<!-- header end -->
+
+<!-- main jump start -->
+<center style="padding-top:80px;">
+        <img src="template/usportstyle/touch/common/images/zizi_mian.png">
+</center>
+<div class="jump_c">
+	<p>$show_message</p>
+    <!--{if $_G['forcemobilemessage']}-->
+		<p>
+            <a href="{$_G['setting']['mobile']['pageurl']}" class="mtn">{lang continue}</a><br />
+            <a href="javascript:history.back();">{lang goback}</a>
+        </p>
+    <!--{/if}-->
+	<!--{if $url_forward}-->
+		<p><a class="grey" href="$url_forward">{lang message_forward_mobile}</a></p>
+	<!--{elseif $allowreturn}-->
+		<p><a class="grey" href="javascript:history.back();">{lang message_go_back}</a></p>
+	<!--{/if}-->
+</div>
+<!-- main jump end -->
+
+<!--{/if}-->
+<!--{template common/footer}-->

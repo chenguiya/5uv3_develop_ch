@@ -1,0 +1,216 @@
+{eval 
+	$space['isfriend'] = $space['self'];
+	if(in_array($_G['uid'], (array)$space['friends'])) $space['isfriend'] = 1;
+	space_merge($space, 'count');
+}
+<!--{if $_G['setting']['mobile']['mobilehotthread'] && $_GET['forumlist'] != 1}-->
+	<!--{eval dheader('Location:forum.php?mod=guide&view=hot');exit;}-->
+<!--{/if}-->
+<!--{template common/header}-->
+
+<script type="text/javascript">
+	function getvisitclienthref() {
+		var visitclienthref = '';
+		if(ios) {
+			visitclienthref = 'https://itunes.apple.com/cn/app/zhang-shang-lun-tan/id489399408?mt=8';
+		} else if(andriod) {
+			visitclienthref = 'http://www.discuz.net/mobile.php?platform=android';
+		}
+		return visitclienthref;
+	}
+</script>
+
+<!--{if $_GET['visitclient']}-->
+
+<header class="header">
+    <div class="nav">
+		<span>{lang warmtip}</span>
+    </div>
+</header>
+<div class="cl">
+	<div class="clew_con">
+		<h2 class="tit">{lang zsltmobileclient}</h2>
+		<p>{lang visitbbsanytime}<input class="redirect button" id="visitclientid" type="button" value="{lang clicktodownload}" href="" /></p>
+		<h2 class="tit">{lang iphoneandriodmobile}</h2>
+		<p>{lang visitwapmobile}<input class="redirect button" type="button" value="{lang clicktovisitwapmobile}" href="$_GET[visitclient]" /></p>
+	</div>
+</div>
+<script type="text/javascript">
+	var visitclienthref = getvisitclienthref();
+	if(visitclienthref) {
+		$('#visitclientid').attr('href', visitclienthref);
+	} else {
+		window.location.href = '$_GET[visitclient]';
+	}
+</script>
+
+<!--{else}-->
+
+<!-- header start -->
+<!--{if $showvisitclient}-->
+
+<div class="visitclienttip vm" style="display:block;">
+	<a href="javascript:;" id="visitclientid" class="btn_download">{lang downloadnow}</a>	
+	<p>
+		{lang downloadzslttoshareview}
+	</p>
+</div>
+<script type="text/javascript">
+	var visitclienthref = getvisitclienthref();
+	if(visitclienthref) {
+		$('#visitclientid').attr('href', visitclienthref);
+		$('.visitclienttip').css('display', 'block');
+	}
+</script>
+
+<!--{/if}-->
+
+<header class="header">
+	<!--{if $_G['setting']['domain']['app']['mobile']}-->
+		{eval $nav = 'http://'.$_G['setting']['domain']['app']['mobile'];}
+	<!--{else}-->
+		{eval $nav = "forum.php";}
+	<!--{/if}-->
+	<div id="elecnation_bbname">
+        <a title="$_G[setting][bbname]" href="$nav" class="title"><!--{if $_G['setting']['mobile']['mobilesimpletype'] == 1}--><!--{if empty($nobbname)}--> $_G['setting']['bbname'] - <!--{/if}--> {lang waptitle}<!--{else}-->{$_G['setting']['bbname']}<!--{/if}--></a>
+	</div>
+
+	<!--{if $_G['uid']}-->
+	<div id="elecnation_header">
+		<div id="elecnation_header_float">
+			{lang publish}<br />
+			$space[threads]
+		</div>
+		<div id="elecnation_header_float">
+			{lang thread}<br />
+			$space[posts]
+		</div>
+            
+		<div class="elecnation_header_avatar">
+        	<div id="elecnation_header_avatar_rad">
+			<a href="home.php?mod=space&uid=$_G[uid]&do=profile&mycenter=1" style="border:none;"><img src="<!--{avatar($_G[uid], middle, true)}-->" width="60" height="60" alt="{$discuz_userss}" style="border:none;" /></a>
+			</div>
+            <!--{if $_G['member'][newpm]}-->
+            <div class="elecnation_header_newmsg"><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_msg.png" /></div>
+            <!--{/if}-->
+        </div>
+            
+		<div id="elecnation_header_float">
+			{lang doing}<br />
+			$space[doings]
+		</div>
+		<div id="elecnation_header_float">
+			{lang credits}<br />
+			$_G[member][credits]
+		</div>
+        <div id="elecnation_clear"></div>
+        <div id="elecnation_header_username">$_G[username]</div>
+	</div>
+        
+	<!--{else}-->
+	<div id="elecnation_header_guest">
+		<div id="elecnation_header_guest_float">
+			<a href="<!--{if $_G['setting']['regstatus']}-->member.php?mod={$_G[setting][regname]}<!--{else}--><!--{if $_G['setting']['connect']['allow'] && !$_G['setting']['bbclosed']}-->$_G[connect][login_url]&statfrom=login_simple<!--{else}-->javascript:;<!--{/if}-->" style="color:#4C4C4C;<!--{/if}-->" title="{$_G['setting']['reglinkname']}">{lang register}</a>
+		</div>
+		<div id="elecnation_header_guest_avatar">
+			<a href="member.php?mod=logging&action=login" style="border:none;"><img src="<!--{avatar($_G[uid], middle, true)}-->" width="60" height="60" alt="{lang guest}" style="border:none;" /></a>
+		</div>
+		<div id="elecnation_header_guest_float">
+			<a href="member.php?mod=logging&action=login" title="{lang login}">{lang login}</a>
+		</div>
+        <div id="elecnation_clear"></div>
+        <div id="elecnation_header_guest_hello">{lang guest}</div>
+	</div>    
+	<!--{/if}-->
+</header>
+<!-- header end -->
+
+
+<!--{if $_G['setting']['mobile']['mobilehotthread']}-->
+<div id="elecnation_gds">
+	<div id="elecnation_gds_float">
+    	<a href="forum.php?mod=guide&view=hot" style="padding:6px 18px;">{lang hot_thread}</a>
+    </div>
+    
+    <div id="elecnation_gds_3red">
+    	<a href="forum.php?forumlist=1&mobile=2" style="padding:6px 18px; color:#D80000;">{$_G[setting][navs][2][navname]}</a>
+    </div>
+    
+    <div id="elecnation_gds_float">
+    	<a href="group.php" style="padding:6px 18px;">{$_G[setting][navs][3][navname]}</a>
+    </div>
+    
+    <div id="elecnation_gds_float" style="border-right:none;">
+    	<a href="home.php?mod=space&do=doing&view=all&mobile=2" style="padding:6px 18px;">{lang doing}</a>
+    </div>
+    <div id="elecnation_clear"></div>
+</div>
+<!--{/if}-->
+
+
+<!--{hook/index_top_mobile}-->
+<!-- main forumlist start -->
+<div class="wp">
+	<!--{loop $catlist $key $cat}-->
+	<div id="elecnation_discuz_cn">
+    	$cat[name]
+    </div>
+	<div style="width:100%; overflow:hidden;">
+		<!--{loop $cat[forums] $forumid}-->
+		<!--{eval $forum=$forumlist[$forumid];}-->
+		<div id="elecnation_discuz_fn">
+			<div class="elecnation_discuz_fn_float_z ">
+				<a href="forum.php?mod=forumdisplay&fid={$forum['fid']}" class="forum_title">{$forum[name]} <img src="{$_G['style']['styleimgdir']}/touch/common/images/arrow_green.png" width="6" height="11" style="border:none;" />
+                </a>
+			</div>
+                
+			<div class="elecnation_discuz_fn_float_y">
+				<div id="elecnation_discuz_fn_post">
+					<div id="elecnation_discuz_fn_fatie"><a href="
+forum.php?mod=post&action=newthread&fid={$forum['fid']}" style="color:#FFFFFF;">{lang send_threads}</a></div>
+					<div id="elecnation_discuz_fn_num">{$forum['todayposts']}</div>
+                    <div id="elecnation_clear"></div>
+				</div>
+			</div>
+			<div id="elecnation_clear"></div>
+            
+            <div id="elecnation_discuz_fn_subject">
+				<!--{if $forum[lastpost]}-->
+                <a href="forum.php?mod=viewthread&tid={$forum[lastpost][tid]}&extra=page%3D1">{$forum[lastpost][subject]}</a>
+                <!--{else}-->
+                {lang forum_nothreads}
+                <!--{/if}-->
+			</div>
+		</div>
+		<!--{/loop}-->
+	</div>
+	<!--{/loop}-->
+</div>
+<!-- main forumlist end -->
+<!--{hook/index_middle_mobile}-->
+<div id="elecnation_footer_box">
+{lang index_today} $todayposts <span class="pipe"> , </span> {lang total} $posts <span class="pipe"> , </span> {lang index_members} $_G['cache']['userstats']['totalmembers'] <!--{if empty($gid) && $_G['setting']['whosonlinestatus'] && $onlinenum}--> <span class="pipe"> , </span> {lang online} $onlinenum<!--{/if}-->
+</div>
+<script type="text/javascript">
+	(function() {
+		<!--{if !$_G[setting][mobile][mobileforumview]}-->
+			$('.sub_forum').css('display', 'block');
+		<!--{else}-->
+			$('.sub_forum').css('display', 'none');
+		<!--{/if}-->
+		$('.subforumshow').on('click', function() {
+			var obj = $(this);
+			var subobj = $(obj.attr('href'));
+			if(subobj.css('display') == 'none') {
+				subobj.css('display', 'block');
+				obj.find('img').attr('src', '{$_G['style']['styleimgdir']}/touch/common/images/collapsed_yes.png');
+			} else {
+				subobj.css('display', 'none');
+				obj.find('img').attr('src', '{$_G['style']['styleimgdir']}/touch/common/images/collapsed_no.png');
+			}
+		});
+	 })();
+</script>
+
+<!--{/if}-->
+<!--{template common/footer}-->

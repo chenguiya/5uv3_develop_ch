@@ -1,0 +1,23 @@
+<!--{block return}-->
+<!--周贡献与总贡献 start-->
+<div class="widget_con">
+	 <ul class="chtb_h cl">
+		 <li class="a" id="new" onmouseover="this.className='a';$('top').className='';$('newuserlist').style.display='block';$('topuserlist').style.display='none';"><a href="javascript:;">周贡献</a></li>
+		 <li id="top" onmouseover="this.className='a';$('new').className='';$('topuserlist').style.display='block';$('newuserlist').style.display='none';"><a href="javascript:;">总贡献</a></li>
+	 </ul>
+	 <div class="widget_bd">
+		  <ul class="week_Mul cl" id="newuserlist" style="display:block;">
+		  	<!--{loop $weekcredits $key $item}-->
+		  	<!--{eval $num = $key+1;}-->
+		   	<li <!--{if $key<3}-->class="week_red"<!--{/if}-->><i>$num.</i>&nbsp;&nbsp;$item[username]<span>贡献：$item[weekcredits]</span></li>
+		  	<!--{/loop}-->
+		  </ul>
+		  <ul class="week_Mul cl" id="topuserlist" style="display:none;">
+		  	<!--{loop $credits $key $item}-->
+		  	<!--{eval $num = $key+1;}-->
+		   	<li <!--{if $key<3}-->class="week_red"<!--{/if}-->><i>$num.</i>&nbsp;&nbsp;$item[username]<span>贡献：$item[credits]</span></li>
+		  	<!--{/loop}-->
+		  </ul>
+	 </div>
+</div>
+<!--{/block}-->
