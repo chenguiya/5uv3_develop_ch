@@ -1,0 +1,61 @@
+<!--{template common/header_special}-->
+
+<link type="text/css" href="$_G['config'][static]/topic/css_nba.css" rel="stylesheet" />
+<div class="football_headerbg">
+     <div class="nba_content">
+	      <p><img src="$_G['config'][static]/topic/2015nba/foot_head_01.jpg" width="1000" height="167" border="0"></p>
+		  <p><img src="$_G['config'][static]/topic/2015nba/foot_head_02.jpg" width="1000" height="166" border="0"></p>
+	 </div>
+</div>
+<div class="football_wrap">
+     <div class="foot_cont1">
+	      <div class="nba_content cl">
+	      <!--[diy=diy1]--><div id="diy1" class="area"><div id="frameFD2Jkj" class="frame move-span cl frame-2-1"><div id="frameFD2Jkj_left" class="column frame-2-1-l"><div id="frameFD2Jkj_left_temp" class="move-span temp"></div><!--{block/80}--></div><div id="frameFD2Jkj_center" class="column frame-2-1-r"><div id="frameFD2Jkj_center_temp" class="move-span temp"></div><!--{block/81}--></div></div><div id="frame8sM6V5" class="frame move-span cl frame-1"><div id="frame8sM6V5_left" class="column frame-1-c"><div id="frame8sM6V5_left_temp" class="move-span temp"></div></div></div><div id="frameOF31z6" class="frame move-span cl frame-1"><div id="frameOF31z6_left" class="column frame-1-c"><div id="frameOF31z6_left_temp" class="move-span temp"></div><!--{block/82}--></div></div></div><!--[/diy]-->
+		  </div>
+	 </div>
+	 <div class="foot_cont2">
+	 <!--[diy=diy2]--><div id="diy2" class="area"></div><!--[/diy]-->	      
+	 </div>
+	 <div class="blank20"></div>
+	 <div class="nba_cont3">
+	      <div class="nba_content cl">
+	      <!--[diy=diy3]--><div id="diy3" class="area"><div id="frame2z91l6" class="frame move-span cl frame-2-1"><div id="frame2z91l6_left" class="column frame-2-1-l"><div id="frame2z91l6_left_temp" class="move-span temp"></div><!--{block/83}--></div><div id="frame2z91l6_center" class="column frame-2-1-r"><div id="frame2z91l6_center_temp" class="move-span temp"></div><!--{block/84}--></div></div><div id="framezo44Pt" class="frame move-span cl frame-1"><div id="framezo44Pt_left" class="column frame-1-c"><div id="framezo44Pt_left_temp" class="move-span temp"></div><!--{block/86}--></div></div></div><!--[/diy]-->
+		  </div>
+	 </div>
+	 <div class="blank20"></div>
+	 <div class="nba_cont4">
+	 <!--[diy=diy4]--><div id="diy4" class="area"></div><!--[/diy]-->	       
+	 </div>
+	 <div class="blank20"></div>
+	 <div class="nba_cont5">
+	      <div class="nba_content cl">
+		       <div class="cont5_left">
+			        <h3 class="h3_hdtitle"><span>官方微博</span></h3>
+					<div class="cont5_weibo">
+					     <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=5&isTitle=0&noborder=1&isWeibo=1&isFans=0&uid=1735856841&verifier=a36ceb4f&colors=d6f3f7,fff,373737,9a9a9a,fbfafa&dpc=1"></iframe>
+					</div>
+			   </div>
+			   <div class="cont5_right">
+			        <h3 class="h3_hdtitle"><span>我来说两句</span></h3>
+					<div class="cont5_comment">
+					     <!--{if $topic['allowcomment']==1}-->
+	{eval
+		$data = &$topic;
+		$common_url = "portal.php?mod=comment&id=$topicid&idtype=topicid";
+		$form_url = "portal.php?mod=portalcp&ac=comment";
+		$commentlist = portaltopicgetcomment($topicid);	}
+	<!--{template portal/portal_comment}-->
+<!--{/if}-->
+					</div>
+			   </div>
+		  </div>
+	 </div>
+	 <div class="blank20"></div>
+</div>
+
+<script type="text/javascript">
+jq(function(){
+   jq(".foot3_table tr:even,.foot4_table tr:even").addClass("even");
+});
+</script>
+<!--{template common/footer}-->

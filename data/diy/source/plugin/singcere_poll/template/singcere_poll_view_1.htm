@@ -1,0 +1,433 @@
+<!--{template common/header}-->
+<style id="diy_style" type="text/css">#portal_block_46 {  margin-bottom:10px !important;margin-top:0px !important;margin-right:0px !important;margin-left:0px !important;}#portal_block_50 {  margin-bottom:30px !important;margin-top:0px !important;margin-right:0px !important;margin-left:0px !important;}#portal_block_52 {  margin-bottom:10px !important;margin-top:0px !important;margin-right:0px !important;margin-left:0px !important;}#portal_block_43 {  margin-top:0px !important;margin-right:0px !important;margin-bottom:30px !important;margin-left:0px !important;}#framez5u2k2 {  margin:0px !important;}</style>
+<link rel="stylesheet" href="source/plugin/singcere_poll/template/src/css/global.css">
+<link rel="stylesheet" href="source/plugin/singcere_poll/template/src/css/style{$theme[color]}.css">
+<link rel="stylesheet" href="source/plugin/singcere_poll/template/src/css/font-awesome.min.css">
+<link rel="stylesheet" href="source/plugin/singcere_poll/template/src/css/uikit.css">
+<script type="text/javascript" src="source/plugin/singcere_poll/template/src/js/qrcode.js"></script>
+<script type="text/javascript" src="{STATICURL}js/mobile/jquery-1.8.3.min.js?{VERHASH}"></script>
+<script type="text/javascript" src="source/plugin/singcere_poll/template/src/js/jquery.scrollto.js"></script>
+<script type="text/javascript" src="source/plugin/singcere_poll/template/src/js/uikit.js"></script>
+<script type="text/javascript" language="javascript">
+jq = $.noConflict();
+ var wpwidth=jq("#wp").width();
+ jq("#poll-header").width(wpwidth);
+ 
+ function setWidth(){
+	 jq("#wp").width();
+ }
+ 
+  function createtwo(width,height,id){
+var qrcode = new QRCode(document.getElementById(id), {
+	width : width,
+	height : height,
+	
+});
+
+	
+	var elText = document.URL; 
+	qrcode.makeCode(elText);
+}
+
+   
+
+   function goto(id) {
+        jq("#" + id).ScrollTo(800);
+    }
+ 
+    errorcode = new Array();
+    errorcode[-1] = "{lang singcere_poll:hefa}";
+    errorcode[-2] = "{lang singcere_poll:nozhuti}";
+    errorcode[-3] = "{lang singcere_poll:noitem}";
+    errorcode[-4] = "{lang singcere_poll:nobegin}";
+    errorcode[-5] = "{lang singcere_poll:gameover}";
+    errorcode[-6] = "{lang singcere_poll:nopeople}";
+    errorcode[-7] = "{lang singcere_poll:pover}";
+    errorcode[-8] = "{lang singcere_poll:hpolled}" + $theme[period] + "{lang singcere_poll:again}";
+    errorcode[-9] = "{lang singcere_poll:thpolled}" + $theme[period] + "{lang singcere_poll:again}";
+    errorcode[-10] = "{lang singcere_poll:login}";
+
+    function dopoll(pid, sid) {
+        jq.get("{$_G[siteurl]}plugin.php?id=singcere_poll:singcere_poll&formhash={FORMHASH}&mod=poll&sid=" + sid + "&pid=" + pid,
+                function(data, status) {
+				
+					rearray = data.split("#");
+                    if (rearray[0] == 1) {
+                        document.getElementById("peopel_" + sid).innerHTML = "<i class='fa fa-thumbs-up pr5'></i>支持(" + rearray[1] + ")";
+                    } else {
+					
+                        showDialog(errorcode[rearray[0]], "alert");
+                        if (rearray[0] == -10) {
+                            showWindow('login', 'member.php?mod=logging&action=login');
+                        }
+                    }
+                });
+    }
+    function doSubmit(uid,can) {
+       if(uid==0&&can==0){
+	    showWindow('login', 'member.php?mod=logging&action=login');
+		return false;
+	   }
+    
+		return true;
+    }
+    function dodel(obj) {
+        if (confirm("{lang singcere_poll:suredel}")) {
+            showWindow(obj.id, obj.href);
+        }
+		
+        return false;
+    }
+	
+jq(function(){
+	(function($) {
+		var screenWidth = $(window).width() || document.documentElement.clientWidth || document.body.clientWidth;
+		var wpWidth = $('#wp').width();
+		var marginWidth = (screenWidth-wpWidth) / 2;
+		var a_fr = $('div.a_fr');
+		var temp = marginWidth-a_fr.width();
+		var right = temp-25 > 0 ? temp-25 : 0; 
+		a_fr.css({'right': right});
+	})(jq);
+});
+
+</script>
+
+<div id="pt" class="bm cl">
+    <div class="z">
+        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em>&raquo;</em><a href="plugin.php?id=singcere_poll:singcere_poll&mod=list">{lang singcere_poll:poll}</a><em>&raquo;</em>$theme[subject]
+    </div>
+    <!--{if $perm}-->
+    <div class="y">
+        <a href="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=select&op=list&pid=$theme[pid]" class="xi2"> {lang singcere_poll:pitemmang}</a>
+        <span class="pipe">|</span>
+        <a href="plugin.php?id=singcere_poll:singcere_poll&mod=cp&ac=poll&op=edit&pid=$theme[pid]" class="xi2">{lang singcere_poll:edit}</a>
+    </div>
+    <!--{/if}-->
+</div>
+<div class="poll-wp">
+
+
+    <!--[diy=diy1]--><div id="diy1" class="area"><div id="frameOG881G" class="frame move-span cl frame-1"><div id="frameOG881G_left" class="column frame-1-c"><div id="frameOG881G_left_temp" class="move-span temp"></div><!--{block/41}--></div></div></div><!--[/diy]-->
+
+    <div class="poll-header" id="poll-header">
+      
+        <!--{if $mnav[nav1]}--><a class="cur" href="" href="javascript:void(0);" onclick="javascript:goto('c1'); return false;">$mnav[nav1]</a><!--{/if}-->
+        <!--{if $mnav[nav2]}--><a href="" href="javascript:void(0);" onclick="javascript:goto('c2'); return false;">$mnav[nav2]</a><!--{/if}-->
+        <!--{if $mnav[nav3]}--><a href="" href="javascript:void(0);" onclick="javascript:goto('c3'); return false;">$mnav[nav3]</a><!--{/if}-->
+        <!--{if $mnav[nav4]}--><a href="" href="javascript:void(0);" onclick="javascript:goto('c4'); return false;">$mnav[nav4]</a><!--{/if}-->
+        <!--{if $mnav[p_nav]}--><a href="" href="javascript:void(0);" onclick="javascript:goto('ctp'); return false;">$mnav[p_nav]</a><!--{/if}-->
+        <!--{if $mnav[c_nav]}--><a href="" href="javascript:void(0);" onclick="javascript:goto('cpl'); return false;">$mnav[c_nav]</a><!--{/if}-->  
+  
+    </div>
+
+    <!--{if $theme[blank] ==1}-->
+    <div class="ml20 mr20">
+        <div id="c1" class="container" data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+        <!--[diy=diy-all01]--><div id="diy-all01" class="area"><div id="framebgM5m6" class="pt150 frame move-span cl frame-1"><div id="framebgM5m6_left" class="column frame-1-c"><div id="framebgM5m6_left_temp" class="move-span temp"></div><!--{block/42}--></div></div></div><!--[/diy]-->
+        </div>
+        <div id="c2" class="container" data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+        <!--[diy=diy-all02]--><div id="diy-all02" class="area"><div id="framehR2pRY" class="pt150 frame move-span cl frame-1"><div id="framehR2pRY_left" class="column frame-1-c"><div id="framehR2pRY_left_temp" class="move-span temp"></div><!--{block/50}--><!--{block/51}--></div></div></div><!--[/diy]-->
+        </div>
+        <div id="c3" class="container" data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+        <!--[diy=diy-all03]--><div id="diy-all03" class="area"><div id="framegreZg2" class="pt150 frame move-span cl frame-1"><div id="framegreZg2_left" class="column frame-1-c"><div id="framegreZg2_left_temp" class="move-span temp"></div><!--{block/43}--><!--{block/46}--></div></div></div><!--[/diy]-->
+        </div>
+        <div id="c4" class="container" data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+        <!--[diy=diy-all04]--><div id="diy-all04" class="area"><div id="framez5u2k2" class="pt150 frame move-span cl frame-1"><div id="framez5u2k2_left" class="column frame-1-c"><div id="framez5u2k2_left_temp" class="move-span temp"></div><!--{block/52}--><!--{block/49}--></div></div></div><!--[/diy]-->
+        </div>
+    </div>
+    <!--{else}-->
+
+    <div class="cat01" id="c1">
+        <h2 class="spr tit01" data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+            <!--[diy=diy-tit01]--><div id="diy-tit01" class="area"></div><!--[/diy]-->
+        </h2>
+        <div class="piece">
+            <div class="tt">
+                <!--[diy=diy-tt]--><div id="diy-tt" class="area"></div><!--[/diy]-->    
+            </div>
+            <div class="bd cl">
+                <div class="pnotice">
+                    <!--[diy=diy-xgtz]--><div id="diy-xgtz" class="area"></div><!--[/diy]-->    
+                </div>
+                <div class="organizer" data-uk-scrollspy="{cls:'uk-animation-slide-right', delay:500, repeat: false}">
+                    <!--[diy=diy-zbf]--><div id="diy-zbf" class="area"></div><!--[/diy]-->  
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="cat02" id="c2">
+        <h2 class="spr tit02" data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+            <!--[diy=diy-tit02]--><div id="diy-tit02" class="area"></div><!--[/diy]-->
+        </h2>
+        <div class="poll-prize cl">
+            <div class="prize-li" data-uk-scrollspy="{cls:'uk-animation-slide-left', delay:500, repeat: true}">
+                <!--[diy=diy-prizeli1]--><div id="diy-prizeli1" class="area"></div><!--[/diy]-->
+            </div>
+            <div class="prize-li" data-uk-scrollspy="{cls:'uk-animation-slide-bottom', delay:300, repeat: true}">
+                <!--[diy=diy-prizeli2]--><div id="diy-prizeli2" class="area"></div><!--[/diy]-->
+            </div>
+            <div class="prize-li" data-uk-scrollspy="{cls:'uk-animation-slide-right', delay:500, repeat: true}">
+                <!--[diy=diy-prizeli3]--><div id="diy-prizeli3" class="area"></div><!--[/diy]-->
+            </div>
+        </div>
+        <div class="cl">
+            <!--[diy=diy-prizeli4]--><div id="diy-prizeli4" class="area"></div><!--[/diy]-->
+        </div>
+    </div>
+    <!--{/if}-->
+
+    <div class="container cat03" id="ctp">
+        <!--<div style="position: relative;">-->
+            <!--<div class="left-bar" id="left-bar" data-uk-scrollspy="{cls:'uk-animation-slide-left', delay:500, repeat: false}">-->
+                <!--{loop $types $key $value}-->
+                <!--<a href="javascript:void(0);" onclick="javascript:goto('the_$value[stid]'); return false;"><i class="fa fa-chevron-circle-right pr10"></i>$value[name]</a>-->
+                <!--{/loop}-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <h2 class="spr tit03" id="tit-03" data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+            <!--[diy=diy-tit03]--><div id="diy-tit03" class="area"><div id="frames4AYdh" class="frame move-span cl frame-1"><div id="frames4AYdh_left" class="column frame-1-c"><div id="frames4AYdh_left_temp" class="move-span temp"></div><!--{block/44}--></div></div></div><!--[/diy]-->
+        </h2>
+
+        <div class="poll-people cl" id="poll-people">
+            <!--{loop $selitem $key $value}-->
+
+            <!--<h3 id="the_$key"><i class="fa fa-chevron-circle-right pr10"></i>$types[$key][name]</h3>-->
+            <ul class="cl">
+                <!--{eval $x = 1}-->
+                <!--{loop $selitem[$key] $key1 $value1}-->
+                <li class="poll-li {if $x % 3 == 0}last{/if}" data-uk-scrollspy="{cls:'uk-animation-fade', delay:{echo $x*100}, repeat: false}">
+                    <div class="poll-div">
+                        <a href="forum.php?mod=viewthread&tid=$value1[tid]" class="poll-div-a" target="_blank">
+                            <!--{loop $attach[$value1[sid]] $key2 $value2}-->
+                            <img class="pimg" src="{PRE_PATH}$value2[attachment]" alt="$types[$key][name]">
+                            <!--{/loop}-->
+                        </a>
+                        <div class="ppc">
+                            <p class="ptitle">$value1[name]</p>
+                            <p class="pmessage"><!--{eval echo nl2br($value1[troduce])}--></p>
+                            <p class="pbtn cl">
+                                <a href="javascript:void(0)"  onclick="dopoll($theme[pid], $value1[sid])" id="peopel_$value1[sid]"><i class="fa fa-thumbs-up pr5"></i>{lang singcere_poll:zhichi} ($value1[pnum])</a>
+                                <a id="btn-share-{$value1[sid]}" class="btn_share" onMouseOver="showMenu({'ctrlid':this.id,'ctrlclass':'a'});">{lang singcere_poll:lapiao}<i class="fa fa-caret-down pl5"></i></a>
+                            </p>
+                        </div>
+                        
+
+                    </div>
+					<ul id="btn-share-{$value1[sid]}_menu" class="btn-share-body" style="display: none;">
+                            <li><a href="javascript:;" onclick="window.open('http://v.t.sina.com.cn/share/share.php?title=' + encodeURIComponent('{lang singcere_poll:hello}{$_G['setting']['bbname']}【{$_G[siteurl]}】{lang singcere_poll:doing}{$theme[subject]}{lang singcere_poll:tougei}【{$value1[name]}】{lang singcere_poll:shuming}') + '&url=' + encodeURIComponent(location.href) + '&appkey=&pic={$_G[siteurl]}{PRE_PATH}{$value2[attachment]}');">{lang singcere_poll:blog}</a></li>
+                            <li><a href="javascript:void(0)" class="scan" id="wemcn" onclick="showMenu({'ctrlid':this, 'menuid':'wemcn_menu', 'mtype':'win', 'duration':'3', 'pos':'00'});">{lang singcere_poll:weixin}</a></li>
+                            <li><a href="javascript:;" target="_blank"  class="qzone" onclick="window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?title=' + encodeURIComponent('{lang singcere_poll:hello}{$_G['setting']['bbname']}{lang singcere_poll:doing}{$theme[subject]}{lang singcere_poll:tougei}【{$value1[name]}】{lang singcere_poll:shuming}') + '&url=' + encodeURIComponent(location.href) + '&pics=' + encodeURIComponent('{$_G[siteurl]}{PRE_PATH}{$value2[attachment]}') + '&site=' + encodeURIComponent('$_G[siteurl]'));">{lang singcere_poll:space}</a></li>
+                        </ul>
+                </li>
+                <!--{eval $x ++}-->
+                <!--{/loop}-->
+            </ul>
+            <!--{/loop}-->
+            <div class="pmore" data-uk-scrollspy="{cls:'uk-animation-slide-left', delay:500, repeat: true}"><!--[diy=diy-pmore]--><div id="diy-pmore" class="area"><div id="framehQ9GUi" class="frame move-span cl frame-1"><div id="framehQ9GUi_left" class="column frame-1-c"><div id="framehQ9GUi_left_temp" class="move-span temp"></div><!--{block/45}--></div></div></div><!--[/diy]--></div>
+            <div id="wemcn_menu" style="display:none;">
+                 <i class="ewmsj"></i> 
+                 <div id="ewm" class="ewmDiv clearfix">
+                    <p>{lang singcere_poll:step1}</p>
+                    <img id="ewmimg" class="ewmimg"src="http://chart.googleapis.com/chart?cht=qr&chs=140x140&chld=L|0&chl=http%3a%2f%2fgroup.5usport.com%2fplugin.php%3fid%3dsingcere_poll%3asingcere_poll%26mod%3dview%26pid%3d1" width="140" height="140" />
+
+                    <p> {lang singcere_poll:step2}</p>
+            
+                 </div> 
+                <a href="javascript:void(0)" id="ewmkg"></a>
+                 
+            </div>
+        </div>
+
+    </div>
+    <div id="fastpostreturn" style="margin:-5px 0 5px"></div>
+
+    <!--{if $theme[mark] == 1}-->
+    <div class="container cat04" id="cpl">
+        <h2 class="spr tit04" data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+            <!--[diy=diy-tit04]--><div id="diy-tit04" class="area"></div><!--[/diy]-->
+        </h2>
+        <div class="piece">
+            <div class="bd cl">
+                <div class="pnotice pl">
+                    <form id="cform" action="plugin.php?id=singcere_poll:singcere_poll&mod=remark"  method="post">
+                        <input type="hidden" name="formhash" value="{FORMHASH}" />
+                         <input type="hidden" name="remarksubmit"  value="yes" />
+						 <input type="hidden" name="mark"  value="$theme[mark]" />
+						 
+                          <input type="hidden" name="reffer"  value="$url" />
+						    <input type="hidden" name="pid"  value="$theme[pid]" />
+                                <div id="comment" class="p20">
+                                    <div class="tedt">
+                                        <div class="area">
+                                            <textarea name="message" class="pt" id="message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <p class="ptn mb20">
+                                        <button type="submit" onclick="doSubmit($uid,$theme[canmark]);" name="commentsubmit_btn" id="commentsubmit_btn" value="true" class="pn"> <strong>{lang singcere_poll:comment}</strong>
+                                        </button>
+                                    </p>
+                                    <div id="comment_ul">
+                                        <a name="comment_anchor_1"></a>
+
+                                        <!--{loop $marks $key $value}-->                        
+                                        <dl class="bbda cl">
+                                            <a href="home.php?mod=space&uid=$value[uid]" class="comment-avatar">
+                                                <!--{avatar($value[uid],small)}--> </a>
+                                            <dt class="mbm cl">
+
+                                                <a href="$_G[siteurl]home.php?mod=space&uid=$value[uid]" class="xi2" c="1" mid="card_8252">$value[username]</a>
+
+                                                <span class="xg1 xw0">
+                                                    <!--{eval echo dgmdate($value[dateline])}--> </span>
+                                                <span class="y">
+
+                                                    <!--{if $perm}-->                        
+                                                    <a href="#" id="c1" onclick='showWindow("c1","plugin.php?id=singcere_poll:singcere_poll&formhash={FORMHASH}&mod=remark&op=delete&rid=$value[rid]")'>{lang singcere_poll:delete}</a>
+                                                    <span class="pipe">|</span>
+                                                    <!--{if $value[hot]==1}-->                        
+                                                    <a href="#" id="c2" onclick='showWindow("c2","plugin.php?id=singcere_poll:singcere_poll&formhash={FORMHASH}&mod=remark&op=unsethot&rid=$value[rid]")'>{lang singcere_poll:uhot}</a>
+                                                    <!--{else}-->                        
+                                                    <a href="#" id="c3" onclick='showWindow("c3","plugin.php?id=singcere_poll:singcere_poll&formhash={FORMHASH}&mod=remark&op=sethot&rid=$value[rid]")'>{lang singcere_poll:ahot}</a>
+                                                    <!--{/if}-->                        
+                                                    <!--{/if}--> </span>
+                                            </dt>
+                                            <dd>$value[message]</dd>
+                                        </dl>
+                                        <!--{/loop}--> </div>
+                                </div>
+                             
+                    </form>
+                </div>
+                <div class="organizer pl" data-uk-scrollspy="{cls:'uk-animation-slide-right', delay:500, repeat: false}">
+                    <h3><i class="fa fa-pencil pr5"></i>{lang singcere_poll:hcomm}</h3>
+                    <div id="comment">
+                        <!--{loop $hot $key $value}-->                        
+                        <dl class="bbda cl">
+                            <a href="home.php?mod=space&uid=$value[uid]" class="comment-avatar">
+                                <!--{avatar($value[uid],small)}--> </a>
+                            <dt class="mbm cl">
+
+                                <a href="$_G[siteurl]home.php?mod=space&uid=$value[uid]" class="xi2" c="1" mid="card_8252">$value[username]</a>
+
+                                <span class="xg1 xw0">
+                                    <!--{eval echo dgmdate($value[dateline])}--> </span>
+                                <span class="y"></span>
+                            </dt>
+                            <dd>$value[message]</dd>
+                        </dl>
+                        <!--{/loop}-->
+                    </div>
+                    <h3 class="mt30"><i class="fa fa-qrcode pr5"></i>{lang singcere_poll:wshare}</h3>
+					<div id="qrcode" style="width:300px; height:300px; margin-top:15px;"></div>
+                    <script>createtwo(190,190,'qrcode');</script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--{/if}-->
+
+
+    <!--{if $theme[blank] ==1}-->
+    <div id="c6" data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+    <!--[diy=diy-all05]--><div id="diy-all05" class="area"></div><!--[/diy]-->
+    </div>
+    <!--{/if}-->
+
+</div>
+
+
+
+<script type="text/javascript">
+if (!(BROWSER.ie && BROWSER.ie < 7)) {
+    _attachEvent(window, 'scroll', function () {
+        var left_refer_rect = $('c1').getBoundingClientRect();
+        if (left_refer_rect.top < 40) {
+            if ($('poll-header')) {
+                $('poll-header').style.top = '0';
+                $('poll-header').style.position = 'fixed';
+            }
+ 
+        } else {
+            if ($('poll-header')) {
+                $('poll-header').style.position = '';
+            }
+ 
+        }
+    });
+}
+
+if (!(BROWSER.ie && BROWSER.ie < 7)) {
+    _attachEvent(window, 'scroll', function () {
+        var left_refer_rect = $('poll-people').getBoundingClientRect();
+        if (left_refer_rect.top < 0) {
+            if ($('left-bar')) {
+                $('left-bar').style.top = '100px';
+                $('left-bar').style.position = 'fixed';
+                $('left-bar').style.left = '50%';
+                $('left-bar').style.marginLeft = '-460px';
+            }
+ 
+        } else {
+            if ($('left-bar')) {
+                $('left-bar').style.position = '';
+                $('left-bar').style.top = '{$theme[juli]}px';
+                $('left-bar').style.left = '0';
+                $('left-bar').style.marginLeft = '0';
+            }
+ 
+        }
+    });
+}
+
+
+jQuery(window).load(function(){
+  fixedArrNum=new Array();
+  jQuery(".container").each(function(){
+    fixedArrNum.push(jQuery(this).offset().top) 
+  })
+  
+  jQuery(".poll-header a").each(function(index,obj){
+    jQuery(this).bind("click",function(){
+      jQuery(".poll-header a").removeClass("cur");
+      jQuery(obj).addClass("cur")
+      jQuery("html,body").stop().animate({scrollTop:fixedArrNum[index]-40},1000);
+    })
+  })
+  jQuery(window).scroll(function(){
+    jQuery.each(fixedArrNum,function(index,obj){
+      if(jQuery(document).scrollTop() >= obj-60 ){
+        jQuery(".poll-header a").removeClass("cur");
+        jQuery(".poll-header a").eq(index).addClass("cur")
+      }
+    })
+  })
+  
+  /*
+  var windowWidth=jQuery(window).width();
+  var windowHeight=jQuery("body").height();
+  jQuery(window).scroll(function(){
+    if(jQuery(document).scrollTop()>windowHeight-1200){
+      jQuery(".topnav").hide();
+    }else{
+      jQuery(".topnav").show();
+    }
+  })
+  if(windowWidth>1145){
+    //jQuery(".mainContent").css({paddingRight:"80px"})
+    jQuery(".side").show();
+  }
+  
+*/
+  
+  
+});
+
+
+</script>
+<!--{ad/custom_2}-->
+<!--{template common/footer}-->

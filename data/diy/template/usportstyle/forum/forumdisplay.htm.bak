@@ -1,0 +1,224 @@
+<!--{template common/sub_common_header}-->
+<div class="blank15"></div>
+<div class="ad_banner">
+<!-- 108811：首页-频道-列表-内容-顶部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+</div>
+<!--{template extend/desktop/channel_common_header}-->
+<!--{if $_G['forum']['ismoderator']}-->
+	<script type="text/javascript" src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
+<!--{/if}-->
+<!--{if !isset($_GET['tpl'])}-->
+<div class="foruCon">
+<div class="foruMain">
+	<!--{if empty($_GET['typeid'])}-->
+	<!--精选帖子 start-->
+	<!--[diy=diy_selectthread]--><div id="diy_selectthread" class="area"><div id="frameMvWsuG" class="frame move-span cl frame-1"><div id="frameMvWsuG_left" class="column frame-1-c"><div id="frameMvWsuG_left_temp" class="move-span temp"></div><!--{block/150}--></div></div></div><!--[/diy]-->     
+	<!--精选帖子 end-->
+	<!--{/if}-->
+    
+	<!--{template forum/forumdisplay_list}-->
+</div>
+
+<div class="ball_right fr">
+	<!--{if empty($_GET['typeid'])}-->
+            <div class="bg_publish"><div class="ball_publish"><a id="btn_newpost_forum" href="forum.php?mod=post&action=newthread&fid={$_G['fid']}"><i></i>发表帖子</a></div></div>
+            
+			<!--{if $match[0][a_name] || $match[0][b_name]}-->
+			<div id="div_match" class="chComd bgnone chMatch clearfix">
+				<ul>
+					<li><a href="javascript:" class="mPrev">上一场</a></li>
+					<li><a href="javascript:" class="active" id="match_date_short">{$match[0]['match_date']}</a></li>
+					<li><a href="javascript:" class="mNext">下一场</a></li>
+				</ul>
+				<div class="matchCont current">
+					<div class="match_l fl clearfix">
+						<img id="a_logo" src="{$match[0][a_logo]}" width="65" height="65">
+						<h4 id="a_name">{$match[0][a_name]}</h4>
+					</div>
+					<div class="match_m fl clearfix" id="vs_style" <!--{if $match[0]['status'] == -1}-->style="color: #ccc;"<!--{/if}-->>
+						<h4 id="league_name">{$match[0][league_name]} {$match[0][season]}</h4><br />
+						<!--{if $match[0]['status'] == 0}-->
+						<!--未开始-->
+						<h1 style="margin-top: 23px;" id="a_score"></h1>
+						<h1 style="margin-top: 23px;" id="vs_ab">VS</h1>
+						<h1 style="margin-top: 23px;" id="b_score"></h1>
+						<!--{elseif $match[0]['status'] == 1}-->
+						<!--直播中-->
+						<h1 style="margin-top: 23px;" id="a_score"><!--{if $match[0][a_score]}-->{$match[0][a_score]}<!--{else}-->0<!--{/if}--></h1>
+						<h1 style="margin-top: 23px;" id="vs_ab">-</h1>
+						<h1 style="margin-top: 23px;" id="b_score"><!--{if $match[0][b_score]}-->{$match[0][b_score]}<!--{else}-->0<!--{/if}--></h1>
+						<!--{elseif $match[0]['status'] == -1}-->
+						<!--已结束-->
+						<h1 style="margin-top: 23px;" id="a_score"><!--{if $match[0][a_score]}-->{$match[0][a_score]}<!--{else}-->0<!--{/if}--></h1>
+						<h1 style="margin-top: 23px;" id="vs_ab">-</h1>
+						<h1 style="margin-top: 23px;" id="b_score"><!--{if $match[0][b_score]}-->{$match[0][b_score]}<!--{else}-->0<!--{/if}--></h1>
+						<!--{/if}-->
+						<div id="status_desc">{$match[0]['status_desc']}</div>
+						<input type="hidden" id="curr_match_time" value="{$match[0]['match_time']}">
+					</div>
+					<div class="match_r fl clearfix">
+						<img id="b_logo" src="{$match[0][b_logo]}" width="65" height="65">
+						<h4 id="b_name">{$match[0][b_name]}</h4>
+					</div>
+				</div>
+			</div>
+			<script language="javascript">
+				jQuery(function($){
+					$(".mPrev, .mNext").click(function(){
+						var btn_name = $(this).attr('class');
+						var curr_match_time = $('#curr_match_time').val();
+						var go = btn_name == 'mPrev' ? -1 : 1;
+						var param = 'league_name={$_G["forum"]["league_name"]}&team_name={$_G["forum"]["name"]}&match_time='+curr_match_time+'&go='+go+'&sign=fb574b29f55486b2c8584e7978b0ea88';
+						$.ajax({
+							url: "http://api.5usport.com/v3/to_v3/phpcms/get_match",
+							type: "post",
+							dataType: "json",
+							data: param,
+							timeout: 10000,
+							cache: false,
+							beforeSend: function(XMLHttpRequest){}, 
+							success: function(data, textStatus){
+								if(typeof(data.message) != "undefined")
+								{
+									if(data.success == true)
+									{
+										var match = data.match[0];
+										$('#match_date_short').html(match.match_date_short);
+										$('#a_logo').attr('src', match.a_logo);
+										$('#a_name').html(match.a_name);
+										$('#a_score').html(match.a_score);
+										$('#b_score').html(match.b_score);
+										if(match.status == 0)
+										{
+											$('#vs_ab').html('VS');
+											$('#a_score').html('');
+											$('#b_score').html('');
+										}
+										else
+										{
+											$('#vs_ab').html('-');
+										}
+										if(match.status == -1)
+										{
+											$('#vs_style').attr('style', 'color: #ccc;');
+										}
+										else
+										{
+											$('#vs_style').attr('style', '');
+										}
+										
+										$('#b_logo').attr('src', match.b_logo);
+										$('#b_name').html(match.b_name);
+										$('#status_desc').html(match.status_desc);
+										$('#curr_match_time').val(match.match_time);
+										$('#league_name').html(match.league_name+' '+match.season);
+										
+									}
+								}
+							},
+							complete: function(XMLHttpRequest, textStatus){},
+							error: function(){
+								alert("返回异常！");
+							}
+						});
+					});
+				});
+			</script>
+            <!--{/if}-->
+            <!--{if $moderator_info}-->
+            <div class="chComd clearfix">
+                <div class="chHeader">
+                    <h1 class="fl bt chComd_title">版主</h1>
+                </div>
+                <div class="chBlock fl clearfix">
+                	<!--{loop $moderator_info $val}-->
+                    <div class="chBoard">
+                        <div class="board_c">
+                            <div class="board_l fl clearfix"><a href=""><img src="{$val[avatar]}" width="50" height="50" alt="{$val[username]}"></a></div>
+                            <div class="board_r fl clearfix">
+                                <div class="r_up"><span><a href="">{$val[username]}</a></span></div>
+                                <div class="r_down"><span>简介：<!--{if $val[bio]}-->{$val[bio]}<!--{else}-->这家伙很懒，什么都没有留下！<!--{/if}--></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--{/loop}-->                    
+                </div>
+            </div>
+            <!--{/if}-->
+            <div class="blank15"></div>
+	<!--{/if}-->
+            <div class="ad_boxs">
+            <!-- 108813：首页-频道-列表-内容-右侧button1 类型：固定广告位 尺寸：300x0-->
+			<script type="text/javascript">
+			_acK({aid:108813,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+			</script>
+            </div>
+            <!--{if $_G[forum][type]=='forum'}-->
+            <!--<div class="chComd clearfix">
+                <div class="chHeader"><h1 class="fl bt chComd_title">球员</h1></div>
+                <div class="chBlock fl clearfix">
+                    <div class="chPlayer">
+                        <div class="player_c">
+                        	<!--{loop $players $val}-->
+                            <div class="player_m fl clearfix">
+                                <div class="m_up"><a href="group/{$val[fid]}" target="_blank"><img src="data/attachment/common/{$val[icon]}" width="76" height="102" val="{$val[name]}"></a></div>
+                                <div class="m_down"><a href="group/{$val[fid]}" target="_blank">{$val[name]}</a></div>
+                            </div>
+                            <!--{/loop}-->
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <!--{/if}-->
+
+            <!--推荐球迷会-->
+            <!--{hook/forumdisplay_hotclub}-->
+            <!--推荐球迷会end-->    
+            <div class="blank15"></div>                   
+            <!--{template extend/desktop/sub_activity}-->
+            <div class="blank15"></div> 
+            <div class="ad_boxs">
+            <!-- 108815：首页-频道-列表-内容-右侧button2 类型：固定广告位 尺寸：300x0-->
+			<script type="text/javascript">
+			_acK({aid:108815,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+			</script>
+            </div>
+			<!--积分榜-->
+			<div class="chComd clearfix">
+                <div class="chHeader">
+                    <h1 class="fl bt chComd_title">积分榜</h1>
+                    <a href="javascript:" class="fr chComd_more clearfix">更多</a>
+                </div>
+                <div class="chBlock chScore fl clearfix">                    
+                    <ul class="s_ulHeader">
+                        <li>排名</li>
+                        <li>球队</li>
+                        <li>胜平负</li>
+                        <li>积分</li>
+                    </ul>
+                    <!--{loop $scoreboard $val}-->
+                    <ul class="s_ulBody">
+                        <li class="ch_no{$val->ranking}"></li>
+                        <li>{$val->team_name}</li>
+                        <li>{$val->win}/{$val->draw}/{$val->lost}</li>
+                        <li>{$val->points}</li>
+                    </ul>
+                    <!--{/loop}-->  
+                </div>
+            </div>
+			<!--积分榜end-->            
+        </div>
+<div class="clear"></div>
+</div>
+<div class="ad_banner">
+<!-- 108817：首页-频道-列表-内容-底部通栏 类型：固定广告位 尺寸：1000x0-->
+<script type="text/javascript">
+_acK({aid:108817,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
+</script>
+</div>
+<div class="blank20"></div>
+<!--{/if}-->
+<!--{template common/footer}-->

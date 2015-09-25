@@ -1,0 +1,149 @@
+<!--{template common/sub_common_header}-->
+<!--{template extend/desktop/channel_common_header}-->
+
+<link href="template/usportstyle/common/main.css" rel="stylesheet" />
+<div class="box">
+	<div class="channelMain">
+    	<div class="channelTitle">新闻动态</div>
+		
+       <div class="channeNewImg">
+        	<a href="#" target="_blank" title=""><img src="../../common/images/img.jpg" title="" alt="" width="330" height="415"/></a>
+        	<a href="#" target="_blank" title="" class="channeNewT">NBA赛场谁最横? 哈登绝杀单节37分!</a>
+        </div>
+        
+        <div class="channeNews">
+        	<dl>
+            	<dt><a href="#" target="_blank" title="">NBA赛场谁最横? 哈登绝杀单节37分!</a></dt>
+                <dd>5U体育3月27日报道 根据国外媒体报道称，西班牙、巴萨传奇球星哈维将很可能在本赛季结束后离开巴萨，而他的下家不是其他球队。</dd>
+            </dl>
+            <dl>
+            	<dt><a href="#" target="_blank" title="">NBA赛场谁最横? 哈登绝杀单节37分!</a></dt>
+                <dd>5U体育3月27日报道 根据国外媒体报道称，西班牙、巴萨传奇球星哈维将很可能在本赛季结束后离开巴萨，而他的下家不是其他球队。</dd>
+            </dl>
+            <dl>
+            	<dt><a href="#" target="_blank" title="">NBA赛场谁最横? 哈登绝杀单节37分!</a></dt>
+                <dd>5U体育3月27日报道 根据国外媒体报道称，西班牙、巴萨传奇球星哈维将很可能在本赛季结束后离开巴萨，而他的下家不是其他球队。</dd>
+            </dl>
+        </div> 
+        <div class="clear"></div>
+    </div>
+    <div class="eventMain">
+    	<div class="eventRank">
+        	<div class="channelTitle">联赛排名</div>
+            <div class="eventRankL">
+            	<div><span>场次</span>15</div>
+                <div><span>胜</span>15</div>
+                <div><span>平</span>15</div>
+                <div><span>负</span>15</div>
+            </div>
+            <div class="eventRankM">12</div>
+            
+            <div class="eventRankL">
+            	<div><span>进球</span>15</div>
+                <div><span>失球</span>15</div>
+                <div><span>净胜球</span>15</div>
+                <div><span>积分</span>15</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="jianju20"></div>
+        <div class="eventRank">
+        	<div class="channelTitle">赛程预告</div>
+            <div class="trailerCon">
+            <div class="trailer">
+            	<div class="trailerL">
+                	<b>西甲第8轮</b>
+                    <p>皇马&nbsp;VS&nbsp;巴塞罗那 </p>
+                </div>
+                <div class="trailerR">
+                	<p class="traTime">8月26日 22:12</p>
+                    <a href="#" target="_blank" class="recom">荐彩</a>
+                    <a href="#" target="_blank" class="remind">提醒</a>
+                </div>
+            </div>
+            
+            <div class="trailer">
+            	<div class="trailerL">
+                	<b>西甲第8轮</b>
+                    <p>皇马&nbsp;VS&nbsp;巴塞罗那 </p>
+                </div>
+                <div class="trailerR">
+                	<p class="traTime">8月26日 22:12</p>
+                    <a href="#" target="_blank" class="recom">荐彩</a>
+                    <a href="#" target="_blank" class="remind">提醒</a>
+                </div>
+            </div>
+            
+            <div class="trailer">
+            	<div class="trailerL">
+                	<b>西甲第8轮</b>
+                    <p>皇马&nbsp;VS&nbsp;巴塞罗那 </p>
+                </div>
+                <div class="trailerR">
+                	<p class="traTime">8月26日 22:12</p>
+                    <a href="#" target="_blank" class="recom">荐彩</a>
+                    <a href="#" target="_blank" class="remind">提醒</a>
+                </div>
+            </div>
+            <div class="clear"></div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="clear"></div>
+</div>
+
+<div class="jianju15"></div>
+<!--{hook/forumdisplay_player_lists}-->
+<div class="jianju20"></div>
+
+<div class="fansBox">
+	<div class="channelTitle">球迷会</div>
+    <!--{hook/forumdisplay_index_server_vip}--> 
+    <!--{hook/forumdisplay_fansclub_lists}-->
+    <div class="teamFanR">
+    	<!--{hook/forumdisplay_good_chairman}-->
+        <div class="jianju"></div>
+        <!--{hook/forumdisplay_much_contribution_man}-->
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="jianju20"></div>
+
+<div class="column">
+	
+     <!--{hook/forumdisplay_clubnews}-->
+    <div class="columnR">
+    	<!--公共模块：产品推荐位-->
+		<!--{template extend/desktop/sidebar_promo}-->
+        
+        <div class="jianju15"></div>
+        
+        <div class="widget_con">
+        	<div class="widget_hd"><h3>积分榜</h3></div>
+            <div class="widget_bd">
+            <div class="columnSideT"><span class="hotline">排名</span><span class="teamline">球队</span><span class="winline">胜/平/负</span><span class="scoreline">积分</span></div>
+            <div class="daren">
+                <ul>
+                    <!--{loop $scoreboard $key $v}-->
+                    <li><em <!--{if ($key < 3)}class="fisrtc"{/if}-->>{$v->ranking}</em></span><span class="teamline">{$v->team_name}</span><span class="winline">{$v->win}/{$v->draw}/{$v->lost}</span><span class="scoreline">{$v->points}</span></li>
+                    <!--{/loop}-->
+                </ul>
+            </div>
+            </div>
+        </div>
+        
+        <div class="jianju15"></div>
+        
+        <!--公共模块：视频图片-->
+		<!--{hook/forumdisplay_sort_media}-->
+    </div>
+    
+    
+    <div class="clear"></div>
+</div>
+
+<div class="jianju40"></div>
+<!--{template common/footer}-->
