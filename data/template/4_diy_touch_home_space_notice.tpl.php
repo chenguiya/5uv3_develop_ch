@@ -119,7 +119,7 @@
                 <?php if($arr_||$a_arr_) { ?>
                     <div class="xld xlda">
                         <div class="nts hmes">
-                            <ul class="cl <?php if($key==1) { ?>bw0<?php } ?>" <?php echo $value['rowid'];?> notice="<?php echo $value['id'];?>">
+                            <ul class="cl <?php if($key==1) { ?>bw0<?php } ?>" <?php echo $value['rowid'];?> notice="<?php echo $value['id'];?>" id="notice_box">
 
                                <?php if($type_wap == 'post') { ?>
                                             <?php if(is_array($arr_)) foreach($arr_ as $key => $value) { ?>                                                    <li class="hmesLi">
@@ -148,11 +148,11 @@
                                                             </div>
                                                             <div class="hmes_right">
                                                                 <div class="hmes_rt">
-                                                                    <span class="xg1 xw0 hrt_s1"><?php echo $value['username'];?></span>
+                                                                    <span class="xg1 xw0 hrt_s1"><?php if($type_ma == 0) { ?><?php echo $value['author'];?><?php } else { ?><?php echo $value['username'];?><?php } ?></span>
                                                                     <span class="colb5 hrt_s2"><?php echo $value['dateline'];?></span>
                                                                 </div>
                                                                 <div class="ntc_body hmes_rb" style="">
-                                                                    <span class="hrt_s3"><?php if($type_ma == 0) { ?>已批准参加活动:<?php } else { ?>申请加入您举办的活动:<?php } ?></span>
+                                                                    <span class="hrt_s3"><?php if($type_ma == 0) { ?>通过你的活动申请:<?php } else { ?>申请加入您举办的活动:<?php } ?></span>
                                                                     <span class="col2d hrt_s4"><?php echo $value['subject'];?></span>
                                                                 </div>
                                                             </div>
@@ -170,7 +170,7 @@
                     <div class="mtm mbm"><a href="home.php?mod=space&amp;do=notice&amp;ignore=all">还有 <?php echo $value['from_num'];?> 个相同通知被忽略 <em>&rsaquo;</em></a></div>
                     <?php } ?>
 
-                    <?php if($multi) { ?><div class="pgs cl"><?php echo $multi;?></div><?php } ?>
+                    <?php if($maxpage > 2) { ?><div class="act_page"><a href="javascript:void(0);" page="2" totalpage="<?php echo $maxpage;?>" class="act_more" id="notice_More">加载更多</a></div><?php } ?>
                 <?php } ?>
 
             <?php } ?>

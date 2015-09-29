@@ -149,7 +149,8 @@ EOF;
 
 function imagelist($attach) {
 global $_G, $post;
-$fix = count($post[imagelist]) == 1 ? 600 : 83;
+$fix = count($post[imagelist]) == 1 ? 600 : 600;
+$fix = intval($attach['width']) < 600 ? intval($attach['width']) : 600;
 $fixtype = count($post[imagelist]) == 1 ? 'fixnone' : 'fixwr';
 $attach['refcheck'] = (!$attach['remote'] && $_G['setting']['attachrefcheck']) || ($attach['remote'] && ($_G['setting']['ftp']['hideurl'] || ($attach['isimage'] && $_G['setting']['attachimgpost'] && strtolower(substr($_G['setting']['ftp']['attachurl'], 0, 3)) == 'ftp')));
 $mobilethumburl = $attach['attachimg'] && $_G['setting']['showimages'] && (!$attach['price'] || $attach['payed']) && ($_G['group']['allowgetimage'] || $_G['uid'] == $attach['uid']) ? getforumimg2($attach['aid'], 0, $fix, $fix, $fixtype) : '' ;
@@ -175,8 +176,10 @@ EOF;
 
 function attachinpost($attach) {
 global $_G;
+$fix = intval($attach['width']) < 600 ? intval($attach['width']) : 600;
+
 $attach['refcheck'] = (!$attach['remote'] && $_G['setting']['attachrefcheck']) || ($attach['remote'] && ($_G['setting']['ftp']['hideurl'] || ($attach['isimage'] && $_G['setting']['attachimgpost'] && strtolower(substr($_G['setting']['ftp']['attachurl'], 0, 3)) == 'ftp')));
-$mobilethumburl = $attach['attachimg'] && $_G['setting']['showimages'] && (!$attach['price'] || $attach['payed']) && ($_G['group']['allowgetimage'] || $_G['uid'] == $attach['uid']) ? getforumimg2($attach['aid'], 0, 600, 600, 'fixnone') : '' ;
+$mobilethumburl = $attach['attachimg'] && $_G['setting']['showimages'] && (!$attach['price'] || $attach['payed']) && ($_G['group']['allowgetimage'] || $_G['uid'] == $attach['uid']) ? getforumimg2($attach['aid'], 0, $fix, $fix, 'fixnone') : '' ;
 $aidencode = packaids($attach);
 $is_archive = $_G['forum_thread']['is_archived'] ? '&fid='.$_G['fid'].'&archiveid='.$_G[forum_thread][archiveid] : '';?><?php
 $return = <<<EOF

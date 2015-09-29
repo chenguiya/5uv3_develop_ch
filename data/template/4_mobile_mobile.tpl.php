@@ -1,10 +1,10 @@
 <?php if(!defined('IN_DISCUZ')) exit('Access Denied'); hookscriptoutput('mobile');
 0
-|| checktplrefresh('./source/plugin/mobile/template/mobile.htm', './template/usportstyle/common/header.htm', 1442988968, 'mobile', './data/template/4_mobile_mobile.tpl.php', './source/plugin/mobile/template', 'mobile')
-|| checktplrefresh('./source/plugin/mobile/template/mobile.htm', './template/usportstyle/common/footer.htm', 1442988968, 'mobile', './data/template/4_mobile_mobile.tpl.php', './source/plugin/mobile/template', 'mobile')
-|| checktplrefresh('./source/plugin/mobile/template/mobile.htm', './template/default/common/header_common.htm', 1442988968, 'mobile', './data/template/4_mobile_mobile.tpl.php', './source/plugin/mobile/template', 'mobile')
-|| checktplrefresh('./source/plugin/mobile/template/mobile.htm', './template/default/common/header_qmenu.htm', 1442988968, 'mobile', './data/template/4_mobile_mobile.tpl.php', './source/plugin/mobile/template', 'mobile')
-|| checktplrefresh('./source/plugin/mobile/template/mobile.htm', './template/usportstyle/common/pubsearchform.htm', 1442988968, 'mobile', './data/template/4_mobile_mobile.tpl.php', './source/plugin/mobile/template', 'mobile')
+|| checktplrefresh('./source/plugin/mobile/template/mobile.htm', './template/usportstyle/common/header.htm', 1443510721, 'mobile', './data/template/4_mobile_mobile.tpl.php', './source/plugin/mobile/template', 'mobile')
+|| checktplrefresh('./source/plugin/mobile/template/mobile.htm', './template/usportstyle/common/footer.htm', 1443510721, 'mobile', './data/template/4_mobile_mobile.tpl.php', './source/plugin/mobile/template', 'mobile')
+|| checktplrefresh('./source/plugin/mobile/template/mobile.htm', './template/default/common/header_common.htm', 1443510721, 'mobile', './data/template/4_mobile_mobile.tpl.php', './source/plugin/mobile/template', 'mobile')
+|| checktplrefresh('./source/plugin/mobile/template/mobile.htm', './template/default/common/header_qmenu.htm', 1443510721, 'mobile', './data/template/4_mobile_mobile.tpl.php', './source/plugin/mobile/template', 'mobile')
+|| checktplrefresh('./source/plugin/mobile/template/mobile.htm', './template/usportstyle/common/pubsearchform.htm', 1443510721, 'mobile', './data/template/4_mobile_mobile.tpl.php', './source/plugin/mobile/template', 'mobile')
 ;?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

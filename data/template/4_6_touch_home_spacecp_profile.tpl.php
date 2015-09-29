@@ -1,7 +1,7 @@
 <?php if(!defined('IN_DISCUZ')) exit('Access Denied'); hookscriptoutput('spacecp_profile');
 0
-|| checktplrefresh('./template/usportstyle/touch/home/spacecp_profile.htm', './template/default/home/spacecp_footer.htm', 1443065653, '6', './data/template/4_6_touch_home_spacecp_profile.tpl.php', './template/usportstyle', 'touch/home/spacecp_profile')
-|| checktplrefresh('./template/usportstyle/touch/home/spacecp_profile.htm', './template/usportstyle/touch/home/spacecp_password.htm', 1443065653, '6', './data/template/4_6_touch_home_spacecp_profile.tpl.php', './template/usportstyle', 'touch/home/spacecp_profile')
+|| checktplrefresh('./template/usportstyle/touch/home/spacecp_profile.htm', './template/default/home/spacecp_footer.htm', 1443500144, '6', './data/template/4_6_touch_home_spacecp_profile.tpl.php', './template/usportstyle', 'touch/home/spacecp_profile')
+|| checktplrefresh('./template/usportstyle/touch/home/spacecp_profile.htm', './template/usportstyle/touch/home/spacecp_password.htm', 1443500144, '6', './data/template/4_6_touch_home_spacecp_profile.tpl.php', './template/usportstyle', 'touch/home/spacecp_profile')
 ;?><?php include template('common/header'); if($validate) { ?>
 <p class="tbmu mbm">管理员否决了您的注册申请，请完善注册原因，重新提交申请</p>
 <form action="member.php?mod=regverify" method="post" autocomplete="off">
@@ -50,10 +50,18 @@
 <header class="header">
     <div class="nav">
         <div class="category">
-        	修改密码
-        	<div id="elecnation_nav_left">
+        <?php if($_GET['sub'] == 'nickname') { ?>
+            修改昵称
+            <div class="enlec_lefs">
+                <a href="javascript:;" class="head_skip">跳过</a>
+            </div>
+        <?php } else { ?>
+            修改密码
+            <div id="elecnation_nav_left">
                 <a href="javascript:;" onclick="history.go(-1)" class="head_back"></a>
-        	</div>
+            </div>
+        <?php } ?>
+        	
         </div>
 </div>
 </header>
@@ -62,6 +70,10 @@
     <form action="home.php?mod=spacecp&amp;ac=profile&amp;op=password&amp;mobile=2" method="post" autocomplete="off">
         <input type="hidden" value="<?php echo FORMHASH;?>" name="formhash" />
         <ul>
+        <?php if($_GET['sub'] == 'nickname') { ?>
+            <li class="nick_names">欢迎到球迷会，由于你的微信昵称已被使用或者存在特殊符号，需要重新输入新的昵称，谢谢</li>
+            <li><input type="text" value="" tabindex="1" class="px p_fre" size="30" autocomplete="off" name="nickname" id="nickname" placeholder="输入新昵称3-15个字"></li>
+        <?php } else { ?>
             <li><input type="password" value="" tabindex="1" class="px p_fre" size="30" autocomplete="off" name="oldpassword" id="oldpassword" placeholder="原密码"></li>
             <li><input type="password" value="" tabindex="2" class="px p_fre" size="30" autocomplete="off" name="newpassword" id="newpassword" placeholder="新密码"></li>
             <li><input type="password" value="" tabindex="3" class="px p_fre" size="30" autocomplete="off" name="newpassword2" id="newpassword2" placeholder="确认新密码"></li>
@@ -70,6 +82,7 @@
             <?php } else { ?>
             <input type="hidden" name="emailnew" id="emailnew" value="<?php echo $space['email'];?>" />
             <?php } ?>
+        <?php } ?>
         </ul>
         <div class="btn_saved">
         

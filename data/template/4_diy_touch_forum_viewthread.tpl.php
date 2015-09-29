@@ -1,13 +1,13 @@
 <?php if(!defined('IN_DISCUZ')) exit('Access Denied'); hookscriptoutput('viewthread');
 0
-|| checktplrefresh('./template/usportstyle/touch/forum/viewthread.htm', './template/usportstyle/touch/forum/forumdisplay_fastpost.htm', 1443150315, 'diy', './data/template/4_diy_touch_forum_viewthread.tpl.php', './template/usportstyle', 'touch/forum/viewthread')
-|| checktplrefresh('./template/usportstyle/touch/forum/viewthread.htm', './template/usportstyle/touch/common/seccheck.htm', 1443150315, 'diy', './data/template/4_diy_touch_forum_viewthread.tpl.php', './template/usportstyle', 'touch/forum/viewthread')
+|| checktplrefresh('./template/usportstyle/touch/forum/viewthread.htm', './template/usportstyle/touch/forum/forumdisplay_fastpost.htm', 1443499058, 'diy', './data/template/4_diy_touch_forum_viewthread.tpl.php', './template/usportstyle', 'touch/forum/viewthread')
+|| checktplrefresh('./template/usportstyle/touch/forum/viewthread.htm', './template/usportstyle/touch/common/seccheck.htm', 1443499058, 'diy', './data/template/4_diy_touch_forum_viewthread.tpl.php', './template/usportstyle', 'touch/forum/viewthread')
 ;?><?php include template('common/header'); ?><!-- header start -->
 <!-- start of navbar-->
 <nav class="navbar"<?php if(!empty($_G['forum']['color'])) { ?> style="background-color:<?php echo $_G['forum']['color'];?>"<?php } ?>>
     <div class="inner">
         <div class="left">
-             <a href="javascript:void(0);" onclick="history.go(-1)"><i class="iconfont icon-back"></i></a>
+             <a href="forum.php?mod=group&amp;fid=<?php echo $_G['fid'];?>"><i class="iconfont icon-back"></i></a>
         </div>       
         <div class="center"><?php if(!$_G['forum_thread']['special']) { ?>帖子<?php } elseif($_G['forum_thread']['special'] == 4) { ?>活动 <?php } ?></div>
         <div class="right">
@@ -29,6 +29,60 @@
 
 </div>
 </div>
+<script>
+    $(function() {
+        $(function($) {
+            var bdshare_content = '';
+            var bdshare_desc = '';
+            var bdshare_pic = '';
+            var bdshare_url = '';
+            var share_thread = function() {
+                $('a.share_thread').off('click.share_thread');
+                $('a.share_thread').on('click.share_thread', function() {
+                    bdshare_url = location.href;
+                    bdshare_pic = $('.message img:first').attr('src');
+                    
+                    if (typeof bdshare_pic == 'string' && bdshare_pic.search(/http/i) == -1) {
+                        bdshare_pic = location.hostname + '/' + bdshare_pic;
+                    }
+                    bdshare_content = $('#elecnation_post_title').text();
+                    bdshare_desc = '';
+                });
+            };
+            var baiduShare = function() {
+                window._bd_share_config = {
+                    common: {
+                        bdText: '【<?php echo $_G['forum_thread']['subject'];?>',
+                        bdDesc: '',
+                        bdUrl: '',
+                        bdPic: '',
+                        bdSign: '',
+                        bdMini: '',
+                        bdMiniList: '',
+                        onBeforeClick: function(cmd, config) {
+                            config.bdPic = bdshare_pic;
+                            config.bdUrl = bdshare_url || location.href;
+                            config.bdDesc = bdshare_desc;
+                            return config;
+                        },
+                        bdPopupOffsetLeft: '',
+                        bdPopupOffsetTop: '',
+                        bdCustomStyle: ''
+                    },
+                    share: [
+                        {tag: 'share_thread', bdSize:32}
+                    ]
+                };
+                with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+            };
+            
+            share_thread();
+            baiduShare();
+        }($));
+
+});
+</script>
+
 <!-- end of navbar-->
 <div class="ch_mians" style="padding-top:44px;">
      <section class="postlist" id="postBoxd">
@@ -264,13 +318,24 @@
                             	<?php echo $post['message'];?>
                             <?php } ?>
                         <?php } else { ?>
-                            <?php echo $post['message'];?>
-
+                            <?php echo $post['message'];?>   
                         <?php } } ?>
-
             </div> 
+            <?php if($_G['setting']['mobile']['mobilesimpletype'] == 0) { if($post['attachment']) { ?>
+               <div class="elecnation_dy quote">
+               附件: <em><?php if($_G['uid']) { ?>您所在的用户组无法下载或查看附件<?php } else { ?>您需要<a href="member.php?mod=logging&amp;action=login">登录</a>才可以下载或查看附件。没有帐号？<a href="member.php?mod=<?php echo $_G['setting']['regname'];?>" title="注册帐号"><?php echo $_G['setting']['reglinkname'];?></a><?php } ?></em>
+               </div>
+            <?php } elseif($post['imagelist'] || $post['attachlist']) { ?>
+               <?php if($post['imagelist']) { if(count($post['imagelist']) == 1) { ?>
+<ul class="img_one"><?php echo showattach($post, 1); ?></ul>
+<?php } else { ?>
+<ul class="img_list cl vm chimg_list"><?php echo showattach($post, 1); ?></ul>
+<?php } } ?>
+                <?php if($post['attachlist']) { ?>
+<ul><?php echo showattach($post); ?></ul>
+<?php } } } ?>
             </div>
-        	</div>
+        </div>
 <?php if($_G['uid'] && $allowpostreply && !$post['first']) { ?>
 <div id="replybtn_<?php echo $post['pid'];?>" display="true" class="elecnation_post_reply">
 <a href="forum.php?mod=post&amp;action=reply&amp;fid=<?php echo $_G['fid'];?>&amp;tid=<?php echo $_G['tid'];?>&amp;repquote=<?php echo $post['pid'];?>&amp;extra=<?php echo $_GET['extra'];?>&amp;page=<?php echo $page;?>" style="padding:8px 6px;">回复</a>
