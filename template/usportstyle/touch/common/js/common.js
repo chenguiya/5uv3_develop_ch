@@ -17,7 +17,7 @@ $(function () {
         $(buttinId).click(function () {
             if (hasNexPage && !isLoading) {
                 isLoading = true;
-                try    {
+                try {
                     url = url.replace(/fid=\d+/, /fid=\d+/.exec(location.search)[0]);
                     url = url.replace(/page=\d+/, "page=" + nextPage);
                 } catch (exception) {
@@ -74,16 +74,16 @@ $(function () {
         "#load-more-group-index-templ",
         ".ylist",
         "forum.php?mod=group&fid=1367&page=2&ajax=1&mobile=2",
-        function(doTempl, data) {
+        function (doTempl, data) {
             console.log(data);
             return doTempl(data.threadlist);
-    });
+        });
 
     loadmore("#load-more-group-memberlist",
         "#load-more-group-memberlist-templ",
         ".author-thumbs",
         "forum.php?mod=group&action=memberlist&fid=1367&page=2&ajax=1&mobile=2",
-        function(doTempl, data) {
+        function (doTempl, data) {
             var ret = doTempl(data.userlist);
             if (delMemStatus) {
                 ret = ret.replace(/icon-del/g, "icon-del active");
@@ -94,21 +94,21 @@ $(function () {
         "#load-more-group-manage-templ",
         ".author-thumbs",
         "forum.php?mod=group&action=manage&op=manageuser&fid=1367&page=2&ajax=1&mobile=2",
-        function(doTempl, data) {
+        function (doTempl, data) {
             return doTempl(data.userlist);
         });
     loadmore("#load-more-group-activity",
         "#load-more-group-activity-templ",
         "#ch_actbox",
         "forum.php?mod=group&action=activity&fid=1367&page=2&ajax=1&mobile=2",
-        function(doTempl, data) {
+        function (doTempl, data) {
             return doTempl(data.threadlist);
         });
     loadmore("#load-more-forum-discuz",
         "#load-more-forum-discuz-templ",
         "#forum-discuz",
         "forum.php?page=2",
-        function(doTempl, data) {
+        function (doTempl, data) {
             return doTempl(data.threadlist);
         });
 
@@ -150,39 +150,54 @@ $(function () {
         });
     });
 
-    var radiusThumbSelector = ['.author-thumb > img'];
-    $(radiusThumbSelector.join(',')).each(function () {
+    function fixedImg(obj, containerWidth, containerHeight) {
+        var _this = obj[0];
+        var naturalHeight = _this.naturalHeight,
+            naturalWidth = _this.naturalWidth;
+        if (typeof _this.naturalWidth == "undefined") {
+            // IE 6/7/8
+            var i = new Image();
+            i.src = _this.src;
+            naturalHeight = i.width;
+            naturalWidth = i.height;
+        }
+
+        if (naturalWidth == naturalHeight) {
+            return;
+        } else if (naturalWidth > naturalHeight) {
+            obj.parent().css({
+                overflow: "hidden",
+            });
+            obj.css({
+                maxWidth: "none",
+                width: "auto",
+                height: "100%",
+                borderRadius: "0",
+                marginLeft: (naturalHeight * containerWidth / naturalWidth - containerWidth) / 2
+            });
+        } else {
+            obj.parent().css({
+                overflow: "hidden",
+            });
+            obj.css({
+                maxWidth: "none",
+                width: "100%",
+                height: "auto",
+                borderRadius: "0",
+                marginTop: (naturalWidth * containerWidth / naturalHeight - containerHeight) / 2
+            });
+        }
+    }
+    $('.author-thumb > img').each(function () {
         var me = $(this),
             containerHeight = me.parent().height(),
             containerWidth = me.parent().width();
-        me.load(function () {
-            var naturalHeight = this.naturalHeight,
-                naturalWidth = this.naturalWidth;
-            if (naturalWidth == naturalHeight) {
-                return;
-            } else if (naturalWidth > naturalHeight) {
-                me.parent().css({
-                    overflow: "hidden",
-                });
-                me.css({
-                    maxWidth: "none",
-                    width: "auto",
-                    height: "100%",
-                    borderRadius: "0",
-                    marginLeft: (naturalHeight * containerWidth / naturalWidth - containerWidth) / 2
-                });
-            } else {
-                me.parent().css({
-                    overflow: "hidden",
-                });
-                me.css({
-                    maxWidth: "none",
-                    width: "100%",
-                    height: "auto",
-                    borderRadius: "0",
-                    marginTop: (naturalWidth * containerWidth / naturalHeight - containerHeight) / 2
-                });
-            }
-        });
+        if (this.complete || this.readyState === "complete" || this.readyState === "loaded") {
+            fixedImg(me, containerWidth, containerHeight);
+        } else {
+            this.onload = function () {
+                fixedImg(me, containerWidth, containerHeight);
+            };
+        }
     });
 });

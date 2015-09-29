@@ -29,7 +29,7 @@ $start = ($page - 1) * $pagesize;
 $limit = " LIMIT ".$start.','.$pagesize;
 
 if (defined('IN_MOBILE')) {
-	$activitylists = DB::fetch_all("SELECT * FROM ".DB::table('forum_activity')." ORDER BY starttimefrom DESC".$limit);
+	$activitylists = DB::fetch_all("SELECT * FROM ".DB::table('forum_activity')." AS a LEFT JOIN ".DB::table('forum_thread')." AS b ON a.tid=b.tid WHERE b.displayorder!='-1' ORDER BY starttimefrom DESC".$limit);
 } else {
 	$activitylists = DB::fetch_all("SELECT * FROM ".DB::table('forum_activity')." WHERE `uid` IN(1,295) ORDER BY starttimefrom DESC".$limit);
 }

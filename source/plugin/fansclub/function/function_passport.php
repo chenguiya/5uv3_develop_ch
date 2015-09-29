@@ -5,8 +5,6 @@ loaducenter();
 // 修改昵称
 function passport_modnick($data)
 {
-    //echo "<pre>";
-    //print_r($data);
     $arr_return = array('success' => FALSE, 'message' => '');
     
     $openid = $data['openid'];
@@ -26,6 +24,7 @@ function passport_modnick($data)
             $arr_param = array();
             $arr_param['username'] = $newnick;
             $arr_param['only_check_username'] = 1;
+            
             $arr_check_result = passport_can_register($arr_param);
             
             if($arr_check_result['success'] === TRUE)
@@ -66,6 +65,8 @@ function passport_directlogin($data)
     $time = $data['time'];
     $from = $data['from'];
     $redirect = $data['redirect'];
+    $wxnick = $data['wxnick'];
+    $wxhead = $data['wxhead'];
     
     if($openid != '' && $time != '' && $from != '')
     {
@@ -83,6 +84,8 @@ function passport_directlogin($data)
                 $arr_return['username'] = trim($member['username']);
                 $arr_return['email'] = trim($member['email']);
                 $arr_return['redirect'] = $redirect;
+                $arr_return['wxhead'] = $wxhead;
+                $arr_return['nickname'] = $wxnick;
             }
             else
             {
@@ -96,8 +99,31 @@ function passport_directlogin($data)
             $arr_param['email'] = passport_get_default_email();
             $arr_param['password'] = passport_get_default_password();
             $arr_param['openid'] = $openid;
-            $arr_param['username'] = passport_get_default_username();
+            $arr_param['username'] = ($wxnick == '') ? passport_get_default_username() : $wxnick;
+            
             $arr_check_result = passport_can_register($arr_param);
+           
+            if($wxnick != '' && $arr_check_result['success'] === FALSE && 
+               ($arr_check_result['message'] == lang('message', 'register_check_found') ||      // 该用户名已注册，请更换用户名或...
+                $arr_check_result['message'] == lang('message', 'profile_username_illegal') ||  // 用户名包含敏感字符
+                $arr_check_result['message'] == lang('message', 'profile_username_protect')))   // 用户名包含被系统屏蔽的字符
+            {
+                if($arr_check_result['message'] == lang('message', 'register_check_found'))
+                {
+                    $arr_param['username'] = $arr_param['username'].'_'.strtolower(passport_create_randomstr(5)); // 已经注册过
+                }
+                else
+                {
+                    $arr_param['username'] = passport_get_default_username();
+                }
+                
+                $arr_check_result = passport_can_register($arr_param);
+                $can_change_nickname = TRUE;
+            }
+            else
+            {
+                $can_change_nickname = FALSE;
+            }
             
             if($arr_check_result['success'] === TRUE)
             {
@@ -117,6 +143,12 @@ function passport_directlogin($data)
                         $arr_return['username'] = trim($member['username']);
                         $arr_return['email'] = trim($member['email']);
                         $arr_return['redirect'] = $redirect;
+                        $arr_return['wxhead'] = $wxhead;
+                        $arr_return['nickname'] = $wxnick;
+                        $arr_return['can_change_nickname'] = $can_change_nickname;
+                        $arr_return['openid'] = $openid;
+                        $arr_return['time'] = $time;
+                        $arr_return['from'] = $from;
                     }
                     else
                     {
@@ -130,7 +162,7 @@ function passport_directlogin($data)
             }
             else
             {
-                $arr_return['message'] = '系统错误请重试';
+                $arr_return['message'] = '系统错误请重试|'.$arr_check_result['message'];
             }
         }
     }
@@ -339,7 +371,7 @@ function passport_check_sign($data)
     }
     else
     {
-        // echo $my_sign;
+        //echo $my_sign;
         return FALSE;
     }
 }
@@ -371,17 +403,20 @@ function passport_can_register($data)
 
     if($type == 1) // Email注册
     {
-        if($arr_return['message'] == '' && $email == '' && $only_check_username == 0)
+        if($only_check_username == 0)
         {
-            $arr_return['message'] = 'Email没有填写'; 
+            // Email是否已注册
+            if($arr_return['message'] == '' && $email == '')
+            {
+                $arr_return['message'] = 'Email没有填写'; 
+            }
+            
+            if($arr_return['message'] == '' && !is_email($email))
+            {
+                $arr_return['message'] = '不是一个有效的Email';
+            }
         }
         
-        if($arr_return['message'] == '' && !is_email($email) && $only_check_username == 0)
-        {
-            $arr_return['message'] = '不是一个有效的Email';
-        }
-        
-        // Email是否已注册
         if($arr_return['message'] == '')
         {
             $ucresult = uc_user_checkname($username);

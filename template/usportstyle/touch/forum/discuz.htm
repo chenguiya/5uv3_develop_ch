@@ -34,25 +34,27 @@
     </section> -->
     <ul id="forum-discuz" class="ylist ylist-padding">
         <!--{loop $threadlist $vo}-->
-        <li class="row" href="$vo[url]">
-            <div class="author-thumb">
-                <img src="$vo[avatar]" alt="$vo[author]"/>
+        <a href="$vo[url]">
+            <li class="row" href="$vo[url]">
+                <div class="author-thumb">
+                    <img src="$vo[avatar]" alt="$vo[author]"/>
+                </div>
+                <div class="row-item">
+                    <div class="m">$vo[author]</div>
+                    <div class="s">$vo[dateline]</div>
+                </div>
+                <div class="row-badge-wrap">
+                    <!-- <div class="ybadge ybadge-4">置顶</div> -->
+                    <span class="social"><i class="iconfont icon-replay"></i>$vo[replies]</span>
+                </div>
+            </li>
+            <div class="title">$vo[title]</div>
+            <div class="images" href="$vo[url]">
+                <!--{loop $vo[attachment] $key $attach}-->
+                <img src="$attach" alt="$vo[title]_$key"/>
+                <!--{/loop}-->
             </div>
-            <div class="row-item">
-                <div class="m">$vo[author]</div>
-                <div class="s">$vo[dateline]</div>
-            </div>
-            <div class="row-badge-wrap">
-                <!-- <div class="ybadge ybadge-4">置顶</div> -->
-                <span class="social"><i class="iconfont icon-replay"></i>$vo[replies]</span>
-            </div>
-        </li>
-        <div class="title">$vo[title]</div>
-        <div class="images" href="$vo[url]">
-            <!--{loop $vo[attachment] $key $attach}-->
-            <img src="$attach" alt="$vo[title]_$key"/>
-            <!--{/loop}-->
-        </div>
+        </a>
         <!--{/loop}-->
     </ul>
     <div style="padding: 0 8px;">
@@ -61,26 +63,28 @@
 </div>
 <script id="load-more-forum-discuz-templ" type="text/x-dot-template">
     {{ for (var key in it) { }}
-    <li class="row" href="{{=it[key].url}}">
-        <div class="author-thumb">
-            <img src="{{=it[key].avatar}}" alt="{{=it[key].author}}"/>
+    <a href="{{=it[key].url}}">
+        <li class="row">
+            <div class="author-thumb">
+                <img src="{{=it[key].avatar}}" alt="{{=it[key].author}}"/>
+            </div>
+            <div class="row-item">
+                <div class="m">{{=it[key].author}}</div>
+                <div class="s">{{=it[key].dateline}}</div>
+            </div>
+            <div class="row-badge-wrap">
+                <span class="social"><i class="iconfont icon-replay"></i>{{=it[key].replies}}</span>
+            </div>
+        </li>
+        <div class="title">{{=it[key].title}}</div>
+        {{? it[key].attachment }}
+        <div class="images">
+            {{~it[key].attachment :value:index}}
+            <img src="{{=value}}" alt='{{=it[key].title}}'/>
+            {{~}}
         </div>
-        <div class="row-item">
-            <div class="m">{{=it[key].author}}</div>
-            <div class="s">{{=it[key].dateline}}</div>
-        </div>
-        <div class="row-badge-wrap">
-            <span class="social"><i class="iconfont icon-replay"></i>{{=it[key].replies}}</span>
-        </div>
-    </li>
-    <div class="title">{{=it[key].title}}</div>
-    {{? it[key].attachment }}
-    <div class="images" href="{{=it[key].url}}">
-        {{~it[key].attachment :value:index}}
-        <img src="{{=value}}" alt='{{=it[key].title}}'/>
-        {{~}}
-    </div>
-    {{?}}
+        {{?}}
+    </a>
     {{ } }}
 </script>
 <script type="text/javascript">
@@ -88,6 +92,7 @@
         new Swiper('.swiper-container', {
             direction: 'horizontal',
             loop: true,
+            autoplay: 5000,
             pagination: '.swiper-pagination'
         });
 

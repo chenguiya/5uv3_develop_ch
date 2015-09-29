@@ -13,15 +13,6 @@
 <!-- header end -->
 
 <ul class="signIn" id="">
-<!-- <<<<<<< HEAD
-	<li class="signLeft cl active"><a href="forum.php?mod=misc&action=signinlist&tid=52637&mobile=2">已签到</a></li>
-	<li class="signRight cl"><a href="forum.php?mod=misc&action=signinlist&tid=52637&issigined=0&mobile=2">未签到</a></li>
-</ul>
-
-<div class="signState">
-	已经签到：<span style="color:#eb6100;">94</span>&nbsp;/&nbsp;<span>300</span>
-</div>
-======= -->
 	<li class="signLeft cl{if $issigned} active{/if}"><a href="<!--{if $issigned}-->javascript:;<!--{else}-->forum.php?mod=misc&action=signinlist&tid=$_GET['tid']&mobile=2<!--{/if}-->">已签到</a></li>
 	<li class="signRight cl{if !$issigned} active{/if}"><a href="<!--{if $issigned}-->forum.php?mod=misc&action=signinlist&tid=$_GET['tid']&issigined=0&mobile=2<!--{else}-->javascript:;<!--{/if}-->">未签到</a></li>
 </ul>
@@ -43,8 +34,8 @@
 		<!--{loop $userlists $user}-->
 		<tr>
 			<td><img src="<!--{avatar($user['uid'], small, true)}-->" alt="$user[username]" width="30" height="30">$user[username]</td>
-			<td><!--{if $user['ufielddatanew']['userfield']['realname']}-->$user['ufielddatanew']['userfield']['realname']<!--{else}-->--<!--{/if}--></td>
-			<td class="tab_phone"><!--{if $user['ufielddatanew']['userfield']['mobile']}-->$user['ufielddatanew']['userfield']['mobile']<!--{else}-->--<!--{/if}--></td>
+			<td><!--{if $user['ufielddatanew']['userfield']['realname'] && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2))&& $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}-->$user['ufielddatanew']['userfield']['realname']<!--{else}-->--<!--{/if}--></td>
+			<td class="tab_phone"><!--{if $user['ufielddatanew']['userfield']['realname'] && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2))&& $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}-->$user['ufielddatanew']['userfield']['mobile']<!--{else}-->--<!--{/if}--></td>
 		</tr>
 		<!--{/loop}-->		
 	</tbody>
@@ -86,16 +77,4 @@
 </div>
 <!--{else}-->
 <!--{/if}-->
-<script type="text/javascript">
-	/*function cellphone(){
-		var tphone = document.getElementsByClassName('signTab')[0];
-		var cellp = tphone.getElementsByTagName('td');
-		for(var i=0;i<cellp.length;i++){
-			if(cellp[i].id == 'tab_phone'){
-				cellp[i].value.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
-			}
-		}
-	}*/
-	
-</script>
 <!--{template common/footer}-->

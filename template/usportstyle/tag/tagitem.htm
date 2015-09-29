@@ -31,9 +31,9 @@
 				</table>
 			</div>
 			<div class="bm_chbox">
-				<!--{if $a}-->
+				<!--{if $threadlist}-->
 					<table cellspacing="0" cellpadding="0" border="0" width="100%">
-						<!--{loop $a $thread}-->
+						<!--{loop $threadlist $thread}-->
 							<tr>
 								<td class="icn">
 									<a href="forum.php?mod=viewthread&tid=$thread[tid]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" title="{lang target_blank}" target="_blank">

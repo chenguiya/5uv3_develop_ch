@@ -433,13 +433,15 @@ if($gid && !empty($catlist)) {
 if (defined('IN_MOBILE')) {
 	require_once libfile('function/extends');
 	$focus = $activity = $activity_fileds = array();
+    
 	//首页焦点图
 	$focus = C::t('common_block_item')->fetch_all_by_bid(132, true);
-// 	foreach ($focus as $key => $item) {
-// 		$attachment = getattachment($item['id'], 1, TRUE);
-// 		$focus[$key]['pic'] = getforumimg($attachment[0], 0, 480, 256, 2);
-// 	}
+	foreach ($focus as $key => $item) {
+		$attachment = getattachment($item['id'], 1, TRUE);
+		$focus[$key]['pic'] = getforumimg($attachment[0], 0, 480, 256, 2);
+	}
 	//首页热门活动
+    /*
 	$activity = C::t('common_block_item')->fetch_all_by_bid(151, true);	
 	foreach ($activity as $key => $value) {		
 		$attachment = getattachment($value['id'], 1, TRUE);
@@ -458,9 +460,8 @@ if (defined('IN_MOBILE')) {
 			$activity[$key]['status'] = true;
 		}			
 	}
+    */
 	//首页热门帖子
-	
-	
 	$item = C::t('common_block_item')->fetch_all_by_bid(135, true);
 	$count = count($item);
 	
@@ -496,7 +497,6 @@ if (defined('IN_MOBILE')) {
 		echo json_encode(array('threadlist' => $threadlist, 'nextpage' => $nextpage));
 		exit;
 	}
-// 	var_dump($threadlist);die;
 }
 
 include template('diy:forum/discuz:'.$gid);

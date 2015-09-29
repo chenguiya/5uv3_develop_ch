@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div style="white-space: nowrap;">时间：</div>
-            <div>{eval echo(date('Y-m-d H:i', $activity[starttimefrom]))}<!--{if $activity[starttimeto]}-->&nbsp;至&nbsp;{eval echo(date('Y-m-d H:i', $activity[starttimeto]))}<!--{/if}--></div>
+            <div>{eval echo(date('Y-m-d H:i', $activity[starttimefrom]))}<!--{if $activity[starttimeto]}-->&nbsp;至<br>&nbsp;{eval echo(date('Y-m-d H:i', $activity[starttimeto]))}<!--{/if}--></div>
         </div>
         <div class="row">
             <div style="white-space: nowrap;">地点：</div>
@@ -24,11 +24,12 @@
         <!--{if $issigned}-->
         <div class="ybtn ybtn-primary">已签到</div>
         <!--{else}-->
-        <form name="activity" id="activity" method="post" autocomplete="off" action="forum.php?mod=misc&action=signin&tid=$_GET[tid]">
+        <form name="activity" id="activity" method="post" autocomplete="off" action="forum.php?mod=misc&action=signin&submitsign=1&tid=$_GET[tid]">
             <input type="hidden" name="formhash" value="{FORMHASH}" />
             <input type="hidden" name="handlekey" value="activitysignin" />
-            <button class="ybtn ybtn-primary" value="true" name="submitsign"><span>立即签到</span></button>
+            <button class="formdialog ybtn ybtn-primary" value="true" name="submitsign" id="submitsign"><span>立即签到</span></button>
         </form>
         <!--{/if}-->
     </div>
 </div>
+<!--{template common/footer}-->

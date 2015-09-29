@@ -23,9 +23,12 @@ if($_G['uid']) {
 		$applied = 1;
 	}
 }
-$applylist = array();
+//eidt by Daming 2015/9/28 添加签到人员列表
+$applylist = $signedlist = array();
 $activity = C::t('forum_activity')->fetch($_G['tid']);
 $activityclose = $activity['expiration'] ? ($activity['expiration'] > TIMESTAMP ? 0 : 1) : 0;
+$activity['starttimefrom_u'] = $activity['starttimefrom'];
+// var_dump($activity['starttimefrom_u']);die;
 $activity['starttimefrom'] = dgmdate($activity['starttimefrom'], 'u');
 $activity['starttimeto'] = $activity['starttimeto'] ? dgmdate($activity['starttimeto']) : 0;
 $activity['expiration'] = $activity['expiration'] ? dgmdate($activity['expiration']) : 0;
@@ -64,9 +67,9 @@ if($activity['aid']) {
 	$skipaids[] = $activity['aid'];
 }
 
-
-$applylistverified = array();
-$noverifiednum = 0;
+//edit by Daming 2015/9/28 添加未签到人员列表
+$applylistverified = $nosignedlist = array();
+$noverifiednum = $nosignednum = 0;
 $query = C::t('forum_activityapply')->fetch_all_for_thread($_G['tid'], 0, 0, 0, 1);
 require_once libfile('function/extends');
 foreach($query as $activityapplies) {
@@ -90,8 +93,30 @@ foreach($query as $activityapplies) {
 		$noverifiednum++;
 	}
 }
+//add by Daming 2015/09/28
+$query = DB::fetch_all("SELECT * FROM ".DB::table('forum_activityapply')." WHERE tid=".$_G['tid']." AND verified=1 ORDER BY sign_time DESC");
+// var_dump($query);die;
+foreach ($query as $activityapplies) {
+	$activityapplies['sign_time'] = dgmdate($activityapplies['sign_time'], 'u');
+	$activityapplies['dateline'] = dgmdate($activityapplies['dateline'], 'u');
+	if($activityapplies['registration'] == 1) {
+		if(count($applylist) < $_G['setting']['activitypp']) {
+			$activityapplies['message'] = preg_replace("/(".lang('forum/misc', 'contact').".*)/", '', $activityapplies['message']);
+			$signedlist[] = $activityapplies;
+		}
+	} else {
+		if(count($nosignedlist) < 8) {
+			$nosignedlist[] = $activityapplies;
+		}
+		$nosignednum++;
+	}
+}
+
+// var_dump($nosignedlist);die;
 
 $applynumbers = $activity['applynumber'];
+$signednum = C::t('forum_activityapply')->count_signed_by_tid_issign($_G['tid']);
+$nosignednum = C::t('forum_activityapply')->count_signed_by_tid_issign($_G['tid'], 0);
 $aboutmembers = $activity['number'] >= $applynumbers ? $activity['number'] - $applynumbers : 0;
 $allapplynum = $applynumbers + $noverifiednum;
 if($_G['forum']['status'] == 3) {

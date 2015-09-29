@@ -21,8 +21,12 @@ class table_forum_activityapply extends discuz_table
 		parent::__construct();
 	}
                         //add by xurui 2015-09-16
-                      public function fetch_info_by_uid($uid){
-                               return DB::fetch_all("SELECT * FROM %t WHERE  uid=%d and verified = 1 ORDER BY dateline DESC", array($this->_table, $uid));
+                      public function fetch_info_by_uid($uid , $start = 0 , $limit = 0){
+                               return DB::fetch_all("SELECT b.author , b.authorid , b.`subject` ,a.tid , a.dateline FROM ".DB::table('forum_activityapply')." a,".DB::table('forum_thread')." b WHERE  a.tid = b.tid and a.uid != b.authorid and a.uid = $uid and a.verified = 1 ORDER BY a.dateline DESC ".DB::limit($start, $limit));
+                      }
+                       //add by xurui 2015-09-16
+                      public function fetch_count_by_uid($uid){
+                               return DB::fetch_first("SELECT count(*) FROM ".DB::table('forum_activityapply')." a,".DB::table('forum_thread')." b WHERE  a.tid = b.tid and a.uid != b.authorid and a.uid = $uid and a.verified = 1  ");
                       }
                       	public function fetch_info_by_tid($tid) {
 		return DB::fetch_all("SELECT * FROM %t WHERE tid=%d ORDER BY dateline DESC", array($this->_table, $tid));
@@ -79,7 +83,7 @@ class table_forum_activityapply extends discuz_table
 	}
 	
 	public function count_signed_by_tid_issign($tid, $issign = 1) {
-		return intval(DB::result_first("SELECT COUNT(*) FROM %t WHERE tid=%d AND registration=%d", array($this->_table, $tid, $issign)));
+		return intval(DB::result_first("SELECT COUNT(*) FROM %t WHERE tid=%d AND registration=%d and verified=1", array($this->_table, $tid, $issign)));
 	}
 	
 	public function fetch_all_user_by_issign($tid, $start = 0, $limit = 100, $issign = 1) {

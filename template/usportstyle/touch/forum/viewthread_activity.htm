@@ -56,12 +56,17 @@
 <!--{if $_G['uid'] && !$activityclose && (!$applied || $isverified == 2)}-->
 <div class="acty_joins"><a href="#activityjoin_$post[pid]" class="popup elecnation_dr">我要参加</a></div>
 	<div id="activityjoin_$post[pid]" popup="true" class="bm mtn">
-    	<div class="pd5 bm_chact">
-        <div class="xw1">{lang activity_join}</div>
+    	<div class="pd5 bm_chact">  
 	<!--{if $_G['forum']['status'] == 3 && helper_access::check_module('group') && $isgroupuser != 'isgroupuser'}-->
-        <p>{lang activity_no_member}</p>
-        <p><a href="forum.php?mod=group&action=join&fid=$_G[fid]&mobile=2" class="xi2">{lang activity_join_group}</a></p>
+	         <div class="bm_nojoin">
+                  <p class="join_font">{lang activity_no_member}</p>
+                  <p>
+                     <a href="forum.php?mod=group&action=join&fid=$_G[fid]&mobile=2" class="join_but button2">加入</a>
+                     <a href="javascript:;" class="join_close" onclick="popup.close();">取消</a>
+                  </p>
+             </div>
 	<!--{else}-->
+	    <div class="xw1">{lang activity_join}</div>
 		<form name="activity" id="activity" method="post" autocomplete="off" action="forum.php?mod=misc&action=activityapplies&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]{if $_GET['from']}&from=$_GET['from']{/if}&mobile=2" >
 			<input type="hidden" name="formhash" value="{FORMHASH}" />
 
@@ -88,7 +93,7 @@
 				<!--{else}-->
 					<input type="hidden" name="activitysubmit" value="true">
 					<em class="xi1" id="return_activityapplies"></em>
-					<button type="submit" class="sub_btns" ><span>{lang submit}</span></button>
+					<button type="submit" class="formdialog sub_btns" ><span>{lang submit}</span></button>
 					<a href="javascript:void(0);" onclick="popup.close();" style="margin-left:0.5rem;">取消</a>
 				<!--{/if}-->
 			</div>
@@ -117,8 +122,7 @@
     </div>
 </div>
 <!--{/if}-->
-
-<!--{if $applylist}-->
+<!--{if $applylist && ($activity[starttimefrom_u]-7200 > TIMESTAMP)}-->
 <div class="act_vtable">
      <p class="pd5">{lang activity_new_join} ($applynumbers {lang activity_member_unit})</p>
      <ul class="act_vul">
@@ -132,7 +136,7 @@
         <!--{loop $applylist $apply}-->
             <tr>
                 <td>
-                    <a target="_blank" href="home.php?mod=space&uid=$apply[uid]&do=profile">$apply[username]</a>
+                    <a target="_blank" href="{if $_G['uid'] == $apply[uid]}home.php?mod=space&uid=$apply[uid]&do=profile&mycenter=1{else}home.php?mod=space&uid=$apply[uid]&do=thread{/if}">$apply[username]</a>
                 </td>
                 <!--{if $activity['cost']}-->
                 <td><!--{if $apply[payment] >= 0}-->$apply[payment] {lang payment_unit}<!--{else}-->{lang activity_self}<!--{/if}--></td>
@@ -140,22 +144,49 @@
                 <td>$apply[dateline]</td>
             </tr>
         <!--{/loop}-->
-    </table>
-    <!--{if $applynumbers > $_G['setting']['activitypp']}-->
+    </table>    
 	<div class="actMors cl">		
 		<a href="forum.php?mod=misc&action=getactivityapplylist&tid=$_G[tid]">查看更多>></a>
 	</div>
-	<!--{/if}-->
+</div>
+<!--{elseif $signedlist && ($activity[starttimefrom_u]-7200 < TIMESTAMP)}-->
+<div class="act_vtable">
+     <p class="pd5">已签到列表</p>
+     <ul class="act_vul">
+     	 <li class="fir">用户</li>
+         <!--{if $activity['cost']}-->
+         <li class="fir">{lang activity_payment}</li>
+         <!--{/if}-->
+         <li class="fir">签到时间</li>
+     </ul>
+    <table class="act_vtd" cellpadding="0" cellspacing="0" width="100%">
+        <!--{loop $signedlist $signed}-->
+            <tr>
+                <td>
+                    <a href="{if $_G['uid'] == $signed[uid]}home.php?mod=space&uid=$signed[uid]&do=profile&mycenter=1{else}home.php?mod=space&uid=$signed[uid]&do=thread{/if}">$signed[username]</a>
+                </td>
+                <!--{if $activity['cost']}-->
+                <td><!--{if $signed[payment] >= 0}-->$signed[payment] {lang payment_unit}<!--{else}-->{lang activity_self}<!--{/if}--></td>
+                <!--{/if}-->
+                <td>$signed[sign_time]</td>
+            </tr>
+        <!--{/loop}-->
+    </table>
+   
+	<div class="actMors cl">		
+		<a href="forum.php?mod=misc&action=signinlist&tid=$_G[tid]">查看更多>></a>
+	</div>
 </div>
 <!--{/if}-->
 
-<!--{if $applylistverified}-->
+
+<!--{if $applylistverified && ($activity[starttimefrom_u]-7200 > TIMESTAMP)}-->
 	<div class="act_vtable">
 		<p class="pd5">
-			{lang activity_new_signup} ($noverifiednum {lang activity_member_unit})
+			{lang activity_new_signup} ($noverifiednum {lang activity_member_unit})	
 			<!--{if $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}-->					
-				<a href="forum.php?mod=misc&action=activityapplylist&tid=$_G[tid]&pid=$post[pid]{if $_GET['from']}&from=$_GET['from']{/if}" title="{lang manage}">{lang manage}</a>
-			<!--{/if}-->
+				<a href="forum.php?mod=misc&action=activityapplylist&tid=$_G[tid]&pid=$post[pid]{if $_GET['from']}&from=$_GET['from']{/if}" title="{lang manage}">{lang manage}</a>			
+			<!--{/if}-->		
 		</p>
 		<ul class="act_vul">
      	 <li class="fir">用户</li>
@@ -169,7 +200,7 @@
 				<tr>
 					<td>
 						<!-- <a target="_blank" href="home.php?mod=space&uid=$apply[uid]" class="ratl vm"><!--{echo avatar($apply[uid], 'small')}--></a> -->
-						<a target="_blank" href="home.php?mod=space&uid=$apply[uid]&do=profile">$apply[username]</a>
+						<a target="_blank" href="{if $_G['uid'] == $apply[uid]}home.php?mod=space&uid=$apply[uid]&do=profile&mycenter=1{else}home.php?mod=space&uid=$apply[uid]&do=thread{/if}">$apply[username]</a>
 					</td>					
 					<!--{if $activity['cost']}-->
 					<td><!--{if $apply[payment] >= 0}-->$apply[payment] {lang payment_unit}<!--{else}-->{lang activity_self}<!--{/if}--></td>
@@ -178,7 +209,43 @@
 				</tr>
 			<!--{/loop}-->
 		</table>
+		<!--{if $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}-->
+		<!--{else}-->
+		<div class="actMors cl">
+			<a href="forum.php?mod=misc&action=activityunauditedlist&tid=$_G[tid]">查看更多</a>
+		</div>
+		<!--{/if}-->
 	</div>
+<!--{elseif $nosignedlist && ($activity[starttimefrom_u]-7200 > TIMESTAMP)}-->
+	<div class="act_vtable">
+		<p class="pd5">
+			未签到列表			
+		</p>
+		<ul class="act_vul">
+     	 <li class="fir">用户</li>
+         <!--{if $activity['cost']}-->
+         <li class="fir">{lang activity_payment}</li>
+         <!--{/if}-->
+         <li class="fir">{lang activity_jointime}</li>
+     	</ul>
+		<table class="act_vtd" cellpadding="0" cellspacing="0">			
+			<!--{loop $nosignedlist $nosigned}-->
+				<tr>
+					<td>
+						<!-- <a target="_blank" href="home.php?mod=space&uid=$nosigned[uid]" class="ratl vm"><!--{echo avatar($nosigned[uid], 'small')}--></a> -->
+						<a target="_blank" href="{if $_G['uid'] == $signed[uid]}home.php?mod=space&uid=$nosigned[uid]&do=profile&mycenter=1{else}home.php?mod=space&uid=$nosigned[uid]&do=thread{/if}">$nosigned[username]</a>
+					</td>					
+					<!--{if $activity['cost']}-->
+					<td><!--{if $nosigned[payment] >= 0}-->$nosigned[payment] {lang payment_unit}<!--{else}-->{lang activity_self}<!--{/if}--></td>
+					<!--{/if}-->
+					<td>$nosigned[dateline]</td>
+				</tr>
+			<!--{/loop}-->
+		</table>
+		<div class="actMors cl">		
+			<a href="forum.php?mod=misc&action=signinlist&tid=$_G[tid]&issigined=0">查看更多>></a>
+		</div>
+	</div>	
 <!--{/if}-->
 
 

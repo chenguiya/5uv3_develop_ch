@@ -338,7 +338,7 @@ class logging_ctl {
 
 		if(defined('IN_MOBILE')) {
 			// showmessage('location_logout_succeed_mobile', dreferer(), array('formhash' => FORMHASH, 'referer' => rawurlencode(dreferer())));
-           showmessage('退出成功', $_G['siteurl'].'forum.php?mod=group&fid=1367&mobile=2');  // modify by zhangjh 2015-09-07
+           showmessage('退出成功', $_G['siteurl'].'group.php');  // modify by zhangjh 2015-09-07
 		} else {
 			showmessage('logout_succeed', dreferer(), array('formhash' => FORMHASH, 'ucsynlogout' => $ucsynlogout, 'referer' => rawurlencode(dreferer())));
 		}

@@ -187,24 +187,15 @@ if($id || $name) {
 	if ($op == 'waterwall') {
 		include_once template('extend/desktop/column');
 	} else {
-                                           //球员频道换成球队频道
-                                            $a = $threadlist;                                         
-                                            foreach ($threadlist as $k=>$v){
-                                                 foreach(C::t('forum_forum')->my_fetch_all_name_by_fid($v['fid']) as $k1=>$v1){
-                                                        if($v1['type'] == 'sub'){
-                                                             foreach(C::t('forum_forum')->my_fetch_all_name_by_fid($v1['fup']) as $k2=>$v2){
-                                                                 $a[$k]['forumname'] = $v2['name'];
-                                                                 $a[$k]['fid'] = $v2['fid'];
-                                                             }
-                                                        }else{
-                                                                $a[$k]['forumname'] = $v['forumname'];
-                                                                $a[$k]['fid'] = $v['fid'];
-                                                        }
-                                               }
-                                            }
-                                           // echo "<pre>";
-                                           // print_r($a);exit;
-                                            include_once template('tag/tagitem');
+                                    //球员频道换成球队频道 add by xurui
+                                    $a = $threadlist;
+                                    foreach($a as $k=>$v){
+                                         if($_G['cache']['forums'][$v['fid']]['type'] == 'sub'){
+                                                  $threadlist[$k]['fid'] = $_G['cache']['forums'][$v['fid']]['fup'];
+                                                  $threadlist[$k]['forumname'] = $_G['cache']['forums'][$_G['cache']['forums'][$v['fid']]['fup']]['name'];
+                                             }
+                                       }                                 
+                                    include_once template('tag/tagitem');
 	}
 } else {
 	$navtitle = $metakeywords = $metadescription = $taglang;

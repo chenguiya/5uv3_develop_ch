@@ -1881,8 +1881,8 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	}
 // 	var_dump($activity);die;
 	if (submitcheck('submitsign')) {		
-		//判断签到时间		
-		if ($activity['starttimefrom'] > TIMESTAMP || $activity['starttimeto'] < TIMESTAMP) {
+		//判断签到时间				
+		if (($activity['starttimefrom']-7200 > TIMESTAMP) || ($activity['starttimeto'] ? $activity['starttimeto'] < TIMESTAMP : FALSE)) {
 			showmessage('现在不是签到时间！', "forum.php?mod=viewthread&tid=$tid");
 		}
 		//判断签到人时候在已通过列表
@@ -1897,7 +1897,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	$issigned = isset($_GET['issigined']) ? intval($_GET['issigined']) : 1;
 	$pp = $_G['setting']['activitypp'];
 	$applymember_num = C::t('forum_activityapply')->count_apply_by_tid($_GET['tid'], 1);
-	$applymember_num = $applymember_num - 1;
+	$applymember_num = $applymember_num;
 	$count = C::t('forum_activityapply')->count_signed_by_tid_issign($_GET['tid'], $issigned);
 	$maxpage = @ceil($count/$pp);
 	

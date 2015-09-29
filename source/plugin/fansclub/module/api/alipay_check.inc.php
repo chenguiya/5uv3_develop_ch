@@ -10,6 +10,9 @@
 日期、VIP充值订单数、VIP充值总金额、U币充值订单数、U币充值总金额、线下店订单数、线下店总金额
 杨源海(杨源海) 09-15 10:25:55
 就甘多数据要求。
+
+http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=alipay_check
+http://www.5usport.com/plugin.php?id=fansclub:api&ac=alipay_check
 */
 
 define('ADMIN_USERNAME', 'admin');                  // Username
@@ -39,6 +42,7 @@ if($_GET['inajax'] == '1')
         $arr_param['stat'] = trim($_POST['stat']);          // 是否统计
         $arr_param['success'] = trim($_POST['success']);    // 是否成功
         $arr_param['page'] = trim($_POST['page']);          // 当前页数
+        $arr_param['bill_type'] = trim($_POST['bill_type']);
         
         $arr_return = search($arr_param);
         $str_return = json_encode($arr_return);
@@ -128,25 +132,31 @@ if($_GET['inajax'] == '1')
 </head>
 <body>
 <form id="form_search" name="form_search" onSubmit="javascript:return false;">
-<table class="gridtable">
-<!--
+<table  style='width:720px;' class="gridtable">
+
 <tr>
 	<th style="width:80px;">注意事项</th>
 	<td>
-    由于种种原因，从2015-09-17开始的统计才比较准确
+    由于种种原因，从2015-09-22开始的统计才比较准确
 	</td>
 </tr>
--->
+
+                
 <tr>
 	<th style="width:80px;">查询时间</th>
 	<td>
 	<input type="text" id="s_time" name="s_time" value="" style="width:80px;"> 至 <input type="text" id="e_time" name="e_time" value="" style="width:80px;">
 	每页 <input type="text" name="num" id="num" value="" style="width:22px;">
-    统计 <select name="stat" id="stat"><option value="0">否</option><option value="1">是</option></select>
-    成功 <select name="success" id="success"><option value="0">所有</option><option value="1">是</option><option value="2">否</option></select>
+    统计 <select name="stat" id="stat"><option value="0">否</option><option value="1" selected>是</option></select>
+    成功 <select name="success" id="success"><option value="0">所有</option><option value="1" selected>是</option><option value="2">否</option></select>
+    充值类型 <select name="bill_type" id="bill_type"><option value="0">所有</option>
+    <option value="1">积分</option>
+    <option value="2">VIP</option>
+    <option value="3">权益</option>
+    <option value="99">实物</option>
+    </select>
 	<input type="hidden" name="page" id="page" value="">
 	<button name="btn_srarch" id="btn_srarch">查询</button>
-    <button name="btn_test" id="btn_test">测试</button>
 	</td>
 </tr>
 
@@ -161,9 +171,14 @@ $(document).ready(function(){
 	
 	function search()
 	{
-        alert($("#form_search").serialize());
-		$("#btn_srarch").text("查询中...");
-		$.ajax({
+        if($("#bill_type").val() == 99)
+        {
+            alert('ecshop支付订单暂时没有查询');
+            return false;
+        }
+        
+        $("#btn_srarch").text("查询中...");
+        $.ajax({
 			url: "plugin.php?id=fansclub:api&ac=alipay_check&op=search&inajax=1",
 			type: "post",
 			dataType: "json",
@@ -177,58 +192,84 @@ $(document).ready(function(){
 				{
 					if(data.success == true)
 					{
-						var str_html = "<table class=\"gridtable\"><tr><th style=\"width:20px;\"><input type='checkbox' id='chkbox_all' /></th><th>类型</th>";
-						str_html += "<th>序号</th><th>文章ID</th><th>标题</th><th>关键字</th><th>作者</th><th>添加时间</th><th>已处理</th><th>录入时间</th><th>录入人</th><th>录入版块</th></tr>";
-						for(var i = 0; i < data.list.length; i++)
-						{
-							$("#search_type").val(data.list[i].type);
-							if(data.list[i].type == '新闻')
-							{
-								$("#type").val('1');
-							}
-							else if(data.list[i].type == '图片')
-							{
-								$("#type").val('2');
-							}
-							else if(data.list[i].type == '视频')
-							{
-								$("#type").val('3');
-							}
-							
-							str_html += "<tr ";
-							if(data.list[i].have_log == '是')
-							{
-								str_html += "class=\"have\"";
-							}
-							else
-							{
-								str_html += "onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#ffffff';\"";
-							}
-							str_html += ">";
-							str_html += "<td align='center'><input ";
-							str_html += (data.list[i].have_log == '是') ? 'disabled ' : '';
-							str_html += "type='checkbox' value='"+data.list[i].id+"' /></td>";
-							str_html += "<td>"+data.list[i].type+"</td>";
-							str_html += "<td>"+data.list[i].lid+"</td>";
-							str_html += "<td>"+data.list[i].id+"</td>";
-							str_html += "<td><a href='"+data.list[i].url+"' target='_blank'>"+data.list[i].title+"</a></td>";
-							str_html += "<td>"+data.list[i].keywords+"</td>";
-							str_html += "<td>"+data.list[i].username+"</td>";
-							str_html += "<td>"+data.list[i].inputtime+"</td>";
-							str_html += "<td>"+data.list[i].have_log+"</td>";
-							str_html += "<td>"+data.list[i].log_time+"</td>";
-							str_html += "<td>"+data.list[i].log_member+"</td>";
-							str_html += "<td>"+data.list[i].forum_info+"</td>";
-							str_html += "</tr>";
-						}
-						str_html += '<tr><th><input type="checkbox" id="chkbox_all2" /></th><td colspan="11" class="right"><button class="left" name="btn_input" id="btn_input">确定录入</button><span id="page_span">'+data.page_html+'</span></td></tr></table>';
-						$("#search_data").html(str_html);
+                        
+                        // 日期、VIP充值订单数、VIP充值总金额、U币充值订单数、U币充值总金额、线下店订单数、线下店总金额
+                        if(data.stat == 1)
+                        {
+                            var str_html = "<table style='width:720px;' class=\"gridtable\"><tr><th>充值类型</th><th>订单时间</th>";
+                            str_html += "<th>订单数目</th><th>订单金额</th><th>状态</th></tr>";
+                            for(var i = 0; i < data.list.length; i++)
+                            {
+                                str_html += "<tr ";
+                                if(data.list[i].status == '1')
+                                {
+                                    str_html += "class=\"have\"";
+                                    str_html += " onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#FFF8DC';\"";
+                                }
+                                else
+                                {
+                                    str_html += "onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#ffffff';\"";
+                                }
+                                str_html += ">";
+                                str_html += "<td>"+data.list[i].type+"</td>";
+                                str_html += "<td>"+data.list[i].time+"</td>";
+                                str_html += "<td>"+data.list[i].num+"</td>";
+                                str_html += "<td>"+data.list[i].amount+"</td>";
+                                str_html += "<td>"+data.list[i].status+"</td>";
+                                
+                                str_html += "</tr>";
+                            }
+                            if(data.list.length == 0)
+                            {
+                                str_html += '<tr><td colspan="5" >没有数据</td></tr></table>';
+                            }
+                        }
+                        else
+                        {
+                            var str_html = "<table class=\"gridtable\"><tr><th>序号</th><th>充值类型</th>";
+                            str_html += "<th>订单ID</th><th>状态</th><th>订单时间</th><th>确认时间</th><th>金额</th><th>购买人</th><th>购买Email</th><th>官方订单号</th></tr>";
+                            for(var i = 0; i < data.list.length; i++)
+                            {
+                                str_html += "<tr ";
+                                if(data.list[i].status == '初始')
+                                {
+                                    str_html += "class=\"have\"";
+                                    str_html += " onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#FFF8DC';\"";
+                                }
+                                else
+                                {
+                                    str_html += "onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#ffffff';\"";
+                                }
+                                str_html += ">";
+                                str_html += "<td>"+data.list[i].log_id+"</td>";
+                                str_html += "<td>"+data.list[i].type+"</td>";
+                                str_html += "<td>"+data.list[i].orderid+"</td>";
+                                str_html += "<td>"+data.list[i].status+"</td>";
+                                str_html += "<td>"+data.list[i].log_time+"</td>";
+                                str_html += "<td>"+data.list[i].confirm_time+"</td>";
+                                str_html += "<td>"+data.list[i].amount+"</td>";
+                                str_html += "<td>"+data.list[i].username+"</td>";
+                                str_html += "<td>"+data.list[i].email+"</td>";
+                                str_html += "<td>"+data.list[i].trade_no+"</td>";
+                                str_html += "</tr>";
+                            }
+                            
+                            if(data.list.length == 0)
+                            {
+                                str_html += '<tr><td colspan="10" style="width:710px;">没有数据</td></tr></table>';
+                            }
+                            else
+                            {
+                                str_html += '<tr><td colspan="11" class="right"><span id="page_span">'+data.page_html+'</span></td></tr></table>';
+                            }
+                        }
+                        $("#search_data").html(str_html);
 					}
 					else
 					{
 						alert(data.message);
 					}
-					$("#btn_srarch").text("搜索文章");
+					$("#btn_srarch").text("查询");
 				}
 			},
 			complete: function(XMLHttpRequest, textStatus){},
@@ -237,7 +278,7 @@ $(document).ready(function(){
 			}
 		});
 	}
-
+    
 		$("body").delegate("#page_span a", "click", function(){
 			$("#page").val($(this).text());
 			search();
@@ -248,26 +289,6 @@ $(document).ready(function(){
 			search();
 		});
         
-        $("#btn_test").click(function(){
-			$.ajax({
-                url: "http://www.5usport.com/plugin.php?id=fansclub:api&ac=passport&op=register&email=czt@163.com&password=123456aa&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&sign=8ead54dadc9b826e4ca856cd22f1b6a6",
-                type: "get",
-                dataType: "json",
-                data: '',
-                timeout: 100000,
-                cache: false,
-                beforeSend: function(XMLHttpRequest){}, 
-                success: function(data, textStatus){
-                            alert(data.message);
-                },
-                complete: function(XMLHttpRequest, textStatus){},
-                error: function(){
-                    alert("返回异常！");
-                }
-            });
-		});
-		
-		
 		function set_selected(id, text)
 		{
 			var count = $("#"+id+" option").length;
@@ -282,7 +303,7 @@ $(document).ready(function(){
 			}
 		}
 		
-		$('#s_time').val('2015-09-17');
+		$('#s_time').val('2015-09-22');
 		$('#e_time').val('<?=date('Y-m-d')?>');
 		$('#num').val('20');
 		$('#page').val('1');
@@ -300,338 +321,160 @@ function show_error($msg = '')
 function search($arr_param)
 {
     $arr_return = array('success' => FALSE, 'message' => 'init');
-    echo "<pre>";
-    print_r($arr_param);
-    exit;
-    $cat_id1 = $arr_param['cat_id1'] + 0;
-    $cat_id2 = $arr_param['cat_id2'] + 0;
+    
+    /*
+    [s_time] => 2015-09-22
+    [e_time] => 2015-09-24
+    [num] => 20 // 每页几条
+    [stat] => 1 // 是否统计
+    [success] => 1 // 是否成功
+    [page] => 1 第几页
+    */
+    
     $s_time = strtotime($arr_param['s_time'].' '.'00:00:00');
     $e_time = strtotime($arr_param['e_time'].' '.'23:59:59');
-    $page = $arr_param['page'] + 0 == 0 ? 1 : $arr_param['page'] + 0;
-    $num = $arr_param['num'] + 0 == 0 ? 20 : $arr_param['num'] + 0;
-    $text_search = trim($arr_param['text_search']);
-    $key_search = trim($arr_param['key_search']);
+    $num = intval($arr_param['num']) == 0 ? 20 : intval($arr_param['num']);
+    $stat = intval($arr_param['stat']);
+    $success = intval($arr_param['success']);
+    $page = intval($arr_param['page']) == 0 ? 1 : intval($arr_param['page']);
+    $bill_type = intval($arr_param['bill_type']);
+
+    $where = "log_time >= ".$s_time." AND log_time <= ".$e_time;
     
-    $chk_pwd = $this->_check_password($arr_param);
+    if($success == 1)
+    {
+        $where .= " AND status = '2'";
+    }
+    elseif($success == 2)
+    {
+        $where .= " AND status != '2'";
+    }
     
-    if(!$chk_pwd['success'])
+    if($bill_type != 0)
     {
-        $arr_return['message'] = $chk_pwd['message'];
+        $where .= " AND bill_type = '".$bill_type."'";
     }
-    elseif($cat_id1 == 0)
+    
+    $pass = ($page-1) * $num;
+    
+    $order_by = '';
+    
+    if($stat == 0) // 显示详细
     {
-        $arr_return['message'] = '没有选择一级分类';
-    }
-    elseif($cat_id2 == 0)
-    {
-        $arr_return['message'] = '没有选择二级分类';
+        $order_by = ' ORDER BY log_id DESC';
+        $arr_list = C::t('#ucharge#plugin_ucharge_log')->fetch_by_where($where.$order_by, $pass, $num);
+        
+        $arr_list_show = array();
+        for($i = 0; $i < count($arr_list); $i++)
+        {
+            $arr_list_show[$i]['log_id'] = $arr_list[$i]['log_id'];
+            $arr_list_show[$i]['orderid'] = $arr_list[$i]['orderid'];
+            $arr_list_show[$i]['status'] = $arr_list[$i]['status'];
+            $arr_list_show[$i]['log_time'] = date('Y-m-d H:i:s', $arr_list[$i]['log_time']);
+            $arr_list_show[$i]['confirm_time'] = date('Y-m-d H:i:s', $arr_list[$i]['confirm_time']);
+            
+            $arr_list_show[$i]['amount'] = $arr_list[$i]['amount']* $arr_list[$i]['price'];
+            $arr_list_show[$i]['charge_type'] = $arr_list[$i]['charge_type'];
+            $arr_list_show[$i]['username'] = $arr_list[$i]['username'];
+            $arr_list_show[$i]['email'] = $arr_list[$i]['email'];
+            $arr_list_show[$i]['trade_no'] = $arr_list[$i]['trade_no'];
+            $arr_list_show[$i]['subject'] = $arr_list[$i]['subject'];
+            $arr_list_show[$i]['body'] = $arr_list[$i]['body'];
+            
+            switch($arr_list[$i]['status'])
+            {
+                case 1 : $arr_list_show[$i]['status'] = '初始'; break;
+                case 2 : $arr_list_show[$i]['status'] = '成功'; break;
+                default : $arr_list_show[$i]['status'] = '其他'; break;
+            }
+            
+            switch($arr_list[$i]['bill_type'])
+            {
+                case 1 : $arr_list_show[$i]['type'] = '积分'; break;
+                case 2 : $arr_list_show[$i]['type'] = 'VIP'; break;
+                case 3 : $arr_list_show[$i]['type'] = '权益'; break;
+                default : $arr_list_show[$i]['type'] = '其他'; break;
+            }
+        }
     }
     else
     {
-        $obj_cat = $this->category_model->getCategory($cat_id2);
-        if(is_object($obj_cat))
+        $arr_list = C::t('#ucharge#plugin_ucharge_log')->stat_by_where($where);
+        $arr_list_show = array();
+        for($i = 0; $i < count($arr_list); $i++)
         {
-            $modelid = $obj_cat->modelid + 0;
-            if($modelid == 1) // 文章类型
+            $arr_list_show[$i] = $arr_list[$i];
+            switch($arr_list[$i]['bill_type'])
             {
-                $data = 'id, title, FROM_UNIXTIME(inputtime) as inputtime, username, url, keywords';
-                $from = 'news';
-                $where = "status = '99' AND catid = '".$cat_id2."' AND inputtime >= ".$s_time." AND inputtime <= ".$e_time;
-                if($text_search != '')
-                {
-                    $where .= " AND title like '%".$text_search."%'";
-                }
-                if($key_search != '')
-                {
-                    $where .= " AND keywords like '%".$key_search."%'";
-                }
-                $pass = ($page-1) * $num;
-                $order = 'id DESC';
-                $arr_list = $this->news_model->getNewsList($data, $from, $where, $pass, $num, $order);
-                for($i = 0; $i < count($arr_list); $i++)
-                {
-                    $_tmp = (array)$arr_list[$i];
-                    $_tmp['type'] = '新闻';
-                    $_tmp['lid'] = $i + $pass + 1;
-                    
-                    $data2 = array();
-                    $data2['article_id'] = $_tmp['id'];
-                    $data2['data_from'] = 'phpcms';
-                    $data2['search_type'] = $_tmp['type'];
-                    $have_log = $this->tov3_model->isLogExist($data2);
-                    if($have_log)
-                    {
-                        $arr_log = $this->tov3_model->getLog($data2);
-                        $_tmp['have_log'] = '是';
-                        $_tmp['log_time'] = date('Y-m-d H:i:s', $arr_log[0]['log_time']);
-                        $_tmp['log_member'] = $arr_log[0]['log_member'];
-                        $_tmp['forum_info'] = $arr_log[0]['forum_info'];
-                    }
-                    else
-                    {
-                        $_tmp['have_log'] = '否';
-                        $_tmp['log_time'] = '';
-                        $_tmp['log_member'] = '';
-                        $_tmp['forum_info'] = '';
-                    }
-                    
-                    $arr_list[$i] = $_tmp;
-                }
-                $arr_return['success'] = TRUE;
-                $arr_return['message'] = '';
-                $arr_return['list'] = $arr_list;
-                
-                $totle = $this->news_model->getWhereNewsTotal($where);
-                
-                $totle_page = ceil($totle/$num);
-                $page_html = '';
-                $pre_point = '';
-                $next_point = '';
-                for($i = 1; $i <= $totle_page; $i++)
-                {
-                    if($page == $i)
-                    {
-                        $page_html .= '['.$i.'] ';
-                    }
-                    else
-                    {
-                        if($page - $i > 3 || $i - $page > 3 )
-                        {
-                            if($i == 1)
-                            {
-                                $page_html .= '[<a href="javascript:return void(0);">'.($i).'</a>] ';
-                            }
-                            if($page - $i > 3 && $pre_point == '')
-                            {
-                                $pre_point = '...';
-                                $page_html .= $pre_point;
-                            }
-                            
-                            if($i - $page > 3 && $next_point == '')
-                            {
-                                $next_point = '...';
-                                $page_html .= $next_point;
-                            }
-                            
-                            if($i == $totle_page)
-                            {
-                                $page_html .= '[<a href="javascript:return void(0);">'.($i).'</a>] ';
-                            }
-                        }
-                        else
-                        {
-                            $page_html .= '[<a href="javascript:return void(0);">'.($i).'</a>] ';
-                        }
-                        
-                    }
-                }
-                $arr_return['page'] = $page;
-                $arr_return['num'] = $num;
-                $arr_return['page_html'] = $page_html;
-                
+                case 1 : $arr_list_show[$i]['type'] = '积分'; break;
+                case 2 : $arr_list_show[$i]['type'] = 'VIP'; break;
+                case 3 : $arr_list_show[$i]['type'] = '权益'; break;
+                default : $arr_list_show[$i]['type'] = '其他'; break;
             }
-            elseif($modelid == 3) // 图片类型
+            
+            switch($arr_list[$i]['status'])
             {
-                $data = 'id, title, FROM_UNIXTIME(inputtime) as inputtime, username, url, keywords';
-                $from = 'picture';
-                $where = "status = '99' AND catid = '".$cat_id2."' AND inputtime >= ".$s_time." AND inputtime <= ".$e_time;
-                if($text_search != '')
-                {
-                    $where .= " AND title like '%".$text_search."%'";
-                }
-                if($key_search != '')
-                {
-                    $where .= " AND keywords like '%".$key_search."%'";
-                }
-                $pass = ($page-1) * $num;
-                $order = 'id DESC';
-                $arr_list = $this->picture_model->getPictureList($data, $from, $where, $pass, $num, $order);
-                for($i = 0; $i < count($arr_list); $i++)
-                {
-                    $_tmp = (array)$arr_list[$i];
-                    $_tmp['type'] = '图片';
-                    $_tmp['lid'] = $i + $pass + 1;
-                    
-                    $data2 = array();
-                    $data2['article_id'] = $_tmp['id'];
-                    $data2['data_from'] = 'phpcms';
-                    $data2['search_type'] = $_tmp['type'];
-                    $have_log = $this->tov3_model->isLogExist($data2);
-                    if($have_log)
-                    {
-                        $arr_log = $this->tov3_model->getLog($data2);
-                        $_tmp['have_log'] = '是';
-                        $_tmp['log_time'] = date('Y-m-d H:i:s', $arr_log[0]['log_time']);
-                        $_tmp['log_member'] = $arr_log[0]['log_member'];
-                        $_tmp['forum_info'] = $arr_log[0]['forum_info'];
-                    }
-                    else
-                    {
-                        $_tmp['have_log'] = '否';
-                        $_tmp['log_time'] = '';
-                        $_tmp['log_member'] = '';
-                        $_tmp['forum_info'] = '';
-                    }
-                    
-                    $arr_list[$i] = $_tmp;
-                }
-                $arr_return['success'] = TRUE;
-                $arr_return['message'] = '';
-                $arr_return['list'] = $arr_list;
-                $totle = $this->picture_model->getWherePictureTotal($where);
-                
-                $totle_page = ceil($totle/$num);
-                $page_html = '';
-                $pre_point = '';
-                $next_point = '';
-                for($i = 1; $i <= $totle_page; $i++)
-                {
-                    if($page == $i)
-                    {
-                        $page_html .= '['.$i.'] ';
-                    }
-                    else
-                    {
-                        if($page - $i > 3 || $i - $page > 3 )
-                        {
-                            if($i == 1)
-                            {
-                                $page_html .= '[<a href="javascript:return void(0);">'.($i).'</a>] ';
-                            }
-                            if($page - $i > 3 && $pre_point == '')
-                            {
-                                $pre_point = '...';
-                                $page_html .= $pre_point;
-                            }
-                            
-                            if($i - $page > 3 && $next_point == '')
-                            {
-                                $next_point = '...';
-                                $page_html .= $next_point;
-                            }
-                            
-                            if($i == $totle_page)
-                            {
-                                $page_html .= '[<a href="javascript:return void(0);">'.($i).'</a>] ';
-                            }
-                        }
-                        else
-                        {
-                            $page_html .= '[<a href="javascript:return void(0);">'.($i).'</a>] ';
-                        }
-                        
-                    }
-                }
-                $arr_return['page'] = $page;
-                $arr_return['num'] = $num;
-                $arr_return['page_html'] = $page_html;
-                
+                case 1 : $arr_list_show[$i]['status'] = '初始'; break;
+                case 2 : $arr_list_show[$i]['status'] = '成功'; break;
+                default : $arr_list_show[$i]['status'] = '其他'; break;
             }
-            elseif($modelid == 11) // 视频类型
+        }
+    }
+    
+    $arr_return['success'] = TRUE;
+    $arr_return['message'] = '';
+    $arr_return['list'] = $arr_list_show;
+    $arr_return['stat'] = $stat;
+    
+    if($stat == 0) // 如果查详细
+    {
+        $totle = C::t('#ucharge#plugin_ucharge_log')->count_by_where($where);
+        
+        $totle_page = ceil($totle/$num);
+        $page_html = '';
+        $pre_point = '';
+        $next_point = '';
+        for($i = 1; $i <= $totle_page; $i++)
+        {
+            if($page == $i)
             {
-                $data = 'id, title, FROM_UNIXTIME(inputtime) as inputtime, username, url, keywords';
-                $from = 'video';
-                $where = "status = '99' AND catid = '".$cat_id2."' AND inputtime >= ".$s_time." AND inputtime <= ".$e_time;
-                if($text_search != '')
-                {
-                    $where .= " AND title like '%".$text_search."%'";
-                }
-                if($key_search != '')
-                {
-                    $where .= " AND keywords like '%".$key_search."%'";
-                }
-                $pass = ($page-1) * $num;
-                $order = 'id DESC';
-                $arr_list = $this->video_model->getVideoList($data, $from, $where, $pass, $num, $order);
-                for($i = 0; $i < count($arr_list); $i++)
-                {
-                    $_tmp = (array)$arr_list[$i];
-                    $_tmp['type'] = '视频';
-                    $_tmp['lid'] = $i + $pass + 1;
-                    $data2 = array();
-                    $data2['article_id'] = $_tmp['id'];
-                    $data2['data_from'] = 'phpcms';
-                    $data2['search_type'] = $_tmp['type'];
-                    $have_log = $this->tov3_model->isLogExist($data2);
-                    if($have_log)
-                    {
-                        $arr_log = $this->tov3_model->getLog($data2);
-                        $_tmp['have_log'] = '是';
-                        $_tmp['log_time'] = date('Y-m-d H:i:s', $arr_log[0]['log_time']);
-                        $_tmp['log_member'] = $arr_log[0]['log_member'];
-                        $_tmp['forum_info'] = $arr_log[0]['forum_info'];
-                    }
-                    else
-                    {
-                        $_tmp['have_log'] = '否';
-                        $_tmp['log_time'] = '';
-                        $_tmp['log_member'] = '';
-                        $_tmp['forum_info'] = '';
-                    }
-                    
-                    $arr_list[$i] = $_tmp;
-                }
-                $arr_return['success'] = TRUE;
-                $arr_return['message'] = '';
-                $arr_return['list'] = $arr_list;
-                $totle = $this->video_model->getWhereVideoTotal($where);
-                
-                $totle_page = ceil($totle/$num);
-                $page_html = '';
-                $pre_point = '';
-                $next_point = '';
-                for($i = 1; $i <= $totle_page; $i++)
-                {
-                    if($page == $i)
-                    {
-                        $page_html .= '['.$i.'] ';
-                    }
-                    else
-                    {
-                        if($page - $i > 3 || $i - $page > 3 )
-                        {
-                            if($i == 1)
-                            {
-                                $page_html .= '[<a href="javascript:return void(0);">'.($i).'</a>] ';
-                            }
-                            if($page - $i > 3 && $pre_point == '')
-                            {
-                                $pre_point = '...';
-                                $page_html .= $pre_point;
-                            }
-                            
-                            if($i - $page > 3 && $next_point == '')
-                            {
-                                $next_point = '...';
-                                $page_html .= $next_point;
-                            }
-                            
-                            if($i == $totle_page)
-                            {
-                                $page_html .= '[<a href="javascript:return void(0);">'.($i).'</a>] ';
-                            }
-                        }
-                        else
-                        {
-                            $page_html .= '[<a href="javascript:return void(0);">'.($i).'</a>] ';
-                        }
-                        
-                    }
-                }
-                $arr_return['page'] = $page;
-                $arr_return['num'] = $num;
-                $arr_return['page_html'] = $page_html;
+                $page_html .= '['.$i.'] ';
             }
             else
             {
-                $arr_return['message'] = '意外的类型';
+                if($page - $i > 3 || $i - $page > 3 )
+                {
+                    if($i == 1)
+                    {
+                        $page_html .= '[<a href="javascript: void(0);">'.($i).'</a>] ';
+                    }
+                    if($page - $i > 3 && $pre_point == '')
+                    {
+                        $pre_point = '... ';
+                        $page_html .= $pre_point;
+                    }
+                    
+                    if($i - $page > 3 && $next_point == '')
+                    {
+                        $next_point = '... ';
+                        $page_html .= $next_point;
+                    }
+                    
+                    if($i == $totle_page)
+                    {
+                        $page_html .= '[<a href="javascript: void(0);">'.($i).'</a>] ';
+                    }
+                }
+                else
+                {
+                    $page_html .= '[<a href="javascript: void(0);">'.($i).'</a>] ';
+                }
             }
         }
-        else
-        {
-            $arr_return['message'] = '没有找到分类信息';
-        }
         
+        $arr_return['page'] = $page;
+        $arr_return['num'] = $num;
+        $arr_return['page_html'] = $page_html;
     }
     
     return $arr_return;

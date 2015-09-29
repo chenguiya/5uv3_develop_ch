@@ -25,6 +25,8 @@ $space = getuserbyuid($_G['uid']);
 space_merge($space, 'field_home');
 space_merge($space, 'profile');
 
+$sub_operation = in_array($_GET['sub'], array('nickname')) ? trim($_GET['sub']) : '';
+
 list($seccodecheck, $secqaacheck) = seccheck('password');
 @include_once DISCUZ_ROOT.'./data/cache/cache_domain.php';
 $spacedomain = isset($rootdomain['home']) && $rootdomain['home'] ? $rootdomain['home'] : array();
@@ -458,6 +460,44 @@ if(submitcheck('profilesubmit')) {
         }
 	}
 }
+elseif(submitcheck('nicknamesubmit', 0, $seccodecheck, $secqaacheck)) // zhangjh 2015-09-29 修改昵称
+{
+    if($bln_mobile)
+    {
+        include_once DISCUZ_ROOT.'./source/plugin/fansclub/function/function_passport.php'; // 用户处理函数
+        $data = array();
+        $data['openid'] = dhtmlspecialchars($_GET['openid']);
+        $data['time'] = dhtmlspecialchars($_GET['time']);
+        $data['from'] = dhtmlspecialchars($_GET['from']);
+        $data['newnick'] = dhtmlspecialchars($_GET['nickname']);
+        $arr_result = passport_modnick($data);
+        
+        $org_url = 'home.php?mod=spacecp&ac=profile&op=password&sub=nickname&mobile=2&openid='.$_GET['openid'].'&time='.$_GET['openid'].
+                   '&from='.$_GET['from'].'&nickname='.$_GET['nickname'].'&redirect='.$_GET['redirect'];
+        if($arr_result['success'] === TRUE)
+        {
+            getuserbyuid(intval($_G['uid']));
+            
+            if($_GET['redirect'] == '')
+            {
+                showmessage('昵称修改成功', 'home.php?mod=space&do=profile&mycenter=1&mobile=2');
+            }
+            else
+            {
+                showmessage('昵称修改成功', urldecode($_GET['redirect']));
+            }
+        }
+        else
+        {
+            showmessage($arr_result['message'], $org_url);
+        }
+    }
+    else
+    {
+        echo "shit";
+    }
+}
+
 
 if($operation == 'password') {
 

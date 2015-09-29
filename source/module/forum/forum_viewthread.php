@@ -30,7 +30,6 @@ $forum = & $_G['forum'];
 if(!$_G['forum_thread'] || !$_G['forum']) {
 	showmessage('thread_nonexistence');
 }
-// var_dump($_G);die;
 
 $page = max(1, $_G['page']);
 $_GET['stand'] = isset($_GET['stand']) && in_array($_GET['stand'], array('0', '1', '2')) ? $_GET['stand'] : null;

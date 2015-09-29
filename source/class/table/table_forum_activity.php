@@ -67,8 +67,14 @@ class table_forum_activity extends discuz_table
 	public function delete_by_tid($tids) {
 		return DB::delete($this->_table, DB::field('tid', $tids));
 	}
-                      public function fetch_tid_by_uid($uid){
-                                    return DB::fetch_all("SELECT * FROM %t WHERE  uid=%d  and applynumber <> 0 ORDER BY starttimefrom DESC", array($this->_table, $uid));
+                      public function fetch_count_by_uid($uid){
+                                    return DB::fetch_all("SELECT count(*) FROM %t WHERE  uid=%d  and applynumber <> 0 ", array($this->_table, $uid));
+                      }
+                      public function fetch_tid_by_uid($uid , $start =0, $limit =0){
+                          return DB::fetch_all("SELECT c.`subject`,b.tid ,b.uid , b.username ,b.dateline FROM ".DB::table('forum_activity')." a,".DB::table('forum_activityapply')." b,".DB::table('forum_thread')."  c WHERE  a.uid = $uid and applynumber != 0 and a.tid = b.tid and a.tid = c.tid and b.verified = 0 order by b.dateline desc ".DB::limit($start, $limit));
+                      }
+                      public function my_fetch_count_by_uid($uid){
+                          return DB::fetch_all("SELECT count(*) FROM ".DB::table('forum_activity')." a,".DB::table('forum_activityapply')." b,".DB::table('forum_thread')."  c WHERE  a.uid = $uid and applynumber != 0 and a.tid = b.tid and a.tid = c.tid and b.verified = 0  ");
                       }
 }
 

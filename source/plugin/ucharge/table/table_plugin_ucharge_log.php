@@ -23,4 +23,29 @@ class table_plugin_ucharge_log extends discuz_table {
 	public function fetch_by_where($where = '1', $start = 0, $num = 10) {
 		return DB::fetch_all("SELECT * FROM %t WHERE ".$where." LIMIT %d,%d", array($this->_table, $start, $num));
 	}
+    
+    public function count_by_where($where = '1')
+    {
+        $arr_result = DB::fetch_first("SELECT count(*) as totle FROM %t WHERE ".$where, array($this->_table));
+        return $arr_result['totle'];
+    }
+    
+    public function stat_by_where($where = '1')
+    {
+        $query = DB::query("SELECT FROM_UNIXTIME(a.log_time,'%Y-%m-%d') as time, count(a.log_id) as num, sum(a.amount*a.price) as amount, ".
+                                "a.`status`, a.api_type, a.bill_type ".
+                            "FROM ".DB::table($this->_table)." a WHERE ".$where." ".
+                            "GROUP BY time, a.`status`, a.api_type, a.bill_type ".
+                            "ORDER BY time DESC, a.api_type ASC");
+        $arr_result = array();
+        $i = 0;
+        
+        while($row = DB::fetch($query))
+        {
+            $arr_result[$i] = $row;
+            $i++;
+        }
+        
+        return $arr_result;
+    }
 }

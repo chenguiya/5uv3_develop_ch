@@ -276,9 +276,14 @@ class table_forum_thread extends discuz_table
 		return DB::fetch_all("SELECT * FROM %t WHERE %i ORDER BY dateline DESC ".DB::limit($start, $limit), array($this->get_table_name($tableid), DB::field('authorid', $authorid)), $this->_pk);
 	}
                        //add by xurui 2015-09-15
-	public function my_fetch_all_by_authorid($authorid, $start = 0, $limit = 0, $tableid = 0) {
+	public function my_fetch_all_by_authorid($authorid, $start = 0, $limit =0) {
 		$authorid = dintval($authorid, true);
-		return DB::fetch_all("SELECT distinct tid,subject FROM %t WHERE %i ORDER BY lastpost DESC ".DB::limit($start, $limit), array($this->get_table_name($tableid), DB::field('authorid', $authorid)), $this->_pk);
+                                              return DB::fetch_all("SELECT a.tid,  a.`subject`,b.authorid, b.author, b.dateline as time FROM ".DB::table('forum_thread')." a,".DB::table('forum_post')." b WHERE  a.authorid = $authorid and a.tid = b.tid and b.authorid != a.authorid and a.displayorder > -1 order by b.dateline desc ".DB::limit($start, $limit));
+	}
+                        //add by xurui 2015-09-29
+	public function my_fetch_count_by_authorid($authorid) {
+		$authorid = dintval($authorid, true);
+                                              return DB::fetch_all("SELECT count(*) FROM ".DB::table('forum_thread')." a,".DB::table('forum_post')." b WHERE  a.authorid = $authorid and a.tid = b.tid and b.authorid != a.authorid and a.displayorder > -1 ");
 	}
         
 	public function fetch_all_by_dateline($starttime, $start = 0, $limit = 0, $order = 'dateline', $sort = 'DESC') {

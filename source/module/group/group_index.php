@@ -204,12 +204,16 @@ if (defined('IN_MOBILE')) {
 	$fields = DB::fetch_first("select * from ".DB::table('forum_forumfield')." where fid = ".intval($clubid));
 	$newfansclubids = array_filter(explode(',', $fields['relatedgroup']));
 	foreach ($newfansclubids as $gid) {
-		$fansclub[$gid] = get_fansclub_info($gid);
-		if (!empty($fansclub[$gid])) {
-			$special_verify = fansclub_get_level_apply_status($gid);
-			$fansclub[$gid]['verify_org'] = $special_verify['verify_org'];
-			$fansclub[$gid]['verify_5u'] = $special_verify['verify_5u'];
-		}		
+		$fansclubinfo = C::t('#fansclub#plugin_fansclub_info')->fetch($gid); // table_plugin_fansclub_apply_log
+// 		var_dump($fansclubinfo);
+		if ($fansclubinfo['displayorder'] >= 0) {
+			$fansclub[$gid] = get_fansclub_info($gid);
+			if (!empty($fansclub[$gid])) {
+				$special_verify = fansclub_get_level_apply_status($gid);
+				$fansclub[$gid]['verify_org'] = $special_verify['verify_org'];
+				$fansclub[$gid]['verify_5u'] = $special_verify['verify_5u'];
+			}
+		}				
 	}
 	
 	foreach ($forums as $key => $forum) {
@@ -217,11 +221,15 @@ if (defined('IN_MOBILE')) {
 			$fields = DB::fetch_first("select * from ".DB::table('forum_forumfield')." where fid = ".intval($key));
 			$newfansclubids = array_filter(explode(',', $fields['relatedgroup']));
 			foreach ($newfansclubids as $gid) {
-				$fansclub[$gid] = get_fansclub_info($gid);
-				if (!empty($fansclub[$gid])) {
-					$special_verify = fansclub_get_level_apply_status($gid);
-					$fansclub[$gid]['verify_org'] = $special_verify['verify_org'];
-					$fansclub[$gid]['verify_5u'] = $special_verify['verify_5u'];
+				$fansclubinfo = C::t('#fansclub#plugin_fansclub_info')->fetch($gid); // table_plugin_fansclub_apply_log
+// 				var_dump($fansclubinfo);
+				if ($fansclubinfo['displayorder'] >= 0) {
+					$fansclub[$gid] = get_fansclub_info($gid);
+					if (!empty($fansclub[$gid])) {
+						$special_verify = fansclub_get_level_apply_status($gid);
+						$fansclub[$gid]['verify_org'] = $special_verify['verify_org'];
+						$fansclub[$gid]['verify_5u'] = $special_verify['verify_5u'];
+					}
 				}
 			}
 		}

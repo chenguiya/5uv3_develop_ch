@@ -68,7 +68,7 @@ if($fid > 0)
 	
 }
 
-$arr = array('index', 'apply','shooter','leaguescore', 'apply_support', 'ajax', 'friendship', 'lists', 'ajax_thread', 'home', 'event', 'live', 'live2', 'mobile_register', 'verify', '404', 'about'); // 只允许的action
+$arr = array('index', 'apply','shooter','leaguescore', 'apply_support', 'ajax', 'friendship', 'lists', 'ajax_thread', 'home', 'event', 'live', 'live2', 'mobile_register', 'verify', '404', 'about','index2'); // 只允许的action
 if(!in_array($ac, $arr)) showmessage('undefined_action');
 
 $file = DISCUZ_ROOT.'./source/plugin/fansclub/module/index/'.$ac.'.inc.php'; // 检查模块是否存在
@@ -82,7 +82,7 @@ $nobbname = TRUE;
 $navtitle = $_G['setting']['bbname'].'_承载自由体育文化，传递不一样的体育声音';
 $metakeywords = '足球明星,篮球明星,体育明星,球队';
 $metadescription = $_G['setting']['bbname'].'是以体育新闻、NBA、CBA、英超、西甲、中超、中国足球等的垂直体育社群门户，体育明星在线互动，独特的体育观点与草根体育专栏，尽在你我的体育社区。';
-if($ac == 'index') // 广场
+if($ac == 'index' || $ac == 'index2') // 广场
 {
 	$navtitle = '5U球迷会_因球星而聚，为球迷而生_'.$_G['setting']['bbname'];
 	$metakeywords = '篮球球迷会,足球球迷会';
@@ -254,6 +254,10 @@ if($_G['style']['tplname'] == '5U体育模版套系')
 		// 2015-08-04 zhangjh 球迷联盟社区1.1
 		include template('extend/desktop/club_page');
 	}
+    elseif($ac == 'index2')
+    {
+        include template('extend/desktop/club_square');
+    }
 	elseif($ac == 'live')
 	{		
 		include template('live/live');

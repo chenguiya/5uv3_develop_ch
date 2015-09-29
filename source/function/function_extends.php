@@ -44,22 +44,25 @@ function getmessagebytid($tid, $typeid = 0) {
  */
 function getattachment($tid, $num = 5, $bln_get_aid = FALSE) {	
 	$attachments = $attachment = $images = array();
-	$attachments = DB::fetch_all("SELECT * FROM ".DB::table('forum_attachment')." WHERE tid=".$tid);
+	$pid = get_pid_by_tid($tid);
+	$attachments = DB::fetch_all("SELECT * FROM ".DB::table('forum_attachment')." WHERE tid=".$tid." AND pid=".$pid);
 	if (count($attachments) > $num) {
 		for ($i = 0; $i < $num; $i++) {
 			if($bln_get_aid) // 是否只是取AID
-			{
-				$images[] = $attachments[$i]['aid'];
-			}
-			else
 			{
 				$attachment = C::t('forum_attachment_n')->fetch($attachments[$i]['tableid'], $attachments[$i]['aid']);
 				$extension = strtolower(fileext($attachment['attachment']));
 				if ($extension == 'gif') {
 					$images = array();
-					$images[] = 'data/attachment/forum/' . $attachment['attachment'];
+					$images[] = $attachments[$i]['aid'];
 					return $images;
+				} else {
+					$images[] = $attachments[$i]['aid'];
 				}
+			}
+			else
+			{
+				$attachment = C::t('forum_attachment_n')->fetch($attachments[$i]['tableid'], $attachments[$i]['aid']);				
 				$images[] = 'data/attachment/forum/' . $attachment['attachment'];
 			}
 		}
@@ -67,17 +70,19 @@ function getattachment($tid, $num = 5, $bln_get_aid = FALSE) {
 		foreach ($attachments as $val) {
 			if($bln_get_aid) // 是否只是取AID
 			{
-				$images[] = $val['aid'];
-			}
-			else
-			{				
 				$attachment = C::t('forum_attachment_n')->fetch($val['tableid'], $val['aid']);
 				$extension = strtolower(fileext($attachment['attachment']));
 				if ($extension == 'gif') {
 					$images = array();
-					$images[] = 'data/attachment/forum/' . $attachment['attachment'];
+					$images[] = $attachments[$i]['aid'];
 					return $images;
-				}
+				} else {
+					$images[] = $val['aid'];
+				}				
+			}
+			else
+			{				
+				$attachment = C::t('forum_attachment_n')->fetch($val['tableid'], $val['aid']);				
 				$images[] = 'data/attachment/forum/' . $attachment['attachment'];
 			}
 		}
@@ -91,14 +96,20 @@ function getattachment($tid, $num = 5, $bln_get_aid = FALSE) {
  * @param int $tid
  * @return array $images
  */
-function wap_getattachment($tid, $num = 3) {	
+function wap_getattachment($tid, $num = 3) {
 	$attachments = $attachment = $images = array();
-	$attachments = DB::fetch_all("SELECT aid FROM ".DB::table('forum_attachment')." WHERE tid=".$tid.' LIMIT '.$num);
+	$pid = get_pid_by_tid($tid);
+	$attachments = DB::fetch_all("SELECT aid FROM ".DB::table('forum_attachment')." WHERE tid=".$tid.' AND pid='.$pid.' LIMIT '.$num);
 	foreach ($attachments as $key => $value) {
 		$aids[$key] = $value['aid'];
 	}
-// 	var_dump($attachments);die;
 	return $aids;
+}
+
+function get_pid_by_tid($tid) {
+	//通过tid获取帖子主题的pid以获取主题的附件
+	$thread = DB::fetch_first("SELECT pid FROM ".DB::table('forum_post')." WHERE tid=".$tid." AND first=1");
+	return intval($thread['pid']);
 }
 
 /**

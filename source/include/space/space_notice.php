@@ -32,7 +32,7 @@ $actives = array($view=>' class="a"');
 $opactives[$view] = 'class="a"';
 $categorynum = $newprompt = array();
 $type_wap = trim($_GET['type']);  //用于模板判断
-//$_G['uid'] = 1844;
+//$_G['uid'] = 1;
 if($view == 'userapp') {
 
 	space_merge($space, 'status');
@@ -147,69 +147,79 @@ if($view == 'userapp') {
 		}
 	}
 
-	$readtag = array($type => ' class="a"');
+	$readtag = array($type => ' class="a"');          
+        //
+                            $perpage =6;
+                            $perpage = mob_perpage($perpage);
+
+                            $page = empty($_GET['page'])?0:intval($_GET['page']);
+                            if($page<1) $page = 1;
+                            $start = ($page-1)*$perpage;
+
+                            ckstart($start, $perpage);                            
+                            $multi = '';
                         //回复我的
-                       if($type_wap == 'post'){
-                            $arr = array();
+                       if($type_wap == 'post'){                         
+                           foreach(C::t('forum_thread')->my_fetch_count_by_authorid($_G['uid']) as $key=>$value){ 
+                                $count= $value['count(*)'];
+                            }
+                            $maxpage = @ceil($count/$perpage);
                             $arr_ = array();
-                            foreach(C::t('forum_thread')->my_fetch_all_by_authorid($_G['uid']) as $key=>$value){         
-                                       //$arr [$key]['subject'] = $value['subject'];
-                                       foreach(C::t('forum_post')->fetch_all_by_tid_authorid(null,$value['tid'],$_G['uid']) as $key1=>$value1){
-                                              $arr [$key][$key1]['tid'] = $value['tid'];
-                                              $arr [$key][$key1]['subject'] = $value['subject'];
-                                              $arr [$key][$key1]['dateline'] = date('Y年n月d日 H:i',$value1 ['dateline']);
-                                              $arr [$key][$key1]['author'] = $value1 ['author'];
-                                              $arr [$key][$key1]['authorid'] = $value1 ['authorid'];
-                                       }
+                            foreach(C::t('forum_thread')->my_fetch_all_by_authorid($_G['uid'] ,$start,$perpage) as $key=>$value){      
+                                              $arr_ [$key]['tid'] = $value['tid'];
+                                              $arr_ [$key]['subject'] = $value['subject'];
+                                              $arr_ [$key]['dateline'] = date('Y年n月d日 H:i',$value['time']);
+                                              $arr_ [$key]['author'] = $value['author'];
+                                              $arr_ [$key]['authorid'] = $value['authorid'];
                             }
-                            foreach($arr as $k=>$v){
-                                 foreach($v as $k1=>$v1){
-                                     $arr_[]=$v1;
-                                 }
-                            }
+
+                            $multi = multi($count, $perpage, $page, "home.php?mod=space&type=post&do=$do");
                        }
+                       /*select a.tid, b.pid, a.`subject`,b.authorid, b.author, FROM_UNIXTIME(a.dateline) as time 
+                        from group_forum_thread a, group_forum_post b where a.authorid = 1 and a.tid = b.tid and b.authorid != a.authorid
+                        and a.displayorder > -1
+                        order by b.dateline desc
+                        */
                        //活动提醒
-                       if($type_wap == 'activity'){
-                            $a_arr = array();
+               if($type_wap == 'activity'){
                             $a_arr_ = array();
-                            $type_ma = count(C::t('forum_activity')->fetch_tid_by_uid($_G['uid']));   //是否有创建活动
-                           if($type_ma == 0){
-                                  //申请加入活动
-                                  foreach(C::t('forum_activityapply')->fetch_info_by_uid($_G['uid']) as $key=>$value){
-                                            //主要是活动名称
-                                            foreach(C::t('forum_thread')->fetch_all_by_tid_displayorder($value['tid']) as $key1=>$value1){
-                                                  $a_arr [$key][$key1]['userid'] = $_G['uid'];
-                                                  $a_arr [$key][$key1]['tid'] = $value['tid'];
-                                                  $a_arr [$key][$key1]['username'] = $value['username'];
-                                                  $a_arr [$key][$key1]['dateline'] = date('Y年n月d日 H:i',$value['dateline']);
-                                                  $a_arr [$key][$key1]['subject'] = $value1['subject'] ;
-                                           }
-                                   }
-                           }  else {
-                                  foreach((C::t('forum_activity')->fetch_tid_by_uid($_G['uid'])) as $k=>$v){
-                                            foreach (C::t('forum_activityapply')->fetch_info_by_tid($v['tid']) as $k1=>$v1){
-                                                  if($v1['uid'] != $_G['uid']){
-                                                          $a_arr [$k][$k1]['tid'] = $v['tid'];
-                                                          $a_arr [$k][$k1]['userid'] = $v1['uid'];
-                                                          $a_arr [$k][$k1]['username'] = $v1['username']; 
-                                                          $a_arr [$k][$k1]['dateline'] = date('Y年n月d日 H:i',$v1['dateline']);
-                                                          foreach(C::t('forum_thread')->fetch_all_by_tid_displayorder($v['tid']) as $k2=>$v2){
-                                                                $a_arr [$k][$k1]['subject'] = $v2['subject'] ;
-                                                            }
-                                                  }
+                             //是否有创建活动
+                            foreach(C::t('forum_activity')->fetch_count_by_uid($_G['uid']) as $key=>$value){ 
+                                 $type_ma= $value['count(*)'];
+                            }
+                            if($type_ma == 0){         
+                                            foreach(C::t('forum_activityapply')->fetch_count_by_uid($_G['uid']) as $key=>$value){ 
+                                                $count= $value['count(*)'];
                                             }
-
-                                        }
-
-                           }    
-                        foreach($a_arr as $k=>$v){
-                                 foreach($v as $k1=>$v1){
-                                       $a_arr_[]=$v1;
-                                  }
-                          }
-                       }                       
-                  //  echo "<pre>";
-                  //  print_r($arr_);exit;
+                                            $maxpage = @ceil($count/$perpage);
+                                            //申请加入活动
+                                            foreach(C::t('forum_activityapply')->fetch_info_by_uid($_G['uid'],$start,$perpage) as $key=>$value){
+                                                        $a_arr_ [$key]['author'] = $value['author'] ;
+                                                        $a_arr_ [$key]['userid'] = $value['authorid'];
+                                                        $a_arr_ [$key]['tid'] = $value['tid'];
+                                                        $a_arr_ [$key]['dateline'] = date('Y年n月d日 H:i',$value['dateline']);
+                                                        $a_arr_ [$key]['subject'] = $value['subject'] ;
+                                          }
+                                          $multi = multi($count, $perpage, $page, "home.php?mod=space&type=activity&do=$do");
+                           }  else {
+                                    foreach((C::t('forum_activity')->my_fetch_count_by_uid($_G['uid'])) as $k=>$v){
+                                         $count= $value['count(*)'];
+                                    }
+                                    $maxpage = @ceil($count/$perpage);
+                                    //谁申请活动
+                                     foreach((C::t('forum_activity')->fetch_tid_by_uid($_G['uid'],$start,$perpage)) as $k=>$v){
+                                                  $a_arr_ [$k]['tid'] = $v['tid'];
+                                                  $a_arr_ [$k]['userid'] = $v['uid'];
+                                                  $a_arr_ [$k]['username'] = $v['username']; 
+                                                  $a_arr_ [$k]['dateline'] = date('Y年n月d日 H:i',$v['dateline']);
+                                                  $a_arr_ [$k]['subject'] = $v['subject'] ;
+                                      }
+                                      $multi = multi($count, $perpage, $page, "home.php?mod=space&type=activity&do=$do");
+                            }
+                     }    
+                
+               	//echo "<pre>";
+                    //  print_r($a_arr_);exit;
 }
 
 dsetcookie('promptstate_'.$_G['uid'], $newprompt, 31536000);

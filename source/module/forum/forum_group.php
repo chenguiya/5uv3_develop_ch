@@ -154,8 +154,8 @@ if($action == 'index') {
 			foreach ($threadlist as $key => $value) {
 				$threadlist[$key]['author_avatar'] = avatar($value['authorid'], 'small', 1);
 				if ($value['attachment'] == '2') {
-					$aids = wap_getattachment($value['tid'], 2);
-// 					var_dump($aids);die;
+					$aids = wap_getattachment($value['tid'], 3);
+// 					var_dump($value['tid']);
 					foreach ($aids as $aid) {
 						$threadlist[$key]['img'][] = getforumimg($aid, 0, 320, 170, 2);
 					}

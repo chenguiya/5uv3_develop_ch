@@ -8,6 +8,7 @@ $_rightsdettings = $_G['cache']['plugin']['rights'];
 $search = trim($_G['gp_search']);
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
+
 if($search != '') // 有搜索的
 {
 	$search_info = C::t('#fansclub#plugin_forum_forum')->fetch_group_by_name($search);
@@ -24,10 +25,12 @@ if($mem_check != '' && $search == '') // 有搜索的不用缓存
 {
 	$arr_group_show = memory('get', 'fansclub_arr_group_show');
 	$arr_province_city = memory('get', 'fansclub_arr_province_city');
+    $arr_forum_list = memory('get', 'fansclub_arr_forum_list');
 }
 
 if($arr_group_show == FALSE || $arr_province_city == FALSE || TRUE) // 暂时不用CACHE
 {
+    $arr_forum_list = array(); // 左版块
 	$arr_group_show = array(); // 右下群组
 	// ====================================== 全部群组 ======================================
 	$arr_province_city = fansclub_get_province_city(TRUE, TRUE); // 省市数组
@@ -69,6 +72,9 @@ if($arr_group_show == FALSE || $arr_province_city == FALSE || TRUE) // 暂时不
 			$arr_group_show[$i]['specialclub'] = FALSE;
 		}
 	}
+    
+    $arr_forum_list = fansclub_get_forum_list(); // 左版块
+    
 	
 	if($mem_check != '')
 	{
@@ -76,11 +82,13 @@ if($arr_group_show == FALSE || $arr_province_city == FALSE || TRUE) // 暂时不
 		{
 			memory('set', 'fansclub_arr_group_show', $arr_group_show, 60*60);
 			memory('set', 'fansclub_arr_province_city', $arr_province_city, 60*60);
+            memory('set', 'fansclub_arr_forum_list', $arr_forum_list, 60*60);
 		}
 		else
 		{
 			memory('rm', 'fansclub_arr_group_show');
 			memory('rm', 'fansclub_arr_province_city');
+            memory('rm', 'fansclub_arr_forum_list');
 		}
 	}
 }

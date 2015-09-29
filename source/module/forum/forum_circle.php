@@ -108,7 +108,13 @@ if ($type == 'football' && $op == 'index') {
 	$navtitle .= $_G['setting']['bbname'];
 	$metakeywords = '足球,新闻资讯,球星';
 	$metadescription = '汇聚足球明星新闻图片与视频资讯，顶级国际足球俱乐部球迷社区，深挖各俱乐部第一手资讯。';
-	
+                        //update by xurui 2015-09-25 换成球队频道
+                       $a = $threadlist;
+                       foreach($a as $k=>$v){
+                            if($_G['cache']['forums'][$v['fid']]['type'] == 'sub'){
+                                     $threadlist[$k]['fid'] = $_G['cache']['forums'][$v['fid']]['fup'];
+                                }
+                     }
 	include template('extend/desktop/ball_index');
 } elseif ($type == 'basket' && $op == 'index') {
 //官方发布
@@ -195,7 +201,13 @@ if ($type == 'football' && $op == 'index') {
 	$navtitle .= $_G['setting']['bbname'];
 	$metakeywords = 'nba,篮球,视频,球星';
 	$metadescription = '精选NBA战报和篮球视频，NBA球星八卦新闻，篮球明星最新资讯。';
-	
+	 
+                       $a = $threadlist;
+                       foreach($a as $k=>$v){
+                            if($_G['cache']['forums'][$v['fid']]['type'] == 'sub'){
+                                     $threadlist[$k]['fid'] = $_G['cache']['forums'][$v['fid']]['fup'];
+                                }
+                     }
 	include template('extend/desktop/ball_index');
 } elseif ($type == 'football' && $op == 'allcategory') {
 	//当前论坛所有足球类的分区的id
