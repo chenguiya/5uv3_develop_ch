@@ -292,5 +292,12 @@ class usermodel {
         $row = $this->db->fetch_array($query);
         return $row;
     }
+    
+    function get_user_fields($uid)
+    {
+        $query = $this->db->query("SELECT * FROM ".UC_DBTABLEPRE."memberfields WHERE uid='".$uid."'");
+        $row = $this->db->fetch_array($query);
+        return $row;
+    }
 
 }

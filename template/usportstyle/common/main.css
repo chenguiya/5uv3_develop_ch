@@ -2676,11 +2676,6 @@ body{background: #f1f4f6;}
     background: #f1f4f6;
 }
 
-.ch_mode
-{
-    padding: 0px 10px;
-}
-
 .ch_mode .pcb
 {
     position: relative;
@@ -5775,70 +5770,33 @@ body{background: #f1f4f6;}
 }
 
 /*other @ch*/
-.noclub
-{
-    line-height: 30px;
+.noclub{line-height: 30px;margin: 15px auto;text-align: center;border: 1px solid #e1e1e1;background: #fff;}
+.debate_hd{ height: 40px; border-bottom: 1px solid #edf1f4; line-height: 40px; font-size: 16px; position: relative; width: 590px; margin-top: 10px;}
+.debate_hd .hd_times{ position: absolute; right: 10px; top:5px; font-size: 12px;}
+.debate_tabcom{ margin-top: 15px; width: 590px; overflow: hidden;}
+.debate_tabcom td{ text-align: center; vertical-align: top; overflow: hidden;}
+.point_chart{ width: 100%; background: #e6eff6; height: 20px; position: relative;}
+.point_chart .zchart{ position: absolute; right: 0; top: 0; height: 20px; background: #eb6100;}
+.point_chart .fchart{ position: absolute; left: 0; top:0; height: 20px; background: #5aaf4a;}
+.zpoint,.fpoint{ padding: 22px 0;}
+.zpoint strong,.fpoint strong{ color: #eb6100; font-size: 18px; font-weight: normal;}
+.zpoint p,.fpoint p{ font-size: 14px; line-height: 22px; color: #474747;}
+.fpoint strong{ color:#5aaf4a;}
+.zsupport button,.fsupport button{ background: url(images/debate_icon.png) no-repeat 0 0; width: 77px; height: 77px; border: none; cursor: pointer;}
+.zsupport button span,.fsupport button span{ display: none;}
+.fsupport button{ background-position: 0 -83px;}
+.znum{ margin: 22px 0; font-size:14px;}
+.znum em{ color: #eb6100;}
+.zpeople{ border-top: 1px solid #f7f8f9; width: 110%;}
+.zpeople li{ float: left; margin-top: 15px; margin-right: 14px;}
+.zpeople li .avt img{ width: 40px; height: 40px; border-radius:50%;}
+.zpeople li p{ display: block;margin-top: 5px; height: 20px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap; width:40px;}
+.vs_zfcom{ width: 42px; height: 42px; background: #949da2; color:#f1f2f3; display: block; font-size: 20px; line-height: 42px; text-align: center; border-radius: 50%; margin: 0 auto;}
+.debate_wr{ padding-top: 15px;}
+.ch_pti .pdbt{margin-top: 0;}
+#gt_forumdisplay_fastpost_btn_extra{float: left;width: 500px;margin: 0 !important;}
+#gt_viewthread_fastpost_content{float: right;margin: 0 !important;}
 
-    margin: 15px auto;
-
-    text-align: center;
-
-    border: 1px solid #e1e1e1;
-    background: #fff;
-}
-
-.ch_debate
-{
-    padding-top: 8px;
-}
-
-.ch_debate .si_1,
-.ch_debate .si_2
-{
-    width: 253px;
-
-    text-align: right;
-    vertical-align: top;
-}
-
-.ch_debate .si_1 h5
-{
-    width: auto;
-
-    text-align: right;
-}
-
-.ch_debate .si_2 h5
-{
-    width: auto;
-
-    text-align: left;
-}
-
-.ch_debate th
-{
-    width: 60px;
-}
-
-.ch_pti .pdbt
-{
-    margin-top: 0;
-}
-
-#gt_forumdisplay_fastpost_btn_extra
-{
-    float: left;
-
-    width: 500px;
-    margin: 0 !important;
-}
-
-#gt_viewthread_fastpost_content
-{
-    float: right;
-
-    margin: 0 !important;
-}
 
 /*左右悬浮 @ch*/
 

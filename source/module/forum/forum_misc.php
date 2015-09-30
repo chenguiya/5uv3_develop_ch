@@ -1893,11 +1893,12 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 		showmessage('签到成功', "forum.php?mod=viewthread&tid=$tid");
 	}
 	include template('extend/forum/activity_sign');
-} elseif ($_GET['action'] == 'signinlist') {	
+} elseif ($_GET['action'] == 'signinlist') {
+	require_once libfile('function/extends');
 	$issigned = isset($_GET['issigined']) ? intval($_GET['issigined']) : 1;
 	$pp = $_G['setting']['activitypp'];
 	$applymember_num = C::t('forum_activityapply')->count_apply_by_tid($_GET['tid'], 1);
-	$applymember_num = $applymember_num;
+// 	$applymember_num = $applymember_num;
 	$count = C::t('forum_activityapply')->count_signed_by_tid_issign($_GET['tid'], $issigned);
 	$maxpage = @ceil($count/$pp);
 	
@@ -1908,7 +1909,8 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	
 	foreach ($userlists as $key => $value) {
 		$userlists[$key]['ufielddatanew'] = dunserialize($value['ufielddata']);
-		$userlists[$key]['sign_time'] = date('Y-m-d H:i', $value['sign_time']);
+		$userlists[$key]['ufielddatanew']['userfield']['en_mobile'] = encryptionDisplay($userlists[$key]['ufielddatanew']['userfield']['mobile'], 3, 4);
+		$userlists[$key]['sign_time'] = dgmdate($value['sign_time'], 'u');
 	}
 // 	var_dump($userlists);die;
 	

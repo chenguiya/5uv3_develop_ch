@@ -18,13 +18,12 @@ alter table group_ucenter_memberfields add column newuser tinyint(1) unsigned DE
 alter table group_ucenter_memberfields add column userfrom varchar(50) DEFAULT '' COMMENT '注册来源';
 alter table group_ucenter_memberfields add column openid varchar(45) NOT NULL DEFAULT '' COMMENT 'openId微信用户与公众号之间的唯一凭证';
 
-// 修改昵称 http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=modnick&from=weixin&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&newnick=5uczt1&time=1442977333&sign=0061524467ff5dd87b4b790a18cb71eb
-// 直接登录 http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=directlogin&from=weixin&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&wxhead=http%3A%2F%2Fwx.qlogo.cn%2Fmmopen%2Fg3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe%2F0&redirect=&wxnick=%E4%BD%A0%E5%A5%BD%E5%91%80%E6%88%91&time=1442977333&sign=bacc6e138682800d225d00f21e94078d
+// 直接登录 http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=directlogin&from=weixin&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&wxhead=http%3A%2F%2Fwx.qlogo.cn%2Fmmopen%2Fg3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe%2F0&redirect=http%3A%2F%2Fzhangjh.usport.com.cn%2Fhome.php%3Fmod%3Dspace%26do%3Dprofile%26mycenter%3D1%26mobile%3D2&wxnick=admin&can_change_nickname=1&time=1442977333&sign=6f450ac6c604a2df4f2748c309eb5084
 
+// 修改昵称(可不用) http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=modnick&from=weixin&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&newnick=5uczt1&time=1442977333&sign=0061524467ff5dd87b4b790a18cb71eb
 // 用户注册(可不用) http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=register&email=czt@163.com&password=123456aa&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&sign=8ead54dadc9b826e4ca856cd22f1b6a6
 // 登录(可不用)     http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=login&name=czt@163.com&password=123456aa&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&sign=382e8c61869ee37cfec36d41ca5bd4b7
 */
-
 
 // echo "<pre>";
 $login_success_url = $_G['siteurl'].'home.php?mod=space&do=profile&mycenter=1&mobile=2';
@@ -44,8 +43,7 @@ $arr_param['wxnick'] = trim(urldecode($_GET['wxnick']));
 $arr_param['redirect'] = trim(urldecode($_GET['redirect']));
 $arr_param['newnick'] = trim(arr_to_utf8($_GET['newnick']));
 $arr_param['wxhead'] = trim(urldecode($_GET['wxhead']));
-
-//echo urlencode('http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0');
+$arr_param['can_change_nickname'] = trim($_GET['can_change_nickname']);
 
 $op = trim($_GET['op']);
     
@@ -106,12 +104,13 @@ if($bln_check === TRUE)
         $data['redirect'] = $arr_param['redirect'];
         $data['wxnick'] = $arr_param['wxnick'];
         $data['wxhead'] = $arr_param['wxhead'];
+        $data['can_change_nickname'] = $arr_param['can_change_nickname'];
         
         $arr_return = passport_directlogin($data);
         
         if($arr_return['success'] === TRUE)
         {
-            if($arr_return['can_change_nickname'] === TRUE) // 需要修改昵称
+            if($data['can_change_nickname'] == '1' && $arr_return['redirect'] != '') // 需要修改昵称
             {
                 if($arr_return['redirect'] != '')
                 {
@@ -141,5 +140,4 @@ else
     $arr_return['message'] = 'sign检验错误';
 }
 
-// print_r($arr_return);
 die(json_encode($arr_return));

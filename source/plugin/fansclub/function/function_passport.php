@@ -34,6 +34,11 @@ function passport_modnick($data)
                 {
                     $arr_return['success'] = TRUE;
                     $arr_return['message'] = '修改成功';
+                    
+                    // 没有通知情况修改，强制修改
+                    C::t('common_member')->update($uid, array('username' => $newnick));
+                    C::t('#fansclub#plugin_ucenter_memberfields')->update($uid, array('newuser' => '1'));
+                    $member = getuserbyuid($uid);
                 }
                 else
                 {
@@ -60,6 +65,7 @@ function passport_modnick($data)
 // 直接登录
 function passport_directlogin($data)
 {
+    global $_G;
     $arr_return = array('success' => FALSE, 'message' => '');
     $openid = $data['openid'];
     $time = $data['time'];
@@ -67,6 +73,7 @@ function passport_directlogin($data)
     $redirect = $data['redirect'];
     $wxnick = $data['wxnick'];
     $wxhead = $data['wxhead'];
+    $can_change_nickname = $data['$can_change_nickname'];
     
     if($openid != '' && $time != '' && $from != '')
     {
@@ -86,6 +93,10 @@ function passport_directlogin($data)
                 $arr_return['redirect'] = $redirect;
                 $arr_return['wxhead'] = $wxhead;
                 $arr_return['nickname'] = $wxnick;
+                $arr_return['can_change_nickname'] = $can_change_nickname;
+                $arr_return['openid'] = $openid;
+                $arr_return['time'] = $time;
+                $arr_return['from'] = $from;
             }
             else
             {
@@ -94,21 +105,26 @@ function passport_directlogin($data)
         }
         else // 没有openid的
         {
+            //$wxnick = 'admin';
             $arr_param = array();
             $arr_param['type'] = 1;
             $arr_param['email'] = passport_get_default_email();
             $arr_param['password'] = passport_get_default_password();
             $arr_param['openid'] = $openid;
             $arr_param['username'] = ($wxnick == '') ? passport_get_default_username() : $wxnick;
+            $arr_param['wxhead'] = $wxhead;
             
             $arr_check_result = passport_can_register($arr_param);
-           
+
             if($wxnick != '' && $arr_check_result['success'] === FALSE && 
                ($arr_check_result['message'] == lang('message', 'register_check_found') ||      // 该用户名已注册，请更换用户名或...
+                $arr_check_result['message'] == '用户名已存在' ||
                 $arr_check_result['message'] == lang('message', 'profile_username_illegal') ||  // 用户名包含敏感字符
                 $arr_check_result['message'] == lang('message', 'profile_username_protect')))   // 用户名包含被系统屏蔽的字符
             {
-                if($arr_check_result['message'] == lang('message', 'register_check_found'))
+                
+                if($arr_check_result['message'] == lang('message', 'register_check_found') || 
+                   $arr_check_result['message'] == '用户名已存在')
                 {
                     $arr_param['username'] = $arr_param['username'].'_'.strtolower(passport_create_randomstr(5)); // 已经注册过
                 }
@@ -145,7 +161,7 @@ function passport_directlogin($data)
                         $arr_return['redirect'] = $redirect;
                         $arr_return['wxhead'] = $wxhead;
                         $arr_return['nickname'] = $wxnick;
-                        $arr_return['can_change_nickname'] = $can_change_nickname;
+                        $arr_return['can_change_nickname'] = $can_change_nickname ? '1' : '0';
                         $arr_return['openid'] = $openid;
                         $arr_return['time'] = $time;
                         $arr_return['from'] = $from;
@@ -168,7 +184,21 @@ function passport_directlogin($data)
     }
     else
     {
+        
         $arr_return['message'] = '参数不完整';
+        
+        if($openid == '')
+        {
+            $arr_return['message'] .= '|取不到openid，请重试';
+        }
+        if($time == '')
+        {
+            $arr_return['message'] .= '|取不到提交时间，请重试';
+        }
+        if($from == '')
+        {
+            $arr_return['message'] .= '|取不到提交来源，请重试';
+        }
     }
     return $arr_return;
 }
@@ -340,6 +370,10 @@ function passport_register($data)
             ));
             manyoulog('user', $uid, 'add');
         }
+        
+        // 取微信头像
+        $_G['uid'] = $uid;
+        $arr = fansclub_avatar_upload($uid, '', $data['wxhead']);
     }
     
     return $arr_return;
@@ -371,7 +405,8 @@ function passport_check_sign($data)
     }
     else
     {
-        //echo $my_sign;
+        // echo $my_sign;
+        // echo '1234';
         return FALSE;
     }
 }
@@ -522,7 +557,7 @@ function passport_can_register($data)
 // 返回一个默认用户名 一共15位
 function passport_get_default_username()
 {
-    return '微信_'.strtolower(passport_create_randomstr(3)).substr(time(), -7);
+    return 'wx_'.strtolower(passport_create_randomstr(3)).substr(time(), -7);
 }
 
 // 返回一个默认Email

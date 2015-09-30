@@ -408,6 +408,14 @@ if(submitcheck('profilesubmit')) {
 		include_once libfile('function/member');
 		checkemail($emailnew);
 	}
+    
+    $user_fields = uc_get_user_fields($_G['uid']);
+    $not_need_oldpassword = ($user_fields['openid'] != '') ? TRUE : FALSE;
+    if($not_need_oldpassword) // 有openid不检查旧密码
+    {
+        $ignorepassword = 1;
+    }
+
 	$ucresult = uc_user_edit(addslashes($_G['username']), $_GET['oldpassword'], $_GET['newpassword'], '', $ignorepassword, $_GET['questionidnew'], $_GET['answernew']);
 	if($ucresult == -1) {
 		showmessage('profile_passwd_wrong', '', array(), array('return' => true));
@@ -476,7 +484,7 @@ elseif(submitcheck('nicknamesubmit', 0, $seccodecheck, $secqaacheck)) // zhangjh
                    '&from='.$_GET['from'].'&nickname='.$_GET['nickname'].'&redirect='.$_GET['redirect'];
         if($arr_result['success'] === TRUE)
         {
-            getuserbyuid(intval($_G['uid']));
+            $member = getuserbyuid(intval($_G['uid']));
             
             if($_GET['redirect'] == '')
             {
@@ -485,6 +493,7 @@ elseif(submitcheck('nicknamesubmit', 0, $seccodecheck, $secqaacheck)) // zhangjh
             else
             {
                 showmessage('昵称修改成功', urldecode($_GET['redirect']));
+                // showmessage('昵称修改成功', 'home.php?mod=space&do=profile&mycenter=1&mobile=2');
             }
         }
         else
@@ -494,10 +503,9 @@ elseif(submitcheck('nicknamesubmit', 0, $seccodecheck, $secqaacheck)) // zhangjh
     }
     else
     {
-        echo "shit";
+        echo "on_see";
     }
 }
-
 
 if($operation == 'password') {
 

@@ -434,12 +434,71 @@ if (defined('IN_MOBILE')) {
 	require_once libfile('function/extends');
 	$focus = $activity = $activity_fileds = array();
     
-	//首页焦点图
-	$focus = C::t('common_block_item')->fetch_all_by_bid(132, true);
-	foreach ($focus as $key => $item) {
-		$attachment = getattachment($item['id'], 1, TRUE);
-		$focus[$key]['pic'] = getforumimg($attachment[0], 0, 480, 256, 2);
-	}
+    $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+    
+    // zhangjh 2015-09-30 这个读缓存
+    $focus = $item = FALSE;
+    $mem_check = memory('check'); // 先检查缓存是否生效
+    if($mem_check != '' && $page == 1) // 第二页面就不用缓存
+    {
+        $focus = memory('get', 'wap_index_arr_focus');
+        $item = memory('get', 'wap_index_arr_item');
+        $hotthread = memory('get', 'wap_index_arr_hotthread');
+        $threadlist = memory('get', 'wap_index_arr_threadlist');
+    }
+    
+    if($focus == FALSE || $item == FALSE )
+    {
+        //首页焦点图
+        $focus = C::t('common_block_item')->fetch_all_by_bid(132, true);
+        foreach ($focus as $key => $item) {
+            $attachment = getattachment($item['id'], 1, TRUE);
+            $focus[$key]['pic'] = getforumimg($attachment[0], 0, 480, 256, 2);
+        }
+        
+        //首页热门帖子
+        $item = C::t('common_block_item')->fetch_all_by_bid(135, true);
+        $count = count($item);
+
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;	
+        $pagesize = isset($_GET['pagesize']) ? intval($_GET['pagesize']) : 10;
+
+        $maxpage = @ceil($count/$pagesize);
+        $nextpage = ($page + 1) > $maxpage ? 1 : ($page + 1);
+        // 	$multipage_more = "forum.php?page=".$nextpage;
+        $hotthread = C::t('#extends#plugin_common_block_item')->fetch_all_by_bid(135, $page, $pagesize, true);
+        $threadlist = array();
+        foreach ($hotthread as $key => $value) {
+            $threadlist[$key]['id'] = $value['id'];
+            $threadlist[$key]['title'] = $value['title'];
+            $threadlist[$key]['url'] = $value['url'];
+            //处理详细字段
+            $fields = dunserialize($value['fields']);
+            $threadlist[$key]['author'] = $fields['author'];
+            $threadlist[$key]['avatar'] = $fields['avatar_middle'];
+            $threadlist[$key]['dateline'] = date('m月d日 H:s', $fields['dateline']);
+            $attachment = getattachment($value['id'], 3, TRUE);
+            for ($i = 0; $i < 3; $i++) {
+                if ($attachment[$i]) {
+                    $threadlist[$key]['attachment'][$i] = getforumimg($attachment[$i], 0, 320, 230, 2);
+                }
+            }
+            // 		$focus[$key]['pic'] = getforumimg($attachment[0], 0, 480, 256, 2);
+            
+            $thread = DB::fetch_first("SELECT * FROM ".DB::table('forum_thread')." WHERE tid=".$value['id']);
+            $threadlist[$key]['replies'] = $thread['replies'];
+        }
+    
+
+        if($mem_check != '' && $page == 1)
+        {
+            memory('set', 'wap_index_arr_focus', $focus, 60);
+            memory('set', 'wap_index_arr_item', $item, 60);
+            memory('set', 'wap_index_arr_hotthread', $hotthread, 60);
+            memory('set', 'wap_index_arr_threadlist', $threadlist, 60);
+        }
+    }
+
 	//首页热门活动
     /*
 	$activity = C::t('common_block_item')->fetch_all_by_bid(151, true);	
@@ -461,38 +520,7 @@ if (defined('IN_MOBILE')) {
 		}			
 	}
     */
-	//首页热门帖子
-	$item = C::t('common_block_item')->fetch_all_by_bid(135, true);
-	$count = count($item);
 	
-	$page = isset($_GET['page']) ? intval($_GET['page']) : 1;	
-	$pagesize = isset($_GET['pagesize']) ? intval($_GET['pagesize']) : 10;
-	
-	$maxpage = @ceil($count/$pagesize);
-	$nextpage = ($page + 1) > $maxpage ? 1 : ($page + 1);
-// 	$multipage_more = "forum.php?page=".$nextpage;
-	$hotthread = C::t('#extends#plugin_common_block_item')->fetch_all_by_bid(135, $page, $pagesize, true);
-	$threadlist = array();
-	foreach ($hotthread as $key => $value) {
-		$threadlist[$key]['id'] = $value['id'];
-		$threadlist[$key]['title'] = $value['title'];
-		$threadlist[$key]['url'] = $value['url'];
-		//处理详细字段		
-		$fields = dunserialize($value['fields']);
-		$threadlist[$key]['author'] = $fields['author'];
-		$threadlist[$key]['avatar'] = $fields['avatar_middle'];
-		$threadlist[$key]['dateline'] = date('m月d日 H:s', $fields['dateline']);
-		$attachment = getattachment($value['id'], 3, TRUE);
-		for ($i = 0; $i < 3; $i++) {
-			if ($attachment[$i]) {
-				$threadlist[$key]['attachment'][$i] = getforumimg($attachment[$i], 0, 320, 230, 2);
-			}
-		}
-		// 		$focus[$key]['pic'] = getforumimg($attachment[0], 0, 480, 256, 2);
-		
-		$thread = DB::fetch_first("SELECT * FROM ".DB::table('forum_thread')." WHERE tid=".$value['id']);
-		$threadlist[$key]['replies'] = $thread['replies'];
-	}
 	if ($page > 1) {
 		echo json_encode(array('threadlist' => $threadlist, 'nextpage' => $nextpage));
 		exit;

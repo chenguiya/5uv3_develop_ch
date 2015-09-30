@@ -74,14 +74,14 @@ $query = C::t('forum_activityapply')->fetch_all_for_thread($_G['tid'], 0, 0, 0, 
 require_once libfile('function/extends');
 foreach($query as $activityapplies) {
 	$activityapplies['dateline'] = dgmdate($activityapplies['dateline'], 'u');
-	if($activityapplies['verified'] == 1) {
-		$activityapplies['ufielddata'] = dunserialize($activityapplies['ufielddata']);
-		//edit by Daming 用于加密显示身份证号码、电话号码
-		foreach ($activityapplies['ufielddata'] as $value) {
-			$activityapplies['ufielddata']['userfield']['mobile'] = encryptionDisplay($value['field2'], 3, 4);
-			$activityapplies['ufielddata']['userfield']['idcard'] = encryptionDisplay($value['field3'], 4, 4);
-		}		
-		//end
+	$fielddata = dunserialize($activityapplies['ufielddata']);
+	// 		var_dump($fielddata);die;
+	//edit by Daming 用于加密显示身份证号码、电话号码
+	$activityapplies['mobile'] = $fielddata['userfield']['mobile'];
+	$activityapplies['en_mobile'] = encryptionDisplay($fielddata['userfield']['mobile'], 3, 4);
+	$activityapplies['realname'] = $fielddata['userfield']['realname'];
+	//end
+	if($activityapplies['verified'] == 1) {		
 		if(count($applylist) < $_G['setting']['activitypp']) {
 			$activityapplies['message'] = preg_replace("/(".lang('forum/misc', 'contact').".*)/", '', $activityapplies['message']);
 			$applylist[] = $activityapplies;
@@ -92,6 +92,8 @@ foreach($query as $activityapplies) {
 		}
 		$noverifiednum++;
 	}
+	
+// 	var_dump($applylistverified);die;
 }
 //add by Daming 2015/09/28
 $query = DB::fetch_all("SELECT * FROM ".DB::table('forum_activityapply')." WHERE tid=".$_G['tid']." AND verified=1 ORDER BY sign_time DESC");
@@ -99,23 +101,30 @@ $query = DB::fetch_all("SELECT * FROM ".DB::table('forum_activityapply')." WHERE
 foreach ($query as $activityapplies) {
 	$activityapplies['sign_time'] = dgmdate($activityapplies['sign_time'], 'u');
 	$activityapplies['dateline'] = dgmdate($activityapplies['dateline'], 'u');
-	if($activityapplies['registration'] == 1) {
-		if(count($applylist) < $_G['setting']['activitypp']) {
-			$activityapplies['message'] = preg_replace("/(".lang('forum/misc', 'contact').".*)/", '', $activityapplies['message']);
-			$signedlist[] = $activityapplies;
+	$userfield = dunserialize($activityapplies['ufielddata']);
+	// 		var_dump($userfield);die;
+	$activityapplies['realname'] = $userfield['userfield']['realname'];
+	$activityapplies['mobile'] = $userfield['userfield']['mobile'];
+	$activityapplies['en_mobile'] = encryptionDisplay($userfield['userfield']['mobile'], 3, 4);
+	if($activityapplies['registration'] == 1) {				
+		if(count($signedlist) < $_G['setting']['activitypp']) {
+			$activityapplies['message'] = preg_replace("/(".lang('forum/misc', 'contact').".*)/", '', $activityapplies['message']);				
+			$signedlist[] = $activityapplies;			
 		}
 	} else {
-		if(count($nosignedlist) < 8) {
+		if(count($nosignedlist) < $_G['setting']['activitypp']) {
 			$nosignedlist[] = $activityapplies;
 		}
 		$nosignednum++;
 	}
 }
 
-// var_dump($nosignedlist);die;
+// var_dump($signedlist);die;
+
 
 $applynumbers = $activity['applynumber'];
 $signednum = C::t('forum_activityapply')->count_signed_by_tid_issign($_G['tid']);
+// var_dump($signednum);die;
 $nosignednum = C::t('forum_activityapply')->count_signed_by_tid_issign($_G['tid'], 0);
 $aboutmembers = $activity['number'] >= $applynumbers ? $activity['number'] - $applynumbers : 0;
 $allapplynum = $applynumbers + $noverifiednum;

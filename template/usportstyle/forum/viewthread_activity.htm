@@ -181,14 +181,14 @@
 	</div>
 <!--{/if}-->
 
-<!--{if $applylist}-->
+<!--{if $applylist && (TIMESTAMP < $activity[starttimefrom_u]-7200)}-->
 	<div class="ptm pbm xs1" id="applylist_$_G[tid]">
 		<h2>{lang activity_new_join} ($applynumbers {lang activity_member_unit})</h2>
 		<table class="dt">
 			<tr>
 				<th width="140">&nbsp;</th>
-				<th width="60">手机号码</th>
-				<th width="110">身份证号码</th>
+				<th width="60">真是姓名</th>
+				<th width="110">手机号码</th>
 				<th width="110">{lang activity_jointime}</th>
 			</tr>
 			<!--{loop $applylist $apply}-->
@@ -197,8 +197,8 @@
 						<a target="_blank" href="home.php?mod=space&uid=$apply[uid]" class="ratl vm"><!--{echo avatar($apply[uid], 'small')}--></a>
 						<a target="_blank" href="home.php?mod=space&uid=$apply[uid]">$apply[username]</a>
 					</td>
-					<td><!--{if $apply['ufielddata']['userfield']['mobile']}--><p>$apply['ufielddata']['userfield']['mobile']</p><!--{/if}--></td>
-					<td><!--{if $apply['ufielddata']['userfield']['idcard']}--><p>$apply['ufielddata']['userfield']['idcard']</p><!--{/if}--></td>
+					<td><!--{if $apply['realname'] && $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}--><p>$apply[realname]</p><!--{else}-->--<!--{/if}--></td>
+					<td><!--{if $apply['mobile'] && $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}--><p>$apply[mobile]</p><!--{else}-->$apply[en_mobile]<!--{/if}--></td>
 					<td>$apply[dateline]</td>
 				</tr>
 			<!--{/loop}-->
@@ -212,18 +212,47 @@
 		</div>
 		<!--{/if}-->
 	</div>
+<!--{elseif $signedlist  && (TIMESTAMP > $activity[starttimefrom_u]-7200)}-->
+	<div class="ptm pbm xs1" id="applylist_$_G[tid]">
+		<h2>已签到 ($signednum {lang activity_member_unit})</h2>
+		<table class="dt">
+			<tr>
+				<th width="140">&nbsp;</th>
+				<th width="60">真是姓名</th>
+				<th width="110">手机号码</th>
+				<th width="110">签到时间</th>
+			</tr>
+			<!--{loop $signedlist $apply}-->
+				<tr>
+					<td>
+						<a target="_blank" href="home.php?mod=space&uid=$apply[uid]" class="ratl vm"><!--{echo avatar($apply[uid], 'small')}--></a>
+						<a target="_blank" href="home.php?mod=space&uid=$apply[uid]">$apply[username]</a>
+					</td>
+					<td><!--{if $apply['realname'] && $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}--><p>$apply[realname]</p><!--{else}-->--<!--{/if}--></td>
+					<td><!--{if $apply['mobile'] && $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}--><p>$apply[mobile]</p><!--{else}-->$apply[en_mobile]<!--{/if}--></td>
+					<td>$apply[sign_time]</td>
+				</tr>
+			<!--{/loop}-->
+		</table>
+		<!--{if $signednum > $_G['setting']['activitypp']}-->
+		<br />
+		<div class="pgs mbm cl">
+			<div class="pg">
+				<a onclick="ajaxget('forum.php?mod=misc&amp;action=signinlist&amp;tid=$_G[tid]&amp;page=2', 'applylist_$_G[tid]')" class="nxt" href="javascript:;">{lang next_page}</a>
+			</div>
+		</div>
+		<!--{/if}-->
+	</div>
 <!--{/if}-->
 
-<!--{if $applylistverified}-->
+<!--{if $applylistverified && (TIMESTAMP < $activity[starttimefrom_u]-7200)}-->
 	<div class="ptm pbm xs1">
 		<h2>{lang activity_new_signup} ($noverifiednum {lang activity_member_unit})</h2>
 		<table class="dt">
 			<tr>
 				<th width="140">&nbsp;</th>
-				<th>{lang leaveword}</th>
-				<!--{if $activity['cost']}-->
-				<th width="60">{lang activity_payment}</th>
-				<!--{/if}-->
+				<th width="60">真是姓名</th>
+				<th width="110">手机号码</th>
 				<th width="110">{lang activity_jointime}</th>
 			</tr>
 			<!--{loop $applylistverified $apply}-->
@@ -232,13 +261,42 @@
 						<a target="_blank" href="home.php?mod=space&uid=$apply[uid]" class="ratl vm"><!--{echo avatar($apply[uid], 'small')}--></a>
 						<a target="_blank" href="home.php?mod=space&uid=$apply[uid]">$apply[username]</a>
 					</td>
-					<td><!--{if $_G['forum_thread']['authorid'] == $_G['uid'] && $apply[message]}-->$apply[message]<!--{/if}--></td>
-					<!--{if $activity['cost']}-->
-					<td><!--{if $apply[payment] >= 0}-->$apply[payment] {lang payment_unit}<!--{else}-->{lang activity_self}<!--{/if}--></td>
-					<!--{/if}-->
+					<td><!--{if $apply['realname'] && $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}--><p>$apply[realname]</p><!--{else}-->--<!--{/if}--></td>
+					<td><!--{if $apply['mobile'] && $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}--><p>$apply[mobile]</p><!--{else}-->$apply[en_mobile]<!--{/if}--></td>
 					<td>$apply[dateline]</td>
 				</tr>
 			<!--{/loop}-->
 		</table>
+	</div>
+<!--{elseif $nosignedlist && (TIMESTAMP > $activity[starttimefrom_u]-7200)}-->
+	<div class="ptm pbm xs1" id="noapplylist_$_G[tid]">
+		<h2>暂未签到 ($nosignednum {lang activity_member_unit})</h2>
+		<table class="dt">
+			<tr>
+				<th width="140">&nbsp;</th>
+				<th width="60">真是姓名</th>
+				<th width="110">手机号码</th>
+				<th width="110">{lang activity_jointime}</th>
+			</tr>
+			<!--{loop $nosignedlist $apply}-->
+				<tr>
+					<td>
+						<a target="_blank" href="home.php?mod=space&uid=$apply[uid]" class="ratl vm"><!--{echo avatar($apply[uid], 'small')}--></a>
+						<a target="_blank" href="home.php?mod=space&uid=$apply[uid]">$apply[username]</a>
+					</td>
+					<td><!--{if $apply['realname'] && $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}--><p>$apply[realname]</p><!--{else}-->--<!--{/if}--></td>
+					<td><!--{if $apply['mobile'] && $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}--><p>$apply[mobile]</p><!--{else}-->$apply[en_mobile]<!--{/if}--></td>
+					<td>$apply[dateline]</td>
+				</tr>
+			<!--{/loop}-->
+		</table>
+		<!--{if $nosignednum > $_G['setting']['activitypp']}-->
+		<br />
+		<div class="pgs mbm cl">
+			<div class="pg">
+				<a onclick="ajaxget('forum.php?mod=misc&amp;action=signinlist&amp;issigined=0&amp;tid=$_G[tid]&amp;page=2', 'noapplylist_$_G[tid]')" class="nxt" href="javascript:;">{lang next_page}</a>
+			</div>
+		</div>
+		<!--{/if}-->
 	</div>
 <!--{/if}-->

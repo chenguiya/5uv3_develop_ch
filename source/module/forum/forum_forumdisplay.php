@@ -54,8 +54,8 @@ if($_G['forum']['status'] == 0 && $_G['forum']['type'] == 'sub')
 {
     dheader("Location:http://".$_SERVER['HTTP_HOST']."/404");
 }
-//http://www.5usport.com/fans/topic/926 --> 404
-if($_G['forum']['fid'] == 926 )
+//不显示上版本球员频道 by xurui 2015-09-30
+if($_G['forum']['fid'] == 926 || $_G['forum']['fid'] == 731)
 {
     dheader("Location:http://".$_SERVER['HTTP_HOST']."/404");
 }

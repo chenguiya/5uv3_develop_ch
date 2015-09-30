@@ -262,7 +262,8 @@ class Avatar
         if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $data, $result))
         {
             $type = $result[2];
-            $tmp_file = UC_DATADIR.'tmp/upload'.$uid.".{$type}";
+            $tmp_file = DISCUZ_ROOT.'./uc_server/data/'.'tmp/upload'.$uid.".{$type}";
+            
             if(file_put_contents($tmp_file, base64_decode(str_replace($result[1], '', $data))))
             {
                 $this->tmp_file = $tmp_file;
@@ -278,6 +279,77 @@ class Avatar
             return FALSE;
         }
     }
+    
+    /**
+     * 取远程图片信息 by zhangjh 2015-09-30
+     */
+    function myGetImageSize($url, $type = 'curl', $isGetFilesize = false)  
+    { 
+        // 若需要获取图片体积大小则默认使用 fread 方式 
+        $type = $isGetFilesize ? 'fread' : $type; 
+        
+        if ($type == 'fread')
+        {
+            // 或者使用 socket 二进制方式读取, 需要获取图片体积大小最好使用此方法 
+            $handle = fopen($url, 'rb'); 
+        
+            if (! $handle) return false; 
+        
+            // 只取头部固定长度168字节数据 
+            $dataBlock = fread($handle, 168); 
+        } 
+        else { 
+            // 据说 CURL 能缓存DNS 效率比 socket 高 
+            $ch = curl_init($url); 
+            // 超时设置 
+            curl_setopt($ch, CURLOPT_TIMEOUT, 20); 
+            // 取前面 168 个字符 通过四张测试图读取宽高结果都没有问题,若获取不到数据可适当加大数值 
+            // curl_setopt($ch, CURLOPT_RANGE, '0-167'); 这个掉 by zhangjh
+            // 跟踪301跳转 
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); 
+            // 返回结果 
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+        
+            $dataBlock = curl_exec($ch); 
+        
+            curl_close($ch); 
+        
+            if (! $dataBlock) return false; 
+        } 
+        
+        // 将读取的图片信息转化为图片路径并获取图片信息,经测试,这里的转化设置 jpeg 对获取png,gif的信息没有影响,无须分别设置 
+        // 有些图片虽然可以在浏览器查看但实际已被损坏可能无法解析信息
+        $code = 'data:image/jpeg;base64,'. base64_encode($dataBlock);
+        $size = getimagesize($code); 
+        if (empty($size)) { 
+            return false; 
+        } 
+        
+        $result['code'] = $code;
+        $result['width'] = $size[0]; 
+        $result['height'] = $size[1]; 
+        
+        // 是否获取图片体积大小 
+        if ($isGetFilesize) { 
+            // 获取文件数据流信息 
+            $meta = stream_get_meta_data($handle); 
+            // nginx 的信息保存在 headers 里，apache 则直接在 wrapper_data  
+            $dataInfo = isset($meta['wrapper_data']['headers']) ? $meta['wrapper_data']['headers'] : $meta['wrapper_data']; 
+        
+            foreach ($dataInfo as $va) { 
+                if ( preg_match('/length/iU', $va)) { 
+                    $ts = explode(':', $va); 
+                    $result['size'] = trim(array_pop($ts)); 
+                    break; 
+                } 
+            } 
+        } 
+        
+        if ($type == 'fread') fclose($handle); 
+        
+        return $result; 
+    } 
+        
     
     function onuploadavatar() {
         @header("Expires: 0");
@@ -298,7 +370,7 @@ class Avatar
         list($width, $height, $type, $attr) = getimagesize($_FILES['Filedata']['tmp_name']);
         $imgtype = array(1 => '.gif', 2 => '.jpg', 3 => '.png');
         $filetype = $imgtype[$type];
-        $tmpavatar = UC_DATADIR.DS.'tmp'.DS.'upload'.$uid.$filetype;
+        $tmpavatar = DISCUZ_ROOT.'./uc_server/data/'.DS.'tmp'.DS.'upload'.$uid.$filetype;
         file_exists($tmpavatar) && @unlink($tmpavatar);
         if(@copy($_FILES['Filedata']['tmp_name'], $tmpavatar) || @move_uploaded_file($_FILES['Filedata']['tmp_name'], $tmpavatar)) {
             @unlink($_FILES['Filedata']['tmp_name']);
@@ -322,17 +394,17 @@ class Avatar
     {
         $home = $this->get_home($uid);
         
-        if(!is_dir(UC_DATADIR.'avatar'.DS.$home))
+        if(!is_dir(DISCUZ_ROOT.'./uc_server/data/'.'avatar'.DS.$home))
         {
-            $this->set_home($uid, UC_DATADIR.'avatar');
+            $this->set_home($uid, DISCUZ_ROOT.'./uc_server/data/'.'avatar');
         }
         
         $avatartype = 'virtual';
         $tmp_avatarfile = $this->tmp_file;
         
-        $big_avatarfile = UC_DATADIR.'avatar'.DS.$this->get_avatar($uid, 'big', $avatartype);
-        $middle_avatarfile = UC_DATADIR.'avatar'.DS.$this->get_avatar($uid, 'middle', $avatartype);
-        $small_avatarfile = UC_DATADIR.'avatar'.DS.$this->get_avatar($uid, 'small', $avatartype);
+        $big_avatarfile = DISCUZ_ROOT.'./uc_server/data/'.'avatar'.DS.$this->get_avatar($uid, 'big', $avatartype);
+        $middle_avatarfile = DISCUZ_ROOT.'./uc_server/data/'.'avatar'.DS.$this->get_avatar($uid, 'middle', $avatartype);
+        $small_avatarfile = DISCUZ_ROOT.'./uc_server/data/'.'avatar'.DS.$this->get_avatar($uid, 'small', $avatartype);
         
         // 生成3个大小的文件
         $thumbnail = new ImageResize();  
@@ -357,15 +429,15 @@ class Avatar
         }
         
         $home = $this->get_home($uid);
-        if(!is_dir(UC_DATADIR.'avatar'.DS.$home)) {
-            $this->set_home($uid, UC_DATADIR.'avatar');
+        if(!is_dir(DISCUZ_ROOT.'./uc_server/data/'.'avatar'.DS.$home)) {
+            $this->set_home($uid, DISCUZ_ROOT.'./uc_server/data/'.'avatar');
         }
         
         $avatartype = $this->getgpc('avatartype', 'G') == 'real' ? 'real' : 'virtual';
         
-        $bigavatarfile = UC_DATADIR.'avatar'.DS.$this->get_avatar($uid, 'big', $avatartype);
-        $middleavatarfile = UC_DATADIR.'avatar'.DS.$this->get_avatar($uid, 'middle', $avatartype);
-        $smallavatarfile = UC_DATADIR.'avatar'.DS.$this->get_avatar($uid, 'small', $avatartype);
+        $bigavatarfile = DISCUZ_ROOT.'./uc_server/data/'.'avatar'.DS.$this->get_avatar($uid, 'big', $avatartype);
+        $middleavatarfile = DISCUZ_ROOT.'./uc_server/data/'.'avatar'.DS.$this->get_avatar($uid, 'middle', $avatartype);
+        $smallavatarfile = DISCUZ_ROOT.'./uc_server/data/'.'avatar'.DS.$this->get_avatar($uid, 'small', $avatartype);
         $bigavatar = $this->flashdata_decode($this->getgpc('avatar1', 'P'));
         $middleavatar = $this->flashdata_decode($this->getgpc('avatar2', 'P'));
         $smallavatar = $this->flashdata_decode($this->getgpc('avatar3', 'P'));
@@ -400,9 +472,9 @@ class Avatar
         //$imgtype = array(1 => '.gif', 2 => '.jpg', 3 => '.png');
         //$filetype = $imgtype[$type];
         
-        @unlink(UC_DATADIR.'tmp'.DS.'upload'.$uid.'.jpg');
-        @unlink(UC_DATADIR.'tmp'.DS.'upload'.$uid.'.gif');
-        @unlink(UC_DATADIR.'tmp'.DS.'upload'.$uid.'.png');
+        @unlink(DISCUZ_ROOT.'./uc_server/data/'.'tmp'.DS.'upload'.$uid.'.jpg');
+        @unlink(DISCUZ_ROOT.'./uc_server/data/'.'tmp'.DS.'upload'.$uid.'.gif');
+        @unlink(DISCUZ_ROOT.'./uc_server/data/'.'tmp'.DS.'upload'.$uid.'.png');
         
         $size = GetImageSize($bigavatarfile);//获取需要处理的文件
         

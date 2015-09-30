@@ -655,4 +655,9 @@ function uc_renameuser($uid, $username, $newusername)
     return call_user_func(UC_API_FUNC, 'user', 'renameuser', array('uid' => $uid, 'username' => $username, 'newusername' => $newusername));
 }
 
+function uc_get_user_fields($uid)
+{
+    return call_user_func(UC_API_FUNC, 'user', 'get_user_fields', array('uid' => $uid));
+}
+
 ?>

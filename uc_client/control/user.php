@@ -340,6 +340,14 @@ class usercontrol extends base {
         
         return $arr_return;
     }
+    
+    function onget_user_fields()
+    {
+        $this->init_input();
+        $uid = $this->input('uid');
+        $member = $_ENV['user']->get_user_fields($uid);
+        return $member;
+    }
 }
 
 ?>

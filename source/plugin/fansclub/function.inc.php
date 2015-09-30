@@ -5,19 +5,30 @@ include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function/function_home.php');
 /**
  * touch端上传头像处理
  */
-function fansclub_avatar_upload($uid, $data)
+function fansclub_avatar_upload($uid, $data = '', $url = '')
 {
     global $_G;
     $arr_return = array('success' => FALSE, 'message' => 'init');
     
-    define('UC_DATADIR', DISCUZ_ROOT.'./uc_server/data/');
+    //define('UC_DATADIR', DISCUZ_ROOT.'./uc_server/data/');
+    //echo DISCUZ_ROOT;
+    //echo "\n";
     include_once(DISCUZ_ROOT.'./source/plugin/fansclub/extend/avatar.php');
     
     if(intval($_G['uid']) > 0 && $uid == intval($_G['uid']))
     {
+        $avatar = new Avatar();
+        if($url != '')
+        {
+            $img = $avatar->myGetImageSize($url);
+            if(count($img) > 0)
+            {
+                $data = $img['code'];
+            }
+            
+        }
         if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $data, $result))
         {
-            $avatar = new Avatar();
             $bln_upload = $avatar->onuploadavatar_touch($uid, $data);
             if($bln_upload === TRUE)
             {
@@ -39,6 +50,8 @@ function fansclub_avatar_upload($uid, $data)
         }
         else
         {
+            //print_r($result);
+            
             $arr_return['message'] = '不是一个有效的图片编码';
         }
     }

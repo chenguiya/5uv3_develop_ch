@@ -45,6 +45,7 @@
 </header>
 <div class="ybtn-group" {if $_GET[action] == 'reply'}style="display:none"{/if}>
 	<a class="ybtn{if empty($special)} active{/if}" href="forum.php?mod=post&action=newthread&fid=$_G[fid]&cedit=yes">普通贴</a>
+	<!--<a class="ybtn{if $special == 1} active{/if}" href="forum.php?mod=post&action=newthread&special=1&fid=$_G[fid]&cedit=yes">投票贴</a>-->
 	<a class="ybtn{if $special == 4} active{/if}" href="forum.php?mod=post&action=newthread&special=4&fid=$_G[fid]&cedit=yes">活动贴</a>
 </div>
 <!-- header end -->
@@ -75,6 +76,7 @@
 			<!--{/if}-->
 			<!--{if $adveditor}-->	
 				<!--{if $special == 4}--><!--{template forum/post_activity}--><!--{/if}-->
+				<!--{if $special == 1}--><!--{template forum/post_poll}--><!--{/if}-->
 			<!--{/if}-->
 			<!--{if $_GET[action] == 'edit' && $isorigauthor && ($isfirstpost && $thread['replies'] < 1 || !$isfirstpost) && !$rushreply && $_G['setting']['editperdel']}-->
 			<li>

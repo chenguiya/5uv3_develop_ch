@@ -1,0 +1,26 @@
+<!--{template common/header}-->
+<!--{if $userlists}-->
+		<h2>已签到 ($count 人)</h2>
+		<table class="dt">
+			<tr>
+				<th width="140">&nbsp;</th>
+				<th width="60">真是姓名</th>
+				<th width="110">手机号码</th>
+				<th width="110">签到时间</th>
+			</tr>
+			<!--{loop $userlists $apply}-->
+				<tr>
+					<td>
+						<a target="_blank" href="home.php?mod=space&uid=$apply[uid]" class="ratl vm"><!--{echo avatar($apply[uid], 'small')}--></a> 
+						<a target="_blank" href="home.php?mod=space&uid=$apply[uid]">$apply[username]</a>
+					</td>
+					<td><!--{if $apply['ufielddatanew']['userfield']['realname'] && $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}--><p>$apply[ufielddatanew][userfield][realname]</p><!--{else}-->--<!--{/if}--></td>
+					<td><!--{if $apply['ufielddatanew']['userfield']['mobile'] && $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}-->$apply[ufielddatanew][userfield][mobile]<!--{else}-->$apply[ufielddatanew][userfield][en_mobile]<!--{/if}--></td>
+					<td>$apply[sign_time]</td>
+				</tr>
+			<!--{/loop}-->
+		</table>
+<!--{/if}-->
+<br \>
+<div class="pgs mbm cl">$multi</div>
+<!--{template common/footer}-->
