@@ -94,7 +94,7 @@
 									<!--{eval $fromforum=DB::fetch_first('select * from '.DB::table('forum_forum').' where fid='.$v['fid']);}-->
 									<span class="source">来自：<!--{if $fromforum['status']==3}--><a href="forum.php?mod=group&fid={$v['fid']}" target="_blank">{$fromforum['name']}</a>
 									<!--{else}-->
-										<a href="forum.php?mod=forumdisplay&fid={$v['fid']}&tpl=channel_index" target="_blank">{$fromforum['name']}</a>
+										<a href="/group/{$v['fid']}/" target="_blank">{$fromforum['name']}</a>
 									<!--{/if}--></span>
 									<div class="active y">
 										<span class="rt">{$v['sharetimes']}</span>

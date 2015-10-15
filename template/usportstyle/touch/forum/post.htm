@@ -40,12 +40,13 @@
 		<span class="y buttn_ch"><button id="postsubmit" class="btn_pn <!--{if $_GET[action] == 'edit'}-->btn_pn_blue" disable="false"<!--{else}-->btn_pn_grey" disable="true"<!--{/if}-->><span><!--{if $_GET[action] == 'newthread'}-->{lang send_thread}<!--{elseif $_GET[action] == 'reply'}-->评论<!--{elseif $_GET[action] == 'edit'}-->{lang edit_save}<!--{/if}--></span></button></span>
 		<input type="hidden" name="{if $_GET[action] == 'newthread'}topicsubmit{elseif $_GET[action] == 'reply'}replysubmit{elseif $_GET[action] == 'edit'}editsubmit{/if}" value="yes">
 
-		<a href="forum.php?mod=group&fid=$_G[fid]&mobile=2" class="head_back"></a>
+		<!--<a href="forum.php?mod=group&fid=$_G[fid]&mobile=2" class="head_back"></a>-->
+        <a href="javascript: history.go(-1);" class="head_back"></a>
 		<!--{if $_GET[action] == 'edit'}-->{lang edit}<!--{elseif $_GET[action] == 'reply'}--><!--{else}-->{lang send_threads}<!--{/if}--></span>
 </header>
 <div class="ybtn-group" {if $_GET[action] == 'reply'}style="display:none"{/if}>
 	<a class="ybtn{if empty($special)} active{/if}" href="forum.php?mod=post&action=newthread&fid=$_G[fid]&cedit=yes">普通贴</a>
-	<!--<a class="ybtn{if $special == 1} active{/if}" href="forum.php?mod=post&action=newthread&special=1&fid=$_G[fid]&cedit=yes">投票贴</a>-->
+	<a class="ybtn{if $special == 1} active{/if}" href="forum.php?mod=post&action=newthread&special=1&fid=$_G[fid]&cedit=yes">投票贴</a>
 	<a class="ybtn{if $special == 4} active{/if}" href="forum.php?mod=post&action=newthread&special=4&fid=$_G[fid]&cedit=yes">活动贴</a>
 </div>
 <!-- header end -->
@@ -85,12 +86,14 @@
 			<!--{/if}-->
 			<li>
 			<textarea id="needmessage" tabindex="3" id="{$editorid}_textarea" name="$editor[textarea]" cols="30" rows="10"  placeholder="{lang thread_content}" fwin="reply">$postinfo[message]</textarea>
-			</li>			
+			</li>
+			<!--{if $special != 1}-->			
 			<li style="padding:0px; width:90%;">
 				<a href="javascript:;" class="y fontweb_icon {if $_GET[action] == 'reply'}ic_photo{else}ic_photo{/if}">
 					<input type="file" name="Filedata" id="filedata" style="opacity:0;"/>
 				</a>
-			</li>		
+			</li>
+			<!--{/if}-->		
 		</ul>		
 		<ul id="imglist" class="post_imglist cl"></ul>	
 		<!--{if $_GET[action] != 'edit' && checkperm('seccode') && ($secqaacheck || $seccodecheck)}-->

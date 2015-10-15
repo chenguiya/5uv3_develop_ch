@@ -281,6 +281,29 @@ class Avatar
     }
     
     /**
+     *  上传视频截图 by zhangjh 2015-10-15
+     */
+    function onuploadvideoimg($data, $video_img_file)
+    {
+
+        if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $data, $result))
+        {
+            if(file_put_contents($video_img_file, base64_decode(str_replace($result[1], '', $data))))
+            {
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    
+    /**
      * 取远程图片信息 by zhangjh 2015-09-30
      */
     function myGetImageSize($url, $type = 'curl', $isGetFilesize = false)  
@@ -320,6 +343,7 @@ class Avatar
         // 将读取的图片信息转化为图片路径并获取图片信息,经测试,这里的转化设置 jpeg 对获取png,gif的信息没有影响,无须分别设置 
         // 有些图片虽然可以在浏览器查看但实际已被损坏可能无法解析信息
         $code = 'data:image/jpeg;base64,'. base64_encode($dataBlock);
+        //echo $code;
         $size = getimagesize($code); 
         if (empty($size)) { 
             return false; 

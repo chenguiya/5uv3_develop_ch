@@ -6,7 +6,7 @@
 			<!--{loop $data['data'] $val}-->
 			<li class="cl">
 				<div class="avatar">
-					<a href="home.php?mod=space&uid={$val[fields][authorid]}" target="_blank"><img src="{$val[fields][avatar_middle]}"></a>
+					<a href="home.php?mod=space&uid={$val[fields][authorid]}" target="_blank"><img class="lazyload" src="static/image/face.jpg" data-original="{$val[fields][avatar_middle]}"></a>
 				</div>
 				<div class="inde_info">
 					<p class="in_name"><a href="{$val[url]}" target="_blank">{$val[title]}</a></p>
@@ -15,7 +15,7 @@
 					<!--{if $val['summary']['img']}-->
 					<p class="in_img">
 						<!--{loop $val['summary']['img'] $v}-->
-						<a href="{$val[url]}" target="_blank"><img src="{$v}" width="auto" height="140"></a>
+						<a href="{$val[url]}" target="_blank"><img class="lazyload" src="static/image/blank.jpg"  data-original="{$v}" width="auto" height="140"></a>
 						<!--{/loop}-->
 					</p>
 					<!--{elseif $val['summary']['media']}-->

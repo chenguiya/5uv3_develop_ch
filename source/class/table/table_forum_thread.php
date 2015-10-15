@@ -1318,8 +1318,8 @@ class table_forum_thread extends discuz_table
 			$parameter[] = $recommends;
 			$wherearr[] = "recommends>%d";
 		}
-		$ordersql = !empty($order) ? ' ORDER BY '.DB::order($order, $sort) : '';
-		$wheresql = !empty($wherearr) && is_array($wherearr) ? ' WHERE special!=4 AND '.implode(' AND ', $wherearr) : ' WHERE special=0';
+		$ordersql = !empty($order) ? ' ORDER BY '.$order : '';
+		$wheresql = !empty($wherearr) && is_array($wherearr) ? ' WHERE 1 AND '.implode(' AND ', $wherearr) : ' WHERE 1';
 		return DB::fetch_all("SELECT * FROM %t $wheresql $ordersql ".DB::limit($start, $limit), $parameter, $this->_pk);
 	}
 	

@@ -1,0 +1,22 @@
+<nav class="navbar"{if $_G[forum][color]}style="background-color:$_G[forum][color]"{/if}>
+    <div class="inner">
+        <a href="forum.php?mod=group&fid=$fid" class="left"><i class="iconfont icon-back"></i></a>
+        <div class="center">$_G[forum][fup_name]</div>
+        <div class="right"><a href="home.php?mod=space&do=profile&mycenter=1&mobile=2"><i class="iconfont icon-me" style="position: relative;"></i></a></div>
+    </div>
+</nav>
+<div class="ymain">
+    <ul class="signIn" id="">
+        <li class="signLeft <!--{if $_GET['ac'] == 'standings'}-->active<!--{/if}-->"><a href="plugin.php?id=fansclub:fansclub&ac=standings&fid=$fid&mobile=2">积分榜</a></li>
+        <li class="signRight <!--{if $_GET['ac'] == 'scorer'}-->active<!--{/if}-->" style="-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;border: 1px solid #e2e2e2"><a href="plugin.php?id=fansclub:fansclub&ac=scorer&fid=$fid&mobile=2">射手榜</a></li>
+        <li class="signRight <!--{if $_GET['ac'] == 'live'}-->active<!--{/if}-->"><a href="plugin.php?id=fansclub:fansclub&ac=live&fid=$fid&mobile=2">赛程</a></li>
+    </ul>
+</div>
+
+<!--{if $_GET['ac']== 'live'}-->
+	<!--{template live/live_index}-->
+<!--{elseif $_GET['ac']== 'scorer'}-->
+	<!--{template live/live_shooter}-->
+<!--{elseif $_GET['ac']== 'standings'}-->
+	<!--{template live/live_jifen}-->
+<!--{/if}-->

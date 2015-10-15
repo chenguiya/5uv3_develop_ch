@@ -8,7 +8,7 @@
      <ul class="col_ul cl">
      	<!--{loop $data[data] $vo}-->
 		<li>
-			<a href="{$vo[url]}" class="col_img" target="_blank"><img src="{$vo[imgUrl]}"></a>
+			<a href="{$vo[url]}" class="col_img" target="_blank"><img class="lazyload" src="static/image/face.jpg" data-original="{$vo[imgUrl]}" width="86" height="86"></a>
 			<a href="{$vo[url]}" class="col_title" target="_blank">{$vo[title]}</a>
 		</li>
         <!--{/loop}-->

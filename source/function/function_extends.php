@@ -46,7 +46,7 @@ function getattachment($tid, $num = 5, $bln_get_aid = FALSE) {
 	$attachments = $attachment = $images = array();
 	$pid = get_pid_by_tid($tid);
 	$attachments = DB::fetch_all("SELECT * FROM ".DB::table('forum_attachment')." WHERE tid=".$tid." AND pid=".$pid);
-	if (count($attachments) > $num) {
+    if (count($attachments) > $num) {
 		for ($i = 0; $i < $num; $i++) {
 			if($bln_get_aid) // 是否只是取AID
 			{
@@ -55,7 +55,7 @@ function getattachment($tid, $num = 5, $bln_get_aid = FALSE) {
 				if ($extension == 'gif') {
 					$images = array();
 					$images[] = $attachments[$i]['aid'];
-					return $images;
+					//return $images;
 				} else {
 					$images[] = $attachments[$i]['aid'];
 				}
@@ -70,12 +70,13 @@ function getattachment($tid, $num = 5, $bln_get_aid = FALSE) {
 		foreach ($attachments as $val) {
 			if($bln_get_aid) // 是否只是取AID
 			{
-				$attachment = C::t('forum_attachment_n')->fetch($val['tableid'], $val['aid']);
+                $attachment = C::t('forum_attachment_n')->fetch($val['tableid'], $val['aid']);
 				$extension = strtolower(fileext($attachment['attachment']));
 				if ($extension == 'gif') {
+                    
 					$images = array();
-					$images[] = $attachments[$i]['aid'];
-					return $images;
+					$images[] = $val['aid'];
+					//return $images;
 				} else {
 					$images[] = $val['aid'];
 				}				
@@ -501,12 +502,24 @@ function get_message($tableid, $tid) {
 	$message = $post['message'];
 	
 	if ($thread['attachment'] == '2') {
-		$attach = getattachment($tid, 5);
+		$attach = getattachment($tid, 5, true);
+        
 		foreach ($attach as $key=>$vo) {
-			$img[$key] = $vo;
+            // $img[$key] = $vo;
+            // $img[$key] = $_G['setting']['attachurl'].substr($vo, 16); // zhangjh 2015-10-08 modify
+            $img[$key] = getforumimg($vo, 0, 280, 280, 2); // zhangjh 2015-10-08 modify
+            
 		}
 	} else {
-		preg_match_all('/\[img\](.*)\[\/img\]/', $message, $match);
+        preg_match_all('/\[img\](.*?)\[\/img\]/', $message, $match);
+        
+        if(count($match[1]) == 0)
+        {
+            preg_match_all('/\[img(.*)\](.*?)\[\/img\]/', $message, $match);
+            $match[1] = $match[2];
+            unset($match[2]);
+        }
+
 		preg_match_all('/\[attach\]([0-9]*)?\[\/attach\]/', $message, $match2);
 		foreach ($match2[1] as $key=>$vo) {
 			$aid = intval($vo);
@@ -514,56 +527,108 @@ function get_message($tableid, $tid) {
 				return FALSE;
 			} else {
 				$attach = DB::fetch_first("SELECT tid,filename,attachment FROM ".DB::table(getattachtablebyaid($aid))." WHERE aid='$aid'");
-		
-				$img[$key] = $_G['setting']['attachurl'].'forum/'.$attach['attachment'];
+                $img[$key] = $_G['setting']['attachurl'].'forum/'.$attach['attachment'];
 			}
 		}
 	}
-	
-	preg_match_all('/\[audio\](.*)\[\/audio\]/', $message, $audio);
+    
+    preg_match_all('/\[audio\](.*)\[\/audio\]/', $message, $audio);
 	preg_match_all('/\[media.*\](.*)\[\/media\]/', $message, $media);
+    preg_match_all('/\[flash.*\](.*)\[\/flash\]/', $message, $flash); // add by zhangjh 2015-10-10
 
+    $video_url = '';
 	$media_num = count($media[1]);
 	if ($media_num > 0) {
 		$content['media'] = $media[1][0];
+        $video_url = $content['media'];
 	} else {
 		$audio_num = count($audio[1]);
 		if ($audio_num > 0) {
 			$content['audio'] = $audio[1][0];
+            $video_url = $content['audio'];
 		} else {
-			$img_num = count($match[1]) + count($img);
-			if ($img_num > 3) {
-				for ($i = 0; $i < 3; $i++) {
-					if ($i < count($match[1])) {
-						$content['img'][$i] = $match[1][$i];
-					} else {
-						$content['img'][$i] = $img[$i-count($match[1])];
-					}
-				}
-			} else {
-				for ($i = 0; $i < $img_num; $i++) {
-					if ($i < count($match[1])) {
-						$content['img'][$i] = $match[1][$i];
-					} else {
-						$content['img'][$i] = $img[$i-count($match[1])];
-					}
-				}
-			}
+            
+            $flash_num = count($flash[1]);
+            if($flash_num > 0)
+            {
+                $content['flash'] = $flash[1][0];
+                $video_url = $content['flash'];
+            }
+            else
+            {
+                $img_num = count($match[1]) + count($img);
+                
+                if ($img_num > 3) {
+                    for ($i = 0; $i < 3; $i++) {
+                        if ($i < count($match[1])) {
+                            $content['img'][$i] = $match[1][$i];
+                        } else {
+                            $content['img'][$i] = $img[$i-count($match[1])];
+                        }
+                    }
+                } else {
+                    for ($i = 0; $i < $img_num; $i++) {
+                        if ($i < count($match[1])) {
+                            $content['img'][$i] = $match[1][$i];
+                        } else {
+                            $content['img'][$i] = $img[$i-count($match[1])];
+                        }
+                    }
+                }
+            }
 		}
 	}
 	
-// 	echo $message;die;
+    // 	echo $message;die;
 	
 	$message = preg_replace('/\[i.*\].*?\[\/i\]/', '', $message);
 	$message = preg_replace('/\[img\].*?\[\/img\]/', '', $message);
+    $message = preg_replace('/\[img(.*)\](.*)\[\/img\]/', '', $message);
 	$message = preg_replace('/\[attach\].*?\[\/attach\]/', '', $message);
 	$message = preg_replace('/\[audio\].*?\[\/audio\]/', '', $message);
 	$message = preg_replace('/\[media.*\].*?\[\/media\]/', '', $message);
+    $message = preg_replace('/\[flash.*\].*?\[\/flash\]/', '', $message);
 	$message = preg_replace('/\[.*?\]/', '', $message);
 	$message = preg_replace("/\s+/", "", $message);
 	$message = str_cut($message, 230, '...');
 	$content['message'] = trimall($message);
-	
+    
+    // 处理视屏图片
+    if($video_url != '')
+    {
+        $img_num = count($match[1]) + count($img);
+        if($img_num > 0) // 有图片取图片，没有的取视频截图
+        {
+            if ($img_num > 3) {
+                for ($i = 0; $i < 3; $i++) {
+                    if ($i < count($match[1])) {
+                        $content['img'][$i] = $match[1][$i];
+                    } else {
+                        $content['img'][$i] = $img[$i-count($match[1])];
+                    }
+                }
+            } else {
+                for ($i = 0; $i < $img_num; $i++) {
+                    if ($i < count($match[1])) {
+                        $content['img'][$i] = $match[1][$i];
+                    } else {
+                        $content['img'][$i] = $img[$i-count($match[1])];
+                    }
+                }
+            }
+        }
+        else
+        {
+            include_once DISCUZ_ROOT.'./source/plugin/fansclub/extend/videoapi.php';
+            $video = new VideoApi();
+            $video_pic = $video->parse($video_url, false, $tid, $_G);
+            if(is_array($video_pic))
+            {
+                $content['img'][0] = $video_pic['img'];
+            }
+        }
+    }
+    
 	return $content;
 }
 

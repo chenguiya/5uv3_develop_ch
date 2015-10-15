@@ -3,19 +3,24 @@ if(!defined('IN_DISCUZ')) exit('Access Denied');
 
 // 大事记
 // eg http://192.168.2.169/discuz/plugin.php?id=fansclub&action=event&fid=80
-
+require_once libfile('function/extends');
+include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';
 $fid = $_GET['fid'] ? $_GET['fid'] + 0 : 0;
+if(defined('IN_MOBILE')){
+        $wap_bigevent = array();  
+        $wap_bigevent = wap_get_big_event($fid);
+}  else {
+        $fid_info = C::t('forum_forum')->fetch_info_by_fid($fid);
+        if(count($fid_info) == 0)
+        {
+                showmessage('球迷会不存在', 'plugin.php?id=fansclub:fansclub');
+        }
 
-$fid_info = C::t('forum_forum')->fetch_info_by_fid($fid);
-if(count($fid_info) == 0)
-{
-	showmessage('球迷会不存在', 'plugin.php?id=fansclub:fansclub');
+        $fansclub_name = $fid_info['name'];
+
+        $arr_year_split = array(); // 年分割点
+        $arr_big_event = get_big_event($fid, $arr_year_split);
 }
-
-$fansclub_name = $fid_info['name'];
-
-$arr_year_split = array(); // 年分割点
-$arr_big_event = get_big_event($fid, $arr_year_split);
 
 // 取大事
 function get_big_event($fid, &$arr_year_split)
@@ -222,6 +227,34 @@ function get_big_event($fid, &$arr_year_split)
 	return $arr_return;
 }
 
+//wap 大事记
+function wap_get_big_event($fid){
+    //echo $fid;exit;
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $pagesize = isset($_GET['pagesize']) ? intval($_GET['pagesize']) : 9;
+    
+        $start = ($page - 1) * $pagesize;
+        $limit = " LIMIT ".$start.','.$pagesize;
+                            $activitylists = DB::fetch_all("SELECT a.*,b.subject FROM ".DB::table('forum_activity')." as  a , ".DB::table('forum_thread')." as b  WHERE   a.tid = b.tid and b.fid = $fid and b.special = 4 ORDER BY a.starttimefrom DESC ".$limit);
+                            foreach ($activitylists as $key => $activity) {
+      //                              取开始月 - 日
+                                        $activitylists[$key]['starttimefrom'] = date('m-d', $activity['starttimefrom']);
+      //                                  if ($activity['starttimeto'] && $activity['starttimeto'] >= TIMESTAMP) {
+      //                                         $activitylists[$key]['status'] = true;
+     //                                   } else {
+     //                                          $activitylists[$key]['status'] = false;
+     //                                   }
+     //                              取开始年                                  
+                                        $activitylists[$key]['starttimeyears'] = date('Y', $activity['starttimefrom']);
+    //                                    $thread = DB::fetch_first("SELECT * FROM ".DB::table('forum_thread')." WHERE tid=".$activity['tid']);
 
-
-
+   //                                     $activitylists[$key]['title'] = str_cut($thread['subject'], 57, '...');
+                                        $attach = C::t('forum_attachment_n')->fetch('tid:'.$activity['tid'], $activity['aid']);
+   //                                     if($attach['isimage']) {
+   //                                             $activitylists[$key]['attachurl'] = ($attach['remote'] ? $_G['setting']['ftp']['attachurl'] : $_G['setting']['attachurl']).'forum/'.$attach['attachment'];
+  //                                              $activitylists[$key]['thumb'] = $attach['thumb'] ? getimgthumbname($activitylists[$key]['attachurl']) : $activitylists[$key]['attachurl'];
+  //                                              $activitylists[$key]['width'] = $attach['thumb'] && $_G['setting']['thumbwidth'] < $attach['width'] ? $_G['setting']['thumbwidth'] : $attach['width'];
+  //                                      }
+                            }
+                            return $activitylists;                    
+}

@@ -2160,113 +2160,22 @@ body{background: #f1f4f6;}
 }
 
 /*球迷会-成员 @ch*/
-.memb_search
-{
-    line-height: 25px;
-
-    position: relative;
-
-    width: 145px;
-    height: 25px;
-    padding-top: 6px;
-}
-
-.memb_search .srchtxt
-{
-    line-height: 25px;
-
-    width: 145px;
-    height: 25px;
-
-    text-indent: 10px;
-
-    border: 1px solid #e2e2e2;
-    outline: none;
-    background: #fff;
-}
-
-.memb_search .chsubmit
-{
-    position: absolute;
-    top: 9px;
-    right: 3px;
-
-    border: none;
-    outline: none;
-    background: none;
-}
-
-.memb_search .chsubmit span
-{
-    display: block;
-
-    width: 21px;
-    height: 21px;
-
-    cursor: pointer;
-
-    background: url(images/bd_icon.png) no-repeat -1px -27px;
-}
-
-.member_con
-{
-    padding: 6px;
-}
-
-.bm_ch
-{
-    line-height: 30px;
-
-    padding-left: 18px;
-
-    border-bottom: 1px solid #e2e2e2;
-}
-
-.bm_ch h2
-{
-    font-family: '\u5b8b\u4f53';
-}
-
-.mem_admin .mls img
-{
-    width: 100px;
-    height: 100px;
-}
-
-.mem_admin .mls li,
-.mem_other .mls li
-{
-    width: auto;
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
-.mem_admin .mls .avt
-{
-    position: relative;
-
-    width: 110px;
-}
-
-.mem_admin .mls .avt .ident_icon
-{
-    position: absolute;
-    right: 5px;
-    bottom: 0;
-}
-
-.mem_other .mls .avt
-{
-    position: relative;
-}
-
-.mem_other .mls .avt .ident_icon
-{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-
+.memb_search{line-height:25px;position:relative;width:145px;height:25px;padding-top:6px;}
+.memb_search .srchtxt{line-height:25px;width:145px;height:25px;text-indent:10px;border:1px solid #e2e2e2;outline:none;background:#fff;}
+.memb_search .chsubmit{position:absolute;top:9px;right:3px;border:none;outline:none;background:none;}
+.memb_search .chsubmit span{display:block;width:21px;height:21px;cursor:pointer;background:url(images/bd_icon.png) no-repeat -1px -27px;}
+.member_con{padding:6px;}
+.bm_ch{line-height:30px;padding-left:18px;border-bottom:1px solid #e2e2e2;}
+.bm_ch h2{font-family:'\u5b8b\u4f53';}
+.mem_admin .mls img{width:100px;height:100px;}
+.mem_admin .mls li,.mem_other .mls li{width:auto;margin-right:14px;margin-bottom:14px;}
+.mem_admin .mls .avt{position:relative;width:110px;}
+.mem_admin .mls .avt .ident_icon{position:absolute;right:5px;bottom:0;}
+.mem_other .mls .avt{position:relative;}
+.mem_other .mls .avt .ident_icon{position:absolute;right:0;bottom:0;}
+.mem_other .img_sp{ width: 50px; height: 16px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;}
+.mem_other .bm_c{ padding: 22px; overflow: hidden;}
+.mem_other .bm_c ul{ width: 612px;}
 /*会员中心相册-相册浏览 @ch*/
 .ch_space_main
 {
@@ -3390,7 +3299,7 @@ body{background: #f1f4f6;}
     height: 7px;
     margin-left: 2px;
 }
-#threadstamp {position: relative;width: 100%;height: 0;overflow: visible;}
+#threadstamp {position: relative;width: 100%;height: 0;overflow: visible; display: none;}
 #threadstamp img {position: absolute;top: -20px;right: 170px;}
 /*.scroll_code .hotcode:after{ content: ''; display: inline-block; border-width: 5px; border-color: transparent transparent transparent #fff; width: 0; height: 0; font-size: 0; border-style: dashed dashed dashed solid; margin-left: 1px;}*/
 
@@ -5525,144 +5434,29 @@ body{background: #f1f4f6;}
 }
 
 /*投票与活动区域 @ch*/
-.ch_polltit strong
-{
-    font-size: 14px;
-}
-
-.ch_pollbox .chVote
-{
-    height: 16px;
-
-    -webkit-border-radius: 0 10px 10px 0;
-    -moz-border-radius: 0 10px 10px 0;
-    border-radius: 0 10px 10px 0;
-    background: #f0f0f0;
-}
-
-.ch_pollbox .chTDnum
-{
-    font-size: 14px;
-    line-height: normal;
-
-    vertical-align: top;
-}
-
-.ch_pollbox .chTDnum em
-{
-    font-size: 16px;
-}
-
-.ch_pollbox .chTitles
-{
-    font-size: 14px;
-    line-height: 35px;
-}
-
-.ch_pollbox .chTitles button
-{
-    font-size: 14px;
-    line-height: 35px;
-
-    width: 100px;
-    height: 35px;
-
-    text-align: center;
-
-    color: #fff;
-    border: 0;
-    border-radius: 10px;
-    background: #eb6100;
-}
-
-.spvimg
-{
-    position: relative;
-
-    float: left;
-
-    width: 300px;
-
-    text-align: center;
-
-    border: 1px solid #cdcdcd;
-    background: #fafafa;
-}
-
-.ch_activy
-{
-    margin-left: 315px;
-}
-
-.ch_activy dl
-{
-    font-size: 14px;
-}
-
-.ch_activy dt,
-.ch_activy dd
-{
-    font-size: 14px;
-
-    color: #434a54;
-}
-
-.ch_activy dl dt,
-.ch_activy dl dd
-{
-    width: auto;
-    padding: 5px 0;
-}
-
-.ch_activy dl dt
-{
-    float: left;
-
-    height: 1em;
-}
-
-.ch_activy dl dd
-{
-    min-height: 21px;
-    margin-left: 90px;
-}
-
-.ch_activy dl dd em
-{
-    font-size: 16px;
-
-    color: #f30;
-}
-
-.activy_center
-{
-    margin-top: 30px;
-
-    text-align: center;
-}
-
-.activy_btn
-{
-    font-size: 24px;
-    line-height: 55px;
-
-    width: 320px;
-    height: 55px;
-
-    text-align: center;
-
-    color: #fff;
-    border: 0;
-    border-radius: 10px;
-    background: #eb5f00;
-}
-
-.ch_mode .t_f
-{
-    font-size: 16px;
-    line-height: 27px;
-}
-.ch_mode .t_f .zoom{max-width: 480px;}
+.ch_polltit strong{font-size:14px;}
+.ch_pollbox{ margin-top: 15px;}.p_precent{ width: 93%;}
+.p_precent label{ font-size: 14px; color: #464646;}
+.p_precent em{ color: #767676; font-size:12px;}
+.ch_pollbox .chVote{height:20px;background:#e6eff5;}
+.ch_pollbox .chVote .pbr_ch{ height: 20px;}
+.ch_pollbox .chTDnum{font-size:14px;line-height:normal;vertical-align:top;}
+.ch_pollbox .chTDnum em{font-size:16px;}
+.ch_pollbox .chTitles{font-size:14px;line-height:35px; text-align: center; padding-top: 29px;}
+.ch_pollbox .chTitles button{font-size:14px;line-height:35px;width:105px;height:35px;text-align:center;color:#464646;border:1px solid #dedede; background: none;-webkit-box-shadow: 0 0 0 #E5E5E5;box-shadow: 0 0 0 #E5E5E5; }
+.ch_pollbox .chTitles button:hover{ background: #eb6100; border: 1px solid #eb6100; color: #fff;}
+.pslt .pr{ width: 20px; height: 20px;}
+.spvimg{position:relative;float:left;width:300px;text-align:center;border:1px solid #cdcdcd;background:#fafafa;}
+.ch_activy{margin-left:315px;}.ch_activy dl{font-size:14px;}
+.ch_activy dt,.ch_activy dd{font-size:14px;color:#434a54;}
+.ch_activy dl dt,.ch_activy dl dd{width:auto;padding:5px 0;}
+.ch_activy dl dt{float:left;height:1em;}
+.ch_activy dl dd{min-height:21px;margin-left:90px;}
+.ch_activy dl dd em{font-size:16px;color:#f30;}
+.activy_center{margin-top:30px;text-align:center;}
+.activy_btn{font-size:24px;line-height:55px;width:320px;height:55px;text-align:center;color:#fff;border:0;border-radius:10px;background:#eb5f00;}
+.ch_mode .t_f{font-size:16px;line-height:27px;}
+.ch_mode .t_f .zoom{max-width:480px;}
 
 /*快速发帖 @ch*/
 .post_chbox
@@ -5796,8 +5590,9 @@ body{background: #f1f4f6;}
 .ch_pti .pdbt{margin-top: 0;}
 #gt_forumdisplay_fastpost_btn_extra{float: left;width: 500px;margin: 0 !important;}
 #gt_viewthread_fastpost_content{float: right;margin: 0 !important;}
-
-
+.waterfall .item .ch_img_icon{ width:320px; display: block; position: relative;}
+.ch_img_icon .video_i{ position: absolute; left: 50%; top:50%; background: url(images/video_ficon.png) no-repeat 0 0; width: 50px; height: 50px; margin-left: -25px; margin-top: -25px;}
+.ch_img_icon:hover .video_i{ background-position: 0 -52px;}
 /*左右悬浮 @ch*/
 
 /** 球迷会申请  @tvrcgo **/
@@ -6877,7 +6672,7 @@ body{background: #f1f4f6;}
 .match_ch .versus .team .logo{ display: block; margin-bottom: 10px;}
 .match_ch .versus .team img{width: 40px;height: 40px;}
 .match_ch .versus .score_over{ color: #a0a0a0;}
-.match_ch .versus .score{font: bold 30px/68px "Arial", sans-serif;display: inline-block;float: left;width: 110px;text-align: center;color: #464646;}
+.match_ch .versus .score{font: bold 30px/68px "Arial", sans-serif;display: inline-block;float: left;width: 120px;text-align: center;color: #464646;}
 .match_ch .link{display: inline-block;float: right;box-sizing: border-box;width: 220px;min-height: 88px;padding: 0 10px 0 35px;border-left: 1px solid #e3e3e3;}
 .match_ch .link li{float: left; width: 50%; line-height: 18px; position: relative; margin-bottom: 2px;}
 .match_ch .link li:before{ content:''; width: 0; height:0; border: 1px solid #eb6100; color: #eb6100; display: block; position: absolute;left: 0; top: 8px;}
@@ -13907,6 +13702,15 @@ input:focus
     color: #fff;
     border: 1px solid #eb6100;
     background-color: #eb6100;
+}
+
+.cellNone{
+    width: 1000px;
+    font-size: 22px;
+    margin: 0 auto 20px;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #fff;
 }
 
 .container

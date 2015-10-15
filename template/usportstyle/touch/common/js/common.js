@@ -36,7 +36,32 @@ $(function () {
                         hasNexPage = false;
                         $(buttinId).text("没有更多了");
                     }
-                    list.append(templFn(doTempl, data));
+                    var $templ = $(templFn(doTempl, data));
+                    list.append($templ);
+                    $('.author-thumb > img', $templ).each(function () {
+                        var me = $(this),
+                            containerHeight = me.parent().height(),
+                            containerWidth = me.parent().width();
+                        if (this.complete || this.readyState === "complete" || this.readyState === "loaded") {
+                            fixedImg(me, containerWidth, containerHeight);
+                        } else {
+                            this.onload = function () {
+                                fixedImg(me, containerWidth, containerHeight);
+                            };
+                        }
+                    });
+                    $('.author-thumb-img > img', $templ).each(function () {
+                        var me = $(this),
+                            containerHeight = me.parent().parent().outerHeight(),
+                            containerWidth = me.parent().parent().outerWidth();
+                        if (this.complete || this.readyState === "complete" || this.readyState === "loaded") {
+                            fixedImg2(me, containerWidth, containerHeight);
+                        } else {
+                            this.onload = function () {
+                                fixedImg2(me, containerWidth, containerHeight);
+                            };
+                        }
+                    });
                 });
             }
 
@@ -124,8 +149,6 @@ $(function () {
             $('#club_' + /league_(\d+)/.exec(me.attr('id'))[1]).show();
         });
     });
-    // active first .hclub_li
-    $('.hclub_li:eq(0)').addClass('active');
 
     // group-index-templ
     var hsub_content = $('.hsub_content ul');
@@ -149,6 +172,10 @@ $(function () {
             return false;
         });
     });
+
+    // active first .hclub_li
+    $('.hclub_li:eq(0)').addClass('active');
+    $('.hst_club:eq(0) a:eq(0)').click();
 
     function fixedImg(obj, containerWidth, containerHeight) {
         var _this = obj[0];
@@ -188,6 +215,7 @@ $(function () {
             });
         }
     }
+    // 修复头像不圆
     $('.author-thumb > img').each(function () {
         var me = $(this),
             containerHeight = me.parent().height(),
@@ -197,6 +225,60 @@ $(function () {
         } else {
             this.onload = function () {
                 fixedImg(me, containerWidth, containerHeight);
+            };
+        }
+    });
+
+    function fixedImg2(obj, containerWidth, containerHeight) {
+        var _this = obj[0];
+        var naturalHeight = _this.naturalHeight,
+            naturalWidth = _this.naturalWidth;
+        if (typeof _this.naturalWidth == "undefined") {
+            // IE 6/7/8
+            var i = new Image();
+            i.src = _this.src;
+            naturalHeight = i.width;
+            naturalWidth = i.height;
+        }
+
+        if (naturalWidth == naturalHeight) {
+            return;
+        } else if (naturalWidth > naturalHeight) {
+            var factor = Math.round((naturalWidth / naturalHeight) * 100);
+            obj.parent().css({
+                overflow: "hidden",
+                borderRadius: "50%"
+            });
+            obj.css({
+                maxWidth: factor + "%",
+                width: "auto",
+                borderRadius: "0",
+                marginLeft: "-" + Math.round((factor - 100) / 2) + "%"
+            });
+        } else {
+            var factor = Math.round((naturalHeight / naturalWidth) * 100);
+            obj.parent().css({
+                overflow: "hidden",
+                borderRadius: "50%"
+            });
+            obj.css({
+                maxWidth: factor + "%",
+                width: "auto",
+                borderRadius: "0",
+                marginTop: "-" + Math.round((factor - 100) / 2) + "%"
+            });
+        }
+    }
+    // 修复会员头像不圆
+    $('.author-thumb-img > img').each(function () {
+        var me = $(this),
+            containerHeight = me.parent().parent().outerHeight(),
+            containerWidth = me.parent().parent().outerWidth();
+        if (this.complete || this.readyState === "complete" || this.readyState === "loaded") {
+            fixedImg2(me, containerWidth, containerHeight);
+        } else {
+            this.onload = function () {
+                fixedImg2(me, containerWidth, containerHeight);
             };
         }
     });

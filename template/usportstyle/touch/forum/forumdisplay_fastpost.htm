@@ -7,16 +7,7 @@
 	<div class="avatar" style="display:none;"><img src="<!--{avatar($_G[uid], middle, true)}-->" /></div>  
 	<div class="pi">
 		<ul class="fastpost">
-		<!--{if $_G[forum_thread][special] == 5 && empty($firststand)}-->
-		<li>
-		<select id="stand" name="stand" >
-			<option value="">{lang debate_viewpoint}</option>
-			<option value="0">{lang debate_neutral}</option>
-			<option value="1">{lang debate_square}</option>
-			<option value="2">{lang debate_opponent}</option>
-		</select>
-		</li>
-		<!--{/if}-->
+		
 		<li><input type="text" value="{lang send_reply_fast_tip}" class="input grey" color="gray" name="message" id="fastpostmessage"></li>
 		<li id="fastpostsubmitline" style="display:block;"><!--{if checkperm('seccode') && ($secqaacheck || $seccodecheck)}--><!--{subtemplate common/seccheck}--><!--{/if}--><input type="button" value="{lang reply}" class="button_chs" name="replysubmit" id="fastpostsubmit" style="float:left; margin-right:0.8rem;"><a style="float:left;" href="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&reppost=$_G[forum_firstpid]&page=$page" class=""><i class="fontweb_icon ic_phots"></i></a><!--{hook/viewthread_fastpost_button_mobile}--></li>
 		</ul>

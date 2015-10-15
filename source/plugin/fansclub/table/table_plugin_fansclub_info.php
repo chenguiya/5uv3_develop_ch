@@ -34,18 +34,26 @@ class table_plugin_fansclub_info extends discuz_table {
 		return $arr_return;
 	}
 	
-	public function update_info_from_forum()
+	public function update_info_from_forum($fid = 0)
 	{
-		$sql = "SELECT f.fid, f.members, f.contribution, f.posts, f.level FROM ".DB::table($this->_table)." f WHERE f.displayorder >= 0";
-		$arr_tmp = DB::fetch_all($sql);
-		for($i = 0; $i < count($arr_tmp); $i++)
-		{
-			$group_fid = intval($arr_tmp[$i]['fid']);
-			$_arr_forum = C::t('forum_forum')->fetch($group_fid);
-			$_arr_forumfield = C::t('forum_forumfield')->fetch($group_fid);
-			$_arr_balance = C::t('#fansclub#plugin_fansclub_balance')->fetch_first($group_fid);
-			DB::query("UPDATE ".DB::table($this->_table)." SET members = ".intval($_arr_forumfield['membernum']).", contribution = ".intval($_arr_balance['extendcredits3']).", posts = ".intval($_arr_forum['posts']).", level = ".intval($_arr_forum['level']).", displayorder = ".intval($_arr_forum['displayorder'])." WHERE fid = ".$group_fid);
-		}
+        // 2015-10-12 zhangjh 不更新信息
+        if($fid == 0)
+        {
+            return false;
+        }
+        else
+        {
+            $sql = "SELECT f.fid, f.members, f.contribution, f.posts, f.level FROM ".DB::table($this->_table)." f WHERE f.displayorder >= 0 and f.fid = ". intval($fid);
+            $arr_tmp = DB::fetch_all($sql);
+            for($i = 0; $i < count($arr_tmp); $i++)
+            {
+                $group_fid = intval($arr_tmp[$i]['fid']);
+                $_arr_forum = C::t('forum_forum')->fetch($group_fid);
+                $_arr_forumfield = C::t('forum_forumfield')->fetch($group_fid);
+                $_arr_balance = C::t('#fansclub#plugin_fansclub_balance')->fetch_first($group_fid);
+                DB::query("UPDATE ".DB::table($this->_table)." SET members = ".intval($_arr_forumfield['membernum']).", contribution = ".intval($_arr_balance['extendcredits3']).", posts = ".intval($_arr_forum['posts']).", level = ".intval($_arr_forum['level']).", displayorder = ".intval($_arr_forum['displayorder'])." WHERE fid = ".$group_fid);
+            }
+        }
 	}
 	
 	/**

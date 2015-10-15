@@ -4,7 +4,14 @@
 <nav class="navbar"{if !empty($_G[forum][color])} style="background-color:$_G[forum][color]"{/if}>
     <div class="inner">
         <div class="left">
-             <a href="forum.php?mod=group&fid=$_G[fid]"><i class="iconfont icon-back"></i></a>
+        <!--{if $_SERVER['HTTP_REFERER'] == ''}-->
+        <a href="forum.php?mobile=yes"><i class="iconfont icon-back"></i></a>
+        <!--{else}-->
+            <!--{if $_G['forum']['status'] != 3}--><a href="javascript: history.go(-1);"><i class="iconfont icon-back"></i></a>
+            <!--{else}--><a href="forum.php?mod=group&fid=$_G[fid]">
+            <i class="iconfont icon-back"></i></a>
+            <!--{/if}-->
+        <!--{/if}-->
         </div>       
         <div class="center"><!--{if !$_G[forum_thread][special]}-->帖子<!--{elseif $_G[forum_thread][special] == 4}-->活动 <!--{/if}--></div>
         <div class="right">

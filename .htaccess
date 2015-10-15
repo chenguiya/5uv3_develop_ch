@@ -12,7 +12,19 @@ RewriteRule jifen/([0-9]+)\.html$  /plugin.php?id=dc_mall&page=$1
 RewriteRule goods-([0-9]+)\.html$ /plugin.php?id=dc_mall&action=goods&gid=$1
 RewriteRule jifen/([a-z]+)/([a-z]+)/([0-9]+)/([0-9]+)\.html$ /plugin.php?id=dc_mall&orderby=$1&da=$2&sortid=$3&page=$4
 RewriteRule jifen/([a-z]+)/([a-z]+)/([0-9]+)/?$ /plugin.php?id=dc_mall&orderby=$1&da=$2&sortid=$3
-
+RewriteRule activity/?$   /forum.php?mod=activity
+RewriteRule activity_([0-9]+)\.html$   /forum.php?mod=activity&page=$1
+RewriteRule football/?$   /forum.php?mod=circle&type=football
+RewriteRule football_([0-9]+)\.html$  /forum.php?mod=circle&type=football&page=$1
+RewriteRule ([a-z]+)/allcategory/?$   /forum.php?mod=circle&type=$1&op=allcategory
+RewriteRule live/?$    /plugin.php?id=fansclub:fansclub&ac=live
+RewriteRule live/([0-9]+)/?$    /plugin.php?id=fansclub:fansclub&ac=live&league_id=$1
+RewriteRule standings/?$   /plugin.php?id=fansclub:fansclub&ac=standings
+RewriteRule scorer/?$    /plugin.php?id=fansclub:fansclub&ac=scorer
+RewriteRule fans/topic/([0-9]+)/?$   /forum.php?mod=forumdisplay&action=list&fid=$1&type=topic
+RewriteRule fans/activity/([0-9]+)/?$   /forum.php?mod=forumdisplay&action=list&fid=$1&type=activity
+RewriteRule fans/member/([0-9]+)/?$   /forum.php?mod=group&action=memberlist&fid=$1
+RewriteRule fans/event/([0-9]+)/?$   /plugin.php?id=fansclub:fansclub&ac=event&fid=$1
 
 
 RewriteRule group/([0-9]+).html$ $1/forum.php?mod=forumdisplay&fid=$2&tpl=channel_index
@@ -21,7 +33,6 @@ RewriteRule pic/([0-9]+)/([0-9]+).html$ $1/forum.php?mod=forumdisplay&fid=$2&tpl
 RewriteRule video/([0-9]+)/([0-9]+).html$ $1/forum.php?mod=forumdisplay&fid=$2&tpl=channel_video&typeid=$3&filter=typeid
 RewriteRule topic/([0-9]+)/([0-9]+).html$ $1/forum.php?mod=forumdisplay&fid=$2&flag=index
 RewriteRule (scroll|dujia)/?$ /plugin.php?id=fansclub:index&ac=news 
-RewriteRule sc/?$ /plugin.php?id=fansclub:fansclub&ac=live 
 RewriteRule (news|video|pic)/?$ $1/plugin.php?id=fansclub:index&ac=$2
 RewriteRule ([0-9]+).html$ /forum.php?mod=forumdisplay&fid=$1&flag=index
 RewriteRule data/([0-9]+).html$    $1/plugin.php?id=playerdata:playerdata&fid=$2&ac=data

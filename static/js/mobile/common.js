@@ -955,9 +955,7 @@ $(document).ready(function() {
 	if($('.scrolltop').length > 0) {
 		scrolltop.init($('.scrolltop'));
 	}
-	if($('img').length > 0) {
-		img.init(1);
-	}
+	
 	if($('.popup').length > 0) {
 		popup.init();
 	}

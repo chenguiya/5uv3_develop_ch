@@ -30,12 +30,12 @@ _acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
     	<!--{if $activitylists}-->
     	<!--{loop $activitylists $val}-->
         <div class="cell">
-            <a href="forum.php?mod=viewthread&tid={$val[tid]}" target="_blank"><img class="img" src="{$val[thumb]}" alt=""></a>
+            <a href="forum.php?mod=viewthread&tid={$val[tid]}" target="_blank"><img class="img lazyload" src="static/image/blank.jpg" data-original="{$val[thumb]}" alt=""></a>
             <div class="desc">
                 <p class="brief">
                     <a href="forum.php?mod=viewthread&tid={$val[tid]}">{$val['title']}</a>
                 </p>
-                <span class="time">{$val['starttimefrom']}<!--{if $val['starttimeto']}-->&nbsp;至<br>&nbsp;{$val['starttimeto']}<!--{/if}--></span>
+                <span class="time">{$val['starttimefrom']}&nbsp;至<br>&nbsp;<!--{if $val['starttimeto']}-->{$val['starttimeto']}<!--{/if}--></span>
                 <a href="forum.php?mod=viewthread&tid={$val[tid]}" class="{if $val[status]}btn-join{else}btn-over{/if}">{if $val[status]}立即参加{else}已结束{/if}</a>
             </div>
         </div>

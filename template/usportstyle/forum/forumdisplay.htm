@@ -24,7 +24,7 @@ _acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
 
 <div class="ball_right fr">
 	<!--{if empty($_GET['typeid'])}-->
-            <div class="bg_publish"><div class="ball_publish"><a id="btn_newpost_forum" href="forum.php?mod=post&action=newthread&fid={$_G['fid']}"><i></i>发表帖子</a></div></div>
+            <div class="bg_publish"><div class="ball_publish"><a {if $_G['forum']['type'] == 'forum'}id="btn_newpost_forum"{else}id="btn_newpost_group"{/if} href="forum.php?mod=post&action=newthread&fid={$_G['fid']}"><i></i>发表帖子</a></div></div>
             
 			<!--{if $match[0][a_name] || $match[0][b_name]}-->
 			<div id="div_match" class="chComd bgnone chMatch clearfix">

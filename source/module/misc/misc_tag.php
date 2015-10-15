@@ -272,15 +272,33 @@ function my_getthreadsbytids($tidarray) {
 		foreach(C::t('forum_thread')->my_fetch_all_by_tid($tidarray, 0, 0, 'dateline') as $result) {
 			$resultnew['url'] = 'forum.php?mod=viewthread&tid='.$result['tid'];
 			if ($result['attachment'] == 2) {
-				$attachment = getattachment($result['tid'], 1);
+				$attachment = getattachment($result['tid'], 1, TRUE);
+                
 				$resultnew['type'] = 2;
-				$resultnew['imgUrl'] = $attachment[0];
+				// $resultnew['imgUrl'] = $attachment[0];
+                $resultnew['imgUrl'] = getforumimg($attachment[0], 0, 400, 0, 1); // zhangjh 2015-10-09 modify
+                
 			} elseif ($result['attachment'] == 3) {
 				$resultnew['type'] = 3;
 				$resultnew['videoUrl'] = getplayurlbytid($result['tid']);
+                
+                // zhangjh 2015-10-14 视频截图
+                include_once DISCUZ_ROOT.'./source/plugin/fansclub/extend/videoapi.php';
+                $video = new VideoApi();
+                $video_pic = $video->parse($resultnew['videoUrl'], FALSE, $result['tid'], $_G);
+                if(is_array($video_pic))
+                {
+                    $resultnew['imgUrl'] = $video_pic['img'];
+                }
+                
 			}else {
+                $resultnew['videoUrl'] = '';
 				$resultnew['imgUrl'] = $_G['style']['tpldir'].'/common/images/lanmu-default.png';
 			}
+            
+            
+            
+            
 			$resultnew['title'] = $result['subject'];
 			$resultnew['authorThumbUrl'] = avatar($result['authorid'], 'small', 1);
 			$resultnew['authorName'] = $result['author'];

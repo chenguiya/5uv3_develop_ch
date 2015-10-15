@@ -8,10 +8,29 @@ class VideoApi
 {
     const USER_AGENT = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.10 (KHTML, like Gecko)
         Chrome/8.0.552.224 Safari/534.10";
-    const CHECK_URL_VALID = "/(youku\.com|tudou\.com|ku6\.com|56\.com|letv\.com|video\.sina\.com\.cn|(my\.)?tv\.sohu\.com|v\.qq\.com)/";
+    const CHECK_URL_VALID = "/(tv\.cntv\.cn|video\.weibo\.com|pptv\.com|video\.qq\.com|youku\.com|tudou\.com|ku6\.com|56\.com|letv\.com|video\.sina\.com\.cn|(my\.)?tv\.sohu\.com|v\.qq\.com)/";
 
-    static public function parse($url = '', $createObject = false)
+    private static $video_img_dir;
+    private static $video_img_file;
+    private static $video_img_url;
+    
+    static public function parse($url = '', $createObject = false, $tid = 0, $_G = array()) // 第三个参数是转传用的tid
     {
+        // 查询tid是否已经有截图保存在服务器
+        if($tid > 0)
+        {
+            self::$video_img_dir = $_G['setting']['attachdir'].'video/';
+            
+            self::$video_img_file = self::$video_img_dir.'tid_'.$tid.'.jpg';
+            self::$video_img_url = $_G['setting']['attachurl'].'video/tid_'.$tid.'.jpg';
+            if(file_exists(self::$video_img_file))
+            {
+                $data = array();
+                $data['img'] = self::$video_img_url;
+                return $data;
+            }
+        }
+        
         $lowerurl = strtolower($url);
         preg_match(self::CHECK_URL_VALID, $lowerurl, $matches);
         if(!$matches) return false;
@@ -23,25 +42,35 @@ class VideoApi
         case 'tudou.com':
             $data = self::_parseTudou($url);
             break;
-        case 'ku6.com':
-            $data = self::_parseKu6($url);
-            break;
-        case '56.com':
-            $data = self::_parse56($url);
-            break;
+        // case 'ku6.com':
+        //     $data = self::_parseKu6($url);
+        //     break;
+        // case '56.com':
+        //     $data = self::_parse56($url);
+        //     break;
         case 'letv.com':
-            $data = self::_parseLetv($url);
-            break;
+             $data = self::_parseLetv($url);
+             break;
         case 'video.sina.com.cn':
             $data = self::_parseSina($url);
             break;
-        case 'my.tv.sohu.com':
-        case 'tv.sohu.com':
-        case 'sohu.com':
-            $data = self::_parseSohu($url);
+        case 'video.weibo.com':
+            $data = self::_parseWeibo($url);
             break;
+        // case 'my.tv.sohu.com':
+        // case 'tv.sohu.com':
+        // case 'sohu.com':
+        //     $data = self::_parseSohu($url);
+        //     break;
+        case 'video.qq.com':
         case 'v.qq.com':
-            $data = self::_parseQq($url);
+             $data = self::_parseQq($url);
+             break;
+        case 'pptv.com':
+            $data = self::_parsePptv($url);
+            break;
+        case 'tv.cntv.cn':
+            $data = self::_parseCntv($url);
             break;
         default:
             $data = false;
@@ -50,16 +79,213 @@ class VideoApi
         if($data && $createObject)
             $data['object'] = "<embed src=\"{$data['swf']}\" quality=\"high\" width=\"480\" height=\"400\" align=\"middle\" allowNetworking=\"all\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>";
         
+        if($data['img'] != '')
+        {
+            self::save_to_local($data['img']);
+        }
+        
+        return $data;
+    }
+    
+    /**
+     * cntv
+     * http://tv.cntv.cn/video/VSET100152136340/e8d94da4920a419890d9a5fdc0da824b
+     */
+    private static function _parseCntv($url)
+    {
+        $html = self::_fget($url);
+        $regex = "|flvImgUrl=\"(.*)\"|U";
+        preg_match_all($regex, $html, $_tmp_arr, PREG_PATTERN_ORDER);
+        
+        if(empty($_tmp_arr[1]))
+        {
+            return false;
+        }
+        $data = array();
+        $data['img'] = $_tmp_arr[1][0];
+
+        return $data;
+    }
+    
+    /**
+     * miaopai
+     * 1 http://www.miaopai.com/show/hKQXSYPOJgXET0oFTqdMWA__.swf
+     * 2 http://wscdn.miaopai.com/splayer2.1.1.swf?scid=hKQXSYPOJgXET0oFTqdMWA__&&r=469845
+     * 3 http://qncdn.miaopai.com/stream/hKQXSYPOJgXET0oFTqdMWA___m.jpg
+     */
+    
+    
+    /**
+     * weibo
+     * http://video.weibo.com/player/1034:394a0d3fca6fc8c3191c31c41f54f15b/v.swf
+     * http://video.weibo.com/show?fid=1034:394a0d3fca6fc8c3191c31c41f54f15b
+     */
+    private static function _parseWeibo($url)
+    {
+        preg_match("#/player/(.*?)/v.swf#", $url, $matches);
+        if(empty($matches))
+        {
+            return false;
+        }
+        $url = 'http://video.weibo.com/show?fid='.$matches[1];
+        
+        $html = self::_fget($url);
+        $regex = "|<img src = \"(.*)\"|U";
+        // echo $html;
+        preg_match_all($regex, $html, $_tmp_arr, PREG_PATTERN_ORDER);
+        
+        if(empty($_tmp_arr[1]))
+        {
+            return false;
+        }
+        $data = array();
+        $data['img'] = $_tmp_arr[1][0];
+
+        return $data;
+    }
+    
+    
+    private static function save_to_local($url)
+    {
+        $data = '';
+        $arr_return = array('success' => FALSE, 'message' => 'init');
+        include_once(DISCUZ_ROOT.'./source/plugin/fansclub/extend/avatar.php');
+        $avatar = new Avatar();
+        $img = $avatar->myGetImageSize($url);
+        
+        if(count($img) > 0)
+        {
+            $data = $img['code'];
+        }
+        
+        if($data == '')
+        {
+            $arr_return['message'] = '取不到图片';
+            return $arr_return;
+        }
+
+        if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $data, $result))
+        {
+            $bln_upload = $avatar->onuploadvideoimg($data, self::$video_img_file);
+            if($bln_upload === TRUE)
+            {
+                $arr_return['success'] = TRUE;
+                $arr_return['message'] = '成功';
+            }
+            else
+            {
+                $arr_return['message'] = '保存文件失败';
+            }
+        }
+        else
+        {
+            $arr_return['message'] = '不是一个有效的图片编码';
+        }
+        return $arr_return;
+    }
+    
+    /**
+     * pptv 
+     * http://player.pptv.com/v/iaagppg505CKFA2s.swf
+       http://v.pptv.com/show/iaagppg505CKFA2s.html
+     */
+    private static function _parsePptv($url)
+    {
+        preg_match("#/v/(.*?)\.swf#", $url, $matches);
+        if(empty($matches))
+        {
+            return false;
+        }
+        
+        $url = 'http://v.pptv.com/show/'.$matches[1].'.html';
+        $html = self::_fget($url);
+        $regex = "|\"share_wx_image\":\"(.*)\"|U";
+        preg_match_all($regex, $html, $_tmp_arr, PREG_PATTERN_ORDER);
+
+        if(empty($_tmp_arr[1]))
+        {
+            return false;
+        }
+        $data = array();
+        $data['img'] = str_replace('\/', '/', $_tmp_arr[1][0]);
+        
         return $data;
     }
     
     /**
      * 新浪
+     * http://video.sina.com.cn/view/249827089.html
+     * http://video.sina.com.cn/share/video/249827089.swf
      */
-     
+     private static function _parseSina($url)
+     {
+        preg_match("#/share/video/(.*?)\.swf#", $url, $matches);
+        if(empty($matches))
+        {
+            return false;
+        }
+        
+        $url = 'http://video.sina.com.cn/view/'.$matches[1].'.html';
+        
+        $html = self::_fget($url);
+        $regex = "|pic: '(.*)'|U";
+        preg_match_all($regex, $html, $_tmp_arr, PREG_PATTERN_ORDER);
+
+        if(empty($_tmp_arr[1]))
+        {
+            return false;
+        }
+        
+        $data = array();
+        $data['img'] = $_tmp_arr[1][0];
+
+        return $data;
+    }
+        
     /**
-     * 腾讯
+     * 腾讯视频 
+     * http://v.qq.com/cover/o/o9tab7nuu0q3esh.html?vid=97abu74o4w3_0
+     * http://v.qq.com/play/97abu74o4w3.html
+     * http://v.qq.com/cover/d/dtdqyd8g7xvoj0o.html
+     * http://v.qq.com/cover/d/dtdqyd8g7xvoj0o/9SfqULsrtSb.html
+     * http://imgcache.qq.com/tencentvideo_v1/player/TencentPlayer.swf?_v=20110829&vid=97abu74o4w3&autoplay=1&list=2&showcfg=1&tpid=23&title=%E7%AC%AC%E4%B8%80%E7%8E%B0%E5%9C%BA&adplay=1&cid=o9tab7nuu0q3esh
+     * http://static.video.qq.com/TPout.swf?auto=1&vid=z0018oig45x zhangjh add
+     * http://static.video.qq.com/TPout.swf?vid=i0017ww9n9k&auto=0
      */
+    private static function _parseQq($url){
+        if(preg_match("/\/play\//", $url)){
+            $html = self::_fget($url);
+            preg_match("/url=[^\"]+/", $html, $matches);
+            if(!$matches); return false;
+            $url = $matches[0];
+        }
+        
+        //$url = 'http://static.video.qq.com/TPout.swf?auto=1&vid=z0018oig45x';
+        preg_match("/vid=([^\_]+)\&/", $url, $matches);
+        $vid = $matches[1];
+        
+        if($vid == '')
+        {
+            preg_match("/vid=([^\_]+)/", $url, $matches);
+            $vid = $matches[1];
+        }
+        
+        $html = self::_fget($url);
+        // query
+        preg_match("/flashvars\s=\s\"([^;]+)/s", $html, $matches);
+        $query = $matches[1];
+        if(!$vid){
+            preg_match("/vid\s?=\s?vid\s?\|\|\s?\"(\w+)\";/i", $html, $matches);
+            $vid = $matches[1];
+        }
+        $query = str_replace('"+vid+"', $vid, $query);
+        parse_str($query, $output);
+        $data['img'] = "http://vpic.video.qq.com/{$$output['cid']}/{$vid}_1.jpg";
+        //$data['url'] = $url;
+        //$data['title'] = $output['title'];
+        //$data['swf'] = "http://imgcache.qq.com/tencentvideo_v1/player/TencentPlayer.swf?".$query;
+        return $data;
+    }
      
     /**
      * 乐视
@@ -68,9 +294,6 @@ class VideoApi
      */
     private static function _parseLetv($url)
     {
-        
-        echo $url;
-        // 'http://i7.imgs.letv.com/player/swfPlayer.swf?autoPlay=0&id=23452267'
         preg_match("#id=(\d+)#", $url, $matches);
         if(empty($matches))
         {
@@ -79,15 +302,18 @@ class VideoApi
         
         $url = 'http://www.letv.com/ptv/vplay/'.$matches[1].'.html';
         $html = self::_fget($url);
+        // preg_match("#videoPic:\"(.*?)\"#", $html, $matches); // 2015-10-10 这个已经不适用了
+        $regex = "|(?is)<div class=\"img-wrap\">(.*)<img src=\"(.*)\"|U";
+        $regex = "|(?is)<div class=\"img-wrap\">(.*)<img data-original=\"(.*)\"|U";
+        preg_match_all($regex, $html, $_tmp_arr, PREG_PATTERN_ORDER);
         
-        preg_match("#videoPic:\"(.*?)\"#", $html, $matches);
-        if(empty($matches))
+        if(empty($_tmp_arr[2]))
         {
             return false;
         }
         
         $data = array();
-        $data['img'] = $matches[1];
+        $data['img'] = $_tmp_arr[2][0];
         return $data;
     }
     
@@ -120,6 +346,8 @@ class VideoApi
     /**
      * 土豆
      * http://www.tudou.com/a/_93DHcFhgf4/&iid=132528782&rpid=801544571&resourceId=801544571_04_05_99/v.swf
+       http://www.tudou.com/v/w75uiyi42K0/&resourceId=0_04_05_99/v.swf
+     
      * http://www.tudou.com/v/siuBXDL5nGs/v.swf
      * doc_url http://open.tudou.com/wiki
      * 账号 myQQ App Key:8492d7dc95dde778 App Secret:bb871864c9dd6a346fb0500b006acd4c
@@ -127,7 +355,7 @@ class VideoApi
     private static function _parseTudou($url)
     {
         $app_key = '8492d7dc95dde778';
-        preg_match("#\/v\/(.*?)\/v\.swf#", $url, $matches);
+        preg_match("#\/v\/(.*?)\/#", $url, $matches);
         
         if(empty($matches))
         {

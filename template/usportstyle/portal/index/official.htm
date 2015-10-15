@@ -1,11 +1,11 @@
 <!--{block return}-->
 <!--{if $data['data']}-->
 <div class="releaseBox">
-	<div class="release_hd"><span>官方发布</span></div>
+	<div class="release_hd"><span>球迷会动态</span></div>
 	<div class="release_bd">
 		<!--{loop $data['data'] $val}-->
 		<!--{if $val[displayorder] == 1}-->
-		<p><a href="{$val[url]}" target="_blank"><img src="data/attachment/{$val[thumbpath]}" width="280" height="125"></a></p>
+		<p><a href="{$val[url]}" target="_blank"><img class="lazyload" src="static/image/blank.jpg" data-original="data/attachment/{$val[thumbpath]}" width="280" height="125"></a></p>
 		<dl>
 			<dt><a href="{$val[url]}" target="_blank">{$val[title]}</a></dt>
 			<dd>{$val[summary]}</dd>

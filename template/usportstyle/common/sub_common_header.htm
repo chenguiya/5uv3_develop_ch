@@ -30,10 +30,12 @@
 		<script type="text/javascript" src="http://s.csbew.com/k.js"></script>
 		<script type="text/javascript" id="seajsnode" src="http://static.5usport.com/sea.js"></script>
 		<script type="text/javascript" src="$_G['config'][static]/jquery.min.js"></script>
+		<script type="text/javascript" src="$_G['config'][static]/jquery.lazyload.js?{VERHASH}"></script>
 		<script type="text/javascript" src="$_G['config'][static]/main.js"></script>
 		<script type="text/javascript">
             var jq=jQuery.noConflict();
         </script>
+        
 </head>
 <body id="nv_{$_G[basescript]}" class="pg_{CURMODULE}{if $_G['basescript'] === 'portal' && CURMODULE === 'list' && !empty($cat)} {$cat['bodycss']}{/if}" onkeydown="if(event.keyCode==27) return false;">
 	<div id="append_parent"></div><div id="ajaxwaitid"></div>

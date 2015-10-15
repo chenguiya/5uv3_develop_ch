@@ -1,0 +1,45 @@
+<!--<nav class="navbar">-->
+    <!--<div class="inner">-->
+        <!--<div class="center">-->
+            <!--曼城赛程-->
+        <!--</div>-->
+        <!--<div class="right">-->
+            <!--<a href="home.php?mod=space&do=profile&mycenter=1&mobile=2"><i class="iconfont icon-me" style="position: relative;"></i></a>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+<div class="ymain saicheng" style="padding-top: 0;">
+    <div class="ylist">
+       
+        <!--{if $arr_game['match_arr']['match']}-->
+        <!--{loop $arr_game['match_arr']['match'] $value}-->
+                <div class="saicheng-item">
+                    <div class="sc-left">
+                        <a class="name" href="#">{$value['league_name']}</a>
+                        <div class="time">{$value['match_date_short']}</div>
+                    </div>
+                    <div class="sc-right">
+                        <div class="team">
+                            <div class="team-thumb">
+                                <img src="{$value['a_logo']}" alt="{$value['a_name']}">
+                            </div>
+                            <div class="team-name">{$value['a_name']}</div>
+                        </div>
+                        <div class="team-vs"><!--{if $value['status'] == 0 }-->VS<!--{else}-->{$value['a_score']}-{$value['b_score']}<!--{/if}--></div>
+                        <div class="team">
+                            <div class="team-thumb">
+                                <img src="{$value['b_logo']}" alt="{$value['b_name']}">
+                            </div>
+                            <div class="team-name">{$value['b_name']}</div>
+                        </div>
+                    </div>
+                </div>
+        <!--{/loop}-->
+        <!--{/if}-->
+        
+    </div>
+</div>
+<div style="padding: 0 8px">
+    <a id="load-more-group-index" class="ybtn loadmore" href="javascript:;">加载更多</a>
+</div>
+<!--{template common/footer}-->

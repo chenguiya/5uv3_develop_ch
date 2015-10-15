@@ -3,6 +3,10 @@ if (!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 global $_G;
+
+require_once libfile('function/extends');
+include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';
+
 loadcache('plugin');
 
 $fid = isset($_GET['fid']) ? intval($_GET['fid']) : 0;
@@ -45,7 +49,60 @@ if ($_GET['ajax'] == 1) {
 	$video_num = intval($arr_video_count['num']);
 	
 	$multipage = fansclub_multi($video_num, $limit, $page, 'fans/video/'.$_G['forum']['fid'].'/');
-} 
+}elseif ($_GET['type'] == 'activity'){
+                        //xurui 2015-10-14 参照活动的显示做修改
+                    //$query = DB::query("SELECT COUNT(*) AS count FROM ".DB::table('forum_thread')." WHERE  fid = $fid and special = 4");
+
+                   // $result = DB::fetch($query);
+                   // $count = intval($result['count']);
+                    
+                    $pagesize = isset($_GET['pagesize']) ? intval($_GET['pagesize']) : 9;
+                    
+                    $maxpage = @ceil($count/$pagesize);
+                    $nextpage = ($page + 1) > $maxpage ? 1 : ($page + 1);
+                    // $multipage_more = "forum.php?mod=activity&page=".$nextpage;
+
+                    $start = ($page - 1) * $pagesize;
+                    $limit = " LIMIT ".$start.','.$pagesize;
+                    //$fids =DB::fetch_all("SELECT DISTINCT authorid FROM ".DB::table('forum_thread')." WHERE fid = $fid and special = 4  ORDER BY dateline DESC");
+                    
+                   // foreach ($fids as $v) {
+    
+                            $activitylists = DB::fetch_all("SELECT a.* FROM ".DB::table('forum_activity')." as  a , ".DB::table('forum_thread')." as b  WHERE  b.fid = $fid and b.special = 4 and a.tid = b.tid  ORDER BY a.starttimefrom DESC".$limit);
+                            foreach ($activitylists as $key => $activity) {
+                                        $activitylists[$key]['starttimefrom'] = date('Y-m-d', $activity['starttimefrom']);
+                                        if ($activity['starttimeto'] && $activity['starttimeto'] >= TIMESTAMP) {
+                                                $activitylists[$key]['status'] = true;
+                                        } else {
+                                                $activitylists[$key]['status'] = false;
+                                        }
+                                        if ($activity['starttimeto']) $activitylists[$key]['starttimeto'] = date('Y-m-d', $activity['starttimeto']);
+                                        $thread = DB::fetch_first("SELECT * FROM ".DB::table('forum_thread')." WHERE tid=".$activity['tid']);
+
+                                        $activitylists[$key]['title'] = str_cut($thread['subject'], 57, '...');
+                                        $attach = C::t('forum_attachment_n')->fetch('tid:'.$activity['tid'], $activity['aid']);
+
+                                        if($attach['isimage']) {
+                                                $activitylists[$key]['attachurl'] = ($attach['remote'] ? $_G['setting']['ftp']['attachurl'] : $_G['setting']['attachurl']).'forum/'.$attach['attachment'];
+ 
+                                                $activitylists[$key]['thumb'] = $attach['thumb'] ? getimgthumbname($activitylists[$key]['attachurl']) : $activitylists[$key]['attachurl'];
+
+                                                $activitylists[$key]['width'] = $attach['thumb'] && $_G['setting']['thumbwidth'] < $attach['width'] ? $_G['setting']['thumbwidth'] : $attach['width'];
+                                        }
+                          //  }
+                        }
+                   // echo "<pre>";
+                   // print_r($activitylists);exit;
+                    $nobbname = TRUE;
+                    $navtitle = '5U体育官网活动中心_';
+                    if ($page > 1) $navtitle .= '第'.$page.'页_';
+                    $navtitle .= $_G['setting']['bbname'];
+                    $metakeywords = '活动,5U体育';
+                    $metadescription = '5U体育最新网站活动中心，参与活动赢取精美礼品，活动流程与参与方式。';
+                   // $multipage = fansclub_multi($maxpage, $pagesize, $page, 'fans/activity/'.$_G['forum']['fid'].'/');
+                    //include template('extend/desktop/activity');
+                    
+}
 
 function get_thread_cover($tid) {
 	$cover = array();

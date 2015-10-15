@@ -8,7 +8,7 @@
 	<!--{loop $data[data] $val}-->
 	<div class="modul_con">
 		<div class="cell">
-			<a href="{$val[url]}" target="_blank"><img src=<!--{if $val[thumbpath]}-->"data/attachment/{$val[thumbpath]}"<!--{else}-->"data/attachment/{$val[pic]}"<!--{/if}--> width="320" height="170" alt="{$val[title]}" class="img" /></a>
+			<a href="{$val[url]}" target="_blank"><img class="img" src=<!--{if $val[thumbpath]}-->"data/attachment/{$val[thumbpath]}"<!--{else}-->"data/attachment/{$val[pic]}"<!--{/if}--> width="320" height="170" alt="{$val[title]}" /></a>
 			<div class="desc">
 				<p class="brief"><a href="{$val[url]}" target="_blank">{$val[title]}</a></p>
 				<span class="time">{$val[starttimefrom]}<!--{if $val[starttimeto]}-->&nbsp;-&nbsp;{$val[starttimeto]}<!--{/if}--></span>

@@ -26,7 +26,7 @@
 					<span class="social"><i class="iconfont icon-replay"></i>$thread[replies]</span>
 				</div>
 			</li>
-			<div class="title">$thread[subject]<!--{if $thread[special] == 1}-->[投票]<!--{/if}--></div>
+			<div class="title">$thread[subject]<!--{if $thread[special] == 1}-->&nbsp;&nbsp;<span class="yvote">投票</span><!--{elseif $thread[special] == 4}-->&nbsp;&nbsp;<span class="yvote">活动</span><!--{/if}--></div>
 			<!--{if $thread[img] && $thread[special] != 1}-->
 			<div class="images">
 				 <!--{loop $thread[img] $img}-->
@@ -71,9 +71,9 @@
 			</div>
 		</li>
 		<div class="title">{{=it[key].subject}}</div>
-		{{? it[key].img && it[key].special == 1}}
+		{{? it[key].img && it[key].special != 1}}
 		<div class="images">
-			<div class="author-thumb" style="margin-right:1.1rem;"></div>
+			<!--<div class="author-thumb" style="margin-right:1.1rem;"></div>-->
 			<div class="img_right">
 				{{~it[key].img :value:index}}
 				<img src="{{=value}}" alt="{{=it[key].subject}}_1"/>

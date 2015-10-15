@@ -43,13 +43,14 @@ class image {
 
 	function Thumb($source, $target, $thumbwidth, $thumbheight, $thumbtype = 1, $nosuffix = 0) {
 		$return = $this->init('thumb', $source, $target, $nosuffix);
-		if($return <= 0) {
+        if($return <= 0) {
 			return $this->returncode($return);
 		}
 
-		if($this->imginfo['animated']) {
-			return $this->returncode(0);
+		if($this->imginfo['animated']) { // 如果是动画的也要显示缩略图
+			//return $this->returncode(0);
 		}
+        
 		$this->param['thumbwidth'] = intval($thumbwidth);
 		if(!$thumbheight || $thumbheight > $this->imginfo['height']) {
 			$thumbheight = $thumbwidth > $this->imginfo['width'] ? $this->imginfo['height'] : $this->imginfo['height']*($thumbwidth/$this->imginfo['width']);

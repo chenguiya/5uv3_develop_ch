@@ -9,7 +9,7 @@
 		<ul class="cl">
 			<!--{loop $data['data'] $val}-->
 			<li>
-			    <a class="fans_img" href="fans/topic/{$val[id]}/" target="_blank"><img src="{$val[fields][icon]}"></a>
+			    <a class="fans_img" href="fans/topic/{$val[id]}/" target="_blank"><img class="lazyload" src="static/image/face.jpg" data-original="{$val[fields][icon]}"></a>
 			    <p class="fans_name"><a href="fans/topic/{$val[id]}/" target="_blank">{$val[title]}</a></p>
 			    <p class="fans_num">地区：{$val[area]} &nbsp;&nbsp;&nbsp;&nbsp;人数：{$val[fields][membernum]}</p>
 			    <!--{if $val[user_status]}-->

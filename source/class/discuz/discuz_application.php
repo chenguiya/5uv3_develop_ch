@@ -755,8 +755,12 @@ class discuz_application extends discuz_base{
 				dheader("Location:misc.php?mod=mobile");
 			}
 		}
+		
+// 		$arr = $this->is_weixin_passport($_SERVER['QUERY_STRING']);
+// 		var_dump($arr);
+// 		die;
 
-		if($nomobile || (!$this->var['setting']['mobile']['mobileforward'] && !$mobileflag)) {
+		if(($nomobile && !$this->is_weixin_passport($_SERVER['QUERY_STRING'])) || (!$this->var['setting']['mobile']['mobileforward'] && !$mobileflag)) {
 			if($_SERVER['HTTP_HOST'] == $this->var['setting']['domain']['app']['mobile'] && $this->var['setting']['domain']['app']['default']) {
 				dheader("Location:http://".$this->var['setting']['domain']['app']['default'].$_SERVER['REQUEST_URI']);
 				return false;
@@ -831,7 +835,7 @@ class discuz_application extends discuz_base{
 		}
 	}
 
-       public function mobile_iconv_recurrence($value) {
+	public function mobile_iconv_recurrence($value) {
 		if(is_array($value)) {
 			foreach($value AS $key => $val) {
 				$value[$key] = $this->mobile_iconv_recurrence($val);
@@ -840,6 +844,20 @@ class discuz_application extends discuz_base{
 			$value = diconv($value, 'utf-8', CHARSET);
 		}
 		return $value;
+	}
+	/*
+	 * add by Daming 2015/10/15 check weixin passport
+	 */
+	public function is_weixin_passport($str) {
+		foreach ($arr = explode('&', $str) as $value) {
+			$arr1 = explode('=', $value);
+			$query_arr[$arr1[0]] = $arr1[1];
+		}
+		if ($query_arr['ac'] == 'passport' && $query_arr['from'] == 'weixin') {
+			return TRUE;
+		} else {
+			return FALSE;
+		}		
 	}
 }
 

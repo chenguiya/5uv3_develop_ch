@@ -1,6 +1,6 @@
 <input type="hidden" name="polls" value="yes" />
-<div class="exfm cl">
-	<div class="sinf sppoll z">
+<div class="exfm cl y_vote">
+	<div class="sinf sppoll">
 		<input type="hidden" name="fid" value="$_G[fid]" />
 		<!--{if $_GET[action] == 'newthread'}-->
 			<input type="hidden" name="tpolloption" value="1" />
@@ -8,18 +8,19 @@
 				<h4 class="z">
 					<em>{lang post_poll_options}: </em>
 					{lang post_poll_comment} &nbsp;
-					<span class="xw0"><input id="pollchecked" type="checkbox" class="pc" onclick="switchpollm(1)" /><label for="pollchecked">{lang post_single_frame_mode}</label></span>
+					<!-- <span class="xw0"><input name="pollchecked" id="pollchecked" type="checkbox" class="pc" onclick="switchpollm(1)" /><label for="pollchecked">{lang post_single_frame_mode}</label></span> -->
 				</h4>
 			</div>
 			<div id="pollm_c_1" class="mbm">
 				<span id="polloption_new"></span>
-				<p id="polloption_hidden" style="display: none">
-					<a href="javascript:;" class="d" onclick="delpolloption(this)">del</a>
-					<input type="text" name="polloption[]" class="px vm" autocomplete="off" style="width:290px;" tabindex="1" />
-					<span id="pollUploadProgress" class="vm" style="display: none;"></span>
+				<p id="polloption_hidden">
+					<label>选项:</label>
+					<input type="text" name="polloption[]" class="px vm input_size_m" autocomplete="off" tabindex="1" />
+					<a href="javascript:;" class="d" onclick="delpolloption(this)">删除</a>
+					<span id="pollUploadProgress" class="vm"></span>
 					<span id="newpoll" class="vm"></span>
 				</p>
-				<p><a href="javascript:;" onclick="addpolloption()">+{lang post_poll_add}</a></p>
+				<p style="padding-left: 60px;"><a style="color: #c4c4c4;font-size: 14px;" href="javascript:;" onclick="addpolloption()">+{lang post_poll_add}</a></p>
 			</div>
 			<div id="pollm_c_2" class="mbm" style="display:none">
 				<textarea name="polloptions" class="pt" style="width:340px;" tabindex="1" rows="6" onchange="switchpollm(0)" /></textarea>
@@ -47,7 +48,7 @@
 				</p>
 			<!--{/loop}-->
 			<span id="polloption_new"></span>
-			<p id="polloption_hidden" style="display: none">
+				<p id="polloption_hidden">
 				<a href="javascript:;" class="d" onclick="delpolloption(this)">del</a>
 				<input type="text" name="displayorder[]" class="px pxs vm" autocomplete="off" tabindex="1" />
 				<input type="text" name="polloption[]" class="px vm" autocomplete="off" style="width:230px;" tabindex="1" />
@@ -57,21 +58,15 @@
 			<p><a href="javascript:;" onclick="addpolloption()">+{lang post_poll_add}</a></p>
 		<!--{/if}-->
 	</div>
-	<div class="sadd z">
+	<div class="sadd">
 		<p class="mbn">
 			<label for="maxchoices">{lang post_poll_allowmultiple}</label>
 			<input type="text" name="maxchoices" id="maxchoices" class="px pxs" value="{if $_GET[action] == 'edit' && $poll[maxchoices]}$poll[maxchoices]{else}1{/if}" tabindex="1" /> {lang post_option}
-		</p>
-		<p class="mbn">
-			<label for="polldatas">{lang post_poll_expiration}</label>
-			<input type="text" name="expiration" id="polldatas" class="px pxs" value="{if $_GET[action] == 'edit'}{if !$poll[expiration]}0{elseif $poll[expiration] < 0}{lang poll_close}{elseif $poll[expiration] < TIMESTAMP}{lang poll_finish}{else}{echo (round(($poll[expiration] - TIMESTAMP) / 86400))}{/if}{/if}" tabindex="1" /> {lang days}
-		</p>
-		<p class="mbn">
-			<input type="checkbox" name="visibilitypoll" id="visibilitypoll" class="pc" value="1"{if $_GET[action] == 'edit' && !$poll[visible]} checked{/if} tabindex="1" /><label for="visibilitypoll">{lang poll_after_result}</label>
-		</p>
-		<p class="mbn">
-			<input type="checkbox" name="overt" id="overt" class="pc" value="1"{if $_GET[action] == 'edit' && $poll[overt]} checked{/if} tabindex="1" /><label for="overt">{lang post_poll_overt}</label>
-		</p>
+		</p>			
+			<input type="hidden" name="expiration" id="polldatas" value="{if $_GET[action] == 'edit'}{if !$poll[expiration]}0{elseif $poll[expiration] < 0}{lang poll_close}{elseif $poll[expiration] < TIMESTAMP}{lang poll_finish}{else}{echo (round(($poll[expiration] - TIMESTAMP) / 86400))}{/if}{/if}" />		
+			<input type="hidden" name="visibilitypoll" id="visibilitypoll" value="1" />		
+			<input type="hidden" name="overt" id="overt" value="1" />
+		
 		<!--{hook/post_poll_extra}-->
 	</div>
 </div>
@@ -83,13 +78,65 @@ var maxoptions = parseInt('$_G[setting][maxpolloptions]');
 	var curnumber = 1;
 	addpolloption();
 	addpolloption();
-	addpolloption();
 <!--{else}-->
 	var curnumber = curoptions = <!--{echo count($poll['polloption'])}-->;
 	for(var i=0; i < curnumber; i++) {
 		addUploadEvent('newpoll_'+i, 'pollUploadProgress_'+i);
 	}
 <!--{/if}-->
+function $(id) {
+	return !id ? null : document.getElementById(id);
+}
+
+var timeoutFn;
+jQuery('.post_chh').on('keyup', 'input[type=text]:visible, textarea:visible', function () {
+	clearTimeout(timeoutFn);
+	timeoutFn = setTimeout(function () {
+		if (checkPost()) {
+			jQuery('#postsubmit').addClass('btn_pn_blue');
+		} else {
+			jQuery('#postsubmit').removeClass('btn_pn_blue');
+		}
+	}, 500);
+});
+
+var allinpusandtextarea;
+function checkPost() {
+	if (allinpusandtextarea === undefined) {
+		allinpusandtextarea = jQuery('.post_chh input[type=text]:visible,.post_chh textarea:visible');
+	}
+	var result = true;
+	allinpusandtextarea.each(function () {
+		console.info(this);
+		if (jQuery(this).val() === '') {
+			result = false;
+		}
+	});
+
+	console.info(result);
+	return result;
+}
+
+function addpolloption() {
+	if(curoptions < maxoptions) {
+		var imgid = 'newpoll_'+curnumber;
+		var proid = 'pollUploadProgress_'+curnumber;
+		var pollstr = $('polloption_hidden').innerHTML.replace('newpoll', imgid);
+		pollstr = pollstr.replace('pollUploadProgress', proid);
+		pollstr = pollstr.replace(/选项\d+/, '选项'+ (curnumber+1));
+		$('polloption_new').outerHTML = $('polloption_new').outerHTML + '<p>' + pollstr + '</p>';
+		curoptions++;
+		curnumber++;
+		addUploadEvent(imgid, proid)
+	} else {
+		$('polloption_new').outerHTML = '<span>已达到最大投票数'+maxoptions+'</span>';
+	}
+}
+function delpolloption(obj) {
+	if (curoptions === 0) return;
+	obj.parentNode.parentNode.removeChild(obj.parentNode);
+	curoptions--;
+}
 function addUploadEvent(imgid, pollstr) {
 	<!--{if empty($_G['setting']['pluginhooks']['post_upload_extend']) && empty($_G['setting']['pluginhooks']['post_poll_upload_extend'])}-->
 		new SWFUpload({

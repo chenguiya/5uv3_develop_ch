@@ -5,8 +5,7 @@
 			<a href="group/{$fupinfo['relation_fid']}/" class="">{$fupinfo['relation_name']}频道</a><em>&gt;</em>
 			 <!--{if $action == 'index' && $ac == ''}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}</a></em><!--{/if}-->
 			 <!--{if $action == 'list'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}话题</a></em><!--{/if}-->
-			  <!--{if $_GET['type'] == 'pic'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}图片</a></em><!--{/if}-->
-			  <!--{if $_GET['type'] == 'video'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}视频</a></em><!--{/if}-->
+			 <!--{if $_GET['type'] == 'activity'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}活动</a></em><!--{/if}-->
 			  <!--{if $action == 'memberlist' || $action == 'invite'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}成员</a></em><!--{/if}-->
 			  <!--{if $ac == 'event'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}大事记</a></em><!--{/if}-->
 			  <!--{if $action == 'manage'}--><em><a href="{$_SERVER['REQUEST_URI']}" target="_self">{$_G['forum']['name']}管理</a></em><!--{/if}-->
@@ -52,9 +51,12 @@ _acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
 			 <!--{if $status != 2 && $status != 3}-->			 
              <ul class="cate">
                  <li class="item{if ($_GET['type']=='topic'|| $_GET['mod'] == 'forumdisplay')} active{/if}"><a href="fans/topic/$_GET[fid]/" title="topic">话题</a></li>
+            <!--     
                  <li class="item{if $_GET['type']=='pic'} active{/if}"><a href="fans/pic/$_GET[fid]/" title="pic">图片</a></li>
                  <li class="item{if $_GET['type']=='video'} active{/if}"><a href="fans/video/$_GET[fid]/" title="video">视频</a></li>
-				 <!--<li class="item"><a href="javascript:;">活动</a></li>-->
+            -->
+            
+				 <li class="item{if $_GET['type']=='activity'} active{/if}"><a href="fans/activity/$_GET[fid]/" title="activity">活动</a></li>
 				 <li class="item{if $action == 'memberlist' || $action == 'invite'} active{/if}"><a href="fans/member/$_GET[fid]/" title="member">成员</a></li>
 				 <!--<li class="item"><a href="javascript:;">球队</a></li>-->
                  <li class="item{if $ac == 'event'} active{/if}"><a href="fans/event/$_GET[fid]/" title="event">大事记</a></li>
@@ -96,11 +98,3 @@ _acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
 		  {/if}
 		
 	</div>
-
-	<div class="ad_banner">
-		<!-- 108817：首页-频道-列表-内容-底部通栏 类型：固定广告位 尺寸：1000x0-->
-<script type="text/javascript">
-_acK({aid:108817,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
-</script>
-	</div>
-	<div class="blank15"></div>

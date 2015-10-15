@@ -11,17 +11,19 @@ $(function(){
     var url,num;
     var page=parseInt($(this).attr('page'));
     var totalpage=parseInt($(this).attr('totalpage'));
-    url='forum.php?mod=activity'+'&page'+page+'&mobile=2';
-    if(page < totalpage){
+    url='forum.php?mod=activity'+'&page='+page+'&mobile=2';
+    if(page <= totalpage){
     $.get(url,function(data){   
           $("#ch_actbox").append($(data).find("#ch_actbox li"));
           num=page+1;
           $("#actbox_More").attr("page",num);
-          if(num==totalpage)
+          if(num==totalpage+1)
           {
             $("#actbox_More").html('没有更多了');
           }
       });
+    }else{
+       $("#actbox_More").html('没有更多了');
     }
   });
 
@@ -30,18 +32,26 @@ $(function(){
      var url='home.php'+window.location.search;
      var page=parseInt($(this).attr('page'));
      var totalpage=parseInt($(this).attr('totalpage'));
-     if(page < totalpage){
+     if(page <= totalpage){
         $.get(url,{page:page},function(data){
             $("#notice_box").append($(data).find("#notice_box li"));
             num=page+1;
             $("#notice_More").attr("page",num);
-            if(num==totalpage){
+            if(num==totalpage+1){
               $("#notice_More").html("没有更多了");
             }
         });
       }else{
         $("#notice_More").html("没有更多了");
       }
+  });
+
+  //@lazyload
+  $(".lazyload").lazyload({
+    placeholder : "static/image/grey.gif",
+    threshold : 200 ,
+    effect : "fadeIn",
+    skip_invisible:false
   });
   
 });

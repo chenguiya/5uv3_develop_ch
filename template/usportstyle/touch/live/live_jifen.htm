@@ -1,0 +1,32 @@
+	<div id="tabCon">
+		<table class="liveTab" colspan="0" collapse="0">
+			<thead>
+				<tr>
+					<th width="18%" style="text-align:center;padding-left:0">排名</th>
+					<th width="28%">球队</th>
+					<th width="10%">赛</th>
+					<th width="10%">胜</th>
+					<th width="10%">平</th>
+					<th width="10%">负</th>
+					<th width="14%">积分</th>
+				</tr>
+			</thead>
+			<tbody>
+                            <!--{if $arr_game['leaguescore']['data']}-->
+                            <!--{loop $arr_game['leaguescore']['data'] $value}-->
+				<tr>
+					<td style="text-align:center;padding-left:0"><i>{$value['ranking']}</i></td>
+					<td>{$value['team_name']}</td>
+					<td style="text-align:center;">{$value['total']}</td>
+					<td style="text-align:center;">{$value['win']}</td>
+					<td style="text-align:center;">{$value['draw']}</td>
+					<td style="text-align:center;">{$value['fail']}</td>
+					<td style="text-align:center;">{$value['score']}</td>
+				</tr>
+                                 <!--{/loop}-->
+                                <!--{/if}-->
+			</tbody>
+		</table>
+	</div>
+
+<!--{template common/footer}-->

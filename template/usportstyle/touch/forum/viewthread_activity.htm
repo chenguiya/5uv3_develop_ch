@@ -1,73 +1,74 @@
 <div class="act_vbox">
 	 <!--{if $activity['thumb']}--><img src="$activity['thumb']"/><!--{else}--><img src="{IMGDIR}/nophoto.gif" /><!--{/if}-->
-		<dl>
-			<!-- <dt><em>{lang activity_type}:</em> <span>$activity[class]</span></dt> -->
-			<dt><em>{lang activity_starttime}:</em>
-				<!--{if $activity['starttimeto']}-->
-					<span>{lang activity_start_between}</span>
-				<!--{else}-->
-					<span>$activity[starttimefrom]</span>
+ 	<!--{if $activity['class'] != '赢流量'}-->
+	<dl>
+		<!-- <dt><em>{lang activity_type}:</em> <span>$activity[class]</span></dt> -->
+		<dt><em>{lang activity_starttime}:</em>
+			<!--{if $activity['starttimeto']}-->
+				<span>{lang activity_start_between}</span>
+			<!--{else}-->
+				<span>$activity[starttimefrom]</span>
+			<!--{/if}-->
+		</dt>
+		<dt><em>{lang activity_space}:</em> <span>$activity[place]</span></dt>
+		<dt><em>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</em>
+			<!--{if $activity['gender'] == 1}-->
+				<span>{lang male}</span>
+			<!--{elseif $activity['gender'] == 2}-->
+				<span>{lang female}</span>
+			<!--{else}-->
+				 <span>{lang unlimited}</span>
+			<!--{/if}-->
+		</dt>
+		<!--{if $activity['cost']}-->
+		<dt><em>{lang activity_payment}:</em> <span>$activity[cost] {lang payment_unit}</span></dt>
+		<!--{/if}-->
+	    <!--{if !$_G['forum_thread']['is_archived']}-->
+		<dt><em>{lang activity_already}:</em>
+			<span class="xi2">$allapplynum {lang activity_member_unit}				
+		</dt>
+		<!--{if $activity['number']}-->
+		<dt><em>{lang activity_about_member}:</em>
+			<span>$aboutmembers {lang activity_member_unit}</span>
+		</dt>
+		<!--{/if}-->
+		<!--{if $activity['expiration']}-->
+			<dt><em>{lang post_closing}:</em> <span>$activity[expiration]</span></dt>
+		<!--{/if}-->
+		<dt>
+			<!--{if $post['invisible'] == 0}-->
+				<!--{if $applied && $isverified < 2}-->
+					
+				<!--{elseif !$activityclose}-->
+                       <!--{if $isverified != 2}-->
+                       <!--{else}-->
+                       <p class="pns mtn">
+                           <input value="{lang complete_data}" name="ijoin" id="ijoin" />
+                       </p>
+                       <!--{/if}-->
 				<!--{/if}-->
-			</dt>
-			<dt><em>{lang activity_space}:</em> <span>$activity[place]</span></dt>
-			<dt><em>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</em>
-				<!--{if $activity['gender'] == 1}-->
-					<span>{lang male}</span>
-				<!--{elseif $activity['gender'] == 2}-->
-					<span>{lang female}</span>
-				<!--{else}-->
-					 <span>{lang unlimited}</span>
-				<!--{/if}-->
-			</dt>
-			<!--{if $activity['cost']}-->
-			<dt><em>{lang activity_payment}:</em> <span>$activity[cost] {lang payment_unit}</span></dt>
 			<!--{/if}-->
-		    <!--{if !$_G['forum_thread']['is_archived']}-->
-			<dt><em>{lang activity_already}:</em>
-				<span class="xi2">$allapplynum {lang activity_member_unit}				
-			</dt>
-			<!--{if $activity['number']}-->
-			<dt><em>{lang activity_about_member}:</em>
-				<span>$aboutmembers {lang activity_member_unit}</span>
-			</dt>
-			<!--{/if}-->
-			<!--{if $activity['expiration']}-->
-				<dt><em>{lang post_closing}:</em> <span>$activity[expiration]</span></dt>
-			<!--{/if}-->
-			<dt>
-				<!--{if $post['invisible'] == 0}-->
-					<!--{if $applied && $isverified < 2}-->
-						
-					<!--{elseif !$activityclose}-->
-                        <!--{if $isverified != 2}-->
-                        <!--{else}-->
-                        <p class="pns mtn">
-                            <input value="{lang complete_data}" name="ijoin" id="ijoin" />
-                        </p>
-                        <!--{/if}-->
-					<!--{/if}-->
-				<!--{/if}-->
-			</dt>
-			<!--{/if}-->
-		</dl>
-		
+		</dt>
+		<!--{/if}-->
+	</dl>
+	<!--{/if}-->		
 </div>
 <div id="postmessage_$post[pid]" class="postmessage">$post[message]</div>
-<!--{if $_G['uid'] && !$activityclose && (!$applied || $isverified == 2)}-->
-<div class="acty_joins"><a href="#activityjoin_$post[pid]" class="popup elecnation_dr">我要参加</a></div>
+<!--{if !$activityclose && (!$applied || $isverified == 2)}-->
+<div class="acty_joins"><a href="#activityjoin_$post[pid]" class="popup elecnation_dr"><!--{if $activity['class'] == '赢流量'}-->我要领流量<!--{else}-->我要参加<!--{/if}--></a></div>
 	<div id="activityjoin_$post[pid]" popup="true" class="bm mtn">
     	<div class="pd5 bm_chact">  
 	<!--{if $_G['forum']['status'] == 3 && helper_access::check_module('group') && $isgroupuser != 'isgroupuser'}-->
 	         <div class="bm_nojoin">
                   <p class="join_font">{lang activity_no_member}</p>
                   <p>
-                     <a href="forum.php?mod=group&action=join&fid=$_G[fid]&mobile=2" class="join_but button2">加入</a>
+                     <a href="forum.php?mod=group&action=join&fid=$_G[fid]&forward={eval echo(urlencode('forum.php?mod=viewthread&tid='.$_GET[tid]))}&mobile=2" class="dialog join_but button2">加入</a>
                      <a href="javascript:;" class="join_close" onclick="popup.close();">取消</a>
                   </p>
              </div>
 	<!--{else}-->
-	    <div class="xw1">{lang activity_join}</div>
-		<form name="activity" id="activity" method="post" autocomplete="off" action="forum.php?mod=misc&action=activityapplies&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]{if $_GET['from']}&from=$_GET['from']{/if}&mobile=2" >
+	    <div class="xw1"><!--{if $activity['class'] == '赢流量'}-->我要领取流量包<!--{else}-->{lang activity_join}<!--{/if}--></div>
+		<form name="activity" id="activity" method="post" autocomplete="off" action="forum.php?mod=misc&action=activityapplies&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]{if $activity['class']=='赢流量'}&yll=1{/if}{if $_GET['from']}&from=$_GET['from']{/if}&mobile=2" >
 			<input type="hidden" name="formhash" value="{FORMHASH}" />
 
 			<!--{if $_G['setting']['activitycredit'] && $activity['credit'] && !$applied}--><p class="xi1">{lang activity_need_credit} $activity[credit] {$_G['setting']['extcredits'][$_G['setting']['activitycredit']][title]}</p><!--{/if}-->
@@ -93,7 +94,7 @@
 				<!--{else}-->
 					<input type="hidden" name="activitysubmit" value="true">
 					<em class="xi1" id="return_activityapplies"></em>
-					<button type="submit" class="formdialog sub_btns" ><span>{lang submit}</span></button>
+					<button type="submit" class="formdialog sub_btns" ><span><!--{if $activity['class'] == '赢流量'}-->领取<!--{else}-->{lang submit}<!--{/if}--></span></button>
 					<a href="javascript:void(0);" onclick="popup.close();" style="margin-left:0.5rem;">取消</a>
 				<!--{/if}-->
 			</div>
@@ -110,6 +111,9 @@
 <!--{elseif $_G['uid'] && !$activityclose && $applied}-->
 <div id="activityjoincancel" class="bm mtn">
 	<div class="bm_c pd5">
+		<!--{if $activity['class'] == '赢流量'}-->
+		<span class="cacel_btns">已参与领取</span>
+		<!--{else}-->
         <form name="activity" method="post" autocomplete="off" action="forum.php?mod=misc&action=activityapplies&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]{if $_GET['from']}&from=$_GET['from']{/if}">
         <input type="hidden" name="formhash" value="{FORMHASH}" />
         <p style="display:none">
@@ -119,10 +123,11 @@
         <button type="submit" name="activitycancel" value="true" class="cacel_btns"><span>{lang activity_join_cancel}</span></button>
         </p>
         </form>
+        <!--{/if}-->
     </div>
 </div>
 <!--{/if}-->
-<!--{if $applylist && ($activity[starttimefrom_u]-7200 > TIMESTAMP)}-->
+<!--{if $applylist && ($activity[starttimefrom_u]-7200 > TIMESTAMP) && $activity['class'] != '赢流量'}-->
 <div class="act_vtable">
      <p class="pd5">{lang activity_new_join} ($applynumbers {lang activity_member_unit})</p>
      <ul class="act_vul">
@@ -149,7 +154,7 @@
 		<a href="forum.php?mod=misc&action=getactivityapplylist&tid=$_G[tid]">查看更多>></a>
 	</div>
 </div>
-<!--{elseif $signedlist && ($activity[starttimefrom_u]-7200 < TIMESTAMP)}-->
+<!--{elseif $signedlist && ($activity[starttimefrom_u]-7200 < TIMESTAMP) && $activity['class'] != '赢流量'}-->
 <div class="act_vtable">
      <p class="pd5">已签到列表</p>
      <ul class="act_vul">
@@ -180,7 +185,7 @@
 <!--{/if}-->
 
 
-<!--{if $applylistverified && ($activity[starttimefrom_u]-7200 > TIMESTAMP)}-->
+<!--{if $applylistverified && ($activity[starttimefrom_u]-7200 > TIMESTAMP) && $activity['class'] != '赢流量'}-->
 	<div class="act_vtable">
 		<p class="pd5">
 			{lang activity_new_signup} ($noverifiednum {lang activity_member_unit})	
@@ -216,7 +221,7 @@
 		</div>
 		<!--{/if}-->
 	</div>
-<!--{elseif $nosignedlist && ($activity[starttimefrom_u]-7200 > TIMESTAMP)}-->
+<!--{elseif $nosignedlist && ($activity[starttimefrom_u]-7200 > TIMESTAMP) && $activity['class'] != '赢流量'}-->
 	<div class="act_vtable">
 		<p class="pd5">
 			未签到列表			
@@ -245,7 +250,7 @@
 		<div class="actMors cl">		
 			<a href="forum.php?mod=misc&action=signinlist&tid=$_G[tid]&issigined=0">查看更多>></a>
 		</div>
-	</div>	
+	</div>
 <!--{/if}-->
 
 

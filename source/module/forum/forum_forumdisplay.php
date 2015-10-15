@@ -646,7 +646,14 @@ if (!empty($_GET['filter'])) {
 } else {
 // 	$multipage = fansclub_multi($_G['forum_threadcount'], $_G['tpp'], $page, "group/$_G[fid]".$forumdisplayadd['page'].($multiadd ? '&'.implode('&', $multiadd) : '')."$multipage_archive", '_');
 	//edit by Daming	2015/08/19	伪静态处理后，无功能选择，可以不要后面的参数
-	$multipage = fansclub_multi($_G['forum_threadcount'], $_G['tpp'], $page, "group/$_G[fid]", '_');
+    if($_G['forum']['type'] == 'forum')
+    {
+        $multipage = fansclub_multi($_G['forum_threadcount'], $_G['tpp'], $page, "group/$_G[fid]", '_');
+    }
+    else
+    {
+        $multipage = fansclub_multi($_G['forum_threadcount'], $_G['tpp'], $page, "fans/topic/$_G[fid]", '_');
+    }
 }
 
 
@@ -1298,6 +1305,7 @@ if(!defined('IN_ARCHIVER')) {
 	$branchnum = count($branch);
 	
 	//热门活动
+                     /*
 	$hot_activity['data'] = C::t('common_block_item')->fetch_all_by_bid(143, true);
 	foreach ($hot_activity['data'] as $key => $value) {
 		$activity = DB::fetch_first("SELECT * FROM ".DB::table('forum_activity')." WHERE tid=".$value['id']);
@@ -1313,7 +1321,7 @@ if(!defined('IN_ARCHIVER')) {
 			$hot_activity['data'][$key]['status'] = true;
 		}
 	}
-	
+	*/
     // 视频/图片列表 2015-09-11 by zhangjh 频道分类的也要改成分页伪静态
     if(count($_G['forum']['threadtypes']['types']) > 0 && $_G['forum']['type'] == 'forum' && $_G['forum']['status'] != 3)
     {
@@ -1332,7 +1340,7 @@ if(!defined('IN_ARCHIVER')) {
     }
     
 	$forum_is_open = $_G['forum']['status'] != 0 ? TRUE : FALSE;
-                      $a = $_G[cache][forums];                                         
+                       $a = $_G[cache][forums];                                         
                         foreach ($_G[cache][forums] as $k=>$v){
                              foreach(C::t('forum_forum')->my_fetch_all_name_by_fid($v['fid']) as $k1=>$v1){
                                     if($v1['type'] == 'sub'){
@@ -1346,8 +1354,13 @@ if(!defined('IN_ARCHIVER')) {
                                     }
                            }
                         }
-                      // echo "<pre>";
-                       //print_r($a);exit;
+
+                       //公告
+                      $gg = getgonggaobyfid($_G['fid']);
+                      //热门活动
+                      $hot_activity = get_new_hot_activity($_G['fid']);
+                     //echo "<pre>";
+                     //print_r($hot_activity);exit;
 	include template($template);
 } else {
 	include loadarchiver('forum/forumdisplay');
@@ -1372,5 +1385,47 @@ function _get_urldata($url,$return='array'){
 		$data  =  $data->content;
 	}
 	return $data;
+}
+// 球迷会 公告
+function getgonggaobyfid($fid , $start = 0 , $limit = 5){
+                $fid = intval($fid);
+                $limit = $limit > 5 ? 5 : $limit ;
+                $query = DB::fetch_all("select b.tid ,b.subject  from ".DB::table('forum_threadclass')." a   LEFT JOIN ".DB::table('forum_thread')." b  on a.typeid = b.typeid WHERE a.fid = $fid and a.name = '公告' and b.displayorder > -1 order by b.dateline desc limit $start , $limit");
+                return $query;
+}
+
+function get_new_hot_activity($fid){
+                    //$fids =DB::fetch_all("SELECT DISTINCT authorid FROM ".DB::table('forum_thread')." WHERE fid = $fid and special = 4  ORDER BY dateline DESC");
+                    
+                   // foreach ($fids as $v) {
+    
+                            $activitylists = DB::fetch_all("SELECT a.* FROM ".DB::table('forum_activity')." as  a , ".DB::table('forum_thread')." as b  WHERE   a.tid = b.tid and b.fid = $fid and b.special = 4 ORDER BY a.starttimefrom DESC limit 1");
+                            foreach ($activitylists as $key => $activity) {
+                                        $activitylists[$key]['starttimefrom'] = date('Y-m-d', $activity['starttimefrom']);
+                                        if ($activity['starttimeto'] && $activity['starttimeto'] >= TIMESTAMP) {
+                                                $activitylists[$key]['status'] = true;
+                                        } else {
+                                                $activitylists[$key]['status'] = false;
+                                        }
+                                        if ($activity['starttimeto']) $activitylists[$key]['starttimeto'] = date('Y-m-d', $activity['starttimeto']);
+                                        $thread = DB::fetch_first("SELECT * FROM ".DB::table('forum_thread')." WHERE tid=".$activity['tid']);
+
+                                        $activitylists[$key]['title'] = str_cut($thread['subject'], 57, '...');
+                                        $attach = C::t('forum_attachment_n')->fetch('tid:'.$activity['tid'], $activity['aid']);
+
+                                        if($attach['isimage']) {
+                                                $activitylists[$key]['attachurl'] = ($attach['remote'] ? $_G['setting']['ftp']['attachurl'] : $_G['setting']['attachurl']).'forum/'.$attach['attachment'];
+ 
+                                                $activitylists[$key]['thumb'] = $attach['thumb'] ? getimgthumbname($activitylists[$key]['attachurl']) : $activitylists[$key]['attachurl'];
+
+                                                $activitylists[$key]['width'] = $attach['thumb'] && $_G['setting']['thumbwidth'] < $attach['width'] ? $_G['setting']['thumbwidth'] : $attach['width'];
+                                        }
+                            }
+
+                   //     }
+                           // echo "<pre>";
+                           // print_r($activitylists);exit;
+                        return $activitylists;
+                        
 }
 ?>

@@ -14,7 +14,7 @@ _acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
 	</div>
 	<div class="blank15"></div>
 	<div class="wp ball_index">
-		<a href="{$type}" class="{if $op=='index'}active{/if}" target="_blank">首页</a><a href="{$type}/allcategory" class="{if $op=='allcategory'}active{/if}" target="_blank">所有频道</a>
+		<a href="{$type}" class="{if $op=='index'}active{/if}">首页</a><a href="{$type}/allcategory" class="{if $op=='allcategory'}active{/if}">所有频道</a>
 	</div>
 	<div class="ball_main cl">
 		<div class="ball_left fl">
@@ -45,12 +45,12 @@ _acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
 							<a href="home.php?mod=space&uid={$val[authorid]}" target="_blank"><img src="{$val[author_avatar]}"></a>
 						</div>
 						<div class="inde_info">
-							<p class="in_name"><a href="forum.php?mod=viewthread&tid={$val[tid]}" target="_blank">{$val[subject]}</a></p>
+							<p class="in_name"><a href="forum.php?mod=viewthread&tid={$val[tid]}"{$val[highlight]} target="_blank">{$val[subject]}</a></p>
 							<p class="in_title">{$val[message][message]}</p>							
 							<!--{if $val[message][img]}-->
 							<p class="in_img">
 							<!--{loop $val[message][img] $img}-->
-							<a href="forum.php?mod=viewthread&tid={$val[tid]}" target="_blank"><img src="{$img}" width="auto" height="140"></a>
+							<a href="forum.php?mod=viewthread&tid={$val[tid]}" target="_blank"><img class="lazyload" src="static/image/blank.jpg" data-original="{$img}" width="auto" height="140"></a>
 							<!--{/loop}-->
 							</p>
 							<!--{/if}-->

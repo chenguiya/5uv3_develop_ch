@@ -66,7 +66,7 @@
 						<a id="a_followmod_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);" class="attention">{lang follow_del}</a>
 					<!--{elseif $fuser[followuid] != $_G[uid]}-->
 						<!--{if $fuser['mutual']}-->
-							<!--{if $fuser['mutual'] > 0}--><span class="z flw_status_2">{lang follow_follower_mutual}</span><!--{else}--><span class="z flw_status_1">{lang did_not_follow_to_me}</span><!--{/if}--><a id="a_followmod_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['followuid']"  onclick="ajaxget(this.href);doane(event);" class="attention">{lang follow_del}</a>
+							<!--<!--{if $fuser['mutual'] > 0}--><span class="z flw_status_2">{lang follow_follower_mutual}</span><!--{else}--><span class="z flw_status_1">{lang did_not_follow_to_me}</span><!--{/if}-->--><a id="a_followmod_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['followuid']"  onclick="ajaxget(this.href);doane(event);" class="attention">{lang follow_del}</a>
 						<!--{elseif helper_access::check_module('follow')}-->
 							<a id="a_followmod_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);" class="attention add">{lang follow_add}</a>
 						<!--{/if}-->
@@ -82,14 +82,14 @@
 			<div class="container-fans cl">
 				<!--{loop $list $fuid $fuser}-->
 				<div class="fanscard im">
-			        <div class="left"><a href="home.php?mod=space&uid=$fuser['uid']" shref="home.php?mod=space&uid=$fuser['uid']"><img src='<!--{avatar($fuser[uid],small)}-->' alt="$fuser[username]"/></a></div>
+			        <div class="left"><a href="home.php?mod=space&uid=$fuser['uid']" shref="home.php?mod=space&uid=$fuser['uid']">{avatar($fuser[uid],small)}</a></div>
 			        <div class="right">
 			            <p class="name">{$fuser[username]}
 			            <!--{if $viewself}-->
 							<a id="a_followmod_{$fuser[uid]}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser[uid]" onclick="ajaxget(this.href);doane(event);" class="attention">{lang follow_del}</a>
 						<!--{elseif $fuser[followuid] != $_G[uid]}-->
 							<!--{if $fuser['mutual']}-->
-								<!--{if $fuser['mutual'] > 0}--><span class="z flw_status_2">{lang follow_follower_mutual}</span><!--{else}--><span class="z flw_status_1">{lang did_not_follow_to_me}</span><!--{/if}--><a id="a_followmod_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['uid']"  onclick="ajaxget(this.href);doane(event);" class="attention">{lang follow_del}</a>
+								<!--<!--{if $fuser['mutual'] > 0}--><span class="z flw_status_2">{lang follow_follower_mutual}</span><!--{else}--><span class="z flw_status_1">{lang did_not_follow_to_me}</span><!--{/if}-->--><a id="a_followmod_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['uid']"  onclick="ajaxget(this.href);doane(event);" class="attention">{lang follow_del}</a>
 							<!--{elseif helper_access::check_module('follow')}-->
 								<a id="a_followmod_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$fuser['uid']" onclick="ajaxget(this.href);doane(event);" class="attention add">{lang follow_add}</a>
 							<!--{/if}-->
@@ -115,9 +115,9 @@
 							<h2 class="xg1 xs2 hm">
 								<!--{if $viewself}-->
 									<!--{if $do=='following'}-->
-										{lang follow_you_following_none}<a href="home.php?mod=follow&view=other" class="xi2">{lang follow_hall}</a>{lang follow_fetch_interested_user}
+										{lang follow_you_following_none}{lang follow_hall}{lang follow_fetch_interested_user}
 									<!--{else}-->
-										{lang follow_you_follower_none1}<a href="home.php?mod=follow" class="xi2">{lang follow_add_feed}</a>{lang follow_you_follower_none2}
+										{lang follow_you_follower_none1}发帖{lang follow_you_follower_none2}
 									<!--{/if}-->
 								<!--{else}-->
 									<!--{if $do=='following'}-->

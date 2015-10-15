@@ -2,6 +2,256 @@
 
 loaducenter();
 
+// 加入球迷会
+function passport_joinfansclub($data)
+{
+    global $_G;
+    
+    $arr_return = array('success' => FALSE, 'message' => '');
+
+    $uid = intval(trim(@$data['uid']));
+    $fid = intval(trim(@$data['fid']));
+    $openid = trim(@$data['openid']);
+    
+    $uid_open = uc_get_uid_by_openid($openid);
+    
+    if($uid_open > 0)
+    {
+        if($uid_open == $uid)
+        {
+            $user = uc_get_user($uid, 1);
+            $forum = C::t('forum_forum')->fetch(intval($fid));
+            $forum_info = C::t('forum_forumfield')->fetch(intval($fid));
+            
+            if(is_array($user) && is_array($forum_info) && is_array($forum))
+            {
+                // 加入成功，清理自己的缓存
+                $mem_check = memory('check'); // 先检查缓存是否生效
+                if($mem_check != '')
+                {
+                    memory('rm', 'fansclub_arr_user_havejoin_'.$uid);
+                }
+	
+                $inviteuid = 0;
+                $membermaximum = $_G['current_grouplevel']['specialswitch']['membermaximum'];
+                if(!empty($membermaximum)) {
+                    $curnum = C::t('forum_groupuser')->fetch_count_by_fid($fid);
+                    if($curnum >= $membermaximum)
+                    {
+                        $arr_return['message'] = lang('message', 'group_member_maximum');
+                        return $arr_return;
+                    }
+                }
+                
+                $groupuser = C::t('forum_groupuser')->fetch_userinfo($uid, $fid);
+                
+                if($groupuser['uid'])
+                {
+                    $arr_return['success'] = TRUE;
+                    if($groupuser['level'] == 0)
+                    {
+                        $arr_return['message'] = lang('message', 'group_join_apply_succeed');
+                    }
+                    else
+                    {
+                        $arr_return['message'] = lang('message', 'group_has_joined');
+                    }
+                }
+                else
+                {
+                    $modmember = 4;
+                    $showmessage = 'group_join_succeed';
+                    $confirmjoin = TRUE;
+                    $inviteuid = C::t('forum_groupinvite')->fetch_uid_by_inviteuid($fid, $uid);
+                    
+                    if($forum_info['jointype'] == 1)
+                    {
+                        if(!$inviteuid)
+                        {
+                            $confirmjoin = FALSE;
+                            $showmessage = 'group_join_need_invite';
+                        }
+                    }
+                    elseif($forum_info['jointype'] == 2)
+                    {
+                        $groupmanagers = $forum_info['moderators'];
+                        // $modmember = !empty($groupmanagers[$inviteuid]) || $_G['adminid'] == 1 ? 4 : 0;
+                        $modmember = 0;
+                        
+                        // zhangjh 2015-06-11 这个逻辑好像有问题
+                        // !empty($groupmanagers[$inviteuid]) && $showmessage = 'group_join_apply_succeed';
+                        if($modmember == 0) $showmessage = 'group_join_apply_succeed';
+                    }
+                    
+                    if($confirmjoin) 
+                    {
+                        C::t('forum_groupuser')->insert($fid, $uid, $user[1], $modmember, TIMESTAMP, TIMESTAMP);
+                        if($forum_info['jointype'] == 2 && (empty($inviteuid) || empty($groupmanagers[$inviteuid])))
+                        {
+                            foreach($groupmanagers as $manage)
+                            {
+                                notification_add($manage['uid'], 'group', 'group_member_join', array('fid' => $fid, 'groupname' => $forum['name'], 'url' => $_G['siteurl'].'forum.php?mod=group&action=manage&op=checkuser&fid='.$fid), 1);
+                            }
+                        }
+
+                        if($inviteuid)
+                        {
+                            C::t('forum_groupinvite')->delete_by_inviteuid($fid, $uid);
+                        }
+                        
+                        if($modmember == 4)
+                        {
+                            C::t('forum_forumfield')->update_membernum($fid);
+                        }
+                        
+                        C::t('forum_forumfield')->update($fid, array('lastupdate' => TIMESTAMP));
+                        
+                        $arr_return['success'] = TRUE;
+                    }
+                    include_once libfile('function/stat');
+                    require_once libfile('function/group');
+                    updatestat('groupjoin');
+                    delgroupcache($fid, array('activityuser', 'newuserlist'));
+                    
+                    $arr_return['message'] = lang('message', $showmessage);
+                }
+            }
+            else
+            {
+                $arr_return['message'] = '账号或球迷会记录有误';
+            }
+        }
+        else
+        {
+            $arr_return['message'] = 'openid不匹配uid，uid='.$uid_open;
+        }
+    }
+    else
+    {
+        $arr_return['message'] = '账号记录有误';
+    }
+    
+    return $arr_return;
+}
+
+// 生成二维码
+function passport_qrcode($type = 'login')
+{
+    global $_G;
+    if($type == 'login')
+    {
+        $PNG_TEMP_DIR = DISCUZ_ROOT.'data'.DIRECTORY_SEPARATOR.'attachment'.DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
+        include DISCUZ_ROOT.'source/class/phpqrcode/phpqrcode.php';
+        
+        $data = array();
+        $data['ip'] = $_G['clientip'];
+        $token = passport_make_token($data);
+            
+        $file = $_G['session']['sid'];
+        $file = $token;
+        
+        $filename = $PNG_TEMP_DIR.'qrcode_login_'.$file.'.png';
+        $fileurl = $_G['siteurl'].'data/attachment/temp/qrcode_login_'.$file.'.png';
+
+        if(!file_exists($filename))
+        {
+            $urlToEncode = 'http://wx.5usport.com/index.php/Access?type=3&oid='.$token;
+            $errorCorrectionLevel = "L"; 
+            $matrixPointSize = "7"; 
+            QRcode::png($urlToEncode, $filename, $errorCorrectionLevel, $matrixPointSize);
+            chmod($filename, 0777);
+            
+            $data = array();
+            $data['t'] = $token;
+            $data['time'] = $_G['timestamp'];
+            $sign = passport_check_sign($data, TRUE);
+        }
+        
+        $html = '<head><script type="text/javascript" id="seajsnode" src="'.$_G['config']['static'].'/jquery.min.js"></script>';
+        $html .= '<script language="javascript">
+$(document).ready(function(){
+    setTimeout(function(){time();}, 1000);
+    
+    var wait = 300;
+    var t;
+    function time() {
+        if (wait == 0) {
+            wait = 300;
+            $("#tips").html("操作超时，请刷新页面再试...");
+        } else {
+            wait--;
+            check();
+            
+            t = setTimeout(function() {
+                time()
+            },
+            1000);
+        }
+    }
+
+    function time_stop()
+    {
+        wait = 300;
+        clearTimeout(t);
+    }
+    
+    function check()
+    {
+        $.ajax({
+            url: "';
+    $html .= 'http://wx.5usport.com/index.php/Qrcodeloginweb/verification';
+    $html .= '",
+            type: "get",
+            dataType: "json",';
+    $html .= 'data: "';
+    $html .= 't='.$token.'&time='.$_G['timestamp'].'&sign='.$sign;
+    $html .= '",
+            timeout: 10000,
+            success: function(json){
+                console.log(json);
+                if(json.rescode == 1)
+                {
+                    var openid = json.openid;
+                    $("#tips").html("确认成功，正在跳转...");
+                    time_stop();
+                    ';
+        $html .= 'var jump_url = "'.$_G['siteurl'].'plugin.php?id=fansclub:api&ac=passport&op=directlogin&from=weixin&openid="+openid+"&redirect='.urlencode($_G['siteurl']).'&time='.$_G['timestamp'].'&token='.$token.'&sign='.md5($_G['session']['sid'].$token).'";';
+        $html .= 'window.location.href = jump_url;
+                    return false;
+                }
+                else if(json.rescode == 0)
+                {
+                    $("#tips").html("等待微信确认...");
+                }
+                else if(json.rescode == 2)
+                {
+                    $("#tips").html("该二维码已确认过登录，正在跳转...");
+                    time_stop();
+                }
+                else if(json.rescode == -2)
+                {
+                    
+                }
+                else
+                {
+                    $("#tips").html("其他错误，请刷新页面再试...");
+                    time_stop();
+                }
+            },
+            complete: function(XMLHttpRequest, textStatus){},
+            error: function(json){}
+        });
+        
+    }
+});
+</script></head>';
+        echo $html;
+        echo "<center><img src='".$fileurl."'></center>";
+        echo "<center><span id='tips'>请用微信扫描二维码，确认登录</span><input type='hidden' id='openid' value=''></center>";
+    }
+    
+}
+
 // 修改昵称
 function passport_modnick($data)
 {
@@ -38,6 +288,9 @@ function passport_modnick($data)
                     // 没有通知情况修改，强制修改
                     C::t('common_member')->update($uid, array('username' => $newnick));
                     C::t('#fansclub#plugin_ucenter_memberfields')->update($uid, array('newuser' => '1'));
+                    // C::t('forum_groupuser')->update($uid, array('username' => $newnick));
+                    DB::query("UPDATE ".DB::table('forum_groupuser')." SET username='".$newnick."' WHERE uid=".$uid);
+                    
                     $member = getuserbyuid($uid);
                 }
                 else
@@ -139,6 +392,11 @@ function passport_directlogin($data)
             else
             {
                 $can_change_nickname = FALSE;
+            }
+            
+            if($wxnick == '')
+            {
+                $can_change_nickname = TRUE;
             }
             
             if($arr_check_result['success'] === TRUE)
@@ -380,10 +638,14 @@ function passport_register($data)
 }
 
 // 检查sign
-function passport_check_sign($data)
+function passport_check_sign($data, $return_sign = FALSE)
 {
+    global $_G;
+    
     $sn_key = '9lF4BbQaDvJMFGLp';
     $your_sing = '';
+    $have_token = FALSE;
+    $token = '';
     
     $arr_sign = array();
     foreach($data as $key => $value)
@@ -394,20 +656,47 @@ function passport_check_sign($data)
             continue;
         }
         $arr_sign[] = $key.'='.urldecode($value);
+        
+        if($key == 'token')
+        {
+            $have_token = TRUE;
+            $token = $value;
+        }
     }
     $arr_sign[] = 'sn_key='.$sn_key;
     asort($arr_sign);
     $str_param = implode('&', $arr_sign);
     $my_sign = md5($str_param);
-    if($my_sign === $your_sing)
+    
+    if($return_sign)
     {
-        return TRUE;
+        return $my_sign;
     }
     else
     {
-        // echo $my_sign;
-        // echo '1234';
-        return FALSE;
+        if($my_sign === $your_sing)
+        {
+            return TRUE;
+        }
+        else
+        {
+            if($have_token) // 如果有token的情况
+            {
+                if($your_sing == md5($_G['session']['sid'].$token))
+                {
+                    return TRUE;
+                }
+                else
+                {
+                    return FALSE;
+                }
+            }
+            else
+            {
+                // echo $my_sign;
+                return FALSE;
+            }
+        }
     }
 }
 

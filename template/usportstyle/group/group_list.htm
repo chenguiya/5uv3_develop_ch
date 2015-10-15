@@ -32,7 +32,7 @@
 					</div>
 					<div class="inde_info">
 						<p class="in_name">
-							<a href="forum.php?mod=viewthread&tid={$thread[tid]}" target="_blank">{$thread[subject]}</a>
+							<a href="forum.php?mod=viewthread&tid={$thread[tid]}"{$thread[highlight]} target="_blank">{$thread[subject]}</a>
 							<!--{if $thread['digest'] > 0 && $filter != 'digest'}--><span class="in_post">精</span><!--{/if}-->
 							<!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}--><span class="in_post in_post_zd">置顶</span><!--{/if}-->
 						</p>

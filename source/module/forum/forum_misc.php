@@ -1142,8 +1142,11 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 				postfeed($feed);
 			}
 		}
-		showmessage('activity_completion', "forum.php?mod=viewthread&tid=$_G[tid]".($_GET['from'] ? '&from='.$_GET['from'] : ''), array(), array('showdialog' => 1, 'showmsg' => true, 'locationtime' => true, 'alert' => 'right'));
-
+		if ($_GET['yll'] == 1) {
+			showmessage('恭喜您获得30M流量，流量将在24小时之内完成充值，充值成功后将以短信通知。', "forum.php?mod=group&fid=$_G[fid]", array(), array('showdialog' => 1, 'showmsg' => true, 'locationtime' => true, 'alert' => 'right'));
+		} else {
+			showmessage('activity_completion', "forum.php?mod=viewthread&tid=$_G[tid]".($_GET['from'] ? '&from='.$_GET['from'] : ''), array(), array('showdialog' => 1, 'showmsg' => true, 'locationtime' => true, 'alert' => 'right'));
+		}
 	} elseif(submitcheck('activitycancel')) {
 		C::t('forum_activityapply')->delete_for_user($_G['uid'], $_G['tid']);
 		$applynumber = C::t('forum_activityapply')->fetch_count_for_thread($_G['tid']);
@@ -1160,6 +1163,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	}
 
 } elseif($_GET['action'] == 'getactivityapplylist') {
+	require_once libfile('function/extends');
 	$pp = $_G['setting']['activitypp'];
 	$page = max(1, $_G['page']);
 	$start = ($page - 1) * $pp;
@@ -1173,7 +1177,8 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 		$info = dunserialize($activityapplies['ufielddata']);
 		$activityapplies['realname'] = $info['userfield']['realname'];
 		$activityapplies['qq'] = $info['userfield']['qq'];
-		$activityapplies['number'] = $info['userfield']['field2'];
+		$activityapplies['mobile'] = $info['userfield']['mobile'];
+		$activityapplies['en_mobile'] = encryptionDisplay($info['userfield']['mobile'], 3, 4);
 		$applylist[] = $activityapplies;		
 	}
 // 	var_dump($applylist);die;	
@@ -1396,6 +1401,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	foreach($query as $apply) {
 		$apply = str_replace(',', lang('forum/thread', 't_comma'), $apply);
 		$apply['dateline'] = dgmdate($apply['dateline'], 'dt');
+		if (!empty($apply['sign_time'])) $apply['sign_time'] = dgmdate($apply['sign_time'], 'dt');
 		$apply['ufielddata'] = !empty($apply['ufielddata']) ? dunserialize($apply['ufielddata']) : '';
 		$ufielddata = '';
 		if($apply['ufielddata'] && $activity['ufield']) {
@@ -1427,7 +1433,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 			$apply['message'] = '['.$apply['message'].']';
 		}
 		$applylist[] = $apply;
-	}
+	}	
 	$filename = "activity_{$_G[tid]}.csv";
 
 	include template('forum/activity_export');

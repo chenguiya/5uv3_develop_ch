@@ -1,5 +1,4 @@
 <!--{template common/sub_common_header}-->
-
 <script type="text/javascript">var fid = parseInt('$_G[fid]'), tid = parseInt('$_G[tid]');</script>
 <!--{if $modmenu['thread'] || $modmenu['post']}-->
 	<script type="text/javascript" src="{$_G['setting']['jspath']}forum_moderate.js?{VERHASH}"></script>
@@ -381,7 +380,7 @@ $_G['forum_tagscript']
 	<script type="text/javascript">document.onkeyup = function(e){keyPageScroll(e, <!--{if $page > 1}-->1<!--{else}-->0<!--{/if}-->, <!--{if $page < $_G['setting']['threadmaxpages'] && $page < $_G['page_next']}-->1<!--{else}-->0<!--{/if}-->, 'forum.php?mod=viewthread&tid=$_G[tid]<!--{if $_GET[authorid]}-->&authorid=$_GET[authorid]<!--{/if}-->', $page);}</script>
 <!--{/if}-->
 		  </div>
-	      <div class="view_r">	      	
+	      <div class="view_r">	
 		       <!--帖子头像 start-->
 			   <div class="viewon_con">
 			        <div class="ch_avatar_bd">
@@ -394,9 +393,9 @@ $_G['forum_tagscript']
 						 <!--{if $_G[forum_thread][authorid] && $_G[forum_thread][author]}-->
 						 <div class="tns xg2">
 								<table cellspacing="0" cellpadding="0">
-									<th><p><a href="home.php?mod=follow&do=following&uid=$_G[forum_thread][authorid]" class="xi2"><!--{echo dnumber($post[following])}--></a></a></p>关注</th>
-									<th><p><a href="home.php?mod=follow&do=follower&uid=$_G[forum_thread][authorid]" class="xi2"><!--{echo dnumber($post[follower])}--></a></p>粉丝	</th>
-									<td><p><a href="home.php?mod=space&uid=$_G[forum_thread][authorid]&do=profile" class="xi2"><!--{echo dnumber($post[credits])}--></a></p>{lang credits}</td>
+									<th><p><a href="home.php?mod=follow&do=following&uid=$_G[forum_thread][authorid]" class="xi2"><!--{echo dnumber($author_info[following])}--></a></a></p>关注</th>
+									<th><p><a href="home.php?mod=follow&do=follower&uid=$_G[forum_thread][authorid]" class="xi2"><!--{echo dnumber($author_info[follower])}--></a></p>粉丝	</th>
+									<td><p><a href="home.php?mod=space&uid=$_G[forum_thread][authorid]&do=profile" class="xi2"><!--{echo dnumber($author_info[credits])}--></a></p>{lang credits}</td>
 								</table>
 						 </div>
 						 <div class="p_norefriend">
@@ -467,7 +466,7 @@ $_G['forum_tagscript']
 			   <!--栏目二end-->
 			   <div class="blank10"></div>
 			   <div class="">
-			        <a href="jifen/" target="_blank"><img src="$_G['config'][static]/images/avatar_middle.jpg" width="320" height="168"></a>
+			        <a href="jifen/" target="_blank"><img class="lazyload" src="static/image/blank.jpg" data-original="$_G['config'][static]/images/avatar_middle.jpg" width="320" height="168"></a>
 			   </div>
 			   <div class="blank15"></div>
 			   <div class="ad_boxs" id="views4">

@@ -218,14 +218,14 @@ if($_G['style']['tplname'] == '5U体育模版套系')
 		}
 	}
 	elseif($ac == 'event')
-	{
+	{                                                                         
 		$navtitle = $_G['forum']['name'].'大事记_'.$_G['setting']['bbname'].'球迷会';
 		$metakeywords = $_G['forum']['name'].'大事记';
 		$metadescription = '记录了'.$_G['forum']['name'].'自创建以来的历程，球迷通过时间轴就能了解'.$_G['forum']['name'].'的发展情况。';
 	}
 	
 	//if($ac  != 'about') // about 不用这个header
-	include template('common/header');
+                       include template('common/header');
 
 	if($ac == 'apply') // 球迷会申请
 	{
@@ -236,14 +236,23 @@ if($_G['style']['tplname'] == '5U体育模版套系')
 		include template('extend/desktop/create_state');
 	}
 	elseif($ac == 'event') // 大事记
-	{
-		$html_group_hd_top = fansclub_group_hd_top();
-		include template('extend/desktop/club_memo');
+	{		
+                                                if(defined('IN_MOBILE')){
+                                                        include template('touch/group/group_event');
+                                                }else{
+                                                       $html_group_hd_top = fansclub_group_hd_top();
+                                                        include template('extend/desktop/club_memo');
+                                                }		
 	}
 	elseif ($ac == 'lists')
 	{
 		$html_group_hd_top = fansclub_group_hd_top();
-		include template('fansclub:index/lists_' . $_GET['type']);
+                                            if($_GET['type'] == 'activity'){
+                                                include template('group/group_activity');
+                                            }else{
+                                                include template('fansclub:index/lists_' . $_GET['type']);
+                                            }
+		
 	}
 	elseif ($ac == 'home') {
 		include template('fansclub:index/home');
@@ -258,22 +267,32 @@ if($_G['style']['tplname'] == '5U体育模版套系')
     {
         include template('extend/desktop/club_square');
     }
-	elseif($ac == 'live')
-	{		
-		include template('live/live');
+       elseif($ac == 'live')
+	{	if(defined('IN_MOBILE'))	{
+                                                    include template('touch/live/live');
+                                             }else{
+                                                 include template('live/live');
+                                             }
+		
 	}
         elseif($ac == 'shooter')
-	{		
-		include template('live/live');
+	{	if(defined('IN_MOBILE'))	{
+                                                    include template('touch/live/live');
+                                             }else{
+                                                     include template('live/live');
+                                             }
 	}
         elseif($ac == 'leaguescore')
-	{		
-		include template('live/live');
+	{	if(defined('IN_MOBILE'))	{
+                                                    include template('touch/live/live');
+                                             }else{
+                                                    include template('live/live');
+                                             }
+		
 	}
 	elseif($ac == 'live2')
 	{
-		//echo "<pre>";
-		//print_r($arr_game);exit;
+
 		include template('live/live');
 	}
     elseif($ac == 'mobile_register')

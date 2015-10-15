@@ -1,5 +1,8 @@
 <?php
-
+echo "1"."<br>";
+$mem_check = memory('check'); // 先检查缓存是否生效
+echo $mem_check;
+exit;
 // echo "<pre>这个是测试\n";
 
 // fansclub_videoscreenshot2(); // 这个只测试到youku

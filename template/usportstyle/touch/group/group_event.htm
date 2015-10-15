@@ -1,0 +1,23 @@
+<!--{template common/header}-->
+<nav class="navbar"{if $_G[forum][color]}style="background-color:$_G[forum][color]"{/if}>
+    <div class="inner">
+        <a href="forum.php?mod=group&fid=$fid" class="left"><i class="iconfont icon-back"></i></a>
+        <div class="center">大事记</div>
+    </div>
+</nav>
+<div class="event_main">
+    <!--{if $wap_bigevent}-->
+     <ul>
+      <!--{loop $wap_bigevent $val}-->    
+         <li class="event_list">
+             <div class="event_time">{$val['starttimefrom']}<em>{$val['starttimeyears']}</em></div>
+             <div class="event_Right">
+                  <span class="event_circle"></span>
+                  <div class="event_name"><a href="forum.php?mod=viewthread&tid={$val['tid']}&mobile=2">{$val['subject']}</a></div>
+             </div>
+         </li>
+          <!--{/loop}-->
+     </ul>
+    <!--{/if}-->
+</div>
+<!--{template common/footer}-->

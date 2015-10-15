@@ -11,13 +11,13 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-if(strpos($_SERVER['HTTP_HOST'], '5usport.com') !== FALSE) // 正式服帖子详细页强制跳转伪静态 by zhangjh 2015-08-19
-{
-	if(strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']) !== FALSE && strpos($_SERVER['QUERY_STRING'], 'inajax=1') === FALSE)
-	{
-		dheader("Location:http://".$_SERVER['HTTP_HOST']."/thread-".intval($_GET['tid']).".html");
-	}
-}
+// if(strpos($_SERVER['HTTP_HOST'], '5usport.com') !== FALSE) // 正式服帖子详细页强制跳转伪静态 by zhangjh 2015-08-19
+// {
+// 	if(strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']) !== FALSE && strpos($_SERVER['QUERY_STRING'], 'inajax=1') === FALSE)
+// 	{
+// 		dheader("Location:http://".$_SERVER['HTTP_HOST']."/thread-".intval($_GET['tid']).".html");
+// 	}
+// }
 
 require_once libfile('function/extends');
 require_once libfile('function/forumlist');
@@ -89,6 +89,11 @@ $_G['forum']['province_name'] = $groupinfo['province_name'];
 $_G['forum']['city_name'] = $groupinfo['city_name'];
 $_G['forum']['color'] = $groupinfo['color'];
 //add end
+
+//主题作者统计数据
+$author_info = C::t('common_member')->fetch_all($_G['forum_thread']['authorid']);
+$author_count = C::t('common_member_count')->fetch_all($_G['forum_thread']['authorid']);
+$author_info = array_merge($author_info, $author_count);
 
 $fromuid = $_G['setting']['creditspolicy']['promotion_visit'] && $_G['uid'] ? '&amp;fromuid='.$_G['uid'] : '';
 $feeduid = $_G['forum_thread']['authorid'] ? $_G['forum_thread']['authorid'] : 0;
@@ -791,6 +796,8 @@ if($postusers) {
 	if($_G['setting']['threadblacklist'] && $_G['uid'] && $member_count[$_G['uid']]['blacklist']) {
 		$member_blackList = C::t('home_blacklist')->fetch_all_by_uid_buid($_G['uid'], $uids);
 	}
+	
+	
 
 	foreach(C::t('common_member')->fetch_all($uids) as $uid => $postuser) {
 		$member_field_home[$uid]['privacy'] = empty($member_field_home[$uid]['privacy']) ? array() : dunserialize($member_field_home[$uid]['privacy']);
@@ -807,17 +814,19 @@ if($postusers) {
 		$postusers[$uid]['groupcolor'] = $_G['cache']['usergroups'][$postuser['groupid']]['color'];
 		unset($postusers[$uid]['position']);
 	}
+	
 	unset($member_field_forum, $member_status, $member_count, $member_profile, $member_field_home, $member_blackList);
 	$_G['medal_list'] = array();
 	foreach($postlist as $pid => $post) {
 		if(getstatus($post['status'], 6)) {
 			$locationpids[] = $pid;
 		}
-		$post = array_merge($postlist[$pid], (array)$postusers[$post['authorid']]);
+		
+		$post = array_merge($postlist[$pid], (array)$postusers[$post['authorid']]);		
 		$postlist[$pid] = viewthread_procpost($post, $_G['member']['lastvisit'], $ordertype, $maxposition);
 	}
 }
-
+// var_dump($author_info);die;
 if($_G['allblocked']) {
 	$_G['blockedpids'] = array();
 }
@@ -1009,7 +1018,7 @@ if(getstatus($_G['forum_thread']['status'], 10)) {
 }
 if ($_GET['mobile'] || $_GET['wap'] == 1) {
 	$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-	$maxpage = @ceil($_G['forum_thread']['maxposition']/$_G['ppp']);
+	$maxpage = @ceil(($_G['forum_thread']['replies'] + 1) / $_G['ppp']);
 	$nextpage = ($page + 1) > $maxpage ? 1 : ($page + 1);
 	if ($_GET['ajax'] == 1) {
 		$result = array('nextpage' => $nextpage, 'postlist' => $postlist);

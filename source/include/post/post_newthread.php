@@ -135,7 +135,20 @@ if(!submitcheck('topicsubmit', 0, $seccodecheck, $secqaacheck)) {
 
 	!isset($attachs['unused']) && $attachs['unused'] = array();
 	!isset($imgattachs['unused']) && $imgattachs['unused'] = array();
-
+        //              管理员可发公告
+                       if(!$_G['forum']['ismoderator']){
+                           $a  = array();
+                           foreach ($_G['forum'][threadtypes][types] as $k=>$v){
+                                    if($v == '公告'){
+                                        continue;
+                                    }  else {
+                                        $a [$k] = $v;
+                                    }
+                           }
+                                    $_G['forum'][threadtypes][types] = $a;
+                       }
+        //                 echo "<pre>";
+        //                 print_r($_G['forum'][threadtypes][types]);exit;
 	getgpc('infloat') ? include template('forum/post_infloat') : include template('forum/post');
 
 } else {

@@ -1220,7 +1220,7 @@ $lang = array (
   'poll_multiple' => '多选',
   'poll_single' => '单选',
   'poll_view_voters' => '查看投票参与人',
-  'poll_voterscount' => '共有 $voterscount 人参与投票',
+  'poll_voterscount' => '共有 <font style="color:#eb6100">$voterscount</font> 人参与投票',
   'poll_voters' => '参与投票的会员',
   'comment_num' => '评论数',
   'home_view_num' => '查看数',

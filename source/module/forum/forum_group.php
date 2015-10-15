@@ -141,7 +141,8 @@ if($action == 'index') {
 	if($status != 2) {		
 		if ($_GET['mobile'] == 2 || $_GET['wap'] == 1) {
 			
-			$count = C::t('forum_thread')->count_thread_by_fid_type($_G['fid'], 0);
+// 			$count = C::t('forum_thread')->count_thread_by_fid_type($_G['fid'], 0);
+			$count = C::t('forum_thread')->count_by_fid($_G['fid']);
 						
 			$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 			$perpage = isset($_GET['pagesize']) ? intval($_GET['pagesize']) : 10;	
@@ -149,7 +150,7 @@ if($action == 'index') {
 			$threadlist = array();
 		
 			$start = ($page - 1)*$perpage;
-			$threadlist = C::t('forum_thread')->fetch_all_common_by_fid_displayorder($_G['fid'], 0, null, null, $start, $perpage, 'displayorder');
+			$threadlist = C::t('forum_thread')->fetch_all_common_by_fid_displayorder($_G['fid'], null, null, null, $start, $perpage, 'displayorder DESC,dateline DESC');
 			require_once libfile('function/extends');
 			foreach ($threadlist as $key => $value) {
 				$threadlist[$key]['author_avatar'] = avatar($value['authorid'], 'small', 1);
@@ -273,7 +274,7 @@ if($action == 'index') {
 	$oparray = array('card', 'address', 'alluser');
 	$op = getgpc('op') && in_array($_GET['op'], $oparray) ?  $_GET['op'] : 'alluser';
 	$page = intval(getgpc('page')) ? intval($_GET['page']) : 1;
-	$perpage = isset($_GET['mobile']) ? 16 : 50;
+	$perpage = isset($_GET['mobile']) ? 16 : 54;
 	$start = ($page - 1) * $perpage;
 
 	$alluserlist = $adminuserlist = array();
@@ -291,7 +292,7 @@ if($action == 'index') {
 			
 			$start = ($page - 1) * $perpage;
 			
-			$alluserlist = C::t('forum_groupuser')->groupuserlist($_G['fid'], 'lastupdate', $perpage, $start);
+			$alluserlist = C::t('forum_groupuser')->groupuserlist($_G['fid'], 'level_join', $perpage, $start, "AND level>'0'");
 			foreach ($alluserlist as $key => $user) {
 // 				$alluserlist[$key]['username'] = cutstr($user['username'], '12', '...');
 				$alluserlist[$key]['avatar'] = avatar($user['uid'], 'middle', true);
@@ -402,8 +403,13 @@ if($action == 'index') {
 		include_once libfile('function/stat');
 		updatestat('groupjoin');
 		delgroupcache($_G['fid'], array('activityuser', 'newuserlist'));
-		if ($_GET['forward'] == 'current') showmessage($showmessage, NULL, NULL, array('timeout'=>1, 'alert'=>'right'));
-		showmessage($showmessage, "forum.php?mod=group&fid=$_G[fid]");
+// 		if ($_GET['forward'] == 'current') showmessage($showmessage, NULL, NULL, array('timeout'=>1, 'alert'=>'right'));
+		if (defined('IN_MOBILE')) {
+			$forward = isset($_GET['forward']) ? htmlspecialchars_decode($_GET['forward']) : 'forum.php?mod=group&fid='.$_G[fid];
+		} else {
+			$forward = isset($_GET['forward']) ? htmlspecialchars_decode($_GET['forward']) : "fans/topic/$_G[fid]/";
+		}		
+		showmessage($showmessage, $forward);
 	}
 
 } elseif($action == 'out') {
@@ -426,7 +432,10 @@ if($action == 'index') {
 	if ($_GET['mobile']) {
 		showmessage($showmessage, "forum.php?mod=group&fid=$_G[fid]");
 	} else {
-		showmessage($showmessage, "forum.php?mod=forumdisplay&fid=$_G[fid]");
+		//edit by daming 2015/10/13
+// 		showmessage($showmessage, "forum.php?mod=forumdisplay&fid=$_G[fid]");
+		showmessage($showmessage, "fans/topic/$_G[fid]/");
+
 	}	
 
 } elseif($action == 'create') {
@@ -755,6 +764,7 @@ if($action == 'index') {
 				$checkusers[] = $row['uid'];
 			}
 		}
+		
 		if($checkusers) {
 			
 			// 一个成员只能加入一个球迷会 by zhangjh 2015-08-20
@@ -805,7 +815,7 @@ if($action == 'index') {
 					C::t('forum_groupuser')->delete_by_fid($_G['fid'], $checkusers);
 				}
 				if($checktype == 1) {
-					showmessage('group_moderate_succeed', $url);
+					showmessage('group_moderate_succeed', "forum.php?mod=group&action=memberlist&fid=$_G[fid]");
 				} else {
 					showmessage('group_moderate_failed', $url);
 				}

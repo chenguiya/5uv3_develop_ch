@@ -2,9 +2,9 @@
 <!--{template common/topnav}-->
     <div class="swiper-container ybanner">
         <div class="swiper-wrapper">
-            <!--{loop $focus $vo}-->
+            <!--{loop $showfocus $vo}-->
             <div class="swiper-slide">
-                <a href="forum.php?mod=viewthread&tid=$vo[id]"><img src="data/attachment/$vo[pic]" alt="$vo[title]"></a>
+                <a href="forum.php?mod=viewthread&tid=$vo[id]"><img src="$vo[pic]" alt="$vo[title]"></a>
 
                 <div class="swiper-title">$vo[title]</div>
             </div>
@@ -102,6 +102,12 @@
             if (!url) url = me.prev().attr('href');
             location.href = url;
         });
+        $(".ylist .row .s").each(function () {
+            var me = $(this);
+            if (me.text().indexOf('\u524D') > 0) {
+                me.css("color", "#eb6100");
+            }
+        });
 
 //        $('#forum-discuz>.row, #forum-discuz>.title, #forum-discuz>.images').click(function () {
 //            var me = $(this);
@@ -111,3 +117,4 @@
 //        });
     });
 </script>
+<!--{template common/footer}-->

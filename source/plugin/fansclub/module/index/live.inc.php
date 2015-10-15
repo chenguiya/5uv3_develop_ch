@@ -13,10 +13,16 @@ if($_G['gp_match_status'])
 	$data['match_status'] = intval($_G['gp_match_status']);
 }
 
-$arr_game = fansclub_get_live2($data);
 
-
-$arr_game_ = array();
+if(defined('IN_MOBILE'))	{
+        //wap 曼城赛程
+        $league_name = $_G['forum']['channel']['name'];
+        $team_name = $_G['forum']['fup_name'];
+        $list_num = 12 ;
+        $arr_game['match_arr'] = get_match($league_name , $team_name, $list_num);
+}else{
+    $arr_game = fansclub_get_live2($data);
+    $arr_game_ = array();
 
 foreach($arr_game['have_end']['game_array'] as $k=>$v){
 	foreach($v['games'] as $k1=>$v1){
@@ -24,8 +30,7 @@ foreach($arr_game['have_end']['game_array'] as $k=>$v){
 	}	
 	
 }
-//echo "<pre>";
-//print_r($arr_game_);exit;
+
 if(trim($data['league_id']) == '' || count($arr_game_) > 7){
 	$len = 7;
 }else{
@@ -49,7 +54,6 @@ for($i=0;$i<$len;$i++){
         }*/
 	$arr_game['have_end_'][$i]['week'] = date('w',strtotime($arr_game_[$i]['game_time']));	
 }
-
 
 foreach($arr_game['have_end_'] as $k=>$v){
 	if($v['week'] == 1){
@@ -121,8 +125,27 @@ foreach($arr_game['have_not_'] as $k=>$v){
 	}
 }
 
-//echo "<pre>";
-//print_r($arr_game['have_end_']);exit;
+
+}
+
+function get_match($league_name = '', $team_name = '', $list_num ) {
+		//曼城赛程比赛    
+                                             $url1 = 'http://api.5usport.com/v3/to_v3/phpcms/get_match?league_name='.urlencode($league_name).'&team_name='.urlencode($team_name).'&list_num='.$list_num;//本场比赛获取接口
+    		$data = file_get_contents($url1);
+		$data = json_decode($data);
+                                            $data = objectToArray($data);        
+                                            return $data;
+}
+function objectToArray($e){
+	$e=(array)$e;
+	foreach($e as $k=>$v){
+		if( gettype($v)=='resource' ) return;
+		if( gettype($v)=='object' || gettype($v)=='array' )
+			$e[$k]=(array)objectToArray($v);
+	}
+	return $e;
+}
+
 /*
 if(!defined('IN_DISCUZ')) exit('Access Denied');
 

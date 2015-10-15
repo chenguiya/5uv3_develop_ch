@@ -6,7 +6,7 @@
             <!--{if $_GET['op'] == 'checkuser'}-->
             <a href="javascript: history.go(-1);"><i class="iconfont icon-back"></i></a>
             <!--{else}-->
-            <a class="logo" href="$_G[siteurl]"><img src="template/usportstyle/touch/common/images/logo-03.png" alt="5u体育"></a>
+            <a class="logo" href="$_G[siteurl]"><i class="iconfont icon-home"></i></a>
             <!--{/if}-->
         </div>
         <!--{if $_GET['op'] == 'checkuser'}--><div class="center">会员审核 </div><!--{/if}-->
@@ -21,13 +21,11 @@
             <!--<!--{if $action == 'introduce'}--><a href="javascript:;"><i class="iconfont icon-hamburger"></i></a><!--{/if}-->-->
             
             <!--{if $_GET['op'] == 'checkuser'}-->
-            <a href="#" class="ybtn ybtn-small checkuser">全部通过</a>
+            <a href="forum.php?mod=group&action=manage&op=checkuser&checkall=1&fid=1367" class="ybtn ybtn-small checkuser dialog">全部通过</a>
             <!--{else}-->
             <a href="home.php?mod=space&uid=$_G[uid]&do=profile&mycenter=1">
                 <i class="iconfont icon-me" style="position: relative;">
-                    <!--{if $_G['member']['newprompt']}-->
-                    <span class="newtips"></span>
-                    <!--{/if}-->
+                    <!--{if $_G['member']['newprompt_num']['post'] || $_G['member']['newprompt_num']['activity']}--><span class="newtips"></span><!--{/if}-->
                 </i>
 
             </a>
@@ -54,7 +52,7 @@
                 <!--{if $status == 'isgroupuser'}-->
                 <a class="ybtn ybtn-primary ybtn-small dialog" href="forum.php?mod=group&action=out&fid=$_G[fid]">退出</a>
                 <!--{elseif $status == 5}-->
-                <a class="ybtn ybtn-primary ybtn-small" href="javascript：void(0);">审核</a>
+                <a class="ybtn ybtn-primary ybtn-small" href="javascript:void(0);">审核</a>
                 <!--{else}-->
                 <a class="ybtn ybtn-primary ybtn-small dialog" href="forum.php?mod=group&action=join&fid=$_G[fid]">加入</a>
                 <!--{/if}-->
@@ -67,7 +65,7 @@
             <li class="<!--{if $action == 'activity'}-->active<!--{/if}-->"><a href="forum.php?mod=group&action=activity&fid=$_G[fid]">活动</a></li>
             <li class="<!--{if $action == 'memberlist' || $_GET['op'] == 'checkuser'}-->active<!--{/if}-->"><a href="forum.php?mod=group&action=memberlist&fid=$_G[fid]">会员</a></li>
             <li class="<!--{if $action == 'introduce'}-->active<!--{/if}-->"><a href="forum.php?mod=group&action=introduce&fid=$_G[fid]">介绍</a></li>
-            <!-- <li class="<!--{if $action == 'introduce'}-->active<!--{/if}-->"><a href="forum.php?mod=group&action=introduce&fid=$_G[fid]">大记事</a></li> -->
+            <li><a href="plugin.php?id=fansclub:fansclub&ac=standings&fid=$_G[fid]&mobile=2">数据</a></li>
         </ul>
         <!-- tabs-body -->
         <!--{if $action == 'index' && $status != 2 && $status != 3}-->

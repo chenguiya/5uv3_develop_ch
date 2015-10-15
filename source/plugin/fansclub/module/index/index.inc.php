@@ -44,9 +44,6 @@ if($arr_group_show == FALSE || $arr_province_city == FALSE || TRUE) // 暂时不
 	{
 		$conditions .= ' AND f.relation_fid = '.$search_info[0]['fid'];
 	}
-	
-	// 更新人数等
-	C::t('#fansclub#plugin_fansclub_info')->update_info_from_forum();
 	 
 	// 加分页
 	$limit = 8;
@@ -71,6 +68,9 @@ if($arr_group_show == FALSE || $arr_province_city == FALSE || TRUE) // 暂时不
 		{
 			$arr_group_show[$i]['specialclub'] = FALSE;
 		}
+        
+        // 更新人数等
+        C::t('#fansclub#plugin_fansclub_info')->update_info_from_forum($arr_group_list[$i]['fid']);
 	}
     
     $arr_forum_list = fansclub_get_forum_list(); // 左版块

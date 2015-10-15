@@ -4,7 +4,7 @@ global $_G;
 }
 <!--{block return}-->
 	<div class="fastlg_fm y" style="margin-right: 10px; padding-right: 10px">
-		<p><a href="$_G[connect][login_url]&statfrom=login_simple"><img src="{IMGDIR}/qq_login.gif" class="vm" alt="{lang qqconnect:connect_header_login}" /></a></p>
+		<p><a {if $_G['mod']=='viewthread'}id="btn_qq_login_thread"{else}id="btn_qq_login"{/if} href="$_G[connect][login_url]&statfrom=login_simple"><img src="{IMGDIR}/qq_login.gif" class="vm" alt="{lang qqconnect:connect_header_login}" /></a></p>
 		<p class="hm xg1" style="padding-top: 2px;">{lang qqconnect:connect_header_login_tip}</p>
 	</div>
 <!--{/block}-->
@@ -55,7 +55,7 @@ global $_G;
 }
 <!--{block return}-->
 	<!--{if !$_G['connectguest']}-->
-	<a href="$_G[connect][login_url]&statfrom=login" target="_top" rel="nofollow"><img src="{IMGDIR}/qq_login.gif" class="vm" /></a>
+    <a {if $_G['mod']=='viewthread'}id="btn_qq_login_thread"{else}id="btn_qq_login"{/if} href="$_G[connect][login_url]&statfrom=login" target="_top" rel="nofollow"><img src="{IMGDIR}/qq_login.gif" class="vm" /></a>
 	<!--{/if}-->
 <!--{/block}-->
 <!--{eval return $return;}-->

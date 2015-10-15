@@ -34,7 +34,11 @@ _acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
         	<!--{if $thread['type'] == 2}-->
             <a href="{$thread[url]}" target="_blank"><img class="img" src="{$thread[imgUrl]}" alt="{$thread[title]}"></a>
             <!--{elseif $thread['type'] == 3}-->
+            {if $thread['imgUrl']==''}
             <embed width="320" height="231" allownetworking="internal" allowscriptaccess="never" src="{$thread[videoUrl]}" quality="high" bgcolor="#ffffff" wmode="transparent" allowfullscreen="true" autostart="false" type="application/x-shockwave-flash"></embed>
+            {else}
+            <a class="ch_img_icon" href="{$thread[url]}" target="_blank"><img class="img" src="{$thread[imgUrl]}" alt="{$thread[title]}"><span class="video_i"></span></a>
+            {/if}
             <!--{/if}-->
             <div class="desc">
                 <a href="{$thread[url]}" target="_blank" class="brief">{$thread[title]}</a>
