@@ -4,304 +4,42 @@ body{background: #f1f4f6;}
 .colorRed{color: #ec0505 !important;}
 .ad_banner{display: block;text-align: center; width: 1000px; margin: 0 auto;}
 .ad_boxs{ background: #fff; padding: 10px;}
-/**
-* 球迷会桌面端
-* since: 2015/4/14;
-* version: 1.0.0;
-**/
 /*header @ch*/
 .blank10{font-size: 0;display: block;visibility: hidden;clear: both;height: 10px;}
 .blank15{font-size: 0;display: block;visibility: hidden;clear: both;height: 15px;}
 .blank20{font-size: 0;display: block;visibility: hidden;clear: both;height: 20px;}
-.wp_main,
-.wp
-{
-    /*min-height: 400px;*/
-    width: 1000px !important;
-    margin: 0 auto;
-}
-
-.p_pop
-{
-    padding: 10px;
-
-    border: none;
-    background: #e4e4e4;
-}
-
-.p_pop a
-{
-    font-family: 'Microsoft YaHei';
-    font-size: 14px;
-}
-
-.p_pop i
-{
-    font-size: 0;
-
-    position: absolute;
-    top: -18px;
-    left: 2px;
-
-    display: block;
-
-    width: 0;
-    height: 0;
-
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent transparent #e4e4e4;
-}
-
-.chheader,
-.chtopnav,
-.chtopnav .chnav li
-{
-    background: url(images/cheader_icon.png) repeat-x -999em -999em;
-}
-
-.chheader .chsubmit #scbar_btn,
-.chheader .chsimp a,
-.topnav_r .topsearch a,
-.chum_on .showmenus,
-.chum_on .set,
-.navtb_R .chsubmit span
-{
-    background: url(images/bd_icons.png) no-repeat -999em -999em;
-}
-
-.chheader
-{
-    height: 124px; /*border-bottom:6px solid #eb6100 !important;*/
-
-    background-position: 0 0;
-}
-
-.chheader .chtop
-{
-    height: 52px;
-    padding-top: 27px;
-}
-
-.chheader h2
-{
-    float: left;
-
-    padding-right: 20px;
-}
-
-.chheader #scbar
-{
-    line-height: 33px;
-
-    float: left;
-
-    height: 35px;
-    margin-left: 180px;
-
-    border: none;
-    background: none;
-}
-
-.chheader .chsearch
-{
-    position: relative;
-
-    width: 316px;
-    height: 30px;
-
-    border: 1px solid #cecece;
-    background: #fff;
-}
-
-.chheader #scbar_txt
-{
-    line-height: 20px;
-
-    width: 300px;
-    height: 30px;
-    margin-left: 10px;
-    padding: 0;
-
-    border: none;
-}
-
-.chheader .chsubmit
-{
-    position: absolute;
-    z-index: 10;
-    top: -1px;
-    right: -1px;
-
-    padding: 5px;
-
-    background-color: #3d4859;
-}
-
-.chheader .chsubmit #scbar_btn
-{
-    width: 22px;
-    height: 22px;
-
-    cursor: pointer;
-
-    outline: none;
-    background-position: -5px -45px;
-}
-
-.chheader .chformlogin
-{
-    float: left;
-
-    margin-top: 3px;
-    margin-left: 55px;
-}
-
-.chlogin button
-{
-    line-height: 28px;
-
-    display: inline-block;
-    float: left;
-
-    width: 66px;
-    height: 30px;
-    margin: -2px 9px;
-
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-
-    color: #fff;
-    border: 1px solid #eb6100;
-    background: #eb6100;
-}
-
-.chlogin a
-{
-    line-height: 28px;
-
-    display: inline-block;
-    float: left;
-
-    width: 66px;
-    height: 28px;
-    margin: -2px 9px;
-
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-
-    color: #eb6100;
-    border: 1px solid #f39d61;
-    background: #fff;
-}
-
-.chheader .chlogin b
-{
-    display: block;
-    float: left;
-
-    height: 24px;
-    margin-top: 2px;
-
-    border-right: 1px solid #ebebeb;
-}
-
-.chlogin button:focus {
-    outline: none;
-}
-.chlogin button:hover
-{
-    background: #d95c04;
-}
-
-.chlogin a:hover
-{
-    background: #ededed;
-}
-
-.chheader .chsimp
-{
-    line-height: 35px;
-
-    float: left;
-
-    margin-left: 15px;
-}
-
-.chsimp span
-{
-    line-height: 35px;
-
-    vertical-align: top;
-}
-
-.chheader .chsimp a
-{
-    display: inline-block;
-
-    width: 36px;
-    height: 36px;
-    margin-right: 10px;
-}
-
-.chheader .chsimp a.ch_QQ
-{
-    background-position: -66px 0;
-}
-
-.chsimp a.ch_webo
-{
-    background-position: -28px 0;
-}
-
-#um
-{
-    padding: 0;
-}
-
-#um .avt
-{
-    margin-right: 0;
-}
-
-.chum_on
-{
-    position: relative;
-
-    float: right;
-}
-
-.chum_on .avt img
-{
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    padding: 0;
-
-    vertical-align: middle;
-
-    border: none;
-    border-radius: 50%;
-}
-
-.chum_on .name_ch
-{
-    font-family: 'Microsoft YaHei';
-    font-size: 14px;
-}
-
-.chum_on .showmenus
-{
-    display: block;
-
-    width: 30px;
-    height: 30px;
-
-    background-position: -84px -5px;
-}
-
+.wp_main,.wp{width: 1000px !important;margin: 0 auto;}
+.p_pop{padding: 10px;border: none;background: #e4e4e4;}
+.p_pop a{font-family: 'Microsoft YaHei';font-size: 14px;}
+.p_pop i{font-size: 0;position: absolute;top: -18px;left: 2px;display: block;width: 0;height: 0;border-width: 10px;border-style: solid;border-color: transparent transparent #e4e4e4;}
+.chheader,.chtopnav,.chtopnav .chnav li{background: url(images/cheader_icon.png) repeat-x -999em -999em;}
+.chheader .chsubmit #scbar_btn,.chheader .chsimp a,.topnav_r .topsearch a,.chum_on .showmenus,.chum_on .set,.navtb_R .chsubmit span{background: url(images/bd_icons.png) no-repeat -999em -999em;}
+.chheader{height: 124px;background-position: 0 0;}
+.chheader .chtop{height: 52px;padding-top: 27px;}
+.chheader h2{float: left;padding-right: 20px;}
+.chheader #scbar{line-height: 33px;float: left;height: 35px;margin-left: 180px;border: none;background: none;}
+.chheader .chsearch{position: relative;width: 316px;height: 30px;border: 1px solid #cecece;background: #fff;}
+.chheader #scbar_txt{line-height: 20px;width: 300px;height: 30px;margin-left: 10px;padding: 0;border: none;}
+.chheader .chsubmit{position: absolute;z-index: 10;top: -1px;right: -1px;padding: 5px;background-color: #3d4859;}
+.chheader .chsubmit #scbar_btn{width: 22px;height: 22px;cursor: pointer;outline: none;background-position: -5px -45px;}
+.chheader .chformlogin{float: left;margin-top: 3px;margin-left: 55px;}
+.chlogin button{line-height: 28px;display: inline-block;float: left;width: 66px;height: 30px;margin: -2px 9px;cursor: pointer;text-align: center;text-decoration: none;color: #fff;border: 1px solid #eb6100;background: #eb6100;}
+.chlogin a{line-height: 28px;display: inline-block;float: left;width: 66px;height: 28px;margin: -2px 9px;cursor: pointer;text-align: center;text-decoration: none;color: #eb6100;border: 1px solid #f39d61;background: #fff;}
+.chheader .chlogin b{display: block;float: left;height: 24px;margin-top: 2px;border-right: 1px solid #ebebeb;}
+.chlogin button:focus {outline: none;}
+.chlogin button:hover{background: #d95c04;}
+.chlogin a:hover{background: #ededed;}
+.chheader .chsimp{line-height: 35px;float: left;margin-left: 15px;}
+.chsimp span{line-height: 35px;vertical-align: top;}
+.chheader .chsimp a{display: inline-block;width: 36px;height: 36px;margin-right: 10px;}
+.chheader .chsimp a.ch_QQ{background-position: -66px 0;}
+.chsimp a.ch_webo{background-position: -28px 0;}
+#um{padding: 0;}
+#um .avt{margin-right: 0;}
+.chum_on{position: relative;float: right;}
+.chum_on .avt img{width: 30px;height: 30px;margin-right: 10px;padding: 0;vertical-align: middle;border: none;border-radius: 50%;}
+.chum_on .name_ch{font-family: 'Microsoft YaHei';font-size: 14px;}
+.chum_on .showmenus{display: block;width: 30px;height: 30px;background-position: -84px -5px;}
 .chum_on .set
 {
     position: relative;
@@ -3551,42 +3289,11 @@ body{background: #f1f4f6;}
 .Fans_box .fans_btn a.attes:hover{ background-position: 0 -31px;}
 .Fans_box .fans_btn a.attes_on{ background-position: 0 -62px;}
 .Fans_box .fans_btn a.attes_on:hover{ background-position: 0 -93px;}
-.modech_left
-{
-    float: left;
-    overflow: hidden;
-
-    width: 660px;
-}
-
-.indexThread ul
-{
-    padding: 0 20px;
-
-    background: #fff;
-}
-
-.indexThread li
-{
-    position: relative;
-
-    padding: 20px 0;
-
-    border-bottom: 1px solid #edf0f2;
-}
-
-.indexThread li:last-child
-{
-    border-bottom: none;
-}
-
-.indexThread li .avatar
-{
-    float: left;
-
-    margin-right: 20px;
-}
-
+.modech_left{float: left;overflow: hidden;width: 660px;}
+.indexThread ul{padding: 0 20px;background: #fff;}
+.indexThread li{position: relative;padding: 20px 0;border-bottom: 1px solid #edf0f2;}
+.indexThread li:last-child{border-bottom: none;}
+.indexThread li .avatar{float: left;margin-right: 20px;}
 .indexThread li .avatar img
 {
     width: 50px;
@@ -5438,6 +5145,7 @@ body{background: #f1f4f6;}
 .ch_pollbox{ margin-top: 15px;}.p_precent{ width: 93%;}
 .p_precent label{ font-size: 14px; color: #464646;}
 .p_precent em{ color: #767676; font-size:12px;}
+.pcht table td {padding: 4px;vertical-align: top;}
 .ch_pollbox .chVote{height:20px;background:#e6eff5;}
 .ch_pollbox .chVote .pbr_ch{ height: 20px;}
 .ch_pollbox .chTDnum{font-size:14px;line-height:normal;vertical-align:top;}
@@ -5457,7 +5165,7 @@ body{background: #f1f4f6;}
 .activy_btn{font-size:24px;line-height:55px;width:320px;height:55px;text-align:center;color:#fff;border:0;border-radius:10px;background:#eb5f00;}
 .ch_mode .t_f{font-size:16px;line-height:27px;}
 .ch_mode .t_f .zoom{max-width:480px;}
-
+.btn_didi{ background: url(images/btn_didibg.png) no-repeat 0 0; width: 280px; height: 64px; display: block; text-indent: -999em; margin: 0 auto;}
 /*快速发帖 @ch*/
 .post_chbox
 {
@@ -5472,97 +5180,17 @@ body{background: #f1f4f6;}
 }
 
 /*hezuohuob @ch*/
-.parter_bg
-{
-    width: 100%;
-    padding: 15px 0 20px;
-}
-
-.parter_bg .parter_nav
-{
-    width: 1000px;
-    margin: 0 auto;
-    margin-bottom: 10px;
-}
-
-.parter_bg .parter_Tag,
-.parter_bg .coor_nav
-{
-    line-height: 28px;
-
-    height: 28px;
-
-    border-bottom: 1px solid #dfe4e7;
-}
-
-.parter_bg .parter_Tag span,
-.parter_bg .coor_nav span
-{
-    font-family: 'Microsoft YaHei';
-    font-size: 18px;
-
-    display: block;
-    float: left;
-
-    margin-right: 20px;
-
-    cursor: pointer;
-
-    color: #9da6b4;
-}
-
-.parter_bg .parter_Tag .active,
-.parter_bg .coor_nav span
-{
-    line-height: 28px;
-
-    color: #eb6100;
-    border-bottom: 1px solid #eb6100;
-}
-
-.parter_bg .parter_link
-{
-    padding: 10px 0;
-}
-
-.parter_bg .parter_link li
-{
-    display: inline;
-    float: left;
-    overflow: auto;
-
-    height: 25px;
-
-    word-wrap: break-word;
-}
-
-.parter_bg .parter_link li a
-{
-    padding-right: 25px;
-
-    color: #888;
-}
-
-.parter_bg .coor_ul
-{
-    padding: 10px 0;
-}
-
-.parter_bg .coor_ul li
-{
-    float: left;
-
-    width: 80px;
-    height: 31px;
-    margin-right: 22px;
-    margin-bottom: 10px;
-}
-
-.hotLink
-{
-    display: none;
-}
-
+.parter_bg{width:100%;padding:15px 0 20px;}
+.parter_bg .parter_nav{width:1000px;margin:0 auto;margin-bottom:10px;}
+.parter_bg .parter_Tag,.parter_bg .coor_nav{line-height:28px;height:28px;border-bottom:1px solid #dfe4e7;}
+.parter_bg .parter_Tag span,.parter_bg .coor_nav span{font-family:'Microsoft YaHei';font-size:18px;display:block;float:left;margin-right:20px;cursor:pointer;color:#9da6b4;}
+.parter_bg .parter_Tag .active,.parter_bg .coor_nav .active{line-height:28px;color:#eb6100;border-bottom:1px solid #eb6100;}
+.parter_bg .parter_link{padding:10px 0;}
+.parter_bg .parter_link li{display:inline;float:left;overflow:auto;height:25px;word-wrap:break-word;}
+.parter_bg .parter_link li a{padding-right:25px;color:#888;}
+.parter_bg .coor_ul{padding:10px 0;}
+.parter_bg .coor_ul li{float:left;width:80px;height:31px;margin-right:22px;margin-bottom:10px;}
+.hotLink{display:none;}
 /*other @ch*/
 .noclub{line-height: 30px;margin: 15px auto;text-align: center;border: 1px solid #e1e1e1;background: #fff;}
 .debate_hd{ height: 40px; border-bottom: 1px solid #edf1f4; line-height: 40px; font-size: 16px; position: relative; width: 590px; margin-top: 10px;}
@@ -5593,6 +5221,11 @@ body{background: #f1f4f6;}
 .waterfall .item .ch_img_icon{ width:320px; display: block; position: relative;}
 .ch_img_icon .video_i{ position: absolute; left: 50%; top:50%; background: url(images/video_ficon.png) no-repeat 0 0; width: 50px; height: 50px; margin-left: -25px; margin-top: -25px;}
 .ch_img_icon:hover .video_i{ background-position: 0 -52px;}
+.ch_memo_edit{ position: absolute; right: 20px; top: 20px;}
+.ch_memo_edit a{ border: 1px solid #dedede; padding: 8px 25px; display: block;}
+.ch_memo_edit a:hover{ color: #fff; border: 1px solid #eb6100; background: #eb6100; text-decoration:none;}
+.ch_memo_edit a .i_edt{ background: url(images/btn_editicon.png) no-repeat 0 0; width: 15px; height: 11px; display: inline-block; margin-right: 5px;}.ch_memo_edit a:hover .i_edt{ background-position: 0 -12px;}
+
 /*左右悬浮 @ch*/
 
 /** 球迷会申请  @tvrcgo **/
@@ -8014,151 +7647,29 @@ img
 }
 
 /*球迷会 大事记*/
-.boxMemo
-{
-    font-family: Microsoft Yahei;
-
-    position: relative;
-
-    clear: both;
-
-    width: 1000px;
-    padding-top: 65px;
-
-    color: #787878;
-    background: #fff;
-}
-
-.memoTitle
-{
-    font-size: 30px;
-    font-weight: bold;
-    line-height: 80px;
-
-    height: 80px;
-    margin-left: 303px;
-    padding-left: 110px;
-
-    color: #eb6100;
-    background: url(images/yuan.jpg) no-repeat;
-}
-
-.memoTime
-{
-    font-size: 18px;
-    line-height: 80px;
-
-    position: absolute;
-    top: 114px;
-    left: 459px;
-
-    width: 80px;
-    height: 80px;
-
-    text-align: center;
-
-    color: #fff;
-}
-
-.perioda
-{
-    font-size: 36px;
-    line-height: 54px;
-
-    float: left;
-
-    width: 358px;
-    height: 54px;
-    margin-top: 50px;
-    margin-left: 62px;
-
-    color: #fff;
-    background: url(images/shi.jpg) no-repeat;
-}
-
-.perioda span
-{
-    display: block;
-
-    width: 214px;
-
-    text-align: center;
-}
-
-.memoLista
-{
-    width: 340px;
-    padding: 0 10px;
-}
-
-.boxMemo font
-{
-    color: #eb6100;
-}
-
-.memoListT
-{
-    font-size: 30px;
-    line-height: 120%;
-
-    margin-bottom: 5px;
-
-    color: #eb6100;
-}
-
-.memoListTa
-{
-    font-size: 18px;
-    line-height: 160%;
-
-    padding: 10px 0;
-}
-
-.memotxt
-{
-    font-family: SimSun;
-    line-height: 180%;
-
-    color: #9b9a9a;
-}
-
-.property
-{
-    font-size: 14px;
-
-    margin-top: 5px;
-}
-
-.property li
-{
-    line-height: 180%;
-
-    display: inline-block;
-
-    width: 140px;
-}
-
-.memoListMain
-{
-    padding-top: 50px;
-
-    background: #fff url(images/xian.jpg) repeat-y;
-}
-
-.memoList
-{
-    clear: both;
-}
-
-.memoLista
-{
-    float: left;
-
-    margin-bottom: 60px;
-
-    border-left: 4px solid #cdcdcd;
-}
-
+.boxMemo{font-family:Microsoft Yahei;position:relative;clear:both;width:1000px;padding-top:65px;color:#787878;background:#fff;}
+.memoTitle{font-size:30px;font-weight:bold;line-height:80px;height:80px;margin-left:303px;padding-left:110px;color:#eb6100;background:url(images/yuan.jpg) no-repeat;}
+.memoTime{font-size:18px;line-height:80px;position:absolute;top:114px;left:459px;width:80px;height:80px;text-align:center;color:#fff;}
+.perioda{font-size:36px;line-height:54px;float:left;width:358px;height:54px;margin-top:50px;margin-left:62px;color:#fff;background:url(images/shi.jpg) no-repeat;}
+.perioda span{display:block;width:214px;text-align:center;}
+.memoLista{width:340px;padding:0 10px;}
+.boxMemo font{color:#eb6100;}
+.memoListT{font-size:30px;line-height:120%;margin-bottom:5px;color:#eb6100;}
+.memoListTa{font-size:18px;line-height:160%;padding:10px 0;}
+.memotxt{font-family:SimSun;line-height:180%;color:#9b9a9a;}
+.property{font-size:14px;margin-top:5px;}
+.property li{line-height:180%;display:inline-block;width:140px;}
+.memoListMain{padding-top:50px;background:#fff url(images/xian.jpg) repeat-y;}
+.memoList{clear:both;}
+.memoLista{float:left;margin-bottom:60px;border-left:4px solid #cdcdcd;}
+.event_edit{ padding: 25px; background: #fff; margin: 20px auto;}
+.event_edit td{ padding-bottom: 20px; font-size: 14px; text-align: left;}
+.event_edit td label{ width:50px; text-align: right;}
+.input_e,.text_es{ width: 400px; height: 30px; border: 1px solid #ccd4d9; line-height: 30px; text-indent: 10px;}
+.text_es{ height: 90px;}.rd_evet{ color:#ff0000;}
+.event_ok,.event_no{ width: 106px; height: 30px; text-align: center; color: #fff;}
+.event_ok{ border: 1px solid #eb6100; background: #eb6100;}
+.event_no{ border: 1px solid #dedede; color: #464646; background: #fff;}
 /*频道头部 @ch*/
 .bread
 {
@@ -12568,106 +12079,19 @@ input:focus
     background-color: #d95c04;
 }
 
-.chComd
-{
-    line-height: 27px;
-
-    margin-top: 15px;
-
-    background: url(images/ball_line6.png) no-repeat 0 12px;
-}
-
-.chComd .chComd_title
-{
-    padding-right: 10px;
-
-    background-color: #f1f4f6;
-}
-
-.chComd .chHeader
-{
-    height: 27px;
-}
-
-.chComd .chHeader .chComd_more
-{
-    font-weight: normal;
-
-    display: inline-block;
-
-    padding-left: 10px;
-
-    text-decoration: none;
-
-    background-color: #f1f4f6;
-}
-
-.chComd .chHeader .chComd_more:hover
-{
-    color: #eb6100;
-}
-
-.chComd .chBlock
-{
-    margin-top: 15px;
-}
-
-.chComd .chBlock .chBlockfl
-{
-    width: 159px;
-    height: 159px;
-    padding-top: 15px;
-
-    border-top: 1px solid #f1f1f1;
-    border-left: 1px solid #f1f1f1;
-    background-color: #fff;
-}
-
-.chComd .chBlock a img
-{
-    width: 86px;
-    height: 86px;
-    margin: 15px 37px;
-
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-}
-
-.chComd .chBlock p
-{
-    position: relative;
-    top: -2px;
-    left: 12px;
-    line-height: 18px;
-    width: 140px;
-
-    text-align: center;
-}
-
-.chComd .chBlock p a
-{
-    font-size: 14px;
-}
-
-.chComd .chBlock h4
-{
-    font-weight: normal;
-
-    position: relative;
-    top: -5px;
-
-    text-align: center;
-
-    color: #909090;
-}
-
-.chComd .chBlock .chH200
-{
-    /*height: 200px;*/
-    padding-bottom: 20px;
-}
-
+.chComd{line-height: 27px;margin-top: 15px;background: url(images/ball_line6.png) no-repeat 0 12px;}
+.chComd .chComd_title{padding-right: 10px;background-color: #f1f4f6;}
+.chComd .chHeader{height: 27px;}
+.chComd .chHeader .chComd_more{font-weight: normal;display: inline-block;padding-left: 10px;text-decoration: none;background-color: #f1f4f6;}
+.chComd .chHeader .chComd_more:hover{color: #eb6100;}
+.chComd .chBlock{margin-top: 15px;}
+.chComd .chBlock .chBlockfl{width: 159px;height: 159px;padding-top: 15px;border-top: 1px solid #f1f1f1;border-left: 1px solid #f1f1f1;background-color: #fff;}
+.chComd .chBlock a img{width: 86px;height: 86px;margin: 15px 37px;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;}
+.chComd .chBlock p{position: relative;top: -2px;left: 12px;line-height: 18px;width: 140px;text-align: center;}
+.chComd .chBlock p a{font-size: 14px;}
+.chComd .chBlock h4{font-weight: normal;position: relative;top: -5px;text-align: center;color: #909090;}
+.chComd .chBlock .chH200{padding-bottom: 20px;}
+.chComd .chCode{ margin-top: 15px; background: #fff; text-align: center; padding: 20px 0;}
 .bgnone
 {
     background: none;

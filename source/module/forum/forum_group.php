@@ -325,7 +325,10 @@ if($action == 'index') {
 	$navtitle = $_G['forum']['name'].'会员_'.$_G['setting']['bbname'].'球迷会';
 	$metakeywords = $_G['forum']['name'].'会员';
 	$metadescription = '所有'.$_G['forum']['name'].'的成员都将在这个页面呈现，包括他们的基本资料、图片以及详细信息。';
-	
+        
+                       //取公告
+                       $gg = getgonggaobyfid($_G['fid']);
+                       
 	include template('diy:group/group:'.$_G['fid']);
 
 } elseif($action == 'join') {
@@ -610,7 +613,10 @@ if($action == 'index') {
 			$setarr = array();
 			$deletebanner = $_GET['deletebanner'];
 			$iconnew = upload_icon_banner($_G['forum'], $_FILES['iconnew'], 'icon');
+                                                                    //                                        二维码
+                                                                    $twocode = upload_icon_banner($_G['forum'], $_FILES['twocode'], 'qrcode');
 			$bannernew = upload_icon_banner($_G['forum'], $_FILES['bannernew'], 'banner');
+
 			if($iconnew) {
 				$setarr['icon'] = $iconnew;
 				$group_recommend = dunserialize($_G['setting']['group_recommend']);
@@ -621,6 +627,18 @@ if($action == 'index') {
 					updatecache('setting');
 				}
 			}
+                        
+                                                                    if($twocode) {
+				$setarr['qrcode'] = $twocode;
+				$group_recommend = dunserialize($_G['setting']['group_recommend']);
+				if($group_recommend[$_G['fid']]) {
+					$group_recommend[$_G['fid']]['qrcode'] = get_groupimg($twocode);
+					C::t('common_setting')->update('group_recommend', $group_recommend);
+					include libfile('function/cache');
+					updatecache('setting');
+				}
+			}
+                        
 			if($bannernew && empty($deletebanner)) {
 				$setarr['banner'] = $bannernew;
 			} elseif($deletebanner) {
@@ -718,6 +736,7 @@ if($action == 'index') {
 				if($iconnew) {
 					$fansclub_setarr['logo'] = $iconnew;
 				}
+                                
 				$fansclub_setarr['brief'] = $_GET['descriptionnew'];
 				C::t('#fansclub#plugin_fansclub_info')->update($_G['fid'], $fansclub_setarr);
 			}
@@ -1164,5 +1183,10 @@ function isadminbyuid($uid, $fid) {
 	}
 }
 
-
+function getgonggaobyfid($fid , $start = 0 , $limit = 5){
+                $fid = intval($fid);
+                $limit = $limit > 5 ? 5 : $limit ;
+                $query = DB::fetch_all("select b.tid ,b.subject  from ".DB::table('forum_threadclass')." a   LEFT JOIN ".DB::table('forum_thread')." b  on a.typeid = b.typeid WHERE a.fid = $fid and a.name = '公告' and b.displayorder > -1 order by b.dateline desc limit $start , $limit");
+                return $query;
+}
 ?>

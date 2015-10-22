@@ -41,6 +41,7 @@ class extend_thread_poll extends extend_thread_base {
 		$this->pollarray['overt'] = !empty($_GET['overt']);
 		$this->pollarray['pollimage'] = $_GET['pollimage'];
 		$this->pollarray['isimage'] = 0;
+		$this->pollarray['redirecturl'] = !empty($_GET['redirecturl']) ? dhtmlspecialchars($_GET['redirecturl']) : '';
 
 		if(preg_match("/^\d*$/", trim($_GET['expiration']))) {
 			if(empty($_GET['expiration'])) {
@@ -74,7 +75,7 @@ class extend_thread_poll extends extend_thread_base {
 
 		$this->polloptionpreview = daddslashes($this->polloptionpreview);
 
-		$data = array('tid' => $this->tid, 'multiple' => $this->pollarray['multiple'], 'visible' => $this->pollarray['visible'], 'maxchoices' => $this->pollarray['maxchoices'], 'expiration' => $this->pollarray['expiration'], 'overt' => $this->pollarray['overt'], 'pollpreview' => $polloptionpreview, 'isimage' => $this->pollarray['isimage']);
+		$data = array('tid' => $this->tid, 'multiple' => $this->pollarray['multiple'], 'visible' => $this->pollarray['visible'], 'maxchoices' => $this->pollarray['maxchoices'], 'expiration' => $this->pollarray['expiration'], 'overt' => $this->pollarray['overt'], 'pollpreview' => $polloptionpreview, 'isimage' => $this->pollarray['isimage'], 'redirecturl' => $this->pollarray['redirecturl']);
 		C::t('forum_poll')->insert($data);
 	}
 
@@ -131,6 +132,7 @@ class extend_thread_poll extends extend_thread_base {
 					$pollarray['expiration'] = $_GET['expiration'];
 					$pollarray['overt'] = !empty($_GET['overt']);
 					$pollarray['pollimage'] = $_GET['pollimage'];
+					$pollarray['redirecturl'] = !empty($_GET['redirecturl']) ? dhtmlspecialchars($_GET['redirecturl']) : '';
 					foreach($_GET['polloptionid'] as $key => $value) {
 						if(!preg_match("/^\d*$/", $value)) {
 							showmessage('submit_invalid');
@@ -176,7 +178,7 @@ class extend_thread_poll extends extend_thread_base {
 
 					$polloptionpreview = daddslashes($polloptionpreview);
 
-					$data = array('multiple' => $pollarray['multiple'], 'visible' => $pollarray['visible'], 'maxchoices' => $pollarray['maxchoices'], 'expiration' => $pollarray['expiration'], 'overt' => $pollarray['overt'], 'pollpreview' => $polloptionpreview);
+					$data = array('multiple' => $pollarray['multiple'], 'visible' => $pollarray['visible'], 'maxchoices' => $pollarray['maxchoices'], 'expiration' => $pollarray['expiration'], 'overt' => $pollarray['overt'], 'pollpreview' => $polloptionpreview, 'redirecturl' => $pollarray['redirecturl']);
 					if($pollarray['isimage']) {
 						$data['isimage'] = 1;
 					}

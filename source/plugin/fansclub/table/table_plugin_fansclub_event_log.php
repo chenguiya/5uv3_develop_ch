@@ -27,4 +27,19 @@ class table_plugin_fansclub_event_log extends discuz_table {
 		else
 			return 0;
 	}
+                      public function add_big_event_by_fid($fid,$uid,$title,$log_time,$path){
+                                             if(intval($fid) <= 0) return array();
+                                             //$time = time();
+                                            $data = "(fid,type,operator_id,title,log_time,url) values ($fid,0,$uid,'$title',$log_time,'$path')";
+                                             $table =DB::table($this->_table) ;
+                                             $query = "insert into  ".$table. " ".$data;
+                                              //echo $query;exit;
+                                              $result = DB::query($query);
+                                              //var_dump($result);exit;
+                                             if($result)
+			return $result;
+		else
+			return 0;
+
+                      }
 }

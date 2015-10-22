@@ -1,0 +1,123 @@
+<!--{template common/header}-->
+<style>
+.topicStl{position: relative;width: 100%;}
+.derby{min-width: 18rem;height:34.2rem;position: relative;z-index: 1;}
+.derby01,.derby02,.derby03,.derby05{background-size:100% auto !important;}
+.derby01{background: url($_G['config'][static]/topic/2015derby/derby_wap_01.jpg) top center no-repeat;}
+.derby02{background: url($_G['config'][static]/topic/2015derby/derby_wap_02.jpg) top center no-repeat;}
+.derby03{background: url($_G['config'][static]/topic/2015derby/derby_wap_03.jpg) top center no-repeat;}
+.derby05{background: url($_G['config'][static]/topic/2015derby/derby_wap_04.jpg) top center no-repeat;max-height:57rem !important;height:57rem;}
+@media screen and (min-width: 360px){.derby{min-width: 25.6rem;height: 38rem;}.derby05{max-height:57rem !important;height:57rem;}.derby_bord{padding-top: 31rem !important;}}
+
+.fire_ice{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	display: flexbox;
+	display: box;
+    flex-flow: row wrap;
+	position:relative;
+	top:26%;
+}
+.fire_ice div{font-size:1rem;}
+.fire_ice div span{display:block;position: absolute;bottom: 0.7rem;margin-left:1.5rem;color: #000;}
+.fi_icon{width: 12.6rem;height: 30px !important;background-color: #053583;z-index: 3;position: relative;top:25px;}
+.fi_icon i{background-color: #ffab3d;width: 50%;height: 30px !important;display: inline-block;z-index: 4;}
+.fi_icon em{background-color: #053583;width: 50%;height: 30px !important;display: inline-block;right:0;z-index: 3;}
+.fire_ice .fi_icon{-webkit-box-flex:1.0;-webkit-flex:1.0;flex:1.0;}
+
+.keyman{min-width: 22.85rem;position: relative;margin: 0 auto;top: 70%;}
+.keyman .keyman_l{float: left;min-width: 11rem;width:11.35rem;position: relative;}
+.keyman .keyman_r{float: right;min-width: 11rem;width:11.35rem;position: relative;}
+.km_button{font-size: 1rem;background-color: #ffab3e;padding:0.5rem 2.5rem 0.5rem 1rem;border-radius: 3px;color: #000;display: inline-block;cursor: pointer;position: relative;left: 8%;margin-top:6rem;}
+.km_button:after{content:'';position: absolute;width: 0;height: 0;margin: 5px;border-width: 5px 10px;border-color: transparent transparent transparent #000;border-style: solid;}
+.km_button_2{background-color: #398fed;}
+.km_aside{position: absolute;top: 0;font-size: 0.8rem;color: #fff;display: inline-block;margin-left:-2px;}
+.km_aside ul{}
+.km_aside ul li{display: inline-block;margin-bottom: 0.3rem;}
+.km_aside ul li span.as_aside{text-align: right;width: 3.2rem;display: inline-block;font-size: 0.8rem;}
+.km_aside ul li span.as_aside:last-child{color: #ffab3d;width: 4.4rem;}
+.km_aside ul li span.as_aside i{font-size: 1rem;}
+.km_aside ul li span.km_bar{width: 3rem;height: 0.7rem;background-color: #000;display: inline-block;position: relative;z-index: 5;margin-left: 0.2rem;}
+.km_bar em{background-color: #ffab3d;width: 0px;height: 1.4rem;z-index: 6;position: absolute;}
+
+.derby_bord{width: 7rem;position: relative;margin: 0 auto;padding-top: 27rem;}
+.derby_pt .derby_box{left: -96px;top: 40px;}
+
+.derby_main{width: 22rem;margin: 0px auto;position: relative;top: 40rem;}
+.derShare{margin-bottom: 3rem;}
+.derShare span{color: #fff;font-size: 1rem;font-weight: normal;line-height: 4rem;padding-left: 40px;position: relative;top: -10px;display: inline-block;}
+.dspic{height: 32px;width: 32px;position: relative;display: inline-block;margin-right: 15px;}
+.dermms{background: url($_G['config'][static]/topic/2015derby/derby_mmsg.png) center center no-repeat;}
+.derqzone{background: url($_G['config'][static]/topic/2015derby/derby_qzone.png) center center no-repeat;}
+.dersina{background: url($_G['config'][static]/topic/2015derby/derby_sina.png) center center no-repeat;} 
+
+.tp_footer{position: relative;bottom: 25px;font-size: 0.8rem;width: 100%;z-index: 10;color: #93a4c6;text-align: center;line-height: 1.6rem;}
+
+</style>
+<div class="topicStl">
+    <div class="derby derby01">
+        <div class="fire_ice">
+            <div class="fire_icon"><img src="$_G['config'][static]/topic/2015derby/derby_css_01.png" alt="" /><span><i>{$like_num}</i>人</span></div>
+            <div class="fi_icon"><i style="width:{$like_percent}"></i><em style="width:{$unlike_percent}"></em></div>
+            <div class="ice_icon"><img src="$_G['config'][static]/topic/2015derby/derby_css_02.png" alt="" /><span style="color:#bcd5fd;"><i>{$unlike_num}</i>人</span></div>
+        </div>
+    </div>
+    <div class="derby derby02">
+        <div class="keyman">
+            <div class="keyman_l">
+        
+                <div class="km_aside">
+             <!--{if $player}-->       
+                    <ul>
+                        <!--{loop $player['like'] $val}-->
+                        <li>
+                            <span class="as_aside">{$val['polloption']}</span>
+                            <span class="km_bar" data-radio="{$val['percent']}"><em></em></span>
+                            <span class="as_aside"><i>{$val['votes']}</i>人支持</span>
+                        </li>
+                        <!--{/loop}-->
+                    </ul>
+              <!--{/if}-->
+                </div>
+                <a class="km_button">阵容实力分析</a>
+            </div>
+            <div class="keyman_r">
+        
+                <div class="km_aside">
+                    <!--{if $player}-->   
+                    <ul>
+                        <!--{loop $player['unlike'] $val}-->
+                        <li>
+                            <span class="as_aside">{$val['polloption']}</span>
+                            <span class="km_bar" data-radio="{$val['percent']}"><em style="background-color:#398fed;"></em></span>
+                            <span class="as_aside" style="color:#bbd5ff;"><i>{$val['votes']}</i>人支持</span>
+                        </li>
+                        <!--{/loop}-->
+                    </ul>
+                    <!--{/if}-->
+                </div>
+                <a class="km_button km_button_2">阵容身价分析</a>
+            </div>
+        </div>
+    </div>
+    <div class="derby derby03">
+        <div class="derby_bord">
+            <div class="derby_pt6">
+                <a href=""><img src="template/usportstyle/common/topic/2015derby/prize.png" alt=""></a>
+            </div>
+        </div>
+    </div>
+    <div class="derby derby05">
+        <div class="derby_main">
+        		    <div class="derShare"><span>分享到：</span>
+        		        <a href="" class="dspic dermms" title="分享到微信"></a>
+        		        <a href="" class="dspic derqzone" title="分享到空间"></a>
+        		        <a href="" class="dspic dersina" title="分享到新浪微博"></a>
+        		    </div>
+        		    <div class="tp_footer">
+        		    	Copyright &copy 2009-2014 5usport.com, All rights reserved. 广州市晌网文化传播有限公司 粤ICP备11095914号
+        		    </div>
+        </div>
+    </div>
+</div>

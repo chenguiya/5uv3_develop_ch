@@ -1,0 +1,95 @@
+*{ padding:0px; margin:0px;}
+body{ margin:0px; padding:0px; color:#333; font-size:12px;font-family:SimSun;}
+ul,li{ list-style:none; _list-style:outside;}
+a{ text-decoration:none;}
+.top{ background:#212e50; height:90px; width:100%;}
+.menu{ width:1000px; margin:0 auto;}
+.logo{ float:left;}
+.jianju50{ clear:both; height:50px; font-size:0px; overflow:hidden;}
+.jianju20{ clear:both; height:20px; font-size:0px; overflow:hidden;}
+.clear{clear:both; height:0px; font-size:0px; overflow:hidden;}
+.logoImg{background:url(../../images/about/logo.gif) no-repeat; display:block; width:145px; height:90px; }
+.menuNav{ height:90px; line-height:90px; font-family:Microsoft Yahei; padding-left:50px; float:left; font-size:16px;}
+.menuNav ul li{ float:left; margin-left:25px; padding:2px 0px;}
+.menuNav ul li a{color:#fff;}
+.menuNav ul li a:hover{color:#fff; border-bottom:2px solid #fff;}
+.menuNav ul li.active a{color:#fff; border-bottom:2px solid #fff;}
+.ban{ background:#234a76 url(../../images/about/ban.jpg) center top no-repeat; height:350px;}
+
+
+.main{ width:1000px; margin:0 auto; padding:40px 0px;}
+.title{ background:url(../../images/about/title3.gif) 105px 6px no-repeat;font-family:Microsoft Yahei;font-size:24px; color:#000; margin-bottom:}
+.titlea{ background:url(../../images/about/title2.gif) 105px 6px no-repeat;}
+.titleb{ background:url(../../images/about/title1.gif) 130px 6px no-repeat;}
+.titlec{ background:url(../../images/about/title4.gif) 105px 6px no-repeat;}
+.titled{ background:url(../../images/about/title5.gif) 110px 6px no-repeat;}
+.titlee{ background:url(../../images/about/title6.gif) 110px 6px no-repeat;}
+.titlef{ background:url(../../images/about/title7.gif) 110px 6px no-repeat;}
+.titleg{ background:url(../../images/about/title8.gif) 105px 6px no-repeat;}
+.titleh{background:url(../../images/about/title9.gif) 105px 6px no-repeat;}
+.titlej{background:url(../../images/about/title10.gif) 130px 6px no-repeat;}
+.titlek{background:url(../../images/about/title11.gif) 110px 6px no-repeat;}
+.titleno{ background:none;}
+.title span{ color:#ce000c;}
+.titleTag{ color:#ce000c; font-size:14px;font-family:Microsoft Yahei; height:15px;margin-top:20px;background:url(../../images/about/borderbg.gif) 0px bottom repeat-x; _background:url(../../images/about/borderbg.gif) 0px 14px repeat-x;}
+.titleTag span{ float:left; display:block;}
+.titleTagT{ background:#fff; padding-right:10px;}
+.titleTagB{ border-bottom:2px solid #ce000c; width:20px; height:13px; font-size:0px;}
+.content{ clear:both; font-size:14px; line-height:210%; color:#666666;font-family:SimSun; padding:10px 0px;}
+
+.aboutTxt{ background:url(../../images/about/titlebg.gif) repeat-x; padding:30px 0px; width:1000px; margin:0 auto; line-height:160%;font-family:Microsoft Yahei;}
+
+.aboutTxta,.aboutTxtb{ font-size:18px;}
+.aboutTxtb{ color:#999; padding-left:20px; margin:10px 0px 5px 0px;}
+.aboutTxtc{ font-family:Arial; color:#999; font-size:11px; padding-left:20px;}
+.content .part{ text-indent:25px;}
+
+.adImg{ padding:20px 0px;}
+.adImg ul li{ float:left; display:inline;width:147px; height:60px; border:1px solid #efefef; margin-right:10px;}
+.adImg ul li img{width:147px; height:60px;}
+
+.contentC{font-family:Microsoft Yahei;}
+.conTitle{ color:#000; font-size:24px;}
+.adress{ font-size:16px; margin:15px 0px; color:#333;}
+.contact{ font-size:14px;color:#666;}
+.main_l{ width:450px; float:left;}
+.bus{ background:url(images/ico.gif) 0px 8px no-repeat; padding-left:40px;}
+.ditie{ background:url(images/ico02.gif) 5px 3px no-repeat; padding-left:40px;}
+.mainC .content{ font-family:Microsoft Yahei;}
+
+.main_r{ float:right; width:402px;}
+
+
+/*地图*/
+.columnT{ background:url(images/mapT.jpg) repeat-x;  height:28px; margin-top:20px;}
+.columnT a{ color:#fff;}
+.columnT span{ display:block;background:url(images/map.jpg) no-repeat; padding-left:45px; color:#fff; font-size:18px; font-family:Microsoft Yahei; height:28px; line-height:28px;}
+.columnT2 span{ background-position:0px -37px;}
+.columnT3 span{ background-position:0px -77px;}
+.columnT4 span{ background-position:0px -117px;}
+.columnT5 span{ background-position:0px -157px;}
+.columnT6 span{ background-position:0px -197px;}
+.columnCon{ overflow:hidden;}
+.columnBox{ margin-left:-11px; width:1011px;}
+.columnCon a{ display:inline-block; margin:25px 0px 0px 11px;background:url(images/bga.gif) repeat-x; height:30px; line-height:30px; padding:0px 30px;font-family:Microsoft Yahei; color:#333; border:1px solid #efefef; font-size:14px;}
+.columnCon a:hover{ background:#ce000c; color:#fff;}
+
+/*招聘*/
+.titleTagJob .titleTagT{ color:#000;}
+.titleTagJob .titleTagT font{ color:#ce000c; margin:0px 3px;}
+.job{font-family:Microsoft Yahei; font-size:14px; color:#666; clear:both; overflow:hidden;}
+.jobBox{margin-left:-40px; width:1040px;}
+.jioMain{ float:left; width:439px; border-left:1px dotted #e3e3e3; padding:0px 40px;}
+.jobT{ color:#fff; background:#ce000c;width:88px; text-align:center;height:22px; line-height:22px; margin:25px 0px 15px 0px;}
+.jobCon{ line-height:220%;}
+
+.bottom{ width:1000px; margin:0 auto;font-family:Microsoft Yahei; font-size:14px; color:#333; line-height:230%;}
+.bottomLogo{ float:left;width:256px; height:255px;}
+.bottomLogoImg{ display:block; background:url(images/logo_bottom.gif) no-repeat; width:256px; height:225px;}
+.copyR{ float:left; width:634px; overflow:hidden; padding:15px 30px; background:#f0f0f0; height:195px;}
+.copyR span.fl{ float:left; width:50%;}
+.copyR span.fr{ float:left;}
+
+.linkB .aboutTxtc{ padding:0px;}
+.linkB .fl{ float:left; width:495px;}
+.linkB .fr{ float:left; background:url(images/linkb.gif) 0px 50px no-repeat; width:396px; height:125px;}

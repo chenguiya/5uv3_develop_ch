@@ -29,7 +29,7 @@
 				}, '3000');
 			</script>
 		<!--{elseif $allowreturn}-->
-			<p><input type="button" class="button" onclick="popup.close();" value="{lang close}"></p>
+			<p style="margin-top:10px;"><!--{if stristr($show_message, '不是本球迷会成员')}--><a href="$_G[siteurl]forum.php?mod=group&action=join&fid=$_G[fid]&forward={eval echo(urlencode('forum.php?mod=viewthread&tid='.$_GET[tid]))}&mobile=2" class="dialog infot_btn">加入</a><!--{/if}--><input type="button" class="infot_a" onclick="popup.close();" value="{lang close}"></p>
 		<!--{/if}-->
 	</dt>
 </div>

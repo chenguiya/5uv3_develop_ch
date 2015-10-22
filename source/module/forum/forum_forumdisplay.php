@@ -1305,7 +1305,7 @@ if(!defined('IN_ARCHIVER')) {
 	$branchnum = count($branch);
 	
 	//热门活动
-                     /*
+                     
 	$hot_activity['data'] = C::t('common_block_item')->fetch_all_by_bid(143, true);
 	foreach ($hot_activity['data'] as $key => $value) {
 		$activity = DB::fetch_first("SELECT * FROM ".DB::table('forum_activity')." WHERE tid=".$value['id']);
@@ -1321,7 +1321,7 @@ if(!defined('IN_ARCHIVER')) {
 			$hot_activity['data'][$key]['status'] = true;
 		}
 	}
-	*/
+	
     // 视频/图片列表 2015-09-11 by zhangjh 频道分类的也要改成分页伪静态
     if(count($_G['forum']['threadtypes']['types']) > 0 && $_G['forum']['type'] == 'forum' && $_G['forum']['status'] != 3)
     {
@@ -1357,10 +1357,12 @@ if(!defined('IN_ARCHIVER')) {
 
                        //公告
                       $gg = getgonggaobyfid($_G['fid']);
-                      //热门活动
-                      $hot_activity = get_new_hot_activity($_G['fid']);
-                     //echo "<pre>";
-                     //print_r($hot_activity);exit;
+                      
+                      //球迷会热门活动
+                      if($_GET['type'] == 'topic'){
+                          $hot_activity['data'] = get_new_hot_activity($_G['fid']);
+                      }
+
 	include template($template);
 } else {
 	include loadarchiver('forum/forumdisplay');
@@ -1395,9 +1397,6 @@ function getgonggaobyfid($fid , $start = 0 , $limit = 5){
 }
 
 function get_new_hot_activity($fid){
-                    //$fids =DB::fetch_all("SELECT DISTINCT authorid FROM ".DB::table('forum_thread')." WHERE fid = $fid and special = 4  ORDER BY dateline DESC");
-                    
-                   // foreach ($fids as $v) {
     
                             $activitylists = DB::fetch_all("SELECT a.* FROM ".DB::table('forum_activity')." as  a , ".DB::table('forum_thread')." as b  WHERE   a.tid = b.tid and b.fid = $fid and b.special = 4 ORDER BY a.starttimefrom DESC limit 1");
                             foreach ($activitylists as $key => $activity) {
@@ -1421,11 +1420,13 @@ function get_new_hot_activity($fid){
                                                 $activitylists[$key]['width'] = $attach['thumb'] && $_G['setting']['thumbwidth'] < $attach['width'] ? $_G['setting']['thumbwidth'] : $attach['width'];
                                         }
                             }
-
-                   //     }
-                           // echo "<pre>";
-                           // print_r($activitylists);exit;
-                        return $activitylists;
+                            //数组调整
+                            foreach($activitylists as $key => $val){
+                                $activitylists[$key]['url'] = "thread-".$activitylists[$key]['tid'].".html";
+                                $activitylists[$key]['thumbpath'] = $activitylists[$key]['thumb'];
+                                $activitylists[$key]['pic'] = $activitylists[$key]['attachurl'];
+                            }
+                            return $activitylists;
                         
 }
 ?>

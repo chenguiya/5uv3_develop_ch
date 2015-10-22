@@ -147,6 +147,7 @@ if(!submitcheck('editsubmit')) {
 				$poll['expiration'] = $pollinfo['expiration'];
 				$poll['overt'] = $pollinfo['overt'];
 				$poll['isimage'] = $pollinfo['isimage'];
+				$poll['redirecturl'] = $pollinfo['redirecturl'];
 				$poll['polloptionid'][] = $temppoll['polloptionid'];
 				$poll['displayorder'][] = $temppoll['displayorder'];
 				$poll['polloption'][] = $temppoll['polloption'];

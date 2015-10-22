@@ -20,11 +20,18 @@ class plugin_fansclub {
 	 * @return boolean
 	 */
 	function checkfansclubcredits($gid) {
-		if (!($result = C::t('#fansclub#plugin_fansclub_balance')->fetch_first($gid))) {
-			return false;
-		} else {
-			return $result['balance_id'];
-		}
+        if(intval($gid) > 0)
+        {
+            if (!($result = C::t('#fansclub#plugin_fansclub_balance')->fetch_first($gid))) {
+                return false;
+            } else {
+                return $result['balance_id'];
+            }
+        }
+        else
+        {
+            return false;
+        }
 	}
 	
 	function getjoinclub($uid, $fid, $type) {
@@ -793,8 +800,11 @@ class plugin_fansclub_group extends plugin_fansclub
 	}
 	//球迷会首页加载内容
 	function group_feed_list() {
+
 		global $_G;		
 		$fid = isset($_GET['fid']) ? intval($_GET['fid']) : showmessage('球迷会不存在');
+        
+        if($fid == 0) return '';
 		
 		require_once libfile('function/feed');
 		require_once libfile('function/home', 'plugin/fansclub');
@@ -822,6 +832,10 @@ class plugin_fansclub_group extends plugin_fansclub
 		foreach ($allfanslist as $fans) {
 			$uids[] = $fans['uid'];
 		}
+        if(count($uids) == 0)
+        {
+            return '';
+        }
 		$struids = implode(',', $uids);
 		$whereall = "`uid` IN (" . $struids . ") AND `icon` IN ('thread','album','blog','friend')";
 		$count = C::t('#fansclub#plugin_home_feed')->count_by_where($whereall);
@@ -841,7 +855,7 @@ class plugin_fansclub_group extends plugin_fansclub
 		}
 		
 		$group = C::t('forum_forum')->fetch_info_by_fid($fid);
-		$level = DB::fetch_first('SELECT * FROM '.DB::table('forum_grouplevel').' WHERE levelid='.$group['level']);
+        $level = DB::fetch_first('SELECT * FROM '.DB::table('forum_grouplevel').' WHERE levelid='.$group['level']);
 		$creditspolicy = dunserialize($level['creditspolicy']);
 		
 		$feedlist = C::t('#fansclub#plugin_home_feed')->fetch_feedlist($where, $page, $pagesize, $_GET['order']);
@@ -1112,6 +1126,8 @@ class plugin_fansclub_group extends plugin_fansclub
 	function group_feed_num_output() {
 		global $_G;		
 		$fid = isset($_GET['fid']) ? intval($_GET['fid']) : showmessage('球迷会不存在');
+        
+        if($fid == 0) return '';
 		
 		require_once libfile('function/feed');
 		require_once libfile('function/home', 'plugin/fansclub');
@@ -1139,6 +1155,10 @@ class plugin_fansclub_group extends plugin_fansclub
 		foreach ($allfanslist as $fans) {
 			$uids[] = $fans['uid'];
 		}
+        if(count($uids) == 0)
+        {
+            return '';
+        }
 		$struids = implode(',', $uids);
 		$whereall = "`uid` IN (" . $struids . ") AND `icon` IN ('thread','album','blog','friend')";
 		$today = strtotime(date('Y-m-d', TIMESTAMP));

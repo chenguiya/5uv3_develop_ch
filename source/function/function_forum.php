@@ -711,7 +711,7 @@ function upload_icon_banner(&$data, $file, $type) {
 			cpmsg($upload->errormessage(), '', 'error');
 		}
 	}
-	if($data['status'] == 3 && $type == 'icon') {
+	if($data['status'] == 3 && ($type == 'icon' || $type == 'qrcode' )) {
 		// $img->Thumb($upload->attach['target'], './'.$uploadtype.'/'.$upload->attach['attachment'], 48, 48, 'fixwr');
 		// 2015-02-15 zhangjh 48*48 变成 150*150 
 		
@@ -720,7 +720,7 @@ function upload_icon_banner(&$data, $file, $type) {
 		{
 			require_once libfile('class/image');
 			$img = new image;
-			$img->Thumb($upload->attach['target'], './'.$uploadtype.'/'.$upload->attach['attachment'], 150, 150, 'fixwr');
+			$img->Thumb($upload->attach['target'], './'.$uploadtype.'/'.$upload->attach['attachment'], 300, 300, 'fixwr');
 		}
 	}
 	return $upload->attach['attachment'];

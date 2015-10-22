@@ -488,14 +488,16 @@ IconIndex=1
 if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 
 	if(!$_G['group']['allowvote']) {
-		showmessage('group_nopermission', NULL, array('grouptitle' => $_G['group']['grouptitle']), array('login' => 1));
+// 		echo 111;die;
+// 		showmessage('group_nopermission', NULL, array('grouptitle' => $_G['group']['grouptitle']), array('login' => 1));
+		showmessage('你不是本球迷会成员，不能参与此次投票，请先加入球迷会。', NULL, NULL, array('login' => 1));
 	} elseif(!empty($thread['closed'])) {
 		showmessage('thread_poll_closed', NULL, array(), array('login' => 1));
 	} elseif(empty($_GET['pollanswers'])) {
 		showmessage('thread_poll_invalid', NULL, array(), array('login' => 1));
 	}
 
-	$pollarray = C::t('forum_poll')->fetch($_G['tid']);
+	$pollarray = C::t('forum_poll')->fetch($_G['tid']);	
 	$overt = $pollarray['overt'];
 	if(!$pollarray) {
 		showmessage('poll_not_found');
@@ -504,7 +506,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	} elseif($pollarray['maxchoices'] && $pollarray['maxchoices'] < count($_GET['pollanswers'])) {
 		showmessage('poll_choose_most', NULL, array('maxchoices' => $pollarray['maxchoices']), array('login' => 1));
 	}
-
+	
 	$voterids = $_G['uid'] ? $_G['uid'] : $_G['clientip'];
 
 	$polloptionid = array();
@@ -552,7 +554,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 		$feed['idtype'] = 'tid';
 		postfeed($feed);
 	}
-
+	
 	if(!empty($_G['inajax'])) {
 		showmessage('thread_poll_succeed', "forum.php?mod=viewthread&tid=$_G[tid]".($_GET['from'] ? '&from='.$_GET['from'] : ''), array(), array('location' => true));
 	} else {

@@ -9,7 +9,7 @@
 		<ul class="cl">
 			<!--{loop $data['data'] $val}-->
 			<li class="cl">
-			    <a href="home.php?mod=space&uid={$val[id]}" class="apl_img" target="_blank"><img src="{$val[fields][avatar_middle]}"><!--{if is_verify($val[id])}--><span class="icon_middle"><!--{/if}--></span></a>
+			    <a href="home.php?mod=space&uid={$val[id]}" class="apl_img" target="_blank" c="1"><img src="{$val[fields][avatar_middle]}"><!--{if is_verify($val[id])}--><span class="icon_middle"><!--{/if}--></span></a>
 			    <div class="apl_box">
 			         <div class="apl_hd">
 			              <p class="apl_name"><a href="home.php?mod=space&uid={$val[id]}" target="_blank">{$val[title]}</a></p>

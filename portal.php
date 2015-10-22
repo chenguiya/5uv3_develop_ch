@@ -14,8 +14,12 @@ require './source/class/class_core.php';
 $discuz = C::app();
 
 if (check_wap()) {
-	header("HTTP/1.1 301 Moved Permanently");
-	dheader("Location: forum.php?mobile=yes");
+    if($_GET['mod'] == 'topic') // 2015-10-20 zhangjh wap设置也可以访问
+    {
+    } else {
+        header("HTTP/1.1 301 Moved Permanently");
+        dheader("Location: forum.php?mobile=yes");
+    }
 }
 
 $cachelist = array('userapp', 'portalcategory', 'diytemplatenameportal');

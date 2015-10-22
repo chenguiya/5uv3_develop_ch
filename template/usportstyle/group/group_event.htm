@@ -1,0 +1,71 @@
+<!--{if $_GET['type'] == 'edit'}-->
+<!--大事记编辑 start-->
+<h3 class="flb ch_flbs">
+    <em fwin="eventEdit">编辑</em>
+    <span><a href="javascript:;" class="flbc" onclick="hideWindow('eventEdit', 0, 1);" title="关闭">关闭</a></span>
+</h3>
+<div class="event_edit">
+     <form enctype="multipart/form-data" action="plugin.php?id=fansclub:fansclub&ac=event&fid=$_G[forum][fid]&type=read" method="post" autocomplete="off">
+           <table border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                      <td><label>标题：</label></td>
+                      <td><input type="text"  name="title" class="input_e" size="36" tabindex="1" value="" /> <span class="rd_evet">*</span></td>
+                  </tr>
+                  <tr>
+                      <td><label>时间：</label></td>
+                      <td id="eventstarttime"><input type="text" class="input_e" name="eventtimefrom[0]" id="eventtimefrom_0" class="px" onclick="showcalendar(event, this, true)" autocomplete="off" value="$event[eventtimefrom]" tabindex="1" /><span class="rd_evet">*</span></td>
+                  </tr>
+                  <tr>
+                      <td><label>URL：</label></td>
+                      <td><input type="text"  name ="path" class="input_e" size="36" tabindex="1" value="" /></td>
+                  </tr>
+                  <tr>
+                      <td colspan="2" style="text-align:center">
+                      	<button type="submit" name="" class="event_ok" value="">确定</button>
+                      	<button type="submit" name="" class="event_no" value="">取消</button>
+                      </td>
+                  </tr>
+           </table>
+     </form>
+</div>
+<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+<!--大事记编辑 end-->
+
+<!--{else}-->
+<!--{template group/group_header}-->
+<div class="boxMain boxMemo">
+	<div class="memoTitle">{$fansclub_name}</div>
+	<div class="memoListMain">
+            
+<!--{if $new_arr}-->
+<!--{loop $new_arr $key $value}-->
+    	<div class="memoList">
+                            <div class="perioda"><span><!--{if $value['title'] }-->{$value['time']}<!--{else}-->{$value['starttimefrom_a']}<!--{/if}--></span></div>
+                                                        <div class="memoLista">
+                                                            <a href="<!--{if $value['title'] }-->{$value['url']}<!--{else}-->thread-{$value['tid']}.html<!--{/if}-->"><div class="memoListT"><!--{if $value['title'] }-->{$value['title']}<!--{else}-->{$value['subject']}<!--{/if}--></div></a>
+                                                                        <div class="memoListTa">
+                                                                        </div>
+                                                                         <!--<ul class="property">-->
+                                                                                 <!--<li>总会员：<font>$value['add_info']['members']</font></li>-->
+                                                                                 <!--<li>图片数：<font>$value['add_info']['pictures']</font></li>-->
+                                                                                 <!--<li>总话题：<font>$value['add_info']['posts']</font></li>-->
+                                                                                 <!--<li>视频数：<font>$value['add_info']['vedios']</font></li>-->
+                                                                         <!--</ul>-->
+                                                        </div>
+                               <div class="clear"></div>
+	</div>
+<!--{/loop}-->
+<!--{/if}-->
+
+
+                    <div class="clear"></div>
+    </div> 
+    <!--编辑 start-->
+    
+    <div class="ch_memo_edit" style="<!--{if $_G[forum][ismoderator] == 0}-->display:none<!--{else}-->display:block<!--{/if}-->"><a href="plugin.php?id=fansclub:fansclub&ac=event&fid=$_G[forum][fid]&type=edit" onclick="showWindow('eventEdit',this.href)"><i class="i_edt"></i>编辑</a></div>
+    
+    <!--编辑 end-->
+</div>
+<div class="jianju60"></div>
+<!--{/if}-->
+

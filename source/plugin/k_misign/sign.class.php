@@ -4,9 +4,10 @@
 class plugin_k_misign{	
 	function _k_misign_showbutton($width) {
 		global $_G;
-		if(empty($_GET['fid'])){
+		if(empty($_GET['fid']) || intval($_GET['fid']) == 0){
 			return '';
 		}
+        
 		$setting = $_G['cache']['plugin']['k_misign'];
 		$setting['groups'] = unserialize($setting['groups']);
 		$setting['ban'] = explode(",",$setting['ban']);

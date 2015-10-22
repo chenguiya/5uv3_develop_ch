@@ -20,6 +20,39 @@ foreach ($forums as $key => $forum) {
 		$forums[$key]['todayposts'] = $thread_fields['todayposts'];
 	}
 }
+
+// 活动 by zhangjh copy from xunrui
+$activitylists = DB::fetch_all("SELECT a.* FROM ".DB::table('forum_activity')." as a , ".DB::table('forum_thread')." as b WHERE a.tid = b.tid and b.special = 4 ORDER BY a.starttimefrom DESC limit 1");
+foreach ($activitylists as $key => $activity)
+{
+    $activitylists[$key]['starttimefrom'] = date('Y-m-d', $activity['starttimefrom']);
+    if ($activity['starttimeto'] && $activity['starttimeto'] >= TIMESTAMP) 
+    {
+        $activitylists[$key]['status'] = true;
+    } else {
+        $activitylists[$key]['status'] = false;
+    }
+    if ($activity['starttimeto']) $activitylists[$key]['starttimeto'] = date('Y-m-d', $activity['starttimeto']);
+    $thread = DB::fetch_first("SELECT * FROM ".DB::table('forum_thread')." WHERE tid=".$activity['tid']);
+
+    $activitylists[$key]['title'] = str_cut($thread['subject'], 57, '...');
+    $attach = C::t('forum_attachment_n')->fetch('tid:'.$activity['tid'], $activity['aid']);
+
+    if($attach['isimage']) {
+        $activitylists[$key]['attachurl'] = ($attach['remote'] ? $_G['setting']['ftp']['attachurl'] : $_G['setting']['attachurl']).'forum/'.$attach['attachment'];
+        $activitylists[$key]['thumb'] = $attach['thumb'] ? getimgthumbname($activitylists[$key]['attachurl']) : $activitylists[$key]['attachurl'];
+        $activitylists[$key]['width'] = $attach['thumb'] && $_G['setting']['thumbwidth'] < $attach['width'] ? $_G['setting']['thumbwidth'] : $attach['width'];
+    }
+
+    //数组调整
+    foreach($activitylists as $key => $val){
+        $activitylists[$key]['url'] = "thread-".$activitylists[$key]['tid'].".html";
+        $activitylists[$key]['thumbpath'] = '';
+        $activitylists[$key]['pic'] = $activitylists[$key]['attachurl'];
+    }
+                            
+}
+    
 //足球圈
 if ($type == 'football' && $op == 'index') {
 	//官方发布
@@ -35,6 +68,7 @@ if ($type == 'football' && $op == 'index') {
 		$recommond_fansclub['data'][$key]['fields'] = dunserialize($fansclub['fields']);
 	}
 	//热门活动
+    /*
 	$hot_activity['data'] = C::t('common_block_item')->fetch_all_by_bid(143, true);
 	foreach ($hot_activity['data'] as $key => $value) {
 		$activity = DB::fetch_first("SELECT * FROM ".DB::table('forum_activity')." WHERE tid=".$value['id']);
@@ -50,6 +84,10 @@ if ($type == 'football' && $op == 'index') {
 			$hot_activity['data'][$key]['status'] = true;
 		}			
 	}
+    */
+    
+    $hot_activity['data'] = $activitylists;
+                            
 // 	var_dump($hot_activity['data']);die;
 	
 	//获取西甲、英超、德甲、意甲、法甲和中超的所有版块id
@@ -130,6 +168,7 @@ if ($type == 'football' && $op == 'index') {
 		$recommond_fansclub['data'][$key]['fields'] = dunserialize($fansclub['fields']);
 	}
 	//热门活动
+    /*
 	$hot_activity['data'] = C::t('common_block_item')->fetch_all_by_bid(144, true);
 	foreach ($hot_activity['data'] as $key => $value) {
 			$activity = DB::fetch_first("SELECT * FROM ".DB::table('forum_activity')." WHERE tid=".$value['id']);
@@ -145,6 +184,8 @@ if ($type == 'football' && $op == 'index') {
 				$hot_activity['data'][$key]['status'] = true;
 			}			
 		}
+        */
+    $hot_activity['data'] = $activitylists;
 	$football_fids = array();
 	foreach ($_G['cache']['forums'] as $forum) {
 		$groupid = get_groupid_by_fid($forum['fid']);

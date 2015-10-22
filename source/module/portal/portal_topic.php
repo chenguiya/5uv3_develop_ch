@@ -45,9 +45,9 @@ $topicid = intval($topic['topicid']);
 
 C::t('portal_topic')->increase($topicid, array('viewnum' => 1));
 
-$navtitle = $topic['title'];
-$metadescription = empty($topic['summary']) ? $topic['title'] : $topic['summary'];
-$metakeywords =  empty($topic['keyword']) ? $topic['title'] : $topic['keyword'];
+$navtitle = "2015曼联vs曼城同城德比-曼彻斯特德比的恩怨历史-5U体育";
+$metadescription = empty($topic['summary']) ? "2015赛季曼彻斯特德比专题，英超双雄曼联与曼城德比的恩怨历史，回顾曼市德比中的经典战役，全方位分析两队球员、战术、教练等，让你全新了解曼切斯特德比": $topic['summary'];
+$metakeywords =  empty($topic['keyword']) ? "曼彻斯特,曼市德比,曼联,曼城,同城德比" : $topic['keyword'];
 
 $attachtags = $aimgs = array();
 
@@ -64,7 +64,102 @@ if(strpos($primaltplname, ':') !== false) {
 	list($tpldirectory, $primaltplname) = explode(':', $primaltplname);
 }
 $topicurl = fetch_topic_url($topic);
-include template('diy:'.$file, NULL, $tpldirectory, NULL, $primaltplname);
+$data_a = get_pic_by_tid(57600);
+$data_b = get_pic_by_tid(57374);
+$data_c = get_pic_by_tid(57348);
+$data_d = get_pic_by_tid(57357);
+$data_e = get_pic_by_tid(57619);
+//曼联帖子
+$data_f = get_pic_by_tid(58230);
+$data_g = get_pic_by_tid(58144);
+$data_h = get_pic_by_tid(58085);
+$data_i = get_pic_by_tid(58018);
+//曼城帖子
+$data_j = get_pic_by_tid(58319);
+$data_k = get_pic_by_tid(58094);
+$data_l = get_pic_by_tid(57986);
+$data_m = get_pic_by_tid(57963);
+//曼联
+$data_n = get_pic_by_tid(58079);
+$data_o = get_pic_by_tid(58099);
+//曼城
+$data_p = get_pic_by_tid(57988);
+$data_q = get_pic_by_tid(58141);
+
+//var_dump($data_a);exit;
+if($_GET['action']){
+        if($_G['uid'] != 0){ 
+            if($_GET['action'] == 'like'){
+                like_ding_cai($_G['uid'],1);
+            }elseif($_GET['action'] == 'unlike'){
+                like_ding_cai($_G['uid'],0);
+            }        
+            $like_num = user_count('like');
+            $unlike_num = user_count('unlike');
+
+            $arr['success']=1;
+            $arr['like'] = $like_num;
+            $arr['unlike'] = $unlike_num;
+            $like_percent = round($like_num/($like_num+$unlike_num),2);
+            $arr['like_percent'] = $like_percent;
+            $arr['unlike_percent'] = (1-$like_percent);
+           // echo "<pre>";
+            //print_r($arr);exit;
+            //var_dump(json_encode($arr));exit;
+            echo json_encode($arr);exit;
+    }else{
+              $arr['success'] = 0;
+              $arr['message'] = "你还没有登录";
+              echo json_encode($arr);exit;
+    }
+}
+
+            $like_num = user_count('like');
+            $unlike_num = user_count('unlike');
+
+            $percent = round($like_num/($like_num+$unlike_num),2);
+            $upercent = round($unlike_num/($like_num+$unlike_num),2);
+            $like_percent= 100*$percent.'%';
+            $unlike_percent =100* ($upercent).'%';
+            $player['like'] = get_player_by_tid(51865);
+            foreach ($player['like'] as $v){
+                if($v['votes'] != 0){
+                    $like_player += $v['votes'];
+                }
+            }
+            foreach ($player['like'] as $key=>$val){
+                $player['like'][$key]['percent'] = round($val['votes']/$like_player,2);
+            }
+            
+            $player['unlike'] = get_player_by_tid(51865);
+             foreach ($player['unlike'] as $v){
+                if($v['votes'] != 0){
+                    $unlike_player += $v['votes'];
+                }
+            }
+            foreach ($player['unlike'] as $key=>$val){
+                $player['unlike'][$key]['percent'] = round($val['votes']/$unlike_player,2);
+            }
+           // echo "<pre>";
+            //print_r($player);exit;
+if(check_wap()) // 2015-10-20 zhangjh wap设置也可以访问
+{
+    
+    $touch_file = DISCUZ_ROOT.$tpldirectory.'/touch/'.$primaltplname.'.htm';
+    if(file_exists($touch_file))
+    {
+        //echo template('touch/'.$primaltplname);exit;
+        include template('touch/'.$primaltplname);
+    }
+    else
+    {
+        die('wap file:'.$tpldirectory.'/touch/'.$primaltplname.'.htm 不存在');
+    }
+}
+else
+{            
+   include template('diy:'.$file, NULL, $tpldirectory, NULL, $primaltplname);
+}
 
 function portaltopicgetcomment($topcid, $limit = 20, $start = 0) {
 	global $_G;
@@ -81,5 +176,62 @@ function portaltopicgetcomment($topcid, $limit = 20, $start = 0) {
 		}
 	}
 	return $data;
+}
+
+//专题顶或踩
+function like_ding_cai($uid,$type){
+    if(!user_played($uid)){
+                $query = C::t('portal_topic_five')->insert_type_by_uid($uid,$type);
+                return $query ? true : false;
+    }
+}
+
+//判断用户是否已经顶或踩过
+function user_played($uid){
+    global $_G;
+    $uid = intval($uid);
+    if($uid){
+        $query = C::t('portal_topic_five')->fetch_all_by_uid($uid);
+        return !empty($query) ?  true : false ;
+    }
+    return false;
+}
+
+function user_count($action){
+    $action = trim($action);
+    if($action){
+         $query = C::t('portal_topic_five')->count_ding_cai($action);
+          return $query[0]['count(*)'];
+    }
+}
+
+//取球员数据
+function get_player_by_tid($tid){
+    $tid = intval($tid);
+    if($tid){
+        $query = C::t('forum_polloption')->fetch_all_by_tid($tid);
+        return $query;
+    }
+}
+
+//取帖子图片
+function get_pic_by_tid($tid){
+        $tid = intval($tid);
+    if($tid){        
+        $title = C::t('forum_thread')->fetch_all_by_tid($tid);        
+
+        $query = C::t('forum_attachment')->fetch_all_by_tid($tid);        
+
+        $tableid = $query[0]['tableid'];
+        $res = C::t('forum_attachment_n')->fetch_all_by_tid($tableid,$tid);
+
+          foreach ($title as $key=>$val){
+                    $data['subject'] = $val['subject'];  
+            }    
+            $data['tid'] = $res[0]['tid'];
+            $data['attachment'] = $res[0]['attachment'];
+
+           return $data;
+    }
 }
 ?>

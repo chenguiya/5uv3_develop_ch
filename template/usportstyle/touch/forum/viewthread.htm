@@ -19,7 +19,7 @@
         </div>
     </div>
 </nav>
-<div id="share_$_G[tid]" display="true" class="shareMeBox">
+<div id="share_$_G[tid]" display="true" class="shareMeBox" style="display:none">
      <div class="share_hds">
           <span>分享到：</span>
           <a class="frigh_cuo" href="javascript:void(0)" onclick="display.hide();"><i class="fontweb_icon ic_cuo"></i></a>
@@ -33,64 +33,10 @@
 
 </div>
 </div>
-<script>
-    $(function() {
-        $(function($) {
-            var bdshare_content = '';
-            var bdshare_desc = '';
-            var bdshare_pic = '';
-            var bdshare_url = '';
-            var share_thread = function() {
-                $('a.share_thread').off('click.share_thread');
-                $('a.share_thread').on('click.share_thread', function() {
-                    bdshare_url = location.href;
-                    bdshare_pic = $('.message img:first').attr('src');
-                    
-                    if (typeof bdshare_pic == 'string' && bdshare_pic.search(/http/i) == -1) {
-                        bdshare_pic = location.hostname + '/' + bdshare_pic;
-                    }
-                    bdshare_content = $('#elecnation_post_title').text();
-                    bdshare_desc = '';
-                });
-            };
-            var baiduShare = function() {
-                window._bd_share_config = {
-                    common: {
-                        bdText: '【$_G[forum_thread][subject]',
-                        bdDesc: '',
-                        bdUrl: '',
-                        bdPic: '',
-                        bdSign: '',
-                        bdMini: '',
-                        bdMiniList: '',
-                        onBeforeClick: function(cmd, config) {
-                            config.bdPic = bdshare_pic;
-                            config.bdUrl = bdshare_url || location.href;
-                            config.bdDesc = bdshare_desc;
-                            return config;
-                        },
-                        bdPopupOffsetLeft: '',
-                        bdPopupOffsetTop: '',
-                        bdCustomStyle: ''
-                    },
-                    share: [
-                        {tag: 'share_thread', bdSize:32}
-                    ]
-                };
-                with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
-            };
-            
-            share_thread();
-            baiduShare();
-        }($));
-
-});
-</script>
-
 <!-- end of navbar-->
 <div class="ch_mians" style="padding-top:44px;">
      <section class="postlist" id="postBoxd">
-	          <div id="elecnation_post_title">
+	          <div id="elecnation_post_title" data-title="【$_G[forum_thread][subject]">
         	<!--{if $_G['forum_thread']['typeid'] && $_G['forum']['threadtypes']['types'][$_G['forum_thread']['typeid']]}-->
 				[{$_G['forum']['threadtypes']['types'][$_G['forum_thread']['typeid']]}]
             <!--{/if}-->

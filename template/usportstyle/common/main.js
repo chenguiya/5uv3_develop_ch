@@ -48,6 +48,10 @@ jQuery(function($){
 	}else if (navRet) {
 		$(".chnav.cl").find("li").eq(navRetMap[navRet[0]]).addClass("a");
 	}
+	// 帮助菜单
+	if ('http://www.5usport.com/group/128' === location.href) {
+		$(".chnav.cl").find("li:eq(3)").removeClass("a");
+	}
 
 	// 下拉弹出菜单 @tvrcgo
 	$.fn.dropdown = function(options){
@@ -670,6 +674,15 @@ jQuery(function($){
 				chilidList.hide();
 				$(chilidList[index]).show();
 				$(".parter_Tag span").removeClass("active");
+				$(this).addClass("active");
+			});
+		});
+		$(".coor_nav span").each(function(index, elen) {
+			var chilidList = $(".coor_ul").children();
+			$(elen).mouseover(function() {
+				chilidList.hide();
+				$(chilidList[index]).show();
+				$(".coor_nav span").removeClass("active");
 				$(this).addClass("active");
 			});
 		});

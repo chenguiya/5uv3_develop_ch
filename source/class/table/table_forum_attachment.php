@@ -57,7 +57,10 @@ class table_forum_attachment extends discuz_table
 	public function count_by_tid($tid) {
 		return $tid ? DB::result_first("SELECT COUNT(*) FROM %t WHERE tid=%d", array($this->_table, $tid)) : 0;
 	}
-
+        //          add by rui 2015-10-22
+                       public function fetch_all_by_tid($tid) {
+		return $tid ? DB::fetch_all("SELECT * FROM %t WHERE tid=%d", array($this->_table, $tid)) : 0;
+	}
 	public function fetch_by_aid_uid($aid, $uid) {
 		$query = DB::query("SELECT * FROM %t WHERE aid=%d AND uid=%d", array($this->_table, $aid, $uid));
 		return DB::fetch($query);

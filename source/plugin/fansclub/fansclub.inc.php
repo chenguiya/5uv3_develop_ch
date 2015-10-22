@@ -68,7 +68,7 @@ if($fid > 0)
 	
 }
 
-$arr = array('index', 'apply','shooter','leaguescore', 'apply_support', 'ajax', 'friendship', 'lists', 'ajax_thread', 'home', 'event', 'live', 'live2', 'mobile_register', 'verify', '404', 'about','index2'); // 只允许的action
+$arr = array('rights', 'index', 'apply','shooter','leaguescore', 'apply_support', 'ajax', 'friendship', 'lists', 'ajax_thread', 'home', 'event', 'live', 'live2', 'mobile_register', 'verify', '404', 'about','index2'); // 只允许的action
 if(!in_array($ac, $arr)) showmessage('undefined_action');
 
 $file = DISCUZ_ROOT.'./source/plugin/fansclub/module/index/'.$ac.'.inc.php'; // 检查模块是否存在
@@ -216,6 +216,12 @@ if($_G['style']['tplname'] == '5U体育模版套系')
 			$metakeywords = $_G['forum']['name'].'视频';
 			$metadescription = '汇聚了'.$_G['forum']['name'].'每一个球迷所发的视频都将在这里呈现，通过这里就可以一览'.$_G['forum']['name'].'各种信息资源。';
 		}
+                		elseif(trim($_GET['type']) == 'activity')
+		{
+			$navtitle = $_G['forum']['name'].'球迷活动_'.$_G['forum']['name'].'活动交流平台_'.$_G['setting']['bbname'].'球迷会';
+			$metakeywords = $_G['forum']['name'].'，球迷，活动';
+			$metadescription = $_G['forum']['name'].'球迷活动交流平台，为'.$_G['forum']['name'].'球迷争取福利的平台，提供各种线上线下有趣的球迷会活动，大家赶快来参加吧。';
+		}
 	}
 	elseif($ac == 'event')
 	{                                                                         
@@ -239,9 +245,13 @@ if($_G['style']['tplname'] == '5U体育模版套系')
 	{		
                                                 if(defined('IN_MOBILE')){
                                                         include template('touch/group/group_event');
-                                                }else{
-                                                       $html_group_hd_top = fansclub_group_hd_top();
-                                                        include template('extend/desktop/club_memo');
+                                                }elseif($_GET['type'] == 'edit' ){
+                                                            include template('group/group_event');
+                                                }elseif($_GET['type'] == 'read'){
+                                                    dheader("Location:http://".$_SERVER['HTTP_HOST']."/fans/event/".$fid);
+                                                 }else{
+                                                        $html_group_hd_top = fansclub_group_hd_top();
+                                                        include template('group/group_event');
                                                 }		
 	}
 	elseif ($ac == 'lists')
@@ -295,6 +305,18 @@ if($_G['style']['tplname'] == '5U体育模版套系')
 
 		include template('live/live');
 	}
+    elseif($ac == 'rights')
+    {
+        $type = $_GET['type'];
+        if(defined('IN_MOBILE'))
+        {
+            include template('touch/extend/rights/rights_'.$type);
+        }
+        else
+        {
+            die('notthing');
+        }
+    }
     elseif($ac == 'mobile_register')
     {
         include template('extend/desktop/mobile_register');

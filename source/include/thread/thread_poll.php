@@ -27,6 +27,7 @@ if($count = C::t('forum_polloption')->fetch_count_by_tid($_G['tid'])) {
 	$expiration = $options['expiration'];
 	$overt = $options['overt'];
 	$voterscount = $options['voters'];
+	$redirecturl = $options['redirecturl'];
 
 	$query = C::t('forum_polloption')->fetch_all_by_tid($_G['tid'], 1);
 	$colors = array('E92725', 'F27B21', 'F2A61F', '5AAF4A', '42C4F5', '0099CC', '3365AE', '2A3591', '592D8E', 'DB3191');

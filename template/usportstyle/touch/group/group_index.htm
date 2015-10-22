@@ -85,12 +85,6 @@
 	{{ } }}
 </script>
 <script>
-	$(".tab-body").delegate(".row", "click", function () {
-		window.location.href = $(this).attr("href");
-	});
-	$(".tab-body").delegate(".imagesh", "click", function () {
-		window.location.href = $(this).attr("href");
-	});
 	$(".ylist .row .s").each(function () {
 		var me = $(this);
 		if (me.text().indexOf('\u524D') > 0) {

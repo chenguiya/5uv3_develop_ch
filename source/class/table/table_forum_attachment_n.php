@@ -135,7 +135,10 @@ class table_forum_attachment_n extends discuz_table
 	public function fetch_all_by_pid_width($tableid, $pids, $width) {
 		return DB::fetch_all("SELECT * FROM %t WHERE %i AND isimage IN ('1', '-1') AND width>=%d", array($this->_get_table($tableid), DB::field('pid', $pids), $width));
 	}
-
+        //            add by rui 2015-10-22
+	public function fetch_all_by_tid($tableid, $tid) {
+		return DB::fetch_all("SELECT * FROM %t WHERE  tid=$tid limit 1 ", array($this->_get_table($tableid)));
+	}
 	public function get_total_filesize() {
 		$attachsize = 0;
 		for($i = 0;$i < 10;$i++) {

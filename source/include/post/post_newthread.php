@@ -316,7 +316,7 @@ if(!submitcheck('topicsubmit', 0, $seccodecheck, $secqaacheck)) {
 	if ($_GET['fansclubid']) {
 		$values['mygid'] = intval($_GET['fansclubid']);
 	}
-	//$values extend by daminy 2015-04-24,返回贴子内容
+	//$values extend by daming 2015-04-24,返回贴子内容
 	$values['message'] = $params['message'];
 	
 	// 用户发帖后清除帖子列表缓存 by zhangjh 2015-08-26

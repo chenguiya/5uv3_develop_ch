@@ -135,6 +135,23 @@
 							<!--{/if}-->
 						</td>
 					</tr>
+                                                                                                                <!--二维码 start-->
+                                        				<tr>
+						<th>{lang group_twocode}</th>
+						<td>
+							<input type="file" id="twocode" class="pf vm" size="25" name="twocode" />
+							<p class="d">
+								{lang group_twocode_resize} &nbsp;
+								<!--{if $_G[setting][group_imgsizelimit]}-->
+									{lang group_image_filesize_limit}
+								<!--{/if}--></p>
+							<!--{if $_G['forum']['qrcode']}-->
+								<img width="48" height="48" alt="" class="vm" style="margin-right: 1em;" src="data/attachment/group/$_G[forum][qrcode]?{TIMESTAMP}" />
+							<!--{/if}-->
+						</td>
+					</tr>
+                                                                                                                <!--二维码 end-->
+                                        
 					<tr>
 					    <td colspan="2" style="border-top:1px solid #e0e0e0;padding:0;"></td>
 					</tr>

@@ -1,19 +1,19 @@
-<!--{if $hot_activity}-->
+<!--{if $hot_activity['data']}-->
 <div class="chComd clearfix">
 	<div class="chHeader">
 		<h1 class="fl bt chComd_title">热门活动</h1>
-		<a href="fans/activity/$_G['fid']" class="fr chComd_more">更多</a>
+<a href="{if $_G['fid'] > 0}fans/activity/$_G['fid']{else}activity/{/if}" target="_blank" class="fr chComd_more">更多</a>
 	</div>
 	<div class="sidebar chComd">
-		<!--{loop $hot_activity $val}-->
+		<!--{loop $hot_activity['data'] $val}-->
 	    <div class="cell">	    
-	        <a href="thread-{$val[tid]}.html" target="_blank" title="{$val[title]}"><img class="img" <!--{if $val[thumb]}-->src="data/attachment/{$val[thumb]}"<!--{else}-->src="data/attachment/{$val[attachurl]}"<!--{/if}--> width="320" height="170" alt="{$val[title]}">	
+	        <a href="{$val[url]}" target="_blank" title="{$val[title]}"><img class="img" <!--{if $val[thumbpath]}-->src="data/attachment/{$val[thumbpath]}"<!--{else}-->src="{$val[pic]}"<!--{/if}--> width="320" height="170" alt="{$val[title]}">	
 	        <div class="desc">
 	           <span class="time">{$val[starttimefrom]}<!--{if $val[starttimeto]}-->&nbsp;-&nbsp;{$val[starttimeto]}<!--{/if}--></span>
 				<!--{if $val[status]}-->
-				<a href="thread-{$val[tid]}.html" class="btn-join" target="_blank">立即参加</a>
+				<a href="{$val[url]}" class="btn-join" target="_blank">立即参加</a>
 				<!--{else}-->
-				<a href="thread-{$val[tid]}.html" class="btn-over" target="_blank">已结束</a>
+				<a href="{$val[url]}" class="btn-over" target="_blank">已结束</a>
 				<!--{/if}-->
 	        </div>
 	    </div>

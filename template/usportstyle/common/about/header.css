@@ -1,0 +1,80 @@
+body, html { padding: 0;margin: 0;font-size: 12px;font-family:SimSun; line-height:24px; background:#fdfdfd;}
+.headerBg{ background:#fff; overflow:hidden;}
+ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form,img,input,select {margin: 0px;padding: 0px;}
+input,select{outline:none;}
+
+ul, li { list-style:none;}
+
+img {border:none;}
+
+.clear{clear:both; height:0; overflow:hidden; font-size:0;}
+.clearfix,.q,.ch_q{zoom: 1;}
+.clearfix:after,.q:after,.ch_q:after{content: '\0020';display: block;height: 0;clear: both;}
+.blank10{ height:10px; visibility:hidden; font-size:0; display:block; clear:both;}
+.blank20{ height:20px; visibility:hidden; font-size:0; display:block; clear:both;}
+a{ color:#333; text-decoration:none;}
+a:hover{ color:#eb6100;text-decoration:underline;}
+
+.fl{ float:left;}
+.fr{ float:right;}
+.box{ width:1000px; margin:0 auto; clear:both;}
+/*头部*/
+
+.logo{height:45px; position:relative; width: 210px;background:none; }
+.logo a{ display:block;  height:97px; float:left;}
+.logo .indexico{background:url(images/logoico.png) no-repeat; width:52px; height:23px; display:none; position:absolute; top:-9px; right:-55px;}
+
+.menuA{ height:50px; line-height:50px; margin-left:20px; margin-top:47px;}
+.menuA li{ float:left; font-size:20px;font-family:Microsoft YaHei; float:left; display:inline; margin-left:5px;}
+.menuA li a{ color:#000000; display:block; padding:0 15px;}
+.menuA li.active a{ color:#fff; background:#eb6100; text-decoration:none;}
+.menuA li a:hover{ color:#fff; background:#eb6100; text-decoration:none;}
+
+.menuB{ background:#eb6100; clear:both; height:40px; line-height:40px;}
+.menuB li{ float:left; display:inline; margin-right:13px;}
+.menuB a{ color:#fff; font-size:14px; font-family:Microsoft YaHei;}
+.menuB ul{ display: block;}
+.menuB ul.active{display: block;}
+
+.menuMain{ border-bottom:1px solid #fafafa; padding-top:25px; height:75px; overflow:hidden;}
+.menuMain .logo a{ color:#eb6100; font-size:24px;font-family:Microsoft YaHei; line-height:45px; margin-right:20px;}
+.menuMain .logo a:hover{ text-decoration:none;}
+.menuC{ font-size:18px;}
+.menuC li{ display:inline;font-family:Microsoft YaHei; line-height:40px;}
+.menuC li a{ color:#000; margin-right:15px;}
+.menuC li a:hover{color:#eb6100;}
+
+
+.footer{ background:#595656; padding:20px 0; width:100%; color:#fff;}
+.footer a{ color:#fff;}
+.footerLogo{ border-right:1px solid #6a6767; height:90px;}
+.logoFooter{ display:block; background:url(../images/header/logo_f.png) top; width:203px; height:90px; float:left;}
+.logo_ting{ background:url(../images/header/logo_ting.png) no-repeat; width:95px; height:90px; float:left; margin-left:15px; margin-right:18px;}
+.copyrightMain{padding-left:18px; padding-right:5px; width:505px; border-left:1px solid #4c4949; }
+.copyrightMain p{ margin:0;line-height:190%;}
+.copyrightMain a{ margin:0 2px;}
+.footerLink{ padding-top:25px; position:relative;}
+.openBox{ position:absolute; background:url(../images/header/jian3.png) center bottom no-repeat; padding-bottom:7px; width:104px; height:119px; text-align:center; display:none;}
+.openBg{ background:#7e7e7e; width:104px; border-radius:3px; color:#fff; padding-top:4px; height:115px;font-family:Microsoft YaHei;}
+.openBg p{ margin-bottom:3px;}
+.sinaBox{ top:-100px; left:-100px; background:none; background:#fff; width:auto; height:auto;}
+.sinaBox span{ background:#fff; display:block; width:220px; height:120px;}
+.code_wx{ top:-102px; left:5px;}
+.code_sj{ top:-102px; left:50px;}
+.footerLink a{ display:inline-block;width:36px; height:35px; margin-right:6px;}
+.footerLink .sinaIco{ background:url(../images/header/footerico.png) no-repeat;}
+.footerLink .weixinIco{ background:url(../images/header/footerico.png) -44px 0 no-repeat;}
+.footerLink .iphoneIco{ background:url(../images/header/footerico.png) -85px 0 no-repeat;}
+.footerLink .sinaIco:hover{ background:url(../images/header/footerico.png) 0 -46px no-repeat;}
+.footerLink .weixinIco:hover{ background:url(../images/header/footerico.png) -44px -46px no-repeat;}
+.footerLink .iphoneIco:hover{ background:url(../images/header/footerico.png) -85px -46px no-repeat;}
+
+.head_K { background-color: #595656 !important; }
+.jianju10{ height:10px; clear:both; font-size:0px; overflow:hidden;}
+.jianju{ height:20px; clear:both; font-size:0px; overflow:hidden;}
+.jianju15{ height:15px; clear:both; font-size:0px; overflow:hidden;}
+.jianju10{ height:10px; clear:both; font-size:0px; overflow:hidden;}	
+	
+.jianju25{ height:25px; clear:both; font-size:0px; overflow:hidden;}	
+.jianju30{ height:30px; clear:both; font-size:0px; overflow:hidden;}	
+.jianju45{ height:45px; clear:both; font-size:0px; overflow:hidden;}	

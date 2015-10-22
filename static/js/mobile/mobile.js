@@ -46,13 +46,57 @@ $(function(){
       }
   });
 
-  //@lazyload
-  $(".lazyload").lazyload({
-    placeholder : "static/image/grey.gif",
-    threshold : 200 ,
-    effect : "fadeIn",
-    skip_invisible:false
-  });
+  //share
+  $(function($) {
+            var bdshare_content = '';
+            var bdshare_desc = '';
+            var bdshare_pic = '';
+            var bdshare_url = '';
+            var share_thread = function() {
+                $('a.share_thread').off('click.share_thread');
+                $('a.share_thread').on('click.share_thread', function() {
+                    bdshare_url = location.href;
+                    bdshare_pic = $('.message img:first').attr('src');
+                    
+                    if (typeof bdshare_pic == 'string' && bdshare_pic.search(/http/i) == -1) {
+                        bdshare_pic = location.hostname + '/' + bdshare_pic;
+                    }
+                    bdshare_content = $('#elecnation_post_title').attr('data-title');
+                    bdshare_desc = '';
+                });
+            };
+            var baiduShare = function() {
+                window._bd_share_config = {
+                    common: {
+                        bdText: '',
+                        bdDesc: '',
+                        bdUrl: '',
+                        bdPic: '',
+                        bdSign: '',
+                        bdMini: '',
+                        bdMiniList: '',
+                        onBeforeClick: function(cmd, config) {
+                            config.bdText = bdshare_content;
+                            config.bdPic = bdshare_pic;
+                            config.bdUrl = bdshare_url || location.href;
+                            config.bdDesc = bdshare_desc;
+                            return config;
+                        },
+                        bdPopupOffsetLeft: '',
+                        bdPopupOffsetTop: '',
+                        bdCustomStyle: ''
+                    },
+                    share: [
+                        {tag: 'share_thread', bdSize:32}
+                    ]
+                };
+                with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+            };
+            
+            share_thread();
+            baiduShare();
+        }($));
+
   
 });
 

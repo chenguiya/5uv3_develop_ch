@@ -53,7 +53,7 @@ $arr_param['uid'] = intval(trim($_GET['uid']));
 $op = trim($_GET['op']);
     
 $bln_check = passport_check_sign($_GET);
-if($op == 'qrcodelogin')
+if($op == 'qrcodelogin' || trim($_GET['token']) != '')
 {
     $bln_check = TRUE;
 }

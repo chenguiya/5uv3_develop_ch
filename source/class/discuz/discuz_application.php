@@ -752,13 +752,10 @@ class discuz_application extends discuz_base{
 
 		if(!$this->var['mobile'] && !$unallowmobile) {
 			if($mobileflag) {
-				dheader("Location:misc.php?mod=mobile");
+				dheader("Location:http://".$this->var['setting']['domain']['app']['default'].$_SERVER['REQUEST_URI']);
+				return false;
 			}
 		}
-		
-// 		$arr = $this->is_weixin_passport($_SERVER['QUERY_STRING']);
-// 		var_dump($arr);
-// 		die;
 
 		if(($nomobile && !$this->is_weixin_passport($_SERVER['QUERY_STRING'])) || (!$this->var['setting']['mobile']['mobileforward'] && !$mobileflag)) {
 			if($_SERVER['HTTP_HOST'] == $this->var['setting']['domain']['app']['mobile'] && $this->var['setting']['domain']['app']['default']) {

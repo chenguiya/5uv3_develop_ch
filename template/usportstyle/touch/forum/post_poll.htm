@@ -62,7 +62,13 @@
 		<p class="mbn">
 			<label for="maxchoices">{lang post_poll_allowmultiple}</label>
 			<input type="text" name="maxchoices" id="maxchoices" class="px pxs" value="{if $_GET[action] == 'edit' && $poll[maxchoices]}$poll[maxchoices]{else}1{/if}" tabindex="1" /> {lang post_option}
-		</p>			
+		</p>
+		<!--{if $_G['adminid'] == '1'}-->
+		<p class="mbn">
+			<label for="maxchoices">跳转地址</label>
+			<input type="text" name="redirecturl" id="redirecturl" class="px pxs" value="{if $_GET[action] == 'edit' && !empty($poll[redirecturl])}$poll[redirecturl]{/if}" placeholder="输入投票成功后的跳转地址" tabindex="1" />
+		</p>
+		<!--{/if}-->			
 			<input type="hidden" name="expiration" id="polldatas" value="{if $_GET[action] == 'edit'}{if !$poll[expiration]}0{elseif $poll[expiration] < 0}{lang poll_close}{elseif $poll[expiration] < TIMESTAMP}{lang poll_finish}{else}{echo (round(($poll[expiration] - TIMESTAMP) / 86400))}{/if}{/if}" />		
 			<input type="hidden" name="visibilitypoll" id="visibilitypoll" value="1" />		
 			<input type="hidden" name="overt" id="overt" value="1" />

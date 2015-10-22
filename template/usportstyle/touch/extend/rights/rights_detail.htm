@@ -1,0 +1,60 @@
+<!--{template extend/rights/rights_header}-->
+<form name="information" id="information" method="post" action="plugin.php?id=fansclub&ac=rights&op=pay" >
+<input type="hidden" name="formhash" value="{FORMHASH}" autocomplete="off"/>
+<input type="hidden" name="gid" value="001" />
+<input type="hidden" name="gname" value="梅西签名足球" />
+<input type="hidden" name="realprice" value="973" />
+<input type="hidden" name="marketprice" value="1173" />
+<input type="hidden" name="handlekey" value="payfor" />
+<input type="hidden" name="paysubmitchk" value="true" />
+<input type="hidden" name="addressedit" value="false" />
+<div class="rgt_detail">
+     <div class="swiper-container" id="swiper-container2">
+          <div class="swiper-wrapper">
+               <div class="swiper-slide"><img src="template/usportstyle/touch/common/images/rights/detail_1.jpg"></div>
+               <div class="swiper-slide"><img src="template/usportstyle/touch/common/images/rights/detail_2.jpg"></div>
+          </div>
+          <div id="num-pagination">
+               <span id="active-num">&nbsp;</span>/<span id="all-num">&nbsp;</span>
+          </div>
+     </div>
+	<div class="detail_price">
+		<div class="ch_price">
+		     <span class="promotion"><em>￥</em>973.00</span>
+		     <span class="original">市价<del>¥1137.00</del></span>
+		</div>
+		<a class="popup btn_buy" href="#detail_52">立即购买</a>
+	</div>
+	<div class="detail_area">
+		<div class="de_name">梅西签名足球</div>
+		<div class="de_tit">5U体育icons独家代理阿根廷主场世界杯版梅西亲笔签名球衣相关的签名产品我们都是拥有完善的认证以及证书的，相信你收到产品后，里面也有相关证书，认证证书上有防伪标签，以作保障。</div>
+		<div class="de_text">提供商：广州市晌网文化传播有限公司</div>
+		<a class="de_service" href="plugin.php?id=fansclub&ac=rights&type=contact&mobile=2"><i class="fontweb_icon ic_service"></i>联系客服</a>
+	</div>
+	<!--填写资料页面 start--> 
+	<div id="detail_52" popup="true">
+		<div class="ch_infomation">
+			<div class="infomat_hd">请填写快递信息</div>
+			<div class="infomat_bd">
+				<p><input type="text" id="name" name="name" class="txt_infor" placeholder="真实姓名" value="" /></p>
+				<p><input type="text" id="mobile" name="mobile" class="txt_infor" placeholder="手机号码" value="" /></p>
+				<p><textarea id="address" name="address" value="" class="txt_text" placeholder="邮寄地址"></textarea></p>
+				<p><button type="submit" id="paysubmit" name="paysubmit" value="1" class="infot_btn" ><span>微信支付</span></button><a href="javascript:void(0);" onclick="popup.close();" class="infot_a" style="margin-left:0.5rem;">取消</a></p>
+			</div>
+		</div>
+	</div>
+	<!--填写资料页面 end-->
+</div>
+</form>
+<script> 
+	var mySwiper2 = new Swiper('#swiper-container2',{
+     	onInit: function(swiper){
+     		document.getElementById("active-num").innerHTML=swiper.activeIndex+1;
+     		document.getElementById("all-num").innerHTML=swiper.slides.length;
+     	},
+     	onSlideChangeEnd: function(swiper){
+     		document.getElementById("active-num").innerHTML=swiper.activeIndex+1;
+     	}
+     })  
+</script>	
+<!--{template common/footer}-->

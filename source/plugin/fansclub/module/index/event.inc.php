@@ -6,10 +6,25 @@ if(!defined('IN_DISCUZ')) exit('Access Denied');
 require_once libfile('function/extends');
 include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';
 $fid = $_GET['fid'] ? $_GET['fid'] + 0 : 0;
+foreach ($_G['forum']['moderators'] as $key =>$value){
+       $uid = $key;
+}
 if(defined('IN_MOBILE')){
         $wap_bigevent = array();  
         $wap_bigevent = wap_get_big_event($fid);
-}  else {
+}  elseif($_GET['type'] == 'read') {
+    
+        $title = trim($_POST['title']) ? trim($_POST['title']) : '' ;
+        //时间
+        $event = array();
+        $event = !empty($_POST['eventtimefrom']) ? $_POST['eventtimefrom'] : '' ;
+        $log_time = strtotime($event[0]);
+       
+        $path = trim($_POST['path']) ? trim($_POST['path']) : '' ;
+        
+        $arr = add_big_event($fid,$uid,$title,$log_time,$path) ;
+       
+}else{
         $fid_info = C::t('forum_forum')->fetch_info_by_fid($fid);
         if(count($fid_info) == 0)
         {
@@ -20,18 +35,85 @@ if(defined('IN_MOBILE')){
 
         $arr_year_split = array(); // 年分割点
         $arr_big_event = get_big_event($fid, $arr_year_split);
-}
+        //活动
+        $arr_event_activity = wap_get_big_event($fid);
+        //$a[] = $arr_big_event[count($arr_big_event)- 1];
+        
+        $arr_ = get_add_big_event($fid);
+        if(!empty($arr_)){
+                $arr_add = array();             
+                foreach ($arr_ as $k=>$v){
+                    if($v['title'] != ''){
+                        $arr_add[$k]['time'] = date("Y.m.d",$v['log_time']);
+                        $arr_add[$k]['title'] = $v['title'];
+                        $arr_add[$k]['url'] = $v['url'];
+                        $arr_add[$k]['log_time'] = $v['log_time'];
+                     }else{
+                         continue;
+                    }
+                }
 
+                //$a_add = array();
+               //foreach ($a as $key=>$val){
+                   
+                 //  $val['time'] = strtr($val['time'], ".", "-");
+                //   $a_add[$key]['log_time'] = strtotime($val['time']);
+                //   $a_add[$key]['title'] = $val['title'];
+                //   $a_add[$key]['time'] = $val['time'];
+            //   },$a_add
+                    $new_arr = array_merge ($arr_add,$arr_event_activity);        
+                    $log_time  = array();
+                    foreach ($new_arr as $v) {
+                       $log_time[] = $v['log_time'];
+                    }
+                   array_multisort($log_time, SORT_DESC, $new_arr);
+            }else{
+                    //$a_add = array();
+                   // foreach ($a as $key=>$val){
+                   //     $a_add[$key]['log_time'] = strtotime($val['time']);
+                  //      $a_add[$key]['title'] = $val['title'];
+                  //      $a_add[$key]['time'] = $val['time'];
+                //    }                array_merge (    ,$a_add);
+                    $new_arr = $arr_event_activity;        
+                    //$log_time  = array();
+                   // foreach ($new_arr as $v) {
+                   //    $log_time[] = $v['log_time'];
+                  //  }
+                  // array_multisort($log_time, SORT_DESC, $new_arr);
+            }
+
+}
+//添加大事记
+function add_big_event($fid,$uid,$title,$log_time,$path)
+{
+     if(intval($fid) <= 0) return array();
+     $title = trim($title);
+     $log_time = intval($log_time);
+     if($title == '' || $log_time ==''){
+         return array();
+     }
+     $path = trim($path);
+     $result = C::t('#fansclub#plugin_fansclub_event_log')->add_big_event_by_fid($fid,$uid,$title,$log_time,$path); // 添加事件
+     return $result;
+}
+//取添加大事记
+function get_add_big_event($fid){
+    $arr_event = C::t('#fansclub#plugin_fansclub_event_log')->fetch_all_by_fid($fid, 0, 9, 'DESC'); // 取所有事      
+    return $arr_event;
+}
 // 取大事
 function get_big_event($fid, &$arr_year_split)
 {
-	global $config;
-	$arr_event = C::t('#fansclub#plugin_fansclub_event_log')->fetch_all_by_fid($fid, 0, 0, 'ASC'); // 取所有事
-	
-	//echo "<pre>";
+	global $config;          
+                      $arr_event = C::t('#fansclub#plugin_fansclub_event_log')->fetch_all_by_fid($fid, 0, 0, 'ASC'); // 取所有事             
+                       if($_GET['type'] == 'read'){
+                           $arr_event = C::t('#fansclub#plugin_fansclub_event_log')->fetch_all_by_fid($fid, 0, 9, 'DESC'); // 取所有事        
+                           return $arr_event;
+                       }
+                       //echo "<pre>";
 	//print_r($arr_event);
 	//exit;
-	
+
 	$arr_return = array();
 	$arr_first = array();
 	$init_remark = $init_remark2 = '';
@@ -226,9 +308,9 @@ function get_big_event($fid, &$arr_year_split)
 	}
 	return $arr_return;
 }
-
 //wap 大事记
-function wap_get_big_event($fid){
+function wap_get_big_event($fid)
+{
     //echo $fid;exit;
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         $pagesize = isset($_GET['pagesize']) ? intval($_GET['pagesize']) : 9;
@@ -239,6 +321,8 @@ function wap_get_big_event($fid){
                             foreach ($activitylists as $key => $activity) {
       //                              取开始月 - 日
                                         $activitylists[$key]['starttimefrom'] = date('m-d', $activity['starttimefrom']);
+                                        $activitylists[$key]['log_time'] = $activity['starttimefrom'];
+                                        $activitylists[$key]['starttimefrom_a'] = date('Y.m.d', $activity['starttimefrom']);
       //                                  if ($activity['starttimeto'] && $activity['starttimeto'] >= TIMESTAMP) {
       //                                         $activitylists[$key]['status'] = true;
      //                                   } else {

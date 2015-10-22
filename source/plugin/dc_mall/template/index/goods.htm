@@ -26,10 +26,10 @@
 					<div id="goodsinfo_middle_txt" class="z">
 						<div id="goodsinfo_title">{$goods['name']}</div>
 						<form method="post" action="plugin.php?id=dc_mall&action=pay" id="payfor" onsubmit="<!--{if $hookcheck===true}-->showWindow('payfor', 'payfor', 'post');<!--{/if}-->return false;">
-						<input type="hidden" name="formhash" value="{FORMHASH}" autocomplete="off"/>
-						<input type="hidden" name="gid" value="{$goods['id']}" />
-						<input type="hidden" name="handlekey" value="payfor" />
-						<input type="hidden" name="submitchk" value="true" />
+							<input type="hidden" name="formhash" value="{FORMHASH}" autocomplete="off"/>
+							<input type="hidden" name="gid" value="{$goods['id']}" />
+							<input type="hidden" name="handlekey" value="payfor" />
+							<input type="hidden" name="submitchk" value="true" />
 							<div id="price_box">
 								<div>{lang dc_mall:index_goods_price}<strong style="color:#FF6600; font-size:16px;"><!--{if $goods['credit']}--><!--{if $_G['dc_mall']['vip']['user']}--><del>{$goods['credit']}</del><!--{else}-->{$goods['credit']}<!--{/if}--></strong> <!--{if $goods['creditid']==99}-->{lang dc_mall:yuan}<!--{else}-->{$_G['setting']['extcredits'][$goods['creditid']]['title']} <!--{/if}--><!--{else}--><!--{if $_G['dc_mall']['vip']['user']}--><del>{lang dc_mall:free}</del><!--{else}-->{lang dc_mall:free}<!--{/if}--></strong><!--{/if}--></div>
 								<!--{if $_G['dc_mall']['vip']['open']}-->

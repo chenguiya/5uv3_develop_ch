@@ -162,8 +162,13 @@
 					<div class="ch_view_time cl">
 					     <span>					     
 						<!--{if $_G[forum_thread][authorid] && $_G[forum_thread][author]}-->
-						  发表在&nbsp;&nbsp;<a href="group/{$_G[fid]}">{$_G[forum][name]}频道</a>&nbsp;&nbsp;{eval echo dgmdate($_G['forum_thread']['dateline'], 'u', '9999', getglobal('setting/dateformat').' H:i:s');}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="home.php?mod=space&username=$_G[forum_thread][lastposter]" title="$_G[forum_thread][author]" class="thread-replyer">$_G[forum_thread][lastposter]</a>&nbsp;&nbsp;最后回复&nbsp;&nbsp;{eval echo dgmdate($_G['forum_thread']['lastpost'], 'u', '9999', getglobal('setting/dateformat').' H:i:s');}
-						<!--{else}-->
+                        <!--{if $_G['forum']['type'] == 'sub'}-->
+                          发表在&nbsp;&nbsp;<a href="fans/topic/{$_G[fid]}/">{$_G[forum][name]}球迷会</a>
+                        <!--{else}-->
+						  发表在&nbsp;&nbsp;<a href="group/{$_G[fid]}/">{$_G[forum][name]}频道</a>
+						<!--{/if}-->
+                        &nbsp;&nbsp;{eval echo dgmdate($_G['forum_thread']['dateline'], 'u', '9999', getglobal('setting/dateformat').' H:i:s');}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="home.php?mod=space&username=$_G[forum_thread][lastposter]" title="$_G[forum_thread][author]" class="thread-replyer">$_G[forum_thread][lastposter]</a>&nbsp;&nbsp;最后回复&nbsp;&nbsp;{eval echo dgmdate($_G['forum_thread']['lastpost'], 'u', '9999', getglobal('setting/dateformat').' H:i:s');}
+                        <!--{else}-->
                         <!--{if $_G['forum']['ismoderator']}-->
                             <a href="home.php?mod=space&uid=$_G[forum_thread][authorid]">{lang anonymous}</a>
                         <!--{else}-->

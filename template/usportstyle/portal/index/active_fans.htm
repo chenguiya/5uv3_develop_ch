@@ -1,7 +1,7 @@
 <!--{block return}-->
 <div class="modul_con">
      <div class="in_hdbox">
-          <span class="hdspan">活跃粉丝</span>
+          <span class="hdspan">七天活跃粉丝</span>
           <!--<a href="plugin.php?id=extends&action=userchange&hash={FORMHASH}" onclick="changeBody(this);" class="mores">换一换</a>-->
      </div>
      <div class="active_Con">
@@ -9,7 +9,7 @@
 			<!--{loop $data['data'] $val}-->
 			<li class="cl">
 				<span class="actico act{$val[displayorder]}"></span>
-				<a href="{$val[url]}" class="act_img" target="_blank"><img src="{$val[fields][avatar_middle]}"><!--{if is_verify($val[id])}--><span class="icon_small"></span><!--{/if}--></a>
+				<a href="{$val[url]}" class="act_img" target="_blank" c="1"><img src="{$val[fields][avatar_middle]}"><!--{if is_verify($val[id])}--><span class="icon_small"></span><!--{/if}--></a>
 				<div class="act_middle">
 					<p class="actname"><a href="{$val[url]}" target="_blank">{$val[title]}</a>&nbsp;&nbsp;&nbsp;<em>积分：</em>{$val[fields][credits]}</p>
 					<p class="acttit">{$val[fields][bio]}</p>

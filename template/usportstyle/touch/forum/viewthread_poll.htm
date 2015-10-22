@@ -1,5 +1,3 @@
-<div id="postmessage_$post[pid]" class="postmessage">$post[message]</div>
-
 <div class="poll_chbd">
 <form id="poll" name="poll" method="post" autocomplete="off" action="forum.php?mod=misc&action=votepoll&fid=$_G[fid]&tid=$_G[tid]&pollsubmit=yes{if $_GET[from]}&from=$_GET[from]{/if}&quickforward=yes&mobile=2" >
 	<input type="hidden" name="formhash" value="{FORMHASH}" />
@@ -28,7 +26,7 @@
            
             </p>
         <!--{/loop}-->
-        	<input type="submit" name="pollsubmit" id="pollsubmit" class="pollsubmits" value="{lang submit}" />       
+        	<input type="submit" name="pollsubmit" id="pollsubmit" class="formdialog pollsubmits" value="{lang submit}" />       
 	<!--{else}-->
         <div class="poll_conman">
              <p><strong>投票结果如下：</strong></p>
@@ -44,7 +42,10 @@
             </div>
         <!--{/loop}-->
         </div>
+        <!--{if $redirecturl && $_G['tid'] == 58251}--><a class="pollsubmits" href="http://{$redirecturl}">领取滴滴红包</a><!--{/if}-->
 	<!--{/if}-->
-	</div>
+	</div>	
 </form>
 </div>
+
+<div id="postmessage_$post[pid]" class="postmessage">$post[message]</div>

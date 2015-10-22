@@ -1,3 +1,337 @@
 <!--{template common/header_special}-->
-<div>PC德比专题</div>
-<!--{template common/footer}-->
+<link rel="stylesheet" href="$_G['config'][static]/topic/css_derby.css">
+<div class="topicStl">
+    <div class="derShare"><span>分享到：</span>
+        <a href="" class="dspic dermms" title="分享到微信"></a>
+        <a href="" class="dspic derqzone" title="分享到空间"></a>
+        <a href="" class="dspic dersina" title="分享到新浪微博"></a>
+    </div>
+    <div class="derby derby01">
+        <div class="fire_ice">
+            <div class="fire_icon"><span><i>{$like_num}</i>人</span></div>
+            <div class="fi_icon"><i style="width:{$like_percent}"></i><em style="width:{$unlike_percent}"></em></div>
+            <div class="ice_icon"><span style="color:#bcd5fd;text-align:center;"><i>{$unlike_num}</i>人</span></div>
+        </div>
+    </div>
+    <div class="derby derby02">
+        <div class="keyman">
+            <div class="keyman_l">
+                <a class="km_button">阵容实力分析</a>
+
+                <div class="km_aside">
+             <!--{if $player}-->       
+                    <ul>
+                        <!--{loop $player['like'] $val}-->
+                        <li>
+                            <span class="as_aside">{$val['polloption']}</span>
+                            <span class="km_bar" data-radio="{$val['percent']}"><em></em></span>
+                            <span class="as_aside"><i>{$val['votes']}</i>人支持</span>
+                        </li>
+                        <!--{/loop}-->
+                    </ul>
+              <!--{/if}-->
+                </div>
+            </div>
+            <div class="keyman_r">
+                <a class="km_button km_button_2">阵容身价分析</a>
+
+                <div class="km_aside">
+                    <!--{if $player}-->   
+                    <ul>
+                        <!--{loop $player['unlike'] $val}-->
+                        <li>
+                            <span class="as_aside">{$val['polloption']}</span>
+                            <span class="km_bar" data-radio="{$val['percent']}"><em style="background-color:#398fed;"></em></span>
+                            <span class="as_aside" style="color:#bbd5ff;"><i>{$val['votes']}</i>人支持</span>
+                        </li>
+                        <!--{/loop}-->
+                    </ul>
+                    <!--{/if}-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="derby derby03">
+        <div class="derby_bord">
+            <div class="derby_pt derby_pt1">
+                <div class="derby_box dn active">
+                    <!--{if $data_a}-->
+                    <a href="thread-{$data_a['tid']}.html">
+                        <div class="main_pic"><img
+                                src="data/attachment/forum/{$data_a['attachment']}" alt="{$data_a['subject']}"></div>
+                        <div class="main_cont">{$data_a['subject']}</div>
+                    </a>
+                    <!--{/if}-->
+                </div>
+            </div>
+            <div class="derby_pt derby_pt2">
+                <div class="derby_box dn">
+                    
+                    <!--{if $data_b}-->
+                    <a href="thread-{$data_b['tid']}.html">
+                        <div class="main_pic"><img
+                                src="data/attachment/forum/{$data_b['attachment']}" alt="{$data_b['subject']}"></div>
+                        <div class="main_cont">{$data_b['subject']}</div>
+                    </a>
+                    <!--{/if}-->
+                    
+                </div>
+            </div>
+            <div class="derby_pt derby_pt3">
+                <div class="derby_box dn">
+                    <!--{if $data_c}-->
+                    <a href="thread-{$data_c['tid']}.html">
+                        <div class="main_pic"><img
+                                src="data/attachment/forum/{$data_c['attachment']}" alt="{$data_c['subject']}"></div>
+                        <div class="main_cont">{$data_c['subject']}</div>
+                    </a>
+                    <!--{/if}-->
+                </div>
+            </div>
+            <div class="derby_pt derby_pt4">
+                <div class="derby_box dn">
+                    <!--{if $data_d}-->
+                    <a href="thread-{$data_d['tid']}.html">
+                        <div class="main_pic"><img
+                                src="data/attachment/forum/{$data_d['attachment']}" alt="{$data_d['subject']}"></div>
+                        <div class="main_cont">{$data_d['subject']}</div>
+                    </a>
+                    <!--{/if}-->
+                </div>
+            </div>
+            <div class="derby_pt derby_pt5">
+                <div class="derby_box dn">
+                    <!--{if $data_e}-->
+                    <a href="thread-{$data_e['tid']}.html">
+                        <div class="main_pic"><img
+                                src="data/attachment/forum/{$data_e['attachment']}" alt="{$data_e['subject']}"></div>
+                        <div class="main_cont">{$data_e['subject']}</div>
+                    </a>
+                    <!--{/if}-->
+                </div>
+            </div>
+            <div class="derby_pt6">
+                <div class="derby_box">
+                    <a href="">
+                        <div class="main_pic"><img src="template/usportstyle/common/topic/2015derby/prize.png" alt="">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="derby derby04">
+        <div class="derby_main">
+            <div class="card_l fl">
+                <h1>帖子</h1>
+
+                <div class="card_cont">
+                    <!--{if $data_f}-->
+                    <a href="thread-{$data_f['tid']}.html">
+                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_f['attachment']}" alt="{$data_f['subject']}">
+                            <div class="main_cont">{$data_f['subject']}</div>
+                        </div>
+                    </a>
+                    <!--{/if}-->
+                    <!--{if $data_g}-->
+                    <a href="thread-{$data_g['tid']}.html">
+                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_g['attachment']}" alt="{$data_g['subject']}">
+                            <div class="main_cont">{$data_g['subject']}</div>
+                        </div>
+                    </a>
+                    <!--{/if}-->
+                    <!--{if $data_h}-->
+                    <a href="thread-{$data_h['tid']}.html">
+                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_h['attachment']}" alt="{$data_h['subject']}">
+                            <div class="main_cont">{$data_h['subject']}</div>
+                        </div>
+                    </a>
+                    <!--{/if}-->
+                    <!--{if $data_i}-->
+                    <a href="thread-{$data_i['tid']}.html">
+                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_i['attachment']}" alt="{$data_i['subject']}">
+                            <div class="main_cont">{$data_i['subject']}</div>
+                        </div>
+                    </a>
+                    <!--{/if}-->
+                </div>
+            </div>
+            <div class="card_r fr">
+                <h1>帖子</h1>
+
+                <div class="card_cont">
+                    <!--{if $data_j}-->
+                    <a href="thread-{$data_j['tid']}.html">
+                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_j['attachment']}" alt="{$data_j['subject']}">
+                            <div class="main_cont">{$data_j['subject']}</div>
+                        </div>
+                    </a>
+                    <!--{/if}-->
+                    <!--{if $data_k}-->
+                    <a href="thread-{$data_k['tid']}.html">
+                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_k['attachment']}" alt="{$data_k['subject']}">
+                            <div class="main_cont">{$data_k['subject']}</div>
+                        </div>
+                    </a>
+                    <!--{/if}-->
+                    <!--{if $data_l}-->
+                    <a href="thread-{$data_l['tid']}.html">
+                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_l['attachment']}" alt="{$data_l['subject']}">
+                            <div class="main_cont">{$data_l['subject']}</div>
+                        </div>
+                    </a>
+                    <!--{/if}-->
+                    <!--{if $data_f}-->
+                    <a href="thread-{$data_m['tid']}.html">
+                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_m['attachment']}" alt="{$data_m['subject']}">
+                            <div class="main_cont">{$data_m['subject']}</div>
+                        </div>
+                    </a>
+                    <!--{/if}-->
+                </div>
+            </div>
+        </div>
+        <div class="derby_main">
+            <div class="card_l fl">
+                <h1>精华</h1>
+
+                <div class="card_cont">
+                    <!--{if $data_n}-->
+                    <a href="thread-{$data_n['tid']}.html">
+                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_n['attachment']}" alt="{$data_n['subject']}">
+                            <div class="main_cont">{$data_n['subject']}</div>
+                        </div>
+                    </a>
+                    <!--{/if}-->
+                    <!--{if $data_o}-->
+                    <a href="thread-{$data_o['tid']}.html">
+                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_o['attachment']}" alt="{$data_o['subject']}">
+                            <div class="main_cont">{$data_o['subject']}</div>
+                        </div>
+                    </a>
+                    <!--{/if}-->
+                </div>
+            </div>
+            <div class="card_r fr">
+                <h1>精华</h1>
+
+                <div class="card_cont">
+                    <!--{if $data_p}-->
+                    <a href="thread-{$data_p['tid']}.html">
+                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_p['attachment']}" alt="{$data_p['subject']}">
+                            <div class="main_cont">{$data_p['subject']}</div>
+                        </div>
+                    </a>
+                    <!--{/if}-->
+                    <!--{if $data_q}-->
+                    <a href="thread-{$data_q['tid']}.html">
+                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_q['attachment']}" alt="{$data_q['subject']}">
+                            <div class="main_cont">{$data_q['subject']}</div>
+                        </div>
+                    </a>
+                    <!--{/if}-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="derby derby05">
+        <div class="derby_main">
+            <div class="video">
+                <i></i>
+                <video width="480" height="320">
+                    <source src="http://player.pptv.com/v/NVqNClonzQtu7FQ.swf" type="video/mp4"/>
+                    <source src="http://player.pptv.com/v/NVqNClonzQtu7FQ.swf" type="video/ogg"/>
+                </video>
+                <!-- <span class="pstop"><img src="template/usportstyle/common/topic/2015derby/play_stop.png" alt=""></span> -->
+                <button></button>
+                <em></em>
+            </div>
+        </div>
+    </div>
+    <div class="tp_footer">
+    	Copyright © 2009-2014 5usport.com, All rights reserved. 广州市晌网文化传播有限公司 粤ICP备11095914号
+    </div>
+</div>
+
+<script>
+    var ySlider = function (el) {
+        var self = {}, _radio = 0,
+                _element, _progressEl,
+                _render = function () {
+                    _progressEl.style.width = Math.round(_element.getBoundingClientRect().width * _radio) + 'px';
+                };
+        self.setRadio = function (radio) {
+            _radio = radio;
+            _render();
+        };
+        self.getRadio = function () {
+            return this.radio;
+        };
+        if (el) {
+            _element = el;
+            _radio = _element.dataset.radio ? _element.dataset.radio : 0;
+            _progressEl = _element.querySelector('em');
+            _element.slider = self;
+
+            _progressEl.style.webkitTransition = "all .5s ease-in-out";
+            _progressEl.style.MozTransition = "all .5s ease-in-out";
+            _progressEl.style.msTransition = "all .5s ease-in-out";
+            _progressEl.style.OTransition = "all .5s ease-in-out";
+            _progressEl.style.transition = "all .5s ease-in-out";
+        } else {
+            console.error('create kSlider error');
+        }
+        _render();
+
+        return self;
+    };
+
+    jQuery('.km_bar').each(function () {
+        ySlider(this);
+    });
+
+    var derbyPt = jQuery('.derby_bord').find('.derby_pt');
+	derbyPt.each(function(){
+    		jQuery(this).hover(function(){
+    			jQuery(this).children().addClass('active').parent().siblings().children().removeClass('active');
+    	});
+	})
+    
+
+    var win = jQuery(window),
+            derShare = jQuery('.derShare');
+    win.scroll(function () {
+        if (win.scrollTop() >= 163) {
+            derShare.css('position', 'fixed');
+        } else {
+            derShare.css('position', 'absolute');
+        }
+    });
+
+
+    function changeFireIceRadio(data) {
+        jQuery('.fire_icon i').text(data.like);
+        jQuery('.ice_icon i').text(data.unlike);
+        var container = jQuery('.fi_icon');
+        container.find('i').css('width', data.like_percent * 100 + '%');
+        container.find('em').css('width', (1 - data.like_percent) * 100 + '%');
+    }
+    jQuery('.fire_icon').click(function () {
+        jQuery.get('/portal.php?mod=topic&topicid=5&action=like', function (data) {
+            if (data.success) {
+                changeFireIceRadio(data);
+            } else {
+                jQuery('#btn_login_simple').click();
+            }
+        });
+    });
+    jQuery('.ice_icon').click(function () {
+        jQuery.get('/portal.php?mod=topic&topicid=5&action=unlike', function (data) {
+            if (data.success) {
+                changeFireIceRadio(data);
+            } else {
+                jQuery('#btn_login_simple').click();
+            }
+        });
+    });
+</script>
