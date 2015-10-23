@@ -62,6 +62,11 @@ if($op == 'add') {
 		showmessage('follow_followed_ta');
 	}
 	$type = !$special ? 'add' : 'special';
+    
+     // add by zhangjh 2010-10-23 关注写LOG
+    include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php');
+    fansclub_use_log('follow_add');
+        
 	showmessage('follow_add_succeed', dreferer(), array('fuid' => $followuid, 'type' => $type, 'special' => $special, 'from' => !empty($_GET['from']) ? $_GET['from'] : 'list'), array('closetime' => '2', 'showmsg' => '1'));
 } elseif($op == 'del') {
 	$_GET['handlekey'] = $_GET['handlekey'] ? $_GET['handlekey'] : 'followmod';

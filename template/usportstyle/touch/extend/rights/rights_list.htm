@@ -1,46 +1,16 @@
 <!--{template extend/rights/rights_header}-->
 <div class="ymain">
 	<ul class="rightList">
-		<li>
-			<img src="template/usportstyle/touch/images/rights/goodsName.jpg" alt="">
-			<div>商品名：梅西世界杯阿根廷签名球梅西世界杯阿根廷签名球...</div>
+		<!--{if $goods_list}-->
+		<!--{loop $goods_list $goods}-->
+		<li href="plugin.php?id=fansclub&ac=rights&type=detail&gid=$goods[goodsid]&mobile=2">
+			<img src="$goods[thumb]" alt="$goods[gname]">
+			<div>商品名：$goods[gname]</div>
 		</li>
-		<li>
-			<img src="template/usportstyle/touch/images/rights/goodsName.jpg" alt="">
-			<div>商品名：梅西世界杯阿根廷签名球梅西世界杯阿根廷签名球...</div>
-		</li>
-		<li>
-			<img src="template/usportstyle/touch/images/rights/goodsName.jpg" alt="">
-			<div>商品名：梅西世界杯阿根廷签名球梅西世界杯阿根廷签名球...</div>
-		</li>
-		<li>
-			<img src="template/usportstyle/touch/images/rights/goodsName.jpg" alt="">
-			<div>商品名：梅西世界杯阿根廷签名球梅西世界杯阿根廷签名球...</div>
-		</li>
-		<li>
-			<img src="template/usportstyle/touch/images/rights/goodsName.jpg" alt="">
-			<div>商品名：梅西世界杯阿根廷签名球梅西世界杯阿根廷签名球...</div>
-		</li>
-		<li>
-			<img src="template/usportstyle/touch/images/rights/goodsName.jpg" alt="">
-			<div>商品名：梅西世界杯阿根廷签名球梅西世界杯阿根廷签名球...</div>
-		</li>
-		<li>
-			<img src="template/usportstyle/touch/images/rights/goodsName.jpg" alt="">
-			<div>商品名：梅西世界杯阿根廷签名球梅西世界杯阿根廷签名球...</div>
-		</li>
-		<li>
-			<img src="template/usportstyle/touch/images/rights/goodsName.jpg" alt="">
-			<div>商品名：梅西世界杯阿根廷签名球梅西世界杯阿根廷签名球...</div>
-		</li>
-		<li>
-			<img src="template/usportstyle/touch/images/rights/goodsName.jpg" alt="">
-			<div>商品名：梅西世界杯阿根廷签名球梅西世界杯阿根廷签名球...</div>
-		</li>
-		<li>
-			<img src="template/usportstyle/touch/images/rights/goodsName.jpg" alt="">
-			<div>商品名：梅西世界杯阿根廷签名球梅西世界杯阿根廷签名球...</div>
-		</li>
+		<!--{/loop}-->
+		<!--{else}-->
+		<li>暂无商品出售</li>
+		<!--{/if}-->		
 	</ul>
 </div>
 <!--{template common/footer}-->

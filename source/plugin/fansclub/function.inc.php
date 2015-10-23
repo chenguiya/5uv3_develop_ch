@@ -2,6 +2,122 @@
 include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function/function_home.php');
 // 一些通用函数
 
+// 先检查是否为wap代理，准确度高
+function fansclub_check_wap()
+{
+    if(stristr($_SERVER['HTTP_VIA'],"wap"))
+    {
+        return true;
+    }
+    // 检查浏览器是否接受 WML.
+    elseif(strpos(strtoupper($_SERVER['HTTP_ACCEPT']),"VND.WAP.WML") > 0){
+        return true;
+    }
+    //检查USER_AGENT
+    elseif(preg_match('/(blackberry|configuration\/cldc|hp |hp-|htc |htc_|htc-|iemobile|kindle|midp|mmp|motorola|mobile|nokia|opera mini|opera |Googlebot-Mobile|YahooSeeker\/M1A1-R2D2|android|iphone|ipod|mobi|palm|palmos|pocket|portalmmm|ppc;|smartphone|sonyericsson|sqh|spv|symbian|treo|up.browser|up.link|vodafone|windows ce|xda |xda_)/i', $_SERVER['HTTP_USER_AGENT'])){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+// 用户行为记录 by zhangjh 2015-10-23
+function fansclub_use_log($log_type = '')
+{
+    global $_G;
+    $is_wap = fansclub_check_wap();
+    
+    /*
+    require_once libfile('function/cache');
+    save_syscache('qudao_fid', 113);
+    updatecache('qudao_fid');
+    save_syscache('qudao_from', 'weixin');
+    updatecache('qudao_from');
+    */
+    
+    loadcache('qudao_fid');
+    loadcache('qudao_from');
+    $qudao_fid = intval(trim($_G['cache']['qudao_fid']));
+    $qudao_from = trim($_G['cache']['qudao_from']);
+    
+    // echo "<pre>";
+    // print_r($_G);
+    $arr_data = array();
+    $arr_data['log_time'] = TIMESTAMP;
+    $arr_data['is_wap'] = $is_wap ? 1 : 0;
+    $arr_data['qudao_from'] = $qudao_from;
+    $arr_data['qudao_fid'] = $qudao_fid;
+    $arr_data['log_type'] = $log_type;
+    
+    $arr_data['g_uid'] = $_G['uid'];
+    $arr_data['g_username'] = $_G['username'];
+    $arr_data['g_clientip'] = $_G['clientip'];
+    $arr_data['g_basescript'] = $_G['basescript'];
+    $arr_data['g_mod'] = $_G['mod'];
+    $arr_data['g_fid'] = $_G['fid'];
+    $arr_data['g_tid'] = $_G['tid'];
+    $arr_data['g_action_action'] = $_G['action']['action'];
+    $arr_data['g_action_fid'] = $_G['action']['fid'];
+    $arr_data['g_action_tid'] = $_G['action']['tid'];
+    $arr_data['g_sessoin_sid'] = $_G['session']['sid'];
+    $arr_data['g_sessoin_lastactivity'] = $_G['session']['lastactivity'];
+    $arr_data['g_cookie_saltkey'] = $_G['cookie']['saltkey'];
+    $arr_data['g_cookie_lastvisit'] = $_G['cookie']['lastvisit'];
+    
+    $arr_data['s_server_addr'] = $_SERVER['SERVER_ADDR'];
+    $arr_data['s_server_name'] = $_SERVER['SERVER_NAME'];
+    $arr_data['s_http_host'] = $_SERVER['HTTP_HOST'];
+    $arr_data['s_request_uri'] = $_SERVER['REQUEST_URI'];
+    $arr_data['s_php_self'] = $_SERVER['PHP_SELF'];
+    $arr_data['s_remote_addr'] = $_SERVER['REMOTE_ADDR'];
+    $arr_data['s_http_user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+    $arr_data['s_http_referer'] = $_SERVER['HTTP_REFERER'];
+    //echo TIMESTAMP;
+    //$_G['session']['qudiaoid'] = 119;
+    // print_r($arr_data);
+    //print_r($_G['session']);
+    //print_r($_G['cookie']);
+    
+
+    
+/*
+CREATE TABLE `group_plugin_fansclub_user_log` (
+  `log_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `log_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '日志时间',
+  `is_wap` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否wap访问',
+  `log_type` char(20) NOT NULL DEFAULT '' COMMENT '日志类型',
+  `qudao_from` char(10) NOT NULL DEFAULT '' COMMENT '渠道来源',
+  `qudao_fid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '渠道ID',
+  `g_uid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '_G的uid',
+  `g_username` char(25) NOT NULL DEFAULT '',
+  `g_clientip` char(25) NOT NULL DEFAULT '',
+  `g_basescript` char(35) NOT NULL DEFAULT '',
+  `g_mod` char(35) NOT NULL DEFAULT '',
+  `g_fid` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `g_tid` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `g_action_action` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `g_action_fid` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `g_action_tid` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `g_sessoin_sid` char(10) NOT NULL DEFAULT '',
+  `g_sessoin_lastactivity` int(11) unsigned NOT NULL DEFAULT '0',
+  `g_cookie_saltkey` char(10) NOT NULL DEFAULT '',
+  `g_cookie_lastvisit` int(11) unsigned NOT NULL DEFAULT '0',
+  `s_server_addr` char(100) NOT NULL DEFAULT '' COMMENT '_SERVER的server_addr',
+  `s_server_name` char(100) NOT NULL DEFAULT '',
+  `s_http_host` char(100) NOT NULL DEFAULT '',
+  `s_request_uri` char(255) NOT NULL DEFAULT '',
+  `s_php_self` char(100) NOT NULL DEFAULT '',
+  `s_remote_addr` char(25) NOT NULL DEFAULT '',
+  `s_http_user_agent` char(255) NOT NULL DEFAULT '',
+  `s_http_referer` char(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`log_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='球迷会用户行为记录表';
+*/
+C::t('#fansclub#plugin_fansclub_user_log')->insert($arr_data);
+  
+}
+
 /**
  * touch端上传头像处理
  */

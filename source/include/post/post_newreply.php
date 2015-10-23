@@ -422,6 +422,11 @@ if(!submitcheck('replysubmit', 0, $seccodecheck, $secqaacheck)) {
 
 	$return = $modpost->newreply($params);
 	$pid = $modpost->pid;
+    
+    // add by zhangjh 2010-10-23 回复写LOG
+    include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php');
+    fansclub_use_log('thread_relay');
+    
 
 	if($specialextra) {
 

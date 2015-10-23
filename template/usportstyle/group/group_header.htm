@@ -37,7 +37,7 @@ _acK({aid:108811,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
                  <div class="name">
                      <h3>{$_G[forum][name]}</h3>
                      <!--{if check_joined_fansclub($_GET['fid'])}-->
-                     <p class="fans_btn"><a class="attes_on" href="javascript:;" onclick="showDialog('确定退出球迷会吗？','confirm','',function(){location.href='forum.php?mod=group&action=out&fid=$_GET[fid]'});" title="退出"></a></p>
+                     <p class="fans_btn"><a class="attes_on" href="javascript:;" onclick="showDialog('确定退出球迷会吗？','confirm','',function(){location.href='{$_G[siteurl]}forum.php?mod=group&action=out&fid=$_GET[fid]'});" title="退出"></a></p>
                      <!--{else}-->
                      <p class="fans_btn"><a class="attes" href="forum.php?mod=group&action=join&fid={$_GET[fid]}" title="加入"></a></p>
                      <!--{/if}-->

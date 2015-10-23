@@ -44,10 +44,16 @@ if(!empty($_G['setting']['makehtml']['flag']) && $topic['htmlmade'] && !isset($_
 $topicid = intval($topic['topicid']);
 
 C::t('portal_topic')->increase($topicid, array('viewnum' => 1));
+if($topicid == 5){
+    $navtitle = "2015曼联vs曼城同城德比-曼彻斯特德比的恩怨历史-5U体育";
+    $metadescription = empty($topic['summary']) ? "2015赛季曼彻斯特德比专题，英超双雄曼联与曼城德比的恩怨历史，回顾曼市德比中的经典战役，全方位分析两队球员、战术、教练等，让你全新了解曼切斯特德比": $topic['summary'];
+    $metakeywords =  empty($topic['keyword']) ? "曼彻斯特,曼市德比,曼联,曼城,同城德比" : $topic['keyword'];
+}else{
+    $navtitle = empty($topic['title']) ? $topic['title'] : $topic['title'] ;
+    $metadescription = empty($topic['summary']) ? $topic['summary'] : $topic['summary'];
+    $metakeywords = empty($topic['keyword']) ? $topic['keyword'] : $topic['keyword'];
+}
 
-$navtitle = "2015曼联vs曼城同城德比-曼彻斯特德比的恩怨历史-5U体育";
-$metadescription = empty($topic['summary']) ? "2015赛季曼彻斯特德比专题，英超双雄曼联与曼城德比的恩怨历史，回顾曼市德比中的经典战役，全方位分析两队球员、战术、教练等，让你全新了解曼切斯特德比": $topic['summary'];
-$metakeywords =  empty($topic['keyword']) ? "曼彻斯特,曼市德比,曼联,曼城,同城德比" : $topic['keyword'];
 
 $attachtags = $aimgs = array();
 
@@ -64,11 +70,12 @@ if(strpos($primaltplname, ':') !== false) {
 	list($tpldirectory, $primaltplname) = explode(':', $primaltplname);
 }
 $topicurl = fetch_topic_url($topic);
-$data_a = get_pic_by_tid(57600);
-$data_b = get_pic_by_tid(57374);
-$data_c = get_pic_by_tid(57348);
-$data_d = get_pic_by_tid(57357);
-$data_e = get_pic_by_tid(57619);
+
+$data_a = get_pic_by_tid(57600,1);
+$data_b = get_pic_by_tid(57374,1);
+$data_c = get_pic_by_tid(57348,1);
+$data_d = get_pic_by_tid(57357,1);
+$data_e = get_pic_by_tid(57619,1);
 //曼联帖子
 $data_f = get_pic_by_tid(58230);
 $data_g = get_pic_by_tid(58144);
@@ -94,8 +101,8 @@ if($_GET['action']){
             }elseif($_GET['action'] == 'unlike'){
                 like_ding_cai($_G['uid'],0);
             }        
-            $like_num = user_count('like');
-            $unlike_num = user_count('unlike');
+            $like_num = user_count('like')+404;
+            $unlike_num = user_count('unlike')+358;
 
             $arr['success']=1;
             $arr['like'] = $like_num;
@@ -114,14 +121,14 @@ if($_GET['action']){
     }
 }
 
-            $like_num = user_count('like');
-            $unlike_num = user_count('unlike');
+            $like_num = user_count('like')+404;
+            $unlike_num = user_count('unlike')+358;
 
             $percent = round($like_num/($like_num+$unlike_num),2);
             $upercent = round($unlike_num/($like_num+$unlike_num),2);
             $like_percent= 100*$percent.'%';
             $unlike_percent =100* ($upercent).'%';
-            $player['like'] = get_player_by_tid(51865);
+            $player['like'] = get_player_by_tid(58347);
             foreach ($player['like'] as $v){
                 if($v['votes'] != 0){
                     $like_player += $v['votes'];
@@ -131,7 +138,7 @@ if($_GET['action']){
                 $player['like'][$key]['percent'] = round($val['votes']/$like_player,2);
             }
             
-            $player['unlike'] = get_player_by_tid(51865);
+            $player['unlike'] = get_player_by_tid(58349);
              foreach ($player['unlike'] as $v){
                 if($v['votes'] != 0){
                     $unlike_player += $v['votes'];
@@ -215,21 +222,33 @@ function get_player_by_tid($tid){
 }
 
 //取帖子图片
-function get_pic_by_tid($tid){
+function get_pic_by_tid($tid, $is_org = 0){
+    global $_G;
         $tid = intval($tid);
     if($tid){        
-        $title = C::t('forum_thread')->fetch_all_by_tid($tid);        
+        $title = C::t('forum_thread')->fetch($tid);        
 
         $query = C::t('forum_attachment')->fetch_all_by_tid($tid);        
 
         $tableid = $query[0]['tableid'];
         $res = C::t('forum_attachment_n')->fetch_all_by_tid($tableid,$tid);
 
-          foreach ($title as $key=>$val){
-                    $data['subject'] = $val['subject'];  
-            }    
+       //  foreach ($title as $key=>$val){
+       //             $data['subject'] = $val['subject'];  
+       //     }    
+            //$res[0]['aid'];
             $data['tid'] = $res[0]['tid'];
-            $data['attachment'] = $res[0]['attachment'];
+           // $data['attachment'] = $res[0]['attachment'];
+           if($is_org == 1)
+           {
+               $data['attachment'] = $_G['setting']['attachurl'].'forum/'.$res[0]['attachment'];
+           }
+           else
+           {
+            $data['attachment'] = getforumimg($res[0]['aid'], 0, 420, 280, 1);
+           }
+//print_r($data['attachment']);exit;
+            $data['subject'] = $title['subject'];
 
            return $data;
     }

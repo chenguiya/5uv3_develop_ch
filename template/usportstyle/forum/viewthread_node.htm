@@ -51,6 +51,10 @@ $postshowavatars = !($_G['setting']['bannedmessages'] & 2 && ($post['memberstatu
 							config.bdPic = bdshare_pic;
 							config.bdUrl = bdshare_url || location.href;
 							config.bdDesc = bdshare_desc;
+                            
+                            // add by zhangjh 2010-10-23 分享写LOG
+                            $.get("{$_G['siteurl']}plugin.php", { 'id' : 'fansclub:api', 'ac' : 'passport', 'op' : 'share', 'cmd' : cmd});
+                            
 							return config;
 						},
 //    onAfterClick:function(cmd,config){return  option.onAfterClick(cmd);},

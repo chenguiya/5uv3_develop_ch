@@ -26,20 +26,20 @@
 .fi_icon em{background-color: #053583;width: 50%;height: 30px !important;display: inline-block;right:0;z-index: 3;}
 .fire_ice .fi_icon{-webkit-box-flex:1.0;-webkit-flex:1.0;flex:1.0;}
 
-.keyman{min-width: 22.85rem;position: relative;margin: 0 auto;top: 70%;}
-.keyman .keyman_l{float: left;min-width: 11rem;width:11.35rem;position: relative;}
-.keyman .keyman_r{float: right;min-width: 11rem;width:11.35rem;position: relative;}
-.km_button{font-size: 1rem;background-color: #ffab3e;padding:0.5rem 2.5rem 0.5rem 1rem;border-radius: 3px;color: #000;display: inline-block;cursor: pointer;position: relative;left: 8%;margin-top:6rem;}
+.keyman{min-width: 24rem;width: 24rem;position: relative;margin: 0 auto;top: 70%;}
+.keyman .keyman_l{float: left;min-width: 11.5rem;width:11.5rem;position: relative;}
+.keyman .keyman_r{float: left;min-width: 11.5rem;width:11.5rem;position: relative;}
+.km_button{font-size: 1rem;background-color: #ffab3e;padding:0.5rem 2.5rem 0.5rem 1rem;border-radius: 3px;color: #000;display: inline-block;cursor: pointer;}
 .km_button:after{content:'';position: absolute;width: 0;height: 0;margin: 5px;border-width: 5px 10px;border-color: transparent transparent transparent #000;border-style: solid;}
-.km_button_2{background-color: #398fed;}
-.km_aside{position: absolute;top: 0;font-size: 0.8rem;color: #fff;display: inline-block;margin-left:-2px;}
+.km_button_2{background-color: #398fed;float: right;}
+.km_aside{position: relative;top: 0;font-size: 0.8rem;color: #fff;display: inline-block;}
 .km_aside ul{}
 .km_aside ul li{display: inline-block;margin-bottom: 0.3rem;}
-.km_aside ul li span.as_aside{text-align: right;width: 3.2rem;display: inline-block;font-size: 0.8rem;}
+.km_aside ul li span.as_aside{text-align: right;width: 4rem;display: inline-block;font-size: 0.8rem;}
 .km_aside ul li span.as_aside:last-child{color: #ffab3d;width: 4.4rem;}
-.km_aside ul li span.as_aside i{font-size: 1rem;}
-.km_aside ul li span.km_bar{width: 3rem;height: 0.7rem;background-color: #000;display: inline-block;position: relative;z-index: 5;margin-left: 0.2rem;}
-.km_bar em{background-color: #ffab3d;width: 0px;height: 1.4rem;z-index: 6;position: absolute;}
+.km_aside ul li span.as_aside i{}
+.km_aside ul li span.km_bar{width: 2.2rem;height: 0.7rem;background-color: #000;display: inline-block;position: relative;z-index: 5;margin-left: 0.2rem;}
+.km_bar em{background-color: #ffab3d;width: 0px;height: 0.7rem;z-index: 6;position: absolute;}
 
 .derby_bord{width: 7rem;position: relative;margin: 0 auto;padding-top: 27rem;}
 .derby_pt .derby_box{left: -96px;top: 40px;}
@@ -104,7 +104,8 @@
     <div class="derby derby03">
         <div class="derby_bord">
             <div class="derby_pt6">
-                <a href=""><img src="template/usportstyle/common/topic/2015derby/prize.png" alt=""></a>
+                <a href="http://mp.weixin.qq.com/s?__biz=MzAxMDE2OTA5OQ==&mid=400191482&idx=1&sn=c18511298d89fff04ceed6010ea011d7#rd" target="_blank">
+                    <img src="template/usportstyle/common/topic/2015derby/prize.png" alt="竞猜有奖"></a>
             </div>
         </div>
     </div>
@@ -121,3 +122,40 @@
         </div>
     </div>
 </div>
+<script>
+    var ySlider = function (el) {
+        var self = {}, _radio = 0,
+                _element, _progressEl,
+                _render = function () {
+                    _progressEl.style.width = Math.round(_element.getBoundingClientRect().width * _radio) + 'px';
+                };
+        self.setRadio = function (radio) {
+            _radio = radio;
+            _render();
+        };
+        self.getRadio = function () {
+            return this.radio;
+        };
+        if (el) {
+            _element = el;
+            _radio = _element.dataset.radio ? _element.dataset.radio : 0;
+            _progressEl = _element.querySelector('em');
+            _element.slider = self;
+
+            _progressEl.style.webkitTransition = "all .5s ease-in-out";
+            _progressEl.style.MozTransition = "all .5s ease-in-out";
+            _progressEl.style.msTransition = "all .5s ease-in-out";
+            _progressEl.style.OTransition = "all .5s ease-in-out";
+            _progressEl.style.transition = "all .5s ease-in-out";
+        } else {
+            console.error('create kSlider error');
+        }
+        _render();
+
+        return self;
+    };
+
+    jQuery('.km_bar').each(function () {
+        ySlider(this);
+    });
+</script>

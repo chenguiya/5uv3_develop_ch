@@ -2,15 +2,15 @@
 <div class="yorderlist yhasHeader ypadding">
     <div class="yorderlist__li">
         <span class="yorderlist__li__left">单号</span>
-        <span class="yorderlist__li__right">201522364498513246214</span>
+        <span class="yorderlist__li__right">$order[orderid]</span>
     </div>
     <div class="yorderlist__li">
         <span class="yorderlist__li__left">商品名</span>
-        <div class="yorderlist__li__right">201522364498513246214</div>
+        <div class="yorderlist__li__right">$order[extdata][gname]</div>
     </div>
     <div class="yorderlist__li">
-        <span class="yorderlist__li__left">商品类型</span>
-        <div class="yorderlist__li__right">实物</div>
+        <span class="yorderlist__li__left">尺码</span>
+        <div class="yorderlist__li__right">M</div>
     </div>
     <div class="yorderlist__li">
         <span class="yorderlist__li__left">数量</span>
@@ -18,37 +18,45 @@
     </div>
     <div class="yorderlist__li">
         <span class="yorderlist__li__left">消费金额</span>
-        <div class="yorderlist__li__right">292.0元</div>
+        <div class="yorderlist__li__right">$order[price]元</div>
     </div>
     <div class="yorderlist__li">
         <span class="yorderlist__li__left">购买者</span>
-        <div class="yorderlist__li__right">李一鑫</div>
+        <div class="yorderlist__li__right">$order[extdata][realname]</div>
     </div>
     <div class="yorderlist__li">
         <span class="yorderlist__li__left">下单时间</span>
-        <div class="yorderlist__li__right">2015-12-16  16:25</div>
+        <div class="yorderlist__li__right">{eval echo(date('Y-m-d H:m', $order[log_time]))}</div>
     </div>
     <div class="yorderlist__li">
         <span class="yorderlist__li__left">交易状态</span>
-        <div class="yorderlist__li__right"><span class="highlight">已完成</span></div>
+        <div class="yorderlist__li__right"><span class="highlight"><!--{if $order['status'] == 2}-->已支付<!--{else}-->未支付<!--{/if}--></span></div>
     </div>
+    <!--{if $order['state']}-->
     <div class="yorderlist__li">
         <span class="yorderlist__li__left">成交时间</span>
-        <div class="yorderlist__li__right">2015-12-18  13:27</div>
+        <div class="yorderlist__li__right">$order[extdata][deliverytime]</div>
     </div>
+    <!--{/if}-->
     <div class="yorderlist__li">
         <span class="yorderlist__li__left">联系地址</span>
-        <div class="yorderlist__li__right">辽宁省四平市中山区怀北街延安路辽宁省四平市中山区怀北街延安路辽宁省四平市中山区怀北街延安路
-            89栋7单元</div>
+        <div class="yorderlist__li__right">$order[extdata][address]</div>
     </div>
 
     <div class="yorderlist__li">
         <span class="yorderlist__li__left">联系电话</span>
-        <div class="yorderlist__li__right">15956322541</div>
+        <div class="yorderlist__li__right">$order[extdata][mobile]</div>
     </div>
+    <!--{if $order['state']}-->
     <div class="yorderlist__li">
         <span class="yorderlist__li__left">快递信息</span>
-        <div class="yorderlist__li__right">顺丰快递  单号7751235469</div>
+        <div class="yorderlist__li__right">$order[extdata][express]&nbsp;&nbsp;单号$order[extdata][expressnumber]</div>
     </div>
+    <!--{else}-->
+    <div class="yorderlist__li">
+        <span class="yorderlist__li__left">发货状态</span>
+        <div class="yorderlist__li__right"><span class="highlight">未发货</span></div>
+    </div>
+    <!--{/if}-->
 </div>
 <!--{template common/footer}-->

@@ -15,6 +15,7 @@ $dos = array('index', 'doing', 'blog', 'album', 'friend', 'wall',
 	'notice', 'share', 'home', 'pm', 'videophoto', 'favorite',
 	'thread', 'trade', 'poll', 'activity', 'debate', 'reward', 'profile', 'plugin', 'follow',
 	'group',	//add by Daming 2015/9/21 for wap
+	'orders'	//add by Daming 2015/10/23 for rights
 );
 
 $do = (!empty($_GET['do']) && in_array($_GET['do'], $dos))?$_GET['do']:'index';

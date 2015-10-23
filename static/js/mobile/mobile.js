@@ -45,6 +45,10 @@ $(function(){
         $("#notice_More").html("没有更多了");
       }
   });
+  //banner
+  $('#add_banner #ic_error').on('click',function(){
+    $('#add_banner').remove();
+  });
 
   //share
   $(function($) {
@@ -80,6 +84,8 @@ $(function(){
                             config.bdPic = bdshare_pic;
                             config.bdUrl = bdshare_url || location.href;
                             config.bdDesc = bdshare_desc;
+                            
+                            $.get("/plugin.php", { 'id' : 'fansclub:api', 'ac' : 'passport', 'op' : 'share', 'cmd' : cmd});
                             return config;
                         },
                         bdPopupOffsetLeft: '',

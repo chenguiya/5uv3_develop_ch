@@ -430,6 +430,8 @@ function set_mask_in_thread($tid)
  */
 function clear_threadlist_cache()
 {
+    include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php');
+    fansclub_use_log('thread_post');
 	$mem_check = memory('check'); // 先检查缓存是否生效
 	if($mem_check != '')
 	{

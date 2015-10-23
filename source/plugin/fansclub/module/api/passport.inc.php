@@ -7,6 +7,17 @@ include_once DISCUZ_ROOT.'./source/function/function_member.php';
 include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';   // 公共函数
 include_once DISCUZ_ROOT.'./source/plugin/fansclub/function/function_passport.php'; // 用户处理函数
 
+// ajax 分享写LOG
+if($_GET['op'] == 'share')
+{
+    // plugin.php?id=fansclub:api&ac=passport&op=share&cmd=qzone
+    if(trim($_GET['cmd']) == 'tsina' || trim($_GET['cmd']) == 'qzone' || trim($_GET['cmd']) == 'weixin')
+    {
+        fansclub_use_log('share_'.trim($_GET['cmd']));
+    }
+    exit;
+}
+
 /*
 DB 修改
 alter table group_ucenter_memberfields add column mobile varchar(30) NOT NULL DEFAULT '' COMMENT '手机号码';
@@ -17,6 +28,7 @@ alter table group_ucenter_memberfields add column address varchar(255) DEFAULT '
 alter table group_ucenter_memberfields add column newuser tinyint(1) unsigned DEFAULT '0' COMMENT '是否新用户名(手机注册和邮箱注册和第三方注册可以修一次)';
 alter table group_ucenter_memberfields add column userfrom varchar(50) DEFAULT '' COMMENT '注册来源';
 alter table group_ucenter_memberfields add column openid varchar(45) NOT NULL DEFAULT '' COMMENT 'openId微信用户与公众号之间的唯一凭证';
+
 
 // 直接登录 http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=directlogin&from=weixin&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&wxhead=http%3A%2F%2Fwx.qlogo.cn%2Fmmopen%2Fg3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe%2F0&redirect=http%3A%2F%2Fzhangjh.usport.com.cn%2Fhome.php%3Fmod%3Dspace%26do%3Dprofile%26mycenter%3D1%26mobile%3D2&wxnick=admin&can_change_nickname=1&time=1442977333&sign=6f450ac6c604a2df4f2748c309eb5084
 // 显示微信登录二维码 http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=qrcodelogin&from=weixin&time=1442977333&sign=601f3e2063aa095b7edf3c55487f775c
@@ -114,12 +126,20 @@ if($bln_check === TRUE)
         $data['redirect'] = $arr_param['redirect'];
         $data['wxnick'] = $arr_param['wxnick'];
         $data['wxhead'] = $arr_param['wxhead'];
+        $data['fid'] = $arr_param['fid'];
         $data['can_change_nickname'] = $arr_param['can_change_nickname'];
         
         $arr_return = passport_directlogin($data);
         
         if($arr_return['success'] === TRUE)
         {
+            // 记录渠道来源
+            require_once libfile('function/cache');
+            save_syscache('qudao_fid', $data['fid']);
+            updatecache('qudao_fid');
+            save_syscache('qudao_from', $data['from']);
+            updatecache('qudao_from');
+            
             if($data['openid'] == 'otiS-uI7hrrOaq4YM0kjKXZkUc1I' && $arr_return['redirect'] != '')
             {
                 //echo "<pre>";

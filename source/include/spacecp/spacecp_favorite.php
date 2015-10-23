@@ -172,6 +172,11 @@ if($_GET['op'] == 'delete') {
 				C::t('portal_article_count')->increase($id, array('favtimes' => 1));
 				break;
 		}
+        
+        // add by zhangjh 2010-10-23 收藏写LOG
+        include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php');
+        fansclub_use_log('favorite');
+    
 		showmessage('favorite_do_success', dreferer(), array('id' => $id, 'favid' => $favid), array('showdialog' => true, 'closetime' => true, 'extrajs' => $extrajs));
 	}
 }

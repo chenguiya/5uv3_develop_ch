@@ -850,7 +850,7 @@ class discuz_application extends discuz_base{
 			$arr1 = explode('=', $value);
 			$query_arr[$arr1[0]] = $arr1[1];
 		}
-		if ($query_arr['ac'] == 'passport' && $query_arr['from'] == 'weixin') {
+		if ($query_arr['from'] == 'weixin') {
 			return TRUE;
 		} else {
 			return FALSE;

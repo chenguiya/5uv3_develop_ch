@@ -13,6 +13,7 @@ if(!defined('IN_DISCUZ')) {
 define('NOROBOT', TRUE);
 
 require_once libfile('function/post');
+include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php');
 
 $feed = array();
 if($_GET['action'] == 'paysucceed') {
@@ -555,6 +556,8 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 		postfeed($feed);
 	}
 	
+    fansclub_use_log('votepoll');
+    
 	if(!empty($_G['inajax'])) {
 		showmessage('thread_poll_succeed', "forum.php?mod=viewthread&tid=$_G[tid]".($_GET['from'] ? '&from='.$_GET['from'] : ''), array(), array('location' => true));
 	} else {
@@ -1144,11 +1147,15 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 				postfeed($feed);
 			}
 		}
+        
+        fansclub_use_log('activity_applies');
+        
 		if ($_GET['yll'] == 1) {
 			showmessage('恭喜您获得30M流量，流量将在24小时之内完成充值，充值成功后将以短信通知。', "forum.php?mod=group&fid=$_G[fid]", array(), array('showdialog' => 1, 'showmsg' => true, 'locationtime' => true, 'alert' => 'right'));
 		} else {
 			showmessage('activity_completion', "forum.php?mod=viewthread&tid=$_G[tid]".($_GET['from'] ? '&from='.$_GET['from'] : ''), array(), array('showdialog' => 1, 'showmsg' => true, 'locationtime' => true, 'alert' => 'right'));
 		}
+        
 	} elseif(submitcheck('activitycancel')) {
 		C::t('forum_activityapply')->delete_for_user($_G['uid'], $_G['tid']);
 		$applynumber = C::t('forum_activityapply')->fetch_count_for_thread($_G['tid']);
@@ -1625,25 +1632,29 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	}
 
 	if($thread['authorid'] == $_G['uid'] && !$_G['setting']['recommendthread']['ownthread']) {
-		showmessage('recommend_self_disallow', '', array('recommendc' => $thread['recommends']), array('msgtype' => 3));
+		showmessage('recommend_self_disallow_2', '', array('recommendc' => $thread['recommends']), array('msgtype' => 3));
 	}
 	if(C::t('forum_memberrecommend')->fetch_by_recommenduid_tid($_G['uid'], $_G['tid'])) {
-		showmessage('recommend_duplicate', '', array('recommendc' => $thread['recommends']), array('msgtype' => 3));
+        showmessage('recommend_duplicate_2', '', array('recommendc' => $thread['recommends']), array('msgtype' => 3));
 	}
 
 	$recommendcount = C::t('forum_memberrecommend')->count_by_recommenduid_dateline($_G['uid'], $_G['timestamp']-86400);
 	if($_G['setting']['recommendthread']['daycount'] && $recommendcount >= $_G['setting']['recommendthread']['daycount']) {
-		showmessage('recommend_outoftimes', '', array('recommendc' => $thread['recommends']), array('msgtype' => 3));
+		showmessage('recommend_outoftimes_2', '', array('recommendc' => $thread['recommends']), array('msgtype' => 3));
 	}
 
 	$_G['group']['allowrecommend'] = intval($_GET['do'] == 'add' ? $_G['group']['allowrecommend'] : -$_G['group']['allowrecommend']);
 	$fieldarr = array();
-	if($_GET['do'] == 'add') {
+    
+    // add by zhangjh 2010-10-23 回复写LOG
+    if($_GET['do'] == 'add') {
 		$heatadd = 'recommend_add=recommend_add+1';
 		$fieldarr['recommend_add'] = 1;
+        fansclub_use_log('recommend_add');
 	} else {
 		$heatadd = 'recommend_sub=recommend_sub+1';
 		$fieldarr['recommend_sub'] = 1;
+        fansclub_use_log('recommend_sub');
 	}
 
 		update_threadpartake($_G['tid']);
@@ -1657,9 +1668,9 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	$recommendv = $_G['group']['allowrecommend'] > 0 ? '+'.$_G['group']['allowrecommend'] : $_G['group']['allowrecommend'];
 	if($_G['setting']['recommendthread']['daycount']) {
 		$daycount = $_G['setting']['recommendthread']['daycount'] - $recommendcount;
-		showmessage('recommend_daycount_succeed', '', array('recommendv' => $recommendv, 'recommendc' => $thread['recommends'], 'daycount' => $daycount), array('msgtype' => 3));
+		showmessage('recommend_daycount_succeed_2', '', array('recommendv' => $recommendv, 'recommendc' => $thread['recommends'], 'daycount' => $daycount), array('msgtype' => 3));
 	} else {
-		showmessage('recommend_succeed', '', array('recommendv' => $recommendv, 'recommendc' => $thread['recommends']), array('msgtype' => 3));
+		showmessage('recommend_succeed_2', '', array('recommendv' => $recommendv, 'recommendc' => $thread['recommends']), array('msgtype' => 3));
 	}
 
 } elseif($_GET['action'] == 'protectsort') {

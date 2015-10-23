@@ -1,10 +1,10 @@
 <!--{template common/header_special}-->
 <link rel="stylesheet" href="$_G['config'][static]/topic/css_derby.css">
 <div class="topicStl">
-    <div class="derShare"><span>分享到：</span>
-        <a href="" class="dspic dermms" title="分享到微信"></a>
-        <a href="" class="dspic derqzone" title="分享到空间"></a>
-        <a href="" class="dspic dersina" title="分享到新浪微博"></a>
+    <div class="bdsharebuttonbox derShare" data-tag="derShare"><span>分享到：</span>
+        <a class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a class="bds_qzone" data-cmd="qzone" title="分享到空间"></a>
+        <a class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
     </div>
     <div class="derby derby01">
         <div class="fire_ice">
@@ -16,7 +16,7 @@
     <div class="derby derby02">
         <div class="keyman">
             <div class="keyman_l">
-                <a class="km_button">阵容实力分析</a>
+                <a href="thread-58347.html" class="km_button" target="_blank">阵容实力分析</a>
 
                 <div class="km_aside">
              <!--{if $player}-->       
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="keyman_r">
-                <a class="km_button km_button_2">阵容身价分析</a>
+                <a href="thread-58349.html"class="km_button km_button_2" target="_blank">阵容身价分析</a>
 
                 <div class="km_aside">
                     <!--{if $player}-->   
@@ -56,9 +56,9 @@
             <div class="derby_pt derby_pt1">
                 <div class="derby_box dn active">
                     <!--{if $data_a}-->
-                    <a href="thread-{$data_a['tid']}.html">
+                    <a href="thread-{$data_a['tid']}.html" target="_blank">
                         <div class="main_pic"><img
-                                src="data/attachment/forum/{$data_a['attachment']}" alt="{$data_a['subject']}"></div>
+                                src="{$data_a['attachment']}" height='140' width='210' alt="{$data_a['subject']}"></div>
                         <div class="main_cont">{$data_a['subject']}</div>
                     </a>
                     <!--{/if}-->
@@ -68,9 +68,9 @@
                 <div class="derby_box dn">
                     
                     <!--{if $data_b}-->
-                    <a href="thread-{$data_b['tid']}.html">
+                    <a href="thread-{$data_b['tid']}.html" target="_blank">
                         <div class="main_pic"><img
-                                src="data/attachment/forum/{$data_b['attachment']}" alt="{$data_b['subject']}"></div>
+                                src="{$data_b['attachment']}" height='140' width='210' alt="{$data_b['subject']}"></div>
                         <div class="main_cont">{$data_b['subject']}</div>
                     </a>
                     <!--{/if}-->
@@ -80,9 +80,9 @@
             <div class="derby_pt derby_pt3">
                 <div class="derby_box dn">
                     <!--{if $data_c}-->
-                    <a href="thread-{$data_c['tid']}.html">
+                    <a href="thread-{$data_c['tid']}.html" target="_blank">
                         <div class="main_pic"><img
-                                src="data/attachment/forum/{$data_c['attachment']}" alt="{$data_c['subject']}"></div>
+                                src="{$data_c['attachment']}" height='140' width='210' alt="{$data_c['subject']}"></div>
                         <div class="main_cont">{$data_c['subject']}</div>
                     </a>
                     <!--{/if}-->
@@ -91,9 +91,9 @@
             <div class="derby_pt derby_pt4">
                 <div class="derby_box dn">
                     <!--{if $data_d}-->
-                    <a href="thread-{$data_d['tid']}.html">
+                    <a href="thread-{$data_d['tid']}.html" target="_blank">
                         <div class="main_pic"><img
-                                src="data/attachment/forum/{$data_d['attachment']}" alt="{$data_d['subject']}"></div>
+                                src="{$data_d['attachment']}" height='140' width='210' alt="{$data_d['subject']}"></div>
                         <div class="main_cont">{$data_d['subject']}</div>
                     </a>
                     <!--{/if}-->
@@ -102,9 +102,9 @@
             <div class="derby_pt derby_pt5">
                 <div class="derby_box dn">
                     <!--{if $data_e}-->
-                    <a href="thread-{$data_e['tid']}.html">
+                    <a href="thread-{$data_e['tid']}.html" target="_blank">
                         <div class="main_pic"><img
-                                src="data/attachment/forum/{$data_e['attachment']}" alt="{$data_e['subject']}"></div>
+                                src="{$data_e['attachment']}" height='140' width='210' alt="{$data_e['subject']}"></div>
                         <div class="main_cont">{$data_e['subject']}</div>
                     </a>
                     <!--{/if}-->
@@ -112,7 +112,7 @@
             </div>
             <div class="derby_pt6">
                 <div class="derby_box">
-                    <a href="">
+                    <a href="http://mp.weixin.qq.com/s?__biz=MzAxMDE2OTA5OQ==&mid=400191482&idx=1&sn=c18511298d89fff04ceed6010ea011d7#rd" target="_blank">
                         <div class="main_pic"><img src="template/usportstyle/common/topic/2015derby/prize.png" alt="">
                         </div>
                     </a>
@@ -127,29 +127,29 @@
 
                 <div class="card_cont">
                     <!--{if $data_f}-->
-                    <a href="thread-{$data_f['tid']}.html">
-                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_f['attachment']}" alt="{$data_f['subject']}">
+                    <a href="thread-{$data_f['tid']}.html" target="_blank">
+                        <div class="derby_box oh"><img src="{$data_f['attachment']}" height='140' width='210' alt="{$data_f['subject']}">
                             <div class="main_cont">{$data_f['subject']}</div>
                         </div>
                     </a>
                     <!--{/if}-->
                     <!--{if $data_g}-->
-                    <a href="thread-{$data_g['tid']}.html">
-                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_g['attachment']}" alt="{$data_g['subject']}">
+                    <a href="thread-{$data_g['tid']}.html" target="_blank">
+                        <div class="derby_box oh"><img src="{$data_g['attachment']}" height='140' width='210' alt="{$data_g['subject']}">
                             <div class="main_cont">{$data_g['subject']}</div>
                         </div>
                     </a>
                     <!--{/if}-->
                     <!--{if $data_h}-->
-                    <a href="thread-{$data_h['tid']}.html">
-                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_h['attachment']}" alt="{$data_h['subject']}">
+                    <a href="thread-{$data_h['tid']}.html" target="_blank">
+                        <div class="derby_box oh"><img src="{$data_h['attachment']}" height='140' width='210' alt="{$data_h['subject']}">
                             <div class="main_cont">{$data_h['subject']}</div>
                         </div>
                     </a>
                     <!--{/if}-->
                     <!--{if $data_i}-->
-                    <a href="thread-{$data_i['tid']}.html">
-                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_i['attachment']}" alt="{$data_i['subject']}">
+                    <a href="thread-{$data_i['tid']}.html" target="_blank">
+                        <div class="derby_box oh"><img src="{$data_i['attachment']}" height='140' width='210' alt="{$data_i['subject']}">
                             <div class="main_cont">{$data_i['subject']}</div>
                         </div>
                     </a>
@@ -161,29 +161,29 @@
 
                 <div class="card_cont">
                     <!--{if $data_j}-->
-                    <a href="thread-{$data_j['tid']}.html">
-                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_j['attachment']}" alt="{$data_j['subject']}">
+                    <a href="thread-{$data_j['tid']}.html" target="_blank">
+                        <div class="derby_box oh"><img src="{$data_j['attachment']}" height='140' width='210' alt="{$data_j['subject']}">
                             <div class="main_cont">{$data_j['subject']}</div>
                         </div>
                     </a>
                     <!--{/if}-->
                     <!--{if $data_k}-->
-                    <a href="thread-{$data_k['tid']}.html">
-                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_k['attachment']}" alt="{$data_k['subject']}">
+                    <a href="thread-{$data_k['tid']}.html" target="_blank">
+                        <div class="derby_box oh"><img src="{$data_k['attachment']}" height='140' width='210' alt="{$data_k['subject']}">
                             <div class="main_cont">{$data_k['subject']}</div>
                         </div>
                     </a>
                     <!--{/if}-->
                     <!--{if $data_l}-->
-                    <a href="thread-{$data_l['tid']}.html">
-                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_l['attachment']}" alt="{$data_l['subject']}">
+                    <a href="thread-{$data_l['tid']}.html" target="_blank">
+                        <div class="derby_box oh"><img src="{$data_l['attachment']}" height='140' width='210' alt="{$data_l['subject']}">
                             <div class="main_cont">{$data_l['subject']}</div>
                         </div>
                     </a>
                     <!--{/if}-->
                     <!--{if $data_f}-->
-                    <a href="thread-{$data_m['tid']}.html">
-                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_m['attachment']}" alt="{$data_m['subject']}">
+                    <a href="thread-{$data_m['tid']}.html" target="_blank">
+                        <div class="derby_box oh"><img src="{$data_m['attachment']}" height='140' width='210' alt="{$data_m['subject']}">
                             <div class="main_cont">{$data_m['subject']}</div>
                         </div>
                     </a>
@@ -197,15 +197,15 @@
 
                 <div class="card_cont">
                     <!--{if $data_n}-->
-                    <a href="thread-{$data_n['tid']}.html">
-                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_n['attachment']}" alt="{$data_n['subject']}">
+                    <a href="thread-{$data_n['tid']}.html" target="_blank">
+                        <div class="derby_box oh"><img src="{$data_n['attachment']}" height='140' width='210' alt="{$data_n['subject']}">
                             <div class="main_cont">{$data_n['subject']}</div>
                         </div>
                     </a>
                     <!--{/if}-->
                     <!--{if $data_o}-->
-                    <a href="thread-{$data_o['tid']}.html">
-                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_o['attachment']}" alt="{$data_o['subject']}">
+                    <a href="thread-{$data_o['tid']}.html" target="_blank">
+                        <div class="derby_box oh"><img src="{$data_o['attachment']}" height='140' width='210' alt="{$data_o['subject']}">
                             <div class="main_cont">{$data_o['subject']}</div>
                         </div>
                     </a>
@@ -217,15 +217,15 @@
 
                 <div class="card_cont">
                     <!--{if $data_p}-->
-                    <a href="thread-{$data_p['tid']}.html">
-                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_p['attachment']}" alt="{$data_p['subject']}">
+                    <a href="thread-{$data_p['tid']}.html" target="_blank">
+                        <div class="derby_box oh"><img src="{$data_p['attachment']}" height='140' width='210' alt="{$data_p['subject']}">
                             <div class="main_cont">{$data_p['subject']}</div>
                         </div>
                     </a>
                     <!--{/if}-->
                     <!--{if $data_q}-->
-                    <a href="thread-{$data_q['tid']}.html">
-                        <div class="derby_box oh"><img src="data/attachment/forum/{$data_q['attachment']}" alt="{$data_q['subject']}">
+                    <a href="thread-{$data_q['tid']}.html" target="_blank">
+                        <div class="derby_box oh"><img src="{$data_q['attachment']}" height='140' width='210' alt="{$data_q['subject']}">
                             <div class="main_cont">{$data_q['subject']}</div>
                         </div>
                     </a>
@@ -237,13 +237,8 @@
     <div class="derby derby05">
         <div class="derby_main">
             <div class="video">
-                <i></i>
-                <video width="480" height="320">
-                    <source src="http://player.pptv.com/v/NVqNClonzQtu7FQ.swf" type="video/mp4"/>
-                    <source src="http://player.pptv.com/v/NVqNClonzQtu7FQ.swf" type="video/ogg"/>
-                </video>
-                <!-- <span class="pstop"><img src="template/usportstyle/common/topic/2015derby/play_stop.png" alt=""></span> -->
-                <button></button>
+                <a class="video_a" href="thread-58155.html" target="_blank"></a>
+                    <embed width="480" height="320" allownetworking="internal" allowscriptaccess="never" src="http://player.pptv.com/v/NVqNClonzQtu7FQ.swf" quality="high" bgcolor="#ffffff" wmode="transparent" allowfullscreen="true" type="application/x-shockwave-flash">
                 <em></em>
             </div>
         </div>
@@ -317,7 +312,7 @@
         container.find('em').css('width', (1 - data.like_percent) * 100 + '%');
     }
     jQuery('.fire_icon').click(function () {
-        jQuery.get('/portal.php?mod=topic&topicid=5&action=like', function (data) {
+        jQuery.getJSON('/portal.php?mod=topic&topicid=5&action=like', function (data) {
             if (data.success) {
                 changeFireIceRadio(data);
             } else {
@@ -326,7 +321,7 @@
         });
     });
     jQuery('.ice_icon').click(function () {
-        jQuery.get('/portal.php?mod=topic&topicid=5&action=unlike', function (data) {
+        jQuery.getJSON('/portal.php?mod=topic&topicid=5&action=unlike', function (data) {
             if (data.success) {
                 changeFireIceRadio(data);
             } else {
@@ -335,3 +330,22 @@
         });
     });
 </script>
+<script>
+    //bdshare
+    var bd_Textd="$navtitle",bd_descd="$metadescription",bd_Urld=window.location.href;
+    window._bd_share_config = {
+        common : {
+            bdText : bd_Textd, 
+            bdDesc : bd_descd, 
+            bdUrl : bd_Urld,   
+            bdPic : 'http://static2.5usport.com/topic/2015derby/derby_wap_01.jpg'
+        },
+        share : [{
+            "tag" : "derShare",
+            "bdSize" : 16
+        }]
+    }
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+</body>
+</html>

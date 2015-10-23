@@ -1,0 +1,29 @@
+<!--{eval $_G['home_tpl_titles'] = array('{lang remind}');}-->
+<!--{template common/header}-->
+<!-- header start -->
+<header class="header">
+    <div class="nav">
+        <div class="category">
+        	订单列表
+        	<div id="elecnation_nav_left">
+                <a href="javascript:;" onclick="history.go(-1)" class="head_back"></a>
+        	</div>
+        </div>
+	</div>
+</header>
+<!-- header end -->
+<div class="ymain" style="padding-top:0px;">
+	<div class="rightList">
+		<!--{if $orderlist}-->
+		<!--{loop $orderlist $order}-->
+		<a href="plugin.php?id=fansclub&ac=rights&type=orderlist&orderid=$order[orderid]&mobile=2">
+		<img src="./template/usportstyle/touch/common/images/rights/thumb_$order[body][goodsid]_1.jpg" alt="$goods[gname]">
+		<div>$order[body][gname]</div>
+		</a>
+		<!--{/loop}-->
+		<!--{else}-->
+		<span>你还没有在我们商场消费过。</span>
+		<!--{/if}-->		
+	</div>
+</div>
+<!--{template common/footer}-->

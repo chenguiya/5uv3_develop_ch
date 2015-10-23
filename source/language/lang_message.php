@@ -377,6 +377,14 @@ $lang = array (
   'recommend_outoftimes' => '评价指数 <strong id="recommentc" class="xi1 xs2">{recommendc}</strong><br />今日评价机会已用完',
   'recommend_daycount_succeed' => '评价指数 <strong id="recommentc" class="xi1 xs2">{recommendc}</strong> <span id="recommentv" class="xg2 xs0">{recommendv}</span><br />您今天还能评价 {daycount} 次',
   'recommend_succeed' => '评价指数 <strong id="recommentc" class="xi1 xs2">{recommendc}</strong> <span id="recommentv" class="xg2 xs0">{recommendv}</span>',
+  
+  'recommend_self_disallow_2' => '您不能评价自己的帖子',
+  'recommend_duplicate_2' => '已评价',
+  'recommend_outoftimes_2' => '今日评价机会已用完',
+  'recommend_daycount_succeed_2' => '您今天还能评价 {daycount} 次',
+  'recommend_succeed_2' => '{recommendc} {recommendv}',
+
+  
   'thread_poll_voter_isnull' => '暂时还没有人参与投票，不能添加标签。',
   'thread_activityapply_isnull' => '暂时还没有人参加活动，不能添加标签。',
   'forum_usertag_set_continue' => '共 {count} 个用户，正在设置 {limit} 至 {next} 个用户，请稍候 ',

@@ -9,10 +9,10 @@
 .derby05{background: url(2015derby/derbybanner_05.jpg) top center no-repeat;height: 940px !important;}
 .derShare{position: absolute;top: 0;left: 70%;width: 171px;height: 32px;background-color: rgba(0,0,0,0.6);z-index: 2;}
 .derShare span{color: #fff;font-size: 12px;font-weight: normal;line-height: 32px;width: 50px;padding-left: 10px;position: relative;top: -10px;display: inline-block;}
-.dspic{height: 32px;width: 32px;position: relative;display: inline-block;}
-.dermms{background: url(2015derby/derby_mmsg.png) center center no-repeat;}
-.derqzone{background: url(2015derby/derby_qzone.png) center center no-repeat;}
-.dersina{background: url(2015derby/derby_sina.png) center center no-repeat;} 
+.derShare a{height: 32px;width: 32px;position: relative;display: inline-block; cursor: pointer; float: none; margin: 0; padding-left: 0;}
+.derShare a.bds_weixin{background: url(2015derby/derby_mmsg.png) center center no-repeat;}
+.derShare a.bds_qzone{background: url(2015derby/derby_qzone.png) center center no-repeat;}
+.derShare a.bds_tsina{background: url(2015derby/derby_sina.png) center center no-repeat;} 
 
 .fire_ice{width: 450px;height: 80px;padding-top: 220px;position: relative;margin: 0 auto;display: block;}
 .fire_ice div{display: inline-block;height: 80px;z-index: 4;}
@@ -46,7 +46,7 @@
 .derby_pt3{left: 448px !important;top: 338px !important;}
 .derby_pt4{left: 593px !important;top: 476px !important;}
 .derby_pt5{left: 370px !important;top: 626px !important;}
-.derby_pt6{left: 720px !important;top: 691px !important;background: url(2015derby/derby_css.png) -30px -105px no-repeat;width: 18px;height: 18px;position: absolute;cursor: pointer;}
+.derby_pt6{left: 785px !important;top: 691px !important;background: url(2015derby/derby_css.png) -30px -105px no-repeat;width: 18px;height: 18px;position: absolute;cursor: pointer;}
 .derby_box{width: 210px;height: 140px;border: 1px solid #322d09;position: relative;display: inline-block;}
 .dn{display: none;}
 .derby_box:after{content: '';position: absolute;top: -26px;left: 45%;width: 0;height: 0;border-width: 13px 10px;border-color: transparent transparent #322d09 transparent;border-style: solid;}
@@ -69,8 +69,8 @@
 .derby_main .video{position: relative;top: 270px;left: 60px;}
 .derby_main .video video{z-index: 8;}
 .derby_main .video button{position: absolute;top: 35%;left: 20%;z-index: 9;width: 85px;height: 85px;cursor: pointer;border:none;background: url(2015derby/play_stop.png) center center no-repeat;}
-.derby_main i{background: url(2015derby/derby_css.png) 0 -190px no-repeat;width: 200px;height: 40px;position: absolute;}
-.derby_main em{background: url(2015derby/derby_css.png) 0 -250px no-repeat;width: 200px;height: 18px;position: absolute;bottom: 10px;left: 280px;z-index: 7;}
+.derby_main .video_a{background: url(2015derby/derby_css.png) 0 -190px no-repeat;width: 200px;height: 40px;position: absolute;top: -40px;}
+.derby_main em{background: url(2015derby/derby_css.png) 0 -250px no-repeat;width: 200px;height: 18px;position: absolute;bottom: -14px;left: 280px;z-index: 7;}
 
 .tp_footer{position: absolute;bottom: 25px;width: 100%;z-index: 10;color: #93a4c6;text-align: center;}
 .tp_footer p{}

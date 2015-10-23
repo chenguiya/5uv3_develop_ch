@@ -21,7 +21,7 @@ class table_plugin_ucharge_log extends discuz_table {
 	}
 	
 	public function fetch_by_where($where = '1', $start = 0, $num = 10) {
-		return DB::fetch_all("SELECT * FROM %t WHERE ".$where." LIMIT %d,%d", array($this->_table, $start, $num));
+		return DB::fetch_all("SELECT * FROM %t WHERE ".$where." ORDER BY log_id DESC LIMIT %d,%d", array($this->_table, $start, $num));
 	}
     
     public function count_by_where($where = '1')
@@ -47,5 +47,20 @@ class table_plugin_ucharge_log extends discuz_table {
         }
         
         return $arr_result;
+    }
+    
+    public function range($start = 0, $limit = 0, $where = '', $item = '', $sort = 'DESC') {
+    	if ($sort) $this->checkpk();
+    	$gname = '';
+//     	if ($where['gname']) {
+//     		$gname = $where['gname'];
+//     		unset($where['gname']);
+//     	}
+    	return DB::fetch_all('SELECT * FROM '.DB::table($this->_table).($where ? ' WHERE '.DB::implode($where, ' AND ') : '').($item ? ' ORDER BY '.DB::order($item, $sort) : '').DB::limit($start, $limit), null, 'log_id');
+    }
+    
+    public function countorders($where = '') {
+    	$count = (int) DB::result_first("SELECT COUNT(*) FROM ".DB::table($this->_table).($where ? ' WHERE '.DB::implode($where, ' AND ') : ''));
+    	return $count;
     }
 }

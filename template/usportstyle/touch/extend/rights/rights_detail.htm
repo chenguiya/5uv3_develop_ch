@@ -1,18 +1,18 @@
 <!--{template extend/rights/rights_header}-->
-<form name="information" id="information" method="post" action="plugin.php?id=fansclub&ac=rights&op=pay" >
+<form name="information" id="information" method="post" action="plugin.php?id=fansclub&ac=rights&op=pay&paysubmit=true" >
 <input type="hidden" name="formhash" value="{FORMHASH}" autocomplete="off"/>
-<input type="hidden" name="gid" value="001" />
-<input type="hidden" name="gname" value="梅西签名足球" />
-<input type="hidden" name="realprice" value="973" />
-<input type="hidden" name="marketprice" value="1173" />
+<input type="hidden" name="gid" value="$goods[goodsid]" />
+<input type="hidden" name="gname" value="$goods[gname]" />
+<input type="hidden" name="realprice" value="$goods[realprice]" />
+<input type="hidden" name="marketprice" value="$goods[marketprice]" />
 <input type="hidden" name="handlekey" value="payfor" />
 <input type="hidden" name="paysubmitchk" value="true" />
 <input type="hidden" name="addressedit" value="false" />
 <div class="rgt_detail">
      <div class="swiper-container" id="swiper-container2">
           <div class="swiper-wrapper">
-               <div class="swiper-slide"><img src="template/usportstyle/touch/common/images/rights/detail_1.jpg"></div>
-               <div class="swiper-slide"><img src="template/usportstyle/touch/common/images/rights/detail_2.jpg"></div>
+               <div class="swiper-slide"><img src="./template/usportstyle/touch/common/images/rights/detail_$goods[goodsid]_1.jpg"></div>
+               <div class="swiper-slide"><img src="./template/usportstyle/touch/common/images/rights/detail_$goods[goodsid]_2.jpg"></div>
           </div>
           <div id="num-pagination">
                <span id="active-num">&nbsp;</span>/<span id="all-num">&nbsp;</span>
@@ -20,15 +20,35 @@
      </div>
 	<div class="detail_price">
 		<div class="ch_price">
-		     <span class="promotion"><em>￥</em>973.00</span>
-		     <span class="original">市价<del>¥1137.00</del></span>
+		     <span class="promotion"><em>￥</em>$goods[realprice]</span>
+		     <span class="original">市价<del>¥$goods[marketprice]</del></span>
 		</div>
-		<a class="popup btn_buy" href="#detail_52">立即购买</a>
+	</div>
+	<div class="detail_price" style="border-bottom:none;">
+		
+		<div class="ch_price">
+			<!--{if $goods[type] == 1}-->
+			<span class="original" style="float:left">尺码</span>
+			<ul class="spec_list">
+				<li data-specid="98"><p>S</p><span></span>
+					<input type="radio" name="size" value="S" id="spec_value_98" style="display:none;">
+				</li>
+				<li data-specid="99"><p>M</p><span></span>
+					<input type="radio" name="size" value="M" id="spec_value_99" style="display:none;">
+				</li>
+				<li data-specid="100"><p>L</p><span></span>
+					<input type="radio" name="size" value="L" id="spec_value_100" style="display:none;">
+			    </li>
+			</ul>
+			<!--{/if}-->		  		
+		</div>
+		
+		<a id="bugnow" class="popup btn_buy" href="#detail_52">立即购买</a>
 	</div>
 	<div class="detail_area">
-		<div class="de_name">梅西签名足球</div>
-		<div class="de_tit">5U体育icons独家代理阿根廷主场世界杯版梅西亲笔签名球衣相关的签名产品我们都是拥有完善的认证以及证书的，相信你收到产品后，里面也有相关证书，认证证书上有防伪标签，以作保障。</div>
-		<div class="de_text">提供商：广州市晌网文化传播有限公司</div>
+		<div class="de_name">$goods[gname]</div>
+		<div class="de_tit">$goods[description]</div>
+		<div class="de_text">提供商：$goods[supplier]</div>
 		<a class="de_service" href="plugin.php?id=fansclub&ac=rights&type=contact&mobile=2"><i class="fontweb_icon ic_service"></i>联系客服</a>
 	</div>
 	<!--填写资料页面 start--> 
@@ -36,9 +56,9 @@
 		<div class="ch_infomation">
 			<div class="infomat_hd">请填写快递信息</div>
 			<div class="infomat_bd">
-				<p><input type="text" id="name" name="name" class="txt_infor" placeholder="真实姓名" value="" /></p>
-				<p><input type="text" id="mobile" name="mobile" class="txt_infor" placeholder="手机号码" value="" /></p>
-				<p><textarea id="address" name="address" value="" class="txt_text" placeholder="邮寄地址"></textarea></p>
+				<p><input type="text" id="realname" name="realname" class="txt_infor" placeholder="真实姓名" value="{if $address['realname']}$address[realname]{/if}" /></p>
+				<p><input type="text" id="mobile" name="mobile" class="txt_infor" placeholder="手机号码" value="{if $address['tel']}$address[tel]{/if}" /></p>
+				<p><textarea id="address" name="address" class="txt_text" placeholder="邮寄地址">{if $address['address']}$address[address]{/if}</textarea></p>
 				<p><button type="submit" id="paysubmit" name="paysubmit" value="1" class="infot_btn" ><span>微信支付</span></button><a href="javascript:void(0);" onclick="popup.close();" class="infot_a" style="margin-left:0.5rem;">取消</a></p>
 			</div>
 		</div>
@@ -46,8 +66,9 @@
 	<!--填写资料页面 end-->
 </div>
 </form>
-<script> 
-	var mySwiper2 = new Swiper('#swiper-container2',{
+<script>
+  $(function(){
+  	var mySwiper2 = new Swiper('#swiper-container2',{
      	onInit: function(swiper){
      		document.getElementById("active-num").innerHTML=swiper.activeIndex+1;
      		document.getElementById("all-num").innerHTML=swiper.slides.length;
@@ -55,6 +76,38 @@
      	onSlideChangeEnd: function(swiper){
      		document.getElementById("active-num").innerHTML=swiper.activeIndex+1;
      	}
-     })  
+     });
+     $('.spec_list li').click(function(){
+     	$(this).parent().find('li').removeClass('onlickSpec');
+     	$(this).addClass('onlickSpec');
+     	$(this).parent().find('input:radio').prop('checked',false);
+     	$(this).find('input:radio').prop('checked',true);
+     })
+	var detail_52,
+			form = {
+				name: '',
+				mobile: '',
+				address: ''
+			};
+	$('#bugnow').click(function () {
+		var i = setInterval(function () {
+			detail_52 = $('#detail_52');
+			if (detail_52.length === 1) {
+				clearInterval(i);
+
+				form.name = $('#detail_52_popmenu #name').val();
+				form.mobile = $(' #detail_52_popmenu #mobile').val();
+				form.address = $(' #detail_52_popmenu #address').val();
+			}
+		}, 100);
+	});
+	$(document).on('submit', '#information', function (event) {
+		if (form.name !== $('#detail_52_popmenu #name').val() ||
+				form.mobile !== $('#detail_52_popmenu #mobile').val() ||
+				form.address !== $('#detail_52_popmenu #address').val()) {
+			$('#information [name=addressedit]').val('true');
+		}
+	});
+})
 </script>	
 <!--{template common/footer}-->

@@ -12,6 +12,7 @@
         <!--{if $_GET['op'] == 'checkuser'}--><div class="center">会员审核 </div><!--{/if}-->
         <div class="right">
             <!--{if $action == 'index' && $status != 2 && $status != 3}--><a href="forum.php?mod=post&action=newthread&fid=$_G[fid]"><i class="iconfont icon-edit"></i></a><!--{/if}-->
+            <a href="plugin.php?id=fansclub&ac=rights&type=detail&mobile=2" style="display:none"><i class="fontweb_icon ic_rights"></i></a>
             <!--{if $action == 'activity'}--><a href="forum.php?mod=post&action=newthread&special=4&fid=$_G[fid]&cedit=yes"><i class="iconfont icon-edit huodong"></i></a><!--{/if}-->
             <!--{if $action == 'memberlist' && $groupuser['level'] == 1}-->
             <a href="forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]"><i class="iconfont icon-shen"></i></a>
@@ -68,6 +69,13 @@
             <li><a href="plugin.php?id=fansclub:fansclub&ac=standings&fid=$_G[fid]&mobile=2">数据</a></li>
         </ul>
         <!-- tabs-body -->
+        <!--广告图 start-->
+        <div class="add_banner" id="add_banner">
+             <a href="plugin.php?id=fansclub&ac=rights&type=index&mobile=2"><img src="template/usportstyle/touch/common/images/add_banner.png">
+             <span>梅西亲笔签名球衣</span></a>
+             <i class="fontweb_icon ic_error" id="ic_error"></i>
+        </div>
+        <!--广告图 end-->
         <!--{if $action == 'index' && $status != 2 && $status != 3}-->
         <!--{subtemplate group/group_index}-->
         <!--{elseif $action == 'list'}-->

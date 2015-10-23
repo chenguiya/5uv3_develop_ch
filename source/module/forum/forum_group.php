@@ -384,7 +384,13 @@ if($action == 'index') {
 			
 			// zhangjh 2015-06-11 这个逻辑好像有问题
 			// !empty($groupmanagers[$inviteuid]) && $showmessage = 'group_join_apply_succeed';
-			if($modmember == 0) $showmessage = 'group_join_apply_succeed';
+			if($modmember == 0) 
+            {
+                $showmessage = 'group_join_apply_succeed';
+                
+                // add by zhangjh 2010-10-23 收藏写LOG
+                fansclub_use_log('fansclub_apply_join');
+            }
 		}
 
 		if($confirmjoin) {
@@ -411,7 +417,13 @@ if($action == 'index') {
 			$forward = isset($_GET['forward']) ? htmlspecialchars_decode($_GET['forward']) : 'forum.php?mod=group&fid='.$_G[fid];
 		} else {
 			$forward = isset($_GET['forward']) ? htmlspecialchars_decode($_GET['forward']) : "fans/topic/$_G[fid]/";
-		}		
+		}
+        if($showmessage == 'group_join_succeed')
+        {
+            // add by zhangjh 2010-10-23 收藏写LOG
+            fansclub_use_log('fansclub_join');
+        }
+        
 		showmessage($showmessage, $forward);
 	}
 

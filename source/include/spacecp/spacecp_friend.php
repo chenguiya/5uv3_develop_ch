@@ -90,6 +90,11 @@ if($op == 'add') {
 			$_POST['gid'] = intval($_POST['gid']);
 			$_POST['note'] = censor(htmlspecialchars(cutstr($_POST['note'], strtolower(CHARSET) == 'utf-8' ? 30 : 20, '')));
 			friend_add($uid, $_POST['gid'], $_POST['note']);
+            
+            // add by zhangjh 2010-10-23 收藏写LOG
+            include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php');
+            fansclub_use_log('friend_add');
+            
 
 			$note = array(
 				'uid' => $_G['uid'],
