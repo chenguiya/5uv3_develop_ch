@@ -215,7 +215,7 @@ $(document).ready(function(){
                     $("#tips").html("确认成功，正在跳转...");
                     time_stop();
                     ';
-        $html .= 'var jump_url = "'.$_G['siteurl'].'plugin.php?id=fansclub:api&ac=passport&op=directlogin&from=weixin&openid="+openid+"&redirect='.urlencode($_G['siteurl']).'&time='.$_G['timestamp'].'&token='.$token.'&sign='.md5($_G['session']['sid'].$token).'";';
+        $html .= 'var jump_url = "'.$_G['siteurl'].'plugin.php?id=fansclub:api&ac=passport&op=directlogin&from=pc_weixin&openid="+openid+"&redirect='.urlencode($_G['siteurl']).'&time='.$_G['timestamp'].'&token='.$token.'&sign='.md5($_G['session']['sid'].$token).'";';
         $html .= 'window.location.href = jump_url;
                     return false;
                 }
@@ -463,23 +463,39 @@ function passport_directlogin($data)
 
 function passport_login($data)
 {
-    $arr_return = array('success' => FALSE, 'message' => '');
+    global $_G;
+    $arr_return = array('success' => FALSE, 'message' => '', 'user_detail' => array());
     
     $password = $data['password'];
-    $openid = $data['openid'];
+    $openid = trim($data['openid']);
     
-    if(is_email($data['name']))
+    if(is_email($data['name']) || is_username($data['name']))
     {
-        //echo "Email\n";
-        $email = $data['name'];
-        
-        // 根据Email查用户名
-        $arr_member = uc_get_member_by_email($email);
+        if(is_email($data['name']))
+        {
+            $email = $data['name'];
+            $arr_member = uc_get_member_by_email($email); // 根据Email查用户名
+        }
+        else
+        {
+            $username = $data['name'];
+            $arr_info = uc_get_user($username);
+            $email = $arr_info[2];
+            $arr_member = uc_get_member_by_email($email);
+        }
         
         if(count($arr_member) > 0)
         {
             // 查询openid
-            $uid = uc_get_uid_by_openid($openid);
+            if($openid != '')
+            {
+                $uid = uc_get_uid_by_openid($openid); // 以openid对应的uid为准
+            }
+            else
+            {
+                $uid = $arr_member['uid'];
+            }
+            
             if(count($arr_member) > 0)
             {
                 if($uid == $arr_member['uid'])
@@ -491,6 +507,12 @@ function passport_login($data)
                         setloginstatus($result['member'], 2592000);
                         $arr_return['success'] = TRUE;
                         $arr_return['message'] = '登录成功';
+                        $user_detail = array();
+                        $user_detail['uid'] = $arr_member['uid'];
+                        $user_detail['username'] = $arr_member['username'];
+                        $user_detail['email'] = $arr_member['email'];
+                        $user_detail['avatar'] = passport_get_avatar($arr_member['uid'], 'middle', $_G['setting']['ucenterurl'].'/');
+                        $arr_return['user_detail'] = $user_detail;
                     }
                     else
                     {
@@ -525,7 +547,6 @@ function passport_login($data)
     {
         $arr_return['message'] = '账号格式不正确';
     }
-    
     return $arr_return;
 }
 
@@ -897,6 +918,19 @@ function passport_get_album($uid, $album_url)
     return $temp_album;
 }
 
+// url文件是否存在
+function url_file_exists($url)
+{
+    $headers = @get_headers($url);
+    if(strpos($headers[0],'404') === false)
+    {
+        return TRUE;
+    }
+    else
+    {
+       return FALSE;
+    }
+}
 // 返回头像URL str
 function passport_get_avatar($uid, $size, $avatar_url)
 {
@@ -906,10 +940,10 @@ function passport_get_avatar($uid, $size, $avatar_url)
     $dir2 = substr($uid, 3, 2);
     $dir3 = substr($uid, 5, 2);
 
-    $url = $avatar_url.'data/avatar/'.$dir1.DS.$dir2.DS.$dir3.DS.substr($uid, -2)."_avatar_$size.jpg";
+    $url = $avatar_url.'data/avatar/'.$dir1.'/'.$dir2.'/'.$dir3.'/'.substr($uid, -2)."_avatar_$size.jpg";
     $no_url = $avatar_url.'images/noavatar_'.$size.'.gif';
     $bln_exists = url_file_exists($url);
-
+    
     return $bln_exists ? $url : $no_url;
 }
 

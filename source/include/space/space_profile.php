@@ -14,7 +14,7 @@ if(!defined('IN_DISCUZ')) {
 	 *	此处是二次开发
 	 */
 	 if(!$_GET['inajax'] && empty($_GET['mobile'])){
-		$uid=$_GET['uid'] ? $_GET['uid']:$_G['uid'];
+		$uid = $_GET['uid'] ? $_GET['uid'] : $_G['uid'];
 		header("Location:/home.php?mod=follow&uid=".$uid."&do=view&from=space");
 	}
 	/*
@@ -162,6 +162,9 @@ if($space['medals']) {
                 }
         }
 }
+
+$space['grouplist'] = get_joined_groups($space['uid']);
+
 $upgradecredit = $space['uid'] && $space['group']['type'] == 'member' && $space['group']['creditslower'] != 9999999 ? $space['group']['creditslower'] - $space['credits'] : false;
 $allowupdatedoing = $space['uid'] == $_G['uid'] && checkperm('allowdoing');
 
@@ -188,5 +191,30 @@ if(!$_G['privacy']) {
 		$_GET['do'] = 'card';
 		include_once template("home/space_card");
 	}
+}
+//获取当前用户加入的球迷会数据
+function get_joined_groups($uid) {
+	$grouplist = $groups = array();
+	$grouplist = C::t('forum_groupuser')->fetch_all_group_for_user($uid, 0, 0, 0, 5);
+	include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php');
+	foreach ($grouplist as $key => $group) {
+		// 	$forum = DB::fetch_first("select * from ".DB::table('forum_forum')." where fid = ".$group['fid']);
+		$fields = DB::fetch_first("SELECT f.fid,f.membernum,i.displayorder FROM ".DB::table('forum_forumfield')." AS f LEFT JOIN ".DB::table('plugin_fansclub_info')." AS i ON f.fid=i.fid WHERE f.fid=".$group['fid']." AND i.displayorder!=-1");
+		if ($fields) {
+			$groupinfo = get_fansclub_info($fields['fid']);
+			$groups[$key]['fid'] = $group['fid'];
+			$groups[$key]['name'] = $groupinfo['name'];
+			$groups[$key]['icon'] = $groupinfo['icon'];
+			$groups[$key]['membernum'] = $fields['membernum'];
+			$groups[$key]['province_name'] = $groupinfo['province_name'];
+			$groups[$key]['city_name'] = $groupinfo['city_name'];
+			if (!empty($grouplist[$key])) {
+				$special_verify = fansclub_get_level_apply_status($group['fid']);
+				$groups[$key]['verify_org'] = $special_verify['verify_org'];
+				$groups[$key]['verify_5u'] = $special_verify['verify_5u'];
+			}
+		}		
+	}	
+	return $groups;
 }
 ?>

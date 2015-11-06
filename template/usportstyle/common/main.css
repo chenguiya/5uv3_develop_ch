@@ -3,7 +3,8 @@ body,input,button,select,textarea{font: 12px/1.5 Tahoma, 'Microsoft Yahei', 'Sim
 body{background: #f1f4f6;}
 .colorRed{color: #ec0505 !important;}
 .ad_banner{display: block;text-align: center; width: 1000px; margin: 0 auto;}
-.ad_boxs{ background: #fff; padding: 10px;}
+.ad_660banner{ display: block; width: 660px; margin:0 auto;}
+.ad_boxs{ background: #fff; padding: 10px;}.padding{ margin-bottom: 20px;}
 /*header @ch*/
 .blank10{font-size: 0;display: block;visibility: hidden;clear: both;height: 10px;}
 .blank15{font-size: 0;display: block;visibility: hidden;clear: both;height: 15px;}
@@ -2393,6 +2394,7 @@ body{background: #f1f4f6;}
 
 .hasfsl
 {
+	margin-top:15px;
     margin-right: 0;
 }
 
@@ -3142,153 +3144,27 @@ body{background: #f1f4f6;}
     background: #fff;
 }
 
-.releaseBox
-{
-    float: right;
-
-    width: 280px;
-    height: 350px;
-    padding: 0 20px;
-
-    background: #fff;
-}
-
-.release_hd
-{
-    position: relative;
-
-    height: 1px;
-    margin-top: 30px;
-
-    background: #eef1f3;
-}
-
-.release_hd span
-{
-    font-family: 'Microsoft YaHei';
-    font-size: 18px;
-
-    position: absolute;
-    top: -15px;
-    left: 0;
-
-    padding-right: 10px;
-
-    background: #fff;
-}
-
-.release_bd
-{
-    margin-top: 18px;
-}
-
-.release_bd dl
-{
-    margin-top: 8px;
-}
-
-.release_bd dt{font-size: 16px;line-height: 14px;overflow: hidden; height:16px;margin-top: 15px; position: relative; padding-left: 8px;}.release_bd dt:before{content: ''; width: 0; height: 0; display:block;color: #eb6100; font-size: 14px; margin-right: 3px; border-left:2px solid #eb6100; position: absolute;left: 0; top:2px; height: 12px;}.release_bd dt a{font-size: 16px;color: #464646;}.release_bd dt a:hover{text-decoration: none;color: #eb6100;}.release_bd dd{font-size: 14px;line-height: 20px;overflow: hidden;height: 40px;margin: 8px 0;padding-left: 8px;color: #919090;}
-
-.in_hdbox
-{
-    position: relative;
-
-    height: 34px;
-    margin-bottom: 10px;
-
-    color: #464646;
-}
-
-.in_hdbox .hdspan
-{
-    font-size: 18px;
-    line-height: 34px;
-
-    display: inline-block;
-
-    border-bottom: 1px solid #eb6100;
-}
-
-.in_hdbox .mores
-{
-    line-height: 22px;
-
-    position: absolute;
-    right: 0;
-    bottom: 0;
-
-    display: block;
-
-    width: 84px;
-    height: 22px;
-
-    text-align: center;
-
-    color: #9da6b4;
-    border: 1px solid #ccd4d9;
-}
-
-.in_hdbox .mores:hover
-{
-    text-decoration: none;
-
-    color: #eb6100;
-}
-
-.Fans_box
-{
-    overflow: hidden;
-
-    width: 1000px;
-}
-
-.Fans_box ul
-{
-    width: 1020px;
-}
-
-.Fans_box li
-{
-    float: left;
-
-    width: 320px;
-    margin-right: 20px;
-    padding-bottom: 20px;
-
-    text-align: center;
-
-    background: #fff;
-}
-
-.Fans_box .fans_img img
-{
-    width: 102px;
-    height: 102px;
-    margin: 20px 0 16px;
-
-    border-radius: 50%;
-}
-
-.Fans_box .fans_name a
-{
-    font-size: 16px;
-    line-height: 25px;
-
-    color: #464646;
-}
-
-.Fans_box .fans_num
-{
-    margin: 10px 0;
-
-    color: #a0a0a0;
-}
-
-.Fans_box .fans_btn a{ background:url(images/fan_iconrs.png) no-repeat -999em -999em; width: 161px; height: 30px;display: inline-block;}
-.Fans_box .fans_btn a.attes{ background-position: 0 0;}
-.Fans_box .fans_btn a.attes:hover{ background-position: 0 -31px;}
-.Fans_box .fans_btn a.attes_on{ background-position: 0 -62px;}
-.Fans_box .fans_btn a.attes_on:hover{ background-position: 0 -93px;}
+.releaseBox{float: right;width: 280px;height: 350px;padding: 0 20px;background: #fff;}
+.release_hd{position: relative;height: 1px;margin-top: 30px;background: #eef1f3;}
+.release_hd span{font-family: 'Microsoft YaHei';font-size: 18px;position: absolute;top: -15px;left: 0px;padding-left:10px;padding-right: 10px;background: #fff;}
+.release_hd span:before{content: ''; width: 0; height: 0; display:block;color: #eb6100; font-size: 14px; margin-right: 3px; border-left:2px solid #eb6100; position: absolute;left: 0; top:5px; height: 16px;}
+.release_hd .more_hd{ position: absolute; top: -12px; right: 0px; background: #fff; color: #9da6b4; font-size: 12px;}
+.release_bd{ margin-top: 10px; width:280px;overflow: hidden;}
+.fans_inch{ width:300px;}
+.fans_inch li{ float: left; text-align: center; width: 145px; padding-top: 15px;}
+.fans_inch .fans_img{border-right: 1px solid #f1f1f1; display: block;}
+.fans_inch .fans_img img{ width:76px; height: 76px;-webkit-border-radius:50%; border-radius:50%; display: block; margin:0 auto;overflow: hidden;}
+.fans_inch .fans_img .fan_name{ display: block; line-height: 18px; text-align: center; height: 20px; overflow: hidden; margin: 5px 0;color: #464646; font-size: 14px;}
+.fans_inch .fan_num{ color: #a0a0a0; text-align: center;border-bottom: 1px solid #f1f1f1; width: 100px; margin: 0 auto; padding-bottom: 15px;}
+.in_hdbox{position: relative;height: 34px;margin-bottom: 10px;color: #464646;}
+.in_hdbox .hdspan{font-size: 18px;line-height: 34px;display: inline-block;border-bottom: 1px solid #eb6100;}
+.in_hdbox .mores{line-height: 22px;position: absolute;right: 0;bottom: 0;display: block;width: 84px;height: 22px;text-align: center;color: #9da6b4;border: 1px solid #ccd4d9;}
+.in_hdbox .mores:hover{text-decoration: none;color: #eb6100;}
+.Fans_box{overflow: hidden;width: 1000px;}
+.Fans_box .cell{ float: left; margin-left: 20px; position: relative;}
+.Fans_box .cell .brief{ width: 230px; text-overflow:ellipsis; white-space: nowrap;}
+.Fans_box .logo_icon{ position:absolute; right: 23px; top: 138px; background:rgba(255,255,255,0.8); width: 60px; height: 60px; border-radius:50%; text-align: center;-webkit-box-shadow:0px 2px 1px rgba(0,0,0,0.2); box-shadow: 0px 2px 1px rgba(0,0,0,0.2);}
+.Fans_box .logo_icon img{ border-radius:50%; width: 48px; height: 48px; margin-top: 6px;}
 .modech_left{float: left;overflow: hidden;width: 660px;}
 .indexThread ul{padding: 0 20px;background: #fff;}
 .indexThread li{position: relative;padding: 20px 0;border-bottom: 1px solid #edf0f2;}
@@ -3736,32 +3612,12 @@ body{background: #f1f4f6;}
 
     height: 18px;
 }
-
-.topic_b a
-{
-    display: block;
-}
-
-.topic_b .top_img img
-{
-    width: 320px;
-    height: 170px;
-}
-
-.topic_b .top_name
-{
-    font-size: 14px;
-    line-height: 44px;
-
-    height: 44px;
-    padding: 0 10px;
-
-    text-align: center;
-
-    color: #464646;
-    background: #fff;
-}
-
+.topic_b a{display: block; position: relative;}
+.topic_b .top_img img{width: 320px;height: 170px;}
+.topic_b .top_img .iconr{background: url(images/video_ficon.png) no-repeat 0 0; width: 50px; height: 50px; position: absolute; left: 50%; top: 50%; margin-left: -25px; margin-top: -25px;}
+.topic_b .top_img:hover .iconr{ background-position: 0 -52px;}
+.topic_b .top_name{font-size: 14px;line-height: 44px;height: 44px;padding: 0 10px;text-align: center;color: #464646;background: #fff;}
+.ch_sident .chBoard{ width: 320px; background: #fff; height: 95px;}
 .link_hd
 {
     height: 38px;
@@ -6305,7 +6161,7 @@ body{background: #f1f4f6;}
 .match_ch .versus .team .logo{ display: block; margin-bottom: 10px;}
 .match_ch .versus .team img{width: 40px;height: 40px;}
 .match_ch .versus .score_over{ color: #a0a0a0;}
-.match_ch .versus .score{font: bold 30px/68px "Arial", sans-serif;display: inline-block;float: left;width: 120px;text-align: center;color: #464646;}
+.match_ch .versus .score{font: bold 30px/68px "Arial", sans-serif;display: inline-block;float: left;width: 135px;text-align: center;color: #464646;}
 .match_ch .link{display: inline-block;float: right;box-sizing: border-box;width: 220px;min-height: 88px;padding: 0 10px 0 35px;border-left: 1px solid #e3e3e3;}
 .match_ch .link li{float: left; width: 50%; line-height: 18px; position: relative; margin-bottom: 2px;}
 .match_ch .link li:before{ content:''; width: 0; height:0; border: 1px solid #eb6100; color: #eb6100; display: block; position: absolute;left: 0; top: 8px;}

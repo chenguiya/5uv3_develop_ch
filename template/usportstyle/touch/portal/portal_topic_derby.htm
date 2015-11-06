@@ -80,7 +80,7 @@
                     </ul>
               <!--{/if}-->
                 </div>
-                <a class="km_button">阵容实力分析</a>
+                <a href="thread-58347.html" class="km_button" target="_blank">阵容实力分析</a>
             </div>
             <div class="keyman_r">
         
@@ -97,7 +97,7 @@
                     </ul>
                     <!--{/if}-->
                 </div>
-                <a class="km_button km_button_2">阵容身价分析</a>
+                <a href="thread-58349.html"class="km_button km_button_2" target="_blank">阵容身价分析</a>
             </div>
         </div>
     </div>
@@ -157,5 +157,52 @@
 
     jQuery('.km_bar').each(function () {
         ySlider(this);
+    });
+	
+	var derbyPt = jQuery('.derby_bord').find('.derby_pt');
+	derbyPt.each(function(){
+    		jQuery(this).hover(function(){
+    			jQuery(this).children().addClass('active').parent().siblings().children().removeClass('active');
+    	});
+	})
+    
+
+    var win = jQuery(window),
+            derShare = jQuery('.derShare');
+    win.scroll(function () {
+        if (win.scrollTop() >= 163) {
+            derShare.css('position', 'fixed');
+        } else {
+            derShare.css('position', 'absolute');
+        }
+    });
+
+
+    function changeFireIceRadio(data) {
+        jQuery('.fire_icon i').text(data.like);
+        jQuery('.ice_icon i').text(data.unlike);
+        var container = jQuery('.fi_icon');
+        container.find('i').css('width', data.like_percent * 100 + '%');
+        container.find('em').css('width', (1 - data.like_percent) * 100 + '%');
+    }
+    jQuery('.fire_icon').click(function () {
+        jQuery.getJSON('/portal.php?mod=topic&topicid=5&action=like', function (data) {
+            if (data.success) {
+                changeFireIceRadio(data);
+            } else {
+                //jQuery('#btn_login_simple').click();
+				window.location.href='member.php?mod=logging&action=login&mobile=2';
+            }
+        });
+    });
+    jQuery('.ice_icon').click(function () {
+        jQuery.getJSON('/portal.php?mod=topic&topicid=5&action=unlike', function (data) {
+            if (data.success) {
+                changeFireIceRadio(data);
+            } else {
+                //jQuery('#btn_login_simple').click();
+				window.location.href='member.php?mod=logging&action=login&mobile=2';
+            }
+        });
     });
 </script>

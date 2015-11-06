@@ -62,7 +62,7 @@
 	         <div class="bm_nojoin">
                   <p class="join_font">{lang activity_no_member}</p>
                   <p>
-                     <a href="forum.php?mod=group&action=join&fid=$_G[fid]&forward={eval echo(urlencode('forum.php?mod=viewthread&tid='.$_GET[tid]))}&mobile=2" class="dialog join_but button2">加入</a>
+                     <a href="forum.php?mod=group&action=join&fid=$_G[fid]&forward={eval echo(urlencode('forum.php?mod=viewthread&tid='.$_GET[tid]))}&mobile=2" class="{if $_G['uid']}dialog{/if} join_but button2">加入</a>
                      <a href="javascript:;" class="join_close" onclick="popup.close();">取消</a>
                   </p>
              </div>

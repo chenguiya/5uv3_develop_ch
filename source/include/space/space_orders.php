@@ -20,4 +20,6 @@ foreach ($orderlist as $key => $order) {
 	$orderlist[$key]['body'] = unserialize($order['body']);
 }
 
+// var_dump($orderlist);die;
+
 include_once template("diy:home/space_orders");

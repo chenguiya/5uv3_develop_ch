@@ -454,14 +454,15 @@ function ckfriend_album($album) {
 				include template('home/misc_inputpwd');
 				exit();
 			}
-		} elseif (!userrightsperm(34, $_G['uid'])) {				//add by Daming 2015/6/2 判断当前用户是否有权限
-			space_merge($space, 'count');
-			space_merge($space, 'profile');
-			$_G['privacy'] = 1;
-			require_once libfile('space/profile', 'include');
-			include template('home/space_privacy');
-			exit();
-		}
+		} 
+// 		elseif (!userrightsperm(34, $_G['uid'])) {				//add by Daming 2015/6/2 判断当前用户是否有权限
+// 			space_merge($space, 'count');
+// 			space_merge($space, 'profile');
+// 			$_G['privacy'] = 1;
+// 			require_once libfile('space/profile', 'include');
+// 			include template('home/space_privacy');
+// 			exit();
+// 		}
 	}
 }
 

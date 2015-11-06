@@ -133,6 +133,8 @@ $lang = array(
 	'blockclass_activity_script_activitynew' => '最新活动',
 	'blockclass_activity_script_activitycity' => '同城活动',
 	'blockclass_activity_script_activity' => '高级自定义',
+		
+	'blockclass_forum_allactivity' => '全部活动模块',
 
 	'blockclass_portal' => '门户类',
 

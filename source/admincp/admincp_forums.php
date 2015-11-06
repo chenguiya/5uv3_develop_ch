@@ -37,8 +37,11 @@ var rowtypedata = [
 </script>
 <?php
 		showformheader('forums');
+        
 		echo '<div style="height:30px;line-height:30px;"><a href="javascript:;" onclick="show_all()">'.cplang('show_all').'</a> | <a href="javascript:;" onclick="hide_all()">'.cplang('hide_all').'</a> <input type="text" id="srchforumipt" class="txt" /> <input type="submit" class="btn" value="'.cplang('search').'" onclick="return srchforum()" /></div>';
 		showtableheader('');
+        
+        showsubmit('editsubmit');
 		showsubtitle(array('', 'display_order', 'forums_admin_name', '', 'forums_moderators', '<a href="javascript:;" onclick="if(getmultiids()) location.href=\''.ADMINSCRIPT.'?action=forums&operation=edit&multi=\' + getmultiids();return false;">'.$lang['multiedit'].'</a>'));
 
 		$forumcount = C::t('forum_forum')->fetch_forum_num();
@@ -85,7 +88,7 @@ var rowtypedata = [
 
 		showforum($gforum, '', 'last');
 
-		showsubmit('editsubmit');
+		// showsubmit('editsubmit');
 		showtablefooter();
 		showformfooter();
 

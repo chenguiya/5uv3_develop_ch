@@ -7,8 +7,11 @@
 	<div class="sidebar chComd">
 		<!--{loop $hot_activity['data'] $val}-->
 	    <div class="cell">	    
-	        <a href="{$val[url]}" target="_blank" title="{$val[title]}"><img class="img" <!--{if $val[thumbpath]}-->src="data/attachment/{$val[thumbpath]}"<!--{else}-->src="{$val[pic]}"<!--{/if}--> width="320" height="170" alt="{$val[title]}">	
+                <a href="{$val[url]}" target="_blank" ><img class="img" <!--{if $val[thumbpath]}-->src="data/attachment/{$val[thumbpath]}"<!--{else}-->src="{$val[pic]}"<!--{/if}--> width="320" height="170" alt="{$val[title]}"></a>	
 	        <div class="desc">
+                                    <p class="brief">
+                                        <a href="{$val[url]}">{$val['title']}</a>
+                                    </p>
 	           <span class="time">{$val[starttimefrom]}<!--{if $val[starttimeto]}-->&nbsp;-&nbsp;{$val[starttimeto]}<!--{/if}--></span>
 				<!--{if $val[status]}-->
 				<a href="{$val[url]}" class="btn-join" target="_blank">立即参加</a>

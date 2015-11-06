@@ -1,0 +1,26 @@
+
+<section class="tab_datas">
+         <table class="DateTab" border="0" cellspacing="0" cellpadding="0" width="100%">
+                <tr>
+                    <th width="16%">号码</th>
+                    <th width="20%">姓名</th>
+                    <th width="16%">进球数</th>
+                    <th width="16%">助攻</th>
+                    <th width="16%">黄牌</th>
+                    <th width="16%">红牌</th>
+                </tr>
+                <!--{loop $arralldata $user}-->
+                <tr>
+                    <td>{$user['num']}</td>
+                    <td>{$user['name']}</td>
+                    <td>{$user['gold']}</td>
+                    <td>{$user['help']}</td>
+                    <td>{$user['yellow']}</td>
+                    <td>{$user['red']}</td>
+                </tr>
+                <!--{/loop}-->
+         </table>
+</section>
+
+
+

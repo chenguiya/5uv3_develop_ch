@@ -28,8 +28,8 @@
 	<ul>
 	<!--{loop $checkusers $user}-->
 		<li class="ucheck_list">
-			<div class="ucl_img"><a href="home.php?mod=space&uid=$user[uid]&do=thread&from=space"><img src="<!--{avatar($user[uid], middle, true)}-->" alt=""></a></div>
-			<div class="ucl_user"><a href="home.php?mod=space&uid=$user[uid]&do=thread&from=space">$user[username]</a></div>
+			<div class="ucl_img"><a href="home.php?mod=space&do=profile&uid=$user[uid]&mobile=2"><img src="<!--{avatar($user[uid], middle, true)}-->" alt=""></a></div>
+			<div class="ucl_user"><a href="home.php?mod=space&do=profile&uid=$user[uid]&mobile=2">$user[username]</a></div>
 			<div class="ucl_apply"><span>$user[joindateline]</span></div>
 			<a href="forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]&uid=$user[uid]&checktype=1" class="ucl_btn uclb_y dialog">通过</a>
 			<a href="forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]&uid=$user[uid]&checktype=2" class="ucl_btn uclb_n dialog">忽略</a>

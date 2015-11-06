@@ -243,7 +243,9 @@ class control extends adminbase {
 	}
 
 	function onedit() {
-		$uid = getgpc('uid');
+        
+        
+        $uid = getgpc('uid');
 		$status = 0;
 		if(!$this->user['isfounder']) {
 			$isprotected = $this->db->result_first("SELECT COUNT(*) FROM ".UC_DBTABLEPRE."protectedmembers WHERE uid = '$uid'");
@@ -261,12 +263,19 @@ class control extends adminbase {
 			$rmrecques = getgpc('rmrecques', 'P');
 			$sqladd = '';
 			if($username != $newusername) {
+                
 				if($_ENV['user']->get_user_by_username($newusername)) {
 					$this->message('admin_user_exists');
 				}
 				$sqladd .= "username='$newusername', ";
 				$this->load('note');
 				$_ENV['note']->add('renameuser', 'uid='.$uid.'&oldusername='.urlencode($username).'&newusername='.urlencode($newusername));
+                
+                // add by zhangjh 2015-10-27
+                //include_once(UC_ROOT.'../source/plugin/fansclub/function.inc.php');
+                $note = 'uid='.$uid.'&oldusername='.urlencode($username).'&newusername='.urlencode($newusername);
+                //fansclub_use_log('ucs_renameuser', $_ENV, $note);
+                $this->_uc_memberlog('renameuser', $note);
 			}
 			if($password) {
 				$salt = substr(uniqid(rand()), 0, 6);
@@ -275,6 +284,12 @@ class control extends adminbase {
 				$sqladd .= "password='$password', salt='$salt', ";
 				$this->load('note');
 				$_ENV['note']->add('updatepw', 'username='.urlencode($username).'&password=');
+                
+                // add by zhangjh 2015-10-27
+                //include_once(UC_ROOT.'../source/plugin/fansclub/function.inc.php');
+                $note = 'username='.urlencode($username).'&password=';
+                //fansclub_use_log('ucs_updatepw', $_ENV, $note);
+                $this->_uc_memberlog('updatepw', $note);
 			}
 			if($rmrecques) {
 				$sqladd .= "secques='', ";
@@ -325,6 +340,60 @@ class control extends adminbase {
 			}
 		}
 	}
+    
+    function _uc_memberlog($log_type, $uc_server_note)
+    {
+        /*
+        CREATE TABLE `pre_ucenter_memberlog` (
+          `log_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+          `log_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '日志时间',
+          `log_type` char(20) NOT NULL DEFAULT '' COMMENT '日志类型',
+          `g_uid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '_G的uid',
+          `g_username` char(25) NOT NULL DEFAULT '',
+          `g_clientip` char(25) NOT NULL DEFAULT '',
+          `uc_server_note` char(255) NOT NULL DEFAULT '',
+          `s_server_addr` char(100) NOT NULL DEFAULT '' COMMENT '_SERVER的server_addr',
+          `s_server_name` char(100) NOT NULL DEFAULT '',
+          `s_http_host` char(100) NOT NULL DEFAULT '',
+          `s_request_uri` char(255) NOT NULL DEFAULT '',
+          `s_php_self` char(100) NOT NULL DEFAULT '',
+          `s_remote_addr` char(25) NOT NULL DEFAULT '',
+          `s_http_user_agent` char(255) NOT NULL DEFAULT '',
+          `s_http_referer` char(255) NOT NULL DEFAULT '',
+          PRIMARY KEY (`log_id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='UC用户行为记录表';
+        */
+
+        $_tmp_user = $_ENV['user']->base->user;
+        $_tmp_ip = $_ENV['user']->base->onlineip;
+    
+        $arr_data = array();
+        $arr_data['log_type'] = $log_type;
+        $arr_data['log_time'] = time();
+        $arr_data['g_uid'] = $_tmp_user['uid'];
+        $arr_data['g_username'] = $_tmp_user['username'];
+        $arr_data['g_clientip'] = $_tmp_ip;
+        $arr_data['uc_server_note'] = $uc_server_note;
+       
+        $arr_data['s_server_addr'] = $_SERVER['SERVER_ADDR'];
+        $arr_data['s_server_name'] = $_SERVER['SERVER_NAME'];
+        $arr_data['s_http_host'] = $_SERVER['HTTP_HOST'];
+        $arr_data['s_request_uri'] = $_SERVER['REQUEST_URI'];
+        $arr_data['s_php_self'] = $_SERVER['PHP_SELF'];
+        $arr_data['s_remote_addr'] = $_SERVER['REMOTE_ADDR'];
+        $arr_data['s_http_user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+        $arr_data['s_http_referer'] = $_SERVER['HTTP_REFERER'];
+        
+        $sqladd = '';
+        foreach($arr_data as $key => $value)
+        {
+            $sqladd .= "`".$key."`='".$value."',";
+        }
+        $sqladd = substr($sqladd, 0, -1);
+        $this->db->query("INSERT INTO ".UC_DBTABLEPRE."memberlog SET ".$sqladd);
+        $log_id = $this->db->insert_id();
+    }
+
 
 }
 

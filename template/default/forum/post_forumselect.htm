@@ -35,9 +35,9 @@
 	<p class="cl">
 		<!--{if $_G['group']['allowpost'] || !$_G['uid']}-->
 			<!--{if $special === null}-->
-				<button id="postbtn" class="pn pnc y" onclick="hideWindow('nav');showWindow('newthread', 'forum.php?mod=post&action=newthread&fid=' + selectfid)" disabled="disabled"><span>{lang send_posts}</span></button>
+				<button id="postbtn" class="pn pnc y" onclick="hideWindow('nav');showWindow('newthread', '{$_G['siteurl']}forum.php?mod=post&action=newthread&fid=' + selectfid)" disabled="disabled"><span>{lang send_posts}</span></button>
 			<!--{else}-->
-				<button id="postbtn" class="pn pnc y" onclick="hideWindow('nav');window.location.href='forum.php?mod=post&action=newthread&fid=' + selectfid + '&special=$special'" disabled="disabled"><span>$actiontitle</span></button>
+				<button id="postbtn" class="pn pnc y" onclick="hideWindow('nav');window.location.href='{$_G['siteurl']}forum.php?mod=post&action=newthread&fid=' + selectfid + '&special=$special'" disabled="disabled"><span>$actiontitle</span></button>
 			<!--{/if}-->
 		<!--{/if}-->
 		<span class="pbnv">$_G['setting']['bbname']<span id="pbnv"></span> <a id="enterbtn" class="xg1" href="javascript:;" onclick="locationforums(currentblock, currentfid)">[{lang nav_forum}]</a></span>

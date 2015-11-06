@@ -1,6 +1,6 @@
 <!--{template common/header}-->
 <!--{if $userlists}-->
-		<h2>已签到 ($count 人)</h2>
+		<h2><!--{if $issigned}-->已签到<!--{else}-->未签到<!--{/if}--> ($count 人)</h2>
 		<table class="dt">
 			<tr>
 				<th width="140">&nbsp;</th>

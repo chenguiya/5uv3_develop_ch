@@ -1893,7 +1893,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	$activity_fields = DB::fetch_first("SELECT * FROM ".DB::table('forum_activity')." WHERE tid=".$tid);
 	$activity = array_merge($activity, $activity_fields);
 	//是否已签到
-	if (!DB::fetch_first("SELECT * FROM ".DB::table('forum_activityapply')." WHERE tid=$tid AND uid=$uid AND verified='1' AND registration='1'")) {
+	if (!DB::fetch_first("SELECT * FROM ".DB::table('forum_activityapply')." WHERE tid=$tid AND uid=$uid AND verified=1 AND registration=1")) {
 		$issigned = false;
 	} else {
 		$issigned = true;
@@ -1905,7 +1905,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 			showmessage('现在不是签到时间！', "forum.php?mod=viewthread&tid=$tid");
 		}
 		//判断签到人时候在已通过列表
-		if (!DB::fetch_first("SELECT * FROM ".DB::table('forum_activityapply')." WHERE tid=$tid AND uid=$uid AND verified='1'")) {
+		if (!DB::fetch_first("SELECT * FROM ".DB::table('forum_activityapply')." WHERE tid=$tid AND uid=$uid AND verified=1")) {
 			showmessage('你没有签到资格，请联系管理员！', "forum.php?mod=viewthread&tid=$tid");
 		}
 		C::t('forum_activityapply')->update(array('tid' => $tid, 'uid' => $uid), array('registration' => 1));
@@ -1922,14 +1922,19 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	$maxpage = @ceil($count/$pp);
 	
 	$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-	$start = ($page - 1)*$pp;
+	$start = ($page - 1) * $pp;
 		
 	$userlists = C::t('forum_activityapply')->fetch_all_user_by_issign($_GET['tid'], $start, $pp, $issigned);
 	
 	foreach ($userlists as $key => $value) {
 		$userlists[$key]['ufielddatanew'] = dunserialize($value['ufielddata']);
 		$userlists[$key]['ufielddatanew']['userfield']['en_mobile'] = encryptionDisplay($userlists[$key]['ufielddatanew']['userfield']['mobile'], 3, 4);
-		$userlists[$key]['sign_time'] = dgmdate($value['sign_time'], 'u');
+		if (!$value['sign_time']) {
+			$userlists[$key]['sign_time'] = '未签到';
+		} else {
+			$userlists[$key]['sign_time'] = dgmdate($value['sign_time'], 'u');
+		}
+		
 	}
 // 	var_dump($userlists);die;
 	

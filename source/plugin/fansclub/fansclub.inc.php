@@ -40,11 +40,11 @@ switch ($_G['gp_league_id']) {
         $_G['gp_league_id'] = 100;
         break;
 }
-//echo $ac,'---',$_G['gp_league_id'];exit;
-//echo $ac;exit;
 $cvar = $_G['cache']['plugin']['fansclub']; 
 $config = include DISCUZ_ROOT.'./source/plugin/fansclub/data/config.php';
 $config = array_merge($cvar, $config); // 合并配置
+
+
 
 include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php'); // 公共函数
 $fid = isset($_GET['fid']) ? intval($_GET['fid']) : 0;
@@ -68,11 +68,41 @@ if($fid > 0)
 	
 }
 
+if(defined('IN_MOBILE'))	{
+        foreach (C::t('forum_forum')->my_fetch_all_name_by_fid($fid) as $key => $val){           
+            foreach (C::t('forum_forum')->my_fetch_all_name_by_fid($val['fup']) as $k=>$v){
+                $fup = C::t('forum_forum')->my_fetch_forum_fup_by_name($v['name']);
+            }   
+        }
+        //var_dump($test);exit;
+        switch ($fup) {
+            case '1':
+                $_G['gp_league_id'] = 1;
+                break;
+            case '54':
+                $_G['gp_league_id'] = 15;
+                break;
+            case '185':
+                $_G['gp_league_id'] = 13;
+                break;
+            case '81':
+                $_G['gp_league_id'] = 21;
+                break;
+            case '64':
+                $_G['gp_league_id'] = 2;
+                break;
+            case '82':
+                $_G['gp_league_id'] = 3;
+                break;
+        }
+        //echo $_G['gp_league_id'];exit;
+ }
+
 $arr = array('rights', 'index', 'apply','shooter','leaguescore', 'apply_support', 'ajax', 'friendship', 'lists', 'ajax_thread', 'home', 'event', 'live', 'live2', 'mobile_register', 'verify', '404', 'about','index2'); // 只允许的action
 if(!in_array($ac, $arr)) showmessage('undefined_action');
 
 $file = DISCUZ_ROOT.'./source/plugin/fansclub/module/index/'.$ac.'.inc.php'; // 检查模块是否存在
-if(!file_exists($file) || !$config['fansclub_enable']) showmessage('undefined_action');
+// if(!file_exists($file) || !$config['fansclub_enable']) showmessage('undefined_action');
 include $file;
 
 // if($_G['style']['styleid'] == 2) // 如果后台选择了第二个模版
@@ -94,7 +124,7 @@ elseif($ac == 'live' || $ac == 'live2')
 	$metakeywords = '赛程,比分,足球赛事直播,NBA直播视频,篮球赛事直播';
 	$metadescription = '最全，最新的各种足球赛事、篮球赛事直播信息。';
 
-	$arr_league_name = trim($config['arr_league'][intval($_GET['league_id'])]);
+	$arr_league_name = trim($config['arr_league'][intval($_G['gp_league_id'])]);
 	if($arr_league_name != '')
 	{
 		$navtitle = $arr_league_name.'视频比分直播_'.$_G['setting']['bbname'];
@@ -104,94 +134,32 @@ elseif($ac == 'live' || $ac == 'live2')
 }
 elseif($ac == 'shooter')
 {
-	if($_G['gp_league_id'] == 41){
-		$navtitle = '亚冠射手榜 _'.$_G['setting']['bbname'];
-		$metakeywords = '亚冠,射手榜';
-		$metadescription = '亚冠射手榜，最新联赛射手榜总排名。';
-	}elseif($_G['gp_league_id'] == 13){
-		$navtitle = '中超射手榜 _'.$_G['setting']['bbname'];
-		$metakeywords = '中超,射手榜';
-		$metadescription = '中超射手榜，最新联赛射手榜总排名。';
-	}elseif($_G['gp_league_id'] == 1){
-		$navtitle = '英超射手榜 _'.$_G['setting']['bbname'];
-		$metakeywords = '英超,射手榜';
-		$metadescription = '英超射手榜，最新联赛射手榜总排名。';
-	}elseif($_G['gp_league_id'] == 15){
-		$navtitle = '西甲射手榜 _'.$_G['setting']['bbname'];
-		$metakeywords = '西甲,射手榜';
-		$metadescription = '西甲射手榜，最新联赛射手榜总排名。';
-	}elseif($_G['gp_league_id'] == 21){
-		$navtitle = '意甲射手榜 _'.$_G['setting']['bbname'];
-		$metakeywords = '意甲,射手榜';
-		$metadescription = '意甲射手榜，最新联赛射手榜总排名。';
-	}elseif($_G['gp_league_id'] == 2){
-		$navtitle = '德甲射手榜 _'.$_G['setting']['bbname'];
-		$metakeywords = '德甲,射手榜';
-		$metadescription = '德甲射手榜，最新联赛射手榜总排名。';
-	}elseif($_G['gp_league_id'] == 3){
-		$navtitle = '法甲射手榜 _'.$_G['setting']['bbname'];
-		$metakeywords = '法甲,射手榜';
-		$metadescription = '法甲射手榜，最新联赛射手榜总排名。';
-	}else{
-		$navtitle = '射手榜_足球联赛射手榜_'.$_G['setting']['bbname'];
-		$metakeywords = '射手榜,足球联赛';
-		$metadescription = '五大足球联赛射手榜，顶级甲级足球联赛射手榜。';		
-	}
+                        $arr_league_name = trim($config['arr_league'][intval($_G['gp_league_id'])]);
+                         if($arr_league_name != '')
+                         {
+                                     $navtitle = $arr_league_name.'射手榜'.$_G['setting']['bbname'];
+                                     $metakeywords = $arr_league_name.',射手榜';
+                                     $metadescription = $arr_league_name.'射手榜，最新联赛射手榜总排名。';
+                         }else{
+                                    $navtitle = '射手榜_足球联赛射手榜_'.$_G['setting']['bbname'];
+                                    $metakeywords = '射手榜,足球联赛';
+                                    $metadescription = '五大足球联赛射手榜，顶级甲级足球联赛射手榜。';		
+                         }
 }
 elseif($ac == 'leaguescore')
 {
-	switch ($_G['gp_league_id']) {
-		case 13:
-			$navtitle = '中超积分榜_'.$_G['setting']['bbname'];
-			$metakeywords = '中超,积分榜';
-			$metadescription = '中超积分榜，最新联赛积分榜排名。';
-			break;
-		case 1:
-			$navtitle = '英超积分榜_'.$_G['setting']['bbname'];
-			$metakeywords = '英超,积分榜';
-			$metadescription = '英超积分榜，最新联赛积分榜排名。';
-			break;
-		case 15:
-			$navtitle = '西甲积分榜_'.$_G['setting']['bbname'];
-			$metakeywords = '西甲,积分榜';
-			$metadescription = '西甲积分榜，最新联赛积分榜排名。';
-			break;
-		case 21:
-			$navtitle = '意甲积分榜_'.$_G['setting']['bbname'];
-			$metakeywords = '意甲,积分榜';
-			$metadescription = '意甲积分榜，最新联赛积分榜排名。';
-			break;
-		case 2:
-			$navtitle = '德甲积分榜_'.$_G['setting']['bbname'];
-			$metakeywords = '德甲,积分榜';
-			$metadescription = '德甲积分榜，最新联赛积分榜排名。';
-			break;
-		case 3:
-			$navtitle = '法甲积分榜_'.$_G['setting']['bbname'];
-			$metakeywords = '法甲,积分榜';
-			$metadescription = '法甲积分榜，最新联赛积分榜排名。';
-			break;	
-		case 41:
-			$navtitle = '亚冠小组赛_亚冠淘汰赛排名_'.$_G['setting']['bbname'];
-			$metakeywords = '亚冠,淘汰赛,小组赛,排名';
-			$metadescription = '最新亚冠小组积分排名，亚冠淘汰赛16强，8强和半决赛等排名。';	
-			break;
-		case 7:
-			$navtitle = 'NBA东西部排名_NBA常规赛排名_'.$_G['setting']['bbname'];
-			$metakeywords = 'NBA东西部,常规赛,排名';
-			$metadescription = '最新NBA东西部排名，NBA常规赛积分排名，季后赛排名。';
-			break;
-		case 8:
-			$navtitle = 'CBA球队积分排名_CBA常规赛排名_'.$_G['setting']['bbname'];
-			$metakeywords = 'CBA球队,常规赛,积分排名';
-			$metadescription = '最新CBA球队积分排名，CBA球队常规赛积分排名，季后赛排名。';
-			break;
-		default:
-			$navtitle = '积分榜_足球联赛积分榜_'.$_G['setting']['bbname'];
-			$metakeywords = '积分榜,足球联赛';
-			$metadescription = '五大足球联赛积分榜，顶级甲级足球联赛积分榜。';
-			break;
-	}
+                        $arr_league_name = trim($config['arr_league'][intval($_G['gp_league_id'])]);
+                        if($arr_league_name != '')
+                        {
+                                    $navtitle = $arr_league_name.'积分榜_'.$_G['setting']['bbname'];
+                                    $metakeywords = $arr_league_name.',积分榜';
+                                    $metadescription = $arr_league_name.'积分榜，最新联赛积分榜排名。';
+
+                        }else{
+                                    $navtitle = '积分榜_足球联赛积分榜_'.$_G['setting']['bbname'];
+                                    $metakeywords = '积分榜,足球联赛';
+                                    $metadescription = '五大足球联赛积分榜，顶级甲级足球联赛积分榜。';
+                        }	
 }
 elseif($ac == '404')
 {

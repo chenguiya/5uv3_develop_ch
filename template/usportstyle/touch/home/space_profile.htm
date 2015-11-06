@@ -4,51 +4,46 @@
 <!--{template common/header}-->
 
 <!--{if !$_GET['mycenter']}-->
-
 <!-- header start -->
-<header class="header">
-    <div class="nav">
-        <div class="category">
-            <!--{if $_G['uid'] == $space['uid']}-->
-            {lang myprofile}
-            <!--{else}-->
-            $space[username] {lang otherprofile}
-            <!--{/if}-->
-       
-        <div id="elecnation_nav_left">
-            <!--{if $_G['uid'] == $space['uid']}-->
-            <a href="home.php?mod=space&uid={$_G[uid]}&do=profile&mycenter=1"><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_center.png" /></a>
-            <!--{else}-->
-            <a href="javascript:;" onclick="history.go(-1)"><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_back.png" /></a>
-            <!--{/if}-->
+<header class="cenhead">
+        <a href="javascript:;" onclick="history.go(-1)" class="head_back"></a>
+        <div class="cen_img">
+            <p><a href="javascript:void(0);" onClick="upload_pic();"><img src="<!--{avatar($space[uid], big, true)}-->" alt="{$discuz_userss}" />{if $space[gender]==1}<i class="fontweb_icon ic_nan"></i>{elseif $space[gender]==2}<i class="fontweb_icon ic_nv"></i>{elseif $space[gender]==0}<i class="fontweb_icon ic_secret"></i>{/if}</a></p>   
         </div>
-        </div>
-    </div>
-</header>
+        <div class="cen_names">$space[username]</div>
+        <div class="cen_introd"><!--{if $space['bio']}-->简介：{$space['bio']}<!--{else}-->简介：这家伙很懒，什么都没有留下。<!--{/if}--></div>
+</header>   
 <!-- header end -->
-<!-- userinfo start -->
-<div class="userinfo wp">
-	<div class="user_avatar">
-		<div class="avatar_m"><span><img src="<!--{avatar($space[uid], middle, true)}-->" /></span></div>
-		<h2 class="name">$space[username]</h2>
-	</div>
-	<div class="user_box">
-		<ul>
-			<li><span>$space[credits]</span>{lang credits}</li>
-			<!--{loop $_G[setting][extcredits] $key $value}-->
-			<!--{if $value[title]}-->
-			<li><span>{$space["extcredits$key"]} $value[unit]</span>$value[title]</li>
-			<!--{/if}-->
-			<!--{/loop}-->
-		</ul>
-	</div>
-	<!--{if $space['uid'] == $_G['uid']}-->
-	<div class="btn_exit"><a href="member.php?mod=logging&action=logout&formhash={FORMHASH}" style="color:#FFFFFF;">{lang logout_mobile}</a></div>
-    <!--{else}-->
-    <div class="btn_exit"><a href="home.php?mod=space&do=pm&subop=view&touid=$space[uid]" style="color:#FFFFFF;">{lang send_pm}</a></div>
-	<!--{/if}-->
+<div class="data_mian">
+     <section class="chdata_nav">
+              <a href="javascript:void(0)" class="hover">资料</a>
+              <a href="home.php?mod=space&uid=$space[uid]&do=thread&from=thread&mobile=2">帖子</a>
+     </section>
+     <ul class="chdata_list">
+         <li><span>性别：</span><em><!--{if $space[gender]==1}-->男<!--{elseif $space[gender]==2}-->女<!--{elseif $space[gender]==0}-->保密<!--{/if}--></em></li>
+         <li><span>生日：</span><em><!--{if empty($space[birthyear]) || empty($space[birthmonth]) || empty($space[birthday])}-->未填<!--{else}-->{$space[birthyear]}.{$space[birthmonth]}.{$space[birthday]}<!--{/if}--></em></li>
+         <li><span>地址：</span><em><!--{if empty($space[address])}-->未填<!--{else}-->$space[address]<!--{/if}--></em></li>
+     </ul>
+     <section class="chdata_fans">
+     	<!--{if $space[grouplist]}-->
+              <h3>加入的球迷会：</h3>
+              <div class="chdata_fanlist">
+              	<!--{loop $space[grouplist] $group}-->
+                   <a href="forum.php?mod=group&fid=$group[fid]&mobile=2">
+                      <div class="chdata_pic"><img src="<!--{if $group[icon]}-->$group[icon]<!--{else}-->template/usportstyle/touch/common/images/logo_5u.png<!--{/if}-->"></div>
+                      <div class="chdata_RI">
+                           <p>$group[name]</p>
+                           <span>人数：$group[membernum]</span>
+                           <span>地区：$group[province_name]&nbsp;&nbsp;$group[city_name]</span>
+                      </div>
+                   </a>
+				<!--{/loop}-->                                     
+              </div>
+		<!--{else}-->
+		此人暂未加入任何球迷会。
+		<!--{/if}-->	           
+     </section>
 </div>
-<!-- userinfo end -->
 <!--{else}-->
 <div class="pic_edit_11111" id="sub_div" style="display:none;">
     <div id="clipArea">
@@ -188,33 +183,32 @@ $change_url = 'home.php?mod=spacecp&ac=profile&op=password&sub=nickname&mobile=2
 
 }-->
 <div id="main_div">
-<header class="cenhead">
-        <a href="javascript:;" onclick="history.go(-1)" class="head_back"></a>
-        <div class="cen_img">
-             <p><a href="javascript:void(0);" onClick="upload_pic();"><img src="<!--{avatar($_G[uid], big, true)}-->" alt="{$discuz_userss}" />{if $space[gender]==1}<i class="fontweb_icon ic_nan"></i>{elseif $space[gender]==2}<i class="fontweb_icon ic_nv"></i>{elseif $space[gender]==0}<i class="fontweb_icon ic_secret"></i>{/if}</a></p>   
-        </div>
-        <div class="cen_names">{if $can_change_nickname}<a href="{$change_url}">$_G[username]</a>{else}$_G[username]{/if}</div>
-        <div class="cen_introd"><!--{if $space['bio']}-->简介：{$space['bio']}<!--{else}-->简介：这家伙很懒，什么都没有留下。<!--{/if}--></div>
-</header>
-<section class="user_wraps wp">
-        <ul class="user_seul">
-            {if $can_change_nickname}
-            <li><a href="{$change_url}">修改昵称</a></li>
-            {/if}
-            <li><a href="home.php?mod=spacecp&ac=profile&op=password&mobile=2">修改密码</a></li>
-            <li><a href="home.php?mod=spacecp&mobile=2">修改资料</a></li>
-            <li><a href="home.php?mod=space&uid=$_G[uid]&&do=thread&from=space&mobile=2">我的帖子</a></li>
-            <li><a href="home.php?mod=space&do=group&mycenter=1&mobile=2">加入的球迷会</a></li>
-            <li><a href="home.php?mod=space&do=notice&view=mypost&type=post&mobile=2">回复我的 <!--{if $_G['member']['newprompt_num']['post']}--><i></i><!--{/if}--></a></li>
-            <li><a href="home.php?mod=space&do=notice&view=mypost&type=activity&mobile=2">活动提醒<!--{if $_G['member']['newprompt_num']['activity']}--><i></i><!--{/if}--></a></li>
-            <li><a href="home.php?mod=space&do=orders&mycenter=1&mobile=2">我的订单</a></li>
-        </ul>
-</section>
-<section class="user_logout">
-         <a href="member.php?mod=logging&action=logout&formhash={FORMHASH}" class="dialog" title="{lang logout}">{lang logout}</a>
-</section>
+	<header class="cenhead">
+		<a href="javascript:;" onclick="history.go(-1)" class="head_back"></a>
+		<div class="cen_img">
+			<p><a href="javascript:void(0);" onClick="upload_pic();"><img src="<!--{avatar($_G[uid], big, true)}-->" alt="{$discuz_userss}" />{if $space[gender]==1}<i class="fontweb_icon ic_nan"></i>{elseif $space[gender]==2}<i class="fontweb_icon ic_nv"></i>{elseif $space[gender]==0}<i class="fontweb_icon ic_secret"></i>{/if}</a></p>   
+		</div>
+		<div class="cen_names">{if $can_change_nickname}<a href="{$change_url}">$_G[username]</a>{else}$_G[username]{/if}</div>
+		<div class="cen_introd"><!--{if $space['bio']}-->简介：{$space['bio']}<!--{else}-->简介：这家伙很懒，什么都没有留下。<!--{/if}--></div>
+	</header>
+	<section class="user_wraps wp">
+		<ul class="user_seul">
+		    {if $can_change_nickname}
+		    <li><a href="{$change_url}">修改昵称</a></li>
+		    {/if}
+		    <li><a href="home.php?mod=spacecp&ac=profile&op=password&mobile=2">修改密码</a></li>
+		    <li><a href="home.php?mod=spacecp&mobile=2">修改资料</a></li>
+		    <li><a href="home.php?mod=space&uid=$_G[uid]&&do=thread&from=space&mobile=2">我的帖子</a></li>
+		    <li><a href="home.php?mod=space&do=group&mycenter=1&mobile=2">加入的球迷会</a></li>
+		    <li><a href="home.php?mod=space&do=notice&view=mypost&type=post&mobile=2">回复我的 <!--{if $_G['member']['newprompt_num']['post']}--><i></i><!--{/if}--></a></li>
+		    <li><a href="home.php?mod=space&do=notice&view=mypost&type=activity&mobile=2">活动提醒<!--{if $_G['member']['newprompt_num']['activity']}--><i></i><!--{/if}--></a></li>
+		    <li><a href="home.php?mod=space&do=orders&mycenter=1&mobile=2">我的订单</a></li>
+		</ul>
+	</section>
+	<section class="user_logout">
+		<a href="member.php?mod=logging&action=logout&formhash={FORMHASH}" class="dialog" title="{lang logout}">{lang logout}</a>
+	</section>
 </div>
-
 <!--{/if}-->
 
 <!--{template common/footer}-->

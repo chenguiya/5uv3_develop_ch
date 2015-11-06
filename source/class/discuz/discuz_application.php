@@ -747,7 +747,7 @@ class discuz_application extends discuz_base{
 			$nomobile = true;
 		}
 		if(!$mobile || $mobile == 'yes') {
-			$mobile = isset($mobile_) ? $mobile_ : 2;
+			$mobile = isset($mobile_) ? $mobile_ : 2;			
 		}
 
 		if(!$this->var['mobile'] && !$unallowmobile) {
@@ -764,7 +764,7 @@ class discuz_application extends discuz_base{
 			} else {
 				return false;
 			}
-		}
+		}		
 
 		if(strpos($this->var['setting']['domain']['defaultindex'], CURSCRIPT) !== false && CURSCRIPT != 'forum' && !$_GET['mod']) {
 			if($this->var['setting']['domain']['app']['mobile']) {
@@ -781,7 +781,7 @@ class discuz_application extends discuz_base{
 		if($mobile === '3' && empty($this->var['setting']['mobile']['wml'])) {
 			return false;
 		}
-		define('IN_MOBILE', isset($this->var['mobiletpl'][$mobile]) ? $mobile : '2');
+		define('IN_MOBILE', isset($this->var['mobiletpl'][$mobile]) ? $mobile : '2');		
 		setglobal('gzipcompress', 0);
 
 		$arr = array();

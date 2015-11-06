@@ -239,6 +239,10 @@ class table_forum_forum extends discuz_table
 	public function fetch_forum_fid_by_name($name) {
 		return DB::result_first("SELECT fid FROM %t WHERE name=%s AND type='forum'", array($this->_table, $name));
 	}
+        //add by xurui 2015-10-26 for wap 
+                       public function my_fetch_forum_fup_by_name($name) {
+		return DB::result_first("SELECT fup FROM %t WHERE name=%s AND type='forum'", array($this->_table, $name));
+	}
 	public function insert_group($fup, $type, $name, $status, $level) {
 		DB::query("INSERT INTO %t (fup, type, name, status, level) VALUES (%d, %s, %s, %d, %d)", array($this->_table, $fup, $type, $name, $status, $level));
 		return DB::insert_id();

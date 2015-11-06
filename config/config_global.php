@@ -24,6 +24,8 @@ $_config['db']['1']['tablepre'] = 'group_';
 $_config['db']['slave'] = '';
 $_config['db']['common']['slave_except_table'] = '';
 
+
+
 // --------------------------  CONFIG MEMORY  --------------------------- //
 $_config['memory']['prefix'] = 'IqDsFs_';
 $_config['memory']['redis']['server'] = '';

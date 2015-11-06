@@ -1,31 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex>
-    <sitemap>
-        <loc>http://www.5usport.com/sitemap/sitemap-home.xml</loc>
-        <lastmod>2015-10-10</lastmod>
-    </sitemap>
-	<sitemap>
-        <loc>http://www.5usport.com/sitemap/sitemap-group.xml</loc>
-        <lastmod>2015-10-10</lastmod>
-    </sitemap>
-	<sitemap>
-        <loc>http://www.5usport.com/sitemap/sitemap-tag.xml</loc>
-        <lastmod>2015-10-10</lastmod>
-    </sitemap>
-    <sitemap>
-        <loc>http://www.5usport.com/sitemap/sitemap-thread.xml</loc>
-        <lastmod>2015-10-10</lastmod>
-    </sitemap>
-	<sitemap>
-        <loc>http://www.5usport.com/sitemap/sitemap-thread-2.xml</loc>
-        <lastmod>2015-10-10</lastmod>
-    </sitemap>
-	<sitemap>
-        <loc>http://www.5usport.com/sitemap/sitemap-thread-3.xml</loc>
-        <lastmod>2015-10-10</lastmod>
-    </sitemap>
-	<sitemap>
-        <loc>http://www.5usport.com/sitemap/sitemap-thread-4.xml</loc>
-        <lastmod>2015-10-10</lastmod>
-    </sitemap>
+<sitemap>
+<loc>http://www.5usport.com/sitemap/sitemap1.xml</loc>
+<lastmod>2015-11-03</lastmod>
+</sitemap>
+<sitemap>
+<loc>http://www.5usport.com/sitemap/sitemap2.xml</loc>
+<lastmod>2015-11-03</lastmod>
+</sitemap>
+<sitemap>
+<loc>http://www.5usport.com/sitemap/sitemap3.xml</loc>
+<lastmod>2015-11-03</lastmod>
+</sitemap>
+<sitemap>
+<loc>http://www.5usport.com/sitemap/sitemap4.xml</loc>
+<lastmod>2015-11-03</lastmod>
+</sitemap>
+<sitemap>
+<loc>http://www.5usport.com/sitemap/sitemap5.xml</loc>
+<lastmod>2015-11-03</lastmod>
+</sitemap>
+<sitemap>
+<loc>http://www.5usport.com/sitemap/sitemap6.xml</loc>
+<lastmod>2015-11-03</lastmod>
+</sitemap>
+<sitemap>
+<loc>http://www.5usport.com/sitemap/sitemap7.xml</loc>
+<lastmod>2015-11-03</lastmod>
+</sitemap>
+<sitemap>
+<loc>http://www.5usport.com/sitemap/sitemap8.xml</loc>
+<lastmod>2015-11-03</lastmod>
+</sitemap>
+<sitemap>
+<loc>http://www.5usport.com/sitemap/sitemap9.xml</loc>
+<lastmod>2015-11-03</lastmod>
+</sitemap>
 </sitemapindex>

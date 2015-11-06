@@ -1,142 +1,82 @@
 <!--{template common/header}-->
-<!-- header start -->
-<header class="header">
-    <div class="nav">
-    	<div class="category" style="width:100%; text-align:center; ">
-        <!--{if $subexists && $_G['page'] == 1}-->
-			<div class="display name vm" href="#subname_list">
-				<h2 class="tit"><!--{eval echo strip_tags($_G['forum']['name']) ? strip_tags($_G['forum']['name']) : $_G['forum']['name'];}--></h2>
-				<img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_arrow_down.png">
-			</div>
-			<div id="subname_list" class="subname_list" display="true" style="display:none;">
-				<ul>
-				<!--{loop $sublist $sub}-->
-				<li>
-					<a href="forum.php?mod=forumdisplay&fid={$sub[fid]}">{$sub['name']}</a>
-				</li>
-				<!--{/loop}-->
-				</ul>
-			</div>
-			<!--{else}-->
-			<div class="name">
-				<!--{eval echo strip_tags($_G['forum']['name']) ? strip_tags($_G['forum']['name']) : $_G['forum']['name'];}-->
-			</div>
-			<!--{/if}-->
-            <div style="width:36px; position:absolute; left:0; top:0;">
-                <a href="forum.php?forumlist=1" class="z"><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_back.png" /></a>
-            </div>
-            <div class="icon_edit y" style="width:36px; position:absolute; right:0; top:0;">
-                <a href="forum.php?mod=post&action=newthread&fid=$_G[fid]" title="{lang send_threads}"><span class="none">{lang send_threads}</span></a>
-            </div>
-        </div>    
+<!-- start of navbar-->
+<nav class="navbar"{if !empty($_G[forum][color])} style="background-color:$_G[forum][color]"{/if}>
+    <div class="inner">
+        <div class="left">
+            <a href="javascript: history.go(-1);"><i class="iconfont icon-back"></i></a>
+        </div>
+        <!--{if $_GET['op'] == 'checkuser'}--><div class="center">会员审核 </div><!--{/if}-->
+        <div class="right">
+            <a href="forum.php?mod=post&action=newthread&fid=$_G[fid]"><i class="iconfont icon-edit"></i></a>
+
+            <a href="home.php?mod=space&uid=$_G[uid]&do=profile&mycenter=1">
+                <i class="iconfont icon-me" style="position: relative;">
+                    <!--{if $_G['member']['newprompt_num']['post'] || $_G['member']['newprompt_num']['activity']}--><span class="newtips"></span><!--{/if}-->
+                </i>
+            </a>
+
+        </div>
     </div>
-</header>
-<!-- header end -->
+</nav>
+<!-- end of navbar-->
+<!-- start of ymain -->
+<div class="ymain">
+    <header class="yheader">
+        <img class="team-banner" src="{$_G[forum][banner]}" alt=""/>
+        <div class="head clearfix">
+            <div class="logo"><img src="{$_G['setting']['attachurl']}common/{$_G[forum][icon]}" alt=""/></div>
+            <div class="head-center">
+                <div class="team-name">$_G[forum][name]<!-- <span class="ybadge ybadge-2">L2</span> --></div>
+                <div class="team-info">
+                    <span class="info">人数：<span>$_G[forum][membernum]</span></span><span style="color: #b5b5b6;margin: 0 8px;font-size: 12px;">
+                    |</span><span class="info">地区：<span>$_G[forum][province_name]&nbsp;$_G[forum][city_name]</span></span>
+                </div>
+                <div class="team-join ybtn">加入</div>
+            </div>
+            <!--
+            <div class="head-right">
+                <!--{if $status == 'isgroupuser'}-->
+                <a class="ybtn ybtn-primary ybtn-small dialog" href="forum.php?mod=group&action=out&fid=$_G[fid]">退出</a>
+                <!--{elseif $status == 5}-->
+                <a class="ybtn ybtn-primary ybtn-small" href="javascript:void(0);">审核</a>
+                <!--{else}-->
+                  <a href="forum.php?mod=group&action=join&fid=$_G[fid]" class="ybtn ybtn-primary ybtn-small <!--{if $_G[uid]}-->dialog<!--{/if}-->">加入</a>
+                <!--{/if}-->
+            </div>
+            -->
+            </div>
+    </header>
+    <div class="tabs">
+        <ul class="tab-title">
+        
 
-<!--{hook/forumdisplay_top_mobile}-->
-<!-- main threadlist start -->
-<!--{if !$subforumonly}-->
-<div class="threadlist">
-			<div>
-			<!--{if $_G['forum_threadcount']}-->
-				<!--{loop $_G['forum_threadlist'] $key $thread}-->
-					<!--{if !$_G['setting']['mobile']['mobiledisplayorder3'] && $thread['displayorder'] > 0}-->
-						{eval continue;}
-					<!--{/if}-->
-                	<!--{if $thread['displayorder'] > 0 && !$displayorder_thread}-->
-                		{eval $displayorder_thread = 1;}
-                    <!--{/if}-->
-					<!--{if $thread['moved']}-->
-						<!--{eval $thread[tid]=$thread[closed];}-->
-					<!--{/if}-->
-					
-					<!--{hook/forumdisplay_thread_mobile $key}-->
-                    <a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra" $thread[highlight] >
-					<div id="threadlist_li">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td width="18" valign="top">
-                        <!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
-                        	<span><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_top.gif" width="13" height="12"></span>
-                        <!--{elseif $thread['attachment'] == 2 && $_G['setting']['mobile']['mobilesimpletype'] == 0}-->
-                            <span><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_img.gif" width="13" height="12"></span>
-                        <!--{elseif $thread['digest'] > 0}-->
-                        	<span><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_dig.gif" width="13" height="12"></span>
-                        <!--{else}-->
-							<span><img src="{$_G['style']['styleimgdir']}/touch/common/images/icon_tid.gif" width="13" height="12"></span>
-                        <!--{/if}-->
-                      </td>
-                        <td valign="top">{$thread[subject]}</td>
-                      </tr>
-                    </table>
-                    
-                    <div style="margin-left:18px; font-size:11px; color:#AAAAAA; line-height:16px;">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                      <!--{if $thread['replies'] > 0}-->
-                      <tr>
-                        <td width="80%">
-                        	{lang author} : 
-							<!--{if $thread['author'] && !$thread['anonymous']}-->
-                            $thread[author]
-                            <!--{else}-->
-                            {lang anonymous}
-                            <!--{/if}-->
-                        	 @ $thread[dateline]
-                            <br />
-                            {lang join_thread} : 
-                            <!--{if $thread['lastposter'] && !$thread['anonymous']}-->
-                            $thread[lastposter] @ $thread[lastpost]
-                            <!--{else}-->
-                            	{lang anonymous} @ $thread[lastpost]
-                          	<!--{/if}-->
-                            
-                        </td>
-                        <td align="right">
-                        	<!--{if $thread['isgroup'] != 1}-->$thread[replies]<!--{else}-->{$groupnames[$thread[tid]][replies]}<!--{/if}-->
-                            {lang join_thread}<br />
-							<!--{if $thread['isgroup'] != 1}-->$thread[views]<!--{else}-->{$groupnames[$thread[tid]][views]}<!--{/if}-->
-                            {lang focus_show}
-                        </td>
-                      </tr>
-					  <!--{else}-->
-                      <tr>
-                        <td width="80%">
-                        	{lang author} :
-                            <!--{if $thread['author'] && !$thread['anonymous']}-->
-                            $thread[author]
-                            <!--{else}-->
-                            {lang anonymous}
-                            <!--{/if}-->
-                        	 @ $thread[dateline]
-                        </td>
-                        <td align="right">
-                        	<!--{if $thread['isgroup'] != 1}-->$thread[replies]<!--{else}-->{$groupnames[$thread[tid]][replies]}<!--{/if}-->
-                            {lang join_thread}<br />
-							<!--{if $thread['isgroup'] != 1}-->$thread[views]<!--{else}-->{$groupnames[$thread[tid]][views]}<!--{/if}-->
-                            {lang focus_show}
-                        </td>
-                      </tr>
-                        <!--{/if}-->
-                    </table>
-                    </div>
-                    </div>
-					</a>
-					
-                <!--{/loop}-->
-            <!--{else}-->
-			<div id="elecnation_noinfo">{lang forum_nothreads}</div>
-			<!--{/if}-->
-		</div>
-
-$multipage
-<div id="elecnation_multi_footer"></div>
-
+            <li class="<!--{if $ac == 'forumdisplay_index' && $status != 2 && $status != 3}-->active<!--{/if}-->"><a href="forum.php?mod=forumdisplay&fid=$_G[fid]">首页</a></li>
+            <li class="<!--{if $ac == 'forumdisplay_team'}-->active<!--{/if}-->"><a href="forum.php?mod=forumdisplay&fid=$_G[fid]&ac=forumdisplay_team">球队</a></li>
+            <li class="<!--{if $ac == 'forumdisplay_schedule'}-->active<!--{/if}-->"><a href="forum.php?mod=forumdisplay&fid=$_G[fid]&ac=forumdisplay_schedule">赛程</a></li>
+            <li class="<!--{if $ac == 'forumdisplay_list'}-->active<!--{/if}-->"><a href="forum.php?mod=forumdisplay&fid=$_G[fid]&ac=forumdisplay_list">数据</a></li>
+            <li class="<!--{if $ac == 'forumdisplay_move'}-->active<!--{/if}-->"><a href="forum.php?mod=forumdisplay&fid=$_G[fid]&ac=forumdisplay_move">互动</a></li>
+        </ul>
+        <!-- tabs-body -->
+        <!--广告图 start-->
+        <div class="add_banner" id="add_banner" style="display:none">
+             <a href="plugin.php?id=fansclub&ac=rights&type=index&mobile=2"><img src="template/usportstyle/touch/common/images/add_banner.png">
+             <span>梅西亲笔签名球衣</span></a>
+             <i class="fontweb_icon ic_error" id="ic_error"></i>
+        </div>
+        <!--广告图 end-->
+        <!--{if $ac == 'forumdisplay_index' && $status != 2 && $status != 3}-->
+        <!--{subtemplate forum/forumdisplay_index}-->
+        <!--{elseif $ac == 'forumdisplay_team'}-->
+        <!--{subtemplate forum/forumdisplay_team}-->
+        <!--{elseif $ac == 'forumdisplay_schedule'}-->
+        <!--{subtemplate forum/forumdisplay_schedule}-->
+        <!--{elseif $ac == 'forumdisplay_list'}-->
+        <!--{subtemplate forum/forumdisplay_list}-->
+        <!--{elseif $ac == 'forumdisplay_move'}-->
+        <!--{subtemplate forum/forumdisplay_move}-->
+        <!--{/if}-->
+    </div>
 </div>
-
-<!--{/if}-->
-<!-- main threadlist end -->
-<!--{hook/forumdisplay_bottom_mobile}-->
-<div class="pullrefresh" style="display:none;"></div>
-
+<!-- end of ymain -->
 
 <!--{template common/footer}-->

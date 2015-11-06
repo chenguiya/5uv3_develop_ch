@@ -45,6 +45,12 @@
 			</div>
 		</div>
 <!--{if count($ordersnew)>10}-->
+<script type="text/javascript" src="$_G['config'][static]/jquery.dotdotdot.min.js"></script>
+<script>
+	jQuery(function () {
+		jQuery('#hotgoods .goods-name a').dotdotdot({height: 36});
+	});
+</script>
 <script>
 var speed=40 
 var gundong=document.getElementById("neworders"); 

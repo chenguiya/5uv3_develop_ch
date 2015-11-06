@@ -1,0 +1,25 @@
+<!--{template common/header}-->
+<div class="tab-body">
+     <ul class="author-thumbs clearfix">
+        <!--{loop $alluserlist $user}-->
+        <li>
+            <div class="author-thumb">
+                <a class="author-thumb-img" href="#" data-old="home.php?mod=space&do=profile&uid=$user[uid]&mobile=2"
+                   data-url="home.php?mod=space&do=profile&uid=$user[uid]&mobile=2">
+                    <img src="$user[avatar]" alt="$user[name]"/>
+                    <i class="iconfont icon-president" style="display: none;"></i>
+                </a>
+                <!--{if $user['level'] == 1}-->
+                <i class="iconfont icon-president"></i>
+                <!--{else}-->
+                <a href="#" data-old="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]&muid=$user[uid]&mobile=2" class="iconfont icon-del dialog"></a>
+                <!--{/if}-->
+            </div>
+            <div class="name"><a href="#" data-old="home.php?mod=space&do=profile&uid=$user[uid]&mobile=2">$user[name]</a></div>
+        </li>
+        <!--{/loop}-->
+        
+
+      </ul>
+</div>
+<!--{template common/footer}-->

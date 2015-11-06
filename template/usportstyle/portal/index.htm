@@ -17,28 +17,52 @@
           <!--{hook/index_official}-->
           <!--官方发布 end-->
      </div>
-     <!--推荐球迷会 start-->
-     <!--{hook/index_fansclub_recommend}-->
-     <!--推荐球迷会 end-->
+     <!--热门活动 start-->
+     <!--{hook/index_hot_activity}-->     
+     <!--热门活动 end-->
+     <div class="ad_banner" id="inxch5">
+          <!-- 111247：首页-中部通栏 类型：固定广告位 尺寸：1000x0-->
+     </div>
      <!--共部分 start-->
      <div class="indexCon cl" style="margin-top: 10px;">
           <!--热门话题start-->
           <!--{hook/index_hot_thread}-->
           <!--热门话题end-->
           <div class="modech_right">
-               <!--热门活动 start-->
-               <!--{hook/index_hot_activity}-->             
-               <!--热门活动 end-->
+               <!--神回复 start-->
+               <!--{hook/index_godreply}-->
+               <!--神回复 end-->
                <div class="ad_boxs" id="inxch3">
                     <!-- 108823：首页-右侧button1 类型：固定广告位 尺寸：300x0-->
                </div>
                <div class="blank15"></div>
-               <!--神回复 start-->
-               <!--{hook/index_godreply}-->
-               <!--神回复 end-->
-               <!--认证用户 start-->
-               <!--{hook/index_recommend_user}-->
-               <!--认证用户 end-->
+               <!--精彩视频 start-->
+                        <!--[diy=diy_video]--><div id="diy_video" class="area"></div><!--[/diy]-->
+               <!--精彩视频 end-->
+               <!--优秀会长 start-->
+               <div class="modul_con">
+                    <div class="in_hdbox">
+                         <span class="hdspan">优秀会长</span>
+                    </div>
+                    <div class="modul_con ch_sident">
+                   <!--{loop $data['chairman'] $val}-->
+                    <div class="chBoard">
+                         <div class="board_c">
+                              <div class="board_l fl clearfix"><a href="home.php?mod=space&uid={$val['uid']}" target="_blank"><img src="static/image/face.jpg" data-original= "$val['avatar']" width="50" height="50"></a></div>
+                              <div class="board_r fl clearfix">
+                                   <div class="r_up">
+                                        <span>{$val['username']}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="fans/topic/{$val['fid']}/" target="_blank">[{$val['name']}]</a></span>
+                                   </div>
+                                   <div class="r_down"><span>简介：<!--{if $val['bio']}-->{$val['bio']}<!--{else}-->这家伙什么都没有留下<!--{/if}--></span></div>
+                              </div>
+                         </div>
+                    </div>
+                   <!--{/loop}-->
+                    
+               </div>
+               </div>
+               
+               <!--优秀会长 end-->
                <div class="ad_boxs" id="inxch4">
                     <!-- 108825：首页-右侧button2 类型：固定广告位 尺寸：300x0-->
                </div>
@@ -102,5 +126,8 @@ _acK({aid:108823,format:0,mode:1,gid:1,destid:"inxch3",serverbaseurl:"afp.csbew.
 </script>
 <script type="text/javascript">
 _acK({aid:108825,format:0,mode:1,gid:1,destid:"inxch4",serverbaseurl:"afp.csbew.com/"});
+</script>
+<script type="text/javascript">
+_acK({aid:111247,format:0,mode:1,gid:1,destid:"inxch5",serverbaseurl:"afp.csbew.com/"});
 </script>
 <!--{template common/footer}-->

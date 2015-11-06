@@ -1,26 +1,33 @@
 <!--{block return}-->
 <!--{if $data[data]}-->
-<div class="modul_con">
+<div class="indexFans">
 	<div class="in_hdbox">
-		<span class="hdspan">热门活动</span>
-		<a href="activity" class="mores" target="_blank">更多</a>
+	     <span class="hdspan">热门活动</span>
+	     <a href="/activity" class="mores" target="_blank">更多</a>
 	</div>
-	<!--{loop $data[data] $val}-->
-	<div class="modul_con">
-		<div class="cell">
-			<a href="{$val[url]}" target="_blank"><img class="img" src=<!--{if $val[thumbpath]}-->"data/attachment/{$val[thumbpath]}"<!--{else}-->"data/attachment/{$val[pic]}"<!--{/if}--> width="320" height="170" alt="{$val[title]}" /></a>
-			<div class="desc">
-				<p class="brief"><a href="{$val[url]}" target="_blank">{$val[title]}</a></p>
-				<span class="time">{$val[starttimefrom]}<!--{if $val[starttimeto]}-->&nbsp;-&nbsp;{$val[starttimeto]}<!--{/if}--></span>
-				<!--{if $val[status]}-->
-				<a href="{$val[url]}" class="btn-join" target="_blank">立即参加</a>
-				<!--{else}-->
-				<a href="{$val[url]}" class="btn-over" target="_blank">已结束</a>
-				<!--{/if}-->
+	<div class="Fans_box">
+		<div class="cell-wrap">
+			<!--{loop $data[data] $val}-->
+			<div class="cell">
+				<a href="$val[url]" target="_blank"><img class="img lazyload" src="<!--{if $val[thumbpath]}-->data/attachment/$val[thumbpath]<!--{else}-->data/attachment/$val[pic]<!--{/if}-->" data-original="" alt="" style="display: block;"></a>
+				<!--{if $val[fields][clublogo]}-->
+				<span class="logo_icon"><img src="$val[fields][clublogo]"></span>
+				<!--{/if}-->		
+				<div class="desc">
+					<p class="brief"><a href="">$val[title]</a></p>
+					<span class="time">$val[fields][time]</span>
+					<!--{if $val[status]}-->
+					<a href="$val[url]" class="btn-join" target="_blank">立即参加</a>
+					<!--{else}-->
+					<a href="$val[url]" class="btn-over" target="_blank">已结束</a>
+					<!--{/if}-->
+				</div>
 			</div>
+			<!--{/loop}-->			
 		</div>
 	</div>
-	<!--{/loop}-->
 </div>
 <!--{/if}-->
 <!--{/block}-->
+
+

@@ -2,7 +2,7 @@
     <div class="inner">
         <a href="javascript:;" onclick="history.go(-1)" class="left"><i class="iconfont icon-back"></i></a>
         <div class="center"><!--{if $_GET['type'] == 'detail'}-->产品详情<!--{elseif $_GET['type'] == 'orderlist'}-->订单详情<!--{elseif $_GET['type'] == 'contact'}-->联系客服<!--{else}-->权益中心<!--{/if}--></div>
-        <!--{if $_GET['type'] == 'index'}--> 
+        <!--{if $_GET['type'] == 'index' || $_GET['type'] == 'detail'}--> 
         <div class="right"><a href="home.php?mod=space&uid=$_G[uid]&do=profile&mycenter=1"><i class="iconfont icon-me" style="position: relative;"></i></a></div><!--{/if}-->
     </div>
 </nav>

@@ -1,0 +1,15 @@
+<!--{template common/header}-->
+<!--别人 start-->
+{if $member['self'] == 0}
+<header class="cenhead">
+        <a href="javascript:;" onclick="history.go(-1)" class="head_back"></a>
+        <div class="cen_img">
+             <p><img src="<!--{avatar($space[uid], big, true)}-->" alt="{$discuz_userss}" />{if $space[gender]==1}<i class="fontweb_icon ic_nan"></i>{elseif $space[gender]==2}<i class="fontweb_icon ic_nv"></i>{elseif $space[gender]==0}<i class="fontweb_icon ic_secret"></i>{/if}</p>   
+        </div>
+        <div class="cen_names">$space[username]</div>
+        <div class="cen_introd"><!--{if $space['bio']}-->简介：{$space['bio']}<!--{else}-->简介：这家伙很懒，什么都没有留下。<!--{/if}--></div>
+</header> 
+{/if}
+<!--别人 end-->
+<div>别人的个人资料页面</div>
+<!--{template common/footer}-->

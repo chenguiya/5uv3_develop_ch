@@ -27,19 +27,11 @@ function fansclub_use_log($log_type = '')
 {
     global $_G;
     $is_wap = fansclub_check_wap();
-    
-    /*
-    require_once libfile('function/cache');
-    save_syscache('qudao_fid', 113);
-    updatecache('qudao_fid');
-    save_syscache('qudao_from', 'weixin');
-    updatecache('qudao_from');
-    */
-    
-    loadcache('qudao_fid');
-    loadcache('qudao_from');
-    $qudao_fid = intval(trim($_G['cache']['qudao_fid']));
-    $qudao_from = trim($_G['cache']['qudao_from']);
+
+    loadcache('qudao_fid_'.$_G['uid']);
+    loadcache('qudao_from_'.$_G['uid']);
+    $qudao_fid = intval(trim($_G['cache']['qudao_fid_'.$_G['uid']]));
+    $qudao_from = trim($_G['cache']['qudao_from_'.$_G['uid']]);
     
     // echo "<pre>";
     // print_r($_G);
@@ -2599,6 +2591,22 @@ function get_fansclub_info($fid)
 	return $arr_return;
 }
 
+/**
+ * 检测输入中是否含有错误字符
+ *
+ * @param char $string 要检查的字符串名称
+ * @return TRUE or FALSE
+ */
+function is_badword($string) {
+    $badwords = array("\\",'&',' ',"'",'"','/','*',',','<','>',"\r","\t","\n","#");
+    foreach($badwords as $value){
+        if(strpos($string, $value) !== FALSE) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 function is_mobile($mobile) {
 	return preg_match("/1[3458]{1}\d{9}$/", $mobile);
 }
@@ -2645,6 +2653,22 @@ function is_password($password)
     {
         return FALSE;
     }
+}
+
+/**
+ * 检查用户名是否符合规定
+ *
+ * @param STRING $username 要检查的用户名
+ * @return     TRUE or FALSE
+ */
+function is_username($username) {
+    $strlen = strlen($username);
+    if(is_badword($username) || !preg_match("/^[a-zA-Z0-9_\x7f-\xff][@\.a-zA-Z0-9_\x7f-\xff]+$/", $username)){
+        return false;
+    } elseif ( 32 < $strlen || $strlen < 2 ) {
+        return false;
+    }
+    return true;
 }
 
 // 取地区的名称

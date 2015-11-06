@@ -30,7 +30,7 @@
      <div class="blank20"></div>
 	<div id="pgt" class="pgs mbm cl {if $modmenu['thread']}pbm bbs{/if}" style="display:none;">
 		<div class="pgt">$multipage</div>
-		<span class="y pgb"{if $_G['setting']['visitedforums']} id="visitedforums" onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id,'pos':'34'})"{/if}><a href="$upnavlink">{lang return_forumdisplay}</a></span>
+		<span class="y pgb"{if $_G['setting']['visitedforums']} id="visitedforums" onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id,'pos':'34'})"{/if}>{lang return_forumdisplay}</span>
 		<!--{if $_G['forum']['threadsorts'] && $_G['forum']['threadsorts']['templatelist']}-->
 			<!--{loop $_G['forum']['threadsorts']['types'] $id $name}-->
 				<button id="newspecial" class="pn pnc" onclick="location.href='forum.php?mod=post&action=newthread&fid=$_G[fid]&extra=$extra&sortid=$id'"><strong>{lang i_want}$name</strong></button>
@@ -296,16 +296,6 @@
 			<!--{eval continue;}-->
 		<!--{/if}-->
 		<!--{if !$post['first'] && $repliescount==0 && $_G[forum_thread][allreplies]>0 }-->
-            <div class="ch_height">
-			     <div class="ad_banner">
-			     <!-- 107243：频道 - 列表 - 中部通栏 类型：固定广告位 尺寸：760x0-->
-				 <!--
-<script type="text/javascript">
-_acK({aid:107243,format:0,mode:1,gid:1,serverbaseurl:"afp.csbew.com/"});
-</script>
--->
-			     </div>
-			</div>
             <div class="repl_bd cl">
 			     <span class="rep_left z"><span>精彩评论</span>&nbsp;<b>{$_G[forum_thread][allreplies]}</b></span>
 				 <span class="rep_right y">
@@ -466,6 +456,10 @@ $_G['forum_tagscript']
 			   <!--栏目一 start-->
 			   <!--{hook/viewthread_column1}-->			   
 			   <!--栏目一 end-->
+			   <div class="ad_boxs" id="views7">
+			        <!-- 111249：首页-频道-列表-内容-右侧button3 类型：固定广告位 尺寸：300x0-->
+			   </div>
+			   <div class="blank15"></div>
 			   <!--栏目二 start-->
 			   <!--{hook/viewthread_column2}-->			   
 			   <!--栏目二end-->
@@ -484,7 +478,9 @@ $_G['forum_tagscript']
 	      <!-- 108817：首页-频道-列表-内容-底部通栏 类型：固定广告位 尺寸：1000x0-->
 	 </div>
 </div>
-
+<div id="views6">
+<!-- 108819：首页-频道-列表-内容-对联 类型：浮层广告位 尺寸：-->
+</div>
 <div class="wp mtn">
 	<!--[diy=diy3]--><div id="diy3" class="area"></div><!--[/diy]-->
 </div>
@@ -575,5 +571,14 @@ _acK({aid:108813,format:0,mode:1,gid:1,destid:"views3",serverbaseurl:"afp.csbew.
 </script>
 <script type="text/javascript">
 _acK({aid:108815,format:0,mode:1,gid:1,destid:"views4",serverbaseurl:"afp.csbew.com/"});
+</script>
+<script type="text/javascript">
+_acK({aid:110865,format:0,mode:1,gid:1,destid:"views5",serverbaseurl:"afp.csbew.com/"});
+</script>
+<script type="text/javascript">
+_acK({aid:108819,format:0,mode:1,gid:1,destid:"views6",serverbaseurl:"afp.csbew.com/"});
+</script>
+<script type="text/javascript">
+_acK({aid:111249,format:0,mode:1,gid:1,destid:"views7",serverbaseurl:"afp.csbew.com/"});
 </script>
 <!--{template common/footer}-->

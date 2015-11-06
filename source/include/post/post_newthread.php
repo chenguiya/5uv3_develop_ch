@@ -323,6 +323,13 @@ if(!submitcheck('topicsubmit', 0, $seccodecheck, $secqaacheck)) {
 	require_once libfile('function/extends');
 	clear_threadlist_cache();
 	
+    // 如果是手机的球迷会，这个发帖成功点击的链接需要修改，从forum.php?mod=forumdisplay&fid=372 => forum.php?mod=group&fid=372&mobile=2 by zhangjh 2015-11-02
+    //        
+    if($return == 'post_newthread_succeed' && defined('IN_MOBILE') && $_G['forum']['status'] == 3)
+    {
+        $return = 'post_newthread_succeed_group';
+    }
+    
 	showmessage($return, $returnurl, array_merge($values, (array)$modthread->param('values')), $modthread->param('param'));
 }
 ?>

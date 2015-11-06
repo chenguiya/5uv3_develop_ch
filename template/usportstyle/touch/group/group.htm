@@ -12,14 +12,14 @@
         <!--{if $_GET['op'] == 'checkuser'}--><div class="center">会员审核 </div><!--{/if}-->
         <div class="right">
             <!--{if $action == 'index' && $status != 2 && $status != 3}--><a href="forum.php?mod=post&action=newthread&fid=$_G[fid]"><i class="iconfont icon-edit"></i></a><!--{/if}-->
-            <a href="plugin.php?id=fansclub&ac=rights&type=detail&mobile=2" style="display:none"><i class="fontweb_icon ic_rights"></i></a>
             <!--{if $action == 'activity'}--><a href="forum.php?mod=post&action=newthread&special=4&fid=$_G[fid]&cedit=yes"><i class="iconfont icon-edit huodong"></i></a><!--{/if}-->
             <!--{if $action == 'memberlist' && $groupuser['level'] == 1}-->
             <a href="forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]"><i class="iconfont icon-shen"></i></a>
             <a href="javascript:;"><i class="iconfont icon-garbage"></i></a>
-            <!--{/if}-->            
+            <!--{/if}-->
+            <a href="plugin.php?id=fansclub&ac=rights&type=index&mobile=2" style="display:none;"><i class="fontweb_icon ic_rights"></i></a>            
             <a href="javascript:;" class="ybtn ybtn-small cancel" style="display:none">取消</a>
-            <!--<!--{if $action == 'introduce'}--><a href="javascript:;"><i class="iconfont icon-hamburger"></i></a><!--{/if}-->-->
+           
             
             <!--{if $_GET['op'] == 'checkuser'}-->
             <a href="forum.php?mod=group&action=manage&op=checkuser&checkall=1&fid=1367" class="ybtn ybtn-small checkuser dialog">全部通过</a>
@@ -55,7 +55,7 @@
                 <!--{elseif $status == 5}-->
                 <a class="ybtn ybtn-primary ybtn-small" href="javascript:void(0);">审核</a>
                 <!--{else}-->
-                <a class="ybtn ybtn-primary ybtn-small dialog" href="forum.php?mod=group&action=join&fid=$_G[fid]">加入</a>
+                  <a href="forum.php?mod=group&action=join&fid=$_G[fid]" class="ybtn ybtn-primary ybtn-small <!--{if $_G[uid]}-->dialog<!--{/if}-->">加入</a>
                 <!--{/if}-->
             </div>
             </div>
@@ -70,7 +70,7 @@
         </ul>
         <!-- tabs-body -->
         <!--广告图 start-->
-        <div class="add_banner" id="add_banner">
+        <div class="add_banner" id="add_banner" style="display:none">
              <a href="plugin.php?id=fansclub&ac=rights&type=index&mobile=2"><img src="template/usportstyle/touch/common/images/add_banner.png">
              <span>梅西亲笔签名球衣</span></a>
              <i class="fontweb_icon ic_error" id="ic_error"></i>

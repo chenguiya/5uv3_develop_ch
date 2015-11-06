@@ -174,7 +174,8 @@ if($_GET['from'] == 'portal') {
                         }                       
 	// $t_link = 'forum.php?mod=forumdisplay&amp;fid='.$_G['fid'].($_GET['extra'] && !IS_ROBOT ? '&amp;'.$_GET['extra'] : '').'&tpl=channel_index';
 	// zhangjh 2015-06-25 修改t_link
-	$t_link = 'group/'.$_G['fid'].'/'.($_GET['extra'] && !IS_ROBOT ? '&amp;'.$_GET['extra'] : '').'';
+	// $t_link = 'group/'.$_G['fid'].'/'.($_GET['extra'] && !IS_ROBOT ? '&amp;'.$_GET['extra'] : '').'';
+    $t_link = 'group/'.$_G['fid'].'/';
         	$navigation .= ' <em>&rsaquo;</em> <a href="'.$t_link.'" target="_blank">'.($_G['forum']['name']).'频道</a>';
 	if($archiveid) {
 		if($threadtable_info[$archiveid]['displayname']) {

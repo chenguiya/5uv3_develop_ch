@@ -117,8 +117,6 @@ html{font-family:"Helvetica Neue",Helvetica,STHeiTi,Arial,sans-serif;-ms-text-si
 .ic_error{ background: #fff; width: 1.5rem; height: 1.5rem; line-height: 1.6rem; font-size: 1rem; position:absolute; right: 5%; top: 50%; margin-top: -0.8rem; text-align: center;-webkit-border-radius:50%; border-radius:50%; z-index: 10;}
 .ic_error::before{ content:'\e60b';}
 
-
-
 /*个人中心 @ch*/
 .cenhead{ height: 20rem;background: -webkit-gradient(linear, left top, right top, from(#2acbea), to(#c3f7fd)); background:-webkit-linear-gradient(300deg,#2acbea,#c3f7fd); margin: 0 auto; text-align: center;position: relative; padding-top: 4.2rem;}
 .cenhead .head_back::after{ border-color: #56838b;}
@@ -139,6 +137,20 @@ html{font-family:"Helvetica Neue",Helvetica,STHeiTi,Arial,sans-serif;-ms-text-si
 .user_seul li a:after{ content: ''; position: absolute; right: 1.1rem;  top: 1.1rem; border: 2px solid #a4aab3; border-width:2px 0 0 2px;width: 0.8rem; height: 0.8rem;-webkit-transform:rotate(135deg);}
 .user_logout{ text-align: center; width: 60%; margin: 0 auto 3rem;}
 .user_logout a{ width: 100%; background: #f8f8f8; display: block; height: 2.4rem; line-height: 2.4rem; border: 1px solid #e3e3e3; border-radius: 0.4rem; font-size: 1rem; color: #646464;}
+.chdata_nav{ height: 3rem; background: #f9f9f9; display: table; table-layout: fixed; width: 100%; font-size: 1.2rem; text-align: center; line-height: 3rem;}
+.chdata_nav a{ display: table-cell; color: #666;}.chdata_nav a.hover{ color: #eb6100;}
+.chdata_list li{ display: -webkit-box; display: -webkit-flex; display: flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between; border-bottom: 1px solid #e2e2e2; line-height: 3.5rem; color: #2d2d2d; font-size: 1.2rem;}
+.chdata_list li span{margin-left: 6%;}.chdata_list li em{margin-right: 5%;}
+.chdata_fans{ width: 90%; margin: 5% auto 10%;}
+.chdata_fans h3{ font-size: 1.2rem;}
+.chdata_fanlist a{ overflow: hidden; border-bottom: 1px solid #eaeaea; padding: 0.9rem 0; display: block;}
+.chdata_fanlist a:last-child{ border-bottom: none;}
+.chdata_pic{ width: 60px; height: 60px; margin-right: 0.5rem; float: left;}
+.chdata_pic img{-webkit-border-radius:5px; border-radius:5px;}
+.chdata_RI{ display: table-cell; vertical-align: middle; width: 100%; height: 1.5rem; font-size: 14px;}
+.chdata_RI p{ line-height: 30px; overflow: hidden; height: 30px; font-size: 16px;}
+.chdata_RI span{ color: #9fa0a0; margin-right: 10px;}
+.chdata_RI span:last-child{ margin-right:0;}
 
 /*活动管理 @ch*/
 .floatwrap{ margin: 5% 0; width: 100%; padding: 0 2%;font-size:14px; padding-bottom: 3.5rem;}
@@ -184,16 +196,15 @@ html{font-family:"Helvetica Neue",Helvetica,STHeiTi,Arial,sans-serif;-ms-text-si
 .btn_pn { width:60px; height:31px; overflow:hidden; border: 1px solid #586170; background: none; outline: none; border-radius: 5px;}
 .btn_pn_grey { color:#929493; font-weight:bolder; }
 .btn_pn_blue { background:#eb6100; color:#fff; font-weight:bolder; }
-	.btn_pn_elecnation { background:url(./images/btn_elecnation_bg.png) no-repeat 0 -31px; color:#73AA66; font-weight:bolder; }
-	.post_msg_from li{ line-height:38px; padding:0 10px; font-size:16px; }
-	.post_msg_from .px,.post_from .px { width:100%; background:none; padding:0; font-size:16px;  }
-	.post_msg_from textarea,.post_from textarea{ width:100%; background:none; padding:5px 0; font-size:16px; }
-	.post_from .sort_sel { background:none; width:100%; border: 0; font-size:16px; color:graytext; margin-left:-2px;  border: 1px solid #e2e2e2; height: 1.9rem; border-radius: 5px;}
-	.post_imglist li { position:relative; float:left; padding:10px;background: #f8f8f8;}
-	.post_imglist li .del { position: absolute; left:-5px; top:-10px; }
-	.post_imglist li .p_img img { padding:2px; border:1px solid #DDD; }
-	.sec_code { padding:10px; color:#999; }
-	.sec_code .px { color:#999; }
+.btn_pn_elecnation { background:url(./images/btn_elecnation_bg.png) no-repeat 0 -31px; color:#73AA66; font-weight:bolder; }
+.post_msg_from li{ line-height:38px; padding:0 10px; font-size:16px; }
+.post_msg_from .px,.post_from .px { width:100%; background:none; padding:0; font-size:16px;  }
+.post_msg_from textarea,.post_from textarea{ width:100%; background:none; padding:5px 0; font-size:16px; }
+.post_from .sort_sel { background:none; width:100%; border: 0; font-size:16px; color:graytext; margin-left:-2px;  border: 1px solid #e2e2e2; height: 1.9rem; border-radius: 5px;}.post_imglist{ width: 80%;}
+.post_imglist li { position:relative; float:left; padding:10px;background: #f8f8f8;}
+.post_imglist li .del { position: absolute; left:-5px; top:-10px; }
+.post_imglist li .p_img img { padding:2px; border:1px solid #DDD; }
+.sec_code { padding:10px; color:#999; }.sec_code .px { color:#999; }
 .post_chh{ margin: 0 3%;}.ic_photo{ width: 2rem; height: 2rem; position: relative; font-size: 2rem; color: #989da3; display: block;}
 .ic_photo:before{ content: '\e609'; position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 10;}
 .ic_photo input,.acit_photo input,.ic_phots input{ position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 22;}
@@ -240,6 +251,11 @@ html{font-family:"Helvetica Neue",Helvetica,STHeiTi,Arial,sans-serif;-ms-text-si
 .spec_list{ float: left; margin-left: 0.5rem;}
 .spec_list li{ float: left; border-right: 1.5rem; width:2.2rem; height: 2.2rem; line-height: 2.2rem; border: 1px solid #b5b5b6; text-align: center; margin-top: 0.9rem; margin-right: 0.9rem; font-size: 16px;}
 .spec_list li.onlickSpec{ border: 1px solid #ea6000; color: #ea6000;}
+/*队员-数据@ch*/
+.DateTab{ width: 100%; margin: 0 auto 50px; padding-top: 20px;}
+.DateTab th{ background: #e9eff4; font-size: 1rem; font-weight: normal; padding: 0.3rem 0;}
+.DateTab th,.DateTab td{ text-align: center;}.DateTab td{ padding: 0.5rem 0; border-bottom: 1px solid #f1f1f1;}
+.DateTab td{ color: #666; font-size: 0.9rem;}
 
 #elecnation_clear { clear:both; height:0; line-height:0; }
 .z { float: left; } .y { float: right; }
@@ -707,15 +723,15 @@ span.brc4{-webkit-box-flex: 1.0;-moz-box-flex: 1.0;-ms-box-flex: 1.0;box-flex: 1
 .hsub_content .hsc_right:after{content: '';position: absolute;border: 2px solid #D9D8D8;border-width: 2px 2px 0 0;width: 1rem;height: 1rem;-webkit-transform:rotate(45deg);}
 .certif{height: 17px;width: 17px;line-height: 1;display: inline-block;color: #eb6100;border: 1px solid #eb6100;border-radius: 3px;padding: 1px;margin-left: 2px;text-align: center;font-size: 12px;}
 
-/*---签到页---*/
-.signIn{width: 94%;position: relative;margin: 0px auto;padding: 20px 0 10px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;flex-flow:row wrap;-webkit-align-items:center;-moz-align-items:center;align-items: center;}
-.signIn .active{background-color: #eb6100;border-color: #eb6100;}
-.signIn .active a{color: #fff;}
-.signLeft,.signRight{z-index:10;float: left;display: inline-block;font-size: 1rem;padding: 8px 0;width: 50%;text-align: center;border: 1px solid #e2e2e2;}
-.signIn.signIn-3 .signLeft,.signIn.signIn-3 .signRight{ width: 33.33%;}
-.signLeft a,.signRight a{color: #666;z-index: 20;margin: 0 auto;-webkit-box-flex:1.0;-moz-box-flex:1.0;-ms-box-flex:1.0;-o-box-flex:1.0;box-flex:1.0;flex:1.0;}
-.signLeft{border-radius: 3px 0 0 3px;border-right: 0;}
-.signRight{border-radius: 0 3px 3px 0;border-left: 0;}
+/*---签到页，tab---*/
+.tabBar,.signIn{width: 94%;position: relative;margin: 0px auto;padding: 20px 0 10px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;flex-flow:row wrap;-webkit-align-items:center;-moz-align-items:center;align-items: center;}
+.tabBar .active,.signIn .active{background-color: #eb6100;border-color: #eb6100;}
+.tabBar .active a,.signIn .active a{color: #fff;}
+.barLeft,.barRight,.signLeft,.signRight{z-index:10;float: left;display: inline-block;font-size: 1rem;padding: 8px 0;width: 50%;text-align: center;border: 1px solid #e2e2e2;}
+.tabBar.tabBar-3 .barLeft,.tabBar.tabBar-3 .barRight,.signIn.signIn-3 .signLeft,.signIn.signIn-3 .signRight{ width: 33.33%;}
+.barLeft a,.barRight a,.signLeft a,.signRight a{color: #666;z-index: 20;margin: 0 auto;-webkit-box-flex:1.0;-moz-box-flex:1.0;-ms-box-flex:1.0;-o-box-flex:1.0;box-flex:1.0;flex:1.0;}
+.barLeft,.signLeft{border-radius: 3px 0 0 3px;border-right: 0;}
+.barRight,.signRight{border-radius: 0 3px 3px 0;border-left: 0;}
 .signState{margin-left: 1rem;margin-top: 1rem;color: #666;font-size: 1rem;}
 .signTab{border-spacing: 0;width: 94%;margin: 20px auto 100px;}
 .signTab thead{background-color: #f8f8f8;}
@@ -725,16 +741,24 @@ span.brc4{-webkit-box-flex: 1.0;-moz-box-flex: 1.0;-ms-box-flex: 1.0;box-flex: 1
 .signTab td{font-size: 1rem;text-align: center;border-bottom: 1px solid  #e2e2e2;color: #666;padding:15px 2px;}
 .signTab tr:last-child td{border-bottom: 0;}
 .signTab.fisrtTdLeft tbody tr td:first-child { text-align: left; text-indent: 10px; }
+/*---*/
+.tableBox{position: relative;}
+.tableBox .tableHead{width: 94%;height: 3rem;margin: 0 auto;background: url(images/line-01.png) center center no-repeat;}
+.tableHead h2{font-size: 1.2rem;color: #eb6100;text-align: center;line-height: 3rem;}
 
-/*---积分射手榜---*/
+/*---积分射手榜,tab---*/
+.tableMain{border-spacing: 0;width: 94%;margin: 0px auto;padding-top: 20px;}
 .liveTab{border-spacing: 0;width: 94%;margin: 0px auto 100px;padding-top: 20px;}
+.tableMain thead{background-color: #e9eff4;}
 .liveTab thead{background-color: #ddd;}
-.liveTab thead tr th{font-weight: normal;padding: 6px 10px;font-size: 1rem;color: #999;text-align: left;}
-.liveTab thead tr th:last-child{padding: 6px 0 6px 10px;}
-.liveTab tr{}
+.tableMain thead tr th,.liveTab thead tr th{font-weight: normal;padding: 1px;font-size: 1rem;color: #999;text-align: center;}
+.tableMain thead tr th:last-child,.liveTab thead tr th:last-child{padding: 6px 0 6px 10px;}
+.tableMain tr,.liveTab tr{}
+.tableMain tr td,.liveTab tr td{text-align: center;}
+.tableMain tbody tr td i{color: #eb6100;}
 .liveTab tbody tr td i{width: 20px;height: 20px;background-color: #eb6100;color: #fff;display: inline-block;margin-left: -5px;}
-.liveTab td{font-size: 1rem;border-bottom: 1px solid  #efefef;padding: 10px 5px;}
-.liveTab tr:last-child td{border-bottom: 0;}
+.tableMain td,.liveTab td{font-size: 1rem;border-bottom: 1px solid  #efefef;padding: 10px 5px;}
+.tableMain tr,.liveTab tr:last-child td{border-bottom: 0;}
 
 /*---权益列表---*/
 .rightList{width: 94%;margin: 10px auto;}
@@ -749,6 +773,47 @@ span.brc4{-webkit-box-flex: 1.0;-moz-box-flex: 1.0;-ms-box-flex: 1.0;box-flex: 1
 }
 .rightList img{width: 70px;height: 70px;}
 .rightList div{-webkit-box-flex:1.0;-moz-box-flex:1.0;-ms-box-flex:1.0;box-flex:1.0;flex:1.0;line-height: 80px;font-size: 1.2rem;margin-left: 20px;width: 75%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+
+/*---联赛球队会---*/
+.contTeam{width: 94%;margin: 0 auto;}
+.leagueTeam{}
+.leagueTeam .leagueList{border-bottom: 1px solid #eaeaea;line-height: 3.22rem;padding: 10px 0;
+						display: -webkit-flex;
+						display: -moz-flex;
+						display: -ms-flex;
+						display: -o-flex;
+						display: flex;
+						flex-flow:row wrap;
+						-webkit-align-items:center;
+						-moz-align-items:center;
+						align-items: center;}
+.leagueTeam .leagueList:last-child{border-bottom:0;}
+.leagueTeam .leagueList img{display: inline-block;}
+.leagueTeam .leagueList div{font-size: 1rem;width: 16rem;color: #2d2d2d;display: inline-block;}
+.leagueTeam .leagueList i{display: inline-block;position: relative;top: -10px;right: 3px;}
+.leagueTeam .leagueList i::after{content: " ";display: inline-block;position: absolute;width: 1rem;height: 1rem;border-top: 1px solid #d3d3d3;border-right: 1px solid #d3d3d3;-webkit-transform: rotate(45deg);transform: rotate(45deg); }
+
+/*---联赛赛程schedule---*/
+.teamSchedule{padding-top: 0.5rem;}
+.teamSchedule .headSchedule{color: #e57123;font-size: 1rem;line-height: 2rem;display: inline-block;width: 72px;height: 28px;background: url(images/teamschedule-01.png) top center no-repeat;padding: 0.1rem 0.8rem}
+.teamSchedule .listSchedule{display: -webkit-flex;
+							display: -moz-flex;
+							display: -ms-flex;
+							display: -o-flex;
+							display: flex;
+							flex-flow:row wrap;
+							-webkit-align-items:center;
+							-moz-align-items:center;
+							align-items: center;
+							width: 94%;margin: 0 auto;border-bottom: 1px solid  #eaeaea;
+						}
+.listSchedule .rowImg{padding: 1rem 1.2rem;padding-bottom: 0.5rem;text-align: center;}
+.listSchedule .rowImg-1{padding-left: 0;}
+.listSchedule .rowImg-2{padding-right: 0;}
+.listSchedule .rowImg p{color: #666;font-size: 0.8rem;line-height: 2rem;}
+.listSchedule .rowMid{text-align: center;}
+.listSchedule .rowMid .rowtitle{font-size: 1rem;display: inline-block;padding: 0.1rem 1rem;line-height: 1.5rem;border: 1px solid #eaeaea;border-radius: 20px;}
+.listSchedule .rowMid .rowtime{font-size: 0.8rem;color: #b5b5b6;line-height: 2rem;}
 
 /*
 * -------------------------------------------
@@ -1273,6 +1338,14 @@ span.brc4{-webkit-box-flex: 1.0;-moz-box-flex: 1.0;-ms-box-flex: 1.0;box-flex: 1
 	font-size: 12px;
 	padding: 0;
 }
+.yheader .head .team-join {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #fff;
+	background-color: #ea6000;
+	border-color: #ea6000;
+}
 
 /*
 * tabs
@@ -1487,7 +1560,7 @@ span.brc4{-webkit-box-flex: 1.0;-moz-box-flex: 1.0;-ms-box-flex: 1.0;box-flex: 1
 .images img, .images embed{
 	float: left;
     width: 31.33%;
-    margin: 0 2px; }
+    margin: 1%; }
 .imagesh{ margin-bottom: 0.9rem; width: 100%; display: -webkit-box;}
 .imagesh .img_right{-webkit-box-flex:1;}
 .img_right img{ width: 50%; padding-right: 2%; float: left; margin-bottom: 2%;}
@@ -1650,6 +1723,13 @@ span.brc4{-webkit-box-flex: 1.0;-moz-box-flex: 1.0;-ms-box-flex: 1.0;box-flex: 1
 .row .row-badge-wrap .social {
     display: block;
     color: #b5b5b6; }
+.row .row-badge-wrap-horizontal {
+	padding-top: 10px;
+}
+.row .row-badge-wrap-horizontal .social{
+	color: #b5b5b6;
+	margin-left: 15px;
+}
 .row .row-badge-wrap .social .fa {
     margin-right: 0.0625rem; }
 .row .row-opera {
@@ -2004,4 +2084,16 @@ span.brc4{-webkit-box-flex: 1.0;-moz-box-flex: 1.0;-ms-box-flex: 1.0;box-flex: 1
 .saicheng-item .sc-right .team-name {
     color: #101010;
     font-size: 14px;
+}
+.yhudong {
+	padding: 10px 2px;
+}
+.yhudong img{
+	display: block;
+	min-width: 100%;
+	margin-bottom: 20px;
+}
+
+.post_time .accent{
+	color: #eb6100;
 }

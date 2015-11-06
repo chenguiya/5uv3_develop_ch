@@ -66,6 +66,15 @@ if($token) {
 			));
 		}
 
+        // add by zhangjh 2015-10-26
+        include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';   // 公共函数
+        require_once libfile('function/cache');
+        save_syscache('qudao_fid_'.$_G['uid'], 0);
+        updatecache('qudao_fid_'.$_G['uid']);
+        save_syscache('qudao_from_'.$_G['uid'], 'pc_weibo');
+        updatecache('qudao_from_'.$_G['uid']);
+        fansclub_use_log('reg_weibo_bind');
+            
 		showmessage('mpage_weibo:bind_succeed', 'home.php?mod=spacecp&ac=plugin&id=mpage_weibo:bind');
 	} else {
 		$bind = C::t('#mpage_weibo#mpage_weibo')->fetch_by_sina_uid($token['uid']);
@@ -91,6 +100,15 @@ if($token) {
 				$ucsynlogin = uc_user_synlogin($_G['uid']);
 			}
 
+            // add by zhangjh 2015-10-26
+            include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';   // 公共函数
+            require_once libfile('function/cache');
+            save_syscache('qudao_fid_'.$_G['uid'], 0);
+            updatecache('qudao_fid_'.$_G['uid']);
+            save_syscache('qudao_from_'.$_G['uid'], 'pc_weibo');
+            updatecache('qudao_from_'.$_G['uid']);
+            fansclub_use_log('login');
+            
 			showmessage('login_succeed', dreferer(), $param, array('extrajs' => $ucsynlogin));
 		} else {
 			$dreferer = rawurlencode(dreferer());

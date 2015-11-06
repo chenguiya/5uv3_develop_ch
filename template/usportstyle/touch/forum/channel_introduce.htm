@@ -1,0 +1,20 @@
+<div class="event_mar">
+    <!--<a href="plugin.php?id=fansclub:fansclub&ac=event&fid=$_G[fid]&mobile=2"><i class="fontweb_icon ic_event"></i>大事记<i class="fontweb_icon ic_mores"></i></a>-->
+    <a href="#"><i class="fontweb_icon ic_event"></i>大事记<i class="fontweb_icon ic_mores"></i></a>
+</div>
+<div>
+	<div class="gp_intro">
+		<p class="p1">地址：</p>
+		<p class="p2">{$_G[forum][province_name]}&nbsp;{$_G[forum][city_name]}</p>
+	</div>
+	<div class="gp_hr"></div>
+	<div class="gp_intro">
+		<p class="p1">简介：</p>
+		<p class="p2"><!--{if $_G[forum][description]}-->$_G[forum][description]<!--{else}-->暂无简介!<!--{/if}--></p>
+	</div>
+	<div class="gp_intro">
+		<p class="p1">二维码：</p>
+		<p class="p2"><img src="data/attachment/group/$_G[forum][qrcode]?{TIMESTAMP}" width="170" height="170" /></p>
+	</div>
+	
+</div>

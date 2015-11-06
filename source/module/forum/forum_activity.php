@@ -10,7 +10,7 @@ include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';
 if (defined('IN_MOBILE')) {
 	$query = DB::query("SELECT COUNT(*) AS count FROM ".DB::table('forum_activity'));;
 } else {
-	$query = DB::query("SELECT COUNT(*) AS count FROM ".DB::table('forum_activity')." WHERE `uid` IN(1,295)");
+	$query = DB::query("SELECT COUNT(*) AS count FROM ".DB::table('forum_activity')." WHERE `uid` IN(1,295,57182)");
 }
 
 $result = DB::fetch($query);
@@ -31,7 +31,7 @@ $limit = " LIMIT ".$start.','.$pagesize;
 if (defined('IN_MOBILE')) {
 	$activitylists = DB::fetch_all("SELECT * FROM ".DB::table('forum_activity')." AS a LEFT JOIN ".DB::table('forum_thread')." AS b ON a.tid=b.tid WHERE b.displayorder!='-1' ORDER BY starttimefrom DESC".$limit);
 } else {
-	$activitylists = DB::fetch_all("SELECT * FROM ".DB::table('forum_activity')." WHERE `uid` IN(1,295) ORDER BY starttimefrom DESC".$limit);
+	$activitylists = DB::fetch_all("SELECT * FROM ".DB::table('forum_activity')." WHERE `uid` IN(1,295,57182) ORDER BY starttimefrom DESC".$limit);
 }
 
 foreach ($activitylists as $key => $activity) {

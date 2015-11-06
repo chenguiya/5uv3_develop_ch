@@ -210,8 +210,8 @@ class plugin_extends_forum extends plugin_extends {
 		include template('forum/viewthread/column');
 		return $return;
 	}
-	
-// 	function viewthread_fastpost_group_output() {
+/* 	
+	function viewthread_fastpost_group_output() {
 // 		global $_G;	
 // 		if (!$_G['uid']) return false;
 // 		if (!$_G['setting']['groupstatus']) return false;		//网站是否开启了群组功能
@@ -228,9 +228,10 @@ class plugin_extends_forum extends plugin_extends {
 // 		}
 // 		include template('extends:group');
 // 		return $group;		
-// 	}
-
-// 	function forumdisplay_fastpost_group_output() {
+*	}
+*/
+/*
+        function forumdisplay_fastpost_group_output() {
 // 		global $_G;
 // 		if (!$_G['uid']) return false;
 // 		if (!$_G['setting']['groupstatus']) return false;		//网站是否开启了群组功能
@@ -247,9 +248,8 @@ class plugin_extends_forum extends plugin_extends {
 // 		}
 // 		include template('extends:group');
 // 		return $group;
-// 	}
+	}*/    
 }
-
 class plugin_extends_portal extends plugin_extends {
 	//首页焦点图
 	function index_focus_output() {
@@ -258,37 +258,22 @@ class plugin_extends_portal extends plugin_extends {
 		include template('portal/index/focus');
 		return $return;
 	}
-	//首页官方发布
+	
+	//新首页推荐球迷会--官方发布位置
 	function index_official_output() {
-		$data = array();
-		$data['data'] = C::t('common_block_item')->fetch_all_by_bid(133, true);
-		include template('portal/index/official');
-		return $return;
-	}
-	//首页推荐球迷会
-	function index_fansclub_recommend() {
 		global $_G;
 		
 		$data = array();
 		include_once libfile('function/extends');
 		$data['data'] = C::t('common_block_item')->fetch_all_by_bid(145, true);
 		foreach ($data['data'] as $key => $value) {
-			if (!$_G['uid']) {
-				$data['data'][$key]['user_status'] = false;
-			} else {
-				$groupuser = C::t('forum_groupuser')->fetch_userinfo($_G['uid'], $value['id']);
-				if (count($groupuser) > 0) {//有记录
-					$data['data'][$key]['user_status'] = true;
-				} else {
-					$data['data'][$key]['user_status'] = false;
-				}
-			}
 			$data['data'][$key]['fields'] = dunserialize($value['fields']);
 			$data['data'][$key]['area'] = get_fansclub_area($value['id']);
-		}
-		$data['dateline'] = TIMESTAMP;
-// 		var_dump($data);die;
-		include template('portal/index/fansclub');
+ //                                                                 球迷会人数
+                                                                    $userfield = DB::fetch_first("SELECT membernum FROM ".DB::table('forum_forumfield')." WHERE fid=".intval($value['id']));
+                                                                     $data['data'][$key]['membernum'] = $userfield['membernum'];
+		} 
+		include template('portal/index/official');
 		return $return;
 	}
 	
@@ -316,23 +301,43 @@ class plugin_extends_portal extends plugin_extends {
 			$data['data'][$key]['support_num'] = $thread['recommend_add'];
 			$data['data'][$key]['dateline'] = date('m月d日 H:s', $data['data'][$key]['fields']['dateline']);
             
-            preg_match("#fid=(\d+)#", $data['data'][$key]['fields']['forumurl'], $matches);
-            $data['data'][$key]['fid'] = $matches[1];
+                                                                    preg_match("#fid=(\d+)#", $data['data'][$key]['fields']['forumurl'], $matches);
+                                                                    $data['data'][$key]['fid'] = $matches[1];
 		}
 		include template('portal/index/hot_thread');
 		return $return;
 	}
-	
+	//首页热门活动
+// 	function index_hot_activity_output() {
+// 		$data = $activity = array();
+// 		$data['data'] = C::t('#extends#plugin_common_block_item')->fetch_all_by_bid(151, true);
+// 		var_dump($data);die;
+// 		foreach ($data['data'] as $key => $value) {
+// 			$activity = DB::fetch_first("SELECT * FROM ".DB::table('forum_activity')." WHERE tid=".$value['id']);
+// 			$data['data'][$key]['starttimefrom'] = date('Y-m-d', $activity['starttimefrom']);
+// 			if ($activity['starttimeto']) $data['data'][$key]['starttimeto'] = date('Y-m-d', $activity['starttimeto']);
+// 			if (!empty($activity['starttimeto'])) {
+// 				if ($activity['starttimeto'] > TIMESTAMP) {
+// 					$data['data'][$key]['status'] = true;
+// 				} else {
+// 					$data['data'][$key]['status'] = false;
+// 				}
+// 			} else {
+// 				$data['data'][$key]['status'] = true;
+// 			}
+			
+// 		}
+// 		include template('portal/index/hot_activity');
+// 		return $return;
+// 	}
 	function index_hot_activity_output() {
 		$data = $activity = array();
-		$data['data'] = C::t('#extends#plugin_common_block_item')->fetch_all_by_bid(151, true);
-// 		var_dump($data);die;
+		$data['data'] = C::t('common_block_item')->fetch_all_by_bid(168, true);
 		foreach ($data['data'] as $key => $value) {
-			$activity = DB::fetch_first("SELECT * FROM ".DB::table('forum_activity')." WHERE tid=".$value['id']);
-			$data['data'][$key]['starttimefrom'] = date('Y-m-d', $activity['starttimefrom']);
-			if ($activity['starttimeto']) $data['data'][$key]['starttimeto'] = date('Y-m-d', $activity['starttimeto']);
-			if (!empty($activity['starttimeto'])) {
-				if ($activity['starttimeto'] > TIMESTAMP) {
+			unset($data['data'][$key]['fields']);
+			$data['data'][$key]['fields'] = dunserialize($value['fields']);
+			if (!empty($data['data'][$key]['fields']['starttimeto'])) {
+				if ($data['data'][$key]['fields']['starttimeto'] > TIMESTAMP) {
 					$data['data'][$key]['status'] = true;
 				} else {
 					$data['data'][$key]['status'] = false;
@@ -340,12 +345,11 @@ class plugin_extends_portal extends plugin_extends {
 			} else {
 				$data['data'][$key]['status'] = true;
 			}
-			
 		}
+// 		var_dump($data['data']);die;
 		include template('portal/index/hot_activity');
 		return $return;
 	}
-	
 	//首页神回复
 	function index_godreply_output() {
 		$data = array();
@@ -373,8 +377,7 @@ class plugin_extends_portal extends plugin_extends {
 		}
 		include template('portal/index/godreply');
 		return $return;
-	}
-	
+	}	
 	//首页认证用户
 	function index_recommend_user_output($param) {
 		global $_G;
@@ -387,16 +390,18 @@ class plugin_extends_portal extends plugin_extends {
 		}
 		include template('portal/index/recommend_user');
 		return $return;
-	}
-	
-	//首页活跃粉丝
-	function index_active_fans_output($param) {
+	}	
+                       //首页七天活跃粉丝
+                       function index_active_fans_output($param) {
 		global $_G;
 		$data = array();
-		$data['data'] = C::t('common_block_item')->fetch_all_by_bid(136, true);
-		foreach ($data['data'] as $key => $value) {
-			$data['data'][$key]['fields'] = dunserialize($value['fields']);
-		}
+                                             $time = time();
+                                            $data['data'] = DB::fetch_all('SELECT count(a.log_id) as post, a.g_username,a.g_uid,b.extcredits1,b.digestposts,c.bio  FROM '.DB::table('plugin_fansclub_user_log').' as a LEFT JOIN '.DB::table('common_member_count')." as b on b.uid = a.g_uid LEFT JOIN ".DB::table('common_member_profile')." as c  on b.uid = c.uid  WHERE a.log_type='thread_post'  and a.log_time >$time -7*24*3600  group by a.g_uid order by post desc limit 5");
+                                            foreach ($data['data'] as $key => $value) {
+                                                    $data['data'][$key]['jifen'] = $value['extcredits1']*2+$value['post']+$value['digestposts']*5;
+                                                    $data['data'][$key]['order'] = $key+1;
+                                                    $data['data'][$key]['image'] = $_G['setting']['ucenterurl'].'/avatar.php?uid='.$value['g_uid'].'&size=small';
+                                            }                                          
 		include template('portal/index/active_fans');
 		return $return;
 	}

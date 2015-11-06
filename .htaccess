@@ -22,7 +22,7 @@ RewriteRule live/([0-9]+)/?$    /plugin.php?id=fansclub:fansclub&ac=live&league_
 RewriteRule standings/?$   /plugin.php?id=fansclub:fansclub&ac=standings
 RewriteRule scorer/?$    /plugin.php?id=fansclub:fansclub&ac=scorer
 RewriteRule fans/topic/([0-9]+)/?$   /forum.php?mod=forumdisplay&action=list&fid=$1&type=topic
-RewriteRule fans/activity/([0-9]+)/?$   /forum.php?mod=forumdisplay&action=list&fid=$1&type=activity
+RewriteRule fans/activity/([0-9]+)/?$   /plugin.php?id=fansclub:fansclub&ac=lists&fid=$1&type=activity
 RewriteRule fans/member/([0-9]+)/?$   /forum.php?mod=group&action=memberlist&fid=$1
 RewriteRule fans/event/([0-9]+)/?$   /plugin.php?id=fansclub:fansclub&ac=event&fid=$1
 

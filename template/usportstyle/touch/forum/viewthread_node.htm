@@ -3,7 +3,7 @@
 	<!--{eval $needhiddenreply = ($hiddenreplies && $_G['uid'] != $post['authorid'] && $_G['uid'] != $_G['forum_thread']['authorid'] && !$post['first'] && !$_G['forum']['ismoderator']);}-->
    <div class="chtwo cl">
         <div class="viewhd">
-             <div class="vi_avatar_img"><a href="home.php?mod=space&uid=$post[authorid]&do=profile&mobile=2" style="border:none;"><img src="<!--{avatar($post[authorid], middle, true)}-->" /></a></div>
+             <div class="vi_avatar_img"><a href="home.php?mod=space&do=profile&uid=$post[authorid]&mobile=2" style="border:none;"><img src="<!--{avatar($post[authorid], middle, true)}-->" /></a></div>
              <div class="two_wrap">
                   <div class="authi_tw">
                         <strong>
@@ -17,7 +17,7 @@
                         </strong>
                         <b>
                     <!--{if $post['authorid'] && $post['username'] && !$post['anonymous']}-->
-                        <a href="home.php?mod=space&uid=$post[authorid]&do=profile&mobile=2" class="blue">$post[author]</a></b>
+                        <a href="home.php?mod=space&do=profile&uid=$post[authorid]&mobile=2" class="blue">$post[author]</a></b>
                         <!--{if $post[authorid] != $_G[uid] && $_G[uid]}-->
                         <a href="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&repquote=$post[pid]&extra=$_GET[extra]&page=$page" class="xg1" title="{lang reply}">{lang reply}</a>
                         <!--{/if}-->
@@ -25,7 +25,7 @@
                         <!--{if !$post['authorid']}-->
                         <a href="javascript:;">{lang guest} <em>$post[useip]</em></a>
                         <!--{elseif $post['authorid'] && $post['username'] && $post['anonymous']}-->
-                        <!--{if $_G['forum']['ismoderator']}--><a href="home.php?mod=space&uid=$post[authorid]&do=profile&mobile=2" target="_blank">{lang anonymous}</a><!--{else}-->{lang anonymous}<!--{/if}-->
+                        <!--{if $_G['forum']['ismoderator']}--><a href="home.php?mod=space&do=profile&uid=$post[authorid]&mobile=2" target="_blank">{lang anonymous}</a><!--{else}-->{lang anonymous}<!--{/if}-->
                         <!--{else}-->
                         $post[author] <em>{lang member_deleted}</em>
                         <!--{/if}-->

@@ -271,6 +271,15 @@ if($op == 'init') {
 				'dateline' => $_G['timestamp'],
 			)
 		);
+        
+        // add by zhangjh 2015-10-26
+        include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';   // 公共函数
+        require_once libfile('function/cache');
+        save_syscache('qudao_fid_'.$_G['uid'], 0);
+        updatecache('qudao_fid_'.$_G['uid']);
+        save_syscache('qudao_from_'.$_G['uid'], 'pc_qq');
+        updatecache('qudao_from_'.$_G['uid']);
+        fansclub_use_log('reg_qq_bind');
 
 		showmessage('qqconnect:connect_register_bind_success', $referer);
 
@@ -305,6 +314,16 @@ if($op == 'init') {
 			}
 
 			dsetcookie('stats_qc_login', 3, 86400);
+            
+            // add by zhangjh 2015-10-26
+            include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';   // 公共函数
+            require_once libfile('function/cache');
+            save_syscache('qudao_fid_'.$_G['uid'], 0);
+            updatecache('qudao_fid_'.$_G['uid']);
+            save_syscache('qudao_from_'.$_G['uid'], 'pc_qq');
+            updatecache('qudao_from_'.$_G['uid']);
+            fansclub_use_log('login');
+        
 			showmessage('login_succeed', $referer, $param, array('extrajs' => $ucsynlogin));
 
 		} else { // debug 此分支是用户直接点击QQ登录，并且这个QQ号还未绑定任何论坛账号，将将跳转到一个新页引导用户注册个新论坛账号或绑一个已有的论坛账号
@@ -361,6 +380,16 @@ if($op == 'init') {
 			$refererParams = explode('/', $referer);
 			$mobileId = $refererParams[count($refererParams) - 1];
 
+            
+            // add by zhangjh 2015-10-26
+            include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';   // 公共函数
+            require_once libfile('function/cache');
+            save_syscache('qudao_fid_'.$_G['uid'], 0);
+            updatecache('qudao_fid_'.$_G['uid']);
+            save_syscache('qudao_from_'.$_G['uid'], 'pc_qq');
+            updatecache('qudao_from_'.$_G['uid']);
+            fansclub_use_log('login');
+            
 			if (substr($mobileId, 0, 7) == 'Mobile_') {
 				showmessage('login_succeed', $referer);
 			} else {

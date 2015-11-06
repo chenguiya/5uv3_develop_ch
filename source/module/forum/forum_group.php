@@ -332,7 +332,6 @@ if($action == 'index') {
 	include template('diy:group/group:'.$_G['fid']);
 
 } elseif($action == 'join') {
-	
 	// 是否只可以加入一个球迷会
 	// $jioned = DB::result_first("SELECT uid FROM ".DB::table('forum_groupuser')." WHERE uid='$_G[uid]'");
 	$jioned = 0; 

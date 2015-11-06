@@ -161,6 +161,12 @@ class block_groupactivity extends discuz_block {
 					'searchkeys' => array(),
 					'replacekeys' => array(),
 				),
+				'forum_allactivity' => array(
+						'name' => lang('blockclass', 'blockclass_forum_allactivity'),
+						'script' => 'allactivity',
+						'searchkeys' => array(),
+						'replacekeys' => array(),
+				),
 			);
 	}
 

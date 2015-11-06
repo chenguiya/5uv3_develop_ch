@@ -1,0 +1,35 @@
+<div class="ypadding">
+    <img src="/template/usportstyle/touch/common/images/demo/demo-ad-1_03.png" alt="">
+</div>
+<div class="tab-body">
+    <ul class="ylist">
+        <a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra">
+            <li class="row">
+                <div class="author-thumb">
+                    <img src="<!--{avatar($thread[authorid], middle, true)}-->" alt="$thread[subject]"/>
+                </div>
+                <div class="row-item">
+                    <div class="m">$thread[author]</div>
+                </div>
+                <div class="row-badge-wrap-horizontal">
+                    <div class="ybadge ybadge-4">置顶</div>
+                    <span class="social"><i class="iconfont icon-replay"></i>$thread[replies]</span>
+                </div>
+            </li>
+            <div class="title">$thread[subject]<!--{if $thread[special] == 1}-->&nbsp;&nbsp;<span class="yvote">投票</span><!--{elseif $thread[special] == 4}-->&nbsp;&nbsp;<span class="yvote">活动</span><!--{/if}--></div>
+            <div class="images">
+                <img src="/template/usportstyle/touch/common/images/demo/demo10.png" alt="{$thread[subject]}_1"/>
+                <img src="/template/usportstyle/touch/common/images/demo/demo10.png" alt="{$thread[subject]}_1"/>
+                <img src="/template/usportstyle/touch/common/images/demo/demo10.png" alt="{$thread[subject]}_1"/>
+            </div>
+            <div class="post_time">
+                <span>2015-06-13  08:16</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;来自&nbsp;
+                <span class="post_time_qmh accent">广州球迷会</span>
+            </div>
+        </a>
+    </ul>
+</div>
+<div style="padding: 0 8px">
+    <a id="load-more-group-index" class="ybtn loadmore" href="javascript:;">加载更多</a>
+</div>

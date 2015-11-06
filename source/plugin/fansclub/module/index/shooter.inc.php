@@ -27,6 +27,13 @@ for($i=0,$len=count($arr_game['shooter']['data']) ; $i<$len ;$i++){
     if(strpos($arr_game['shooter']['data'][$i]['player'],'.') === FALSE && strpos($arr_game['shooter']['data'][$i]['player'],'·') === FALSE || mb_strlen($arr_game['shooter']['data'][$i]['player']) < 15){
         $arr_game['shooter']['data'][$i]['newplayer'] = '';
     }
+    if($arr_game['shooter']['data'][$i]['player'] == '内马尔·达席尔瓦'){
+        $arr_game['shooter']['data'][$i]['newplayer'] = '内马尔';
+    }
+   if($arr_game['shooter']['data'][$i]['player'] == '克里斯蒂亚诺·罗纳尔多'){
+        $arr_game['shooter']['data'][$i]['newplayer'] = 'C罗纳尔多';
+    }
+    
 }
 //echo "<pre>";
 //print_r($arr_game['shooter']['data']);exit;

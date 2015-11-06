@@ -1,0 +1,85 @@
+<!--{template common/header}-->
+<ul class="tabBar" id="">
+	<li class="barLeft active"><a href="">7人队</a></li>
+	<li class="barRight"><a href="">5人队</a></li>
+</ul>
+<div class="tableBox">
+	<div class="tableHead"><h2>积分榜</h2></div>
+		<table class="tableMain" colspan="0" collapse="0">
+			<thead>
+				<tr>
+					<th>排名</th>
+					<th>球队</th>
+					<th>胜</th>
+					<th>平</th>
+					<th>负</th>
+					<th>净胜球</th>
+					<th>积分</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><i>1</i></td>
+					<td>上海利物浦球迷会</td>
+					<td>1</td>
+					<td>3</td>
+					<td>0</td>
+					<td>0</td>
+					<td>26</td>
+				</tr>
+				<tr>
+					<td><i>2</i></td>
+					<td>上海利物浦球迷会</td>
+					<td>1</td>
+					<td>3</td>
+					<td>0</td>
+					<td>0</td>
+					<td>26</td>
+				</tr>
+			</tbody>
+		</table>
+</div>
+<div class="tableBox">
+	<div class="tableHead"><h2>射手榜</h2></div>
+		<table class="tableMain" colspan="0" collapse="0">
+			<thead>
+				<tr>
+					<th>排名</th>
+					<th>球员</th>
+					<th>球队</th>
+					<th>进球</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><i>1</i></td>
+					<td>李小天</td>
+					<td>1</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td><i>2</i></td>
+					<td>李小天</td>
+					<td>1</td>
+					<td>3</td>
+				</tr>
+			</tbody>
+		</table>
+</div>
+<!--{if $shooter_data}-->
+    {eval //print_r($shooter_data['title']);}
+    <!--{loop $shooter_data['title'] $id $row}-->
+            $row
+    <!--{/loop}-->
+
+    <hr>
+    {eval //print_r($shooter_data['item']);}
+
+    <!--{loop $shooter_data['item'] $id $row}-->
+        <!--{loop $row $id2 $row2}-->
+            $row2 
+        <!--{/loop}-->
+        <br>
+    <!--{/loop}-->
+<!--{/if}-->
+<!--{template common/footer}-->

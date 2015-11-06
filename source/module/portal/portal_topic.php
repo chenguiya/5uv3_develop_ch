@@ -45,7 +45,7 @@ $topicid = intval($topic['topicid']);
 
 C::t('portal_topic')->increase($topicid, array('viewnum' => 1));
 if($topicid == 5){
-    $navtitle = "2015曼联vs曼城同城德比-曼彻斯特德比的恩怨历史-5U体育";
+    $navtitle = "2015曼联vs曼城同城德比-曼彻斯特德比的恩怨历史";
     $metadescription = empty($topic['summary']) ? "2015赛季曼彻斯特德比专题，英超双雄曼联与曼城德比的恩怨历史，回顾曼市德比中的经典战役，全方位分析两队球员、战术、教练等，让你全新了解曼切斯特德比": $topic['summary'];
     $metakeywords =  empty($topic['keyword']) ? "曼彻斯特,曼市德比,曼联,曼城,同城德比" : $topic['keyword'];
 }else{

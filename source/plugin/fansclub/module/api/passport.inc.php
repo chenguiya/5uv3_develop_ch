@@ -36,8 +36,8 @@ alter table group_ucenter_memberfields add column openid varchar(45) NOT NULL DE
 
 
 // 修改昵称(可不用) http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=modnick&from=weixin&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&newnick=5uczt1&time=1442977333&sign=0061524467ff5dd87b4b790a18cb71eb
-// 用户注册(可不用) http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=register&email=czt@163.com&password=123456aa&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&sign=8ead54dadc9b826e4ca856cd22f1b6a6
-// 登录(可不用)     http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=login&name=czt@163.com&password=123456aa&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&sign=382e8c61869ee37cfec36d41ca5bd4b7
+// 用户注册(聊球用) http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=register&email=czt@163.com&password=123456aa&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&sign=8ead54dadc9b826e4ca856cd22f1b6a6
+// 登录(推客聊球用) http://zhangjh.usport.com.cn/plugin.php?id=fansclub:api&ac=passport&op=login&name=czt@163.com&password=123456aa&openid=otiS-uNL79pw1lCLtR_zcQHSkuyU&sign=382e8c61869ee37cfec36d41ca5bd4b7
 */
 
 // echo "<pre>";
@@ -100,10 +100,19 @@ if($bln_check === TRUE)
         
         $arr_login_result = passport_login($data);
         $arr_return['message'] = $arr_login_result['message'];
+        $arr_return['user_detail'] = $arr_login_result['user_detail'];
         if($arr_login_result['success'] === TRUE)
         {
             $arr_return['success'] = TRUE;
-            $arr_return['login_success_url'] = $login_success_url;
+            // $arr_return['login_success_url'] = $login_success_url;
+            
+            require_once libfile('function/cache');
+            save_syscache('qudao_fid_'.$_G['uid'], $arr_param['fid']);
+            updatecache('qudao_fid_'.$_G['uid']);
+            save_syscache('qudao_from_'.$_G['uid'], $arr_param['from']);
+            updatecache('qudao_from_'.$_G['uid']);
+            
+            fansclub_use_log('login');
         }
     }
     elseif($op == 'modnick') // 不可用
@@ -133,13 +142,6 @@ if($bln_check === TRUE)
         
         if($arr_return['success'] === TRUE)
         {
-            // 记录渠道来源
-            require_once libfile('function/cache');
-            save_syscache('qudao_fid', $data['fid']);
-            updatecache('qudao_fid');
-            save_syscache('qudao_from', $data['from']);
-            updatecache('qudao_from');
-            
             if($data['openid'] == 'otiS-uI7hrrOaq4YM0kjKXZkUc1I' && $arr_return['redirect'] != '')
             {
                 //echo "<pre>";
@@ -175,6 +177,18 @@ if($bln_check === TRUE)
                 //    exit;
                 }
                 
+                
+                // 记录渠道来源 不记录通过代理的跳转记录
+                //if($_G['clientip'] == $_SERVER['REMOTE_ADDR'])
+                //{
+                    require_once libfile('function/cache');
+                    save_syscache('qudao_fid_'.$_G['uid'], $data['fid']);
+                    updatecache('qudao_fid_'.$_G['uid']);
+                    save_syscache('qudao_from_'.$_G['uid'], $data['from']);
+                    updatecache('qudao_from_'.$_G['uid']);
+                    fansclub_use_log('login');
+                //}
+            
                 header('Location: '.$arr_return['redirect']);
                 exit;
             }
@@ -209,7 +223,7 @@ if($bln_check === TRUE)
 }
 
 返回代码说明：
--10000：sign验证错误
+-10000：sign验证错误 
 -3：请求参数丢失
 -2：不存在该二维码数据
 -1：该二维码已取消登录或失效

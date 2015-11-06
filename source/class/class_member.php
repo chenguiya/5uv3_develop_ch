@@ -11,6 +11,8 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
+include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php');
+
 class logging_ctl {
 
 	function logging_ctl() {
@@ -47,7 +49,7 @@ class logging_ctl {
 			$referer = dreferer();
 			$ucsynlogin = $this->setting['allowsynlogin'] ? uc_user_synlogin($_G['uid']) : '';
 			$param = array('username' => $_G['member']['username'], 'usergroup' => $_G['group']['grouptitle'], 'uid' => $_G['member']['uid']);
-			showmessage('login_succeed', $referer ? $referer : './', $param, array('showdialog' => 1, 'locationtime' => true, 'extrajs' => $ucsynlogin));
+            showmessage('login_succeed', $referer ? $referer : './', $param, array('showdialog' => 1, 'locationtime' => true, 'extrajs' => $ucsynlogin));
 		}
 
 		list($seccodecheck) = seccheck('login');
@@ -86,6 +88,7 @@ class logging_ctl {
 			include template($this->template);
 
 		} else {
+            
 
 			if(!empty($_GET['auth'])) {
 				list($_GET['username'], $_GET['password']) = daddslashes(explode("\t", authcode($_GET['auth'], 'DECODE', $_G['config']['security']['authkey'])));
@@ -112,7 +115,7 @@ class logging_ctl {
 				$_GET['username'] = $result['ucresult']['username'];
 				$this->logging_more($result['ucresult']['uid'] == -3);
 			}
-
+            
 			if($result['status'] == -1) {
 				if(!$this->setting['fastactivation']) {
 					$auth = authcode($result['ucresult']['username']."\t".FORMHASH, 'ENCODE');
@@ -267,6 +270,26 @@ class logging_ctl {
 					$location = 'home.php?mod=spacecp&ac=profile&op=password';
 					$_GET['lssubmit'] = 0;
 				}
+                
+                if($loginmessage == 'login_succeed')
+                {
+                    // add by zhangjh 2015-10-26 记录登录渠道来源
+                    require_once libfile('function/cache');
+                    save_syscache('qudao_fid_'.$_G['uid'], 0);
+                    updatecache('qudao_fid_'.$_G['uid']);
+
+                    if(defined('IN_MOBILE'))
+                    {
+                        save_syscache('qudao_from_'.$_G['uid'], 'wap');
+                    }
+                    else
+                    {
+                        save_syscache('qudao_from_'.$_G['uid'], 'pc');
+                    }
+                    updatecache('qudao_from_'.$_G['uid']);
+                    fansclub_use_log('login');
+                }
+                
 				if(empty($_GET['handlekey']) || !empty($_GET['lssubmit'])) {
 					if(defined('IN_MOBILE')) {
 						showmessage($loginmessage, $location, $param, array('location' => true));
@@ -329,13 +352,20 @@ class logging_ctl {
 		if($_GET['formhash'] != $_G['formhash']) {
 			showmessage('logout_succeed', dreferer(), array('formhash' => FORMHASH, 'ucsynlogout' => $ucsynlogout, 'referer' => rawurlencode(dreferer())));
 		}
+        
+        require_once libfile('function/cache');
+        fansclub_use_log('logout');
+        save_syscache('qudao_fid_'.$_G['uid'], 0);
+        updatecache('qudao_fid_'.$_G['uid']);
+        save_syscache('qudao_from_'.$_G['uid'], '');
+        updatecache('qudao_from_'.$_G['uid']);
 
 		clearcookies();
 		$_G['groupid'] = $_G['member']['groupid'] = 7;
 		$_G['uid'] = $_G['member']['uid'] = 0;
 		$_G['username'] = $_G['member']['username'] = $_G['member']['password'] = '';
 		$_G['setting']['styleid'] = $this->setting['styleid'];
-
+            
 		if(defined('IN_MOBILE')) {
 			// showmessage('location_logout_succeed_mobile', dreferer(), array('formhash' => FORMHASH, 'referer' => rawurlencode(dreferer())));
            showmessage('退出成功', $_G['siteurl'].'group.php');  // modify by zhangjh 2015-09-07

@@ -367,8 +367,7 @@ jQuery(function($){
 	// 栏目页瀑布流@young
 	var waterfall = $(".waterfall"),
 		$wp = $("#wp"),
-		isLoading = false,
-		isEnd = false;
+		lanmuIsLoading = loading(waterfall);
 	if (waterfall.length > 0) {
 
 		waterfall.masonry({
@@ -383,7 +382,7 @@ jQuery(function($){
 				// url = '/misc.php?mod=tag&name=%E6%A2%85%E8%A5%BF&type=thread&op=waterwall&page=1&pagesize=12';
 				url = '/misc.php?mod=tag&id=18803&type=thread&op=waterwall&page=1&pagesize=12';
 			return function () {
-				isLoading = true;
+				lanmuIsLoading.show();
 				currentPage++;
 				url = url.replace(/&page=\w+/, '&page=' + currentPage);
 				// url = url.replace(/&name=(.+?)&/, '&name=' + /&name=(.+?&)/.exec(location.href)[1]);
@@ -396,15 +395,15 @@ jQuery(function($){
 								waterfall.masonry('appended', items);
 							});
 					} else {
-						isEnd = true;
+						lanmuIsLoading.noMore();
 					}
-					isLoading = false;
+					lanmuIsLoading.hide();
 				});
 			};
 		})();
 
 		$window.scroll(function () {
-			if (!isEnd && !isLoading && $window.scrollTop() + window.innerHeight > $wp.height() + 153) {
+			if (lanmuIsLoading.getState() === 1 && $window.scrollTop() + window.innerHeight > $wp.height() + 153) {
 				getNextPage();
 			}
 		});
@@ -662,7 +661,7 @@ jQuery(function($){
 				var $self = $('this');
 				if (!$box.length || $box.is('visible'))
 					return false;
-				seajs.use('module/showMenue', function(s) {
+				seajs.use('showMenue', function(s) {
 					s.showMenue($self, $box);
 				});
 			});
