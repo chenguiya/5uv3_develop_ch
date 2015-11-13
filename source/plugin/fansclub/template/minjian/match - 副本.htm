@@ -1,0 +1,52 @@
+<div class="blank20"></div>
+<div class="ch_main" style="overflow: hidden;">
+     <div class="tab_inegral">
+          <ul class="cl">
+              <li class="hover">第一轮</li>
+              <li>第二轮</li>
+              <li>第三轮</li>
+              <li>第四轮</li>
+              <li>第五轮</li>
+              <li>第六轮</li>
+              <li>第七轮</li>
+          </ul>
+	</div>
+    
+     <table border="0" cellpadding="0" cellspacing="0" width="100%" class="com_shooter c_match">
+            <colgroup>
+                     <!-- <col width="104"> -->
+                     <col width="190">
+                     <col width="510">
+                     <col width="auto">
+            </colgroup>
+
+			{loop $match_list $k $v}
+			{if $k > 3}
+			{eval continue;}
+			{/if}
+            <tr>
+                <!-- <td><em>{$v['group_name']}</em>组</td> -->
+                <td >
+                    <span class="mat_time">{eval echo date("m月d日",$v['match_time']);}</span>
+                    <span class="mat_span">{eval echo date("H:i",$v['match_time']);}</span>
+                </td>
+                <td class="mat_ma cl">
+                    <div class="mat_left">
+                         <img src="{$v['a_logo']}">
+                         <span>{$v['a_name']}</span>
+                    </div>
+                    <div class="mat_cent">
+                         VS
+                    </div>
+                    <div class="mat_left">
+                         <img src="{$v['b_logo']}">
+                         <span>{$v['b_name']}</span>
+                    </div>
+                </td>
+                <td>场地：{$v['address']}</td>
+            </tr>
+			{/loop}
+     </table>
+
+</div>
+<div class="blank20"></div>

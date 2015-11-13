@@ -21,13 +21,9 @@
 </div>
 <div class="ch_main">
     <ul class="ch_navul cl">
-        <li><a href="" target="_self" class="active">首页</a></li>
-        <li><a href="" target="_self">球队</a></li>
-        <li><a href="" target="_self">积分榜</a></li>
-        <li><a href="" target="_self">射手榜</a></li>
-        <li><a href="" target="_self">赛程</a></li>
-        <li><a href="" target="_self">最佳球员评选</a></li>
-        <li><a href="" target="_self">赛事公告</a></li>
-        <li><a href="" target="_self">历史回顾</a></li>
+        <li><a href="/match/shanghai" target="_self"{if $ac == 'index'} class="active"{/if}>首页</a></li>
+        <li><a href="/match/shanghai/schedule" target="_self"{if $ac == 'match'} class="active"{/if}>赛程</a></li>
+        <li><a href="/match/shanghai/soccer" target="_self"{if $ac == 'inegral'} class="active"{/if}>积分榜</a></li>
+        <li><a href="/match/shanghai/goal" target="_self"{if $ac == 'shooter'} class="active"{/if}>射手榜</a></li>
     </ul>
 </div>

@@ -32,25 +32,25 @@ $data['chairman'] = index_chairman();
 
 include_once template('diy:portal/index');
 
-//Ê×Ò³ÓÅĞã»á³¤
+//é¦–é¡µä¼˜ç§€ä¼šé•¿
 function index_chairman(){
                                              global $_G;
-                                            $chairmanlists = C::t('#fansclub#plugin_fansclub_info')->fetch_all_for_search('1 = 1', 0, 3, 'members'); // ÁĞ±í
+                                            $chairmanlists = C::t('#fansclub#plugin_fansclub_info')->fetch_all_for_search('1 = 1', 0, 3, 'members'); // åˆ—è¡¨
                                             
                                             for($i = 0; $i < count($chairmanlists); $i++)
                                             {
-                                                    //»ñÈ¡ÇòÃÔ»áĞÅÏ¢
+                                                    //è·å–çƒè¿·ä¼šä¿¡æ¯
                                                     $clubinfo = C::t('#fansclub#plugin_fansclub_info')->fetch_fansclub_info_by_fid($chairmanlists[$i]['fid']);
 
-                                                    //»ñÈ¡ÇòÃÔ»á»á³¤ĞÅÏ¢
+                                                    //è·å–çƒè¿·ä¼šä¼šé•¿ä¿¡æ¯
                                                     $userinfo = DB::fetch_first('SELECT * FROM '.DB::table('forum_groupuser').' WHERE fid='.$chairmanlists[$i]['fid']." AND level=1");
                                                     
                                                     $chairmanlists[$i]['name'] = $clubinfo['name'];			
-                                                    $chairmanlists[$i]['uid'] = $userinfo['uid'];			//»á³¤ÓÃ»§id
-                                                    $chairmanlists[$i]['avatar'] = avatar($userinfo['uid'], 'small', true);     //»á³¤ÖĞÍ·Ïñ
-                                                    $chairmanlists[$i]['username'] = $userinfo['username'];		//»á³¤ÓÃ»§Ãû
+                                                    $chairmanlists[$i]['uid'] = $userinfo['uid'];			//ä¼šé•¿ç”¨æˆ·id
+                                                    $chairmanlists[$i]['avatar'] = avatar($userinfo['uid'], 'small', true);     //ä¼šé•¿ä¸­å¤´åƒ
+                                                    $chairmanlists[$i]['username'] = $userinfo['username'];		//ä¼šé•¿ç”¨æˆ·å
                                                     
-                                                    $userfieldinfo = DB::fetch_first("SELECT * FROM ".DB::table('common_member_profile')." WHERE uid=".intval($userinfo['uid']));//»á³¤¼ò½é
+                                                    $userfieldinfo = DB::fetch_first("SELECT * FROM ".DB::table('common_member_profile')." WHERE uid=".intval($userinfo['uid']));//ä¼šé•¿ç®€ä»‹
                                                     $chairmanlists[$i]['bio'] = $userfieldinfo['bio'];
                                                     
                                             }

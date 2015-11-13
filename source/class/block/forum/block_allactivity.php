@@ -304,13 +304,13 @@ class block_allactivity extends discuz_block {
 			}
 			$forumfields = C::t('forum_forumfield')->fetch_all_by_fid($data['fid']);
 			$attachurl = preg_match('/^(http|ftp|ftps|https):\/\//', $_G['setting']['attachurl']) ? $_G['setting']['attachurl'] : $_G['siteurl'].$_G['setting']['attachurl'];
-			if(!empty($forumfields[$data['fid']]['icon']) && !$forumfields[$data['fid']]['isgroup']) {
-				$forumfields[$data['fid']]['icon'] = preg_match('/^(http|ftp|ftps|https):\/\//', $forumfields[$data['fid']]['icon']) ? $forumfields[$data['fid']]['icon'] : $attachurl.'common/'.$forumfields[$data['fid']]['icon'];
-			} elseif (!empty($forumfields[$data['fid']]['icon']) && $forumfields[$data['fid']]['isgroup']) {
-				$forumfields[$data['fid']]['icon'] = preg_match('/^(http|ftp|ftps|https):\/\//', $forumfields[$data['fid']]['icon']) ? $forumfields[$data['fid']]['icon'] : $attachurl.'group/'.$forumfields[$data['fid']]['icon'];
-			} else {
+			if (empty($forumfields[$data['fid']]['icon'])) {
 				$forumfields[$data['fid']]['icon'] = 'static/image/common/forum_new.gif';
-			}
+			} elseif ($data['isgroup']) {
+				$forumfields[$data['fid']]['icon'] = preg_match('/^(http|ftp|ftps|https):\/\//', $forumfields[$data['fid']]['icon']) ? $forumfields[$data['fid']]['icon'] : $attachurl.'group/'.$forumfields[$data['fid']]['icon'];
+			} else  {
+				$forumfields[$data['fid']]['icon'] = preg_match('/^(http|ftp|ftps|https):\/\//', $forumfields[$data['fid']]['icon']) ? $forumfields[$data['fid']]['icon'] : $attachurl.'common/'.$forumfields[$data['fid']]['icon'];
+			} 
 			$listtids[] = $data['tid'];
 			$list[$data['tid']] = array(
 					'fid' => $data['fid'],

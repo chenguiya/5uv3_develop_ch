@@ -2213,20 +2213,7 @@ body{background: #f1f4f6;}
     background: #f7f8f9;
 }
 
-.view_l #p_btn a
-{
-    font-size: 14px;
-
-    display: inline-block;
-    float: none;
-    overflow: hidden;
-
-    height: 20px;
-    margin-right: 3px;
-
-    color: #888;
-    background: none;
-}
+.view_l #p_btn a{font-size: 14px;display: inline-block;float: none;overflow: hidden;height: 20px;margin-right: 3px;color: #888;background: none; line-height: 15px;}
 
 .view_l #p_btn a:hover
 {
@@ -2247,20 +2234,8 @@ body{background: #f1f4f6;}
     line-height: 20px;
 }
 
-#p_btn span
-{
-    vertical-align: top;
-}
-
-#p_btn a.recommend_add i
-{
-    background-position: 0 -568px;
-}
-
-#p_btn a.recommend_add:hover i
-{
-    background-position: 0 -588px;
-}
+#p_btn a.recommend_add i{background-position: 0 -568px;}
+#p_btn a.recommend_add:hover i{background-position: 0 -588px;}
 
 #p_btn a.recommend_sub i
 {
@@ -2291,6 +2266,7 @@ body{background: #f1f4f6;}
 {
     background-position: -60px -588px;
 }
+
 
 #threadShare
 {
@@ -3163,8 +3139,8 @@ body{background: #f1f4f6;}
 .Fans_box{overflow: hidden;width: 1000px;}
 .Fans_box .cell{ float: left; margin-left: 20px; position: relative;}
 .Fans_box .cell .brief{ width: 230px; text-overflow:ellipsis; white-space: nowrap;}
-.Fans_box .logo_icon{ position:absolute; right: 23px; top: 138px; background:rgba(255,255,255,0.8); width: 60px; height: 60px; border-radius:50%; text-align: center;-webkit-box-shadow:0px 2px 1px rgba(0,0,0,0.2); box-shadow: 0px 2px 1px rgba(0,0,0,0.2);}
-.Fans_box .logo_icon img{ border-radius:50%; width: 48px; height: 48px; margin-top: 6px;}
+.Fans_box .logo_icon{ position:absolute; right: 17px; top: 138px; background:rgba(255,255,255,0.4); width: 60px; height: 60px; border-radius:50%; text-align: center;-webkit-box-shadow:0px 1px 1px rgba(0,0,0,0.1); box-shadow: 0px 1px 1px rgba(0,0,0,0.1);}
+.Fans_box .logo_icon img{ border-radius:50%; width: 50px; height: 50px; margin-top: 5px;}
 .modech_left{float: left;overflow: hidden;width: 660px;}
 .indexThread ul{padding: 0 20px;background: #fff;}
 .indexThread li{position: relative;padding: 20px 0;border-bottom: 1px solid #edf0f2;}
@@ -7544,7 +7520,7 @@ img
 {
     position: relative;
 
-    width: 1000px;
+    width: 320px;   /*1000*/
     height: 280px;
 
     background: #f9fbfc;

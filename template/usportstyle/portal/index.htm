@@ -20,7 +20,7 @@
      <!--热门活动 start-->
      <!--{hook/index_hot_activity}-->     
      <!--热门活动 end-->
-     <div class="ad_banner" id="inxch5">
+     <div class="ad_banner" id="inxch5" style="width:960px;">
           <!-- 111247：首页-中部通栏 类型：固定广告位 尺寸：1000x0-->
      </div>
      <!--共部分 start-->
@@ -48,7 +48,7 @@
                    <!--{loop $data['chairman'] $val}-->
                     <div class="chBoard">
                          <div class="board_c">
-                              <div class="board_l fl clearfix"><a href="home.php?mod=space&uid={$val['uid']}" target="_blank"><img src="static/image/face.jpg" data-original= "$val['avatar']" width="50" height="50"></a></div>
+                              <div class="board_l fl clearfix"><a href="home.php?mod=space&uid={$val['uid']}" target="_blank" c="1"><img src="$val['avatar']" data-original= "$val['avatar']" width="50" height="50"></a></div>
                               <div class="board_r fl clearfix">
                                    <div class="r_up">
                                         <span>{$val['username']}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="fans/topic/{$val['fid']}/" target="_blank">[{$val['name']}]</a></span>

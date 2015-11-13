@@ -111,7 +111,7 @@ if(defined('IN_MOBILE'))
 }
 else
 {
-    die('The web version is coming soon...');
+    // die('The web version is coming soon...');
     include template('common/header');
     include template('fansclub:minjian/header');
     include template('fansclub:minjian/'.$ac);

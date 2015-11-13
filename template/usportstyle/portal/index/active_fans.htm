@@ -9,10 +9,10 @@
 			<!--{loop $data['data'] $key $val}-->
 			<li class="cl">
 				<span class="actico act{$val[order]}"></span>
-				<a href="home.php?mod=space&uid={$val[g_uid]}&do=thread&from=space" class="act_img" target="_blank" c="1"><img src="{$val[image]}"><!--{if is_verify($val[g_uid])}--><span class="icon_small"></span><!--{/if}--></a>
+				<a href="home.php?mod=space&uid={$val[g_uid]}" class="act_img" target="_blank" c="1"><img src="{$val[image]}"><!--{if is_verify($val[g_uid])}--><span class="icon_small"></span><!--{/if}--></a>
 				<div class="act_middle">
-					<p class="actname">{$val[title]}</a>&nbsp;&nbsp;&nbsp;<em>积分：</em>{$val[jifen]}</p>
-					<p class="acttit">&nbsp;&nbsp;&nbsp;<!--{if $val[bio]}-->{$val[bio]}<!--{else}-->这家伙很懒，什么都没留下。<!--{/if}--></p>
+					<p class="actname">{$val[g_username]}</a>&nbsp;&nbsp;&nbsp;<em>积分：</em>{$val[jifen]}</p>
+					<p class="acttit"><!--{if $val[bio]}-->{$val[bio]}<!--{else}-->这家伙很懒，什么都没留下。<!--{/if}--></p>
 				</div>				
 				<span class="y">
 				      <!--{if follow_check({$val[g_uid]})}-->

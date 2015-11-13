@@ -67,7 +67,7 @@ if($token) {
 		}
 
         // add by zhangjh 2015-10-26
-        include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';   // 公共函数
+        include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';   // 鍏叡鍑芥暟
         require_once libfile('function/cache');
         save_syscache('qudao_fid_'.$_G['uid'], 0);
         updatecache('qudao_fid_'.$_G['uid']);
@@ -101,7 +101,7 @@ if($token) {
 			}
 
             // add by zhangjh 2015-10-26
-            include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';   // 公共函数
+            include_once DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php';   // 鍏叡鍑芥暟
             require_once libfile('function/cache');
             save_syscache('qudao_fid_'.$_G['uid'], 0);
             updatecache('qudao_fid_'.$_G['uid']);

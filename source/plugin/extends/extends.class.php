@@ -332,7 +332,7 @@ class plugin_extends_portal extends plugin_extends {
 // 	}
 	function index_hot_activity_output() {
 		$data = $activity = array();
-		$data['data'] = C::t('common_block_item')->fetch_all_by_bid(168, true);
+		$data['data'] = C::t('common_block_item')->fetch_all_by_bid(154, true);
 		foreach ($data['data'] as $key => $value) {
 			unset($data['data'][$key]['fields']);
 			$data['data'][$key]['fields'] = dunserialize($value['fields']);
@@ -367,9 +367,9 @@ class plugin_extends_portal extends plugin_extends {
 				
 				// zhangjh 2015-08-08 过滤中括号
 				include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php');
-				$search = array ("'\[.*?\].*?\[.*?\]'si");
+				$search = array ("'\[.*?\]'si");
 				$replace = array ("");
-				$value['message'] = @preg_replace ($search, $replace, $value['message']);
+				$value['message'] = @preg_replace($search, $replace, $value['message']);
 				$data['data'][$key]['message'] = str_intercept($value['message'], 0, 40);
 				$data['data'][$key]['tid'] = $thread['tid'];
 				$data['data'][$key]['pid'] = $value['pid'];

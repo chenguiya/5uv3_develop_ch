@@ -1113,6 +1113,7 @@ if(!defined('IN_ARCHIVER')) {
     
     // 联赛功能转移
     // 上海联赛相关显示修改 zhangjh 2015-08-14
+    $is_wap = fansclub_check_wap();
     if(strpos($_SERVER['HTTP_HOST'], '5usport.com') !== FALSE) // 正式服
     {
         if($_G['forum']['fid'] == 1378 || $_G['forum']['fid'] == 1390)
@@ -1154,7 +1155,14 @@ if(!defined('IN_ARCHIVER')) {
             
             // 需要修改template
             $ac = trim($_GET['ac']) == '' ? 'forumdisplay_index' : trim($_GET['ac']);
-            $template = 'touch/forum/forumdisplay';
+            
+            if($is_wap)
+                $template = 'touch/forum/forumdisplay';
+            else
+            {
+                include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
+                exit;
+            }
         }
         
         // 联赛下面的球队
@@ -1163,7 +1171,7 @@ if(!defined('IN_ARCHIVER')) {
             $_G['forum']['province_name'] = '广东';
             $_G['forum']['city_name'] = '广州';
             $ac = trim($_GET['ac']) == '' ? 'channel_index' : trim($_GET['ac']);
-            $template = 'touch/forum/channel';
+            
             
             if($ac == 'channel_member') // 成员列表数据
             {
@@ -1205,6 +1213,14 @@ if(!defined('IN_ARCHIVER')) {
                     $i++;
                     $arralldata[] = $_tmp;
                 }
+            }
+            
+            if($is_wap)
+                $template = 'touch/forum/channel';
+            else
+            {
+                include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
+                exit;
             }
         }
     }
@@ -1249,7 +1265,15 @@ if(!defined('IN_ARCHIVER')) {
             
             // 需要修改template
             $ac = trim($_GET['ac']) == '' ? 'forumdisplay_index' : trim($_GET['ac']);
-            $template = 'touch/forum/forumdisplay';
+            if($is_wap)
+            {
+                $template = 'touch/forum/forumdisplay';
+            }
+            else
+            {
+                include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
+                exit;
+            }
         }
         
         // 联赛下面的球队
@@ -1258,7 +1282,7 @@ if(!defined('IN_ARCHIVER')) {
             $_G['forum']['province_name'] = '广东';
             $_G['forum']['city_name'] = '广州';
             $ac = trim($_GET['ac']) == '' ? 'channel_index' : trim($_GET['ac']);
-            $template = 'touch/forum/channel';
+           
             
             if($ac == 'channel_member') // 成员列表数据
             {
@@ -1300,6 +1324,14 @@ if(!defined('IN_ARCHIVER')) {
                     $i++;
                     $arralldata[] = $_tmp;
                 }
+            }
+            
+            if($is_wap)
+                $template = 'touch/forum/channel';
+            else
+            {
+                include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
+                exit;
             }
         }
     }

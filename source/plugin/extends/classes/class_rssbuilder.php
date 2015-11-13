@@ -39,10 +39,12 @@ class rssbuilder {
 	// $link
 	// $description   $pubDate
 	/**************************************************************************/
-	function AddItem($title, $link, $description ,$pubDate) {
+	function AddItem($title, $link, $description, $author, $category, $pubDate) {
 		$this->items[] = array('title' => $title ,
 				'link' => $link,
 				'description' => $description,
+				'author' => $author,
+				'category' => $category,
 				'pubDate' => $pubDate);
 	}
 	/**************************************************************************/
@@ -110,6 +112,8 @@ class rssbuilder {
 			$s .= "<title>{$this->items[$i]['title']}</title>\n";
 			$s .= "<link>{$this->items[$i]['link']}</link>\n";
 			$s .= "<description><![CDATA[{$this->items[$i]['description']}]]></description>\n";
+			$s .= "<author>{$this->items[$i]['author']}</author>\n";
+			$s .= "<category>{$this->items[$i]['category']}</category>\n";
 			$s .= "<pubDate>{$this->items[$i]['pubDate']}</pubDate>\n";
 			$s .= "</item>\n";
 		}

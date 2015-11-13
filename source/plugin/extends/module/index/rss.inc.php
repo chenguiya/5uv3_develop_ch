@@ -12,9 +12,12 @@ $channel_url = trim($_G['siteurl']);
 
 //数据获取,默认100条
 $num = isset($_GET['num']) ? intval($_GET['num']) : '100';
-$sql = "SELECT a.`subject`, a.`tid`, c.`pid`, c.`message`, a.`dateline` FROM ".DB::table('forum_thread')." a, ".DB::table('forum_threadclass')." b, ".DB::table('forum_post')." c WHERE a.`typeid`=b.`typeid` AND a.`tid`=c.`tid` AND c.`first`=1 AND b.`name`='新闻' AND a.`displayorder`>=0 ORDER BY a.`tid` DESC LIMIT $num";
+$sql = "SELECT a.subject, a.tid, a.fid, c.pid, c.message, a.author, a.dateline FROM ".DB::table('forum_thread')." a, ".DB::table('forum_threadclass')." b, ".DB::table('forum_post')." c WHERE a.typeid=b.typeid AND a.tid=c.tid AND c.first=1 AND b.name='新闻' AND a.displayorder>=0 ORDER BY a.tid DESC LIMIT $num";
 $result = DB::fetch_all($sql);
 
+
+//获取栏目缓存
+loadcache('forums');
 $siteurl = 'http://www.5usport.com/';
 require_once libfile('function/extends');
 require_once libfile('function/discuzcode');
@@ -30,10 +33,11 @@ foreach ($result as $key => $value) {
 		
 	$message = discuzcode($value['message'], 1, 0);
 	$description = changemessagetohtml($message, $attachments);
-	
-// 	$pubDate = date('Y/n/j H:i:s', $value['dateline']);
+	$author = trim($value['author']);
+	$fup = $_G['cache']['forums'][$value['fid']]['fup'];
+	$category = $_G['cache']['forums'][$fup]['name'];
 	$pubDate = date(DATE_RFC2822, $value['dateline']);
-	$rss->AddItem($title, $link, $description, $pubDate);
+	$rss->AddItem($title, $link, $description, $author, $category, $pubDate);
 }
 $rss->BuildRSSForZark($channel_title, $channel_url, $channel_description);
 $rss->Show();

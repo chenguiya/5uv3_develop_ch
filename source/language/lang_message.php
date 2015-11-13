@@ -383,7 +383,7 @@ $lang = array (
   'recommend_duplicate_2' => '已评价',
   'recommend_outoftimes_2' => '今日评价机会已用完',
   'recommend_daycount_succeed_2' => '您今天还能评价 {daycount} 次',
-  'recommend_succeed_2' => '{recommendc} {recommendv}',
+  'recommend_succeed_2' => '已评价',
 
   
   'thread_poll_voter_isnull' => '暂时还没有人参与投票，不能添加标签。',
