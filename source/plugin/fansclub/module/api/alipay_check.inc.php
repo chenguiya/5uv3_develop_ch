@@ -361,7 +361,7 @@ function search($arr_param)
     
     if($stat == 0) // 显示详细
     {
-        $order_by = ' ORDER BY log_id DESC';
+        // $order_by = ' ORDER BY log_id DESC';
         $arr_list = C::t('#ucharge#plugin_ucharge_log')->fetch_by_where($where.$order_by, $pass, $num);
         
         $arr_list_show = array();

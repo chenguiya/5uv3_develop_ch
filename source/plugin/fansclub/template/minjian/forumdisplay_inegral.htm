@@ -1,0 +1,121 @@
+<div class="ch_main" style="overflow: hidden;">
+    
+        <ul class="xGZ_ul">
+            <li class="active">7人</li>
+            <li>5人</li>
+        </ul>
+    
+    <div class="blank20"></div>
+    <div id="leagueMatch">
+        <div>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="com_shooter">
+                <colgroup>
+                    <col width="100">
+                    <col width="auto">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                </colgroup>
+                <tr>
+                    <th>排名</th>
+                    <th>球队</th>
+                    <th>场次</th>
+                    <th>胜</th>
+                    <th>负</th>
+                    <th>平</th>
+                    <th>进球</th>
+                    <th>失球</th>
+                    <th>净胜球</th>
+                    <th>积分</th>
+                </tr>
+                {loop $team_seven_integral['item'] $k $v}
+                <tr>
+                    <td {if $v[0] == '1' || $v[0] == '2' || $v[0] == '3'}
+                         class="reds"
+                         {/if}
+                     >$v[0]</td>
+                    <td>{if $v[1]}{$v[1]}{else}--{/if}</td>
+                    <td>{$v[2]}</td>
+                    <td>{$v[3]}</td>
+                    <td>{$v[4]}</td>
+                    <td>{$v[5]}</td>
+                    <td>{$v[6]}</td>
+                    <td>{$v[7]}</td>
+                    <td>{$v[8]}</td>
+                    <td>{$v[10]}</td>
+                </tr>
+                {/loop}
+            </table>
+        </div>
+        <div style="display:none;">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="com_shooter">
+                <colgroup>
+                    <col width="100">
+                    <col width="auto">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                </colgroup>
+                <tr>
+                    <th>排名</th>
+                    <th>球队</th>
+                    <th>场次</th>
+                    <th>胜</th>
+                    <th>负</th>
+                    <th>平</th>
+                    <th>进球</th>
+                    <th>失球</th>
+                    <th>净胜球</th>
+                    <th>积分</th>
+                </tr>
+                {loop $team_seven_integral['item'] $k $v}
+                <tr>
+                    <td {if $v[0] == '1' || $v[0] == '2' || $v[0] == '3'}
+                         class="reds"
+                         {/if}
+                     >$v[0]</td>
+                    <td>{if $v[1]}{$v[1]}{else}--{/if}（5人）</td>
+                    <td>{$v[2]}</td>
+                    <td>{$v[3]}</td>
+                    <td>{$v[4]}</td>
+                    <td>{$v[5]}</td>
+                    <td>{$v[6]}</td>
+                    <td>{$v[7]}</td>
+                    <td>{$v[8]}</td>
+                    <td>{$v[10]}</td>
+                </tr>
+                {/loop}
+            </table>
+        </div>
+    </div>
+</div>
+
+    <div class="jfRule">
+        <h1>积分规则：</h1>
+        <p>1.  每队胜一场得3分，平一场得1分，负一场得0分；
+        <p>2.  联赛结束，积分多的队名次列前；
+        <p>3.  如果两队或两队以上积分相等
+    </div>
+</div>
+<div class="blank20"></div>
+
+<script type="text/javascript">
+    jq(function() {
+        var barLi = jq('.xGZ_ul li');
+        barLi.click(function() {
+            jq(this).addClass('active').siblings().removeClass('active');
+            var active = barLi.index(this);
+            jq('div#leagueMatch>div').eq(active).show().siblings().hide();
+        });
+    });
+</script>

@@ -1,18 +1,24 @@
-<div class="blank20"></div>
-<div class="ch_main" style="overflow: hidden;">
+<div class="ch_main cl">
+  <ul class="xGZ_ul">
+    <li class="active" id="seven_lb_1" onclick="cg('seven',1)">7人</li>
+    <li id="seven_lb_2" onclick="cg('seven',2)">5人</li>
+  </ul>
+</div>
+<div class="ch_main" style="overflow: hidden; margin-top:20px;" id="leagSCHEd">
+  <div id="seven_div_1">
      <div class="tab_inegral">
-          <ul class="cl">
-              <li class="hover">第一轮</li>
-              <li>第二轮</li>
-              <li>第三轮</li>
-              <li>第四轮</li>
-              <li>第五轮</li>
-              <li>第六轮</li>
-              <li>第七轮</li>
+          <ul id="seven_Nav" class="cl">
+              <li data-sevenid="1" class="hover">第一轮</li>
+              <li data-sevenid="2">第二轮</li>
+              <li data-sevenid="3">第三轮</li>
+              <li data-sevenid="4">第四轮</li>
+              <li data-sevenid="5">第五轮</li>
+              <li data-sevenid="6">第六轮</li>
+              <li data-sevenid="7">第七轮</li>
           </ul>
-	</div>
-    
-     <table border="0" cellpadding="0" cellspacing="0" width="100%" class="com_shooter c_match">
+	  </div>
+    <div id="seven_table">
+     <table border="0" cellpadding="0" cellspacing="0" width="100%" id="seven_table1" class="com_shooter c_match">
             <colgroup>
                      <!-- <col width="104"> -->
                      <col width="190">
@@ -20,12 +26,11 @@
                      <col width="auto">
             </colgroup>
 
-			{loop $match_list $k $v}
+			{loop $match_data['seven'] $k $v}
 			{if $k > 3}
 			{eval continue;}
 			{/if}
             <tr>
-                <!-- <td><em>{$v['group_name']}</em>组</td> -->
                 <td >
                     <span class="mat_time">{eval echo date("m月d日",$v['match_time']);}</span>
                     <span class="mat_span">{eval echo date("H:i",$v['match_time']);}</span>
@@ -34,10 +39,16 @@
                     <div class="mat_left">
                          <img src="{$v['a_logo']}">
                          <span>{$v['a_name']}</span>
-                    </div>
-                    <div class="mat_cent">
-                         VS
-                    </div>
+                    </div>  
+                    <!--{if $v['a_score']==null}-->
+                            <div class="mat_cent">
+                                 VS
+                            </div>
+                    <!--{else}-->            
+                              <div class="mat_cent">
+                                        {$v['a_score']}-{$v['b_score']}
+                            </div>
+                    <!--{/if}-->
                     <div class="mat_left">
                          <img src="{$v['b_logo']}">
                          <span>{$v['b_name']}</span>
@@ -47,6 +58,63 @@
             </tr>
 			{/loop}
      </table>
-
+     </div>
+     <div class="blank20"></div>
 </div>
+
+<div id="seven_div_2" style="display:none">
+     <div class="tab_inegral five_inegral">
+          <ul id="five_Nav" class="cl">
+              <li data-fiveid="1" class="hover">第一轮</li>
+              <li data-fiveid="2">第二轮</li>
+              <li data-fiveid="3">第三轮</li>
+              <li data-fiveid="4">第四轮</li>
+              <li data-fiveid="5">第五轮</li>
+          </ul>
+  </div>
+    <div id="five_table">
+     <table border="0" cellpadding="0" cellspacing="0" width="100%" id="five_table1" class="com_shooter c_match">
+            <colgroup>
+                     <!-- <col width="104"> -->
+                     <col width="190">
+                     <col width="510">
+                     <col width="auto">
+            </colgroup>
+
+      {loop $match_data['five'] $k $v}
+      {if $k > 2}
+      {eval continue;}
+      {/if}
+            <tr>
+                <td >
+                    <span class="mat_time">{eval echo date("m月d日",$v['match_time']);}</span>
+                    <span class="mat_span">{eval echo date("H:i",$v['match_time']);}</span>
+                </td>
+                <td class="mat_ma cl">
+                    <div class="mat_left">
+                         <img src="{$v['a_logo']}">
+                         <span>{$v['a_name']}</span>
+                    </div>  
+                    <!--{if $v['a_score']==null}-->
+                            <div class="mat_cent">
+                                 VS
+                            </div>
+                    <!--{else}-->            
+                              <div class="mat_cent">
+                                        {$v['a_score']}-{$v['b_score']}
+                            </div>
+                    <!--{/if}-->
+                    <div class="mat_left">
+                         <img src="{$v['b_logo']}">
+                         <span>{$v['b_name']}</span>
+                    </div>
+                </td>
+                <td>场地：{$v['address']}</td>
+            </tr>
+      {/loop}
+     </table>
+     </div>
 <div class="blank20"></div>
+</div>
+</div>
+<script type="text/javascript" src="$_G['config'][static]/schelues.js"></script>

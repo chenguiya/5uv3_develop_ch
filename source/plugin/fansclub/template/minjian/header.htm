@@ -1,33 +1,63 @@
 <link rel="stylesheet" type="text/css" href="{$_G['config'][static]}/css_minjian.css">
+<script src="{$_G['config'][static]}/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
 
 <div class="ch_bm">
 <div class="z">
 <a href="./" class="" title="">5U体育</a><em>&gt;</em>
-<a href="/match/shanghai">{$local_name}球迷会联赛</a>
-{if $ac == 'match'}
-<em>&gt;</em><a href="/match/shanghai/schedule">赛程</a>
+{if $_G['forum']['fid'] == 1390}
+<a href="forum.php?mod=forumdisplay&fid={$_G['forum']['fid']}&ac=forumdisplay_index">{$_G['forum']['name']}</a>
 {/if}
-{if $ac == 'inegral'}
-<em>&gt;</em><a href="/match/shanghai/soccer">积分榜</a>
+{if $_G['forum']['fup'] == 1390}
+<a href="forum.php?mod=forumdisplay&fid={$_G['forum']['fup']}&ac=forumdisplay_index">广州豪门球迷会联赛</a>
+<em>&gt;</em>
+<a href="forum.php?mod=forumdisplay&fid={$_G['forum']['fid']}&ac=channel_index">{$_G['forum']['name']}</a>
 {/if}
-{if $ac == 'shooter'}
-<em>&gt;</em><a href="/match/shanghai/goal">射手榜</a>
-{/if}
-</div>
-</div>
 
+</div>
+</div>
+{if $_G['forum']['fid'] == 1390} <!--联赛-->
 <div class="club_banner">
     <div class="ch_main"><img src="{$_G['config'][static]}/images/minjian/banner_1.jpg"></div>
 </div>
+<div style="width:100%;background-color:#fff;">
+    <div class="ch_main">
+        <ul class="ch_navul cl">
+            <li><a href="forum.php?mod=forumdisplay&fid=$_G['forum']['fid']&ac=forumdisplay_index" target="_self" {if $ac == 'forumdisplay_index'}class="active"{/if}>首页</a></li>
+            <li><a href="forum.php?mod=forumdisplay&fid=$_G['forum']['fid']&ac=forumdisplay_team" target="_self" {if $ac == 'forumdisplay_team'}class="active"{/if}>球队</a></li>
+            <li><a href="forum.php?mod=forumdisplay&fid=$_G['forum']['fid']&ac=forumdisplay_inegral" target="_self" {if $ac == 'forumdisplay_inegral'}class="active"{/if}>积分榜</a></li>
+            <li><a href="forum.php?mod=forumdisplay&fid=$_G['forum']['fid']&ac=forumdisplay_shooter" target="_self" {if $ac == 'forumdisplay_shooter'}class="active"{/if}>射手榜</a></li>
+            <li><a href="forum.php?mod=forumdisplay&fid=$_G['forum']['fid']&ac=forumdisplay_schedule" target="_self" {if $ac == 'forumdisplay_schedule'}class="active"{/if}>赛程</a></li>
+            <li><a href="forum.php?mod=forumdisplay&fid=$_G['forum']['fid']&ac=forumdisplay_mvp" target="_self" {if $ac == 'forumdisplay_mvp'}class="active"{/if}>MVP评选</a></li>
+            <li><a href="forum.php?mod=forumdisplay&fid=$_G['forum']['fid']&ac=forumdisplay_notice" target="_self" {if $ac == 'forumdisplay_notice'}class="active"{/if}>赛事公告</a></li>
+            <!--<li><a href="forum.php?mod=forumdisplay&fid=$_G['forum']['fid']&ac=forumdisplay_history" target="_self" {if $ac == 'forumdisplay_history'}class="active"{/if}>历史回顾</a></li>-->
+        </ul>
+    </div>
+</div>
+{else}
+{if $_G['forum']['fup'] == 1390}<!--联赛下的球队-->
+<div class="ch_main cl">
+    <div class="group-header">
+        <div class=""><img src="{$_G['forum']['banner']}" width="1000" height="200"></div>
+        <div class="center">
+            <div class="logo"><img src="$team_data['logo']" width="110" height="110" alt="" title=""></div>
+            <div class="name"><h3>$_G['forum']['name']</h3></div>
+                
+                
+                <span>地区：广东&nbsp;|&nbsp;广州</span>
+                <span>人数：0</span>
+                <p class="brief">简介：{if $team_data['team_intro']!=null}{$team_data['team_intro']}{else}暂时没有{/if}</p>
+            
+        </div>
+    </div>
+</div>
 <div class="ch_main">
     <ul class="ch_navul cl">
-        <li><a href="" target="_self" class="active">首页</a></li>
-        <li><a href="" target="_self">球队</a></li>
-        <li><a href="" target="_self">积分榜</a></li>
-        <li><a href="" target="_self">射手榜</a></li>
-        <li><a href="" target="_self">赛程</a></li>
-        <li><a href="" target="_self">最佳球员评选</a></li>
-        <li><a href="" target="_self">赛事公告</a></li>
-        <li><a href="" target="_self">历史回顾</a></li>
+        <li><a href="forum.php?mod=forumdisplay&fid=$_G['forum']['fid']&ac=channel_index" target="_self" {if $ac == 'channel_index'}class="active"{/if}>首页</a></li>
+        <li><a href="forum.php?mod=forumdisplay&fid=$_G['forum']['fid']&ac=channel_member" target="_self" {if $ac == 'channel_member'}class="active"{/if}>队员</a></li>
+        <li><a href="forum.php?mod=forumdisplay&fid=$_G['forum']['fid']&ac=channel_data" target="_self" {if $ac == 'channel_data'}class="active"{/if}>数据</a></li>
+        <!--<li><a href="forum.php?mod=forumdisplay&fid=$_G['forum']['fid']&ac=channel_introduce" target="_self" {if $ac == 'channel_introduce'}class="active"{/if}>介绍</a></li>-->
+
     </ul>
 </div>
+{/if}
+{/if}

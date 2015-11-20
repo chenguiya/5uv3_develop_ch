@@ -3,14 +3,14 @@
 <nav class="navbar"{if !empty($_G[forum][color])} style="background-color:$_G[forum][color]"{/if}>
     <div class="inner">
         <div class="left">
-            <!--{if $_GET['op'] == 'checkuser'}-->
+            <!--{if $_GET['op'] == 'checkuser' || $_G['forum']['fup'] == 1390}-->
             <a href="javascript: history.go(-1);"><i class="iconfont icon-back"></i></a>
             <!--{else}-->
             <a class="logo" href="$_G[siteurl]"><i class="iconfont icon-home"></i></a>
             <!--{/if}-->
         </div>
         <div class="right">
-            <!--{if $action == 'index' && $status != 2 && $status != 3}--><a href="forum.php?mod=post&action=newthread&fid=$_G[fid]"><i class="iconfont icon-edit"></i></a><!--{/if}-->
+            <!--{if ($action == 'index' && $status != 2 && $status != 3 || $_G['forum']['fup'] == 1390)}--><a href="forum.php?mod=post&action=newthread&fid=$_G[fid]"><i class="iconfont icon-edit"></i></a><!--{/if}-->
             
             <a href="home.php?mod=space&uid=$_G[uid]&do=profile&mycenter=1">
                 <i class="iconfont icon-me" style="position: relative;">

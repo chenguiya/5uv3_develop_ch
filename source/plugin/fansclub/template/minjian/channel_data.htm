@@ -1,1 +1,47 @@
-球队数据
+<div class="ch_main" style="overflow: hidden;">
+    <div id="leagueMatch">
+        <div>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="com_shooter">
+                <colgroup>
+                    <col width="100">
+                    <col width="auto">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                    <col width="85">
+                </colgroup>
+                <tr>
+                    <th>号码</th>
+                    <th>姓名</th>
+                    <th>进球数</th>
+                    <th>助攻</th>
+                    <th>黄牌</th>
+                    <th>红牌</th>
+                </tr>
+                <!--{loop $arralldata $user}-->
+                <tr>
+                    <td>{$user['num']}</td>
+                    <td>{$user['name']}</td>
+                    <td>{$user['gold']}</td>
+                    <td>{$user['help']}</td>
+                    <td>{$user['yellow']}</td>
+                    <td>{$user['red']}</td>
+                </tr>
+                <!--{/loop}-->
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="blank20"></div>
+
+<script type="text/javascript">
+    jq(function() {
+        var barLi = jq('.xGZ_ul li');
+        barLi.click(function() {
+            jq(this).addClass('active').siblings().removeClass('active');
+            var active = barLi.index(this);
+            jq('div#leagueMatch>div').eq(active).show().siblings().hide();
+        });
+    });
+</script>

@@ -169,14 +169,25 @@ if($_GET['from'] == 'portal') {
 // 	}
                         // xurui 2015-09-25 修改t_link and $navigation
                       if($_G['forum']['type'] == 'sub'){
-                            $_G['fid'] = $_G['forum']['fup'];
-                            $_G['forum']['name'] = $_G['cache']['forums'][$_G['forum']['fup']]['name'];
-                        }                       
+                            //$_G['fid'] = $_G['forum']['fup'];
+                            //$_G['forum']['name'] = $_G['cache']['forums'][$_G['forum']['fup']]['name'];
+                            
+                            // zhangjh 2015-11-20 修改
+                            $t_link = 'group/'.$_G['forum']['fup'].'/';
+                            $navigation .= ' <em>&rsaquo;</em> <a href="'.$t_link.'" target="_blank">'.($_G['cache']['forums'][$_G['forum']['fup']]['name']).'频道</a>';
+                            
+                            $t_link = 'group/'.$_G['fid'].'/';
+                            $navigation .= ' <em>&rsaquo;</em> <a href="'.$t_link.'" target="_blank">'.($_G['forum']['name']).'</a>';
+                        }
+                        else
+                        {
+                            $t_link = 'group/'.$_G['fid'].'/';
+                            $navigation .= ' <em>&rsaquo;</em> <a href="'.$t_link.'" target="_blank">'.($_G['forum']['name']).'频道</a>';
+                        }
 	// $t_link = 'forum.php?mod=forumdisplay&amp;fid='.$_G['fid'].($_GET['extra'] && !IS_ROBOT ? '&amp;'.$_GET['extra'] : '').'&tpl=channel_index';
 	// zhangjh 2015-06-25 修改t_link
 	// $t_link = 'group/'.$_G['fid'].'/'.($_GET['extra'] && !IS_ROBOT ? '&amp;'.$_GET['extra'] : '').'';
-    $t_link = 'group/'.$_G['fid'].'/';
-        	$navigation .= ' <em>&rsaquo;</em> <a href="'.$t_link.'" target="_blank">'.($_G['forum']['name']).'频道</a>';
+    
 	if($archiveid) {
 		if($threadtable_info[$archiveid]['displayname']) {
 			$t_name = dhtmlspecialchars($threadtable_info[$archiveid]['displayname']);

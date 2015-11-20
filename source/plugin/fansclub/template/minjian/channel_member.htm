@@ -1,1 +1,28 @@
-球队队员
+<div class="ch_main cl">
+<!--{loop $arr_player $player}-->
+    <div class="channelMember">
+        <div class="memberBox">
+            <a href="" target=""><img src="{$player['logo']}" alt="" width="120" height="120"></a>
+            <h1><a href="" target="">{$player['player_name']}</a></h1>
+            <p>{$player['num']}号<b>|</b>{$player['height']}cm<b>|</b>{$player['position']}</p>
+        </div>
+    </div>
+<!--{/loop}-->
+</div>
+<div class="blank20"></div>
+<script type="text/javascript">
+	jq(function() {
+		var box = jq('.channelMember');
+		var l = box.length;
+		var o = l - 5;
+		for(var i=0;i<l;i++){
+			if(l%5 != 0){
+				box.css('borderBottom', '0');
+			}else if(l%5 == 0 && l > 5){
+				box.css('borderBottom', '0');
+			}else{
+				
+			}
+		}
+	});
+</script><div>

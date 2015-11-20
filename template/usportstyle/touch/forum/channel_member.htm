@@ -1,25 +1,23 @@
-<!--{template common/header}-->
-<div class="tab-body">
-     <ul class="author-thumbs clearfix">
-        <!--{loop $alluserlist $user}-->
-        <li>
-            <div class="author-thumb">
-                <a class="author-thumb-img" href="#" data-old="home.php?mod=space&do=profile&uid=$user[uid]&mobile=2"
-                   data-url="home.php?mod=space&do=profile&uid=$user[uid]&mobile=2">
-                    <img src="$user[avatar]" alt="$user[name]"/>
-                    <i class="iconfont icon-president" style="display: none;"></i>
-                </a>
-                <!--{if $user['level'] == 1}-->
-                <i class="iconfont icon-president"></i>
-                <!--{else}-->
-                <a href="#" data-old="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]&muid=$user[uid]&mobile=2" class="iconfont icon-del dialog"></a>
-                <!--{/if}-->
-            </div>
-            <div class="name"><a href="#" data-old="home.php?mod=space&do=profile&uid=$user[uid]&mobile=2">$user[name]</a></div>
-        </li>
+<div class="tableBox">
+    <table class="tableMain" colspan="0" collapse="0">
+        <thead>
+            <tr>
+                <th>号码</th>
+                <th class="left_mem">球员</th>
+                <th>身高</th>
+                <th>位置</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!--{loop $arr_player $player}-->
+            <tr>
+                <td>{$player['num']}号</td>
+                <td class="left_mem"><img src="{$player['logo']}" alt="" style="vertical-align: middle;display: inline-block;width: 2.15rem;height: 2.15rem;border-radius:20px;"> {$player['player_name']}</td>
+                <td>{$player['height']}cm</td>
+                <td>{$player['position']}</td>
+            </tr>
         <!--{/loop}-->
-        
-
-      </ul>
+        </tbody>
+    </table>
 </div>
 <!--{template common/footer}-->

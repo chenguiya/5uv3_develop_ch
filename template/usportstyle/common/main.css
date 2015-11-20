@@ -7519,10 +7519,9 @@ img
 .teamHead
 {
     position: relative;
-
-    width: 320px;   /*1000*/
+    /*width: 320px;*/
+    width: 1000px;
     height: 280px;
-
     background: #f9fbfc;
 }
 

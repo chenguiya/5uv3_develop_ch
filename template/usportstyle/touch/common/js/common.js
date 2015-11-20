@@ -103,6 +103,15 @@ $(function () {
             console.log(data);
             return doTempl(data.threadlist);
         });
+        
+    loadmore("#load-more-forum-index",
+        "#load-more-forum-index-templ",
+        ".ylist",
+        "forum.php?mod=forumdisplay&fid=1390&page=2&ajax=1&mobile=2&ac=forumdisplay_index",
+        function (doTempl, data) {
+            console.log(data);
+            return doTempl(data.threadlist);
+        });
 
     loadmore("#load-more-group-memberlist",
         "#load-more-group-memberlist-templ",
@@ -282,4 +291,14 @@ $(function () {
             };
         }
     });
+
+
+    //广州联赛tab切换
+    var barLi = $('.tabBarM li');
+    barLi.click(function() {
+        $(this).addClass('active').siblings().removeClass('active');
+        var active = barLi.index(this);
+        $('div#leagueMatch>div').eq(active).show().siblings().hide();
+    });
+    
 });

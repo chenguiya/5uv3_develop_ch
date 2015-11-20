@@ -2,10 +2,11 @@
 
 include_once(DISCUZ_ROOT.'./source/plugin/fansclub/function.inc.php'); // 公共函数
 
-$ac = $_GET['ac'] ? $_GET['ac'] : 'index';
+// $ac = $_GET['ac'] ? $_GET['ac'] : 'index';
 $arr = array('index', 'inegral', 'match', 'shooter', 
     'channel_data', 'channel_index', 'channel_introduce','channel_member',
-    'forumdisplay_index','forumdisplay_list', 'forumdisplay_move','forumdisplay_schedule', 'forumdisplay_team'); // 只允许的action
+    'forumdisplay_index','forumdisplay_list', 'forumdisplay_move','forumdisplay_schedule', 'forumdisplay_team', 'forumdisplay_shooter', 'forumdisplay_inegral',
+    'forumdisplay_mvp','forumdisplay_notice','forumdisplay_history','forumdisplay_data'); // 只允许的action
 if(!in_array($ac, $arr)) showmessage('undefined_action');
 
 if(strpos($_SERVER['HTTP_HOST'], '5usport.com') !== FALSE) // 正式服
@@ -17,6 +18,7 @@ else
     $_G['config']['playerdata']['domian'] = 'http://zhangjh.dev.usport.cc';
 }
 
+/*
 $mem_check = memory('check'); // 先检查缓存是否生效
 if($mem_check != '') // 可以用缓存
 {
@@ -31,6 +33,7 @@ else
 {
     $bln_need_load = TRUE;
 }
+*/
 
 if($ac == 'index')
 {
@@ -73,7 +76,8 @@ elseif($ac == 'shooter')
 {
 }
 elseif(in_array($ac, array('channel_data', 'channel_index', 'channel_introduce','channel_member',
-    'forumdisplay_index', 'forumdisplay_list', 'forumdisplay_move', 'forumdisplay_schedule', 'forumdisplay_team')))
+    'forumdisplay_index', 'forumdisplay_list', 'forumdisplay_move', 'forumdisplay_schedule', 'forumdisplay_team', 'forumdisplay_shooter', 'forumdisplay_inegral',
+    'forumdisplay_mvp','forumdisplay_notice','forumdisplay_history','forumdisplay_data')))
 {
     // 查数据方式同 forum.php?mod=group&fid=372&mobile=2
     // 页头数据

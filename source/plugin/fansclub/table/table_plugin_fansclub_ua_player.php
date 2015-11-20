@@ -9,10 +9,24 @@ class table_plugin_fansclub_ua_player extends discuz_table {
         parent::__construct();
     }
     
-    public function fetch_by_fid()
+    public function fetch_by_fid($fid = 0)
     {
-        $filed = 'player_id';
-        $limit = 10;
-        return DB::fetch_all("SELECT * FROM %t ORDER BY %w ASC LIMIT %d", array($this->_table, $filed, $limit));
+        if(intval($fid) <= 0)
+            return array();
+        
+        $row_team = DB::fetch_all("SELECT * FROM ".DB::table('plugin_fansclub_ua_team')." WHERE fid = %d", array($fid));
+        if(count($row_team) == 1)
+        {
+            $team_id = $row_team[0]['team_id'];
+            $row_player = DB::fetch_all("SELECT a.team_id,a.num, a.position, b.player_id,  b.player_name, b.logo, b.birthday, b.weight, ".
+                    "b.height ".
+                    "FROM ".DB::table('plugin_fansclub_ua_team_player')." a, ".DB::table('plugin_fansclub_ua_player')." b ".
+                    "WHERE a.team_id = %d AND a.player_id = b.player_id", array($team_id));
+            return $row_player;
+        }
+        else
+        {
+            return array();
+        }
     }
 }

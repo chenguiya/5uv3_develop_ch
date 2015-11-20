@@ -1,10 +1,11 @@
 <!--{template common/header}-->
 <!-- start of navbar-->
-<nav class="navbar"{if !empty($_G[forum][color])} style="background-color:$_G[forum][color]"{/if}>
+<nav class="navbar navbar2"{if !empty($_G[forum][color])} style="background-color:$_G[forum][color]"{/if}>
     <div class="inner">
         <div class="left">
-            <a href="javascript: history.go(-1);"><i class="iconfont icon-back"></i></a>
+            <a href="/"><i class="iconfont icon-home"></i></a>
         </div>
+        <div class="center">{$_G['forum']['name']}</div>
         <!--{if $_GET['op'] == 'checkuser'}--><div class="center">会员审核 </div><!--{/if}-->
         <div class="right">
             <a href="forum.php?mod=post&action=newthread&fid=$_G[fid]"><i class="iconfont icon-edit"></i></a>
@@ -21,39 +22,15 @@
 <!-- end of navbar-->
 <!-- start of ymain -->
 <div class="ymain">
-    <header class="yheader">
-        <img class="team-banner" src="{$_G[forum][banner]}" alt=""/>
-        <div class="head clearfix">
-            <div class="logo"><img src="{$_G['setting']['attachurl']}common/{$_G[forum][icon]}" alt=""/></div>
-            <div class="head-center">
-                <div class="team-name">$_G[forum][name]<!-- <span class="ybadge ybadge-2">L2</span> --></div>
-                <div class="team-info">
-                    <span class="info">人数：<span>$_G[forum][membernum]</span></span><span style="color: #b5b5b6;margin: 0 8px;font-size: 12px;">
-                    |</span><span class="info">地区：<span>$_G[forum][province_name]&nbsp;$_G[forum][city_name]</span></span>
-                </div>
-                <div class="team-join ybtn">加入</div>
-            </div>
-            <!--
-            <div class="head-right">
-                <!--{if $status == 'isgroupuser'}-->
-                <a class="ybtn ybtn-primary ybtn-small dialog" href="forum.php?mod=group&action=out&fid=$_G[fid]">退出</a>
-                <!--{elseif $status == 5}-->
-                <a class="ybtn ybtn-primary ybtn-small" href="javascript:void(0);">审核</a>
-                <!--{else}-->
-                  <a href="forum.php?mod=group&action=join&fid=$_G[fid]" class="ybtn ybtn-primary ybtn-small <!--{if $_G[uid]}-->dialog<!--{/if}-->">加入</a>
-                <!--{/if}-->
-            </div>
-            -->
-            </div>
-    </header>
-    <div class="tabs">
+
+    <div class="tabs tabs2">
         <ul class="tab-title">
         
 
             <li class="<!--{if $ac == 'forumdisplay_index' && $status != 2 && $status != 3}-->active<!--{/if}-->"><a href="forum.php?mod=forumdisplay&fid=$_G[fid]">首页</a></li>
             <li class="<!--{if $ac == 'forumdisplay_team'}-->active<!--{/if}-->"><a href="forum.php?mod=forumdisplay&fid=$_G[fid]&ac=forumdisplay_team">球队</a></li>
             <li class="<!--{if $ac == 'forumdisplay_schedule'}-->active<!--{/if}-->"><a href="forum.php?mod=forumdisplay&fid=$_G[fid]&ac=forumdisplay_schedule">赛程</a></li>
-            <li class="<!--{if $ac == 'forumdisplay_list'}-->active<!--{/if}-->"><a href="forum.php?mod=forumdisplay&fid=$_G[fid]&ac=forumdisplay_list">数据</a></li>
+            <li class="<!--{if $ac == 'forumdisplay_data'}-->active<!--{/if}-->"><a href="forum.php?mod=forumdisplay&fid=$_G[fid]&ac=forumdisplay_data">数据</a></li>
             <li class="<!--{if $ac == 'forumdisplay_move'}-->active<!--{/if}-->"><a href="forum.php?mod=forumdisplay&fid=$_G[fid]&ac=forumdisplay_move">互动</a></li>
         </ul>
         <!-- tabs-body -->
@@ -64,14 +41,14 @@
              <i class="fontweb_icon ic_error" id="ic_error"></i>
         </div>
         <!--广告图 end-->
-        <!--{if $ac == 'forumdisplay_index' && $status != 2 && $status != 3}-->
+        <!--{if $ac == 'forumdisplay_index'}-->
         <!--{subtemplate forum/forumdisplay_index}-->
         <!--{elseif $ac == 'forumdisplay_team'}-->
         <!--{subtemplate forum/forumdisplay_team}-->
         <!--{elseif $ac == 'forumdisplay_schedule'}-->
         <!--{subtemplate forum/forumdisplay_schedule}-->
-        <!--{elseif $ac == 'forumdisplay_list'}-->
-        <!--{subtemplate forum/forumdisplay_list}-->
+        <!--{elseif $ac == 'forumdisplay_data'}-->
+        <!--{subtemplate forum/forumdisplay_data}-->
         <!--{elseif $ac == 'forumdisplay_move'}-->
         <!--{subtemplate forum/forumdisplay_move}-->
         <!--{/if}-->

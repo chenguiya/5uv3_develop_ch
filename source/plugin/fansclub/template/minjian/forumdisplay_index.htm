@@ -1,34 +1,39 @@
+
 <div class="ch_main">
     <div class="sh_match steps">
         <div class="stepsOverfllow">
             <ul class="steps-container">
-			<!--{loop $team_list $k $v}-->
-                    <li>
-                        <span><a href="javascript:" target="_blank"><img src="{$v['logo']}" alt="" width="60" height="60"></a></span>
+            <!--{loop $team_list $k $v}-->
+                    <li class="swiper-slide">
+                        <span><a href="forum.php?mod=forumdisplay&fid=$v['fid']&ac=channel_index" target="_blank"><img src="{$v['logo']}" alt="" width="60" height="60"></a></span>
                         <div class="m_c_title">
-                            <a href="javascript:" target="_blank">{$v['team_name']}</a>
+                            <a href="forum.php?mod=forumdisplay&fid=$v['fid']&ac=channel_index" target="_blank">{$v['team_name']}</a>
                         </div>
                     </li>
 			<!--{/loop}-->
             </ul>
+        <a class="sh_m_prev" href="javascript:void(0)"></a>
+        <a class="sh_m_next" href="javascript:void(0)"></a>
         </div>
     </div>
 </div>
+<script type="text/javascript">        
+  jq(".stepsOverfllow").slide({ mainCell:"ul",vis:8,prevCell:".sh_m_prev",nextCell:".sh_m_next",effect:"leftLoop"});
+</script>
 <div class="ch_main cl">
     <div class="slide_content fl slider">
         <div class="cl slidebox">
             <ul class="slideshow slider-container">
-                <li><a href="javascript:void(0);"><img src="http://www.5usport.com/data/attachment/portal/201508/15/103610nh9z8iictu0kntt6.png" width="660" height="350"><span class="title">詹姆斯称自己能赢乔丹? 名宿:打10次你都赢不了</span></a>
+          <!--{if $data['focus']}-->
+          <!--{loop $data['focus'] $k $v}-->
+                <li><a href="{$v['url']}" target="_blank"><img src="data/attachment/{$v['pic']}" width="660" height="350"><span class="title">{$v['title']}</span></a>
                 </li>
-                <li><a href="javascript:void(0);"><img src="http://www.5usport.com/data/attachment/portal/201508/14/153003a4h5xbm34394sbxt.jpg" width="660" height="350"><span class="title">英超维拉VS曼联亚盘竞彩推介 红魔客场艰难首选平局</span></a>
-                </li>
-                <li><a href="javascript:void(0);"><img src="http://www.5usport.com/data/attachment/portal/201508/13/093711q0y4pvqyybkq999q.jpg" width="660" height="350"><span class="title">瑞恩解密:伦敦新贵铁锤帮 西汉姆联吹响英超强袭号! </span></a>
-                </li>
+                <!--{/loop}-->
+           <!--{/if}-->
             </ul>
         </div>
         <div class="slidebar">
             <ul class="slider-bar">
-                <li class="active"></li>
                 <li></li>
                 <li></li>
             </ul>
@@ -38,26 +43,50 @@ runslideshow();
 </script>
     </div>
     <div class="releaseBox">
-        <div class="release_hd"><span class="fl">赛程</span><span class="fr"><a href="/match/shanghai/schedule">更多</a></span></div>
-        <div class="release_bd">
-            <ul>
-			<!--{loop $match_list $k $v}-->
+        <div class="release_sh">
+             <ul class="sche_nav">
+                 <li><a href="javascript:;" title="" class="active" id="sche_lb_1"  onclick="cg('sche',1)">7人</a></li>
+                 <li><a href="javascript:;" title="" id="sche_lb_2"  onclick="cg('sche',2)">5人</a></li>
+             </ul>
+             <span class="fr"><a href="/forum.php?mod=forumdisplay&fid=1390&ac=forumdisplay_schedule">更多</a></span></div>
+        <div class="release_bd cl">
+            <ul id="sche_div_1">
+			<!--{loop $match_data['seven'] $k $v}-->
 			{if $k > 3}
 			{eval continue;}
 			{/if}
 					<li>
-						<span class="release_bd_l fl"><h1>第{$v['num_round']}轮</h1></span>
+						<!--<span class="release_bd_l fl"><h1>第{$v['num_round']}轮</h1></span>-->
 						<span class="release_bd_r fr">
 							<div class="r_bd_l fl">
-								<a href="javascript:void(0);"><img src="{$v['a_logo']}" alt="" width="36" height="36"></a>
-								<h3><a href="javascript:void(0);">{$v['a_name']}</a></h3>
+								<a href="javascript:void(0);" class="notice_header fl"><img src="{$v['a_logo']}" alt="" width="36" height="36"></a>
+								<div class="notice_cont fr"><p>广州</p><div><a href="javascript:void(0);">{$v['a_name']}</a></div></div>
 							</div>
-							<div class="r_bd_m fl">
-								<span><h2>{$v['a_score']}</h2><h2>-</h2><h2>{$v['b_score']}</h2></span>
-							</div>
+							<div class="r_bd_m fl"><span><a href="thread-{$v['tid']}.html" target="_blank"><h2>VS</h2></a></span></div>
 							<div class="r_bd_r fl">
-								<a href="javascript:void(0);"><img src="{$v['b_logo']}" alt="" width="36" height="36"></a>
-								<h3><a href="javascript:void(0);">{$v['b_name']}</a></h3>
+								<a href="javascript:void(0);" class="notice_header fr"><img src="{$v['b_logo']}" alt="" width="36" height="36"></a>
+								<div class="notice_cont fl"><p>广州</p><div><a href="javascript:void(0);">{$v['b_name']}</a></div></div>
+							</div>
+						</span>
+					</li>
+			{/loop}
+            </ul>
+            <ul id="sche_div_2" style="display:none">
+              <!--{loop $match_data['five'] $k $v}-->
+			{if $k > 3}
+			{eval continue;}
+			{/if}
+					<li>
+						<!--<span class="release_bd_l fl"><h1>第{$v['num_round']}轮</h1></span>-->
+						<span class="release_bd_r fr">
+							<div class="r_bd_l fl">
+								<a href="javascript:void(0);" class="notice_header fl"><img src="{$v['a_logo']}" alt="" width="36" height="36"></a>
+								<div class="notice_cont fr"><p>广州</p><div><a href="javascript:void(0);">{$v['a_name']}</a></div></div>
+							</div>
+							<div class="r_bd_m fl"><span><a href="thread-{$v['tid']}.html" target="_blank"><h2>VS</h2></a></span></div>
+							<div class="r_bd_r fl">
+								<a href="javascript:void(0);" class="notice_header fr"><img src="{$v['b_logo']}" alt="" width="36" height="36"></a>
+								<div class="notice_cont fl"><p>广州</p><div><a href="javascript:void(0);">{$v['b_name']}</a></div></div>
 							</div>
 						</span>
 					</li>
@@ -66,24 +95,37 @@ runslideshow();
         </div>
     </div>
 </div>
-<!-- <div class="ch_main">
-    <div class="judge_hd">
-        <div class="judge_head"><span>美女球员评选</span></div>
-        <h3 class="judge_more">更多</h3>
+<div class="ch_main cl">
+    <div class="indexActivity">
+        <div class="act_header">
+            <h1>视频专区</h1>
+            <span></span>
+            <!--<h3><a href="" target="_blank">更多</a></h3>-->
+        </div>
+                  <!--{if $data['pic']}-->
+          <!--{loop $data['pic'] $k $v}-->
+                        <div class="act_content">
+                            <a href="{$v[url]}" class="act_box" target="_blank">
+                                <img src="data/attachment/{$v[pic]}" alt="" width="306" height="169">
+                                <p>{$v['title']}</p>
+                            </a>
+                        </div>
+                        <!--{/loop}-->
+           <!--{/if}-->
     </div>
-</div> -->
+</div>
 <div class="ch_main" style="overflow: hidden;">
     <div class="match_state">
         <div class="state_head cl">
             <h1>赛场动态</h1>
 			<span><a onclick="showWindow('newthread', 'forum.php?mod=post&action=newthread&fid={$_G['forum']['fid']}')" href="javascript:;" title="发帖" id="btn_show_editer">发贴</a></span>
         </div>
-		<div class="match_list cl">
-            <ul>
-                <li><a href="forum.php?mod=forumdisplay&fid={$_G['forum']['fid']}&filter=lastpost&orderby=lastpost" title="最新"{if $type_id == 0} class="active"{/if}>最新</a></li>
-                <!--<li><a href="?type_id=2" title="图片"{if $type_id == 2} class="active"{/if}>图片</a></li>
+		<!--<div class="match_list cl">-->
+            <!--<ul>-->
+                <!--<li><a href="forum.php?mod=forumdisplay&fid={$_G['forum']['fid']}&filter=lastpost&orderby=lastpost" title="最新"{if $type_id == 0} class="active"{/if}>最新</a></li>
+                <li><a href="?type_id=2" title="图片"{if $type_id == 2} class="active"{/if}>图片</a></li>
                 <li><a href="?type_id=3" title="视频"{if $type_id == 3} class="active"{/if}>视频</a></li>-->
-            </ul>
+            <!--</ul>-->
 				<!--<span>筛选：
 					<select name="">
 					{loop $team_list $k $v}
@@ -91,7 +133,7 @@ runslideshow();
 					{/loop}
 					</select>
 				</span>-->
-        </div>
+        <!--</div>-->
         <div class="indexThread mt15">
             <ul>
 			
@@ -139,20 +181,22 @@ runslideshow();
         <div class="match_aside">
             <div class="matchHeader">
                 <h1 class="fl bt match_aside_title">赛事公告</h1>
-                <span class="match_aside_more"><a href="" target="_blank" title="">更多</a></span>
+                <!--<span class="match_aside_more"><a href="" target="_blank" title="">更多</a></span>-->
             </div>
             <div class="chBlock">
                 <ul class="chAnnouce">
-                    <li><a href="javascript:">在5U体育球迷会联盟申请球迷会事宜只有俱乐部可以建哦，亲！……</a></li>
-                    <li><a href="javascript:">在5U体育球迷会联盟申请球迷会事宜只有俱乐部可以建哦，亲！……</a></li>
-                    <li><a href="javascript:">在5U体育球迷会联盟申请球迷会事宜只有俱乐部可以建哦，亲！……</a></li>
+                    	    	<!--{if $data['gongg']}-->
+	    	<!--{loop $data['gongg'] $v}-->
+                    <li><a href="{$v[url]}">{$v['title']}</a></li>
+	        <!--{/loop}-->
+	        <!--{/if}-->
                 </ul>
             </div>
         </div>
 
         <div class="matchTeam cl">
             <div class="teamHead cl">
-                <div><h1 class="fl">积分榜</h1><span class="teamMore fr"><a href="" title="">更多</a></span></div>
+                <div><h1 class="fl">积分榜</h1><span class="teamMore fr"><a href="forum.php?mod=forumdisplay&fid=1390&ac=forumdisplay_inegral" title="">更多</a></span></div>
                 <ul class="cl">
                     <li><a href="javascript:;" title="" class="active" data-tab-target="1">7人</a></li>
                     <li><a href="#" title="" data-tab-target="2">5人</a></li>
@@ -166,15 +210,15 @@ runslideshow();
                         <li>场次</li>
                         <li>积分</li>
                     </ul>
-					{loop $ranking_list $k $v}
-					{if $k > 5}
-					{eval break;}
-					{/if}
+                                    {loop $team_seven_integral['item'] $k $v}
+                                    {if $k > 5}
+                                    {eval break;}
+                                    {/if}
                     <ul class="scoreList">
-                        <li class="score{eval $k = $k + 1;}{$k}"></li>
-                        <li class="teamW75">{$v['team_name']}</li>
-                        <li>3</li>
-                        <li>{$v['team_integral']}</li>
+                        <li class="score{eval echo $v[0];}"></li>
+                        <li class="teamW75">{if $v[1]}{$v[1]}{else}--{/if}</li>
+                        <li>{$v[2]}</li>
+                        <li>{$v[10]}</li>
                     </ul>
                     {/loop}
                 </div>
@@ -184,7 +228,7 @@ runslideshow();
         <div class="matchTeam cl">
             <div class="teamHead">
                 <div class="teamHead cl">
-                    <div><h1 class="fl">射手榜</h1><span class="teamMore fr"><a href="" title="">更多</a></span></div>
+                    <div><h1 class="fl">射手榜1</h1><span class="teamMore fr"><a href="forum.php?mod=forumdisplay&fid=1390&ac=forumdisplay_shooter" title="">更多</a></span></div>
                     <ul class="cl">
                         <li><a href="javascript:;" title="" class="active" data-tab-target="1">7人</a></li>
                         <li><a href="#" title="" data-tab-target="2">5人</a></li>
@@ -193,7 +237,7 @@ runslideshow();
             </div>
             <div class="teamScoreWrap">
 
-                <div class="teamScore teamerScore" data-tab-index="3" id="div_shooter" style="display: block;">
+                <div class="teamScore teamerScore" data-tab-index="3" id="div_shooter" >
                     <ul class="scoreHead">
                         <li>排名</li>
                         <li class="teamW75">球队</li>
@@ -213,20 +257,20 @@ runslideshow();
                     {/loop}
                 </div>
 
-                <div class="teamScore teamerScore" data-tab-index="4" id="div_assists">
+                <div class="teamScore teamerScore" data-tab-index="4" id="div_assists" style="display: block;">
                     <ul class="scoreHead">
                         <li>排名</li>
                         <li class="teamW120">球员</li>
-                        <li class="teamW45">助攻数</li>
+                        <li class="teamW45">进球数</li>
                     </ul>
-					{loop $assists $k $v}
+					{loop $team_seven_shooter['item'] $k $v}
 					{if $k > 5}
 					{eval continue;}
 					{/if}
                     <ul class="scoreList">
-                        <li class="score{eval $k = $k + 1;}{$k}"></li>
-                        <li class="teamW120">{$v['player_name']}</li>
-                        <li class="teamW45">{$v['assists']}</li>
+                        <li class="score{eval echo $v[0];}"></li>
+                        <li class="teamW120">{$v[1]}</li>
+                        <li class="teamW45">{$v[5]}</li>
                     </ul>
 					{/loop}
                 </div>
@@ -258,3 +302,16 @@ seajs.use('jquery', function($){
     </div>
     <div class="blank20"></div>
 </div>
+<script>
+          function cg(id,m){
+             var n=3;
+             for(var i=1;i<=3;i++){
+             jq("#"+id+"_lb_"+i).removeClass(" active");
+             jq("#"+id+"_div_"+i).css("display","none");
+             if(m==i){
+             jq("#"+id+"_lb_"+i).addClass(" active");
+             jq("#"+id+"_div_"+i).css("display","");      
+           }
+         }
+       }
+     </script>

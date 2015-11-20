@@ -1,1 +1,186 @@
-球队首页
+<div class="ch_main" style="overflow: hidden;">
+    <div class="match_state">
+        <div class="state_head cl">
+            <h1>赛场动态</h1>
+			<span><a onclick="showWindow('newthread', 'forum.php?mod=post&action=newthread&fid={$_G['forum']['fid']}')" href="javascript:;" title="发帖" id="btn_show_editer">发贴</a></span>
+        </div>
+		<div class="match_list cl">
+            <ul>
+                <li><a href="forum.php?mod=forumdisplay&fid={$_G['forum']['fid']}&filter=lastpost&orderby=lastpost" title="最新"{if $type_id == 0} class="active"{/if}>最新</a></li>
+                <!--<li><a href="?type_id=2" title="图片"{if $type_id == 2} class="active"{/if}>图片</a></li>
+                <li><a href="?type_id=3" title="视频"{if $type_id == 3} class="active"{/if}>视频</a></li>-->
+            </ul>
+				<!--<span>筛选：
+					<select name="">
+					{loop $team_list $k $v}
+							<option value="">{$v['team_name']}</option>
+					{/loop}
+					</select>
+				</span>-->
+        </div>
+        <div class="indexThread mt15">
+            <ul>
+			
+	    	<!--{if $_G['forum_threadlist']}-->
+	    	<!--{loop $_G['forum_threadlist'] $thread}-->
+			
+			<li class="cl">
+					<div class="avatar">
+						<a href="home.php?mod=space&uid={$thread[authorid]}" target="_blank"><img src="<!--{avatar($thread[authorid],small,1)}-->"></a>
+					</div>
+					<div class="inde_info">
+						<p class="in_name"><a href="forum.php?mod=viewthread&tid=$thread[tid]" target="_blank">$thread[subject]</a>
+						<span class="in_post"></span><span class="in_post"></span></p>
+						<!--{eval $message = get_message('', $thread['tid'])}-->
+						<p class="in_title">
+							{$message[message]}
+						</p>
+						<!--{if $message['img']}-->
+						<p class="in_img">
+							<!--{loop $message['img'] $v}-->
+								<a href="forum.php?mod=viewthread&tid=$thread[tid]" target="_blank"><img src="{$v}" width="auto" height="140"></a>
+							<!--{/loop}-->
+						</p>
+						<!--{elseif $message['media']}-->
+						<p class="in_img"><embed width="230" height="140" allownetworking="internal" allowscriptaccess="never" src="{$message['media']}" quality="high" bgcolor="#ffffff" wmode="transparent" allowfullscreen="true" type="application/x-shockwave-flash"></embed></p>
+						<!--{/if}-->
+						<div class="in_meta">
+							<span><a href="home.php?mod=space&uid=$thread[authorid]" target="_blank">$thread[author]</a>&nbsp;&nbsp;{eval echo(date('m月d日 H:i',$thread[dbdateline]))} &nbsp;&nbsp;&nbsp;来自<a href="forum.php?mod=forumdisplay&fid=$thread[fid]" target="_blank">$_G[cache][forums][$thread[fid]][name]</a></span>
+							<span class="y sta_lun">$thread[replies]</span>
+							<span class="y sta_zan">$thread[recommend_add]</span>
+						</div>
+					</div>
+				</li>
+	        <!--{/loop}-->
+	        <!--{/if}-->
+            </ul>
+        </div>
+        <!--{if $_G['setting']['threadmaxpages'] > 0}-->$multipage<!--{/if}-->
+
+    </div>
+
+	
+	
+    <div class="match_as_right">
+        <div class="match_aside">
+            <div class="matchHeader">
+                <h1 class="fl bt match_aside_title">赛事公告</h1>
+                <span class="match_aside_more"><a href="" target="_blank" title="">更多</a></span>
+            </div>
+            <div class="chBlock">
+                <ul class="chAnnouce">
+                    <li><a href="javascript:">在5U体育球迷会联盟申请球迷会事宜只有俱乐部可以建哦，亲！……</a></li>
+                    <li><a href="javascript:">在5U体育球迷会联盟申请球迷会事宜只有俱乐部可以建哦，亲！……</a></li>
+                    <li><a href="javascript:">在5U体育球迷会联盟申请球迷会事宜只有俱乐部可以建哦，亲！……</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="matchTeam cl">
+            <div class="teamHead cl">
+                <div><h1 class="fl">积分榜</h1><span class="teamMore fr"><a href="forum.php?mod=forumdisplay&fid=1390&ac=forumdisplay_inegral" title="">更多</a></span></div>
+                <ul class="cl">
+                    <li><a href="javascript:;" title="" class="active" data-tab-target="1">7人</a></li>
+                    <li><a href="#" title="" data-tab-target="2">5人</a></li>
+                </ul>
+            </div>
+            <div class="teamScoreWrap">
+                <div class="teamScore" data-tab-index="1" style="display: block;">
+                    <ul class="scoreHead">
+                        <li>排名</li>
+                        <li class="teamW75">球队</li>
+                        <li>场次</li>
+                        <li>积分</li>
+                    </ul>
+                                    {loop $team_seven_integral['item'] $k $v}
+                                    {if $k > 5}
+                                    {eval break;}
+                                    {/if}
+                    <ul class="scoreList">
+                        <li class="score{eval echo $v[0];}"></li>
+                        <li class="teamW75">{if $v[1]}{$v[1]}{else}--{/if}</li>
+                        <li>{$v[2]}</li>
+                        <li>{$v[10]}</li>
+                    </ul>
+                    {/loop}
+                </div>
+            </div>
+        </div>
+
+        <div class="matchTeam cl">
+            <div class="teamHead">
+                <div class="teamHead cl">
+                    <div><h1 class="fl">射手榜</h1><span class="teamMore fr"><a href="forum.php?mod=forumdisplay&fid=1390&ac=forumdisplay_shooter" title="">更多</a></span></div>
+                    <ul class="cl">
+                        <li><a href="javascript:;" title="" class="active" data-tab-target="1">7人</a></li>
+                        <li><a href="#" title="" data-tab-target="2">5人</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="teamScoreWrap">
+
+                <div class="teamScore teamerScore" data-tab-index="3" id="div_shooter" >
+                    <ul class="scoreHead">
+                        <li>排名</li>
+                        <li class="teamW75">球队</li>
+                        <li>场次</li>
+                        <li>积分</li>
+                    </ul>
+                    {loop $ranking_list $k $v}
+                    {if $k > 5}
+                    {eval break;}
+                    {/if}
+                    <ul class="scoreList">
+                        <li class="score{eval $k = $k + 1;}{$k}"></li>
+                        <li class="teamW75">{$v['team_name']}</li>
+                        <li>3</li>
+                        <li>{$v['team_integral']}</li>
+                    </ul>
+                    {/loop}
+                </div>
+
+                <div class="teamScore teamerScore" data-tab-index="4" id="div_assists" style="display: block;">
+                    <ul class="scoreHead">
+                        <li>排名</li>
+                        <li class="teamW120">球员</li>
+                        <li class="teamW45">进球数</li>
+                    </ul>
+					{loop $team_seven_shooter['item'] $k $v}
+					{if $k > 5}
+					{eval continue;}
+					{/if}
+                    <ul class="scoreList">
+                        <li class="score{eval echo $v[0];}"></li>
+                        <li class="teamW120">{$v[1]}</li>
+                        <li class="teamW45">{$v[5]}</li>
+                    </ul>
+					{/loop}
+                </div>
+            </div>
+        </div>
+<script type="text/javascript">
+seajs.use('jquery', function($){
+	$('#head_shooter').mouseover(function(){
+		$(this).addClass('active');
+		$('#head_assists').removeClass('active');
+		$('#div_shooter').css("display", "block");
+		$('#div_assists').css("display", "none");
+	});
+	
+	$('#head_assists').mouseover(function(){
+		$(this).addClass('active');
+		$('#head_shooter').removeClass('active');
+		$('#div_shooter').css("display", "none");
+		$('#div_assists').css("display", "block");
+	});
+});
+</script>
+        <div class="matchTeam cl">
+            <div class="matchAd">
+                <a href=""><img src="{$_G['config'][static]}/images/minjian/ad_pic.png" width="320" height="170"></a>
+                <h1>上海足球锦标赛最佳球员评选</h1>
+            </div>
+        </div>
+    </div>
+    <div class="blank20"></div>
+</div>

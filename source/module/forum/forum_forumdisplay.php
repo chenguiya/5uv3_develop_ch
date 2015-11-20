@@ -48,6 +48,10 @@ if(strpos($_SERVER['HTTP_HOST'], '5usport.com') !== FALSE && FALSE) // 正式服
 	}
 }
 
+if($_G['uid'] == 1760)
+{
+    //echo "你好"
+}
 
 // 不显示已隐藏的版块 by zhangjh 2015-09-11
 if($_G['forum']['status'] == 0 && $_G['forum']['type'] == 'sub')
@@ -1114,228 +1118,197 @@ if(!defined('IN_ARCHIVER')) {
     // 联赛功能转移
     // 上海联赛相关显示修改 zhangjh 2015-08-14
     $is_wap = fansclub_check_wap();
-    if(strpos($_SERVER['HTTP_HOST'], '5usport.com') !== FALSE) // 正式服
+    if( $_G['forum']['fid'] == 660  || $_G['forum']['fid'] == 1378 || $_G['forum']['fid'] == 1390)
     {
-        if($_G['forum']['fid'] == 1378 || $_G['forum']['fid'] == 1390)
+        if($_G['forum']['fid'] == 1390)
         {
-            if($_G['forum']['fid'] == 1390)
+            $local_name = '广州';
+            $_G['forum']['province_name'] = '广东';
+            $_G['forum']['city_name'] = '广州';
+        } else {
+            $local_name = '上海';
+        }
+        if($_GET['ac'] == 'match')
+        {
+            $navtitle = $local_name.'球迷会联赛赛程时间表_5U体育';
+            $metakeywords = $local_name.',联赛,赛程,时间表';
+            $metadescription = $local_name.'球迷会联赛赛程时间表，'.$local_name.'球迷会足球队比赛赛果';
+        }
+        elseif($_GET['ac'] == 'inegral')
+        {
+            $navtitle = $local_name.'球迷会联赛积分榜_5U体育';
+            $metakeywords = $local_name.',联赛,积分榜';
+            $metadescription = $local_name.'球迷会联赛积分榜，最新'.$local_name.'球迷会足球队比赛排名积分情况。';
+        }
+        elseif($_GET['ac'] == 'shooter')
+        {
+            $navtitle = $local_name.'球迷会联赛射手榜_5U体育';
+            $metakeywords = $local_name.',联赛,射手榜';
+            $metadescription = $local_name.'球迷会联赛射手榜，最新'.$local_name.'球迷会足球比赛球员进球排名。';
+        }
+        else
+        {
+            $navtitle = $local_name.'球迷会足球联赛_'.$local_name.'业余足球队比赛_5U体育';
+            $metakeywords = $local_name.',足球,球迷会,业余球队';
+            $metadescription = $local_name.'球迷会足球联赛信息，'.$local_name.'足球民间业余足球队比赛，一起加入到'.$local_name.'的球';
+        }
+        //include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
+        //exit;
+        //web首页焦点、视频、公告
+        $data['focus'] = C::t('common_block_item')->fetch_all_by_bid(132, true);
+        $data['pic'] = C::t('common_block_item')->fetch_all_by_bid(167, true);
+        $data['gongg'] = C::t('common_block_item')->fetch_all_by_bid(167, true);
+//        echo "<pre>";
+//        print_r($data['gongg']);exit;
+
+        // 查询球队下的队伍
+        $team_list = C::t('#fansclub#plugin_fansclub_ua_team')->fetchAllTeamForIndex(); // 7人的和5人的
+        
+       if($_GET['ac']=='forumdisplay_team')
+       {
+                $team_seven = C::t('#fansclub#plugin_fansclub_ua_team')->fetchAllTeamByLeagueId(1) ;//7人球队
+                $team_five = C::t('#fansclub#plugin_fansclub_ua_team')->fetchAllTeamByLeagueId(2) ;//5人球队
+       }
+        
+        
+        $team_seven_data = C::t('#fansclub#plugin_fansclub_ua_league_integral_shooter')->fetchAllIntegralShooterData(1);//7人积分和射手
+        $team_seven_integral = json_decode($team_seven_data[0]['integral_data'],TRUE) ;
+        $team_seven_shooter = json_decode($team_seven_data[0]['shooter_data'],TRUE) ;
+        $team_five_data = C::t('#fansclub#plugin_fansclub_ua_league_integral_shooter')->fetchAllIntegralShooterData(2);//5人积分和射手
+        $team_five_integral = json_decode($team_five_data[0]['integral_data'],TRUE) ;
+        $team_five_shooter = json_decode($team_five_data[0]['shooter_data'],TRUE) ;
+        //web赛程
+        if($_GET['ac']=='forumdisplay_schedule' && !$is_wap)
+        {
+                $_GET['league_id'] = isset($_GET['league_id']) ? $_GET['league_id'] : '';
+                $_GET['num_round_id'] = isset($_GET['num_round_id']) ? $_GET['num_round_id'] : '';
+                $test_data = C::t('#fansclub#plugin_fansclub_ua_match')->fetchAllMatchData($_GET['league_id'],$_GET['num_round_id']); 
+
+                $test_datas = array();
+                foreach ($test_data as $key => $value) 
+                {
+                    $test_datas[$key] = $value;
+                    $test_datas[$key]['date'] = date("m月d日 ",$value['match_time']);
+                    $test_datas[$key]['time'] = date("H:i",$value['match_time']);      
+                }
+                
+                $new_data = array();
+                if(!empty($test_data))
+                {
+                    $new_data['code'] = 0 ;
+                    $new_data['msg'] = "请求成功";
+                    $new_data['match'] = $test_datas;
+                    echo json_encode($new_data);exit;
+                }
+
+        }
+        $match_datas = C::t('#fansclub#plugin_fansclub_ua_match')->fetchAllMatchDataWap(); //wap赛程&首页
+        $match_data = array() ;
+        foreach($match_datas as $key=>$val)
+        {
+            if($val['league_id'] == 1)
             {
-                $local_name = '广州';
-                $_G['forum']['province_name'] = '广东';
-                $_G['forum']['city_name'] = '广州';
-            } else {
-                $local_name = '上海';
+                $match_data['seven'][] = $val ;
             }
-            if($_GET['ac'] == 'match')
+            if($val['league_id' ]== 2)
             {
-                $navtitle = $local_name.'球迷会联赛赛程时间表_5U体育';
-                $metakeywords = $local_name.',联赛,赛程,时间表';
-                $metadescription = $local_name.'球迷会联赛赛程时间表，'.$local_name.'球迷会足球队比赛赛果';
+                $match_data['five'][] = $val ;
             }
-            elseif($_GET['ac'] == 'inegral')
-            {
-                $navtitle = $local_name.'球迷会联赛积分榜_5U体育';
-                $metakeywords = $local_name.',联赛,积分榜';
-                $metadescription = $local_name.'球迷会联赛积分榜，最新'.$local_name.'球迷会足球队比赛排名积分情况。';
+        }
+        // 需要修改template
+        $ac = (trim($_GET['ac']) == '') ? 'forumdisplay_index' : trim($_GET['ac']);
+        if($is_wap)
+        {
+            //首页焦点图
+            $focus = C::t('common_block_item')->fetch_all_by_bid(132, true);
+            foreach ($focus as $key => $item) {
+                $attachment = getattachment($item['id'], 1, TRUE);
+                if (!empty($attachment)) {
+                    $showfocus[$key] = $focus[$key];
+                    $showfocus[$key]['pic'] = getforumimg($attachment[0], 0, 480, 256, 2);
+                }            
             }
-            elseif($_GET['ac'] == 'shooter')
-            {
-                $navtitle = $local_name.'球迷会联赛射手榜_5U体育';
-                $metakeywords = $local_name.',联赛,射手榜';
-                $metadescription = $local_name.'球迷会联赛射手榜，最新'.$local_name.'球迷会足球比赛球员进球排名。';
-            }
-            else
-            {
-                $navtitle = $local_name.'球迷会足球联赛_'.$local_name.'业余足球队比赛_5U体育';
-                $metakeywords = $local_name.',足球,球迷会,业余球队';
-                $metadescription = $local_name.'球迷会足球联赛信息，'.$local_name.'足球民间业余足球队比赛，一起加入到'.$local_name.'的球';
-            }
-            //include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
-            //exit;
             
-            // 需要修改template
-            $ac = trim($_GET['ac']) == '' ? 'forumdisplay_index' : trim($_GET['ac']);
+            // 取帖子图片
+            require_once libfile('function/extends');
+            foreach ($threadlist as $key => $value) {
+                $threadlist[$key]['author_avatar'] = avatar($value['authorid'], 'small', 1);
+                if ($value['attachment'] == '2') {
+                    $aids = wap_getattachment($value['tid'], 3);
+                    foreach ($aids as $aid) {
+                        $threadlist[$key]['img'][] = getforumimg($aid, 0, 320, 170, 2);
+                    }
+                } elseif ($value['attachment'] == '3') {
+                    $threadlist[$key]['video'] = create_video($value['tid']);
+                }
+                // $threadlist[$key]['dateline'] = dgmdate($value['dateline'], 'u');
+            }
             
-            if($is_wap)
-                $template = 'touch/forum/forumdisplay';
-            else
+            $template = 'touch/forum/forumdisplay';
+        }
+        else
+        {
+            include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
+            exit;
+        }
+    }
+        
+    // 联赛下面的各个球队
+    if($_G['forum']['fup'] == 1390)
+    {
+        $_G['forum']['province_name'] = '广东';
+        $_G['forum']['city_name'] = '广州';
+        $ac = (trim($_GET['ac']) == '') ? 'channel_index' : trim($_GET['ac']);
+        
+        $team_data = C::t('#fansclub#plugin_fansclub_ua_team')->fetchAllTeamDataByFid($_G['forum']['fid']); // 球队频道数据
+
+        $team_seven_data = C::t('#fansclub#plugin_fansclub_ua_league_integral_shooter')->fetchAllIntegralShooterData(1);//7人积分和射手
+        $team_seven_integral = json_decode($team_seven_data[0]['integral_data'],TRUE) ;
+        $team_seven_shooter = json_decode($team_seven_data[0]['shooter_data'],TRUE) ;
+        $team_five_data = C::t('#fansclub#plugin_fansclub_ua_league_integral_shooter')->fetchAllIntegralShooterData(2);//5人积分和射手
+        $team_five_integral = json_decode($team_five_data[0]['integral_data'],TRUE) ;
+        $team_five_shooter = json_decode($team_five_data[0]['shooter_data'],TRUE) ;
+
+        if($ac == 'channel_member') // 成员列表数据
+        {
+            $alluserlist = array();
+            $arr_player = C::t('#fansclub#plugin_fansclub_ua_player')->fetch_by_fid($_G['forum']['fid']);
+        }
+        elseif($ac == 'channel_data') // 
+        {
+            $arr = C::t('#fansclub#plugin_fansclub_ua_league_integral_shooter')->fetch(1);
+            $integral_data = json_decode($arr['integral_data'], true);
+            $shooter_data = json_decode($arr['shooter_data'], true);
+            $arralldata = array();
+            $i = 1;
+            foreach($shooter_data['item'] as $key => $value)
             {
-                include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
-                exit;
+                if(count($arralldata) >= 10) break;
+                $_tmp = array();
+                $_tmp['num'] = $i;
+                $_tmp['name'] = $value[1];
+                $_tmp['gold'] = $value[5];
+                $_tmp['help'] = $value[7];
+                $_tmp['yellow'] = $i%3;
+                $_tmp['red'] = $i%2;
+                $i++;
+                $arralldata[] = $_tmp;
             }
         }
         
-        // 联赛下面的球队
-        if($_G['forum']['fup'] == 1390)
+        if($is_wap)
+            $template = 'touch/forum/channel';
+        else
         {
-            $_G['forum']['province_name'] = '广东';
-            $_G['forum']['city_name'] = '广州';
-            $ac = trim($_GET['ac']) == '' ? 'channel_index' : trim($_GET['ac']);
-            
-            
-            if($ac == 'channel_member') // 成员列表数据
-            {
-
-                $alluserlist = array();
-
-                $arr_player = C::t('#fansclub#plugin_fansclub_ua_player')->fetch_by_fid();
-                
-                foreach($arr_player as $key => $value)
-                {
-                    $_tmp = array();
-                    $_tmp['name'] = $value['player_name'];
-                    $_tmp['avatar'] = $value['logo'];
-                    $_tmp['level'] = count($alluserlist) == 0 ? 1 : 0;
-                    
-                    $alluserlist[] = $_tmp;
-                }
-                
-                //print_r($alluserlist)
-
-            }
-            elseif($ac == 'channel_data') // 
-            {
-                $arr = C::t('#fansclub#plugin_fansclub_ua_league_integral_shooter')->fetch(1);
-                $integral_data = json_decode($arr['integral_data'], true);
-                $shooter_data = json_decode($arr['shooter_data'], true);
-                $arralldata = array();
-                $i = 1;
-                foreach($shooter_data['item'] as $key => $value)
-                {
-                    if(count($arralldata) >= 10) break;
-                    $_tmp = array();
-                    $_tmp['num'] = $i;
-                    $_tmp['name'] = $value[1];
-                    $_tmp['gold'] = $value[5];
-                    $_tmp['help'] = $value[7];
-                    $_tmp['yellow'] = $i%3;
-                    $_tmp['red'] = $i%2;
-                    $i++;
-                    $arralldata[] = $_tmp;
-                }
-            }
-            
-            if($is_wap)
-                $template = 'touch/forum/channel';
-            else
-            {
-                include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
-                exit;
-            }
+            include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
+            exit;
         }
     }
-    else
-    {
-        if($_G['forum']['fid'] == 660 || $_G['forum']['fid'] == 1390)
-        {
-            if($_G['forum']['fid'] == 1390)
-            {
-                $local_name = '广州';
-                $_G['forum']['province_name'] = '广东';
-                $_G['forum']['city_name'] = '广州';
-            } else {
-                $local_name = '上海';
-            }
-            if($_GET['ac'] == 'match')
-            {
-                $navtitle = $local_name.'球迷会联赛赛程时间表_5U体育';
-                $metakeywords = $local_name.',联赛,赛程,时间表';
-                $metadescription = $local_name.'球迷会联赛赛程时间表，'.$local_name.'球迷会足球队比赛赛果';
-            }
-            elseif($_GET['ac'] == 'inegral')
-            {
-                $navtitle = $local_name.'球迷会联赛积分榜_5U体育';
-                $metakeywords = $local_name.',联赛,积分榜';
-                $metadescription = $local_name.'球迷会联赛积分榜，最新'.$local_name.'球迷会足球队比赛排名积分情况。';
-            }
-            elseif($_GET['ac'] == 'shooter')
-            {
-                $navtitle = $local_name.'球迷会联赛射手榜_5U体育';
-                $metakeywords = $local_name.',联赛,射手榜';
-                $metadescription = $local_name.'球迷会联赛射手榜，最新'.$local_name.'球迷会足球比赛球员进球排名。';
-            }
-            else
-            {
-                $navtitle = $local_name.'球迷会足球联赛_'.$local_name.'业余足球队比赛_5U体育';
-                $metakeywords = $local_name.',足球,球迷会,业余球队';
-                $metadescription = $local_name.'球迷会足球联赛信息，'.$local_name.'足球民间业余足球队比赛，一起加入到'.$local_name.'的球';
-            }
-            //include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
-            //exit;
-            
-            // 需要修改template
-            $ac = trim($_GET['ac']) == '' ? 'forumdisplay_index' : trim($_GET['ac']);
-            if($is_wap)
-            {
-                $template = 'touch/forum/forumdisplay';
-            }
-            else
-            {
-                include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
-                exit;
-            }
-        }
-        
-        // 联赛下面的球队
-        if($_G['forum']['fup'] == 1390)
-        {
-            $_G['forum']['province_name'] = '广东';
-            $_G['forum']['city_name'] = '广州';
-            $ac = trim($_GET['ac']) == '' ? 'channel_index' : trim($_GET['ac']);
-           
-            
-            if($ac == 'channel_member') // 成员列表数据
-            {
-
-                $alluserlist = array();
-
-                $arr_player = C::t('#fansclub#plugin_fansclub_ua_player')->fetch_by_fid();
-                
-                foreach($arr_player as $key => $value)
-                {
-                    $_tmp = array();
-                    $_tmp['name'] = $value['player_name'];
-                    $_tmp['avatar'] = $value['logo'];
-                    $_tmp['level'] = count($alluserlist) == 0 ? 1 : 0;
-                    
-                    $alluserlist[] = $_tmp;
-                }
-                
-                //print_r($alluserlist)
-
-            }
-            elseif($ac == 'channel_data') // 
-            {
-                $arr = C::t('#fansclub#plugin_fansclub_ua_league_integral_shooter')->fetch(1);
-                $integral_data = json_decode($arr['integral_data'], true);
-                $shooter_data = json_decode($arr['shooter_data'], true);
-                $arralldata = array();
-                $i = 1;
-                foreach($shooter_data['item'] as $key => $value)
-                {
-                    if(count($arralldata) >= 10) break;
-                    $_tmp = array();
-                    $_tmp['num'] = $i;
-                    $_tmp['name'] = $value[1];
-                    $_tmp['gold'] = $value[5];
-                    $_tmp['help'] = $value[7];
-                    $_tmp['yellow'] = $i%3;
-                    $_tmp['red'] = $i%2;
-                    $i++;
-                    $arralldata[] = $_tmp;
-                }
-            }
-            
-            if($is_wap)
-                $template = 'touch/forum/channel';
-            else
-            {
-                include_once(DISCUZ_ROOT.'./source/plugin/fansclub/minjian.inc.php');
-                exit;
-            }
-        }
+    if ($_GET['ajax'] == 1) {
+        $result = array('nextpage' => $nextpage, 'threadlist' => $threadlist);
+        echo json_encode($result);
+        exit;
     }
-    
 	
 	//获取版主信息
 	if (!empty($_G['forum']['moderators'])) {

@@ -469,7 +469,7 @@ function passport_login($data)
     $password = $data['password'];
     $openid = trim($data['openid']);
     
-    if(is_email($data['name']) || is_username($data['name']))
+    if(is_email($data['name']) || is_username($data['name']) || TRUE)
     {
         if(is_email($data['name']))
         {
